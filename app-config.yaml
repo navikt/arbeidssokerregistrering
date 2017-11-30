@@ -1,0 +1,14 @@
+# ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
+image: docker.adeo.no:5000/fo/arbeidssokerregistrering
+replicas:
+  min: 2
+  max: 4
+  cpuThresholdPercentage: 50
+port: 8080
+healthcheck:
+  liveness:
+    path: arbeidssokerregistrering/index.html
+    initialDelay: 20
+  readiness:
+    path: arbeidssokerregistrering/index.html
+    initialDelay: 20
