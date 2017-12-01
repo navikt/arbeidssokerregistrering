@@ -1,11 +1,29 @@
 {
   "name": "arbeidssokerregistrering",
+  "homepage": "/arbeidssokerregistrering",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts-ts": "2.8.0"
+    "classnames": "2.2.5",
+    "lodash.throttle": "^4.1.1",
+    "nav-frontend-chevron-style": "^0.3.4",
+    "nav-frontend-core": "4.0.5",
+    "nav-frontend-grid": "0.1.10",
+    "nav-frontend-grid-style": "0.2.4",
+    "nav-frontend-js-utils": "^0.2.10",
+    "nav-frontend-knapper": "0.2.14",
+    "nav-frontend-knapper-style": "0.3.5",
+    "nav-frontend-lenkepanel": "0.3.16",
+    "nav-frontend-lenkepanel-style": "0.3.6",
+    "nav-frontend-typografi": "1.0.12",
+    "nav-frontend-typografi-style": "1.0.7",
+    "prop-types": "^15.6.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-intl": "2.4.0",
+    "react-redux": "5.0.6",
+    "react-scripts-ts": "2.8.0",
+    "redux-thunk": "2.2.0"
   },
   "scripts": {
     "start:ts": "react-scripts-ts start",
@@ -20,14 +38,18 @@
     "start:less": "autoless --source-map --intervall 100 ./src ./public",
     "build:less": "node ./node_modules/less/bin/lessc/ src/index.less ./public/index.css",
     "start": "npm-run-all -p start:*",
-    "build": "npm run build:less && npm run build:ts"
+    "build:tekster": "node ./src/utils/build-tekster.js",
+    "build": "npm run build:less && npm run build:ts && npm run build:tekster"
   },
   "devDependencies": {
     "@types/jest": "21.1.8",
     "@types/node": "8.0.53",
     "@types/react": "16.0.25",
     "@types/react-dom": "16.0.3",
+    "@types/react-intl": "2.3.2",
+    "@types/react-redux": "5.0.10",
     "autoless": "0.1.7",
+    "copyfiles": "^1.2.0",
     "less": "2.7.3",
     "npm-run-all": "4.0.2"
   }
