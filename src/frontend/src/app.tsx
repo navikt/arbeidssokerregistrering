@@ -3,6 +3,11 @@ import {Provider} from 'react-redux';
 import IntlProvider from './Intl-provider';
 import getStore from './store';
 import RegistrerDeg from './registrerdeg';
+import {
+    BrowserRouter as Router,
+    Route
+} from 'react-router-dom';
+import SkjemaPanel from "./skjema/skjema-panel";
 
 const store = getStore();
 
@@ -11,14 +16,12 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <div>
-                        <RegistrerDeg
-                            className="registrerdeg"
-                            tittelId="overskrift-registrerdeg"
-                            beskrivelseId="beskrivelse-registrerdeg"
-                            knappId="knapp-registrerdeg"
-                        />
-                    </div>
+                    <Router basename="/arbeidsokerregistrering">
+                        <div>
+                            <Route path="/registrer" component={RegistrerDeg}/>
+                            <Route path="/skjema/:id" component={SkjemaPanel}/>
+                        </div>
+                    </Router>
                 </IntlProvider>
             </Provider>
         );

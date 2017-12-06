@@ -1,22 +1,16 @@
 import * as React from 'react';
-import {FormattedMessage, injectIntl, InjectedIntlProps} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {Knapp} from 'nav-frontend-knapper';
 
-interface Props {
-    tittelId: string;
-    beskrivelseId: string;
-    knappId: string;
-    className?: string;
-}
 
-function RegistrerDeg({tittelId, beskrivelseId, knappId, className, intl}: Props & InjectedIntlProps) {
+function RegistrerDeg() {
     return (
-        <article className={className}>
+        <article className="registrerdeg">
             <section className="panel--stor">
                 <section>
-                    <h1 className="typo-innholdstittel"><FormattedMessage id={tittelId}/></h1>
+                    <h1 className="typo-innholdstittel"><FormattedMessage id="overskrift-registrerdeg"/></h1>
                     <p className="typo-normal">
-                        <FormattedMessage id={beskrivelseId}/>
+                        <FormattedMessage id="beskrivelse-registrerdeg"/>
                     </p>
                     <ul className="typo-normal">
                         <li><FormattedMessage id="liste-dufarhjelp"/></li>
@@ -29,11 +23,11 @@ function RegistrerDeg({tittelId, beskrivelseId, knappId, className, intl}: Props
             </section>
             <footer>
                 <Knapp type="hoved" className="knapp knapp--hoved">
-                    <FormattedMessage id={knappId}/>
+                    <FormattedMessage id="knapp-registrerdeg"/>
                 </Knapp>
             </footer>
         </article>
     );
 }
 
-export default injectIntl(RegistrerDeg);
+export default RegistrerDeg;
