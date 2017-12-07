@@ -1,15 +1,16 @@
-package veilarbarbeidssokerregistrering;
+package no.nav.sbl.arbeidssokerregistrering.config;
 
 import no.nav.apiapp.ApiApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import veilarbarbeidssokerregistrering.DemoRessurs;
+
+import java.util.EnumSet;
 
 import static no.nav.apiapp.ApiApplication.Sone.FSS;
+import static no.nav.sbl.arbeidssokerregistrering.util.DecoratorUtils.getDecoratorFilter;
 
 @Configuration
-@Import({
-        DemoRessurs.class
-})
 public class ApplicationConfig implements ApiApplication {
 
     @Override
@@ -20,6 +21,12 @@ public class ApplicationConfig implements ApiApplication {
     @Override
     public String getApplicationName() {
         return APPLICATION_NAME;
+    }
+
+    @Override
+    public void startup(ServletContext servletContext) {
+        FilterRegistration.Dynamic docratorfilter = servletContext.addFilter("docratorfilter", getDecoratorFilter());
+        docratorfilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.FORWARD),false, "/index.html");
     }
 
     public static final String APPLICATION_NAME = "arbeidssokerregistrering";
