@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import IntlProvider from './Intl-provider';
 import getStore from './store';
 import RegistrerDeg from './registrerdeg';
+import StartRegistrering from './start/start';
 import {
     BrowserRouter as Router,
     Route
@@ -19,6 +20,7 @@ class App extends React.Component {
                     <Router basename="/arbeidsokerregistrering">
                         <div className="body__wrapper">
                             <Route path="/registrer" component={RegistrerDeg}/>
+                            <Route path="/start" component={StartRegistrering}/>
                             <Route path="/skjema/:id" component={SkjemaPanel}/>
                         </div>
                     </Router>
