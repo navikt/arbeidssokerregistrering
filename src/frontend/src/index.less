@@ -7,51 +7,61 @@
 @import '../node_modules/nav-frontend-skjema-style/src/index';
 
 body {
-  background-color: #e9e7e7;
+    background-color: #e9e7e7;
+}
+
+.body__wrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+
+    @import './skjema/skjema';
 }
 
 article.registrerdeg {
-  margin: 5em auto 0 auto;
-  max-width: 50em;
-  color: #59514B;
+    margin: 5em auto 0 auto;
+    max-width: 50em;
+    color: #59514B;
 
-  > section {
-    display: flex;
-  }
-
-  > section > section{
-    margin: auto;
-    padding: 2em 0;
-
-    > h1 {
-      margin-bottom: 0.5em;
-      &:after {
-        border-top: 1px #66cbec solid;
-        width: 30px;
-        display: block;
-        clear: both;
-        content: "";
-        margin: 20px auto 0;
-      }
+    > section {
+        display: flex;
     }
 
-    > ul {
-      margin: 1em 0;
-      padding-left: 1em;
+    > section > section {
+        margin: auto;
+        padding: 2em 0;
+
+        > h1 {
+            margin-bottom: 0.5em;
+            &:after {
+                border-top: 1px #66cbec solid;
+                width: 30px;
+                display: block;
+                clear: both;
+                content: "";
+                margin: 20px auto 0;
+            }
+        }
+
+        > ul {
+            margin: 1em 0;
+            padding-left: 1em;
+        }
+
+        > p:last-child {
+            color: #66cbec;
+            font-weight: 300;
+            font-style: italic;
+        }
+
     }
 
-    > p:last-child {
-      color: #66cbec;
-      font-weight: 300;
-      font-style: italic;
+    footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 2em;
     }
-
-  }
-
-  footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-  }
 }
+
 

@@ -1,9 +1,10 @@
-import { combineReducers } from "redux";
-import svar, { SvarState} from './ducks/svar';
+import { combineReducers } from 'redux';
+import svar, { SvarState } from './ducks/svar';
 
 export interface AppState {
-    svar: SvarState
+    svar: SvarState;
 }
 
 export default combineReducers<AppState>({
+    svar
 });

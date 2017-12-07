@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {FormattedMessage} from 'react-intl';
-import {Knapp} from 'nav-frontend-knapper';
-
+import { FormattedMessage } from 'react-intl';
+import { Knapp } from 'nav-frontend-knapper';
 
 function RegistrerDeg() {
     return (
