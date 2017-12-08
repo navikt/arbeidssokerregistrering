@@ -24,7 +24,8 @@ yarn-error.log*
 **/*.css
 
 
-.idea/
+.idea/*
+!.idea/runConfigurations
 *.iml
 
 public/index.css
