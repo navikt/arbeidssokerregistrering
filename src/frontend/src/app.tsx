@@ -7,19 +7,24 @@ import {
     BrowserRouter as Router,
     Route
 } from 'react-router-dom';
-import SkjemaPanel from './skjema/skjema-panel';
+import Skjema from './skjema/skjema';
+import Oppsummering from './oppsummering/oppsummering';
+import SblRegistrering from "./oppsummering/sbl-registrering";
 
 const store = getStore();
+export const basename = '/arbeidsokerregistrering';
 
 class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <Router basename="/arbeidsokerregistrering">
+                    <Router basename={basename}>
                         <div className="body__wrapper">
                             <Route path="/registrer" component={RegistrerDeg}/>
-                            <Route path="/skjema/:id" component={SkjemaPanel}/>
+                            <Route path="/skjema/:id" component={Skjema}/>
+                            <Route path="/oppsummering" component={Oppsummering}/>
+                            <Route path="/sblregistrering" component={SblRegistrering}/>
                         </div>
                     </Router>
                 </IntlProvider>
