@@ -28,9 +28,8 @@ yarn-error.log*
 !.idea/runConfigurations
 *.iml
 
-public/index.css
-public/index.css.map
 **/webapp/
 
 /src/frontend/src/tekster/alle-tekster.ts
+/src/frontend/public/index.css
 /src/frontend/public/index.css.map

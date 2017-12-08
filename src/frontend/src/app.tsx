@@ -13,7 +13,7 @@ import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from "./oppsummering/sbl-registrering";
 
 const store = getStore();
-export const basename = '/arbeidsokerregistrering';
+export const basename = '/arbeidssokerregistrering';
 
 class App extends React.Component {
     render() {
