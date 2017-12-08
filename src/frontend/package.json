@@ -49,12 +49,12 @@
     "build:less": "node ./node_modules/less/bin/lessc/ src/index.less ./public/index.css",
     "start": "npm-run-all -p start:*",
     "build:tekster": "node ./src/utils/build-tekster.js",
-    "build": "npm run delete-static npm run build:less && npm run build:ts && npm run build:tekster && npm run copyfiles"
+    "build": "npm run delete-static npm run build:less && npm run build:tekster && npm run build:ts && npm run copyfiles"
   },
   "devDependencies": {
     "@types/jest": "21.1.8",
     "@types/node": "8.0.53",
-    "@types/react": "16.0.25",
+    "@types/react": "16.0.28",
     "@types/react-dom": "16.0.3",
     "@types/react-intl": "2.3.2",
     "@types/react-redux": "5.0.10",
