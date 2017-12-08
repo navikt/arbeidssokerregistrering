@@ -11,6 +11,7 @@ import {
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from "./oppsummering/sbl-registrering";
+import './decorator/decorator-mock';
 
 const store = getStore();
 export const basename = '/arbeidsokerregistrering';
