@@ -1,6 +1,6 @@
 
 import no.nav.apiapp.ApiApp;
-import veilarbarbeidssokerregistrering.ApplicationConfig;
+import no.nav.sbl.arbeidssokerregistrering.config.ApplicationConfig;
 
 public class Main {
 
