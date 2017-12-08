@@ -7,6 +7,7 @@
 @import '../node_modules/nav-frontend-skjema-style/src/index';
 
 @import './start/start';
+@import './registrer/registrerdeg';
 
 body {
     background-color: #e9e7e7;
@@ -19,51 +20,6 @@ body {
     margin-top: 2rem;
 
     @import './skjema/skjema';
-}
-
-article.registrerdeg {
-    margin: 5em auto 0 auto;
-    max-width: 50em;
-    color: #59514B;
-
-    > section {
-        display: flex;
-    }
-
-    > section > section {
-        margin: auto;
-        padding: 2em 0;
-
-        > h1 {
-            margin-bottom: 0.5em;
-            &:after {
-                border-top: 1px #66cbec solid;
-                width: 30px;
-                display: block;
-                clear: both;
-                content: "";
-                margin: 20px auto 0;
-            }
-        }
-
-        > ul {
-            margin: 1em 0;
-            padding-left: 1em;
-        }
-
-        > p:last-child {
-            color: #66cbec;
-            font-weight: 300;
-            font-style: italic;
-        }
-
-    }
-
-    footer {
-        display: flex;
-        justify-content: center;
-        margin-top: 2em;
-    }
 }
 
 

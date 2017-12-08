@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import IntlProvider from './Intl-provider';
 import getStore from './store';
-import RegistrerDeg from './registrerdeg';
+import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
 import {
     BrowserRouter as Router,

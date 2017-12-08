@@ -1,0 +1,40 @@
+.registrerdeg {
+  margin: 5em auto 0 auto;
+  max-width: 50em;
+  color: #59514B;
+
+  &__innhold-wrapper {
+    display: flex;
+
+    .registrerdeg__innhold {
+      margin: auto;
+      padding: 2em 0;
+      max-width: 54%;
+
+      .registrerdeg__tittel {
+        text-align: center;
+        &:after {
+          border-top: 1px #66cbec solid;
+          width: 30px;
+          display: block;
+          clear: both;
+          content: "";
+          margin: 20px auto 0;
+        }
+      }
+      .registrerdeg-tips {
+        color: #66cbec;
+        font-weight: 300;
+        font-style: italic;
+      }
+
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem auto;
+    width: 50%;
+  }
+}
