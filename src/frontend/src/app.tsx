@@ -2,12 +2,13 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import IntlProvider from './Intl-provider';
 import getStore from './store';
-import RegistrerDeg from './registrerdeg';
+import RegistrerDeg from './registrer/registrerdeg';
+import StartRegistrering from './start/start';
 import {
     BrowserRouter as Router,
     Route
 } from 'react-router-dom';
-import Skjema from './skjema/skjema';
+import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from "./oppsummering/sbl-registrering";
 
@@ -21,8 +22,9 @@ class App extends React.Component {
                 <IntlProvider>
                     <Router basename={basename}>
                         <div className="body__wrapper">
+                            <Route path="/start" component={StartRegistrering}/>
                             <Route path="/registrer" component={RegistrerDeg}/>
-                            <Route path="/skjema/:id" component={Skjema}/>
+                            <Route path="/skjema/:id" component={SkjemaPanel}/>
                             <Route path="/oppsummering" component={Oppsummering}/>
                             <Route path="/sblregistrering" component={SblRegistrering}/>
                         </div>
