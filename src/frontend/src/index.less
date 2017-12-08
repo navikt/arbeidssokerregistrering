@@ -1,10 +1,10 @@
 @nodeModulesPath: './../../';
 @coreModulePath: './../../';
 
+@import '../node_modules/nav-frontend-core/less/core';
 @import '../node_modules/nav-frontend-knapper-style/src/index';
-@import '../node_modules/nav-frontend-paneler-style/src/index';
-
 @import '../node_modules/nav-frontend-skjema-style/src/index';
+@import '../node_modules/nav-frontend-paneler-style/src/index';
 
 @import './start/start';
 @import './registrer/registrerdeg';
@@ -14,12 +14,17 @@ body {
 }
 
 .body__wrapper {
+    @import './skjema/skjema';
+    @import './oppsummering/oppsummering';
+
+
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2rem;
 
-    @import './skjema/skjema';
+    @media (max-width: 768px) {
+        width: 100%
+    }
 }
 
 

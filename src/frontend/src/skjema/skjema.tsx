@@ -1,56 +1,84 @@
 import * as React from 'react';
-import {connect, Dispatch} from 'react-redux';
-import {Radio} from 'nav-frontend-skjema';
-import {InjectedIntlProps, injectIntl} from 'react-intl';
+import { connect, Dispatch } from 'react-redux';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
-import {Undertittel} from 'nav-frontend-typografi';
-import {Panel} from 'nav-frontend-paneler';
-import {Knapp} from 'nav-frontend-knapper';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Panel } from 'nav-frontend-paneler';
 import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
+import Alternativ, { EndreSvar } from './alternativ';
+import { RouteComponentProps } from 'react-router';
+import KnappNeste from './knapp-neste';
+import { uncheckRadioButtons } from './skjema-utils';
+import KnappFullfor from './knapp-fullfor';
 
 interface SkjemaProps {
     id: string;
 }
 
-interface AlternativProps {
-    tekstId: string;
+export interface MatchProps {
+    id: string;
+}
+
+interface StateProps {
+    sporsmalErBesvar: (sporsmalId: string) => boolean;
 }
 
 interface DispatchProps {
-    endreSvar: (sporsmalId: string, alternativId: string) => void;
+    endreSvar: EndreSvar;
 }
 
-function Skjema({id, intl}: SkjemaProps & InjectedIntlProps & DispatchProps) {
-    const antallAlternativer = antallSporsmal[parseInt(id) - 1];
-    const tittelId = `sporsmal-${id}-tittel`;
-    return <div>
-        <Undertittel className="blokk-xxs">{intl.messages[tittelId]}</Undertittel>
-        <Panel>
-            <form>
-                {Array.from(Array(antallAlternativer).keys())
-                    .map(i => i + 1)
-                    .map((key) => <Alternativ key={key} tekstId={`sporsmal-${id}-alternativ-${key}`} intl={intl}/>)}
-            </form>
-        </Panel>
-        <Knapp type="hoved" onClick={(() => console.log('neste'))}>Neste</Knapp>
-    </div>;
+type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
+
+function Skjema({match, history, intl, endreSvar, sporsmalErBesvar}: Props) {
+    const sporsmalId = match.params.id;
+    const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
+    const tittelId = `sporsmal-${sporsmalId}-tittel`;
+    return (
+        <div>
+            <Undertittel className="blokk-xxs">{intl.messages[tittelId]}</Undertittel>
+            <Panel className="blokk-s">
+                <form >
+                    {Array.from(Array(antallAlternativer).keys())
+                        .map(i => i + 1)
+                        .map((key) => <Alternativ
+                            sporsmalId={sporsmalId}
+                            endreSvar={endreSvar}
+                            key={key}
+                            tekstId={`sporsmal-${sporsmalId}-alternativ-${key}`}
+                            intl={intl}
+                        />)}
+                </form>
+            </Panel>
+            <div className="skjema-knapper">
+                {
+                    parseInt(sporsmalId, 10) === antallSporsmal.length ?
+                        <KnappFullfor
+                            disabled={!sporsmalErBesvar(sporsmalId)}
+                            onClick={() => history.push('/oppsummering')}
+                        />
+                        :
+                        <KnappNeste
+                            disabled={!sporsmalErBesvar(sporsmalId)}
+                            onClick={(() => {
+                                history.push(`/skjema/${(parseInt(sporsmalId, 10) + 1)}`);
+                                uncheckRadioButtons();
+                            })}
+                        />
+                }
+            </div>
+        </div>
+    );
 }
 
-function Alternativ({tekstId, intl}: AlternativProps & InjectedIntlProps) {
-    const tekst = intl.messages[tekstId];
-
-    return <Radio onClick={onClick} className="blokk-xs" name={'alternativ'} label={tekst} value={tekst}/>;
-}
-
-function onClick(event: React.MouseEvent<HTMLInputElement>) {
-    return console.log('event', event);
-}
+const mapStateToProps = (state: AppState): StateProps => ({
+    sporsmalErBesvar: (sporsmalId) => !!state.svar[sporsmalId],
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, alternativId) => dispatch(endreSvarAction(sporsmalId, alternativId)),
 });
 
-export default connect(null, mapDispatchToProps)
-    (injectIntl(Skjema)
+export default connect(mapStateToProps, mapDispatchToProps)
+(injectIntl(Skjema)
 );
