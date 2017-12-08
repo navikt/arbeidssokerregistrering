@@ -17,7 +17,7 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <Router basename="/arbeidsokerregistrering">
+                    <Router basename="/arbeidssokerregistrering">
                         <div className="body__wrapper">
                             <Route path="/registrer" component={RegistrerDeg}/>
                             <Route path="/start" component={StartRegistrering}/>
