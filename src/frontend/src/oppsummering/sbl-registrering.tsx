@@ -4,7 +4,7 @@ import {Normaltekst, Systemtittel} from 'nav-frontend-typografi';
 import {FormattedMessage} from 'react-intl';
 import {Knapp} from 'nav-frontend-knapper';
 
-const sblUrl = '/sbl/arbeid/registrering';
+export const sblUrl = '/sbl/arbeid/registrering';
 
 function SblRegistrering() {
     if (window.innerWidth > 768) {
@@ -13,7 +13,7 @@ function SblRegistrering() {
     }
     return (
         <div>
-            <Panel className="blokk-xl">
+            <Panel className="blokk-s">
                 <Systemtittel className="overskrift-sbl-registrering">
                     <FormattedMessage id="overskrift-registrering-pc"/>
                 </Systemtittel>
@@ -21,7 +21,7 @@ function SblRegistrering() {
                     <FormattedMessage id="beskrivelse-registrering-pc"/>
                 </Normaltekst>
             </Panel>
-            <div className="sbl-registrering__knapperad">
+            <div className="sbl-registrering__knapperad blokk-m">
                 <Knapp type="standard">
                     <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
                 </Knapp>

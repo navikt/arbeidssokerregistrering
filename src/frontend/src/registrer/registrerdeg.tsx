@@ -7,7 +7,9 @@ function RegistrerDeg() {
         <article className="registrerdeg">
             <section className="panel--stor registrerdeg__innhold-wrapper">
                 <section className="registrerdeg__innhold">
-                    <h1 className="typo-innholdstittel blokk-xs registrerdeg__tittel"><FormattedMessage id="overskrift-registrerdeg"/></h1>
+                    <h1 className="typo-innholdstittel blokk-xs registrerdeg__tittel">
+                        <FormattedMessage id="overskrift-registrerdeg"/>
+                    </h1>
                     <p className="typo-normal blokk-xs">
                         <FormattedMessage id="beskrivelse-registrerdeg"/>
                     </p>
