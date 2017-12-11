@@ -1,0 +1,39 @@
+.panel-info {
+  padding: 2em 2em;
+}
+
+.overskrift-panel-info {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  text-align: center;
+
+  &::before {
+    content: "";
+    background-size: 38px 38px;
+    display: block;
+    width: 38px;
+    height: 38px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  &::after {
+    border-bottom: 2px solid;
+    display: block;
+    content: '';
+    margin-top: 2rem;
+    width: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+  }
+}
+
+.panel-info__knapperad {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+}

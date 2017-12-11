@@ -13,15 +13,15 @@ function SblRegistrering() {
     }
     return (
         <div>
-            <Panel className="blokk-xl">
-                <Systemtittel className="overskrift-sbl-registrering">
+            <Panel className="panel-info blokk-l">
+                <Systemtittel className="overskrift-panel-info info-rod">
                     <FormattedMessage id="overskrift-registrering-pc"/>
                 </Systemtittel>
-                <Normaltekst className="beskrivelse-sbl-registrering blokk-xl">
+                <Normaltekst>
                     <FormattedMessage id="beskrivelse-registrering-pc"/>
                 </Normaltekst>
             </Panel>
-            <div className="sbl-registrering__knapperad">
+            <div className="panel-info__knapperad">
                 <Knapp type="standard">
                     <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
                 </Knapp>
