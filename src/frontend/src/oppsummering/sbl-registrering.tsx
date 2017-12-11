@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Panel} from 'nav-frontend-paneler';
-import {Normaltekst, Systemtittel} from 'nav-frontend-typografi';
-import {FormattedMessage} from 'react-intl';
-import {Knapp} from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
+import { Knapp } from 'nav-frontend-knapper';
 
 const sblUrl = '/sbl/arbeid/registrering';
 
@@ -14,9 +14,9 @@ function SblRegistrering() {
     return (
         <div>
             <Panel className="panel-info blokk-l">
-                <Systemtittel className="overskrift-panel-info info-rod">
+                <Sidetittel className="overskrift-panel-info info-rod">
                     <FormattedMessage id="overskrift-registrering-pc"/>
-                </Systemtittel>
+                </Sidetittel>
                 <Normaltekst>
                     <FormattedMessage id="beskrivelse-registrering-pc"/>
                 </Normaltekst>
@@ -25,7 +25,7 @@ function SblRegistrering() {
                 <Knapp type="standard">
                     <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
                 </Knapp>
-                <Knapp type="hoved" onClick={() => document.location.href = sblUrl}>
+                <Knapp type="hoved" className="mml" onClick={() => document.location.href = sblUrl}>
                     <FormattedMessage id="knapp-sbl-registrering-neste"/>
                 </Knapp>
             </div>

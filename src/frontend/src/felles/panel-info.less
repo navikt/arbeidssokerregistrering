@@ -1,11 +1,10 @@
 .panel-info {
-  padding: 2em 2em;
+  padding: 2em 14em;
 }
 
 .overskrift-panel-info {
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
   text-align: center;
 
   &::before {
@@ -32,8 +31,20 @@
 }
 
 .panel-info__knapperad {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: space-around;
+  text-align: center;
+  > .mml {
+    margin-left: 2em;
+  }
 }
+
+// Small screen / tablet
+@media (max-width: @screen-sm-min) {
+  .panel-info {
+    padding: 2em 2em;
+  }
+}
+
+// Medium screen / desktop
+//@media (max-width: @screen-md-min) {
+// css for desktop
+//}

@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {Panel} from 'nav-frontend-paneler';
-import {Normaltekst, Systemtittel} from 'nav-frontend-typografi';
-import {FormattedMessage} from 'react-intl';
-import {Knapp} from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
+import { Knapp } from 'nav-frontend-knapper';
 
 function Start() {
     return (
         <div>
             <Panel className="panel-info blokk-l">
-                <Systemtittel className="overskrift-panel-info info-bla">
+                <Sidetittel className="overskrift-panel-info info-bla">
                     <FormattedMessage id="overskrift-start"/>
-                </Systemtittel>
+                </Sidetittel>
                 <Normaltekst className="blokk-xs">
                     <FormattedMessage id="beskrivelse-start"/>
                 </Normaltekst>
@@ -19,7 +19,7 @@ function Start() {
                 <Knapp type="standard" className="knapp">
                     <FormattedMessage id="knapp-avbryt"/>
                 </Knapp>
-                <Knapp type="hoved" className="knapp knapp--hoved">
+                <Knapp type="hoved" className="knapp knapp--hoved mml">
                     <FormattedMessage id="knapp-neste"/>
                 </Knapp>
             </div>

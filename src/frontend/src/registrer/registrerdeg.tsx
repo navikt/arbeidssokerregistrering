@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import {Panel} from 'nav-frontend-paneler';
-import {Normaltekst, Systemtittel} from 'nav-frontend-typografi';
+import { Panel } from 'nav-frontend-paneler';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 
 function RegistrerDeg() {
     return (
         <div>
             <Panel className="panel-info blokk-l">
-                <Systemtittel className="overskrift-panel-info info-bla">
+                <Sidetittel className="overskrift-panel-info info-bla">
                     <FormattedMessage id="overskrift-registrerdeg"/>
-                </Systemtittel>
+                </Sidetittel>
                 <Normaltekst className="blokk-xs">
                     <FormattedMessage id="beskrivelse-registrerdeg"/>
                 </Normaltekst>
