@@ -3,8 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import { Panel } from 'nav-frontend-paneler';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
+import { MatchProps } from '../skjema/skjema';
+import { RouteComponentProps } from 'react-router';
 
-function RegistrerDeg() {
+type Props = RouteComponentProps<MatchProps>;
+
+function RegistrerDeg({history}: Props) {
     return (
         <div>
             <Panel className="panel-info blokk-l">
@@ -25,7 +29,7 @@ function RegistrerDeg() {
                 </Normaltekst>
             </Panel>
             <div className="panel-info__knapperad">
-                <Knapp type="hoved" className="knapp knapp--hoved">
+                <Knapp type="hoved" className="knapp knapp--hoved" onClick={() => history.push('/start')}>
                     <FormattedMessage id="knapp-registrerdeg"/>
                 </Knapp>
             </div>
