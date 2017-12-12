@@ -6,7 +6,7 @@ import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
-import { shallowwithStoreAndIntl, dispatch, store } from '../test/test-utils';
+import { shallowwithStoreAndIntl, store } from '../test/test-utils';
 import KnappNeste from './knapp-neste';
 import KnappFullfor from './knapp-fullfor';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
