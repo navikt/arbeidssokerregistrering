@@ -10,11 +10,11 @@ import {
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
-import SblRegistrering from "./oppsummering/sbl-registrering";
+import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
 
 const store = getStore();
-export const basename = '/arbeidsokerregistrering';
+export const basename = '/arbeidssokerregistrering';
 
 class App extends React.Component {
     render() {

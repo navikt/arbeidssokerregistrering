@@ -1,12 +1,13 @@
 const AVGI_SVAR = 'AVGI_SVAR';
+const INITIAL_STATE = 'INITIAL_STATE';
 
 export interface SvarState {
-        1?: string;
-        2?: string;
-        3?: string;
-        4?: string;
-        5?: string;
-        6?: string;
+    1?: string;
+    2?: string;
+    3?: string;
+    4?: string;
+    5?: string;
+    6?: string;
 }
 
 interface Action {
@@ -31,6 +32,9 @@ export default function (state: SvarState = initialState, action: Action): SvarS
         case AVGI_SVAR: {
             return {...state, [action.data.sporsmalId]: action.data.alternativId};
         }
+        case INITIAL_STATE: {
+            return initialState;
+        }
         default : {
             return state;
         }
@@ -44,5 +48,11 @@ export function endreSvarAction(sporsmalId: string, alternativId: string) {
             sporsmalId,
             alternativId
         }
+    };
+}
+
+export function setInitalState() {
+    return {
+        type: INITIAL_STATE
     };
 }

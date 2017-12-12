@@ -1,4 +1,4 @@
-import '../test-setup';
+import '../test/test-setup';
 import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';

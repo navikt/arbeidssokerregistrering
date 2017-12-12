@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Panel} from 'nav-frontend-paneler';
-import {Normaltekst, Systemtittel} from 'nav-frontend-typografi';
-import {FormattedMessage} from 'react-intl';
-import {Knapp} from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
+import { Knapp } from 'nav-frontend-knapper';
 
 export const sblUrl = '/sbl/arbeid/registrering';
 
@@ -13,7 +13,7 @@ function SblRegistrering() {
     }
     return (
         <div>
-            <Panel className="blokk-s">
+            <Panel className="blokk-s sbl-registrering__panel">
                 <Systemtittel className="overskrift-sbl-registrering">
                     <FormattedMessage id="overskrift-registrering-pc"/>
                 </Systemtittel>
