@@ -4,6 +4,7 @@ import IntlProvider from './Intl-provider';
 import getStore from './store';
 import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
+import Avbryt from './avbryt/avbryt';
 import {
     BrowserRouter as Router,
     Route
@@ -27,6 +28,7 @@ class App extends React.Component {
                             <Route path="/skjema/:id" component={SkjemaPanel}/>
                             <Route path="/oppsummering" component={Oppsummering}/>
                             <Route path="/sblregistrering" component={SblRegistrering}/>
+                            <Route path="/avbryt" component={Avbryt}/>
                         </div>
                     </Router>
                 </IntlProvider>
