@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "../build/dist",
+    "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
     "lib": ["es6", "dom"],
@@ -18,9 +18,9 @@
     "noUnusedLocals": true
   },
   "exclude": [
+    "node_modules",
     "src/test/**/*",
     "src/**/*.test.*",
-    "../node_modules",
     "build",
     "scripts",
     "acceptance-tests",
