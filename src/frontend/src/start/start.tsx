@@ -12,7 +12,7 @@ function Start({history}: Props) {
     return (
         <div>
             <Panel className="panel-info blokk-l">
-                <Sidetittel className="overskrift-panel-info info-bla">
+                <Sidetittel className="overskrift-panel-info info-sirkel-bla">
                     <FormattedMessage id="overskrift-start"/>
                 </Sidetittel>
                 <Normaltekst className="blokk-xs">

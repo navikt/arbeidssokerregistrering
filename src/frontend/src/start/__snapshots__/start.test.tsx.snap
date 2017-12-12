@@ -6,7 +6,7 @@ exports[`Start komponent har riktig innhold og struktur 1`] = `
     className="panel panel-info blokk-l"
   >
     <h1
-      className="typo-sidetittel overskrift-panel-info info-bla"
+      className="typo-sidetittel overskrift-panel-info info-sirkel-bla"
     >
       <span>
         Hei
