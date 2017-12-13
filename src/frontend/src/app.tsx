@@ -12,11 +12,15 @@ import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
+import { hentRegistreringStatus} from './ducks/hentRegistreringStatus';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
 
 class App extends React.Component {
+    componentDidMount () {
+        store.dispatch(hentRegistreringStatus('123'));
+    }
     render() {
         return (
             <Provider store={store}>
