@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
+import { FormattedMessage } from 'react-intl';
+import { Knapp } from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 
-const sblUrl = '/sbl/arbeid/registrering';
+export const sblUrl = '/sbl/arbeid/registrering';
 
 function SblRegistrering() {
     if (window.innerWidth > 768) {
