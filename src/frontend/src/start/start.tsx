@@ -15,7 +15,7 @@ function Start({history}: Props) {
                 <Sidetittel className="overskrift-panel-info info-sirkel-bla">
                     <FormattedMessage id="overskrift-start"/>
                 </Sidetittel>
-                <Normaltekst className="blokk-xs">
+                <Normaltekst className="beskrivelse-start">
                     <FormattedMessage id="beskrivelse-start"/>
                 </Normaltekst>
             </Panel>
