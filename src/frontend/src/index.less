@@ -11,6 +11,7 @@ body {
 }
 
 .arbsokreg_app {
+    @import './felles/margin-padding';
     @import './felles/panel-info';
     @import './start/start';
     @import './registrer/registrerdeg';
@@ -25,9 +26,18 @@ body {
         width: 100%
     }
 }
+.appContainer {
+    height: 100%;
+}
+
+.pagewrapper {
+    min-height: 100%;
+    height: auto;
+    margin-bottom: -200px;
+    padding-bottom: 200px;
+}
 
 .hodefot-footer {
-    position: absolute;
     width: 100%;
     bottom: 0;
 }
