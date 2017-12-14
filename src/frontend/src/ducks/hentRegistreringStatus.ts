@@ -1,45 +1,54 @@
-export const HENT_REGISTRERING_STATUS = 'HENT_REGISTRERING_STATUS';
-export const MOTTA_REGISTRERING_STATUS = 'MOTTA_REGISTRERING_STATUS';
+import * as Api from './api';
+import { doThenDispatch, STATUS } from './utils';
+
+export const OK = 'hentRegistreringStatus/OK';
+export const FEILET = 'hentRegistreringStatus/FEILET';
+export const PENDING = 'hentRegistreringStatus/PENDING';
 
 export interface RegStatusState {
-    erUnderOppfolging?: boolean;
-    oppfyllerKrav?: boolean;
+    data: {
+        erUnderOppfolging?: boolean;
+        oppfyllerKrav?: boolean;
+    };
+    status?: string;
 }
 
 interface Action {
     type: string;
+    data: {
+        erUnderOppfolging: string;
+        oppfyllerKrav: string;
+    };
 }
 
-const initialState = {
-    erUnderOppfolging: false,
-    oppfyllerKrav: true,
+const initialState: RegStatusState = {
+    data : {
+        erUnderOppfolging: false,
+        oppfyllerKrav: true,
+    }
 };
 
-export default function (state: RegStatusState = initialState, action: Action): RegStatusState {
+export default function (state: RegStatusState = initialState, action: Action) {
     switch (action.type) {
-        case MOTTA_REGISTRERING_STATUS: {
-            return {...state, erUnderOppfolging: true};
+        case PENDING:
+            if (state.status === STATUS.OK) {
+                return { ...state, status: STATUS.RELOADING };
+            }
+            return { ...state, status: STATUS.PENDING };
+        case FEILET:
+            return { ...state, status: STATUS.ERROR, data: action.data };
+        case OK: {
+            return { ...state, status: STATUS.OK, data: action.data };
         }
-        default : {
+        default:
             return state;
-        }
     }
 }
 
-function mottattRegistreringStatus(registreringStatus: {}) {
-    return {
-        type: MOTTA_REGISTRERING_STATUS,
-        data: {
-            registreringStatus,
-        }
-    };
-}
-
 export function hentRegistreringStatus(fnr: string) {
-    return (dispatch: any) => {
-        return fetch(`localhost` + '/' + fnr)
-            .then(json => {
-                return dispatch(mottattRegistreringStatus(json));
-            });
-    };
+    return doThenDispatch(() => Api.hentRegistreringStatus(fnr), {
+        OK,
+        FEILET,
+        PENDING
+    });
 }
