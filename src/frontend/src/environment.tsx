@@ -1,1 +1,0 @@
-export const OPPFOLGING_PROXY_BASE_URL = 'veilarboppfolging_url';

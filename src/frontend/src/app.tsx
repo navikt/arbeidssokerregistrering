@@ -6,27 +6,39 @@ import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
 import {
     BrowserRouter as Router,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
-import { hentRegistreringStatus} from './ducks/hentRegistreringStatus';
+import { hentRegistreringStatus } from './ducks/hentRegistreringStatus';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
 
-class App extends React.Component {
-    componentDidMount () {
+class RegistreringStatus extends React.Component {
+    componentDidMount() {
         store.dispatch(hentRegistreringStatus('123'));
     }
+
+    render() {
+        if (store.getState().registreringStatus.erUnderOppfolging) {
+            return <Redirect to="sbl/arbeid"/>;
+        } else {
+            return null;
+        }
+    }
+}
+class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
                 <IntlProvider>
                     <Router basename={basename}>
                         <div className="arbsokreg_app">
+                            <Route path="/" component={RegistreringStatus}/>
                             <Route path="/start" component={StartRegistrering}/>
                             <Route path="/registrer" component={RegistrerDeg}/>
                             <Route path="/skjema/:id" component={SkjemaPanel}/>
