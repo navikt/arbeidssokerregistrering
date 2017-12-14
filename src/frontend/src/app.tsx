@@ -17,6 +17,7 @@ import { hentRegistreringStatus } from './ducks/hentRegistreringStatus';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
+export const sblArbeid = 'sbl/arbeid';
 
 class RegistreringStatus extends React.Component {
     componentDidMount() {
@@ -25,7 +26,7 @@ class RegistreringStatus extends React.Component {
 
     render() {
         if (store.getState().registreringStatus.erUnderOppfolging) {
-            return <Redirect to="sbl/arbeid"/>;
+            return <Redirect to={sblArbeid}/>;
         } else {
             return null;
         }

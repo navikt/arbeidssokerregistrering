@@ -36,7 +36,7 @@ function mottattRegistreringStatus(registreringStatus: {}) {
 }
 
 export function hentRegistreringStatus(fnr: string) {
-    return (dispatch: {}) => {
+    return (dispatch: any) => {
         return fetch(`localhost` + '/' + fnr)
             .then(json => {
                 return dispatch(mottattRegistreringStatus(json));
