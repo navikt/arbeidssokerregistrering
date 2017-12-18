@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
+import KnappNeste from '../komponenter/knapp-neste';
 
 type Props =  RouteComponentProps<MatchProps>;
 
@@ -21,11 +22,12 @@ function Start({history}: Props) {
             </Panel>
             <div className="panel-info__knapperad">
                 <Knapp type="standard" className="knapp">
-                    <FormattedMessage id="knapp-avbryt"/>
+                    <Normaltekst><FormattedMessage id="knapp-avbryt"/></Normaltekst>
                 </Knapp>
-                <Knapp type="hoved" className="knapp knapp--hoved mml" onClick={() => history.push('/skjema/1')}>
-                    <FormattedMessage id="knapp-neste"/>
-                </Knapp>
+                <KnappNeste
+                    onClick={() => history.push('/skjema/1')}
+                    className="mml"
+                />
             </div>
         </div>
     );

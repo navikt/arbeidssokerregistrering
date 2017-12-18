@@ -7,7 +7,7 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
 import { shallowwithStoreAndIntl, store } from '../test/test-utils';
-import KnappNeste from './knapp-neste';
+import KnappNeste from '../komponenter/knapp-neste';
 import KnappFullfor from './knapp-fullfor';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
 import {endreSvarAction, setInitalState } from "../ducks/svar";

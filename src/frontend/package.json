@@ -10,7 +10,7 @@
     "nav-frontend-core": "4.0.5",
     "nav-frontend-grid": "0.1.10",
     "nav-frontend-grid-style": "0.2.4",
-    "nav-frontend-ikoner-assets": "^0.2.19",
+    "nav-frontend-ikoner-assets": "0.2.19",
     "nav-frontend-js-utils": "0.2.10",
     "nav-frontend-knapper": "0.2.14",
     "nav-frontend-knapper-style": "0.3.5",
@@ -30,7 +30,7 @@
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
     "react-scripts-ts": "2.8.0",
-    "react-test-renderer": "^16.2.0",
+    "react-test-renderer": "16.2.0",
     "redux-thunk": "2.2.0"
   },
   "scripts": {
@@ -52,20 +52,21 @@
     "build": "npm run delete-static npm run build:less && npm run build:tekster && npm run build:ts && npm run copyfiles"
   },
   "devDependencies": {
-    "@types/react-router-dom": "^4.2.3",
-    "@types/react-test-renderer": "^16.0.0",
+    "@types/react-router-dom": "4.2.3",
+    "@types/react-test-renderer": "16.0.0",
     "@types/jest": "21.1.8",
     "@types/node": "8.0.53",
     "@types/react": "16.0.29",
     "@types/react-dom": "16.0.3",
     "@types/react-intl": "2.3.2",
     "@types/react-redux": "5.0.10",
+    "@types/classnames": "2.2.3",
     "autoless": "0.1.7",
     "chai": "4.1.2",
     "copyfiles": "1.2.0",
     "enzyme": "3.2.0",
     "enzyme-adapter-react-16": "1.1.0",
-    "enzyme-react-intl": "^1.4.8",
+    "enzyme-react-intl": "1.4.8",
     "less": "2.7.3",
     "npm-run-all": "4.0.2",
     "sinon": "4.1.3"
