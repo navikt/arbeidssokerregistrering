@@ -1,5 +1,5 @@
 import { fetchToJson } from './utils';
-const VEILARBOPPFOLGING_URL = '/veilarboppfolging/api';
+const VEILARBOPPFOLGING_URL = '/veilarboppfolgingproxy/api/startRegistreringStatus';
 
 export function hentRegistreringStatus(fnr: string) {
     const url = `${VEILARBOPPFOLGING_URL}/${fnr}`;

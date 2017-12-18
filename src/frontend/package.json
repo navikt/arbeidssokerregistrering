@@ -53,6 +53,7 @@
     "build:tekster": "node ./src/utils/build-tekster.js",
     "build": "npm run delete-static npm run build:less && npm run build:tekster && npm run build:ts && npm run copyfiles"
   },
+  "proxy": "http://localhost:8080",
   "devDependencies": {
     "@types/react-router-dom": "^4.2.3",
     "@types/react-test-renderer": "^16.0.0",
