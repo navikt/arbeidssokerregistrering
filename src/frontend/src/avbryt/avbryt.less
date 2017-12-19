@@ -1,8 +1,13 @@
+@padding-avstand-vannrett: 3em;
+@padding-avstand-vannrett-small: 2em;
+.avbryt-panel-wrapper {
+  margin-top: 4em;
+  background-color: @navLysGra;
+}
 .avbryt-panel {
   border-top: 2px solid @navGra20;
   border-bottom: 2px solid @navGra20;
-  padding: 2em;
-
+  padding: 2em @padding-avstand-vannrett;
 }
 
 .avbryt-fokus {
@@ -10,4 +15,28 @@
   padding: 2em;
   display: flex;
   align-items: center;
+}
+
+.avbryt-panel__knapperad {
+  padding: 2em @padding-avstand-vannrett;
+}
+
+.avbryt-panel__lukkknapperad{
+  text-align: end;
+  padding: 1em;
+}
+
+// Small screen / tablet
+@media (max-width: @screen-sm-min) {
+  .avbryt-panel {
+    padding: 2em @padding-avstand-vannrett-small;
+  }
+
+  .avbryt-panel__knapperad {
+    padding: 2em @padding-avstand-vannrett-small;
+  }
+
+  .avbryt-panel__lukkknapperad{
+    padding: 1em;
+  }
 }
