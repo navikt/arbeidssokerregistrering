@@ -12,3 +12,7 @@ healthcheck:
   readiness:
     path: arbeidssokerregistrering/index.html
     initialDelay: 20
+fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseurl
