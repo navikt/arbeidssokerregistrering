@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import {
     Redirect
 } from 'react-router-dom';
 import { hentRegistreringStatus } from './ducks/hentRegistreringStatus';
 import Innholdslaster from './innholdslaster/innholdslaster';
 import { RegStatusState } from './ducks/hentRegistreringStatus';
+import { AppState } from './reducer';
 
 export const sblArbeid = '/sbl/arbeid';
 
@@ -39,12 +40,15 @@ class AppWrapper extends React.Component<AppWrapperProps> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
     registreringStatus: state.registreringStatus
 });
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
-    hentRegistreringStatus: (fnr) => dispatch(hentRegistreringStatus(fnr)),
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    hentRegistreringStatus: (fnr) => {
+        dispatch(hentRegistreringStatus(fnr));
+        return null;
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper);

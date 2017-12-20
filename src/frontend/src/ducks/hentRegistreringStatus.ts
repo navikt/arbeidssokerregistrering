@@ -1,24 +1,14 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './utils';
-
-export const OK = 'hentRegistreringStatus/OK';
-export const FEILET = 'hentRegistreringStatus/FEILET';
-export const PENDING = 'hentRegistreringStatus/PENDING';
+// import { Dispatch } from 'react-redux';
+// import { AppState } from '../reducer';
+import {
+    Action, ActionType} from './actions';
+import RegistreringStatus from './registrering-status-modell';
 
 export interface RegStatusState {
-    data: {
-        erUnderOppfolging?: boolean;
-        oppfyllerKrav?: boolean;
-    };
+    data: RegistreringStatus;
     status?: string;
-}
-
-interface Action {
-    type: string;
-    data: {
-        erUnderOppfolging: string;
-        oppfyllerKrav: string;
-    };
 }
 
 const initialState: RegStatusState = {
@@ -28,16 +18,16 @@ const initialState: RegStatusState = {
     }
 };
 
-export default function (state: RegStatusState = initialState, action: Action) {
+export default function (state: RegStatusState = initialState, action: Action): RegStatusState {
     switch (action.type) {
-        case PENDING:
+        case ActionType.HENT_REGISTRERINGSTATUS:
             if (state.status === STATUS.OK) {
                 return { ...state, status: STATUS.RELOADING };
             }
             return { ...state, status: STATUS.PENDING };
-        case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
-        case OK: {
+        case ActionType.HENT_REGISTRERINGSTATUS_FEILET:
+            return { ...state, status: STATUS.ERROR };
+        case ActionType.HENTET_REGISTRERINGSTATUS: {
             return { ...state, status: STATUS.OK, data: action.data };
         }
         default:
@@ -47,8 +37,8 @@ export default function (state: RegStatusState = initialState, action: Action) {
 
 export function hentRegistreringStatus(fnr: string) {
     return doThenDispatch(() => Api.hentRegistreringStatus(fnr), {
-        OK,
-        FEILET,
-        PENDING
+        PENDING: ActionType.HENT_REGISTRERINGSTATUS,
+        OK : ActionType.HENTET_REGISTRERINGSTATUS,
+        FEILET: ActionType.HENT_REGISTRERINGSTATUS_FEILET,
     });
 }

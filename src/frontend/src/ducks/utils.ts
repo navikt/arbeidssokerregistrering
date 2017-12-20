@@ -1,3 +1,7 @@
+import { Dispatch } from 'react-redux';
+import { AppState } from '../reducer';
+import { ActionType } from './actions';
+import { ThunkAction } from 'redux-thunk';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -16,36 +20,37 @@ class FetchError extends Error {
     }
 }
 
-export function sjekkStatuskode(response: any) {
+export function sjekkStatuskode(response: Response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
-        return response;
+        return Promise.resolve(response);
     }
     if (response.status === 401) {
-        window.location.href = 'feilsider/401.html';// eslint-disable-line no-undef
+        window.location.href = 'feilsider/401.html'; // eslint-disable-line no-undef
     }
     return Promise.reject(new FetchError(response.statusText, response));
 }
 
-export function toJson(response: any) {
+export function toJson(response: Response) {
     if (response.status !== 204) { // No content
         return response.json();
     }
     return response;
 }
 
-export function sendResultatTilDispatch(dispatch: any, action: any) {
-    return (...data: any[]) => {
-        if (data.length === 1) {
-            return dispatch({ type: action, data: data[0] });
-        }
-        return dispatch({ type: action, data });
+export function sendResultatTilDispatch(dispatch: Dispatch<AppState>, action: ActionType)  {
+    return <S>(data: S): S => { // tslint:disable-line no-any
+        // if (data.length === 1) {
+        //     return dispatch({ type: action, data: data[0] });
+        // }
+        dispatch({ type: action, data });
+        return data;
     };
 }
 
-export function handterFeil(dispatch: any, action: any) {
-    return (error: any) => {
+export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
+    return (error: FetchError): void => {
         if (error.response) {
-            error.response.text().then((data: any) => {
+            error.response.text().then((data: string) => {
                 console.error(error, error.stack, data); // tslint:disable-line no-console
                 dispatch({ type: action, data: { response: error.response, data } });
             });
@@ -56,18 +61,26 @@ export function handterFeil(dispatch: any, action: any) {
     };
 }
 
-export function fetchToJson<ResponseInterface>(url: string, config: RequestInit = {}): Promise<ResponseInterface> {
+export function fetchToJson<DATA>(url: string, config: RequestInit = {}): Promise<DATA> {
     return fetch(url, config)
         .then(sjekkStatuskode)
         .then(toJson);
 }
 
-export function doThenDispatch(fn: any, { OK, FEILET, PENDING }: any) {
-    return (dispatch: any, getState?: any) => {
+interface RestActions {
+    OK: ActionType;
+    PENDING: ActionType;
+    FEILET: ActionType;
+}
+
+export function doThenDispatch<DATA>(
+    fn: () => Promise<DATA> , { OK, FEILET, PENDING }: RestActions
+): ThunkAction<Promise<DATA|void>, AppState, void> {
+    return (dispatch: Dispatch<AppState>) => {
         if (PENDING) {
             dispatch({ type: PENDING });
         }
-        return fn(dispatch, getState)
+        return fn()
             .then(sendResultatTilDispatch(dispatch, OK))
             .catch(handterFeil(dispatch, FEILET));
     };
