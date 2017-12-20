@@ -10,7 +10,7 @@ RUN npm install && npm run build
 
 FROM ${BASE_IMAGE_PREFIX}maven as maven-builder
 ADD / /source
-COPY --from=node-builder /source/build /src/main/webapp
+COPY --from=node-builder /source/build /source/src/main/webapp
 WORKDIR /source
 RUN mvn install
 
