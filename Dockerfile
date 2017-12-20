@@ -15,5 +15,15 @@ WORKDIR /source
 RUN mvn install
 
 
+
+
 FROM docker.adeo.no:5000/bekkci/nais-java-app
 COPY --from=maven-builder /source/target/arbeidssokerregistrering /app
+
+# TODO TEST
+# TODO TEST
+# TODO TEST
+# TODO TEST
+# TODO TEST
+# TODO TEST
+ENV APPRES_CMS_URL=https://appres-t6.nav.no
