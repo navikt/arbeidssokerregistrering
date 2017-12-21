@@ -1,8 +1,8 @@
-.panel-info {
+.panel-blokk {
   padding: 2em 14em 4em 14em;
 }
 
-.overskrift-panel-info {
+.panel-blokk-overskrift {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -31,18 +31,41 @@
   }
 }
 
-.panel-info__knapperad {
+.panel-blokk-beskrivelse {
+  padding: 0 4em;
+}
+
+.panel-blokk__knapperad {
   text-align: center;
 }
 
 // Small screen / tablet
 @media (max-width: @screen-sm-min) {
-  .panel-info {
+  .panel-blokk {
     padding: 3em 3em;
+  }
+
+  .panel-blokk-beskrivelse {
+    padding: 0;
   }
 }
 
-// Medium screen / desktop
-//@media (max-width: @screen-md-min) {
-// css for desktop
-//}
+
+/*
+* Variant av tittel todo bedre navn
+*/
+.info-sirkel-bla {
+  //&::before {
+  //  background: url("svg/info-sirkel-bla.svg") no-repeat;
+  //}
+}
+
+.info-sirkel-gronn {
+  &::before {
+
+  }
+
+  &::after {
+    color: #a2ad00;
+  }
+}
