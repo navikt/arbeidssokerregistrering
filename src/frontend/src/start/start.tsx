@@ -11,29 +11,27 @@ type Props = RouteComponentProps<MatchProps>;
 
 function Start({history}: Props) {
     return (
-        <div>
-            <PanelBlokk
-                tittelId="overskrift-start"
-                beskrivelseId="beskrivelse-start"
-                tittelCssType="info-sirkel-bla"
-                knappAksjoner={
-                    [
-                        <Knapp key="1" type="standard" className="knapp">
-                            <Normaltekst>
-                                <FormattedMessage id="knapp-avbryt"/>
-                            </Normaltekst>
-                        </Knapp>,
-                        <KnappNeste
-                            key="2"
-                            className="mml"
-                            onClick={(() => {
-                                history.push('/skjema/1');
-                            })}
-                        />
-                    ]
-                }
-            />
-        </div>
+        <PanelBlokk
+            tittelId="overskrift-start"
+            tittelCssNavnVariant="bla-variant"
+            beskrivelseId="beskrivelse-start"
+            knappAksjoner={
+                [
+                    <Knapp key="1" type="standard" className="knapp">
+                        <Normaltekst>
+                            <FormattedMessage id="knapp-avbryt"/>
+                        </Normaltekst>
+                    </Knapp>,
+                    <KnappNeste
+                        key="2"
+                        className="mml"
+                        onClick={(() => {
+                            history.push('/skjema/1');
+                        })}
+                    />
+                ]
+            }
+        />
     );
 }
 

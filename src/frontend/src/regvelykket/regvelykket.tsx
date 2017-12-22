@@ -5,23 +5,19 @@ import { RouteComponentProps } from 'react-router';
 
 function RegVelykket({history}: RouteComponentProps<History>) {
     return (
-        <div>
-            <div>
-                <PanelBlokk
-                    tittelId="overskrift-regvelykket"
-                    tittelCssType="info-sirkel-gronn"
-                    beskrivelseId="beskrivelse-regvelykket"
-                    knappAksjoner={
-                        <KnappNeste
-                            key="2"
-                            onClick={(() => {
-                                history.push('/skjema/1');
-                            })}
-                        />
-                    }
+        <PanelBlokk
+            tittelId="overskrift-regvelykket"
+            tittelCssNavnVariant="gronn-variant"
+            beskrivelseId="beskrivelse-regvelykket"
+            knappAksjoner={
+                <KnappNeste
+                    key="2"
+                    onClick={(() => {
+                        history.push('/skjema/1');
+                    })}
                 />
-            </div>
-        </div>
+            }
+        />
     );
 }
 

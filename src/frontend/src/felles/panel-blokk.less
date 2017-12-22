@@ -29,6 +29,33 @@
     margin-bottom: 2rem;
     color: @navLysBla;
   }
+
+
+  /*
+  * ::before og ::after
+  * med varianter av farger og type ikon
+  *
+  */
+  &__bla-variant {
+    // todo legg til ikonet her
+    //&::before {
+    //  background: url("svg/info-sirkel-bla.svg") no-repeat;
+    //}
+  }
+  &__gronn-variant {
+    &::after {
+      color: #a2ad00;
+    }
+  }
+  &__rod-variant {
+    &::before {
+      background: url("svg/info-sirkel-rod.svg") no-repeat;
+      background-position-x: center;
+    }
+    &::after {
+      color: @navRod;
+    }
+  }
 }
 
 .panel-blokk-beskrivelse {
@@ -47,25 +74,5 @@
 
   .panel-blokk-beskrivelse {
     padding: 0;
-  }
-}
-
-
-/*
-* Variant av tittel todo bedre navn
-*/
-.info-sirkel-bla {
-  //&::before {
-  //  background: url("svg/info-sirkel-bla.svg") no-repeat;
-  //}
-}
-
-.info-sirkel-gronn {
-  &::before {
-
-  }
-
-  &::after {
-    color: #a2ad00;
   }
 }
