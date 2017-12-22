@@ -9,8 +9,8 @@ import Skjema from './skjema';
 import { shallowwithStoreAndIntl, store } from '../test/test-utils';
 import KnappNeste from '../komponenter/knapp-neste';
 import KnappFullfor from './knapp-fullfor';
-import antallSporsmal from '../sporsmal/alle-sporsmal';
 import {endreSvarAction, setInitalState } from "../ducks/svar";
+import {configSpmPrSide} from "./skjema-utils";
 
 enzyme.configure({ adapter: new Adapter()});
 
@@ -59,7 +59,7 @@ describe('<Skjema />', () => {
         expect(knappNeste.length).to.be.equal(0);
     });
     it('Fullfør skal være synlig på siste side', () => {
-        const lastId = antallSporsmal.length.toString();
+        const lastId = Object.keys(configSpmPrSide).length.toString();
         const props = {
             match: {
                 params: {
