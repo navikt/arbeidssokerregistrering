@@ -13,7 +13,7 @@ function RegVelykket({history}: RouteComponentProps<History>) {
                 <KnappNeste
                     key="2"
                     onClick={(() => {
-                        history.push('/skjema/1');
+                        history.push('/veientilarbeid');
                     })}
                 />
             }
