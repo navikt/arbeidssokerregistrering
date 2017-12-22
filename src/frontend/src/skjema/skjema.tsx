@@ -9,7 +9,6 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { uncheckRadioButtons } from './skjema-utils';
 import KnappFullfor from './knapp-fullfor';
 
 interface SkjemaProps {
@@ -23,6 +22,7 @@ export interface MatchProps {
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
+    hentAvgittSvarId: (sporsmalId: string) => string;
 }
 
 interface DispatchProps {
@@ -31,10 +31,12 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
+function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, hentAvgittSvarId}: Props) {
     const sporsmalId = match.params.id;
     const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
     const tittelId = `sporsmal-${sporsmalId}-tittel`;
+    const avgittSvarId = parseInt(hentAvgittSvarId(sporsmalId), 10);
+
     return (
         <div>
             <Undertittel className="blokk-xxs">{intl.messages[tittelId]}</Undertittel>
@@ -47,6 +49,7 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
                             endreSvar={endreSvar}
                             key={key}
                             tekstId={`sporsmal-${sporsmalId}-alternativ-${key}`}
+                            checked={key === avgittSvarId}
                             intl={intl}
                         />)}
                 </form>
@@ -63,7 +66,6 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
                             disabled={!sporsmalErBesvart(sporsmalId)}
                             onClick={(() => {
                                 history.push(`/skjema/${(parseInt(sporsmalId, 10) + 1)}`);
-                                uncheckRadioButtons();
                             })}
                         />
                 }
@@ -74,6 +76,7 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
+    hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId]
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

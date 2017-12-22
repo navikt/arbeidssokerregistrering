@@ -8,12 +8,13 @@ export type EndreSvar = (sporsmalId: string, alternativId: string) => void;
 interface AlternativProps {
     tekstId: string;
     sporsmalId: string;
+    checked: boolean | undefined;
     endreSvar: EndreSvar;
 }
 
 const onChange = (endreSvar: EndreSvar, sporsmalId: string) => () => (endreSvar(sporsmalId, hentValgteAlternativ()));
 
-function Alternativ({tekstId, sporsmalId, endreSvar, intl}: AlternativProps & InjectedIntlProps) {
+function Alternativ({tekstId, sporsmalId, endreSvar, checked, intl}: AlternativProps & InjectedIntlProps) {
     const tekst = intl.messages[tekstId];
     return (
         <Radio
@@ -22,6 +23,7 @@ function Alternativ({tekstId, sporsmalId, endreSvar, intl}: AlternativProps & In
             name={'alternativ'}
             label={tekst}
             value={tekst}
+            checked={checked}
         />);
 }
 
