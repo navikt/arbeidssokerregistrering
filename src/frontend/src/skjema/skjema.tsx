@@ -10,6 +10,7 @@ import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from './knapp-neste';
 import KnappFullfor from './knapp-fullfor';
+import { configSpmPrSide } from './skjema-utils';
 
 interface SkjemaProps {
     id: string;
@@ -32,40 +33,62 @@ interface DispatchProps {
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
 function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, hentAvgittSvarId}: Props) {
-    const sporsmalId = match.params.id;
-    const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
-    const tittelId = `sporsmal-${sporsmalId}-tittel`;
-    const avgittSvarId = parseInt(hentAvgittSvarId(sporsmalId), 10);
+    const sideId = match.params.id;
+    // const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
+    // const tittelId = `sporsmal-${sporsmalId}-tittel`;
+    // const avgittSvarId = parseInt(hentAvgittSvarId(sideId), 10);
+
+    // todo
+    // test send tilbake til førsteside, dersom sideurl ikke finnes
+    // test fullforknap disable frem til alle spm er besvart
+
+    const spmListePaSiden = configSpmPrSide[sideId];
+
+    let disbl = true;
+    spmListePaSiden.map((spmId: string) => {
+        disbl = !sporsmalErBesvart(spmId);
+    });
 
     return (
         <div>
-            <Undertittel className="blokk-xxs">{intl.messages[tittelId]}</Undertittel>
-            <Panel className="blokk-s">
-                <form >
-                    {Array.from(Array(antallAlternativer).keys())
-                        .map(i => i + 1)
-                        .map((key) => <Alternativ
-                            sporsmalId={sporsmalId}
-                            endreSvar={endreSvar}
-                            key={key}
-                            tekstId={`sporsmal-${sporsmalId}-alternativ-${key}`}
-                            checked={key === avgittSvarId}
-                            intl={intl}
-                        />)}
-                </form>
-            </Panel>
+            {
+                spmListePaSiden
+                    .map((spmId: string) => (
+                        <div>
+                            <Undertittel className="blokk-xxs">
+                                {intl.messages[`sporsmal-${spmId}-tittel`]}
+                            </Undertittel>
+                            <Panel className="blokk-s">
+                                <form >
+                                    {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
+                                        .map(i => i + 1)
+                                        .map((key) => <Alternativ
+                                            sporsmalId={spmId}
+                                            endreSvar={endreSvar}
+                                            key={key}
+                                            alternativId={key.toString()}
+                                            tekstId={`sporsmal-${sideId}-alternativ-${key}`}
+                                            checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
+                                            intl={intl}
+                                        />)}
+                                </form>
+                            </Panel>
+                        </div>
+                    ))
+            }
+
             <div className="skjema-knapper">
                 {
-                    parseInt(sporsmalId, 10) === antallSporsmal.length ?
+                    parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
                         <KnappFullfor
-                            disabled={!sporsmalErBesvart(sporsmalId)}
+                            disabled={disbl}
                             onClick={() => history.push('/oppsummering')}
                         />
                         :
                         <KnappNeste
-                            disabled={!sporsmalErBesvart(sporsmalId)}
+                            disabled={disbl}
                             onClick={(() => {
-                                history.push(`/skjema/${(parseInt(sporsmalId, 10) + 1)}`);
+                                history.push(`/skjema/${(parseInt(sideId, 10) + 1)}`);
                             })}
                         />
                 }
