@@ -18,3 +18,20 @@ export const configSpmPrSide = {
     2: ['2', '3', '4'],
     3: ['5']
 };
+
+/*
+* Konfigurasjon
+*
+* Besvarelser som gir utslag - ikke selvgående bruker
+*
+* key: spørsmål id
+* value: svar id
+*
+* */
+export const configIkkeSelvgaende = {
+    1: '6',
+    2: '1',
+    3: '2',
+    4: '2',
+    5: '1',
+};
