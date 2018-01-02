@@ -22,6 +22,7 @@ export interface MatchProps {
 }
 
 interface StateProps {
+    erAlleSpmBesvart: () => boolean;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     hentAvgittSvarId: (sporsmalId: string) => string;
 }
@@ -32,29 +33,25 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, hentAvgittSvarId}: Props) {
+function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBesvart, hentAvgittSvarId}: Props) {
     const sideId = match.params.id;
-    // const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
-    // const tittelId = `sporsmal-${sporsmalId}-tittel`;
-    // const avgittSvarId = parseInt(hentAvgittSvarId(sideId), 10);
+    const spmListePaSiden = configSpmPrSide[sideId];
 
     // todo
     // test send tilbake til førsteside, dersom sideurl ikke finnes
-    // test fullforknap disable frem til alle spm er besvart
+    if (spmListePaSiden === undefined)  {
+        return null;
+    }
 
-    const spmListePaSiden = configSpmPrSide[sideId];
-
-    let disbl = true;
-    spmListePaSiden.map((spmId: string) => {
-        disbl = !sporsmalErBesvart(spmId);
-    });
+    let disableKnappNeste = spmListePaSiden.filter((spmId: string) => !sporsmalErBesvart(spmId)).length !== 0;
+    const disableKnappFullfor = erAlleSpmBesvart();
 
     return (
         <div>
             {
                 spmListePaSiden
                     .map((spmId: string) => (
-                        <div>
+                        <div key={spmId}>
                             <Undertittel className="blokk-xxs">
                                 {intl.messages[`sporsmal-${spmId}-tittel`]}
                             </Undertittel>
@@ -81,12 +78,12 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, hentAvgittS
                 {
                     parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
                         <KnappFullfor
-                            disabled={disbl}
+                            disabled={disableKnappFullfor}
                             onClick={() => history.push('/oppsummering')}
                         />
                         :
                         <KnappNeste
-                            disabled={disbl}
+                            disabled={disableKnappNeste}
                             onClick={(() => {
                                 history.push(`/skjema/${(parseInt(sideId, 10) + 1)}`);
                             })}
@@ -99,7 +96,8 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, hentAvgittS
 
 const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
-    hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId]
+    hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
+    erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
