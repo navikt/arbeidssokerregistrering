@@ -8,7 +8,9 @@ import RegVelykket from './regvelykket/regvelykket';
 import Avbryt from './avbryt/avbryt';
 import {
     BrowserRouter as Router,
-    Route
+    Route,
+    Switch,
+    Redirect
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
@@ -25,13 +27,15 @@ class App extends React.Component {
                 <IntlProvider>
                     <Router basename={basename}>
                         <div className="arbsokreg_app">
-                            <Route path="/start" component={StartRegistrering}/>
-                            <Route path="/registrer" component={RegistrerDeg}/>
-                            <Route path="/skjema/:id" component={SkjemaPanel}/>
-                            <Route path="/oppsummering" component={Oppsummering}/>
-                            <Route path="/sblregistrering" component={SblRegistrering}/>
-                            <Route path="/regvelykket" component={RegVelykket}/>
-                            <Route path="/avbryt" component={Avbryt}/>
+                            <Switch>
+                                <Route path="/start" component={StartRegistrering}/>
+                                <Route path="/registrer" component={RegistrerDeg}/>
+                                <Route path="/skjema/:id" component={SkjemaPanel}/>
+                                <Route path="/oppsummering" component={Oppsummering}/>
+                                <Route path="/sblregistrering" component={SblRegistrering}/>
+                                <Route path="/regvelykket" component={RegVelykket}/>
+                                <Route path="/avbryt" component={Avbryt}/>
+                            </Switch>
                         </div>
                     </Router>
                 </IntlProvider>
