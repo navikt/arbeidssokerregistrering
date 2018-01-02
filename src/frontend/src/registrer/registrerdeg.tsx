@@ -18,13 +18,13 @@ function RegistrerDeg({history}: Props) {
                 <Normaltekst className="blokk-xs">
                     <FormattedMessage id="beskrivelse-registrerdeg"/>
                 </Normaltekst>
-                <ul className="typo-normal blokk-xs">
+                <ul className="typo-normal blokk-xs pml">
                     <li><FormattedMessage id="liste-dufarhjelp"/></li>
                     <li><FormattedMessage id="liste-dukansoke"/></li>
                     <li><FormattedMessage id="liste-arbeidsgiverefinner"/></li>
                     <li><FormattedMessage id="liste-dukanabonnere"/></li>
                 </ul>
-                <Normaltekst className="registrerdeg-tips blokk-xl">
+                <Normaltekst className="registrerdeg-tips">
                     <FormattedMessage id="tips-fullforregistrering"/>
                 </Normaltekst>
             </Panel>
