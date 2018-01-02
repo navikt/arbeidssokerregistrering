@@ -63,7 +63,7 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBe
                                             endreSvar={endreSvar}
                                             key={key}
                                             alternativId={key.toString()}
-                                            tekstId={`sporsmal-${sideId}-alternativ-${key}`}
+                                            tekstId={`sporsmal-${spmId}-alternativ-${key}`}
                                             checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
                                             intl={intl}
                                         />)}
