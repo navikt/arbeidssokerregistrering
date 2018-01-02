@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import * as _ from 'lodash';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -10,7 +11,8 @@ import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from './knapp-neste';
 import KnappFullfor from './knapp-fullfor';
-import { configSpmPrSide } from './skjema-utils';
+import { configIkkeSelvgaende, configSpmPrSide } from './skjema-utils';
+import { sblUrl } from '../oppsummering/sbl-registrering';
 
 interface SkjemaProps {
     id: string;
@@ -22,6 +24,7 @@ export interface MatchProps {
 }
 
 interface StateProps {
+    erIkkeSelvgaende: () => boolean;
     erAlleSpmBesvart: () => boolean;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     hentAvgittSvarId: (sporsmalId: string) => string;
@@ -33,7 +36,7 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBesvart, hentAvgittSvarId}: Props) {
+function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBesvart, erIkkeSelvgaende, hentAvgittSvarId}: Props) {
     const sideId = match.params.id;
     const spmListePaSiden = configSpmPrSide[sideId];
 
@@ -78,7 +81,13 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBe
                     parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
                         <KnappFullfor
                             disabled={disableKnappFullfor}
-                            onClick={() => history.push('/oppsummering')}
+                            onClick={() => {
+                                if (erIkkeSelvgaende()) {
+                                    history.push(sblUrl);
+                                } else {
+                                    history.push('/oppsummering');
+                                }
+                            }}
                         />
                         :
                         <KnappNeste
@@ -96,7 +105,8 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBe
 const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
     hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
-    erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0
+    erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
+    erIkkeSelvgaende: () => _.isEqual(state.svar, configIkkeSelvgaende)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
