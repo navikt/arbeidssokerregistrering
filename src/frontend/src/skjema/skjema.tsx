@@ -37,13 +37,12 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBe
     const sideId = match.params.id;
     const spmListePaSiden = configSpmPrSide[sideId];
 
-    // todo
-    // test send tilbake til førsteside, dersom sideurl ikke finnes
     if (spmListePaSiden === undefined)  {
+        history.push('/skjema/1');
         return null;
     }
 
-    let disableKnappNeste = spmListePaSiden.filter((spmId: string) => !sporsmalErBesvart(spmId)).length !== 0;
+    const disableKnappNeste = spmListePaSiden.filter((spmId: string) => !sporsmalErBesvart(spmId)).length !== 0;
     const disableKnappFullfor = erAlleSpmBesvart();
 
     return (
