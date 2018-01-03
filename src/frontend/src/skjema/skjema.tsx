@@ -8,12 +8,13 @@ import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
-import KnappNeste from './knapp-neste';
+import KnappNeste from '../komponenter/knapp-neste';
 import { uncheckRadioButtons } from './skjema-utils';
 import KnappFullfor from './knapp-fullfor';
 
 interface SkjemaProps {
     id: string;
+    resetSvar: () => void;
 }
 
 export interface MatchProps {
@@ -21,7 +22,7 @@ export interface MatchProps {
 }
 
 interface StateProps {
-    sporsmalErBesvar: (sporsmalId: string) => boolean;
+    sporsmalErBesvart: (sporsmalId: string) => boolean;
 }
 
 interface DispatchProps {
@@ -30,7 +31,7 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({match, history, intl, endreSvar, sporsmalErBesvar}: Props) {
+function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
     const sporsmalId = match.params.id;
     const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
     const tittelId = `sporsmal-${sporsmalId}-tittel`;
@@ -54,12 +55,12 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvar}: Props) {
                 {
                     parseInt(sporsmalId, 10) === antallSporsmal.length ?
                         <KnappFullfor
-                            disabled={!sporsmalErBesvar(sporsmalId)}
+                            disabled={!sporsmalErBesvart(sporsmalId)}
                             onClick={() => history.push('/oppsummering')}
                         />
                         :
                         <KnappNeste
-                            disabled={!sporsmalErBesvar(sporsmalId)}
+                            disabled={!sporsmalErBesvart(sporsmalId)}
                             onClick={(() => {
                                 history.push(`/skjema/${(parseInt(sporsmalId, 10) + 1)}`);
                                 uncheckRadioButtons();
@@ -72,7 +73,7 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvar}: Props) {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    sporsmalErBesvar: (sporsmalId) => !!state.svar[sporsmalId],
+    sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

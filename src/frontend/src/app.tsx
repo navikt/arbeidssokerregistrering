@@ -22,7 +22,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <Router basename={basename}>
-                        <div className="body__wrapper">
+                        <div className="arbsokreg_app">
                             <Route path="/start" component={StartRegistrering}/>
                             <Route path="/registrer" component={RegistrerDeg}/>
                             <Route path="/skjema/:id" component={SkjemaPanel}/>

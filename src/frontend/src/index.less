@@ -14,24 +14,39 @@ body {
     background-color: #f1f1f1;
 }
 
-.body__wrapper {
+.arbsokreg_app {
+    @import './felles/margin-padding';
+    @import './felles/panel-info';
+    @import './start/start';
+    @import './registrer/registrerdeg';
+
     @import './skjema/skjema';
     @import './oppsummering/oppsummering';
 
+
     @import './avbryt/avbryt';
 
+    width: @screen-md-min;
+    margin: 4em auto;
 
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-
-    .mmr {
-        margin-right: 16px;
-    }
-
-    @media (max-width: 768px) {
+    @media (max-width: @screen-sm-min) {
         width: 100%
     }
+}
+.appContainer {
+    height: 100%;
+}
+
+.pagewrapper {
+    min-height: 100%;
+    height: auto;
+    margin-bottom: -200px;
+    padding-bottom: 200px;
+}
+
+.hodefot-footer {
+    width: 100%;
+    bottom: 0;
 }
 
 

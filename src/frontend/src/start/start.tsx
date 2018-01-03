@@ -1,29 +1,35 @@
 import * as React from 'react';
+import { Panel } from 'nav-frontend-paneler';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
+import { MatchProps } from '../skjema/skjema';
+import { RouteComponentProps } from 'react-router';
+import KnappNeste from '../komponenter/knapp-neste';
 
-function Start() {
+type Props =  RouteComponentProps<MatchProps>;
+
+function Start({history}: Props) {
     return (
-        <article className="start">
-            <section className="panel--stor start__innhold-wrapper">
-                <section className="start-inner-body start__innhold">
-                    <h1 className="typo-sidetittel blokk-xs start__tittel ">
-                        <FormattedMessage id="overskrift-start"/>
-                    </h1>
-                    <p className="typo-normal">
-                        <FormattedMessage id="beskrivelse-start"/>
-                    </p>
-                </section>
-            </section>
-            <footer className="start__footer">
+        <div>
+            <Panel className="panel-info blokk-l">
+                <Sidetittel className="overskrift-panel-info info-sirkel-bla">
+                    <FormattedMessage id="overskrift-start"/>
+                </Sidetittel>
+                <Normaltekst className="beskrivelse-start">
+                    <FormattedMessage id="beskrivelse-start"/>
+                </Normaltekst>
+            </Panel>
+            <div className="panel-info__knapperad">
                 <Knapp type="standard" className="knapp">
-                    <FormattedMessage id="knapp-avbryt"/>
+                    <Normaltekst><FormattedMessage id="knapp-avbryt"/></Normaltekst>
                 </Knapp>
-                <Knapp type="hoved" className="knapp knapp--hoved">
-                    <FormattedMessage id="knapp-neste"/>
-                </Knapp>
-            </footer>
-        </article>
+                <KnappNeste
+                    onClick={() => history.push('/skjema/1')}
+                    className="mml"
+                />
+            </div>
+        </div>
     );
 }
 

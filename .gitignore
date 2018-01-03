@@ -30,6 +30,10 @@ yarn-error.log*
 
 **/webapp/
 
-/src/frontend/src/tekster/alle-tekster.ts
+#/src/frontend/src/tekster/alle-tekster.ts
 /src/frontend/public/index.css
 /src/frontend/public/index.css.map
+/src/frontend/src/tekster/alle-tekster.ts
+
+/SERVICE_CALLS_HOME_IS_UNDEFINED
+/APP_LOG_HOME_IS_UNDEFINED
