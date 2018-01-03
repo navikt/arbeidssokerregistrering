@@ -27,7 +27,7 @@ describe('<Skjema />', () => {
             }
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
@@ -40,7 +40,7 @@ describe('<Skjema />', () => {
             }
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.true;
     });
@@ -54,7 +54,7 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (id) => true
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappFullfor);
         expect(knappNeste.length).to.be.equal(0);
     });
@@ -69,7 +69,7 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (id) => true
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappFullfor);
         expect(knappNeste.length).to.be.equal(1);
     });
@@ -87,7 +87,7 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (id) => true,
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         wrapper.find(KnappNeste).simulate('click');
         expect(push).to.have.property('callCount', 1);
     });
