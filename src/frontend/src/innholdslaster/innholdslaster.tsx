@@ -1,24 +1,23 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntl } from 'react-intl';
 import Laster from './innholdslaster-laster';
 import { STATUS } from '../ducks/utils';
-import { reducerType } from '../reducer';
+import { storrelseType } from 'nav-frontend-spinner';
 
-const array = (value: any) => (Array.isArray(value) ? value : [value]);
-const harStatus = (...status: any[]) => (element: any) => array(status).toString().includes(element.status);
-const noenHarFeil = (avhengigheter: any) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
-const alleLastet = (avhengigheter: any) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
-const alleLastetEllerReloading = (avhengigheter: any) => (
+const array = (value: {}) => (Array.isArray(value) ? value : [value]);
+const harStatus = (...status: string[]) =>
+    (element: {status: string}) => array(status).toString().includes(element.status);
+const noenHarFeil = (avhengigheter: {}[]) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
+const alleLastet = (avhengigheter: {}[]) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
+const alleLastetEllerReloading = (avhengigheter: {}[]) => (
     avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING))
 );
 
 interface InnholdslasterProps {
-    avhengigheter: reducerType[];
+    avhengigheter: {status: string}[];
     className: string;
-    children: React.ReactChild;
-    feilmeldingKey: string;
-    storrelse: string;
-    intl: InjectedIntl;
+    children: React.ReactNode | React.ReactChild;
+    feilmeldingKomponent: React.ReactNode | React.ReactChild;
+    storrelse?: storrelseType;
 }
 
 interface InnholdslasterState {
@@ -28,7 +27,7 @@ interface InnholdslasterState {
 class Innholdslaster extends React.Component<InnholdslasterProps, InnholdslasterState> {
     timer?: number;
 
-    constructor(props: any) {
+    constructor(props: InnholdslasterProps) {
         super(props);
 
         this.state = { timeout: false };
@@ -67,7 +66,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     }
 
     render() {
-        const { avhengigheter, className, feilmeldingKey, intl, storrelse } = this.props;
+        const { avhengigheter, className, feilmeldingKomponent, storrelse } = this.props;
         if (alleLastet(avhengigheter)) {
             return this.renderChildren();
         } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
@@ -77,14 +76,9 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
 
         if (noenHarFeil(avhengigheter)) {
             this.clearTimer();
-            const feilmelding = (feilmeldingKey && intl.messages[feilmeldingKey]) || (
-                    'Det skjedde en feil ved innlastningen av data'
-                );
 
             return (
-                <div className={className}>
-                    <p>{feilmelding}</p>
-                </div>
+                <div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div>
             );
         }
 
@@ -92,4 +86,4 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     }
 }
 
-export default injectIntl(Innholdslaster);
+export default Innholdslaster;

@@ -12,7 +12,7 @@ import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
-import AppWrapper from './appwrapper';
+import SjekkOppfolgingsstatusWrapper from './oppfolgingsstatus/sjekk-oppfolgingsstatus-wrapper';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
@@ -23,7 +23,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <Router basename={basename}>
-                        <AppWrapper>
+                        <SjekkOppfolgingsstatusWrapper>
                             <div className="arbsokreg_app">
                                 <Route path="/start" component={StartRegistrering}/>
                                 <Route path="/registrer" component={RegistrerDeg}/>
@@ -31,7 +31,7 @@ class App extends React.Component {
                                 <Route path="/oppsummering" component={Oppsummering}/>
                                 <Route path="/sblregistrering" component={SblRegistrering}/>
                             </div>
-                        </AppWrapper>
+                        </SjekkOppfolgingsstatusWrapper>
                     </Router>
                 </IntlProvider>
             </Provider>

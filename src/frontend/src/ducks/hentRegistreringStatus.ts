@@ -1,21 +1,17 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './utils';
-// import { Dispatch } from 'react-redux';
-// import { AppState } from '../reducer';
 import {
-    Action, ActionType} from './actions';
+    Action, ActionType } from './actions';
 import RegistreringStatus from './registrering-status-modell';
 
 export interface RegStatusState {
     data: RegistreringStatus;
-    status?: string;
+    status: string;
 }
 
 const initialState: RegStatusState = {
-    data : {
-        erUnderOppfolging: false,
-        oppfyllerKrav: true,
-    }
+    data : {},
+    status: STATUS.NOT_STARTED
 };
 
 export default function (state: RegStatusState = initialState, action: Action): RegStatusState {
@@ -35,8 +31,8 @@ export default function (state: RegStatusState = initialState, action: Action): 
     }
 }
 
-export function hentRegistreringStatus(fnr: string) {
-    return doThenDispatch(() => Api.hentRegistreringStatus(fnr), {
+export function hentRegistreringStatus() {
+    return doThenDispatch(() => Api.hentRegistreringStatus(), {
         PENDING: ActionType.HENT_REGISTRERINGSTATUS,
         OK : ActionType.HENTET_REGISTRERINGSTATUS,
         FEILET: ActionType.HENT_REGISTRERINGSTATUS_FEILET,

@@ -1,10 +1,15 @@
 import * as React from 'react';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import NavFrontendSpinner, { storrelseType } from 'nav-frontend-spinner';
 
-function Laster({ storrelse }: any) {
+interface LasterInterface {
+    storrelse?: storrelseType;
+    className?: string;
+}
+
+function Laster({ storrelse, className }: LasterInterface) {
     return (
-        <div className="innholdslaster">
-            <NavFrontendSpinner storrelse={storrelse} />
+        <div className={className}>
+            <NavFrontendSpinner type={storrelse} />
         </div>
     );
 }

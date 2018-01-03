@@ -24,9 +24,6 @@ export function sjekkStatuskode(response: Response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return Promise.resolve(response);
     }
-    if (response.status === 401) {
-        window.location.href = 'feilsider/401.html'; // eslint-disable-line no-undef
-    }
     return Promise.reject(new FetchError(response.statusText, response));
 }
 

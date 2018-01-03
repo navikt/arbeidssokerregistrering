@@ -1,7 +1,6 @@
 import { fetchToJson } from './utils';
-const VEILARBOPPFOLGING_URL = '/veilarboppfolgingproxy/api/startRegistreringStatus';
+const VEILARBOPPFOLGING_URL = '/veilarboppfolgingproxy/api/startregistrering';
 
-export function hentRegistreringStatus(fnr: string) {
-    const url = `${VEILARBOPPFOLGING_URL}/${fnr}`;
-    return fetchToJson(url);
+export function hentRegistreringStatus() {
+    return fetchToJson(VEILARBOPPFOLGING_URL);
 }
