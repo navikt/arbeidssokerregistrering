@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 import PanelBlokk from '../felles/panel-blokk';
+import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 
 export const sblUrl = '/sbl/arbeid/registrering';
 
@@ -11,10 +12,7 @@ function SblRegistrering() {
         return null;
     }
     return (
-        <PanelBlokk
-            tittelId="overskrift-registrering-pc"
-            tittelCssNavnVariant="rod-variant"
-            beskrivelseId="beskrivelse-registrering-pc"
+        <PanelBlokkGruppe
             knappAksjoner={
                 [
                     <Knapp key="1" type="standard">
@@ -25,7 +23,13 @@ function SblRegistrering() {
                     </Knapp>
                 ]
             }
-        />
+        >
+            <PanelBlokk
+                tittelId="overskrift-registrering-pc"
+                tittelCssNavnVariant="rod-variant"
+                beskrivelseId="beskrivelse-registrering-pc"
+            />
+        </PanelBlokkGruppe>
     );
 }
 

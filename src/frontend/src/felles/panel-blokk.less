@@ -1,5 +1,14 @@
 .panel-blokk {
   padding: 2em 14em 4em 14em;
+
+  &__bla-variant {
+    background-color: @navLysBlaLighten60;
+    border-bottom: 2px solid @navLysBlaLighten20;
+    border-radius: 0 ;
+  }
+  &__transparent-variant {
+    background: transparent;
+  }
 }
 
 .panel-blokk-overskrift {
@@ -44,7 +53,7 @@
   }
   &__gronn-variant {
     &::after {
-      color: #a2ad00;
+      color: @navGronnLighten60;
     }
   }
   &__rod-variant {
@@ -59,7 +68,7 @@
 }
 
 .panel-blokk-beskrivelse {
-  padding: 0 4em;
+  text-align: center;
 }
 
 .panel-blokk__knapperad {
@@ -70,9 +79,5 @@
 @media (max-width: @screen-sm-min) {
   .panel-blokk {
     padding: 3em 3em;
-  }
-
-  .panel-blokk-beskrivelse {
-    padding: 0;
   }
 }

@@ -6,15 +6,13 @@ import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
 import PanelBlokk from '../felles/panel-blokk';
 import KnappNeste from '../skjema/knapp-neste';
+import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 
 type Props = RouteComponentProps<MatchProps>;
 
 function Start({history}: Props) {
     return (
-        <PanelBlokk
-            tittelId="overskrift-start"
-            tittelCssNavnVariant="bla-variant"
-            beskrivelseId="beskrivelse-start"
+        <PanelBlokkGruppe
             knappAksjoner={
                 [
                     <Knapp key="1" type="standard" className="knapp">
@@ -31,7 +29,13 @@ function Start({history}: Props) {
                     />
                 ]
             }
-        />
+        >
+            <PanelBlokk
+                tittelId="overskrift-start"
+                tittelCssNavnVariant="bla-variant"
+                beskrivelseId="beskrivelse-start"
+            />
+        </PanelBlokkGruppe>
     );
 }
 

@@ -1,14 +1,12 @@
 import * as React from 'react';
+import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import PanelBlokk from '../felles/panel-blokk';
 import KnappNeste from '../skjema/knapp-neste';
 import { RouteComponentProps } from 'react-router';
 
 function RegVelykket({history}: RouteComponentProps<History>) {
     return (
-        <PanelBlokk
-            tittelId="overskrift-regvelykket"
-            tittelCssNavnVariant="gronn-variant"
-            beskrivelseId="beskrivelse-regvelykket"
+        <PanelBlokkGruppe
             knappAksjoner={
                 <KnappNeste
                     key="2"
@@ -17,7 +15,13 @@ function RegVelykket({history}: RouteComponentProps<History>) {
                     })}
                 />
             }
-        />
+        >
+            <PanelBlokk
+                tittelId="overskrift-regvelykket"
+                tittelCssNavnVariant="gronn-variant"
+                beskrivelseId="beskrivelse-regvelykket"
+            />
+        </PanelBlokkGruppe>
     );
 }
 
