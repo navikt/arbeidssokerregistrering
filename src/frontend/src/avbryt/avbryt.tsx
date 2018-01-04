@@ -13,7 +13,7 @@ function Avbryt({history}: Props) {
     return (
         <div className="avbryt-panel-wrapper">
             <div className="avbryt-panel__lukkknapperad">
-                <Lukknapp onClick={() => history.push('/start')}>
+                <Lukknapp onClick={() => history.goBack()}>
                     Lukk
                 </Lukknapp>
             </div>
@@ -27,10 +27,10 @@ function Avbryt({history}: Props) {
                 </Normaltekst>
             </div>
             <div className="avbryt-panel__knapperad">
-                <Knapp type="standard" className="knapp mmr" onClick={() => history.push('/dittnav/innlogget')}>
+                <Knapp type="standard" className="knapp mmr" onClick={() => document.location.href = '/dittnav'}>
                     <FormattedMessage id="knapp-ja-avbryt"/>
                 </Knapp>
-                <Knapp type="standard" className="knapp" onClick={() => history.push('/start')}>
+                <Knapp type="standard" className="knapp" onClick={() => history.goBack()}>
                     <FormattedMessage id="knapp-nei"/>
                 </Knapp>
             </div>

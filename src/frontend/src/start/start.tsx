@@ -21,7 +21,11 @@ function Start({history}: Props) {
                 </Normaltekst>
             </Panel>
             <div className="panel-info__knapperad">
-                <Knapp type="standard" className="knapp">
+                <Knapp
+                    type="standard"
+                    className="knapp"
+                    onClick={() => history.push('/avbryt')}
+                >
                     <Normaltekst><FormattedMessage id="knapp-avbryt"/></Normaltekst>
                 </Knapp>
                 <KnappNeste
