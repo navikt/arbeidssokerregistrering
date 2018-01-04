@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import * as _ from 'lodash';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -11,7 +10,7 @@ import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
 import KnappFullfor from './knapp-fullfor';
-import { configIkkeSelvgaende, configSpmPrSide } from './skjema-utils';
+import { configSpmPrSide, erSelvgaende } from './skjema-utils';
 import { sblUrl } from '../oppsummering/sbl-registrering';
 
 interface SkjemaProps {
@@ -24,7 +23,7 @@ export interface MatchProps {
 }
 
 interface StateProps {
-    erIkkeSelvgaende: () => boolean;
+    erSelvgaendeBruker: () => boolean;
     erAlleSpmBesvart: () => boolean;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     hentAvgittSvarId: (sporsmalId: string) => string;
@@ -36,11 +35,21 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBesvart, erIkkeSelvgaende, hentAvgittSvarId}: Props) {
+function Skjema({
+                    match,
+                    history,
+                    intl,
+                    endreSvar,
+                    sporsmalErBesvart,
+                    erAlleSpmBesvart,
+                    erSelvgaendeBruker,
+                    hentAvgittSvarId
+                }: Props) {
+
     const sideId = match.params.id;
     const spmListePaSiden = configSpmPrSide[sideId];
 
-    if (spmListePaSiden === undefined)  {
+    if (spmListePaSiden === undefined) {
         history.push('/skjema/1');
         return null;
     }
@@ -58,7 +67,7 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBe
                                 {intl.messages[`sporsmal-${spmId}-tittel`]}
                             </Undertittel>
                             <Panel className="blokk-s">
-                                <form >
+                                <form>
                                     {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
                                         .map(i => i + 1)
                                         .map((key) => <Alternativ
@@ -82,10 +91,10 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart, erAlleSpmBe
                         <KnappFullfor
                             disabled={disableKnappFullfor}
                             onClick={() => {
-                                if (erIkkeSelvgaende()) {
-                                    history.push(sblUrl);
-                                } else {
+                                if (erSelvgaendeBruker()) {
                                     history.push('/oppsummering');
+                                } else {
+                                    history.push(sblUrl);
                                 }
                             }}
                         />
@@ -106,7 +115,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
     hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
     erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
-    erIkkeSelvgaende: () => _.isEqual(state.svar, configIkkeSelvgaende)
+    erSelvgaendeBruker: () => erSelvgaende(state.svar)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
