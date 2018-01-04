@@ -18,7 +18,7 @@ function Avbryt({history}: Props) {
                 </Lukknapp>
             </div>
             <div className="avbryt-panel">
-                <Sidetittel className="overskrift-panel-info info-sirkel-bla blokk-xs">
+                <Sidetittel className="blokk">
                     <FormattedMessage id="overskrift-avbryt"/>
                 </Sidetittel>
                 <Normaltekst className="avbryt-fokus blokk-xs">
