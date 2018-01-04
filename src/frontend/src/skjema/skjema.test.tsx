@@ -125,6 +125,65 @@ describe('<Skjema />', () => {
         expect(knappNeste.props().disabled).to.be.false;
     });
 
+    it('Fullfør knapp skal sende ikke selvgående brukere til sbl registrering', () => {
+        const lastId = Object.keys(configSpmPrSide).length.toString();
+        const push = sinon.spy();
+
+        const props = {
+            match: {
+                params: {
+                    id: lastId
+                }
+            },
+            history: {
+                push
+            },
+            sporsmalErBesvart: (id) => true
+        };
+
+        store.dispatch(endreSvarAction('1', '1'));
+        store.dispatch(endreSvarAction('2', '1')); // ikke selvgående bruker
+        store.dispatch(endreSvarAction('3', '1'));
+        store.dispatch(endreSvarAction('4', '1'));
+        store.dispatch(endreSvarAction('5', '1'));
+
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        wrapper.find(KnappFullfor).simulate('click');
+
+        expect(push.firstCall.args[0]).to.be.equal('/sbl/arbeid/registrering');
+
+    });
+
+    it('Fullfør knapp skal sende selvgående brukere til oppsummering', () => {
+        const lastId = Object.keys(configSpmPrSide).length.toString();
+        const push = sinon.spy();
+
+        const props = {
+            match: {
+                params: {
+                    id: lastId
+                }
+            },
+            history: {
+                push
+            },
+            sporsmalErBesvart: (id) => true
+        };
+
+        store.dispatch(endreSvarAction('1', '1'));
+        store.dispatch(endreSvarAction('2', '2')); // selvgående bruker
+        store.dispatch(endreSvarAction('3', '1'));
+        store.dispatch(endreSvarAction('4', '1'));
+        store.dispatch(endreSvarAction('5', '1'));
+
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        wrapper.find(KnappFullfor).simulate('click');
+
+        expect(push.firstCall.args[0]).to.be.equal('/oppsummering');
+
+    });
+
+
     /*
     * Navigering til skjema/1 - dersom id ikke finnes - f.eks skjema/finnesIkke
     * */
