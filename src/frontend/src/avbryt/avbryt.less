@@ -1,0 +1,43 @@
+@padding-avstand-vannrett: 3em;
+@padding-avstand-vannrett-small: 2em;
+.avbryt-panel-wrapper {
+  margin: 4em auto;
+  background-color: @navLysGra;
+  max-width: 768px;
+}
+.avbryt-panel {
+  border-top: 2px solid @navGra20;
+  border-bottom: 2px solid @navGra20;
+  padding: 2em @padding-avstand-vannrett;
+}
+
+.avbryt-fokus {
+  background-color: @orangeFocusLighten20;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.avbryt-panel__knapperad {
+  padding: 2em @padding-avstand-vannrett;
+}
+
+.avbryt-panel__lukkknapperad{
+  text-align: end;
+  padding: 1em;
+}
+
+// Small screen / tablet
+@media (max-width: @screen-sm-min) {
+  .avbryt-panel {
+    padding: 2em @padding-avstand-vannrett-small;
+  }
+
+  .avbryt-panel__knapperad {
+    padding: 2em @padding-avstand-vannrett-small;
+  }
+
+  .avbryt-panel__lukkknapperad{
+    padding: 1em;
+  }
+}
