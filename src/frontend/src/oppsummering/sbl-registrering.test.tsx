@@ -11,12 +11,12 @@ describe('<SblRegistrering />', () => {
     it('skal rendre komponent om window.innerWidth < 768px', () => {
         window.innerWidth = 700;
         const wrapper = enzyme.shallow(<SblRegistrering />);
-        expect(wrapper.find('.overskrift-panel-info')).to.have.length(1);
+        expect(wrapper.find('PanelBlokk')).to.have.length(1);
     });
     it('skal ikke rendre om window.innerWidth > 768px', () => {
         window.innerWidth = 1000;
         const wrapper = enzyme.shallow(<SblRegistrering />);
-        expect(wrapper.find('.overskrift-panel-info')).to.have.length(0);
+        expect(wrapper.find('PanelBlokk')).to.have.length(0);
     });
     it('skal sende bruker direkte til sbl om window.innerWidth > 768px', () => {
         window.innerWidth = 1000;
