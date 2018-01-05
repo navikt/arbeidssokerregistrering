@@ -5,8 +5,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
 import PanelBlokk from '../felles/panel-blokk';
-import KnappNeste from '../skjema/knapp-neste';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
+import KnappNeste from '../komponenter/knapp-neste';
 
 type Props = RouteComponentProps<MatchProps>;
 
@@ -15,7 +15,12 @@ function Start({history}: Props) {
         <PanelBlokkGruppe
             knappAksjoner={
                 [
-                    <Knapp key="1" type="standard" className="knapp">
+                    <Knapp
+                        key="1"
+                        type="standard"
+                        className="knapp"
+                        onClick={() => history.push('/avbryt')}
+                    >
                         <Normaltekst>
                             <FormattedMessage id="knapp-avbryt"/>
                         </Normaltekst>

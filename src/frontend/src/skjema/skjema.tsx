@@ -8,7 +8,7 @@ import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
-import KnappNeste from './knapp-neste';
+import KnappNeste from '../komponenter/knapp-neste';
 import { uncheckRadioButtons } from './skjema-utils';
 import KnappFullfor from './knapp-fullfor';
 

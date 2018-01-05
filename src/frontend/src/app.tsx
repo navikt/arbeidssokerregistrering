@@ -5,6 +5,7 @@ import getStore from './store';
 import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
 import RegVelykket from './regvelykket/regvelykket';
+import Avbryt from './avbryt/avbryt';
 import {
     BrowserRouter as Router,
     Route
@@ -30,6 +31,7 @@ class App extends React.Component {
                             <Route path="/oppsummering" component={Oppsummering}/>
                             <Route path="/sblregistrering" component={SblRegistrering}/>
                             <Route path="/regvelykket" component={RegVelykket}/>
+                            <Route path="/avbryt" component={Avbryt}/>
                         </div>
                     </Router>
                 </IntlProvider>

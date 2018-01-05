@@ -5,9 +5,13 @@
 @import '../node_modules/nav-frontend-knapper-style/src/index';
 @import '../node_modules/nav-frontend-skjema-style/src/index';
 @import '../node_modules/nav-frontend-paneler-style/src/index';
+@import '../node_modules/nav-frontend-lukknapp-style/src/lukknapp-style';
+
+@import './start/start';
+@import './registrer/registrerdeg';
 
 body {
-    background-color: @navLysGra;
+    background-color: #f1f1f1;
 }
 
 .arbsokreg_app {
@@ -17,6 +21,9 @@ body {
 
     @import './skjema/skjema';
     @import './oppsummering/oppsummering';
+
+
+    @import './avbryt/avbryt';
 
     width: @screen-md-min;
     margin: 4em auto;

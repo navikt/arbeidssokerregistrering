@@ -5,6 +5,7 @@ import PanelBlokk from '../felles/panel-blokk';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 
 export const sblUrl = '/sbl/arbeid/registrering';
+export const dittNavUrl = '/dittnav';
 
 function SblRegistrering() {
     if (window.innerWidth > 768) {
@@ -15,7 +16,7 @@ function SblRegistrering() {
         <PanelBlokkGruppe
             knappAksjoner={
                 [
-                    <Knapp key="1" type="standard">
+                    <Knapp key="1" type="standard" onClick={() => document.location.href = dittNavUrl}>
                         <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
                     </Knapp>,
                     <Knapp key="2" type="hoved" className="mml" onClick={() => document.location.href = sblUrl}>
