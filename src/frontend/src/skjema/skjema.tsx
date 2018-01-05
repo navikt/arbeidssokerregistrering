@@ -10,8 +10,9 @@ import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from './knapp-neste';
 import KnappFullfor from './knapp-fullfor';
-import { configSpmPrSide, erSelvgaende } from './skjema-utils';
+import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom} from './skjema-utils';
 import { sblUrl } from '../oppsummering/sbl-registrering';
+import KnappAvbryt from './knapp-avbryt';
 
 interface SkjemaProps {
     id: string;
@@ -62,12 +63,15 @@ function Skjema({
             {
                 spmListePaSiden
                     .map((spmId: string) => (
-                        <div key={spmId}>
-                            <Undertittel className="blokk-xxs">
+                        <div
+                            key={spmId}
+                            className={`${visRiktigCssMarginBottom(spmListePaSiden, spmId)} panel-skjema-wrapper`}
+                        >
+                            <Undertittel className="spm-tittel">
                                 {intl.messages[`sporsmal-${spmId}-tittel`]}
                             </Undertittel>
-                            <Panel className="blokk-s">
-                                <form>
+                            <Panel className="panel-skjema">
+                                <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
                                     {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
                                         .map(i => i + 1)
                                         .map((key) => <Alternativ
@@ -85,7 +89,13 @@ function Skjema({
                     ))
             }
 
-            <div className="skjema-knapper">
+            <div className="panel-info__knapperad">
+                <KnappAvbryt
+                    classname="mmr"
+                    onClick={(() => {
+                        history.push('/avbryt');
+                    })}
+                />
                 {
                     parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
                         <KnappFullfor

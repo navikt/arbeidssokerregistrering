@@ -47,3 +47,20 @@ export const erSelvgaende = (svar: SvarState) => {
 
     return resultat;
 };
+
+export const erSvarAlternativMerEnnTo = (spmId: string) => {
+    let classname = '';
+    if (spmId !== '1' && spmId !== '2') {
+        classname = 'form-flex';
+    }
+    return classname;
+};
+
+export const visRiktigCssMarginBottom = (spmListePaSiden: string[], spmId: string) => {
+    let blokkCssMarginBottom = 'blokk-s';
+
+    if (spmListePaSiden.length === parseInt(spmId , 10) - 1 || spmListePaSiden.length === 1) {
+        blokkCssMarginBottom = 'blokk-l';
+    }
+    return blokkCssMarginBottom;
+};
