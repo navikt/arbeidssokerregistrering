@@ -5,6 +5,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 
 export const sblUrl = '/sbl/arbeid/registrering';
+export const dittNavUrl = '/dittnav';
 
 function SblRegistrering() {
     if (window.innerWidth > 768) {
@@ -22,7 +23,7 @@ function SblRegistrering() {
                 </Normaltekst>
             </Panel>
             <div className="panel-info__knapperad">
-                <Knapp type="standard">
+                <Knapp type="standard" onClick={() => document.location.href = dittNavUrl}>
                     <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
                 </Knapp>
                 <Knapp type="hoved" className="mml" onClick={() => document.location.href = sblUrl}>
