@@ -39,7 +39,7 @@ class ExpanderBarInfo extends React.PureComponent<Readonly<{}>, EgenProps> {
                         <FormattedMessage id="hva-betyr-dette"/>
                     </Normaltekst>
                 </button>
-                <div>
+                <div className="expander-bar-vis-skjul">
                     {
                         this.state.visSkjul
                             ?
