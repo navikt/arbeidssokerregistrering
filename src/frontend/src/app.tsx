@@ -10,7 +10,6 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
-    Redirect
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
