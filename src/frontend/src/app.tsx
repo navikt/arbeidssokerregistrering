@@ -8,7 +8,6 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
-    Redirect
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
@@ -31,7 +30,6 @@ class App extends React.Component {
                                 <Route path="/skjema/:id" component={SkjemaPanel}/>
                                 <Route path="/oppsummering" component={Oppsummering}/>
                                 <Route path="/sblregistrering" component={SblRegistrering}/>
-                                <Route render={() => <Redirect to="/start" />} />
                             </Switch>
                         </div>
                     </Router>
