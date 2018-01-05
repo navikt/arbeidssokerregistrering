@@ -10,7 +10,7 @@ import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from './knapp-neste';
 import KnappFullfor from './knapp-fullfor';
-import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom} from './skjema-utils';
+import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom } from './skjema-utils';
 import { sblUrl } from '../oppsummering/sbl-registrering';
 import KnappAvbryt from './knapp-avbryt';
 
