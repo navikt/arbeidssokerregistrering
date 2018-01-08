@@ -8,7 +8,6 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
 import { shallowwithStoreAndIntl, store } from '../test/test-utils';
 import KnappNeste from '../komponenter/knapp-neste';
-import KnappFullfor from './knapp-fullfor';
 import {endreSvarAction, setInitalState } from "../ducks/svar";
 import {configSpmPrSide} from "./skjema-utils";
 
@@ -70,40 +69,10 @@ describe('<Skjema />', () => {
     });
 
     /*
-    * Fullfør knapp
+    * Neste knapp på siste side
     * */
-    it('Fullfør skal ikke være synlig på første side', () => {
-        const props = {
-            match: {
-                params: {
-                    id: '1'
-                }
-            },
-            sporsmalErBesvart: (id) => true
-        };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
-        const knappNeste = wrapper.find(KnappFullfor);
-        expect(knappNeste.length).to.be.equal(0);
-    });
-
-    it('Fullfør skal være synlig på siste side', () => {
-        const lastId = Object.keys(configSpmPrSide).length.toString();
-        const props = {
-            match: {
-                params: {
-                    id: lastId
-                }
-            },
-            sporsmalErBesvart: (id) => true
-        };
-
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
-        const knappNeste = wrapper.find(KnappFullfor);
-        expect(knappNeste.length).to.be.equal(1);
-    });
-
-    it('Fullfør skal være enablet når alle svarene er besvart', () => {
+    it('Neste knapp på siste side skal være enablet når alle svarene er besvart', () => {
         const lastId = Object.keys(configSpmPrSide).length.toString();
         const props = {
             match: {
@@ -121,11 +90,11 @@ describe('<Skjema />', () => {
         store.dispatch(endreSvarAction('5', '1'));
 
         const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
-        const knappNeste = wrapper.find(KnappFullfor);
+        const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
 
-    it('Fullfør knapp skal sende ikke selvgående brukere til sbl registrering', () => {
+    it('Neste knapp på siste side skal sende ikke selvgående brukere til sbl registrering', () => {
         const lastId = Object.keys(configSpmPrSide).length.toString();
         const push = sinon.spy();
 
@@ -148,13 +117,13 @@ describe('<Skjema />', () => {
         store.dispatch(endreSvarAction('5', '1'));
 
         const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
-        wrapper.find(KnappFullfor).simulate('click');
+        wrapper.find(KnappNeste).simulate('click');
 
-        expect(push.firstCall.args[0]).to.be.equal('/sbl/arbeid/registrering');
+        expect(push.firstCall.args[0]).to.be.equal('/sblregistrering');
 
     });
 
-    it('Fullfør knapp skal sende selvgående brukere til oppsummering', () => {
+    it('Neste knapp på siste side skal sende selvgående brukere til oppsummering', () => {
         const lastId = Object.keys(configSpmPrSide).length.toString();
         const push = sinon.spy();
 
@@ -177,7 +146,7 @@ describe('<Skjema />', () => {
         store.dispatch(endreSvarAction('5', '1'));
 
         const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
-        wrapper.find(KnappFullfor).simulate('click');
+        wrapper.find(KnappNeste).simulate('click');
 
         expect(push.firstCall.args[0]).to.be.equal('/oppsummering');
 
