@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import PanelBlokk from '../felles/panel-blokk';
-import KnappNeste from '../skjema/knapp-neste';
+import KnappNeste from '../komponenter/knapp-neste';
 import { RouteComponentProps } from 'react-router';
 
 function RegVelykket({history}: RouteComponentProps<History>) {

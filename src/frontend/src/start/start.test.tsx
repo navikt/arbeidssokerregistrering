@@ -7,6 +7,7 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Start from './start';
 import KnappNeste from "../komponenter/knapp-neste";
+import {shallowwithStoreAndIntl} from "../test/test-utils";
 
 enzyme.configure({ adapter: new Adapter()});
 
@@ -20,7 +21,7 @@ describe('<Start />', () => {
             }
         };
 
-        const wrapper = enzyme.shallow(<Start {...props} />);
+        const wrapper = shallowwithStoreAndIntl((<Start {...props} />)).dive();
         wrapper.find(KnappNeste).simulate('click');
         expect(push).to.have.property('callCount', 1);
     });
