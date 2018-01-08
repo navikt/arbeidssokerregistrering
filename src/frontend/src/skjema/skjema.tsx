@@ -87,7 +87,7 @@ function Skjema({
                     ))
             }
 
-            <div className="panel-info__knapperad">
+            <div className="panel-blokk__knapperad">
                 <KnappAvbryt
                     classname="mmr"
                     onClick={(() => {
