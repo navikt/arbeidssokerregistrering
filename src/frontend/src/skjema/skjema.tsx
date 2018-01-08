@@ -9,7 +9,6 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import KnappFullfor from './knapp-fullfor';
 import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
 
@@ -97,7 +96,7 @@ function Skjema({
                 />
                 {
                     parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
-                        <KnappFullfor
+                        <KnappNeste
                             disabled={disableKnappFullfor}
                             onClick={() => {
                                 if (erSelvgaendeBruker()) {
