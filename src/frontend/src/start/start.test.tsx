@@ -5,9 +5,9 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
+import { shallowWithIntl } from 'enzyme-react-intl';
 import Start from './start';
 import KnappNeste from "../komponenter/knapp-neste";
-import {shallowwithStoreAndIntl} from "../test/test-utils";
 
 enzyme.configure({ adapter: new Adapter()});
 
@@ -21,7 +21,7 @@ describe('<Start />', () => {
             }
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Start {...props} />)).dive();
+        const wrapper = enzyme.shallow((<Start {...props} />)).dive();
         wrapper.find(KnappNeste).simulate('click');
         expect(push).to.have.property('callCount', 1);
     });

@@ -25,7 +25,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <SjekkOppfolgingsstatusWrapper>
-                    <Router basename={basename}>
+                        <Router basename={basename}>
                             <div className="arbsokreg_app">
                                 <Route path="/start" component={StartRegistrering}/>
                                 <Route path="/registrer" component={RegistrerDeg}/>
@@ -35,11 +35,11 @@ class App extends React.Component {
                                 <Route path="/regvelykket" component={RegVelykket}/>
                                 <Route path="/avbryt" component={Avbryt}/>
                             </div>
-                    </Router>
+                        </Router>
                     </SjekkOppfolgingsstatusWrapper>
                 </IntlProvider>
             </Provider>
-        )
+        );
     }
 }
 
