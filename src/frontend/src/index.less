@@ -6,6 +6,9 @@
 @import '../node_modules/nav-frontend-skjema-style/src/index';
 @import '../node_modules/nav-frontend-paneler-style/src/index';
 @import '../node_modules/nav-frontend-spinner-style/src/spinner-style';
+@import '../node_modules/nav-frontend-lukknapp-style/src/lukknapp-style';
+
+@import './registrer/registrerdeg';
 
 body {
     background-color: @navLysGra;
@@ -17,13 +20,15 @@ body {
 }
 
 .arbsokreg_app {
-    @import './felles/margin-padding';
-    @import './felles/panel-info';
-    @import './start/start';
+    @import 'felles/utils';
+    @import 'felles/panel-blokk';
     @import './registrer/registrerdeg';
 
     @import './skjema/skjema';
     @import './oppsummering/oppsummering';
+
+
+    @import './avbryt/avbryt';
 
     width: @screen-md-min;
     margin: 4em auto;
