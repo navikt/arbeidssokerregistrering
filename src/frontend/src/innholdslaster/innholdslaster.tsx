@@ -14,7 +14,7 @@ const alleLastetEllerReloading = (avhengigheter: {}[]) => (
 
 interface InnholdslasterProps {
     avhengigheter: {status: string}[];
-    className: string;
+    className?: string;
     children: React.ReactNode | React.ReactChild;
     feilmeldingKomponent: React.ReactNode | React.ReactChild;
     storrelse?: storrelseType;
@@ -66,7 +66,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     }
 
     render() {
-        const { avhengigheter, className, feilmeldingKomponent, storrelse } = this.props;
+        const { avhengigheter, feilmeldingKomponent, storrelse } = this.props;
         if (alleLastet(avhengigheter)) {
             return this.renderChildren();
         } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
@@ -82,7 +82,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             );
         }
 
-        return <Laster className={className} storrelse={storrelse} />;
+        return <Laster className="innholdslaster-laster" storrelse={storrelse} />;
     }
 }
 

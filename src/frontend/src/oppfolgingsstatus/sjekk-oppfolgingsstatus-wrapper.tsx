@@ -40,7 +40,6 @@ class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
         return (
             <Innholdslaster
                 avhengigheter={[registreringStatus]}
-                className="innholdslaster"
                 feilmeldingKomponent={<OppfolgingsstatusFeilmelding/>}
                 storrelse="XXL"
             >
