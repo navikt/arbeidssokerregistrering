@@ -24,22 +24,22 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
+                    <SjekkOppfolgingsstatusWrapper>
                     <Router basename={basename}>
-                        <SjekkOppfolgingsstatusWrapper>
-                        <div className="arbsokreg_app">
-                            <Route path="/start" component={StartRegistrering}/>
-                            <Route path="/registrer" component={RegistrerDeg}/>
-                            <Route path="/skjema/:id" component={SkjemaPanel}/>
-                            <Route path="/oppsummering" component={Oppsummering}/>
-                            <Route path="/sblregistrering" component={SblRegistrering}/>
-                            <Route path="/regvelykket" component={RegVelykket}/>
-                            <Route path="/avbryt" component={Avbryt}/>
-                        </div>
-                        </SjekkOppfolgingsstatusWrapper>
+                            <div className="arbsokreg_app">
+                                <Route path="/start" component={StartRegistrering}/>
+                                <Route path="/registrer" component={RegistrerDeg}/>
+                                <Route path="/skjema/:id" component={SkjemaPanel}/>
+                                <Route path="/oppsummering" component={Oppsummering}/>
+                                <Route path="/sblregistrering" component={SblRegistrering}/>
+                                <Route path="/regvelykket" component={RegVelykket}/>
+                                <Route path="/avbryt" component={Avbryt}/>
+                            </div>
                     </Router>
+                    </SjekkOppfolgingsstatusWrapper>
                 </IntlProvider>
             </Provider>
-        );
+        )
     }
 }
 
