@@ -30,7 +30,7 @@ function RegistrerDeg({history}: Props) {
                     <li><FormattedMessage id="liste-arbeidsgiverefinner"/></li>
                     <li><FormattedMessage id="liste-dukanabonnere"/></li>
                 </ul>
-                <Normaltekst className="registrerdeg-tips">
+                <Normaltekst className="bla-italic">
                     <FormattedMessage id="tips-fullforregistrering"/>
                 </Normaltekst>
             </PanelBlokk>

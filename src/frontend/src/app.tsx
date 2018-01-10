@@ -6,6 +6,7 @@ import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
 import RegVelykket from './regvelykket/regvelykket';
 import Avbryt from './avbryt/avbryt';
+import Fullfor from './fullfor/fullfor';
 import {
     BrowserRouter as Router,
     Route
@@ -32,7 +33,7 @@ class App extends React.Component {
                             <Route path="/sblregistrering" component={SblRegistrering}/>
                             <Route path="/regvelykket" component={RegVelykket}/>
                             <Route path="/avbryt" component={Avbryt}/>
-                            <Route path="/fullfor" component={Avbryt}/>
+                            <Route path="/fullfor" component={Fullfor}/>
                         </div>
                     </Router>
                 </IntlProvider>

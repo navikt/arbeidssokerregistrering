@@ -1,5 +1,5 @@
 .panel-blokk {
-  padding: 2em 14em 4em 14em;
+  padding: 2em 14em;
 
   &__bla-variant {
     background-color: @navLysBlaLighten60;
@@ -8,6 +8,9 @@
   }
   &__transparent-variant {
     background: transparent;
+  }
+  &__oransje-variant {
+    background-color: @navOransjeLighten60;
   }
 }
 
@@ -65,6 +68,11 @@
       color: @navRod;
     }
   }
+  &__oransje-variant {
+    &::after {
+      color: @navOransjeLighten60;
+    }
+  }
 }
 
 .panel-blokk-beskrivelse {
@@ -78,6 +86,6 @@
 // Small screen / tablet
 @media (max-width: @screen-sm-min) {
   .panel-blokk {
-    padding: 3em 3em;
+    padding: 2em 3em;
   }
 }
