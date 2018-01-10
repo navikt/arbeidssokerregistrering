@@ -32,6 +32,7 @@ class App extends React.Component {
                             <Route path="/sblregistrering" component={SblRegistrering}/>
                             <Route path="/regvelykket" component={RegVelykket}/>
                             <Route path="/avbryt" component={Avbryt}/>
+                            <Route path="/fullfor" component={Avbryt}/>
                         </div>
                     </Router>
                 </IntlProvider>
