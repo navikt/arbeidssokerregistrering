@@ -52,7 +52,6 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                     tittelCssNavnVariant="bla-variant"
                     beskrivelseId="beskrivelse-start"
                 />
-                <div>jose jose {hentFornavn(name)}</div>
             </PanelBlokkGruppe>
         );
     }
