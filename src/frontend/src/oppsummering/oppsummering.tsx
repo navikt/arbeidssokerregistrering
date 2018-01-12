@@ -1,11 +1,16 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Knapp } from 'nav-frontend-knapper';
-import { RouterProps } from 'react-router';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import PanelBlokk from '../felles/panel-blokk';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import { FormattedMessage } from 'react-intl';
+import { InnloggingsInfoState } from '../ducks/hentInnloggingsInfo';
+import { MatchProps } from '../skjema/skjema';
+import { RouteComponentProps } from 'react-router';
+import { AppState } from '../reducer';
+import { hentFornavn } from '../utils/utils';
 
 interface EgenProps {
     visSkjul: boolean;
@@ -62,58 +67,73 @@ class ExpanderBarInfo extends React.PureComponent<Readonly<{}>, EgenProps> {
     }
 }
 
-function Oppsummering({history}: RouterProps) {
-    return (
-        <div>
-            <PanelBlokkGruppe
-                knappAksjoner={
-                    [
-                        <Knapp
-                            key="1"
-                            type="standard"
-                            onClick={() => history.push('/sblregistrering')}
-                        >
-                            <FormattedMessage id="knapp-uenig"/>
-                        </Knapp>,
-                        <Knapp
-                            key="2"
-                            type="hoved"
-                            onClick={() => history.push('/sistearbforhold')}
-                            className="mml"
-                        >
-                            <FormattedMessage id="knapp-enig"/>
-                        </Knapp>
-                    ]
-                }
-            >
-                <PanelBlokk
-                    tittelId="du-har-gode-muligheter"
-                    beskrivelseId="utfra-informasjon"
-                    tittelCssNavnVariant="gronn-variant"
-                />
-                <PanelBlokk cssVariant="bla-variant">
-                    <Normaltekst className="blokk-xs">
-                        <FormattedMessage id="det-tyder-pa"/>
-                    </Normaltekst>
-                    <ul className="typo-normal blokk-xs pml">
-                        <li><FormattedMessage id="oppgaver-som-skal"/></li>
-                        <li><FormattedMessage id="kartlegging-av-deg"/></li>
-                        <li><FormattedMessage id="en-digital-plan"/></li>
-                        <li><FormattedMessage id="informasjon-om-hva"/></li>
-                    </ul>
-                    <Normaltekst>
-                        <FormattedMessage id="du-kan-ta-kontakt"/>
-                    </Normaltekst>
-                </PanelBlokk>
-                <PanelBlokk cssVariant="transparent-variant">
-                    <ExpanderBarInfo/>
-                    <Normaltekst>
-                        <FormattedMessage id="vi-ber-deg-ta"/>
-                    </Normaltekst>
-                </PanelBlokk>
-            </PanelBlokkGruppe>
-        </div>
-    );
+interface StateProps {
+    innloggingsInfo: InnloggingsInfoState;
 }
 
-export default Oppsummering;
+type OppsummeringProps = StateProps & null;
+
+class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & OppsummeringProps> {
+    render() {
+        const { history, innloggingsInfo } = this.props;
+        const { name } = innloggingsInfo.data;
+        return (
+            <div>
+                <PanelBlokkGruppe
+                    knappAksjoner={
+                        [
+                            <Knapp
+                                key="1"
+                                type="standard"
+                                onClick={() => history.push('/sblregistrering')}
+                            >
+                                <FormattedMessage id="knapp-uenig"/>
+                            </Knapp>,
+                            <Knapp
+                                key="2"
+                                type="hoved"
+                                onClick={() => history.push('/sistearbforhold')}
+                                className="mml"
+                            >
+                                <FormattedMessage id="knapp-enig"/>
+                            </Knapp>
+                        ]
+                    }
+                >
+                    <PanelBlokk
+                        tittelId="du-har-gode-muligheter"
+                        tittelVerdier={{fornavn: hentFornavn(name)}}
+                        beskrivelseId="utfra-informasjon"
+                        tittelCssNavnVariant="gronn-variant"
+                    />
+                    <PanelBlokk cssVariant="bla-variant">
+                        <Normaltekst className="blokk-xs">
+                            <FormattedMessage id="det-tyder-pa"/>
+                        </Normaltekst>
+                        <ul className="typo-normal blokk-xs pml">
+                            <li><FormattedMessage id="oppgaver-som-skal"/></li>
+                            <li><FormattedMessage id="kartlegging-av-deg"/></li>
+                            <li><FormattedMessage id="en-digital-plan"/></li>
+                            <li><FormattedMessage id="informasjon-om-hva"/></li>
+                        </ul>
+                        <Normaltekst>
+                            <FormattedMessage id="du-kan-ta-kontakt"/>
+                        </Normaltekst>
+                    </PanelBlokk>
+                    <PanelBlokk cssVariant="transparent-variant">
+                        <ExpanderBarInfo/>
+                        <Normaltekst>
+                            <FormattedMessage id="vi-ber-deg-ta"/>
+                        </Normaltekst>
+                    </PanelBlokk>
+                </PanelBlokkGruppe>
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state: AppState) => ({
+    innloggingsInfo: state.innloggingsInfo
+});
+
+export default connect(mapStateToProps, null)(Oppsummering);

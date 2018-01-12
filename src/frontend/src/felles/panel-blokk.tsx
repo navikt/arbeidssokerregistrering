@@ -5,18 +5,25 @@ import { FormattedMessage } from 'react-intl';
 
 interface PanelBlokkProps {
     tittelId?: string;
+    tittelVerdier?: {};
     tittelCssNavnVariant?: string;
     cssVariant?: string;
     beskrivelseId?: string;
     children?: Array<React.ReactElement<Element>> | React.ReactElement<Element>;
 }
 
-function PanelBlokk({tittelId, beskrivelseId, tittelCssNavnVariant, cssVariant, children}: PanelBlokkProps) {
+function PanelBlokk({
+                        tittelId,
+                        beskrivelseId,
+                        tittelCssNavnVariant,
+                        cssVariant,
+                        tittelVerdier,
+                        children}: PanelBlokkProps) {
     return (
         <Panel className={`panel-blokk panel-blokk__${cssVariant} mmb`}>
             {tittelId ?
                 <Sidetittel className={`panel-blokk-overskrift panel-blokk-overskrift__${tittelCssNavnVariant}`}>
-                <FormattedMessage id={tittelId}/>
+                    <FormattedMessage id={tittelId} values={tittelVerdier}/>
             </Sidetittel> : null}
             {beskrivelseId ?
                 <Normaltekst className="panel-blokk-beskrivelse">

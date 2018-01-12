@@ -16,7 +16,7 @@ interface InnholdslasterProps {
     avhengigheter: {status: string}[];
     className?: string;
     children: React.ReactNode | React.ReactChild;
-    feilmeldingKomponent: React.ReactNode | React.ReactChild;
+    feilmeldingKomponent?: React.ReactNode | React.ReactChild;
     storrelse?: storrelseType;
 }
 
