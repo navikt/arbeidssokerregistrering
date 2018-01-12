@@ -14,6 +14,7 @@ import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
+import SjekkOppfolgingsstatusWrapper from './oppfolgingsstatus/sjekk-oppfolgingsstatus-wrapper';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
@@ -23,17 +24,19 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <Router basename={basename}>
-                        <div className="arbsokreg_app">
-                            <Route path="/start" component={StartRegistrering}/>
-                            <Route path="/registrer" component={RegistrerDeg}/>
-                            <Route path="/skjema/:id" component={SkjemaPanel}/>
-                            <Route path="/oppsummering" component={Oppsummering}/>
-                            <Route path="/sblregistrering" component={SblRegistrering}/>
-                            <Route path="/regvelykket" component={RegVelykket}/>
-                            <Route path="/avbryt" component={Avbryt}/>
-                        </div>
-                    </Router>
+                    <SjekkOppfolgingsstatusWrapper>
+                        <Router basename={basename}>
+                            <div className="arbsokreg_app">
+                                <Route path="/start" component={StartRegistrering}/>
+                                <Route path="/registrer" component={RegistrerDeg}/>
+                                <Route path="/skjema/:id" component={SkjemaPanel}/>
+                                <Route path="/oppsummering" component={Oppsummering}/>
+                                <Route path="/sblregistrering" component={SblRegistrering}/>
+                                <Route path="/regvelykket" component={RegVelykket}/>
+                                <Route path="/avbryt" component={Avbryt}/>
+                            </div>
+                        </Router>
+                    </SjekkOppfolgingsstatusWrapper>
                 </IntlProvider>
             </Provider>
         );
