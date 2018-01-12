@@ -6,7 +6,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import { sblUrl } from '../oppsummering/sbl-registrering';
 import SjekkOppfolgingsstatusWrapper, { veienTilArbeid } from './sjekk-oppfolgingsstatus-wrapper';
 import {
-    makeHrefWritable, mountWithStore, promiseWithSetTimeout, stubFetchWithErrorResponse,
+    makeHrefWritable, mountWithStore, promiseWithSetTimeout, store, stubFetchWithErrorResponse,
     stubFetchWithResponse,
     zeroTimeoutPromise
 } from '../test/test-utils';
