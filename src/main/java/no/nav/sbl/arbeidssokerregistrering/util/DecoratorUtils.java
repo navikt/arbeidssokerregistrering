@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static no.nav.sbl.util.EnvironmentUtils.getRequiredProperty;
 
 public class DecoratorUtils {
     private static final String FRAGMENTS_URL = "common-html/v4/navno";
     private static final String APPLICATION_NAME = "arbeidssokerregistrering";
     private static final List<String> NO_DECORATOR_PATTERNS = new ArrayList<>(asList("./rest/.*", ".*/img/.*", ".*/css/.*", ".*/js/.*", ".*/font/.*", ".*selftest.*"));
     private static final List<String> FRAGMENT_NAMES = new ArrayList<>(asList("webstats-ga-notrack", "header-withmenu", "footer", "styles", "scripts", "skiplinks", "megamenu-resources"));
-    private static final String appresUrl = System.getenv("APPRES_CMS_URL");
+    private static final String appresUrl = getRequiredProperty("APPRES_CMS_URL");
 
     private static final SimpleEnonicClient enonicClient = new SimpleEnonicClient(appresUrl);
 

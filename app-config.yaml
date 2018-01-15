@@ -16,4 +16,5 @@ fasitResources:
   used:
   - alias: veilarboppfolgingproxy
     resourceType: baseUrl
-# TODO HUSK DOCKERFILE
+  - alias: appres.cms
+    resourceType: baseUrl

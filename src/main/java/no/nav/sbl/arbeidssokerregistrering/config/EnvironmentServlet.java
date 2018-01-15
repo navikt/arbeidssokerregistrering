@@ -18,7 +18,7 @@ public class EnvironmentServlet extends HttpServlet {
     static Map<String, String> requiredProperties = new HashMap<>();
 
     static {
-        requiredProperties.put("veilarboppfolgingproxy.url", "veilarboppfolgingproxy_url");
+        requiredProperties.put("VEILARBOPPFOLGINGPROXY_URL", "veilarboppfolgingproxy_url");
     }
 
 
