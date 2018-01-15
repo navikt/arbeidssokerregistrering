@@ -7,15 +7,17 @@ import RegistreringStatus from '../ducks/registrering-status-modell';
 import { AppState } from '../reducer';
 import { sblUrl } from '../oppsummering/sbl-registrering';
 import OppfolgingsstatusFeilmelding from './oppfolgingsstatus-feilmelding';
+import { veilarboppfolgingproxyUrlSelector } from '../ducks/api';
 
 export const veienTilArbeid = '/veientilarbeid';
 
 interface StateProps {
     registreringStatus: RegStatusState;
+    veilarboppfolgingproxyUrl: string;
 }
 
 interface DispatchProps {
-    hentRegistreringStatus: () => void;
+    hentRegistrering: (baseUrl: string) => void;
 }
 
 type AppWrapperProps = StateProps & DispatchProps;
@@ -32,7 +34,8 @@ function redirectOrRenderChildren(data: RegistreringStatus, children: React.Reac
 
 class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
     componentWillMount() {
-        this.props.hentRegistreringStatus();
+        const { veilarboppfolgingproxyUrl, hentRegistrering} = this.props;
+        hentRegistrering(veilarboppfolgingproxyUrl);
     }
 
     render() {
@@ -50,11 +53,12 @@ class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    registreringStatus: state.registreringStatus
+    registreringStatus: state.registreringStatus,
+    veilarboppfolgingproxyUrl: veilarboppfolgingproxyUrlSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
+    hentRegistrering: (baseUrl: string) => dispatch(hentRegistreringStatus(baseUrl)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SjekkOppfolgingsstatusWrapper);

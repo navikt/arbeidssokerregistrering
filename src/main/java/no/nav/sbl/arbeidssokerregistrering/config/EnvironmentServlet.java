@@ -14,7 +14,6 @@ import static no.nav.sbl.util.EnvironmentUtils.getRequiredProperty;
 
 public class EnvironmentServlet extends HttpServlet {
 
-    public static final String ENVIRONMENT = "environment";
     static Map<String, String> requiredProperties = new HashMap<>();
 
     static {
@@ -24,15 +23,15 @@ public class EnvironmentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/javascript");
+        resp.setContentType("application/json");
         resp.getWriter().write(getEnvironmentString());
     }
 
     static String getEnvironmentString() {
-        return ENVIRONMENT + "={}" + "\n" + requiredProperties.
+        return "{" + requiredProperties.
                     entrySet()
                     .stream()
-                    .map(entry -> ENVIRONMENT + "." + entry.getValue() + "=" + getRequiredProperty(entry.getKey()))
-                    .collect(Collectors.joining("\n"));
+                    .map(entry -> "\"" + entry.getValue() +"\"" + ":" + "\"" + getRequiredProperty(entry.getKey()) + "\"")
+                    .collect(Collectors.joining(",")) + "}";
     }
 }

@@ -31,7 +31,7 @@ public class ApplicationConfig implements ApiApplication {
         docratorfilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.FORWARD),false, "/index.html");
 
         ServletRegistration.Dynamic environment = servletContext.addServlet("environment", new EnvironmentServlet());
-        environment.addMapping("/environment.js");
+        environment.addMapping("/environment");
 
 
         ServletRegistration.Dynamic reactapp = servletContext.addServlet("reactapp", new ApplicationServlet());
