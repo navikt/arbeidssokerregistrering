@@ -20,7 +20,7 @@
             <dependency>
                 <groupId>no.nav.sbl</groupId>
                 <artifactId>bom</artifactId>
-                <version>RELEASE</version>
+                <version>2018.01.15.10.51</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -45,6 +45,10 @@
             <groupId>no.nav.sbl</groupId>
             <artifactId>innholdshenter</artifactId>
             <version>4.8</version>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.sbl</groupId>
+            <artifactId>util</artifactId>
         </dependency>
         <dependency>
             <groupId>no.nav.modig</groupId>
