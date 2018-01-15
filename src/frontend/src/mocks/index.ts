@@ -2,6 +2,7 @@
 import { mock, respondWith, delayed, randomFailure } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
+import './environment-mock';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_INNLOGGINGS_INFO = true;

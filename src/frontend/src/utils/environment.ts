@@ -5,7 +5,8 @@ function getEnviromentVariable(variableName: string) {
         return variableName; // Kjører i test
     }
 
-    const value = (window as {}).arbeidssokerregistrering[variableName];
+    /*tslint:disable-next-line*/
+    const value = (window as any).arbeidssokerregistrering[variableName];
 
     if (!value) {
         throw new Error(`Mangler: ${variableName}`);
