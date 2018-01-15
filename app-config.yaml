@@ -16,5 +16,4 @@ fasitResources:
   used:
   - alias: veilarboppfolgingproxy
     resourceType: baseUrl
-    mapToProperty: public.veilarboppfolgingproxy_url
 # TODO HUSK DOCKERFILE
