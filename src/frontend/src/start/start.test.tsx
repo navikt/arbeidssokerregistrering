@@ -1,5 +1,4 @@
 /*tslint:disable*/
-import '../test/test-setup';
 import * as React from 'react';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
