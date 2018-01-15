@@ -12,8 +12,9 @@ healthcheck:
   readiness:
     path: arbeidssokerregistrering/index.html
     initialDelay: 20
-#fasitResources:
-#  used:
-#  - alias: appres.cms
-#    resourceType: baseurl
+fasitResources:
+  used:
+  - alias: veilarboppfolgingproxy
+    resourceType: baseUrl
+    mapToProperty: public.veilarboppfolgingproxy_url
 # TODO HUSK DOCKERFILE
