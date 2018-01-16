@@ -14,7 +14,7 @@ healthcheck:
     initialDelay: 20
 fasitResources:
   used:
-  - alias: veilarboppfolgingproxy
-    resourceType: baseUrl
+  - alias: arbeidssokerregistrering.properties
+    resourceType: applicationProperties
   - alias: appres.cms
     resourceType: baseUrl

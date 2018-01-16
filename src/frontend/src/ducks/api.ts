@@ -35,3 +35,11 @@ function getEnvironmentVariable(environment: EnvironmentData, property: string) 
 export function veilarboppfolgingproxyUrlSelector(state: AppState) {
     return getEnvironmentVariable(state.environment.data, 'veilarboppfolgingproxy_url');
 }
+
+export function veientilarbeidUrlSelector(state: AppState) {
+    return getEnvironmentVariable(state.environment.data, 'veientilarbeid_url');
+}
+
+export function sblarbeidUrlSelector(state: AppState) {
+    return getEnvironmentVariable(state.environment.data, 'sblarbeid_url');
+}

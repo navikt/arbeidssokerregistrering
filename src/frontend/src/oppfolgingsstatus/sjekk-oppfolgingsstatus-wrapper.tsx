@@ -5,15 +5,14 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import { RegStatusState } from '../ducks/hentRegistreringStatus';
 import RegistreringStatus from '../ducks/registrering-status-modell';
 import { AppState } from '../reducer';
-import { sblUrl } from '../oppsummering/sbl-registrering';
 import OppfolgingsstatusFeilmelding from './oppfolgingsstatus-feilmelding';
-import { veilarboppfolgingproxyUrlSelector } from '../ducks/api';
-
-export const veienTilArbeid = '/veientilarbeid';
+import { sblarbeidUrlSelector, veientilarbeidUrlSelector, veilarboppfolgingproxyUrlSelector } from '../ducks/api';
 
 interface StateProps {
     registreringStatus: RegStatusState;
     veilarboppfolgingproxyUrl: string;
+    sblarbeidUrl: string;
+    veientilarbeidUrl: string;
 }
 
 interface DispatchProps {
@@ -22,11 +21,14 @@ interface DispatchProps {
 
 type AppWrapperProps = StateProps & DispatchProps;
 
-function redirectOrRenderChildren(data: RegistreringStatus, children: React.ReactNode | React.ReactChild) {
+function redirectOrRenderChildren(data: RegistreringStatus,
+                                  children: React.ReactNode | React.ReactChild,
+                                  sblarbeidUrl: string,
+                                  veientilarbeidUrl: string  ) {
     if (data.underOppfolging) {
-        return document.location.href = veienTilArbeid;
+        return document.location.href = veientilarbeidUrl;
     } else if (!data.oppfyllerKrav) {
-        return document.location.href = sblUrl;
+        return document.location.href = sblarbeidUrl;
     } else {
         return children;
     }
@@ -34,19 +36,19 @@ function redirectOrRenderChildren(data: RegistreringStatus, children: React.Reac
 
 class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
     componentWillMount() {
-        const { veilarboppfolgingproxyUrl, hentRegistrering} = this.props;
+        const { veilarboppfolgingproxyUrl, hentRegistrering } = this.props;
         hentRegistrering(veilarboppfolgingproxyUrl);
     }
 
     render() {
-        const {registreringStatus, children} = this.props;
+        const {registreringStatus, children, sblarbeidUrl, veientilarbeidUrl} = this.props;
         return (
             <Innholdslaster
                 avhengigheter={[registreringStatus]}
                 feilmeldingKomponent={<OppfolgingsstatusFeilmelding/>}
                 storrelse="XXL"
             >
-                {() => redirectOrRenderChildren(registreringStatus.data, children)}
+                {() => redirectOrRenderChildren(registreringStatus.data, children, sblarbeidUrl, veientilarbeidUrl)}
             </Innholdslaster>
         );
     }
@@ -54,6 +56,8 @@ class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
 
 const mapStateToProps = (state: AppState) => ({
     registreringStatus: state.registreringStatus,
+    sblarbeidUrl: sblarbeidUrlSelector(state),
+    veientilarbeidUrl: veientilarbeidUrlSelector(state),
     veilarboppfolgingproxyUrl: veilarboppfolgingproxyUrlSelector(state)
 });
 

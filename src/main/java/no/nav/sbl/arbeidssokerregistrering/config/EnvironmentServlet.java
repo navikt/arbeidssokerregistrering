@@ -18,6 +18,8 @@ public class EnvironmentServlet extends HttpServlet {
 
     static {
         requiredProperties.put("VEILARBOPPFOLGINGPROXY_URL", "veilarboppfolgingproxy_url");
+        requiredProperties.put("SBLARBEID_URL", "sblarbeid_url");
+        requiredProperties.put("VEIENTILARBEID_URL", "veientilarbeid_url");
     }
 
 

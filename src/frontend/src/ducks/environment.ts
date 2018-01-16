@@ -6,6 +6,8 @@ import {
 
 export interface EnvironmentData {
     veilarboppfolgingproxy_url?: string;
+    sblarbeid_url?: string;
+    veientilarbeid_url?: string;
 }
 
 export interface EnvironmentState {
