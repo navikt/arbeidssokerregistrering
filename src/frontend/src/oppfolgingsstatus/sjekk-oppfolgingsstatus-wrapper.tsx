@@ -26,9 +26,11 @@ function redirectOrRenderChildren(data: RegistreringStatus,
                                   sblarbeidUrl: string,
                                   veientilarbeidUrl: string  ) {
     if (data.underOppfolging) {
-        return document.location.href = veientilarbeidUrl;
+        document.location.href = veientilarbeidUrl;
+        return null;
     } else if (!data.oppfyllerKrav) {
-        return document.location.href = sblarbeidUrl;
+        document.location.href = sblarbeidUrl;
+        return null;
     } else {
         return children;
     }
