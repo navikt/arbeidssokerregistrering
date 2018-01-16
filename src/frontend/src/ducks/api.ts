@@ -20,10 +20,6 @@ export function hentEnvironment() {
 }
 
 function getEnvironmentVariable(environment: EnvironmentData, property: string) {
-    if (window.name === 'nodejs') {
-        return ''; // I test
-    }
-
     const value = environment[property];
     if (!value && value !== '') {
         throw new Error(`Mangler: ${property}`);

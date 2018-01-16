@@ -1,14 +1,15 @@
+/*tslint:disable:variable-name*/
 import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { sblUrl } from '../oppsummering/sbl-registrering';
 import SjekkOppfolgingsstatusWrapper, { veienTilArbeid } from './sjekk-oppfolgingsstatus-wrapper';
 import {
-    makeHrefWritable, mountWithStore, promiseWithSetTimeout, store, stubFetchWithErrorResponse,
+    makeHrefWritable, mountWithStore, promiseWithSetTimeout, stubFetchWithErrorResponse,
     stubFetchWithResponse,
     zeroTimeoutPromise
 } from '../test/test-utils';
+import { environmentTestData } from '../SetupTests';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -23,7 +24,7 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
         mountWithStore(<SjekkOppfolgingsstatusWrapper />);
 
         return promiseWithSetTimeout()
-            .then(() => expect(document.location.href).to.equal(sblUrl));
+            .then(() => expect(document.location.href).to.equal(environmentTestData.sblarbeid_url));
     });
 
     it('skal sende bruker til veien til arbeid om den er under oppfølging', () => {
@@ -34,15 +35,15 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
         mountWithStore(<SjekkOppfolgingsstatusWrapper />);
 
         return promiseWithSetTimeout()
-            .then(() => expect(document.location.href).to.equal(veienTilArbeid));
+            .then(() => expect(document.location.href).to.equal(environmentTestData.veientilarbeid_url));
     });
     it('Skal rendre innhold dersom bruker oppfyller krav og ikke er under oppfølging', () => {
         stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: true});
 
         const wrapper = mountWithStore(
             <SjekkOppfolgingsstatusWrapper >
-            <div className="Dummy"/>
-        </SjekkOppfolgingsstatusWrapper>);
+                <div className="Dummy"/>
+            </SjekkOppfolgingsstatusWrapper>);
 
         return promiseWithSetTimeout()
             .then(() => expect(wrapper.html()).to.have.string('Dummy'));

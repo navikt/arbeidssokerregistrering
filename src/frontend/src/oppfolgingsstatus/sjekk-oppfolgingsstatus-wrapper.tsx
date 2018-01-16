@@ -54,12 +54,14 @@ class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
     }
 }
 
-const mapStateToProps = (state: AppState) => ({
-    registreringStatus: state.registreringStatus,
-    sblarbeidUrl: sblarbeidUrlSelector(state),
-    veientilarbeidUrl: veientilarbeidUrlSelector(state),
-    veilarboppfolgingproxyUrl: veilarboppfolgingproxyUrlSelector(state)
-});
+const mapStateToProps = (state: AppState) => {
+    return {
+        registreringStatus: state.registreringStatus,
+        sblarbeidUrl: sblarbeidUrlSelector(state),
+        veientilarbeidUrl: veientilarbeidUrlSelector(state),
+        veilarboppfolgingproxyUrl: veilarboppfolgingproxyUrlSelector(state)
+    };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentRegistrering: (baseUrl: string) => dispatch(hentRegistreringStatus(baseUrl)),

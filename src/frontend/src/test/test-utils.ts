@@ -3,6 +3,10 @@ import * as sinon from 'sinon';
 import { mount } from 'enzyme';
 import { shallowWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
+import { ActionType } from '../ducks/actions';
+import { Dispatch } from 'react-redux';
+import { AppState } from '../reducer';
+import { EnvironmentData } from '../ducks/environment';
 
 export const store = getStore();
 
@@ -35,5 +39,11 @@ export function promiseWithSetTimeout() {
 export function makeHrefWritable() {
     return Object.defineProperty(document.location, 'href', {
         writable: true,
+    });
+}
+export function dispatchEnvironment(dispatch: Dispatch<AppState>, data: EnvironmentData) {
+    dispatch({
+        type: ActionType.HENT_ENVIRONMENT_OK,
+        data
     });
 }
