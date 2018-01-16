@@ -19,6 +19,7 @@
   },
   "exclude": [
     "node_modules",
+    "src/test/test-utils.ts",
     "src/test/**/*",
     "src/**/*.test.*",
     "build",
