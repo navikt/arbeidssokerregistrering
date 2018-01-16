@@ -4,7 +4,7 @@ import { EnvironmentData } from './environment';
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 
 const config = {
-    credentials: 'include'
+    credentials: ('include' as RequestCredentials)
 };
 
 export function hentRegistreringStatus(baseUrl: string) {
@@ -16,7 +16,7 @@ export function hentInnloggingsInfo() {
 }
 
 export function hentEnvironment() {
-    return fetchToJson('/arbeidssokerregistrering/environment');
+    return fetchToJson('/arbeidssokerregistrering/environment', config);
 }
 
 function getEnvironmentVariable(environment: EnvironmentData, property: string) {
