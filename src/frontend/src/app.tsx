@@ -25,7 +25,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <Router basename={basename}>
-                        <div className="arbsokreg_app">
+                        <main id="maincontent" role="main" tabIndex={-1} className="arbsokreg_app">
                             <Switch>
                                 <Route path="/start" component={StartRegistrering}/>
                                 <Route path="/registrer" component={RegistrerDeg}/>
@@ -35,7 +35,7 @@ class App extends React.Component {
                                 <Route path="/regvelykket" component={RegVelykket}/>
                                 <Route path="/avbryt" component={Avbryt}/>
                             </Switch>
-                        </div>
+                        </main>
                     </Router>
                 </IntlProvider>
             </Provider>

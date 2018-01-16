@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
 import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
@@ -65,9 +65,9 @@ function Skjema({
                             key={spmId}
                             className={`${visRiktigCssMarginBottom(spmListePaSiden, spmId)} panel-skjema-wrapper`}
                         >
-                            <Undertittel className="spm-tittel">
+                            <Systemtittel tag="h1" className="spm-tittel">
                                 {intl.messages[`sporsmal-${spmId}-tittel`]}
-                            </Undertittel>
+                            </Systemtittel>
                             <Panel className="panel-skjema">
                                 <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
                                     {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
