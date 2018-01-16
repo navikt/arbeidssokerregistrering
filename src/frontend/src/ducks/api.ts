@@ -3,12 +3,16 @@ import { AppState } from '../reducer';
 import { EnvironmentData } from './environment';
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 
+const config = {
+    credentials: 'include'
+};
+
 export function hentRegistreringStatus(baseUrl: string) {
-    return fetchToJson(`${baseUrl}/api/startregistrering`);
+    return fetchToJson(`${baseUrl}/api/startregistrering`, config);
 }
 
 export function hentInnloggingsInfo() {
-    return fetchToJson(INNLOGGINGSINFO_URL);
+    return fetchToJson(INNLOGGINGSINFO_URL, config);
 }
 
 export function hentEnvironment() {
