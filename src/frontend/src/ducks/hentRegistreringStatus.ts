@@ -1,8 +1,23 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './utils';
-import {
-    Action, ActionType } from './actions';
 import RegistreringStatus from './registrering-status-modell';
+import { ActionType } from './types';
+
+interface HentRegisteringStatusAction {
+    type: ActionType.HENT_REGISTRERINGSTATUS;
+}
+
+interface HentRegisteringStatusFeiletAction {
+    type: ActionType.HENT_REGISTRERINGSTATUS_FEILET;
+    // error: Error
+}
+
+interface HentetRegisteringStatusAction {
+    type: ActionType.HENTET_REGISTRERINGSTATUS;
+    data: RegistreringStatus;
+}
+
+type Action = HentRegisteringStatusAction | HentetRegisteringStatusAction | HentRegisteringStatusFeiletAction;
 
 export interface RegStatusState {
     data: RegistreringStatus;

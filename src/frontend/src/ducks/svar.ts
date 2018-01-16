@@ -1,5 +1,5 @@
-const AVGI_SVAR = 'AVGI_SVAR';
-const INITIAL_STATE = 'INITIAL_STATE';
+import { ActionType } from './types';
+import Svar from './svar-modell';
 
 export interface SvarState {
     1?: string;
@@ -10,13 +10,26 @@ export interface SvarState {
     6?: string;
 }
 
-interface Action {
-    type: string;
-    data: {
-        alternativId: string;
-        sporsmalId: string;
-    };
+interface AvgiSvarAction {
+    type: ActionType.AVGI_SVAR;
+    data: Svar;
 }
+
+interface AvgaSvarAction {
+    type: ActionType.AVGA_SVAR;
+    data: Svar;
+}
+
+interface AvgiSvarFeiletAction {
+    type: ActionType.AVGI_SVAR_FEILET;
+    // error: Error
+}
+
+interface AvgiSvarInitState {
+    type: ActionType.AVGI_SVAR_INITIAL_STATE;
+}
+
+type Action = AvgiSvarAction | AvgaSvarAction | AvgiSvarFeiletAction | AvgiSvarInitState;
 
 const initialState = {
         1: undefined,
@@ -29,10 +42,10 @@ const initialState = {
 
 export default function (state: SvarState = initialState, action: Action): SvarState {
     switch (action.type) {
-        case AVGI_SVAR: {
+        case ActionType.AVGI_SVAR: {
             return {...state, [action.data.sporsmalId]: action.data.alternativId};
         }
-        case INITIAL_STATE: {
+        case ActionType.AVGI_SVAR_INITIAL_STATE: {
             return initialState;
         }
         default : {
@@ -43,7 +56,7 @@ export default function (state: SvarState = initialState, action: Action): SvarS
 
 export function endreSvarAction(sporsmalId: string, alternativId: string) {
     return {
-        type: AVGI_SVAR,
+        type: ActionType.AVGI_SVAR,
         data: {
             sporsmalId,
             alternativId
@@ -53,6 +66,6 @@ export function endreSvarAction(sporsmalId: string, alternativId: string) {
 
 export function setInitalState() {
     return {
-        type: INITIAL_STATE
+        type: ActionType.AVGI_SVAR_INITIAL_STATE
     };
 }

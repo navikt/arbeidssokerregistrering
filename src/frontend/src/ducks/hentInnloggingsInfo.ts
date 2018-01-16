@@ -1,9 +1,23 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './utils';
-import {
-    Action, ActionType
-} from './actions';
+import { ActionType } from './types';
 import InnloggingsInfo from './innloggings-info-modell';
+
+interface HentInnloggingsInfoAction {
+    type: ActionType.HENT_INNLOGGINGSINFO;
+}
+
+interface HentInnloggingsInfoFeiletAction {
+    type: ActionType.HENT_INNLOGGINGSINFO_FEILET;
+    // error: Error
+}
+
+interface HentetInnloggingsInfoAction {
+    type: ActionType.HENTET_INNLOGGINGSINFO;
+    data: InnloggingsInfo;
+}
+
+type Action = HentInnloggingsInfoAction | HentetInnloggingsInfoAction | HentInnloggingsInfoFeiletAction;
 
 export interface InnloggingsInfoState {
     data: InnloggingsInfo;

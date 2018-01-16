@@ -1,6 +1,6 @@
 import { Dispatch } from 'react-redux';
 import { AppState } from '../reducer';
-import { ActionType } from './actions';
+import { ActionType } from './types';
 import { ThunkAction } from 'redux-thunk';
 
 export const STATUS = {
