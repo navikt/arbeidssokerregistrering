@@ -31,7 +31,12 @@ public class EnvironmentServlet extends HttpServlet {
         return "{" + requiredProperties.
                     entrySet()
                     .stream()
-                    .map(entry -> "\"" + entry.getValue() +"\"" + ":" + "\"" + getRequiredProperty(entry.getKey()) + "\"")
+                    .map(entry -> "\"" + entry.getValue() +"\"" + ":" + "\"" + replaceOeraWithNav(getRequiredProperty(entry.getKey())) + "\"")
                     .collect(Collectors.joining(",")) + "}";
+    }
+
+    // Fiks ettersom apper i SBS eksponerer itjeneter-url og ikke tjenester. Fjernes når det blir fikses
+    static String replaceOeraWithNav(String s) {
+        return s.replace("https://i","https://").replace(".oera.no", ".nav.no");
     }
 }
