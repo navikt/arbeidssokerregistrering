@@ -18,7 +18,8 @@ window.requestAnimationFrame = (callback) => {
 export const environmentTestData = {
     veilarboppfolgingproxy_url: 'https://test.no/veilarboppfolgingproxy',
     sblarbeid_url: 'https://test.no/sblarbeid',
-    veientilarbeid_url: 'https://test.no/veientilarbeid'
+    veientilarbeid_url: 'https://test.no/veientilarbeid',
+    dittnav_url: 'https://test.no/veientilarbeid'
 };
 
 dispatchEnvironment(getStore().dispatch, environmentTestData);

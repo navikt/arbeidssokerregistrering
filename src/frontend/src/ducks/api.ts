@@ -39,3 +39,7 @@ export function veientilarbeidUrlSelector(state: AppState) {
 export function sblarbeidUrlSelector(state: AppState) {
     return getEnvironmentVariable(state.environment.data, 'sblarbeid_url');
 }
+
+export function dittnavSelector(state: AppState) {
+    return getEnvironmentVariable(state.environment.data, 'dittnav_url');
+}
