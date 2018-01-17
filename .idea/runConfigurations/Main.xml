@@ -13,8 +13,8 @@
     <module name="arbeidssokerregistrering" />
     <envs>
       <env name="APPRES_CMS_URL" value="http://localhost:8080" />
-      <env name="NAV_TRUSTSTORE_PATH" value="" />
-      <env name="NAV_TRUSTSTORE_PASSWORD" value="" />
+      <env name="NAV_TRUSTSTORE_PATH" value="''" />
+      <env name="NAV_TRUSTSTORE_PASSWORD" value="''" />
     </envs>
     <method />
   </configuration>

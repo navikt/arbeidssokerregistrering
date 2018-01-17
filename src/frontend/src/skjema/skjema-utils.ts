@@ -37,7 +37,7 @@ export const configSelvgaende = {
     2: ['2', '3'],
     3: ['1'],
     4: ['1'],
-    5: ['1'],
+    5: ['2'],
 };
 
 export const erSelvgaende = (svar: SvarState) => {
