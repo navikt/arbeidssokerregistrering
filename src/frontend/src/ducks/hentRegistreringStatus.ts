@@ -31,8 +31,8 @@ export default function (state: RegStatusState = initialState, action: Action): 
     }
 }
 
-export function hentRegistreringStatus(baseUrl: string) {
-    return doThenDispatch(() => Api.hentRegistreringStatus(baseUrl), {
+export function hentRegistreringStatus() {
+    return doThenDispatch(() => Api.hentRegistreringStatus(), {
         PENDING: ActionType.HENT_REGISTRERINGSTATUS,
         OK : ActionType.HENTET_REGISTRERINGSTATUS,
         FEILET: ActionType.HENT_REGISTRERINGSTATUS_FEILET,
