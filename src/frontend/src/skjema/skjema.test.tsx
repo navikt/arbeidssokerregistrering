@@ -1,5 +1,4 @@
 /*tslint:disable*/
-import '../test/test-setup';
 import * as React from 'react';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
@@ -30,7 +29,7 @@ describe('<Skjema />', () => {
             }
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
@@ -44,7 +43,7 @@ describe('<Skjema />', () => {
             }
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.true;
     });
@@ -63,7 +62,7 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (id) => true,
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         wrapper.find(KnappNeste).simulate('click');
         expect(push).to.have.property('callCount', 1);
     });
@@ -89,7 +88,7 @@ describe('<Skjema />', () => {
         store.dispatch(endreSvarAction('4', '1'));
         store.dispatch(endreSvarAction('5', '1'));
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
@@ -110,7 +109,7 @@ describe('<Skjema />', () => {
             },
         };
 
-        shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+        shallowwithStoreAndIntl((<Skjema {...props} />));
         expect(push).to.have.property('callCount', 1);
     });
 });
@@ -140,7 +139,7 @@ describe('<Skjema />', () => {
                 store.dispatch(endreSvarAction('4', '1'));
                 store.dispatch(endreSvarAction('5', '2'));
 
-                const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+                const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
                 wrapper.find(KnappNeste).simulate('click');
 
                 expect(push.firstCall.args[0]).to.be.equal('/oppsummering');
@@ -169,7 +168,7 @@ describe('<Skjema />', () => {
                 store.dispatch(endreSvarAction('4', '1'));
                 store.dispatch(endreSvarAction('5', '2'));
 
-                const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+                const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
                 wrapper.find(KnappNeste).simulate('click');
 
                 expect(push.firstCall.args[0]).to.be.equal('/oppsummering');
@@ -200,7 +199,7 @@ describe('<Skjema />', () => {
             store.dispatch(endreSvarAction('4', '1'));
             store.dispatch(endreSvarAction('5', '2'));
 
-            const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />)).dive().dive();
+            const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
             wrapper.find(KnappNeste).simulate('click');
 
             expect(push.firstCall.args[0]).to.be.equal('/sblregistrering');
