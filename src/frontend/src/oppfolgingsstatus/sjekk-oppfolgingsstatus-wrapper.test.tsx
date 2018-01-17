@@ -10,6 +10,7 @@ import {
     zeroTimeoutPromise
 } from '../test/test-utils';
 import { environmentTestData } from '../SetupTests';
+import { SBLARBEID_URL, VEIENTILARBEID_URL } from '../ducks/api';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -21,11 +22,11 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
 
         stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: false});
 
-        // const wrapper = mountWithStore(<SjekkOppfolgingsstatusWrapper />);
+        mountWithStore(<SjekkOppfolgingsstatusWrapper />);
 
-        // TODO Denne komponenten SjekkOppfolgingsstatusWrapper returnerer nå en connecta komponent
-        // som gjøre det vanskelig å teste. Implementer denne nesten når vi kan bruker relative url-er og
-        // <SblRegistrering/> ikke trenger å være connecta.
+        return promiseWithSetTimeout()
+            .then(() => expect(document.location.href).to.equal(SBLARBEID_URL));
+
     });
 
     it('skal sende bruker til veien til arbeid om den er under oppfølging', () => {
@@ -36,7 +37,7 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
         mountWithStore(<SjekkOppfolgingsstatusWrapper />);
 
         return promiseWithSetTimeout()
-            .then(() => expect(document.location.href).to.equal(environmentTestData.veientilarbeid_url));
+            .then(() => expect(document.location.href).to.equal(VEIENTILARBEID_URL));
     });
     it('Skal rendre innhold dersom bruker oppfyller krav og ikke er under oppfølging', () => {
         stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: true});

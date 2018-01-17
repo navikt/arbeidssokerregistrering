@@ -6,26 +6,23 @@ import { RegStatusState } from '../ducks/hentRegistreringStatus';
 import RegistreringStatus from '../ducks/registrering-status-modell';
 import { AppState } from '../reducer';
 import OppfolgingsstatusFeilmelding from './oppfolgingsstatus-feilmelding';
-import { veientilarbeidUrlSelector, veilarboppfolgingproxyUrlSelector } from '../ducks/api';
 import SblRegistrering from '../oppsummering/sbl-registrering';
+import { VEIENTILARBEID_URL } from '../ducks/api';
 
 interface StateProps {
     registreringStatus: RegStatusState;
-    veilarboppfolgingproxyUrl: string;
-    veientilarbeidUrl: string;
 }
 
 interface DispatchProps {
-    hentRegistrering: (baseUrl: string) => void;
+    hentRegistrering: () => void;
 }
 
 type AppWrapperProps = StateProps & DispatchProps;
 
 function redirectOrRenderChildren(data: RegistreringStatus,
-                                  children: React.ReactNode | React.ReactChild,
-                                  veientilarbeidUrl: string) {
+                                  children: React.ReactNode | React.ReactChild) {
     if (data.underOppfolging) {
-        document.location.href = veientilarbeidUrl;
+        document.location.href = VEIENTILARBEID_URL;
         return null;
     } else if (!data.oppfyllerKrav) {
         return <SblRegistrering/>;
@@ -36,12 +33,11 @@ function redirectOrRenderChildren(data: RegistreringStatus,
 
 class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
     componentWillMount() {
-        const { veilarboppfolgingproxyUrl, hentRegistrering } = this.props;
-        hentRegistrering(veilarboppfolgingproxyUrl);
+        this.props.hentRegistrering();
     }
 
     render() {
-        const { registreringStatus, children, veientilarbeidUrl} = this.props;
+        const {registreringStatus, children } = this.props;
         return (
             <Innholdslaster
                 avhengigheter={[registreringStatus]}
@@ -50,24 +46,19 @@ class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
             >
                 {() => redirectOrRenderChildren(
                     registreringStatus.data,
-                    children,
-                    veientilarbeidUrl
+                    children
                 )}
             </Innholdslaster>
         );
     }
 }
 
-const mapStateToProps = (state: AppState) => {
-    return {
-        registreringStatus: state.registreringStatus,
-        veientilarbeidUrl: veientilarbeidUrlSelector(state),
-        veilarboppfolgingproxyUrl: veilarboppfolgingproxyUrlSelector(state)
-    };
-};
+const mapStateToProps = (state: AppState) => ({
+    registreringStatus: state.registreringStatus
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    hentRegistrering: (baseUrl: string) => dispatch(hentRegistreringStatus(baseUrl)),
+    hentRegistrering: () => dispatch(hentRegistreringStatus()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SjekkOppfolgingsstatusWrapper);
