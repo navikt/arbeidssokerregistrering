@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { shallowWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
 import { ActionType } from '../ducks/actions';
@@ -18,6 +18,12 @@ export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWith
     return shallowWithIntl(React.cloneElement(children, {
         store
     })).dive().dive();
+}
+
+export function shallowwithStore(children: React.ReactElement<ElementWithStore>) {
+    return shallow(React.cloneElement(children, {
+        store
+    })).dive();
 }
 
 export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
