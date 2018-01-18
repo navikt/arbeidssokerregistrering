@@ -1,5 +1,4 @@
 import { basename } from './app';
-import { dispatchEnvironment } from './test/test-utils';
 
 // For å slippe waning fra react-router
 Object.defineProperty(window.location, 'pathname', {
