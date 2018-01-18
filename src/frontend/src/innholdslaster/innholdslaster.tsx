@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Laster from './innholdslaster-laster';
-import { STATUS } from '../ducks/utils';
+import { STATUS } from '../ducks/api-utils';
 import { storrelseType } from 'nav-frontend-spinner';
 
 const array = (value: {}) => (Array.isArray(value) ? value : [value]);

@@ -5,7 +5,10 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import SjekkOppfolgingsstatusWrapper, { veienTilArbeid } from './sjekk-oppfolgingsstatus-wrapper';
 import {
-    makeHrefWritable, mountWithStore, promiseWithSetTimeout, stubFetchWithErrorResponse,
+    makeHrefWritable,
+    mountWithStoreAndIntl,
+    promiseWithSetTimeout,
+    stubFetchWithErrorResponse,
     stubFetchWithResponse,
     zeroTimeoutPromise
 } from '../test/test-utils';
@@ -22,7 +25,7 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
 
         stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: false});
 
-        mountWithStore(<SjekkOppfolgingsstatusWrapper />);
+        mountWithStoreAndIntl(<SjekkOppfolgingsstatusWrapper />);
 
         return promiseWithSetTimeout()
             .then(() => expect(document.location.href).to.equal(SBLARBEID_URL));
@@ -34,7 +37,7 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
 
         stubFetchWithResponse({underOppfolging: true, oppfyllerKrav: false});
 
-        mountWithStore(<SjekkOppfolgingsstatusWrapper />);
+        mountWithStoreAndIntl(<SjekkOppfolgingsstatusWrapper />);
 
         return promiseWithSetTimeout()
             .then(() => expect(document.location.href).to.equal(VEIENTILARBEID_URL));
@@ -42,7 +45,7 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
     it('Skal rendre innhold dersom bruker oppfyller krav og ikke er under oppfølging', () => {
         stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: true});
 
-        const wrapper = mountWithStore(
+        const wrapper = mountWithStoreAndIntl(
             <SjekkOppfolgingsstatusWrapper >
                 <div className="Dummy"/>
             </SjekkOppfolgingsstatusWrapper>);
@@ -55,7 +58,7 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
     it('skal rendre feilmelding dersom henting av status feiler', () => {
         stubFetchWithErrorResponse();
 
-        const wrapper = mountWithStore(<SjekkOppfolgingsstatusWrapper />);
+        const wrapper = mountWithStoreAndIntl(<SjekkOppfolgingsstatusWrapper />);
 
         return promiseWithSetTimeout()
             .then(() => expect(wrapper.html()).to.have.string('innholdslaster-feilmelding'));

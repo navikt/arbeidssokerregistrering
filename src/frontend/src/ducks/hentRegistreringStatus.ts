@@ -1,5 +1,5 @@
 import * as Api from './api';
-import { doThenDispatch, STATUS } from './utils';
+import { doThenDispatch, STATUS } from './api-utils';
 import {
     Action, ActionType } from './actions';
 import RegistreringStatus from './registrering-status-modell';

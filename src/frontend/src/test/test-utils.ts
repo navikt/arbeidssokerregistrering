@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
-import { shallowWithIntl } from 'enzyme-react-intl';
+import { shallowWithIntl, mountWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
 import { Store } from 'react-redux';
 import { AppState } from '../reducer';
@@ -26,6 +26,12 @@ export function shallowwithStore(children: React.ReactElement<ElementWithStore>)
 
 export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
     return mount(React.cloneElement(children, {
+        store
+    }));
+}
+
+export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>) {
+    return mountWithIntl(React.cloneElement(children, {
         store
     }));
 }

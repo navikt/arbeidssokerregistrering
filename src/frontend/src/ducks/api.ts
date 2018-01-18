@@ -1,4 +1,4 @@
-import { fetchToJson } from './utils';
+import { fetchToJson } from './api-utils';
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/arbeid/registrering';
 export const DITTNAV_URL = '/dittnav';

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { hentRegistreringStatus } from '../ducks/hentRegistreringStatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import { RegStatusState } from '../ducks/hentRegistreringStatus';
@@ -8,6 +9,7 @@ import { AppState } from '../reducer';
 import OppfolgingsstatusFeilmelding from './oppfolgingsstatus-feilmelding';
 import SblRegistrering from '../oppsummering/sbl-registrering';
 import { VEIENTILARBEID_URL } from '../ducks/api';
+import { getIntlMessage } from '../utils/utils';
 
 interface StateProps {
     registreringStatus: RegStatusState;
@@ -17,7 +19,7 @@ interface DispatchProps {
     hentRegistrering: () => void;
 }
 
-type AppWrapperProps = StateProps & DispatchProps;
+type AppWrapperProps = StateProps & DispatchProps & InjectedIntlProps;
 
 function redirectOrRenderChildren(data: RegistreringStatus,
                                   children: React.ReactNode | React.ReactChild) {
@@ -37,11 +39,15 @@ class SjekkOppfolgingsstatusWrapper extends React.Component<AppWrapperProps> {
     }
 
     render() {
-        const {registreringStatus, children } = this.props;
+        const {registreringStatus, children, intl } = this.props;
         return (
             <Innholdslaster
                 avhengigheter={[registreringStatus]}
-                feilmeldingKomponent={<OppfolgingsstatusFeilmelding/>}
+                feilmeldingKomponent={
+                    <OppfolgingsstatusFeilmelding
+                        feilmelding={getIntlMessage(intl.messages, 'feil-i-systemene-beskrivelse')}
+                    />
+                }
                 storrelse="XXL"
             >
                 {() => redirectOrRenderChildren(
@@ -61,4 +67,6 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentRegistrering: () => dispatch(hentRegistreringStatus()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SjekkOppfolgingsstatusWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    injectIntl(SjekkOppfolgingsstatusWrapper)
+);
