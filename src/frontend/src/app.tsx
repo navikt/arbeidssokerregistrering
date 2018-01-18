@@ -24,27 +24,29 @@ export const basename = '/arbeidssokerregistrering';
 class App extends React.Component {
     render() {
         return (
-            <Provider store={store}>
-                <IntlProvider>
-                    <HentEnvironment>
-                        <SjekkOppfolgingsstatusWrapper>
-                            <HentInitialData>
-                                <Router basename={basename}>
-                                    <div className="arbsokreg_app">
-                                        <Route path="/start" component={StartRegistrering}/>
-                                        <Route path="/registrer" component={RegistrerDeg}/>
-                                        <Route path="/skjema/:id" component={SkjemaPanel}/>
-                                        <Route path="/oppsummering" component={Oppsummering}/>
-                                        <Route path="/sblregistrering" component={SblRegistrering}/>
-                                        <Route path="/regvelykket" component={RegVelykket}/>
-                                        <Route path="/avbryt" component={Avbryt}/>
-                                    </div>
-                                </Router>
-                            </HentInitialData>
-                        </SjekkOppfolgingsstatusWrapper>
-                    </HentEnvironment>
-                </IntlProvider>
-            </Provider>
+            <div className="arbsokreg_app">
+                <Provider store={store}>
+                    <IntlProvider>
+                        <HentEnvironment>
+                            <SjekkOppfolgingsstatusWrapper>
+                                <HentInitialData>
+                                    <Router basename={basename}>
+                                        <div>
+                                            <Route path="/start" component={StartRegistrering}/>
+                                            <Route path="/registrer" component={RegistrerDeg}/>
+                                            <Route path="/skjema/:id" component={SkjemaPanel}/>
+                                            <Route path="/oppsummering" component={Oppsummering}/>
+                                            <Route path="/sblregistrering" component={SblRegistrering}/>
+                                            <Route path="/regvelykket" component={RegVelykket}/>
+                                            <Route path="/avbryt" component={Avbryt}/>
+                                        </div>
+                                    </Router>
+                                </HentInitialData>
+                            </SjekkOppfolgingsstatusWrapper>
+                        </HentEnvironment>
+                    </IntlProvider>
+                </Provider>
+            </div>
         );
     }
 }

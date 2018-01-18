@@ -6,9 +6,12 @@
   "private": true,
   "dependencies": {
     "@types/query-string": "4.3.0",
+    "babel-polyfill": "6.26.0",
     "classnames": "2.2.5",
     "lodash": "4.17.4",
     "lodash.throttle": "4.1.1",
+    "nav-frontend-alertstriper": "0.2.21",
+    "nav-frontend-alertstriper-style": "0.2.26",
     "nav-frontend-chevron-style": "0.3.4",
     "nav-frontend-core": "4.0.5",
     "nav-frontend-grid": "0.1.10",
