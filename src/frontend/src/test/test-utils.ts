@@ -1,12 +1,10 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
-import { shallowWithIntl } from 'enzyme-react-intl';
+import { shallowWithIntl, mountWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
-import { ActionType } from '../ducks/actions';
-import { Dispatch, Store } from 'react-redux';
+import { Store } from 'react-redux';
 import { AppState } from '../reducer';
-import { EnvironmentData } from '../ducks/environment';
 
 export const store = getStore();
 
@@ -32,6 +30,12 @@ export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
     }));
 }
 
+export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>) {
+    return mountWithIntl(React.cloneElement(children, {
+        store
+    }));
+}
+
 export function stubFetchWithResponse(response: {}): Promise<{}> {
     return sinon.stub(global, 'fetch').callsFake(() =>
         Promise.resolve({status: 200, ok: true, json: () => (response)}));
@@ -49,11 +53,5 @@ export function promiseWithSetTimeout() {
 export function makeHrefWritable() {
     return Object.defineProperty(document.location, 'href', {
         writable: true,
-    });
-}
-export function dispatchEnvironment(dispatch: Dispatch<AppState>, data: EnvironmentData) {
-    dispatch({
-        type: ActionType.HENT_ENVIRONMENT_OK,
-        data
     });
 }

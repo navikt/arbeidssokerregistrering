@@ -1,7 +1,6 @@
 import RegistreringStatus from './registrering-status-modell';
 import Svar from './svar-modell';
 import InnloggingsInfo from './innloggings-info-modell';
-import { EnvironmentData } from './environment';
 
 export enum ActionType {
     HENT_REGISTRERINGSTATUS,
@@ -15,10 +14,6 @@ export enum ActionType {
     AVGI_SVAR,
     AVGA_SVAR,
     AVGI_SVAR_FEILET,
-
-    HENT_ENVIRONMENT_OK,
-    HENT_ENVIRONMENT_PENDING,
-    HENT_ENVIRONMENT_ERROR,
 }
 
 /*
@@ -56,17 +51,6 @@ export interface HentetInnloggingsInfoAction {
     data: InnloggingsInfo;
 }
 
-export interface HentEnvironmentOK {
-    type: ActionType.HENT_ENVIRONMENT_OK;
-    data: EnvironmentData;
-}
-export interface HentEnvironmentPENDING {
-    type: ActionType.HENT_ENVIRONMENT_PENDING;
-}
-export interface HentEnvironmentERROR {
-    type: ActionType.HENT_ENVIRONMENT_ERROR;
-}
-
 /*
 * Avgi svar
 * */
@@ -96,9 +80,6 @@ export type Action =
     | AvgiSvarAction
     | AvgaSvarAction
     | AvgiSvarFeiletAction
-    | HentEnvironmentERROR
-    | HentEnvironmentOK
-    | HentEnvironmentPENDING
 
     // | NesteSporsmalAction
     // | VisAlternativerAction

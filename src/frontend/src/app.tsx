@@ -16,7 +16,6 @@ import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
 import SjekkOppfolgingsstatusWrapper from './oppfolgingsstatus/sjekk-oppfolgingsstatus-wrapper';
 import HentInitialData from './initialdata/hent-initial-data';
-import HentEnvironment from './komponenter/hent-environment';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
@@ -27,7 +26,6 @@ class App extends React.Component {
             <div className="arbsokreg_app">
                 <Provider store={store}>
                     <IntlProvider>
-                        <HentEnvironment>
                             <SjekkOppfolgingsstatusWrapper>
                                 <HentInitialData>
                                     <Router basename={basename}>
@@ -43,7 +41,6 @@ class App extends React.Component {
                                     </Router>
                                 </HentInitialData>
                             </SjekkOppfolgingsstatusWrapper>
-                        </HentEnvironment>
                     </IntlProvider>
                 </Provider>
             </div>
