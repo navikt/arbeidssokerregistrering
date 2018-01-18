@@ -7,7 +7,6 @@ export interface SvarState {
     3?: string;
     4?: string;
     5?: string;
-    6?: string;
 }
 
 interface Action {
@@ -24,7 +23,6 @@ const initialState = {
         3: undefined,
         4: undefined,
         5: undefined,
-        6: undefined
 };
 
 export default function (state: SvarState = initialState, action: Action): SvarState {

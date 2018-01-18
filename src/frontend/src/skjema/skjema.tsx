@@ -2,15 +2,15 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import antallSporsmal from '../sporsmal/alle-sporsmal';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
 import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { uncheckRadioButtons } from './skjema-utils';
-import KnappFullfor from './knapp-fullfor';
+import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom } from './skjema-utils';
+import KnappAvbryt from './knapp-avbryt';
 
 interface SkjemaProps {
     id: string;
@@ -22,7 +22,10 @@ export interface MatchProps {
 }
 
 interface StateProps {
+    erSelvgaendeBruker: () => boolean;
+    erAlleSpmBesvart: () => boolean;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
+    hentAvgittSvarId: (sporsmalId: string) => string;
 }
 
 interface DispatchProps {
@@ -31,39 +34,83 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
-    const sporsmalId = match.params.id;
-    const antallAlternativer = antallSporsmal[parseInt(sporsmalId, 10) - 1];
-    const tittelId = `sporsmal-${sporsmalId}-tittel`;
+function Skjema({
+                    match,
+                    history,
+                    intl,
+                    endreSvar,
+                    sporsmalErBesvart,
+                    erAlleSpmBesvart,
+                    erSelvgaendeBruker,
+                    hentAvgittSvarId
+                }: Props) {
+
+    const sideId = match.params.id;
+    const spmListePaSiden = configSpmPrSide[sideId];
+
+    if (spmListePaSiden === undefined) {
+        history.push('/skjema/1');
+        return null;
+    }
+
+    const disableKnappNeste = spmListePaSiden.filter((spmId: string) => !sporsmalErBesvart(spmId)).length !== 0;
+    const disableKnappFullfor = erAlleSpmBesvart();
+
     return (
         <div>
-            <Undertittel className="blokk-xxs">{intl.messages[tittelId]}</Undertittel>
-            <Panel className="blokk-s">
-                <form >
-                    {Array.from(Array(antallAlternativer).keys())
-                        .map(i => i + 1)
-                        .map((key) => <Alternativ
-                            sporsmalId={sporsmalId}
-                            endreSvar={endreSvar}
-                            key={key}
-                            tekstId={`sporsmal-${sporsmalId}-alternativ-${key}`}
-                            intl={intl}
-                        />)}
-                </form>
-            </Panel>
-            <div className="skjema-knapper">
+            {
+                spmListePaSiden
+                    .map((spmId: string) => (
+                        <div
+                            key={spmId}
+                            className={`${visRiktigCssMarginBottom(spmListePaSiden, spmId)} panel-skjema-wrapper`}
+                        >
+                            <Systemtittel tag="h1" className="spm-tittel">
+                                {intl.messages[`sporsmal-${spmId}-tittel`]}
+                            </Systemtittel>
+                            <Panel className="panel-skjema">
+                                <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
+                                    {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
+                                        .map(i => i + 1)
+                                        .map((key) => <Alternativ
+                                            sporsmalId={spmId}
+                                            endreSvar={endreSvar}
+                                            key={key}
+                                            alternativId={key.toString()}
+                                            tekstId={`sporsmal-${spmId}-alternativ-${key}`}
+                                            checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
+                                            intl={intl}
+                                        />)}
+                                </form>
+                            </Panel>
+                        </div>
+                    ))
+            }
+
+            <div className="panel-blokk__knapperad">
+                <KnappAvbryt
+                    classname="mmr"
+                    onClick={(() => {
+                        history.push('/avbryt');
+                    })}
+                />
                 {
-                    parseInt(sporsmalId, 10) === antallSporsmal.length ?
-                        <KnappFullfor
-                            disabled={!sporsmalErBesvart(sporsmalId)}
-                            onClick={() => history.push('/oppsummering')}
+                    parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
+                        <KnappNeste
+                            disabled={disableKnappFullfor}
+                            onClick={() => {
+                                if (erSelvgaendeBruker()) {
+                                    history.push('/oppsummering');
+                                } else {
+                                    history.push('/sblregistrering');
+                                }
+                            }}
                         />
                         :
                         <KnappNeste
-                            disabled={!sporsmalErBesvart(sporsmalId)}
+                            disabled={disableKnappNeste}
                             onClick={(() => {
-                                history.push(`/skjema/${(parseInt(sporsmalId, 10) + 1)}`);
-                                uncheckRadioButtons();
+                                history.push(`/skjema/${(parseInt(sideId, 10) + 1)}`);
                             })}
                         />
                 }
@@ -74,6 +121,9 @@ function Skjema({match, history, intl, endreSvar, sporsmalErBesvart}: Props) {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
+    hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
+    erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
+    erSelvgaendeBruker: () => erSelvgaende(state.svar)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

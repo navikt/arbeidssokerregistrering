@@ -5,17 +5,16 @@
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="8081" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+    <option name="ALTERNATIVE_JRE_PATH" />
     <option name="ENABLE_SWING_INSPECTOR" value="false" />
     <option name="ENV_VARIABLES" />
     <option name="PASS_PARENT_ENVS" value="true" />
-    <module name="fo-arbeidssokerregistrering" />
+    <module name="arbeidssokerregistrering" />
     <envs>
-      <env name="APPRES_CMS_URL" value="https://appres-q6.nav.no" />
-      <env name="NAV_TRUSTSTORE_PATH" value="c://Temp/nav_truststore_nonproduction.jts" />
-      <env name="NAV_TRUSTSTORE_PASSWORD" value="467792be15c4a8807681fd2d5c9c1748" />
-      <env name="" value="" />
+      <env name="APPRES_CMS_URL" value="http://localhost:8080" />
+      <env name="NAV_TRUSTSTORE_PATH" value="''" />
+      <env name="NAV_TRUSTSTORE_PASSWORD" value="''" />
     </envs>
     <method />
   </configuration>
