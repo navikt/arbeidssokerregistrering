@@ -1,4 +1,4 @@
-import { SvarState } from '../ducks/svar';
+import { State as SvarState } from '../ducks/svar';
 
 export function hentValgteAlternativ() {
     return Array.from(document.getElementsByName(`alternativ`) as NodeListOf<HTMLInputElement>)

@@ -6,7 +6,7 @@ import Ikon from 'nav-frontend-ikoner-assets';
 import PanelBlokk from '../felles/panel-blokk';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import { FormattedMessage } from 'react-intl';
-import { InnloggingsInfoState } from '../ducks/hentInnloggingsInfo';
+import { State as InnloggingsInfoState } from '../ducks/innloggingsinfo';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../reducer';
