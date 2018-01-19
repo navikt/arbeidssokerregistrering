@@ -6,8 +6,10 @@ declare module "nav-frontend-alertstriper" {
         className?: string;
     }
 
+    export type AlertstripeTypes = 'advarsel' | 'suksess' | 'info';
+
     interface AlertStripeMedTypeOgSolidProps extends AlertStripeProps {
-        type: 'advarsel' | 'suksess' | 'info';
+        type: AlertstripeTypes;
         solid?: boolean;
     }
 

@@ -1,5 +1,6 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
+import { AppState } from '../reducer';
 
 export enum ActionTypes {
     HENT_INNLOGGINGSINFO_OK = 'HENT_INNLOGGINGSINFO_OK',
@@ -51,4 +52,8 @@ export function hentInnloggingsInfo() {
         OK: ActionTypes.HENT_INNLOGGINGSINFO_OK,
         FEILET: ActionTypes.HENT_INNLOGGINGSINFO_FEILET,
     });
+}
+
+export function selectInnloggingsinfo(state: AppState): State {
+    return state.innloggingsInfo;
 }
