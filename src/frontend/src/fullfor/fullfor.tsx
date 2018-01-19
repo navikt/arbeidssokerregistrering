@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
@@ -36,12 +36,13 @@ function Fullfor({history}: Props) {
                 tittelCssNavnVariant="oransje-variant"
             >
                 <Normaltekst>
-                    <FormattedMessage id={'fullfor-ingress'}/>
+                    <FormattedHTMLMessage id={'fullfor-ingress'}/>
                 </Normaltekst>
                 <ul className="typo-normal blokk pml mmt">
                     <li><FormattedMessage id="fullfor-liste-1"/></li>
                     <li><FormattedMessage id="fullfor-liste-2"/></li>
                     <li><FormattedMessage id="fullfor-liste-3"/></li>
+                    <li><FormattedMessage id="fullfor-liste-4"/></li>
                 </ul>
                 <EkspanderbartInfo tittelId="fullfor-les-mer">
                     <Normaltekst>
