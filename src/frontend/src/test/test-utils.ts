@@ -5,6 +5,7 @@ import { shallowWithIntl, mountWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
 import { Store } from 'react-redux';
 import { AppState } from '../reducer';
+import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 
 export const store = getStore();
 
@@ -54,4 +55,8 @@ export function makeHrefWritable() {
     return Object.defineProperty(document.location, 'href', {
         writable: true,
     });
+}
+
+export function dispatchRegistreringstatus(data: RegStatusData) {
+    return store.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
 }
