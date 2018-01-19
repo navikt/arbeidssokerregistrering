@@ -29,11 +29,11 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, intl } = this.props;
+        const { children, registreringstatus, intl, innloggingsinfo } = this.props;
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[registreringstatus]}
+                avhengigheter={[registreringstatus, innloggingsinfo]}
                 storrelse="XXL"
             >
                 {children}
