@@ -6,7 +6,7 @@ import Ikon from 'nav-frontend-ikoner-assets';
 import PanelBlokk from '../felles/panel-blokk';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import { FormattedMessage } from 'react-intl';
-import { State as InnloggingsInfoState } from '../ducks/innloggingsinfo';
+import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../ducks/innloggingsinfo';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../reducer';
@@ -133,7 +133,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
 }
 
 const mapStateToProps = (state: AppState) => ({
-    innloggingsInfo: state.innloggingsInfo
+    innloggingsInfo: selectInnloggingsinfo(state)
 });
 
 export default connect(mapStateToProps, null)(Oppsummering);
