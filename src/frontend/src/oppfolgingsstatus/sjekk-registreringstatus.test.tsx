@@ -3,13 +3,12 @@ import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import SjekkOppfolgingsstatusWrapper, { veienTilArbeid } from './sjekk-oppfolgingsstatus-wrapper';
+import SjekkRegistreringstatus, { veienTilArbeid } from './sjekk-registreringstatus';
 import {
-    makeHrefWritable,
+    dispatchRegistreringstatus,
+    makeHrefWritable, mountWithStore,
     mountWithStoreAndIntl,
     promiseWithSetTimeout,
-    stubFetchWithErrorResponse,
-    stubFetchWithResponse,
     zeroTimeoutPromise
 } from '../test/test-utils';
 import { environmentTestData } from '../SetupTests';
@@ -17,15 +16,13 @@ import { SBLARBEID_URL, VEIENTILARBEID_URL } from '../ducks/api';
 
 enzyme.configure({adapter: new Adapter()});
 
-afterEach(() => fetch.restore());
-
-describe('<SjekkOppfolginsstautsWrapper />', () => {
+describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til sbl om den ikke oppfyller krav og ikke er under oppfølging', () => {
         makeHrefWritable();
 
-        stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: false});
+        dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false});
 
-        mountWithStoreAndIntl(<SjekkOppfolgingsstatusWrapper />);
+        mountWithStoreAndIntl(<SjekkRegistreringstatus />);
 
         return promiseWithSetTimeout()
             .then(() => expect(document.location.href).to.equal(SBLARBEID_URL));
@@ -35,32 +32,23 @@ describe('<SjekkOppfolginsstautsWrapper />', () => {
     it('skal sende bruker til veien til arbeid om den er under oppfølging', () => {
         makeHrefWritable();
 
-        stubFetchWithResponse({underOppfolging: true, oppfyllerKrav: false});
+        dispatchRegistreringstatus({underOppfolging: true, oppfyllerKrav: false});
 
-        mountWithStoreAndIntl(<SjekkOppfolgingsstatusWrapper />);
+        mountWithStoreAndIntl(<SjekkRegistreringstatus />);
 
         return promiseWithSetTimeout()
             .then(() => expect(document.location.href).to.equal(VEIENTILARBEID_URL));
     });
     it('Skal rendre innhold dersom bruker oppfyller krav og ikke er under oppfølging', () => {
-        stubFetchWithResponse({underOppfolging: false, oppfyllerKrav: true});
+        dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: true});
 
-        const wrapper = mountWithStoreAndIntl(
-            <SjekkOppfolgingsstatusWrapper >
+        const wrapper = mountWithStore(
+            <SjekkRegistreringstatus >
                 <div className="Dummy"/>
-            </SjekkOppfolgingsstatusWrapper>);
+            </SjekkRegistreringstatus>);
 
         return promiseWithSetTimeout()
             .then(() => expect(wrapper.html()).to.have.string('Dummy'));
 
-    });
-
-    it('skal rendre feilmelding dersom henting av status feiler', () => {
-        stubFetchWithErrorResponse();
-
-        const wrapper = mountWithStoreAndIntl(<SjekkOppfolgingsstatusWrapper />);
-
-        return promiseWithSetTimeout()
-            .then(() => expect(wrapper.html()).to.have.string('innholdslaster-feilmelding'));
     });
 });

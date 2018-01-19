@@ -1,5 +1,6 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
+import { AppState } from '../reducer';
 
 export enum ActionTypes {
     HENT_REG_STATUS_OK = 'HENT_REG_STATUS_OK',
@@ -50,4 +51,8 @@ export function hentRegistreringStatus() {
         OK : ActionTypes.HENT_REG_STATUS_OK,
         FEILET: ActionTypes.HENT_REG_STATUS_FEILET,
     });
+}
+
+export function selectRegistreringstatus(state: AppState): State {
+    return state.registreringStatus;
 }
