@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { hentRegistreringStatus } from '../ducks/hentRegistreringStatus';
+import { hentRegistreringStatus } from '../ducks/registreringstatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import { RegStatusState } from '../ducks/hentRegistreringStatus';
-import RegistreringStatus from '../ducks/registrering-status-modell';
+import { State as RegStatusState, Data as RegistreringStatusData } from '../ducks/registreringstatus';
 import { AppState } from '../reducer';
 import OppfolgingsstatusFeilmelding from './oppfolgingsstatus-feilmelding';
 import SblRegistrering from '../oppsummering/sbl-registrering';
@@ -21,7 +20,7 @@ interface DispatchProps {
 
 type AppWrapperProps = StateProps & DispatchProps & InjectedIntlProps;
 
-function redirectOrRenderChildren(data: RegistreringStatus,
+function redirectOrRenderChildren(data: RegistreringStatusData,
                                   children: React.ReactNode | React.ReactChild) {
     if (data.underOppfolging) {
         document.location.href = VEIENTILARBEID_URL;

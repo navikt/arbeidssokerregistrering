@@ -8,7 +8,7 @@ import { MatchProps } from '../skjema/skjema';
 import PanelBlokk from '../felles/panel-blokk';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import KnappNeste from '../komponenter/knapp-neste';
-import { InnloggingsInfoState } from '../ducks/hentInnloggingsInfo';
+import { State as InnloggingsInfoState } from '../ducks/innloggingsinfo';
 import { AppState } from '../reducer';
 import { hentFornavn } from '../utils/utils';
 

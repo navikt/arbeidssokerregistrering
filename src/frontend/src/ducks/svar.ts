@@ -1,7 +1,9 @@
-const AVGI_SVAR = 'AVGI_SVAR';
-const INITIAL_STATE = 'INITIAL_STATE';
+export enum ActionTypes {
+    AVGI_SVAR = 'AVGI_SVAR',
+    AVGI_SVAR_RESET = 'AVGI_SVAR_RESET'
+}
 
-export interface SvarState {
+export interface State {
     1?: string;
     2?: string;
     3?: string;
@@ -9,12 +11,14 @@ export interface SvarState {
     5?: string;
 }
 
+export interface Data {
+    alternativId: string;
+    sporsmalId: string;
+}
+
 interface Action {
-    type: string;
-    data: {
-        alternativId: string;
-        sporsmalId: string;
-    };
+    type: ActionTypes;
+    data: Data;
 }
 
 const initialState = {
@@ -25,12 +29,12 @@ const initialState = {
         5: undefined,
 };
 
-export default function (state: SvarState = initialState, action: Action): SvarState {
+export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
-        case AVGI_SVAR: {
+        case ActionTypes.AVGI_SVAR: {
             return {...state, [action.data.sporsmalId]: action.data.alternativId};
         }
-        case INITIAL_STATE: {
+        case ActionTypes.AVGI_SVAR_RESET: {
             return initialState;
         }
         default : {
@@ -41,7 +45,7 @@ export default function (state: SvarState = initialState, action: Action): SvarS
 
 export function endreSvarAction(sporsmalId: string, alternativId: string) {
     return {
-        type: AVGI_SVAR,
+        type: ActionTypes.AVGI_SVAR,
         data: {
             sporsmalId,
             alternativId
@@ -51,6 +55,6 @@ export function endreSvarAction(sporsmalId: string, alternativId: string) {
 
 export function setInitalState() {
     return {
-        type: INITIAL_STATE
+        type: ActionTypes.AVGI_SVAR_RESET
     };
 }

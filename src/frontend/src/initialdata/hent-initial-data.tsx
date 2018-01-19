@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../reducer';
-import { hentInnloggingsInfo } from '../ducks/hentInnloggingsInfo';
+import { hentInnloggingsInfo } from '../ducks/innloggingsinfo';
 
 interface DispatchProps {
     hentInnloggingsInfo: () => void;

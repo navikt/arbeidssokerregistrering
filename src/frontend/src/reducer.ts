@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import svar, { SvarState } from './ducks/svar';
-import registreringStatus, { RegStatusState } from './ducks/hentRegistreringStatus';
-import innloggingsInfo, { InnloggingsInfoState } from './ducks/hentInnloggingsInfo';
+import svar, { State as SvarState } from './ducks/svar';
+import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
+import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
 
 export interface AppState {
     svar: SvarState;
