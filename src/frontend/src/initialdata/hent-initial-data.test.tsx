@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { expect } from 'chai';
 import { promiseWithSetTimeout, stubFetch, FetchStub, mountWithStoreAndIntl } from '../test/test-utils';
-import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { INNLOGGINGSINFO_URL } from '../ducks/api';
