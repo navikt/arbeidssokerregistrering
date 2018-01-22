@@ -14,9 +14,7 @@ export interface State {
 }
 
 export interface Data {
-    authenticated?: boolean;
     name?: string;
-    securityLevel?: string;
 }
 
 interface Action {

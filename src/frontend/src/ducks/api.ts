@@ -11,9 +11,29 @@ const config = {
 };
 
 export function hentRegistreringStatus() {
-    return fetchToJson(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, config);
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        config});
 }
 
 export function hentInnloggingsInfo() {
-    return fetchToJson(INNLOGGINGSINFO_URL, config);
+    return fetchToJson({
+        url: INNLOGGINGSINFO_URL,
+        config,
+        recoverWith: () => ({ name: ''})
+    });
+}
+
+export function hentKrrStatus() {
+    return fetchToJson({url: `${VEILARBOPPFOLGINGPROXY_URL}/krr`, recoverWith: krrRecoverWith, config});
+}
+
+function krrRecoverWith(status: number) {
+    if (status === 404) {
+        return { reservertIKrr: true};
+    } else if (status >= 500) {
+        return { reservertIKrr: false };
+    } else {
+        return null;
+    }
 }
