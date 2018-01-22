@@ -1,7 +1,4 @@
-import {
-    fetchStubWithErrorResponse, stubFetch,
-    withError, withResponse
-} from '../test/test-utils';
+import { stubFetch, withError, withResponse } from '../test/test-utils';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import { fetchToJson } from './api-utils';
