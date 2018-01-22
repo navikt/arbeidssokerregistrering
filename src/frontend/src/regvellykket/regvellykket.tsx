@@ -4,7 +4,7 @@ import PanelBlokk from '../felles/panel-blokk';
 import KnappNeste from '../komponenter/knapp-neste';
 import { RouteComponentProps } from 'react-router';
 
-function RegVelykket({history}: RouteComponentProps<History>) {
+function RegVellykket({history}: RouteComponentProps<History>) {
     return (
         <PanelBlokkGruppe
             knappAksjoner={
@@ -17,12 +17,12 @@ function RegVelykket({history}: RouteComponentProps<History>) {
             }
         >
             <PanelBlokk
-                tittelId="overskrift-regvelykket"
+                tittelId="overskrift-regvellykket"
                 tittelCssNavnVariant="gronn-variant"
-                beskrivelseId="beskrivelse-regvelykket"
+                beskrivelseId="beskrivelse-regvellykket"
             />
         </PanelBlokkGruppe>
     );
 }
 
-export default RegVelykket;
+export default RegVellykket;
