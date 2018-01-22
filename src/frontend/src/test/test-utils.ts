@@ -6,6 +6,7 @@ import getStore from '../store';
 import { Store } from 'react-redux';
 import { AppState } from '../reducer';
 import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
+import { Data as KrrData, ActionTypes as KrrActionTypes } from '../ducks/krr';
 
 export const store = getStore();
 
@@ -37,14 +38,16 @@ export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithSt
     }));
 }
 
-export function stubFetchWithResponse(response: {}): Promise<{}> {
-    return sinon.stub(global, 'fetch').callsFake(() =>
-        Promise.resolve({status: 200, ok: true, json: () => (response)}));
+export function stubFetch(fetchStub: FetchStub): Promise<{}> {
+    return sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
 }
 
-export function stubFetchWithErrorResponse() {
-    return sinon.stub(global, 'fetch').callsFake(() =>
-        Promise.resolve({status: 500, text: () => Promise.resolve('Skal kaste feil')}));
+function getPromiseResponse(url: string, fetchStub: FetchStub) {
+    const status = fetchStub.getResponse(url).status;
+    const errorResponse = Promise.resolve({status, text: () => Promise.resolve('Skal kaste feil')});
+    const okResponse = Promise.resolve({status, ok: true, json: () => (fetchStub.getResponse(url).response)});
+
+    return status === 200 ? okResponse : errorResponse;
 }
 
 export function promiseWithSetTimeout() {
@@ -59,4 +62,42 @@ export function makeHrefWritable() {
 
 export function dispatchRegistreringstatus(data: RegStatusData) {
     return store.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
+}
+
+export function dispatchKrrStatus(data: KrrData) {
+    return store.dispatch({type: KrrActionTypes.HENT_KRR_STATUS_OK, data});
+}
+
+export function withResponse(response: {}) {
+    return new FetchStub().addResponse('_', response);
+}
+
+export function withError(status: number) {
+    return new FetchStub().addErrorResponse('_', status);
+}
+
+export class FetchStub {
+    urlMap: { [url: string]: {response?: {}, status: number}};
+    constructor() {
+        this.urlMap = {};
+    }
+    addResponse(url: string, response: {}) {
+        this.urlMap[url] = {response, status: 200};
+        return this;
+    }
+    addErrorResponse(url: string, status: number) {
+        if  (status < 400) {
+            throw new Error('Status should be >= 400');
+        }
+        this.urlMap[url] = { status };
+        return this;
+    }
+
+    getResponse(url: string) {
+        const keys = Object.keys(this.urlMap);
+        const length = keys.length;
+        const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
+        const response = (responseKey && this.urlMap[responseKey]) || ({ response: {}, status: 200});
+        return response;
+    }
 }

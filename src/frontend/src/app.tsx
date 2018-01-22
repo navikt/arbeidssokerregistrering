@@ -16,6 +16,7 @@ import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
 import SjekkRegistreringstatus from './oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './initialdata/hent-initial-data';
+import SjekkKrrStatus from './krr/sjekk-krr-status';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
@@ -27,19 +28,21 @@ class App extends React.Component {
                 <Provider store={store}>
                     <IntlProvider>
                         <HentInitialData>
-                            <SjekkRegistreringstatus>
-                                <Router basename={basename}>
-                                    <div>
-                                        <Route path="/start" component={StartRegistrering}/>
-                                        <Route path="/registrer" component={RegistrerDeg}/>
-                                        <Route path="/skjema/:id" component={SkjemaPanel}/>
-                                        <Route path="/oppsummering" component={Oppsummering}/>
-                                        <Route path="/sblregistrering" component={SblRegistrering}/>
-                                        <Route path="/regvellykket" component={RegVellykket}/>
-                                        <Route path="/avbryt" component={Avbryt}/>
-                                    </div>
-                                </Router>
-                            </SjekkRegistreringstatus>
+                            <SjekkKrrStatus>
+                                <SjekkRegistreringstatus>
+                                    <Router basename={basename}>
+                                        <div>
+                                            <Route path="/start" component={StartRegistrering}/>
+                                            <Route path="/registrer" component={RegistrerDeg}/>
+                                            <Route path="/skjema/:id" component={SkjemaPanel}/>
+                                            <Route path="/oppsummering" component={Oppsummering}/>
+                                            <Route path="/sblregistrering" component={SblRegistrering}/>
+                                            <Route path="/regvellykket" component={RegVellykket}/>
+                                            <Route path="/avbryt" component={Avbryt} />
+                                        </div>
+                                    </Router>
+                                </SjekkRegistreringstatus>
+                            </SjekkKrrStatus>
                         </HentInitialData>
                     </IntlProvider>
                 </Provider>

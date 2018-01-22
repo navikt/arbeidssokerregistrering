@@ -20,11 +20,19 @@ class FetchError extends Error {
     }
 }
 
-export function sjekkStatuskode(response: Response) {
-    if (response.status >= 200 && response.status < 300 && response.ok) {
-        return Promise.resolve(response);
-    }
-    return Promise.reject(new FetchError(response.statusText, response));
+type RecoverWith = (status: number) => ({} | null);
+
+export function sjekkStatuskode(recoverWith?: RecoverWith) {
+
+    return (response: Response) => {
+        if (response.status >= 200 && response.status < 300 && response.ok) {
+            return Promise.resolve(response);
+        }
+
+        return (!!recoverWith && !!recoverWith(response.status)) ?
+            Promise.resolve({json: () => recoverWith(response.status)}) :
+            Promise.reject(new FetchError(response.statusText, response));
+    };
 }
 
 export function toJson(response: Response) {
@@ -58,9 +66,19 @@ export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
     };
 }
 
-export function fetchToJson<DATA>(url: string, config: RequestInit = {}): Promise<DATA> {
+interface FetchToJson {
+    url: string;
+    config?: { credentials: RequestCredentials};
+    recoverWith?: RecoverWith;
+}
+
+export function fetchToJson<DATA>({
+                                      url,
+                                      config = {credentials: 'include'},
+                                      recoverWith}: FetchToJson): Promise<DATA> {
+
     return fetch(url, config)
-        .then(sjekkStatuskode)
+        .then(sjekkStatuskode(recoverWith))
         .then(toJson);
 }
 

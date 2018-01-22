@@ -3,26 +3,9 @@ import * as fetchMock from 'fetch-mock';
 import * as qs from 'query-string';
 import * as pathRegex from 'path-to-regexp';
 
-export const MOCK_CONFIG = {
-    failureRate: -1
-};
-
-export function randomFailure(fn: any) {
-    return (...args: any[]) => {
-        const shouldFail = Math.random() <= MOCK_CONFIG.failureRate;
-        if (shouldFail) {
-            return 500;
-        }
-
-        if (typeof fn === 'function') {
-            return fn(...args);
-        }
-        return fn; // Trust me, its data
-    };
-}
-
-export function delayed(time: any, response: any): any {
-    return () => new Promise((resolve) => setTimeout(() => resolve(response), time));
+export function delayed(time: any, response: any, failure?: number): any {
+    const kanskejFeil = failure ? failure : response;
+    return () => new Promise((resolve) => setTimeout(() => resolve(kanskejFeil), time));
 }
 
 export function respondWith(handler: any) {
