@@ -8,6 +8,8 @@
     "@types/query-string": "4.3.0",
     "babel-polyfill": "6.26.0",
     "classnames": "2.2.5",
+    "intl": "1.2.5",
+    "intl-locales-supported": "1.0.0",
     "lodash": "4.17.4",
     "lodash.throttle": "4.1.1",
     "nav-frontend-alertstriper": "0.2.21",
