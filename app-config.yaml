@@ -12,8 +12,7 @@ healthcheck:
   readiness:
     path: arbeidssokerregistrering/index.html
     initialDelay: 20
-#fasitResources:
-#  used:
-#  - alias: appres.cms
-#    resourceType: baseurl
-# TODO HUSK DOCKERFILE
+fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseUrl

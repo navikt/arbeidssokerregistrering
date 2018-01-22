@@ -5,15 +5,32 @@
 @import '../node_modules/nav-frontend-knapper-style/src/index';
 @import '../node_modules/nav-frontend-skjema-style/src/index';
 @import '../node_modules/nav-frontend-paneler-style/src/index';
+@import '../node_modules/nav-frontend-spinner-style/src/spinner-style';
 @import '../node_modules/nav-frontend-lukknapp-style/src/lukknapp-style';
+@import '../node_modules/nav-frontend-alertstriper-style/src/index';
+
+@import './registrer/registrerdeg';
 
 body {
-    background-color: #f1f1f1;
+    background-color: @navLysGra;
 }
 
-.arbsokreg_app {
+
+.innholdslaster-laster {
+    text-align: center;
+    margin-top: 2em;
+}
+
+main.arbsokreg_app:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+main.arbsokreg_app {
     @import 'felles/utils';
     @import 'felles/panel-blokk';
+    @import './registrer/registrerdeg';
+    @import './innholdslaster/innholdslaster';
 
     @import './skjema/skjema';
     @import './oppsummering/oppsummering';

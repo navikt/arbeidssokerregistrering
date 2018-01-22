@@ -4,7 +4,7 @@ import IntlProvider from './Intl-provider';
 import getStore from './store';
 import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
-import RegVelykket from './regvelykket/regvelykket';
+import RegVellykket from './regvellykket/regvellykket';
 import Avbryt from './avbryt/avbryt';
 import Fullfor from './fullfor/fullfor';
 import {
@@ -15,6 +15,9 @@ import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
 import SblRegistrering from './oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
+import SjekkRegistreringstatus from './oppfolgingsstatus/sjekk-registreringstatus';
+import HentInitialData from './initialdata/hent-initial-data';
+import SjekkKrrStatus from './krr/sjekk-krr-status';
 
 const store = getStore();
 export const basename = '/arbeidssokerregistrering';
@@ -22,22 +25,30 @@ export const basename = '/arbeidssokerregistrering';
 class App extends React.Component {
     render() {
         return (
-            <Provider store={store}>
-                <IntlProvider>
-                    <Router basename={basename}>
-                        <div className="arbsokreg_app">
-                            <Route path="/start" component={StartRegistrering}/>
-                            <Route path="/registrer" component={RegistrerDeg}/>
-                            <Route path="/skjema/:id" component={SkjemaPanel}/>
-                            <Route path="/oppsummering" component={Oppsummering}/>
-                            <Route path="/sblregistrering" component={SblRegistrering}/>
-                            <Route path="/regvelykket" component={RegVelykket}/>
-                            <Route path="/avbryt" component={Avbryt}/>
-                            <Route path="/fullfor" component={Fullfor}/>
-                        </div>
-                    </Router>
-                </IntlProvider>
-            </Provider>
+            <main id="maincontent" role="main" tabIndex={-1} className="arbsokreg_app">
+                <Provider store={store}>
+                    <IntlProvider>
+                        <HentInitialData>
+                            <SjekkKrrStatus>
+                                <SjekkRegistreringstatus>
+                                    <Router basename={basename}>
+                                        <div>
+                                            <Route path="/start" component={StartRegistrering}/>
+                                            <Route path="/registrer" component={RegistrerDeg}/>
+                                            <Route path="/skjema/:id" component={SkjemaPanel}/>
+                                            <Route path="/oppsummering" component={Oppsummering}/>
+                                            <Route path="/sblregistrering" component={SblRegistrering}/>
+                                            <Route path="/regvellykket" component={RegVellykket}/>
+                                            <Route path="/avbryt" component={Avbryt} />
+                                            <Route path="/fullfor" component={Fullfor}/>
+                                        </div>
+                                    </Router>
+                                </SjekkRegistreringstatus>
+                            </SjekkKrrStatus>
+                        </HentInitialData>
+                    </IntlProvider>
+                </Provider>
+            </main>
         );
     }
 }

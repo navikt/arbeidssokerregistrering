@@ -1,9 +1,10 @@
-import '../test/test-setup';
 import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import SblRegistrering, { sblUrl } from './sbl-registrering';
+import SblRegistrering from './sbl-registrering';
+import { environmentTestData } from '../SetupTests';
+import { SBLARBEID_URL } from '../ducks/api';
 
 enzyme.configure({ adapter: new Adapter()});
 
@@ -24,6 +25,6 @@ describe('<SblRegistrering />', () => {
             writable: true,
         });
         enzyme.shallow(<SblRegistrering />);
-        expect(document.location.href).to.equal(sblUrl);
+        expect(document.location.href).to.equal(SBLARBEID_URL);
     });
 });
