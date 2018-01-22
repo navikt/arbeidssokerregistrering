@@ -23,7 +23,7 @@ export const basename = '/arbeidssokerregistrering';
 class App extends React.Component {
     render() {
         return (
-            <div className="arbsokreg_app">
+            <main id="maincontent" role="main" tabIndex={-1} className="arbsokreg_app">
                 <Provider store={store}>
                     <IntlProvider>
                         <HentInitialData>
@@ -43,7 +43,7 @@ class App extends React.Component {
                         </HentInitialData>
                     </IntlProvider>
                 </Provider>
-            </div>
+            </main>
         );
     }
 }
