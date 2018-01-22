@@ -15,12 +15,18 @@ body {
     background-color: @navLysGra;
 }
 
+
 .innholdslaster-laster {
     text-align: center;
     margin-top: 2em;
 }
 
-.arbsokreg_app {
+main.arbsokreg_app:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+main.arbsokreg_app {
     @import 'felles/utils';
     @import 'felles/panel-blokk';
     @import './registrer/registrerdeg';
