@@ -4,7 +4,7 @@ import IntlProvider from './Intl-provider';
 import getStore from './store';
 import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
-import RegVelykket from './regvelykket/regvelykket';
+import RegVellykket from './regvellykket/regvellykket';
 import Avbryt from './avbryt/avbryt';
 import {
     BrowserRouter as Router,
@@ -37,7 +37,7 @@ class App extends React.Component {
                                             <Route path="/skjema/:id" component={SkjemaPanel}/>
                                             <Route path="/oppsummering" component={Oppsummering}/>
                                             <Route path="/sblregistrering" component={SblRegistrering}/>
-                                            <Route path="/regvelykket" component={RegVelykket}/>
+                                            <Route path="/regvellykket" component={RegVellykket}/>
                                             <Route path="/avbryt" component={Avbryt} />
                                         </div>
                                     </Router>
