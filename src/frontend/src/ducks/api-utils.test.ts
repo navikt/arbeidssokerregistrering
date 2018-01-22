@@ -43,7 +43,7 @@ describe('Test fetchToJson', () => {
         stubFetch(withResponse({bar: 'foo'}));
         return expect(fetchToJson({
             url: 'url',
-            recoverWith: {foo: 'bar'},
+            recoverWith: () => ({foo: 'bar'}),
         })).to.eventually.have.property('bar');
     });
 });
