@@ -9,6 +9,7 @@ import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 
 type Props = RouteComponentProps<MatchProps>;
 
+/*TODO brukes ikke - kan slettes*/
 function RegistrerDeg({history}: Props) {
     return (
         <PanelBlokkGruppe

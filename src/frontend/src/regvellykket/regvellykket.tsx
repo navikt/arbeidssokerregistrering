@@ -3,6 +3,7 @@ import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import PanelBlokk from '../felles/panel-blokk';
 import KnappNeste from '../komponenter/knapp-neste';
 import { RouteComponentProps } from 'react-router';
+import { VEIENTILARBEID_URL } from '../ducks/api';
 
 function RegVellykket({history}: RouteComponentProps<History>) {
     return (
@@ -11,7 +12,7 @@ function RegVellykket({history}: RouteComponentProps<History>) {
                 <KnappNeste
                     key="2"
                     onClick={(() => {
-                        history.push('/veientilarbeid');
+                        document.location.href = VEIENTILARBEID_URL;
                     })}
                 />
             }

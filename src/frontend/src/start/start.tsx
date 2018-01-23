@@ -11,6 +11,7 @@ import KnappNeste from '../komponenter/knapp-neste';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../ducks/innloggingsinfo';
 import { AppState } from '../reducer';
 import { hentFornavn } from '../utils/utils';
+import { AVBRYT_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
 interface StateProps {
     innloggingsInfo: InnloggingsInfoState;
@@ -30,7 +31,7 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                             key="1"
                             type="standard"
                             className="knapp"
-                            onClick={() => history.push('/avbryt')}
+                            onClick={() => history.push(`${AVBRYT_PATH}`)}
                         >
                             <Normaltekst>
                                 <FormattedMessage id="knapp-avbryt"/>
@@ -40,7 +41,7 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                             key="2"
                             className="mml"
                             onClick={(() => {
-                                history.push('/skjema/1');
+                                history.push(`${SKJEMA_PATH}/1`);
                             })}
                         />
                     ]

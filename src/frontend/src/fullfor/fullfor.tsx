@@ -9,6 +9,7 @@ import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { Checkbox } from 'nav-frontend-skjema';
+import { AVBRYT_PATH, REGVELLYKKET_PATH } from '../utils/konstanter';
 
 type Props = RouteComponentProps<MatchProps>;
 
@@ -20,14 +21,14 @@ function Fullfor({history}: Props) {
                     key="1"
                     type="standard"
                     className="knapp mmr"
-                    onClick={() => history.push('/avbryt')}
+                    onClick={() => history.push(`${AVBRYT_PATH}`)}
                 >
                     <Normaltekst><FormattedMessage id="knapp-avbryt"/></Normaltekst>
                 </Knapp>,
                 <KnappFullfor
                     key="2"
                     disabled={false}
-                    onClick={() => history.push('/regvelykket')}
+                    onClick={() => history.push(`${REGVELLYKKET_PATH}`)}
                 />
             ]}
         >

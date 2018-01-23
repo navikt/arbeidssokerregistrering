@@ -11,6 +11,7 @@ import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
 import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
+import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
 interface SkjemaProps {
     id: string;
@@ -49,7 +50,7 @@ function Skjema({
     const spmListePaSiden = configSpmPrSide[sideId];
 
     if (spmListePaSiden === undefined) {
-        history.push('/skjema/1');
+        history.push(`${SKJEMA_PATH}/1`);
         return null;
     }
 
@@ -91,7 +92,7 @@ function Skjema({
                 <KnappAvbryt
                     classname="mmr"
                     onClick={(() => {
-                        history.push('/avbryt');
+                        history.push(`${AVBRYT_PATH}`);
                     })}
                 />
                 {
@@ -100,9 +101,9 @@ function Skjema({
                             disabled={disableKnappFullfor}
                             onClick={() => {
                                 if (erSelvgaendeBruker()) {
-                                    history.push('/oppsummering');
+                                    history.push(`${OPPSUMMERING_PATH}`);
                                 } else {
-                                    history.push('/sblregistrering');
+                                    history.push(`${SBLREG_PATH}`);
                                 }
                             }}
                         />
@@ -110,7 +111,7 @@ function Skjema({
                         <KnappNeste
                             disabled={disableKnappNeste}
                             onClick={(() => {
-                                history.push(`/skjema/${(parseInt(sideId, 10) + 1)}`);
+                                history.push(`${SKJEMA_PATH}/${(parseInt(sideId, 10) + 1)}`);
                             })}
                         />
                 }

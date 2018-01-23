@@ -6,6 +6,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import Lukknapp from 'nav-frontend-lukknapp';
+import { DITTNAV_URL } from '../ducks/api';
 
 type Props = RouteComponentProps<MatchProps>;
 
@@ -27,7 +28,7 @@ function Avbryt({history}: Props) {
                 </Normaltekst>
             </div>
             <div className="avbryt-panel__knapperad">
-                <Knapp type="standard" className="knapp mmr" onClick={() => document.location.href = '/dittnav'}>
+                <Knapp type="standard" className="knapp mmr" onClick={() => document.location.href = `${DITTNAV_URL}`}>
                     <FormattedMessage id="knapp-ja-avbryt"/>
                 </Knapp>
                 <Knapp type="standard" className="knapp" onClick={() => history.goBack()}>
