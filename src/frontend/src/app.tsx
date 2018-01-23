@@ -8,7 +8,8 @@ import RegVellykket from './regvellykket/regvellykket';
 import Avbryt from './avbryt/avbryt';
 import {
     BrowserRouter as Router,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
@@ -39,6 +40,7 @@ class App extends React.Component {
                                             <Route path="/sblregistrering" component={SblRegistrering}/>
                                             <Route path="/regvellykket" component={RegVellykket}/>
                                             <Route path="/avbryt" component={Avbryt} />
+                                            <Redirect exact={true} from="/" to="/start"/>
                                         </div>
                                     </Router>
                                 </SjekkRegistreringstatus>
