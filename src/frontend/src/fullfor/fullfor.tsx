@@ -51,7 +51,7 @@ function Fullfor({history}: Props) {
                     </Normaltekst>
                 </EkspanderbartInfo>
             </PanelBlokk>
-            <PanelBlokk cssVariant="oransje-variant padding-vertical-small">
+            <PanelBlokk cssVariant="oransje-variant padding-vertikalt-small">
                 <Checkbox
                     label={<FormattedMessage id="fullfor-sjekkboks"/>}
                     id="fullfor-sjekkboks"

@@ -1,15 +1,26 @@
 .panel-blokk {
-  padding: 3em 14em 3em 14em;
+  padding-left: 14rem;
+  padding-right: 14rem;
 
-  &__bla-variant {
+  &.padding-vertikalt-standard {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  &.padding-vertikalt-small {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  &.bla-variant {
     background-color: @navLysBlaLighten60;
     border-bottom: 2px solid @navLysBlaLighten20;
     border-radius: 0 ;
   }
-  &__transparent-variant {
+  &.transparent-variant {
     background: transparent;
   }
-  &__oransje-variant {
+  &.oransje-variant {
     background-color: @navOransjeLighten60;
   }
 }
@@ -86,6 +97,6 @@
 // Small screen / tablet
 @media (max-width: @screen-sm-min) {
   .panel-blokk {
-    padding: 2.5em 3em 2em 3em;
+    padding: 2.5rem 3rem 2rem 3rem;
   }
 }

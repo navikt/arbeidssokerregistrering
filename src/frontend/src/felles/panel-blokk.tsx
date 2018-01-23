@@ -20,7 +20,7 @@ function PanelBlokk({
                         tittelVerdier,
                         children}: PanelBlokkProps) {
     return (
-        <Panel className={`panel-blokk panel-blokk__${cssVariant} mmb`}>
+        <Panel className={`panel-blokk padding-vertikalt-standard ${cssVariant} mmb`}>
             {tittelId ?
                 <Sidetittel className={`panel-blokk-overskrift panel-blokk-overskrift__${tittelCssNavnVariant}`}>
                     <FormattedMessage id={tittelId} values={tittelVerdier}/>
