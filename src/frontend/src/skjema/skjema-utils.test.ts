@@ -3,6 +3,14 @@ import { erSelvgaende } from './skjema-utils';
 
 const expect = chai.expect;
 
+const svarSomGirSelvgaende = {
+    1: ['1', '2', '3', '4', '5'],
+    2: ['2', '3'],
+    3: ['1'],
+    4: ['1'],
+    5: ['2'],
+};
+
 describe('Test erSelvgående', () => {
     it('skal gi ingen utslag', () => {
         const svar = {
@@ -12,7 +20,7 @@ describe('Test erSelvgående', () => {
             4: '1',
             5: '2',
         };
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(true);
     });
 });
@@ -27,7 +35,7 @@ describe('Test ikke selvgående', () => {
             5: '2',
         };
 
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(false);
     });
     it('skal gi utslag på spørsmål 2', () => {
@@ -38,7 +46,7 @@ describe('Test ikke selvgående', () => {
             4: '1',
             5: '2',
         };
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(false);
     });
     it('skal gi utslag på spørsmål 3', () => {
@@ -49,7 +57,7 @@ describe('Test ikke selvgående', () => {
             4: '1',
             5: '2',
         };
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(false);
     });
     it('skal gi utslag på spørsmål 4', () => {
@@ -60,7 +68,7 @@ describe('Test ikke selvgående', () => {
             4: '2', // svar: Nei
             5: '2',
         };
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(false);
     });
     it('skal gi utslag på spørsmål 5', () => {
@@ -71,7 +79,7 @@ describe('Test ikke selvgående', () => {
             4: '1',
             5: '1', // svar: Ja
         };
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(false);
     });
     it('skal gi utslag på spørsmål 3, 4, 5', () => {
@@ -82,7 +90,7 @@ describe('Test ikke selvgående', () => {
             4: '2', // svar: Nei
             5: '1', // svar: Ja
         };
-        const svarVurdertSomSelvaende = erSelvgaende(svar);
+        const svarVurdertSomSelvaende = erSelvgaende(svar, svarSomGirSelvgaende);
         expect(svarVurdertSomSelvaende).to.equal(false);
     });
 });
