@@ -9,7 +9,7 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
+import { configSelvgaende, configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
@@ -124,7 +124,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
     hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
     erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
-    erSelvgaendeBruker: () => erSelvgaende(state.svar)
+    erSelvgaendeBruker: () => erSelvgaende(state.svar, configSelvgaende)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
