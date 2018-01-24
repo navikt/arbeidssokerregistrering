@@ -26,7 +26,6 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
         return (
             <div>
                 <PanelBlokkGruppe
-                    className="blokk-s"
                     knappAksjoner={
                         [
                             <Knapp

@@ -9,21 +9,21 @@ interface EgenProps {
 }
 
 interface EgenStateProps {
-    visSkjul: boolean;
+    apen: boolean;
 }
 
 class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
     constructor(props: EgenProps) {
         super(props);
         this.state = {
-            visSkjul: false,
+            apen: false,
         };
-        this.onVisSkjul = this.onVisSkjul.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    onVisSkjul() {
+    handleClick() {
         this.setState({
-            visSkjul: !this.state.visSkjul
+            apen: !this.state.apen
         });
     }
 
@@ -32,8 +32,8 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
             <div className="bla-italic">
                 <button
                     className="knapp-reset blokk-xxs"
-                    onClick={this.onVisSkjul}
-                    aria-expanded={this.state.visSkjul}
+                    onClick={this.handleClick}
+                    aria-expanded={this.state.apen}
                 >
                     <Normaltekst className="flex-align-items-start">
                         <span className="mmr"><Ikon kind="help-circle" size={25} className=""/></span>
@@ -41,7 +41,7 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
                     </Normaltekst>
                 </button>
                 {
-                    this.state.visSkjul
+                    this.state.apen
                         ?
                         <div className="pxll">{this.props.children}</div>
                         : null
