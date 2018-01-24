@@ -9,7 +9,8 @@ import Avbryt from './avbryt/avbryt';
 import {
     BrowserRouter as Router,
     Route,
-    Redirect
+    Redirect,
+    Switch
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
@@ -32,7 +33,7 @@ class App extends React.Component {
                             <SjekkKrrStatus>
                                 <SjekkRegistreringstatus>
                                     <Router basename={basename}>
-                                        <div>
+                                        <Switch>
                                             <Route path="/start" component={StartRegistrering}/>
                                             <Route path="/registrer" component={RegistrerDeg}/>
                                             <Route path="/skjema/:id" component={SkjemaPanel}/>
@@ -41,7 +42,7 @@ class App extends React.Component {
                                             <Route path="/regvellykket" component={RegVellykket}/>
                                             <Route path="/avbryt" component={Avbryt} />
                                             <Redirect exact={true} from="/" to="/start"/>
-                                        </div>
+                                        </Switch>
                                     </Router>
                                 </SjekkRegistreringstatus>
                             </SjekkKrrStatus>

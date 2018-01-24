@@ -3,6 +3,7 @@ export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/arbeid/registrering';
 export const DITTNAV_URL = '/dittnav';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
+export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 
@@ -19,8 +20,7 @@ export function hentRegistreringStatus() {
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: INNLOGGINGSINFO_URL,
-        config,
-        recoverWith: () => ({ name: ''})
+        config
     });
 }
 
