@@ -9,7 +9,7 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom } from './skjema-utils';
+import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
@@ -64,7 +64,7 @@ function Skjema({
                     .map((spmId: string) => (
                         <div
                             key={spmId}
-                            className={`${visRiktigCssMarginBottom(spmListePaSiden, spmId)} panel-skjema-wrapper`}
+                            className="blokk panel-skjema-wrapper"
                         >
                             <Systemtittel tag="h1" className="spm-tittel">
                                 {intl.messages[`sporsmal-${spmId}-tittel`]}

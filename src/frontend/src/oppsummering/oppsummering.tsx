@@ -26,6 +26,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
         return (
             <div>
                 <PanelBlokkGruppe
+                    className="blokk-s"
                     knappAksjoner={
                         [
                             <Knapp
@@ -66,7 +67,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
                             <FormattedMessage id="du-kan-ta-kontakt"/>
                         </Normaltekst>
                     </PanelBlokk>
-                    <PanelBlokk cssVariant="transparent-variant">
+                    <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
                         <EkspanderbartInfo tittelId="hva-betyr-dette">
                             <Normaltekst className="blokk-xs">
                                 <FormattedMessage id="vi-har-basert"/>
@@ -78,6 +79,8 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
                                 <FormattedMessage id="svaret-ditt-har-ingen-betydning"/>
                             </Normaltekst>
                         </EkspanderbartInfo>
+                    </PanelBlokk>
+                    <PanelBlokk cssVariant="transparent-variant no-margin-padding-vertikalt">
                         <Normaltekst>
                             <FormattedMessage id="vi-ber-deg-ta"/>
                         </Normaltekst>

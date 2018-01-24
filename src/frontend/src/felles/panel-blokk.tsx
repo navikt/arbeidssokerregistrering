@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import { Panel } from 'nav-frontend-paneler';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
@@ -20,7 +21,7 @@ function PanelBlokk({
                         tittelVerdier,
                         children}: PanelBlokkProps) {
     return (
-        <Panel className={`panel-blokk padding-vertikalt-standard ${cssVariant} mmb`}>
+        <Panel className={classNames('panel-blokk padding-vertikalt-standard mmb', cssVariant)}>
             {tittelId ?
                 <Sidetittel className={`panel-blokk-overskrift panel-blokk-overskrift__${tittelCssNavnVariant}`}>
                     <FormattedMessage id={tittelId} values={tittelVerdier}/>
