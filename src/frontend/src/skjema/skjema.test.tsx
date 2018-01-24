@@ -116,7 +116,6 @@ describe('<Skjema />', () => {
 
 describe('<Skjema />', () => {
     describe('Neste knapp på siste side, skal sende selvgående brukere til oppsummering', () => {
-        for (let i = 1; i <= 5; i++) {
             it('Basert på alle gyldige svaralternativ fra spørmål 1', () => {
                 const lastId = Object.keys(configSpmPrSide).length.toString();
                 const push = sinon.spy();
@@ -133,7 +132,7 @@ describe('<Skjema />', () => {
                     sporsmalErBesvart: (id) => true
                 };
 
-                store.dispatch(endreSvarAction('1', i.toString()));
+                store.dispatch(endreSvarAction('1', '1'));
                 store.dispatch(endreSvarAction('2', '2'));
                 store.dispatch(endreSvarAction('3', '1'));
                 store.dispatch(endreSvarAction('4', '1'));
@@ -144,36 +143,6 @@ describe('<Skjema />', () => {
 
                 expect(push.firstCall.args[0]).to.be.equal('/oppsummering');
             });
-        }
-        for (let i = 2; i <= 3; i++) {
-            it('Basert på alle gyldige svaralternativ fra spørmål 2', () => {
-                const lastId = Object.keys(configSpmPrSide).length.toString();
-                const push = sinon.spy();
-
-                const props = {
-                    match: {
-                        params: {
-                            id: lastId
-                        }
-                    },
-                    history: {
-                        push
-                    },
-                    sporsmalErBesvart: (id) => true
-                };
-
-                store.dispatch(endreSvarAction('1', '1'));
-                store.dispatch(endreSvarAction('2', i.toString()));
-                store.dispatch(endreSvarAction('3', '1'));
-                store.dispatch(endreSvarAction('4', '1'));
-                store.dispatch(endreSvarAction('5', '2'));
-
-                const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
-                wrapper.find(KnappNeste).simulate('click');
-
-                expect(push.firstCall.args[0]).to.be.equal('/oppsummering');
-            });
-        }
     });
 
     describe('Neste knapp på siste side, skal sende ikke-selvgående brukere til sbl-registrering', () => {
