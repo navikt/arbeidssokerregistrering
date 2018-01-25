@@ -47,12 +47,3 @@ export const erSvarAlternativMerEnnTo = (spmId: string) => {
     }
     return classname;
 };
-
-export const visRiktigCssMarginBottom = (spmListePaSiden: string[], spmId: string) => {
-    let blokkCssMarginBottom = 'blokk-s';
-
-    if (spmListePaSiden.length === parseInt(spmId , 10) - 1 || spmListePaSiden.length === 1) {
-        blokkCssMarginBottom = 'blokk-l';
-    }
-    return blokkCssMarginBottom;
-};

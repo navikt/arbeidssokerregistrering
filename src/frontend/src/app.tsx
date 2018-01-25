@@ -2,14 +2,15 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import IntlProvider from './Intl-provider';
 import getStore from './store';
-import RegistrerDeg from './registrer/registrerdeg';
 import StartRegistrering from './start/start';
 import RegVellykket from './regvellykket/regvellykket';
 import Avbryt from './avbryt/avbryt';
+import Fullfor from './fullfor/fullfor';
 import {
     BrowserRouter as Router,
     Route,
-    Redirect
+    Redirect,
+    Switch
 } from 'react-router-dom';
 import SkjemaPanel from './skjema/skjema';
 import Oppsummering from './oppsummering/oppsummering';
@@ -18,9 +19,12 @@ import './decorator/decorator-mock';
 import SjekkRegistreringstatus from './oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './initialdata/hent-initial-data';
 import SjekkKrrStatus from './krr/sjekk-krr-status';
+import {
+    basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH, REGVELLYKKET_PATH,
+    AVBRYT_PATH, FULLFOR_PATH
+} from './utils/konstanter';
 
 const store = getStore();
-export const basename = '/arbeidssokerregistrering';
 
 class App extends React.Component {
     render() {
@@ -32,16 +36,16 @@ class App extends React.Component {
                             <SjekkKrrStatus>
                                 <SjekkRegistreringstatus>
                                     <Router basename={basename}>
-                                        <div>
-                                            <Route path="/start" component={StartRegistrering}/>
-                                            <Route path="/registrer" component={RegistrerDeg}/>
-                                            <Route path="/skjema/:id" component={SkjemaPanel}/>
-                                            <Route path="/oppsummering" component={Oppsummering}/>
-                                            <Route path="/sblregistrering" component={SblRegistrering}/>
-                                            <Route path="/regvellykket" component={RegVellykket}/>
-                                            <Route path="/avbryt" component={Avbryt} />
-                                            <Redirect exact={true} from="/" to="/start"/>
-                                        </div>
+                                        <Switch>
+                                            <Route path={START_PATH} component={StartRegistrering}/>
+                                            <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaPanel}/>
+                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                            <Route path={REGVELLYKKET_PATH} component={RegVellykket}/>
+                                            <Route path={AVBRYT_PATH} component={Avbryt} />
+                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Redirect exact={true} from="/" to={START_PATH}/>
+                                        </Switch>
                                     </Router>
                                 </SjekkRegistreringstatus>
                             </SjekkKrrStatus>
