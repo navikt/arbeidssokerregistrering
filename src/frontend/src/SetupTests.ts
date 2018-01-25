@@ -1,4 +1,4 @@
-import { basename } from './app';
+import { basename } from './utils/konstanter';
 
 // For å slippe waning fra react-router
 Object.defineProperty(window.location, 'pathname', {

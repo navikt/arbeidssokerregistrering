@@ -1,13 +1,37 @@
 .panel-blokk {
-  padding: 3em 14em 4em 14em;
+  padding-left: 14rem;
+  padding-right: 14rem;
 
-  &__bla-variant {
+  &.padding-vertikalt-standard {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  &.padding-vertikalt-small {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+  }
+  &.padding-vertikalt-xsmall {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  &.no-margin-padding-vertikalt {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &.bla-variant {
     background-color: @navLysBlaLighten60;
     border-bottom: 2px solid @navLysBlaLighten20;
     border-radius: 0 ;
   }
-  &__transparent-variant {
+  &.transparent-variant {
     background: transparent;
+  }
+  &.oransje-variant {
+    background-color: @navOransjeLighten60;
   }
 }
 
@@ -65,6 +89,11 @@
       color: @navRod;
     }
   }
+  &__oransje-variant {
+    &::after {
+      color: @navOransjeLighten60;
+    }
+  }
 }
 
 .panel-blokk-beskrivelse {
@@ -78,6 +107,6 @@
 // Small screen / tablet
 @media (max-width: @screen-sm-min) {
   .panel-blokk {
-    padding: 3em 3em;
+    padding: 2.5rem 3rem 2rem 3rem;
   }
 }

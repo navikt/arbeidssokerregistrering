@@ -1,15 +1,5 @@
 import { State as SvarState } from '../ducks/svar';
 
-export function hentValgteAlternativ() {
-    return Array.from(document.getElementsByName(`alternativ`) as NodeListOf<HTMLInputElement>)
-        .reduce((acc, curr, i) => curr.checked ? (i + 1).toString() : acc, '-1');
-}
-
-export function uncheckRadioButtons() {
-    Array.from(document.getElementsByName(`alternativ`) as NodeListOf<HTMLInputElement>)
-        .forEach(input => input.checked = false);
-}
-
 /*
 * ConfigSpmPrSide
 * key = sideurl
@@ -40,10 +30,10 @@ export const configSelvgaende = {
     5: ['2'],
 };
 
-export const erSelvgaende = (svar: SvarState) => {
+export const erSelvgaende = (svar: SvarState, svarSomGirSelvgaende: {}) => {
     let resultat = true;
     Object.keys(svar).map((key) => {
-        const res = configSelvgaende[key].filter((configSvar: string) => configSvar === svar[key]);
+        const res = svarSomGirSelvgaende[key].filter((configSvar: string) => configSvar === svar[key]);
         if (res.length === 0) { resultat = false; }
     });
 
@@ -56,13 +46,4 @@ export const erSvarAlternativMerEnnTo = (spmId: string) => {
         classname = 'form-flex';
     }
     return classname;
-};
-
-export const visRiktigCssMarginBottom = (spmListePaSiden: string[], spmId: string) => {
-    let blokkCssMarginBottom = 'blokk-s';
-
-    if (spmListePaSiden.length === parseInt(spmId , 10) - 1 || spmListePaSiden.length === 1) {
-        blokkCssMarginBottom = 'blokk-l';
-    }
-    return blokkCssMarginBottom;
 };

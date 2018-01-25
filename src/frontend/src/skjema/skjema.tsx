@@ -9,8 +9,9 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo, visRiktigCssMarginBottom } from './skjema-utils';
+import { configSelvgaende, configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
+import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
 interface SkjemaProps {
     id: string;
@@ -49,7 +50,7 @@ function Skjema({
     const spmListePaSiden = configSpmPrSide[sideId];
 
     if (spmListePaSiden === undefined) {
-        history.push('/skjema/1');
+        history.push(`${SKJEMA_PATH}/1`);
         return null;
     }
 
@@ -63,7 +64,7 @@ function Skjema({
                     .map((spmId: string) => (
                         <div
                             key={spmId}
-                            className={`${visRiktigCssMarginBottom(spmListePaSiden, spmId)} panel-skjema-wrapper`}
+                            className="blokk panel-skjema-wrapper"
                         >
                             <Systemtittel tag="h1" className="spm-tittel">
                                 {intl.messages[`sporsmal-${spmId}-tittel`]}
@@ -91,7 +92,7 @@ function Skjema({
                 <KnappAvbryt
                     classname="mmr"
                     onClick={(() => {
-                        history.push('/avbryt');
+                        history.push(`${AVBRYT_PATH}`);
                     })}
                 />
                 {
@@ -100,9 +101,9 @@ function Skjema({
                             disabled={disableKnappFullfor}
                             onClick={() => {
                                 if (erSelvgaendeBruker()) {
-                                    history.push('/oppsummering');
+                                    history.push(`${OPPSUMMERING_PATH}`);
                                 } else {
-                                    history.push('/sblregistrering');
+                                    history.push(`${SBLREG_PATH}`);
                                 }
                             }}
                         />
@@ -110,7 +111,7 @@ function Skjema({
                         <KnappNeste
                             disabled={disableKnappNeste}
                             onClick={(() => {
-                                history.push(`/skjema/${(parseInt(sideId, 10) + 1)}`);
+                                history.push(`${SKJEMA_PATH}/${(parseInt(sideId, 10) + 1)}`);
                             })}
                         />
                 }
@@ -123,7 +124,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
     hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
     erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
-    erSelvgaendeBruker: () => erSelvgaende(state.svar)
+    erSelvgaendeBruker: () => erSelvgaende(state.svar, configSelvgaende)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

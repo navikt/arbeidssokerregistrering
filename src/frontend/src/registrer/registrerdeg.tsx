@@ -9,6 +9,7 @@ import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 
 type Props = RouteComponentProps<MatchProps>;
 
+/*TODO brukes ikke - kan slettes*/
 function RegistrerDeg({history}: Props) {
     return (
         <PanelBlokkGruppe
@@ -30,7 +31,7 @@ function RegistrerDeg({history}: Props) {
                     <li><FormattedMessage id="liste-arbeidsgiverefinner"/></li>
                     <li><FormattedMessage id="liste-dukanabonnere"/></li>
                 </ul>
-                <Normaltekst className="registrerdeg-tips">
+                <Normaltekst className="bla-italic">
                     <FormattedMessage id="tips-fullforregistrering"/>
                 </Normaltekst>
             </PanelBlokk>
