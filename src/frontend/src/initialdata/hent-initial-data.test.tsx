@@ -8,7 +8,7 @@ import {
     resetAndMakeHrefWritable } from '../test/test-utils';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { ARBEIDSSOKERREGISTRERING_START, INNLOGGINGSINFO_URL } from '../ducks/api';
+import { INNLOGGINGSINFO_URL, VEILARBSTEPUP } from '../ducks/api';
 import HentInitialData from './hent-initial-data';
 import getStore from '../store';
 import { selectKrr } from '../ducks/krr';
@@ -70,7 +70,7 @@ describe('<HentInitialData />', () => {
                 expect(wrapper.find('StepUp')).to.have.length(1);
             });
     });
-    it('skal trigge page-refresh til /start dersom bruker ikke er innlogget', () => {
+    it('skal sende bruker til veilarbstepup dersom den ikke er innlogget', () => {
         stubFetch(new FetchStub()
             .addResponse(INNLOGGINGSINFO_URL, { authenticated: false })
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true})
@@ -81,7 +81,7 @@ describe('<HentInitialData />', () => {
         mountWithStoreAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
-            .then(() => expect(document.location.href).to.equal(ARBEIDSSOKERREGISTRERING_START));
+            .then(() => expect(document.location.href).to.equal(VEILARBSTEPUP));
     });
     it('skal ikke hente registreringstatus og krrstatus om bruker ikke er innlogget', () => {
         const fetchStub = new FetchStub()
@@ -117,7 +117,7 @@ describe('<HentInitialData />', () => {
                 expect(fetchStub.getCallcount('/krr')).to.equal(0);
             });
     });
-    it('skal trigge page-refresh til /start dersom bruker er innlogget på nivå 2', () => {
+    it('skal sende bruker til veilarbstepup dersom bruker er innlogget på nivå 2', () => {
         stubFetch(new FetchStub()
             .addResponse(INNLOGGINGSINFO_URL, {  name: 'navn', authenticated: true, securityLevel: '2'  })
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true})
@@ -130,7 +130,7 @@ describe('<HentInitialData />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(document.location.href).to.equal(ARBEIDSSOKERREGISTRERING_START);
+                expect(document.location.href).to.equal(VEILARBSTEPUP);
             });
     });
 });

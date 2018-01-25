@@ -14,7 +14,7 @@ import {
     State as RegistreringstatusState } from '../ducks/registreringstatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Feilmelding from './feilmelding';
-import { ARBEIDSSOKERREGISTRERING_START } from '../ducks/api';
+import { VEILARBSTEPUP } from '../ducks/api';
 import StepUp from './stepup';
 
 interface StateProps {
@@ -47,8 +47,7 @@ export class HentInitialData extends React.Component<Props> {
         const { authenticated, securityLevel } = innloggingsinfo.data;
 
         if (authenticated === false || securityLevel === '2') {
-            // Bruker er ikke logget inn. Refresh til /start trigger innlogging i idporten ettersom url er enforced.
-            document.location.href = ARBEIDSSOKERREGISTRERING_START;
+            document.location.href = VEILARBSTEPUP;
             return null;
         } else if (securityLevel === '3') {
             return <StepUp />;

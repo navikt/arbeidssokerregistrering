@@ -1,3 +1,2 @@
-https://${DomainName}/arbeidssokerregistrering/index.css
-https://${DomainName}/arbeidssokerregistrering/static/*
+https://${DomainName}/arbeidssokerregistrering/*
 https://${DomainName}/arbeidssokerregistrering
