@@ -37,14 +37,14 @@ class App extends React.Component {
                                 <SjekkRegistreringstatus>
                                     <Router basename={basename}>
                                         <Switch>
-                                            <Route path={`${START_PATH}`} component={StartRegistrering}/>
+                                            <Route path={START_PATH} component={StartRegistrering}/>
                                             <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaPanel}/>
-                                            <Route path={`${OPPSUMMERING_PATH}`} component={Oppsummering}/>
-                                            <Route path={`${SBLREG_PATH}`} component={SblRegistrering}/>
-                                            <Route path={`${REGVELLYKKET_PATH}`} component={RegVellykket}/>
-                                            <Route path={`${AVBRYT_PATH}`} component={Avbryt} />
-                                            <Route path={`${FULLFOR_PATH}`} component={Fullfor}/>
-                                            <Redirect exact={true} from="/" to={`${START_PATH}`}/>
+                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                            <Route path={REGVELLYKKET_PATH} component={RegVellykket}/>
+                                            <Route path={AVBRYT_PATH} component={Avbryt} />
+                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Redirect exact={true} from="/" to={START_PATH}/>
                                         </Switch>
                                     </Router>
                                 </SjekkRegistreringstatus>
