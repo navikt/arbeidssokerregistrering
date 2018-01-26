@@ -16,6 +16,12 @@ export function hentRegistreringStatus() {
         config});
 }
 
+export function registrerBruker() {
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/registrerbruker`,
+        config});
+}
+
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: INNLOGGINGSINFO_URL,

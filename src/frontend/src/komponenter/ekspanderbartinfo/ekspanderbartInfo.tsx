@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
-import { FormattedMessage } from 'react-intl';
+import { getIntlMessage } from '../../utils/utils';
 
-interface EgenProps {
+interface Props {
     tittelId: string;
     children?: Array<React.ReactElement<Element>> | React.ReactElement<Element>;
 }
+
+type EgenProps = Props & InjectedIntlProps;
 
 interface EgenStateProps {
     apen: boolean;
@@ -37,7 +40,7 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
                 >
                     <Normaltekst className="flex-align-items-start">
                         <span className="mmr"><Ikon kind="help-circle" size={25} className=""/></span>
-                        <FormattedMessage id={this.props.tittelId}/>
+                        {getIntlMessage(this.props.intl.messages, this.props.tittelId)}
                     </Normaltekst>
                 </button>
                 {
@@ -51,4 +54,4 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 }
 
-export default EkspanderbartInfo;
+export default injectIntl(EkspanderbartInfo);

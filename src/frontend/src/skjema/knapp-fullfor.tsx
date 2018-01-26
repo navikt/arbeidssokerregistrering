@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
+import { getIntlMessage } from '../utils/utils';
+import InjectedIntl = ReactIntl.InjectedIntl;
 
 interface Props {
-    disabled: boolean;
+    disabled?: boolean;
     onClick: () => void;
+    intl: InjectedIntl;
 }
 
-function KnappFullfor({ disabled, onClick}: Props) {
+function KnappFullfor({ disabled, onClick, intl}: Props) {
     return(
         <Knapp
             type="hoved"
@@ -16,7 +18,7 @@ function KnappFullfor({ disabled, onClick}: Props) {
             disabled={disabled}
             onClick={onClick}
         >
-            <Normaltekst><FormattedMessage id="knapp-fullfor"/></Normaltekst>
+            <Normaltekst>{getIntlMessage(intl.messages, 'knapp-fullfor')}</Normaltekst>
         </Knapp>
 
     );
