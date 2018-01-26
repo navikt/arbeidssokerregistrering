@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
-import { getIntlMessage } from './utils';
+import { getIntlMessage, hentFornavn } from './utils';
+
 describe('utils test', () => {
     it('skal hente ut intl', () => {
         const id = 'ID';
@@ -9,5 +10,13 @@ describe('utils test', () => {
 
         expect(getIntlMessage({[id]: tekst}, id )).to.equal(tekst);
         expect(getIntlMessage({[id]: tekst}, finnesIkke )).to.equal(finnesIkke);
+    });
+    
+    it('test av hentFornavn', () => {
+        expect(hentFornavn(undefined)).to.equal('');
+        expect(hentFornavn('Test testesen')).to.equal('Test');
+        expect(hentFornavn('TEST TESTESEN')).to.equal('Test');
+        expect(hentFornavn('test testesen')).to.equal('Test');
+        expect(hentFornavn('tEST TESTESEN')).to.equal('Test');
     });
 });
