@@ -1,5 +1,5 @@
 export default {
     authenticated: true,
-    name: 'Sivert Helge Pettersen',
+    name: 'TEST TESTESEN',
     securityLevel: '4'
 };
