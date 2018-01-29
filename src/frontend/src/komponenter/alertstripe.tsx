@@ -10,7 +10,7 @@ interface Props {
 function Alertstripe({ type, tekst}: Props) {
     return(
         <NavAlertStripe type={type}>
-            <Normaltekst>{tekst}</Normaltekst>
+            <Normaltekst><span dangerouslySetInnerHTML={{__html: tekst}}/></Normaltekst>
         </NavAlertStripe>
     );
 }
