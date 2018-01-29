@@ -42,6 +42,10 @@ export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithSt
     }));
 }
 
+export function mountWithIntl(children: React.ReactElement<ElementWithStore>, paramStore?: ElementWithStore) {
+    return mountWithIntl(React.cloneElement(children, paramStore));
+}
+
 export function stubFetch(fetchStub: FetchStub): Promise<{}> {
     return sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
 }

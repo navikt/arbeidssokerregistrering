@@ -4,14 +4,24 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { Knapp } from 'nav-frontend-knapper';
+import {Knapp} from 'nav-frontend-knapper';
 import {shallowWithIntl} from 'enzyme-react-intl';
 import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import {Checkbox} from "nav-frontend-skjema";
-import {FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, stubFetch} from "../test/test-utils";
+import {
+    FetchStub, mountWithIntl, mountWithStoreAndIntl, promiseWithSetTimeout,
+    stubFetch
+} from "../test/test-utils";
+import {create} from "../store";
+import {REGVELLYKKET_PATH} from "../utils/konstanter";
 
 enzyme.configure({adapter: new Adapter()});
+afterEach(() => {
+    if (fetch.restore) {
+        fetch.restore()
+    }
+});
 
 describe('<Fullfor />', () => {
     it('Skal ha fullfor knapp som er inaktiv', () => {
@@ -35,22 +45,8 @@ describe('<Fullfor />', () => {
         expect(knappFullfor.props().disabled).to.be.false;
     });
 
-    // todo hvordan teste om det er ok
-    // it('Skal ha en fullfor knapp som går til /regvellykket', () => {
-    //     const push = sinon.spy();
-    //     const props = {
-    //         history: {
-    //             push
-    //         }
-    //     };
-    //
-    //     const wrapper = enzyme.shallow((<Fullfor {...props} />)).dive();
-    //     const knappFullfor = wrapper.find(KnappFullfor);
-    //     knappFullfor.simulate('click');
-    //     expect(push.firstCall.args[0]).to.be.equal(`${REGVELLYKKET_PATH}`);
-    // });
-
     it('Skal vise feilmelding dersom fullfor feiler', () => {
+        const nyStore = {store: create()};
         const push = sinon.spy();
         const props = {
             history: {
@@ -58,10 +54,9 @@ describe('<Fullfor />', () => {
             }
         };
 
-        stubFetch(new FetchStub()
-            .addErrorResponse('/registrerbruker', 500);
+        stubFetch(new FetchStub().addErrorResponse('/registrerbruker', 500));
 
-        const wrapper = mountWithStoreAndIntl((<Fullfor {...props} />));
+        const wrapper = mountWithIntl(<Fullfor {...props} />, nyStore);
 
         // marker sjekkboks
         const sjekkboks = wrapper.find(Checkbox);
@@ -70,12 +65,42 @@ describe('<Fullfor />', () => {
 
         // simuler klikk
         wrapper.find(KnappFullfor).simulate('click');
-        
+
         // forventet resultat
         return promiseWithSetTimeout()
             .then(() => {
-            wrapper.update()
+                wrapper.update()
                 expect(wrapper.html()).to.include('innholdslaster-feilmelding');
             });
     });
+
+    it('Skal vise feilmelding dersom fullfor feiler', () => {
+        const nyStore = {store: create()};
+        const push = sinon.spy();
+        const props = {
+            history: {
+                push
+            }
+        };
+
+        stubFetch(new FetchStub().addResponse('/registrerbruker', {}));
+
+        const wrapper = mountWithIntl(<Fullfor {...props} />, nyStore);
+
+        // marker sjekkboks
+        const sjekkboks = wrapper.find(Checkbox);
+        const input = sjekkboks.find('input[type="checkbox"]');
+        input.simulate('change');
+
+        // simuler klikk
+        wrapper.find(KnappFullfor).simulate('click');
+
+        // forventet resultat
+        return promiseWithSetTimeout()
+            .then(() => {
+                wrapper.update()
+                expect(push.firstCall.args[0]).to.be.equal(`${REGVELLYKKET_PATH}`);
+            });
+    });
+
 });
