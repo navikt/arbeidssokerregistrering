@@ -47,9 +47,10 @@ export function stubFetch(fetchStub: FetchStub): Promise<{}> {
 }
 
 function getPromiseResponse(url: string, fetchStub: FetchStub) {
-    const status = fetchStub.getResponse(url).status;
+    const response = fetchStub.getResponse(url);
+    const status = response.status;
     const errorResponse = Promise.resolve({status, text: () => Promise.resolve('Skal kaste feil')});
-    const okResponse = Promise.resolve({status, ok: true, json: () => (fetchStub.getResponse(url).response)});
+    const okResponse = Promise.resolve({status, ok: true, json: () => (response.response)});
 
     return status === 200 ? okResponse : errorResponse;
 }
@@ -58,9 +59,10 @@ export function promiseWithSetTimeout() {
     return new Promise(resolve => setTimeout(resolve, 0));
 }
 
-export function makeHrefWritable() {
+export function resetAndMakeHrefWritable() {
     return Object.defineProperty(document.location, 'href', {
         writable: true,
+        value: ''
     });
 }
 
@@ -82,11 +84,14 @@ export function withError(status: number) {
 
 export class FetchStub {
     urlMap: { [url: string]: {response?: {}, status: number}};
+    callCount: { [url: string]: number };
     constructor() {
         this.urlMap = {};
+        this.callCount = {};
     }
     addResponse(url: string, response: {}) {
         this.urlMap[url] = {response, status: 200};
+        this.callCount[url] = 0;
         return this;
     }
     addErrorResponse(url: string, status: number) {
@@ -94,6 +99,7 @@ export class FetchStub {
             throw new Error('Status should be >= 400');
         }
         this.urlMap[url] = { status };
+        this.callCount[url] = 0;
         return this;
     }
 
@@ -101,7 +107,16 @@ export class FetchStub {
         const keys = Object.keys(this.urlMap);
         const length = keys.length;
         const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
-        const response = (responseKey && this.urlMap[responseKey]) || ({ response: {}, status: 200});
-        return response;
+        if (responseKey) {
+            this.callCount[responseKey] += 1;
+        }
+        return (responseKey && this.urlMap[responseKey]) || ({ response: {}, status: 200});
+    }
+
+    getCallcount(url: string) {
+        const keys = Object.keys(this.callCount);
+        const length = keys.length;
+        const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
+        return (responseKey && this.callCount[responseKey]) || 0;
     }
 }
