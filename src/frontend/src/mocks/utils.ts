@@ -31,7 +31,7 @@ export function respondWith(handler: any) {
             console.log('extra', extra);
             console.groupEnd();
 
-            console.log('response', res());
+            console.log('response', res);
             console.groupEnd();
         });
 
