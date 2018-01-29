@@ -46,7 +46,7 @@ export class HentInitialData extends React.Component<Props> {
         const { children, registreringstatus, innloggingsinfo, krr, intl } = this.props;
         const { authenticated, securityLevel } = innloggingsinfo.data;
 
-        if (authenticated === false || securityLevel === '2') {
+        if (authenticated === false || securityLevel === '2' || securityLevel === '1') {
             document.location.href = VEILARBSTEPUP;
             return null;
         } else if (securityLevel === '3') {
