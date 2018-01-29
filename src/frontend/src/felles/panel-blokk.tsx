@@ -25,7 +25,7 @@ function PanelBlokk({
     return (
         <Panel className={classNames('panel-blokk padding-vertikalt-standard mmb', cssVariant)}>
             {tittelId ?
-                <Sidetittel className={`panel-blokk-overskrift panel-blokk-overskrift__${tittelCssNavnVariant}`}>
+                <Sidetittel className={`panel-blokk-overskrift ${tittelCssNavnVariant}`}>
                     <span>
                         {
                             intl.formatMessage(

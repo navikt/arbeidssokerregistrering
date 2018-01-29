@@ -14,13 +14,16 @@ function Feilmelding({intl}: FeilmeldingProps) {
         <div>
             <PanelBlokk
                 tittelId="oops-feilmelding-header"
-                tittelCssNavnVariant="oransje-variant"
+                tittelCssNavnVariant="oops-feilmelding-variant"
                 cssVariant="transparent-variant"
                 beskrivelseId="oops-feilmelding-beskrivelse"
             />
 
             <div className="text-align-center blokk">
-                <Knapp type="standard">
+                <Knapp
+                    type="standard"
+                    onClick={() => window.location.reload()}
+                >
                     <Normaltekst>{getIntlMessage(intl.messages, 'knapp-tilbake')}</Normaltekst>
                 </Knapp>
             </div>

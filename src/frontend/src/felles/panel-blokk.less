@@ -1,3 +1,23 @@
+.panel-blokk-overskrift-before {
+  content: "";
+  background-size: 38px 38px;
+  width: 38px;
+  height: 38px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+}
+.panel-blokk-overskrift-after {
+  border-bottom: 2px solid;
+  content: '';
+  margin-top: 2rem;
+  width: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  color: @navLysBla;
+}
+
 .panel-blokk {
   padding-left: 14rem;
   padding-right: 14rem;
@@ -41,26 +61,13 @@
   text-align: center;
 
   &::before {
-    content: "";
-    background-size: 38px 38px;
     display: none;
-    width: 38px;
-    height: 38px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1.5rem;
+    .panel-blokk-overskrift-before;
   }
 
   &::after {
-    border-bottom: 2px solid;
     display: block;
-    content: '';
-    margin-top: 2rem;
-    width: 2rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
-    color: @navLysBla;
+    .panel-blokk-overskrift-after;
   }
 
 
@@ -69,18 +76,18 @@
   * med varianter av farger og type ikon
   *
   */
-  &__bla-variant {
+  &.bla-variant {
     // todo legg til ikonet her
     //&::before {
     //  background: url("svg/info-sirkel-bla.svg") no-repeat;
     //}
   }
-  &__gronn-variant {
+  &.gronn-variant {
     &::after {
       color: @navGronnLighten60;
     }
   }
-  &__rod-variant {
+  &.rod-variant {
     &::before {
       background: url("svg/info-sirkel-rod.svg") no-repeat;
       background-position-x: center;
@@ -89,9 +96,22 @@
       color: @navRod;
     }
   }
-  &__oransje-variant {
+  &.oransje-variant {
     &::after {
       color: @navOransjeLighten60;
+    }
+  }
+
+  &.oops-feilmelding-variant {
+    &::before {
+      background: url("svg/advarsel-sirkel-oransje.svg") no-repeat;
+      background-position-x: center;
+      display: block;
+      .panel-blokk-overskrift-before;
+    }
+
+    &::after {
+      color: @navOransje;
     }
   }
 }
