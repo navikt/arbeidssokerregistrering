@@ -5,6 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import { getIntlMessage } from '../utils/utils';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
+import { VEILARBSTEPUP } from '../ducks/api';
 
 function StepUp({intl}: InjectedIntlProps) {
     return (
@@ -12,7 +13,7 @@ function StepUp({intl}: InjectedIntlProps) {
             knappAksjoner={
                 <Knapp
                     type="hoved"
-                    onClick={() => console.log('sd')}
+                    onClick={() => document.location.href === VEILARBSTEPUP}
                 >
                     <Normaltekst>{getIntlMessage(intl.messages, 'knapp-logg-inn')}</Normaltekst>
                 </Knapp>
