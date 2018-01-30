@@ -4,6 +4,8 @@ export const SBLARBEID_URL = '/sbl/arbeid/registrering';
 export const DITTNAV_URL = '/dittnav';
 export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
+export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
+export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 
@@ -26,8 +28,7 @@ export function registrerBruker() {
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: INNLOGGINGSINFO_URL,
-        config,
-        recoverWith: () => ({ name: ''})
+        config
     });
 }
 
