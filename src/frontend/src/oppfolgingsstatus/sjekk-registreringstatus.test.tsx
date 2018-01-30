@@ -6,7 +6,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import SjekkRegistreringstatus, { veienTilArbeid } from './sjekk-registreringstatus';
 import {
     dispatchRegistreringstatus,
-    makeHrefWritable, mountWithStore,
+    resetAndMakeHrefWritable, mountWithStore,
     mountWithStoreAndIntl,
     promiseWithSetTimeout,
     zeroTimeoutPromise
@@ -18,7 +18,7 @@ enzyme.configure({adapter: new Adapter()});
 
 describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til sbl om den ikke oppfyller krav og ikke er under oppfølging', () => {
-        makeHrefWritable();
+        resetAndMakeHrefWritable();
 
         dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false});
 
@@ -30,7 +30,7 @@ describe('<SjekkRegistreringstatus />', () => {
     });
 
     it('skal sende bruker til veien til arbeid om den er under oppfølging', () => {
-        makeHrefWritable();
+        resetAndMakeHrefWritable();
 
         dispatchRegistreringstatus({underOppfolging: true, oppfyllerKrav: false});
 
