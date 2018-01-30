@@ -5,7 +5,12 @@ import * as pathRegex from 'path-to-regexp';
 
 export function delayed(time: any, response: any, failure?: number): any {
     const kanskejFeil = failure ? failure : response;
-    return () => new Promise((resolve) => setTimeout(() => resolve(kanskejFeil), time));
+    return (...args) => new Promise((resolve) => setTimeout(() => {
+        if(typeof kanskejFeil === 'function') {
+            return resolve(kanskejFeil(...args));
+        }
+        return resolve(kanskejFeil)
+    }, time));
 }
 
 export function respondWith(handler: any) {
