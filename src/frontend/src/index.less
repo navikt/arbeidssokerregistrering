@@ -8,6 +8,7 @@
 @import '../node_modules/nav-frontend-spinner-style/src/spinner-style';
 @import '../node_modules/nav-frontend-lukknapp-style/src/lukknapp-style';
 @import '../node_modules/nav-frontend-alertstriper-style/src/index';
+@import '../node_modules/nav-frontend-lenker-style/src/lenker-style';
 
 
 body {
@@ -28,10 +29,11 @@ main.arbsokreg_app:focus {
 main.arbsokreg_app {
     @import 'felles/utils';
     @import 'felles/panel-blokk';
-    @import '/felles/feilmelding';
+    @import '/komponenter/alertstripe';
 
     @import './skjema/skjema';
     @import './oppsummering/oppsummering';
+    @import './fullfor/fullfor-feilmelding';
 
 
     @import './avbryt/avbryt';

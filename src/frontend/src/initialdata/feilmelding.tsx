@@ -9,11 +9,7 @@ interface FeilmeldingProps {
 }
 
 function Feilmelding({intl, id}: FeilmeldingProps) {
-    return (
-        <div className="feilmelding">
-            <Alertstripe type="advarsel" tekst={getIntlMessage(intl.messages, id)}/>
-        </div>
-    );
+    return (<Alertstripe type="advarsel" tekst={getIntlMessage(intl.messages, id)}/>);
 }
 
 export default Feilmelding;

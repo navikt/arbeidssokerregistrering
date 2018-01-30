@@ -39,7 +39,11 @@ function PanelBlokk({
             </Sidetittel> : null}
             {beskrivelseId ?
                 <Normaltekst className="panel-blokk-beskrivelse">
-                    <span>{getIntlMessage(intl.messages, beskrivelseId)}</span>
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: getIntlMessage(intl.messages, beskrivelseId)
+                        }}
+                    />
                 </Normaltekst>
                 : null}
             {children}

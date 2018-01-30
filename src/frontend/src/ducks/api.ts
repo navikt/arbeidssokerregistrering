@@ -2,6 +2,7 @@ import { fetchToJson } from './api-utils';
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/arbeid/registrering';
 export const DITTNAV_URL = '/dittnav';
+export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';

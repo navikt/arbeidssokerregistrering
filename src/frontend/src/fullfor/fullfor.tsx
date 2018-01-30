@@ -14,7 +14,7 @@ import { AVBRYT_PATH, REGVELLYKKET_PATH } from '../utils/konstanter';
 import { AppState } from '../reducer';
 import { utforRegistrering, selectRegistrerBruker, State as RegistrerBrukerState } from '../ducks/registrerbruker';
 import { getIntlMessage } from '../utils/utils';
-import Feilmelding from './feilmelding';
+import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 
 interface StateProps {
