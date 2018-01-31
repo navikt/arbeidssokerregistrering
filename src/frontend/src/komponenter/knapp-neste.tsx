@@ -20,6 +20,7 @@ function KnappNeste({ disabled, onClick, className }: Props) {
             onClick={onClick}
         >
             <Normaltekst><FormattedMessage id="knapp-neste"/></Normaltekst>
+
         </Knapp>
     );
 }

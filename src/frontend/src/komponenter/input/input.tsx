@@ -5,7 +5,7 @@ import { CustomField } from 'react-redux-form-validation';
 interface InnerInputComponentProps {
     label: string;
     errorMessage?: string[];
-    input?: string;
+    input?: {};
 }
 
 function InnerInputComponent({ input, label, errorMessage, ...rest}: InnerInputComponentProps) {
@@ -27,6 +27,7 @@ interface InputProps {
 
 function Input({ feltNavn, label }: InputProps) {
     return (
+
         <CustomField
             name={feltNavn}
             errorClass="skjemaelement--harFeil"
