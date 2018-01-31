@@ -70,13 +70,15 @@ function SisteArbeidsforholdForm({
                                     <Datovelger
                                         feltNavn="fraDato"
                                         labelId="siste-arbeidsforhold.fra-dato"
-                                        disabledDays={isAfterDate(currentTilDato)}
+                                        disabledDays={(value) => isAfterDate(currentTilDato)(value)
+                                        || isAfterDate(new Date())(value)}
                                         initialMonth={toDateOrUndefined(currentFraDato)}
                                     />
                                     <Datovelger
                                         feltNavn="tilDato"
                                         labelId="siste-arbeidsforhold.til-dato"
-                                        disabledDays={isBeforeDate(currentFraDato)}
+                                        disabledDays={(value) => isBeforeDate(currentFraDato)(value)
+                                        || isAfterDate(new Date())(value)}
                                         initialMonth={toDateOrUndefined(currentTilDato)}
                                     />
                                 </div>
