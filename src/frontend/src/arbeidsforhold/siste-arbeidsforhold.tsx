@@ -44,7 +44,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
                 avhengigheter={[sisteArbeidsforhold]}
                 storrelse="XXL"
             >
-                <SisteArbeidsforholdForm onSubmit={(data) => console.log(data)} history={history}/>
+                <SisteArbeidsforholdForm onSubmit={(data) => console.log(data)} history={history}/>// tslint:disable-line
             </Innholdslaster>);
     }
 }

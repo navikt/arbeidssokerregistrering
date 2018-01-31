@@ -6,7 +6,7 @@ import { mountWithStoreAndIntl } from '../test/test-utils';
 import SisteArbeidsforholdForm from '../arbeidsforhold/siste-arbeidsforhold-form';
 import KnappNeste from '../komponenter/knapp-neste';
 import { create } from '../store';
-import {datePickerToISODate, ISODateToDatePicker} from "../komponenter/input/datovelger/utils";
+import { datePickerToISODate, ISODateToDatePicker } from '../komponenter/input/datovelger/utils';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -69,10 +69,9 @@ describe('<SisteArbeidsforholdForm />', () => {
         arbeidsgiver.simulate('change', { target: {value: 'Arbeidsgiver AS' }});
         stilling.simulate('change', { target: {value: 'Butikkmedarbeider' }});
 
-        const fraDatoVerdi = new Date(2018,0,1);
+        const fraDatoVerdi = new Date(2018, 0, 1);
 
         fraDato.simulate('change', { target: {value: ISODateToDatePicker(fraDatoVerdi) }});
-
 
         knappNeste.simulate('click');
 

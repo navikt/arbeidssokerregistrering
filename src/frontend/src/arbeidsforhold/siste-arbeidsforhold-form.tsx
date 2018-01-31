@@ -110,6 +110,5 @@ const mapStateToProps = (state) => {
     };
 };
 
-
 // tslint:disable-next-line:no-any
 export default (connect(mapStateToProps)(SisteArbeidsforholdReduxForm) as any);
