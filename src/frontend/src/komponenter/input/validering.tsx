@@ -10,7 +10,8 @@ export function paakrevdTekst(feilmeldingId: string) {
 }
 
 export function gyldigDato(value: string) {
-        return !value || erGyldigISODato(value) ?  undefined : <FormattedMessage key={guid()} id="datepicker-ugyldig-dato" />;
+        return !value || erGyldigISODato(value) ?
+            undefined : <FormattedMessage key={guid()} id="datepicker-ugyldig-dato" />;
 }
 
 export function paakrevdDato(feilmeldingId: string) {
