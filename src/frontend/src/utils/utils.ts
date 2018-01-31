@@ -9,3 +9,11 @@ function forsteTegnStorBokstav(name: string) {
 export function getIntlMessage(messages: { [id: string]: string }, id: string): string {
     return messages[id] || id;
 }
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString().substring(1);
+}
+
+export function guid() {
+    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+}
