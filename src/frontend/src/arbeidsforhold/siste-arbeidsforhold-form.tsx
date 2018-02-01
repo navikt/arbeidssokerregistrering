@@ -17,8 +17,17 @@ import { connect } from 'react-redux';
 import PeriodeValidering from '../komponenter/input/datovelger/periodevalidering';
 import Datovelger from '../komponenter/input/datovelger/datovelger';
 import { formValueSelector } from 'redux-form';
+import {
+    dateToLocalDateString,
+    isAfterDate,
+    isBeforeDate,
+    isoDateStringToDate,
+    localDateStringToDate,
+} from '../komponenter/input/datovelger/utils';
+import { lagreArbeidsforhold,
+    selectSisteArbeidsforhold,
+    Data as ArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
 import { AVBRYT_PATH } from '../utils/konstanter';
-import { isAfterDate, isBeforeDate, toDateOrUndefined } from '../komponenter/input/datovelger/utils';
 
 const FORM_NAME = 'sisteArbeidsforhold';
 
@@ -26,8 +35,11 @@ interface Props {
     handleSubmit: () => void;
     errorSummary?: React.ReactNode[];
     onSubmit: () => void;
-    currentFraDato: Date;
-    currentTilDato: Date;
+    dispatchArbeidsforhold: (data: ArbeidsforholdData) => void;
+    arbeidsgiver?: string;
+    stilling?: string;
+    currentFraDato?: Date;
+    currentTilDato?: Date;
     history: History;
 }
 
@@ -35,17 +47,30 @@ function SisteArbeidsforholdForm({
                                      handleSubmit,
                                      errorSummary,
                                      intl,
+                                     arbeidsgiver,
+                                     stilling,
                                      currentFraDato,
                                      currentTilDato,
-                                     history
+                                     history,
+                                     dispatchArbeidsforhold
                                     }: Props & InjectedIntlProps) {
+    function onAvbryt() {
+        dispatchArbeidsforhold({
+            arbeidsgiver,
+            stilling,
+            fra: dateToLocalDateString(currentFraDato),
+            til: dateToLocalDateString(currentTilDato)
+        });
+        history.push(AVBRYT_PATH);
+    }
+
     return (
         <React.Fragment>
             <Sidetittel className="center blokk-l"><FormattedMessage id="siste-arbeidsforhold.tittel"/></Sidetittel>
             <form >
                 <PanelBlokkGruppe
                     knappAksjoner={[
-                        <KnappAvbryt key="1" onClick={() => history.push(AVBRYT_PATH)} classname="mmr"/>,
+                        <KnappAvbryt key="1" onClick={onAvbryt} classname="mmr"/>,
                         <KnappNeste key="2" onClick={handleSubmit}/>
                     ]}
                 >
@@ -72,14 +97,14 @@ function SisteArbeidsforholdForm({
                                         labelId="siste-arbeidsforhold.fra-dato"
                                         disabledDays={(value) => isAfterDate(currentTilDato)(value)
                                         || isAfterDate(new Date())(value)}
-                                        initialMonth={toDateOrUndefined(currentFraDato)}
+                                        initialMonth={currentFraDato}
                                     />
                                     <Datovelger
                                         feltNavn="tilDato"
                                         labelId="siste-arbeidsforhold.til-dato"
                                         disabledDays={(value) => isBeforeDate(currentFraDato)(value)
                                         || isAfterDate(new Date())(value)}
-                                        initialMonth={toDateOrUndefined(currentTilDato)}
+                                        initialMonth={currentTilDato}
                                     />
                                 </div>
                             </PeriodeValidering>
@@ -107,10 +132,22 @@ const SisteArbeidsforholdReduxForm = validForm({
 const mapStateToProps = (state) => {
     const selector = formValueSelector(FORM_NAME);
     return {
-        currentFraDato: selector(state, 'fraDato'),
-        currentTilDato: selector(state, 'tilDato'),
+        arbeidsgiver: selector(state, 'arbeidsgiver'),
+        stilling: selector(state, 'stilling'),
+        currentFraDato: isoDateStringToDate(selector(state, 'fraDato')),
+        currentTilDato: isoDateStringToDate(selector(state, 'tilDato')),
+        initialValues: {
+            arbeidsgiver: selectSisteArbeidsforhold(state).data.arbeidsgiver,
+            stilling: selectSisteArbeidsforhold(state).data.stilling,
+            fraDato: localDateStringToDate(selectSisteArbeidsforhold(state).data.fra),
+            tilDato: localDateStringToDate(selectSisteArbeidsforhold(state).data.til)
+        }
     };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    dispatchArbeidsforhold: (data) => dispatch(lagreArbeidsforhold(data)),
+});
+
 // tslint:disable-next-line:no-any
-export default (connect(mapStateToProps)(SisteArbeidsforholdReduxForm) as any);
+export default (connect(mapStateToProps, mapDispatchToProps)(SisteArbeidsforholdReduxForm) as any);

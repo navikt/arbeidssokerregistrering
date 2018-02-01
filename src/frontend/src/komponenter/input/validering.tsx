@@ -2,7 +2,7 @@ import * as React from 'react';
 import { rules } from 'react-redux-form-validation';
 import { FormattedMessage } from 'react-intl';
 import * as moment from 'moment';
-import { erGyldigISODato } from './datovelger/utils';
+import { erGyldigIsoDato } from './datovelger/utils';
 import { guid } from '../../utils/utils';
 
 export function paakrevdTekst(feilmeldingId: string) {
@@ -10,7 +10,7 @@ export function paakrevdTekst(feilmeldingId: string) {
 }
 
 export function gyldigDato(value: string) {
-        return !value || erGyldigISODato(value) ?
+        return !value || erGyldigIsoDato(value) ?
             undefined : <FormattedMessage key={guid()} id="datepicker-ugyldig-dato" />;
 }
 
@@ -21,7 +21,7 @@ export function paakrevdDato(feilmeldingId: string) {
 }
 
 export function historiskDato(value: string) {
-        if (!value || !erGyldigISODato(value)) {
+        if (!value || !erGyldigIsoDato(value)) {
             return undefined;
         }
 

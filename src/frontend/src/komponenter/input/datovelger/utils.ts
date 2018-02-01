@@ -1,42 +1,6 @@
 import * as moment from 'moment';
-import { InjectedIntl } from 'react-intl';
 
-interface Alternativer {
-    fra?: Date;
-    til?: Date;
-}
-
-// eslint-disable-next-line import/prefer-default-export
-export function validerDatoField(input: Date, intl: InjectedIntl, alternativer: Alternativer) {
-    const { fra, til } = alternativer;
-    const inputDato = moment(input);
-
-    const fraDato = moment(fra);
-    const tilDato = moment(til);
-
-    if (input && !erGyldigISODato(input)) {
-        return intl.formatMessage({
-            id: 'datepicker.feilmelding.ugyldig-dato',
-        });
-    } else if (
-        fra &&
-        til &&
-        (inputDato.isAfter(tilDato, 'day') || fraDato.isAfter(inputDato, 'day'))
-    ) {
-        tilDato.add(1, 'day');
-        fraDato.subtract(1, 'day');
-
-        const msgValues = {
-            fradato: toDatePrettyPrint(fraDato.date()),
-            tildato: toDatePrettyPrint(tilDato.date()),
-        };
-        return intl.formatMessage(
-            { id: 'datepicker.feilmelding.innenfor-periode' },
-            (msgValues as {[key: string]: string})
-        );
-    }
-    return undefined;
-}
+const localDateFormat = /\d{4}-\d\d-\d\d/;
 
 export const autobind = (ctx) => {
     Object.getOwnPropertyNames(ctx.constructor.prototype)
@@ -47,69 +11,88 @@ export const autobind = (ctx) => {
         });
 };
 
-export const dateToISODate = dato => {
-    const parsetDato = moment(dato);
-    return dato && parsetDato.isValid() ? parsetDato.toISOString() : '';
-};
+function pad(value: string) {
+    if (value.length > 1) {
+        return value;
+    }
+    return '0' + value;
+}
 
-export const erGyldigISODato = isoDato => {
-    return !!(isoDato && moment(isoDato, moment.ISO_8601).isValid());
-};
+export function erGyldigIsoDato(isoDato?: string) {
+    return !!(isoDato && moment(isoDato, moment.ISO_8601, true).isValid());
+}
 
-export const ISODateToDatePicker = dato => {
+export function isoDateToDatePicker(dato?: string) {
     const parsetDato = moment(dato);
     return dato && parsetDato.isValid() ? parsetDato.format('DD.MM.YYYY') : '';
-};
+}
 
-export const datePickerToISODate = dato => {
+export function datePickerToISODate(dato: string) {
     const parsetDato = moment(dato, 'DD.MM.YYYY', true);
     return parsetDato.isValid() ? parsetDato.toISOString() : '';
-};
+}
 
-export const erGyldigFormattertDato = formattertDato => {
+export function erGyldigFormattertDato(formattertDato?: string) {
     return !!(
         formattertDato &&
         formattertDato.length === 10 &&
         moment(formattertDato, 'DD.MM.YYYY', true).isValid()
     );
-};
+}
 
 export const toDatePrettyPrint = dato => {
     if (typeof dato === 'undefined' || dato === null) {
         return null;
     }
 
-    const _dato = toDate(dato);
+    const year = `${dato.getFullYear()}`;
+    const month = `${dato.getMonth() + 1}`;
+    const day = `${dato.getDay()}`;
 
-    const days =
-        _dato.getDate() < 10 ? `0${_dato.getDate()}` : `${_dato.getDate()}`;
-    const months =
-        _dato.getMonth() + 1 < 10
-            ? `0${_dato.getMonth() + 1}`
-            : `${_dato.getMonth() + 1}`;
-    const years = _dato.getFullYear();
-
-    return `${days}.${months}.${years}`;
-};
-
-export const toDate = dato => {
-    return erLocalDate(dato)
-        ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth)
-        : new Date(dato);
-};
-
-const erLocalDate = dato => {
-    return dato.year && dato.monthValue && dato.dayOfMonth;
+    return `${pad(day)}.${pad(month)}.${year}`;
 };
 
 export function isBeforeDate(dato?: Date) {
-    return (value) => !!dato && moment(value).endOf('day').isSameOrBefore(dato);
+    return (value) => !!dato && moment(value).endOf('day').isBefore(dato);
 }
 
 export function isAfterDate(dato?: Date) {
-    return (value) => !!dato && moment(value).startOf('day').isSameOrAfter(dato);
+    return (value) => !!dato && moment(value).startOf('day').isAfter(dato);
 }
 
-export function toDateOrUndefined(dato: Date) {
-    return erGyldigISODato(dato) ? new Date(dato) : undefined;
+export function localDateStringToDate(localDate?: string) {
+    if (!localDate) {
+        return undefined;
+    }
+
+    if (!localDate.match(localDateFormat)) {
+        throw new Error(`Date should be on format YYYY-MM-DD, but was ${localDate}`);
+    }
+
+    return new Date(Date.parse(localDate));
+}
+
+export function isoDateStringToDate(date?: string) {
+    if (!date || !erGyldigIsoDato(date)) {
+        return undefined;
+    }
+    return new Date(date);
+}
+
+export function dateToLocalDateString(date?: Date) {
+    if (!date) {
+        return undefined;
+    }
+
+    const year = `${date.getFullYear()}`;
+    const month = `${date.getMonth() + 1}`;
+    const day = `${date.getDate()}`;
+
+    return `${year}-${pad(month)}-${pad(day)}`;
+}
+
+export function isoDateToLocalDateString(isoDateString: string) {
+    const date = new Date(isoDateString);
+
+    return dateToLocalDateString(date);
 }

@@ -38,6 +38,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
     render() {
         const { sisteArbeidsforhold, intl, history } = this.props;
 
+        /*tslint:disable:no-console*/
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}

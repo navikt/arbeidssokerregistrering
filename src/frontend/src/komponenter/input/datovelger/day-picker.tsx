@@ -85,7 +85,7 @@ interface DayPickerComponentProps {
     lukk: () => void;
     ariaControlledBy?: string;
     onKeyUp: (e: React.KeyboardEvent<HTMLElement>) => void;
-    input?: { value: Date };
+    input?: { value: string };
     onDayClick: (day: Date) => void;
     ariaControls: string;
 }

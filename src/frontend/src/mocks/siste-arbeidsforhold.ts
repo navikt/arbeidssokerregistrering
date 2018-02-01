@@ -1,6 +1,6 @@
 export default {
     arbeidsgiver: 'Arbeidsforhold AS',
     stilling: 'Butikkmedarbeider',
-    fra: new Date(2018, 1, 1),
-    til: null
+    fra: '2018-01-01',
+    til: '2018-01-02'
 };

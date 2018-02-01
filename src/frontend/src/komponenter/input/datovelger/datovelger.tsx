@@ -5,9 +5,8 @@ import { connect, Dispatch } from 'react-redux';
 import { change, touch, WrappedFieldMetaProps } from 'redux-form';
 import {
     autobind,
-    dateToISODate,
-    erGyldigISODato,
-    ISODateToDatePicker,
+    erGyldigIsoDato,
+    isoDateToDatePicker,
     datePickerToISODate,
     erGyldigFormattertDato
 } from './utils';
@@ -34,7 +33,7 @@ interface DatoFieldInterfaceProps {
     id: string;
     feltNavn: string;
     label: React.ReactNode;
-    input?: { value: Date };
+    input?: { value: string };
     dispatch: Dispatch<AppState>;
     disabled?: boolean;
     errorMessage?: React.ReactNode;
@@ -87,8 +86,8 @@ class DatoField extends React.Component<DatoFieldInterfaceProps, DatoFieldInterf
         }
 
         const { meta, feltNavn } = this.props;
-        const isoDate = dateToISODate(date);
-        this.props.dispatch(change((meta as WrappedFieldMetaProps).form, feltNavn, isoDate));
+        // const isoDate = dateToISODate(date);
+        this.props.dispatch(change((meta as WrappedFieldMetaProps).form, feltNavn, date.toISOString()));
         this.props.dispatch(touch((meta as WrappedFieldMetaProps).form, feltNavn));
         this.lukk();
     }
@@ -130,7 +129,7 @@ class DatoField extends React.Component<DatoFieldInterfaceProps, DatoFieldInterf
         const value = input && input.value;
         const maskedInputProps = {
             ...input,
-            value: erGyldigISODato(value) ? ISODateToDatePicker(value) : value,
+            value: erGyldigIsoDato(value) ? isoDateToDatePicker(value) : value,
         };
 
         return (
@@ -200,7 +199,7 @@ class DatoField extends React.Component<DatoFieldInterfaceProps, DatoFieldInterf
     }
 }
 
-function parseDato(dato: Date) {
+function parseDato(dato: string) {
     return erGyldigFormattertDato(dato) ? datePickerToISODate(dato) : dato;
 }
 

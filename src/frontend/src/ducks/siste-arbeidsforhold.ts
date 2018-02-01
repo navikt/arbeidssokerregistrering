@@ -11,8 +11,8 @@ export enum ActionTypes {
 export interface Data {
     arbeidsgiver?: string;
     stilling?: string;
-    fra?: Date;
-    til?: Date;
+    fra?: string;
+    til?: string;
 }
 
 export interface State {
@@ -55,6 +55,13 @@ export function hentSisteArbeidsforhold() {
     });
 }
 
+export function lagreArbeidsforhold(data: Data) {
+    return {
+        data,
+        type: ActionTypes.SISTE_ARBEIDSFORHOLD_OK
+    };
+}
+
 export function registrerSisteArbeidsforhold(data: Data) {
     return doThenDispatch(() => Api.registrerSisteArbeidsforhold(data), {
         PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_PENDING,
@@ -63,6 +70,6 @@ export function registrerSisteArbeidsforhold(data: Data) {
     });
 }
 
-export function selectSisteArbeidsforhold(state: AppState) {
+export function selectSisteArbeidsforhold(state: AppState): State {
     return state.sisteArbeidsforhold;
 }

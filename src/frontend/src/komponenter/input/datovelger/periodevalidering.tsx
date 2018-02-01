@@ -5,10 +5,9 @@ import { CustomField } from 'react-redux-form-validation';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { AppState } from '../../../reducer';
-import { erGyldigISODato } from './utils';
 
 function validerPeriode(fradato?: Date, tildato?: Date) {
-    if (!fradato || !tildato || !erGyldigISODato(fradato) || !erGyldigISODato(tildato)) {
+    if (!fradato || !tildato ) {
         return true;
     }
     return fradato <= tildato;
