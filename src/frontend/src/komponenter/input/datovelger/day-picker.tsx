@@ -4,7 +4,7 @@ import { FormattedDate, injectIntl, InjectedIntl, InjectedIntlProps, DateSource 
 import DayPicker from 'react-day-picker';
 import * as DateUtils from 'react-day-picker/lib/src/DateUtils';
 import MomentLocaleUtils from 'react-day-picker/moment';
-import { Moment } from 'moment';
+import { erGyldigIsoDato } from './utils';
 
 const localeUtils = {
     ...MomentLocaleUtils,
@@ -106,8 +106,9 @@ class DayPickerComponent extends React.Component<DayPickerComponentProps & Injec
     }
 
     getDateFromValue() {
-        const dato = this.props.input && moment(this.props.input.value);
-        return (dato as Moment).isValid() ? (dato as Moment).toDate() : null;
+        const { input } = this.props;
+
+        return input && erGyldigIsoDato(input.value) ? moment(input.value).toDate() : null;
     }
 
     selectedDays(day: Date) {

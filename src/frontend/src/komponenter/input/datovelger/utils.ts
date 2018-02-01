@@ -96,3 +96,11 @@ export function isoDateToLocalDateString(isoDateString: string) {
 
     return dateToLocalDateString(date);
 }
+
+export function validerPeriode(fradato?: Date, tildato?: Date): boolean {
+    if (!fradato || !tildato ) {
+        return true;
+    }
+
+    return moment(fradato).endOf('day').isSameOrBefore(moment(tildato).endOf('day'));
+}

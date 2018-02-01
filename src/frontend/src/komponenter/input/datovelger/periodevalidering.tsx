@@ -5,13 +5,7 @@ import { CustomField } from 'react-redux-form-validation';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { AppState } from '../../../reducer';
-
-function validerPeriode(fradato?: Date, tildato?: Date) {
-    if (!fradato || !tildato ) {
-        return true;
-    }
-    return fradato <= tildato;
-}
+import { validerPeriode } from './utils';
 
 interface InnerInputComponentProps {
     meta?: WrappedFieldMetaProps;

@@ -148,4 +148,35 @@ describe('<SisteArbeidsforholdForm />', () => {
         expect(fraDato.props().value).to.equal('01.01.2018');
         expect(tilDato.props().value).to.equal('01.02.2018');
     });
+    it('skal ikke submitte dersom periode er ugyldig', () => {
+        const store = create();
+        const submitted = false;
+
+        const wrapper = mountWithStoreAndIntl(
+            <SisteArbeidsforholdForm
+                onSubmit={() => submitted = true}
+                history={history}
+            />,
+            store);
+
+        const arbeidsgiver = wrapper.find('input').find('#arbeidsgiver');
+        const stilling = wrapper.find('input').find('#stilling');
+        const fraDato = wrapper.find('input').find('#fraDato');
+        const tilDato = wrapper.find('input').find('#tilDato');
+
+        arbeidsgiver.simulate('change', { target: {value: 'Arbeidsgiver AS' }});
+        stilling.simulate('change', { target: {value: 'Butikkmedarbeider' }});
+
+        const fraDatoVerdi = new Date(2018, 1, 1);
+        const tilDatoVerdi = new Date(2018, 0, 1);
+
+        fraDato.simulate('change', { target: {value: isoDateToDatePicker(fraDatoVerdi) }});
+        tilDato.simulate('change', { target: {value: isoDateToDatePicker(tilDatoVerdi) }});
+
+        const knappNeste = wrapper.find(KnappNeste);
+        knappNeste.simulate('click');
+
+        expect(submitted).to.equal(false);
+
+    });
 });

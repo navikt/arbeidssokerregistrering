@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import {
     erGyldigFormattertDato, erGyldigIsoDato, isAfterDate, isBeforeDate, isoDateToLocalDateString, localDateStringToDate,
-    toDatePrettyPrint
+    toDatePrettyPrint, validerPeriode
 } from './utils';
 
 describe('Datovelger utils', () => {
@@ -54,5 +54,16 @@ describe('Datovelger utils', () => {
         expect(erGyldigIsoDato('01-01-2018')).to.equal(false);
         expect(erGyldigIsoDato(undefined)).to.equal(false);
         expect(erGyldigIsoDato(null)).to.equal(false);
+    });
+    it('validerPeriode skal validere om periode er gyldig', () => {
+        expect(validerPeriode(new Date('2018-02-01T12:00:00Z'), new Date('2018-02-02T12:00:00Z'))).to.equal(true);
+        expect(validerPeriode(new Date('2018-02-01T12:00:00Z'), new Date('2018-02-02T08:00:00Z'))).to.equal(true);
+        expect(validerPeriode(new Date('2018-02-01T01:00:00+02:00'), new Date('2018-01-31T23:00:00Z'))).to.equal(true);
+        expect(validerPeriode(undefined, new Date('2018-01-31T23:00:00+02:00'))).to.equal(true);
+        expect(validerPeriode(undefined, undefined)).to.equal(true);
+        expect(validerPeriode(new Date('2018-01-31T23:00:00+02:00'), undefined)).to.equal(true);
+        expect(validerPeriode(undefined, new Date('2018-01-31T23:00:00+02:00'))).to.equal(true);
+
+        expect(validerPeriode(new Date('2018-02-01T12:00:00Z'), new Date('2018-01-31T12:00:00Z'))).to.equal(false);
     });
 });

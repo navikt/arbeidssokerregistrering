@@ -84,9 +84,7 @@ class DatoField extends React.Component<DatoFieldInterfaceProps, DatoFieldInterf
         if (this.props.disabledDays(date)) {
             return;
         }
-
         const { meta, feltNavn } = this.props;
-        // const isoDate = dateToISODate(date);
         this.props.dispatch(change((meta as WrappedFieldMetaProps).form, feltNavn, date.toISOString()));
         this.props.dispatch(touch((meta as WrappedFieldMetaProps).form, feltNavn));
         this.lukk();
