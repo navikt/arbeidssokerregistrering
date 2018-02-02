@@ -50,7 +50,7 @@ export class HentInitialData extends React.Component<Props> {
             document.location.href = VEILARBSTEPUP;
             return null;
         } else if (securityLevel === '3') {
-            return <StepUp />;
+            return <StepUp intl={intl} />;
         }
 
         return (
