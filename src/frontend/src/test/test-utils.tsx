@@ -15,6 +15,10 @@ interface ElementWithStore {
     store: Store<AppState>;
 }
 
+export function shallowwithIntl(children: React.ReactElement<ElementWithStore>) {
+    return shallowWithIntl(React.cloneElement(children)).dive();
+}
+
 export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWithStore>) {
     return shallowWithIntl(React.cloneElement(children, {
         store

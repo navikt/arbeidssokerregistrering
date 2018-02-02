@@ -4,6 +4,7 @@ import { Data as SisteArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/arbeid/registrering';
 export const DITTNAV_URL = '/dittnav';
+export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
@@ -17,6 +18,12 @@ const MED_CREDENTIALS = {
 export function hentRegistreringStatus() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        config: MED_CREDENTIALS});
+}
+
+export function registrerBruker() {
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/registrerbruker`,
         config: MED_CREDENTIALS});
 }
 
