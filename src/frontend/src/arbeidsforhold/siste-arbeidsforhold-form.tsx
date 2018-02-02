@@ -67,7 +67,9 @@ function SisteArbeidsforholdForm({
 
     return (
         <React.Fragment>
-            <Sidetittel className="center blokk-l"><FormattedMessage id="siste-arbeidsforhold.tittel"/></Sidetittel>
+            <Sidetittel className="text-align-center blokk-l">
+                <FormattedMessage id="siste-arbeidsforhold.tittel"/>
+            </Sidetittel>
             <form >
                     <Panel className="blokk-s panel-blokk padding-vertikalt-standard" >
                         <div>
