@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 interface Props {
     onClick: () => void;
-    classname: string;
+    classname?: string;
 }
 
 function KnappAvbryt({ classname, onClick }: Props) {

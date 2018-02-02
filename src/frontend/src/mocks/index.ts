@@ -2,10 +2,13 @@
 import {mock, respondWith, delayed } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
+import sisteArbeidsforhold from './siste-arbeidsforhold';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_HENT_KRR_STATUS = true;
+const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
+const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 
 
 if (MOCK_START_REGISRERING_STATUS) {
@@ -18,6 +21,16 @@ if (MOCK_INNLOGGINGS_INFO) {
 
 if(MOCK_HENT_KRR_STATUS) {
     (mock as any).get('/veilarboppfolgingproxy/api/krr', respondWith(delayed(1000, { reservertIKrr: false})));
+}
+
+if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
+    (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteArbeidsforhold)));
+}
+
+if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
+    (mock as any).post('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, (url, config, params) => {
+        return params.bodyParams;
+    })));
 }
 
 

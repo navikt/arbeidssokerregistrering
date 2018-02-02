@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
-import { shallowWithIntl, mountWithIntl } from 'enzyme-react-intl';
+import { shallowWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
-import { Store } from 'react-redux';
+import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
 import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import { Data as KrrData, ActionTypes as KrrActionTypes } from '../ducks/krr';
+import IntlProvider from '../Intl-provider';
 
 export const store = getStore();
 
@@ -32,10 +33,14 @@ export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
     }));
 }
 
-export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>) {
-    return mountWithIntl(React.cloneElement(children, {
-        store
-    }));
+export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
+    return mount(
+        <Provider store={withStore || store}>
+            <IntlProvider >
+                {children}
+            </IntlProvider>
+        </Provider>
+        );
 }
 
 export function stubFetch(fetchStub: FetchStub): Promise<{}> {
