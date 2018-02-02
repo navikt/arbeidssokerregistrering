@@ -9,9 +9,7 @@ import {
 } from '../komponenter/input/validering';
 import { getIntlMessage } from '../utils/utils';
 import KnappAvbryt from '../skjema/knapp-avbryt';
-import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import KnappNeste from '../komponenter/knapp-neste';
-import PanelBlokk from '../felles/panel-blokk';
 import { Sidetittel } from 'nav-frontend-typografi';
 import { connect } from 'react-redux';
 import PeriodeValidering from '../komponenter/input/datovelger/periodevalidering';
@@ -28,6 +26,9 @@ import { lagreArbeidsforhold,
     selectSisteArbeidsforhold,
     Data as ArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
 import { AVBRYT_PATH } from '../utils/konstanter';
+import Knapperad from '../komponenter/input/knapperad';
+import { Panel } from 'nav-frontend-paneler';
+import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 
 const FORM_NAME = 'sisteArbeidsforhold';
 
@@ -68,13 +69,7 @@ function SisteArbeidsforholdForm({
         <React.Fragment>
             <Sidetittel className="center blokk-l"><FormattedMessage id="siste-arbeidsforhold.tittel"/></Sidetittel>
             <form >
-                <PanelBlokkGruppe
-                    knappAksjoner={[
-                        <KnappAvbryt key="1" onClick={onAvbryt} classname="mmr"/>,
-                        <KnappNeste key="2" onClick={handleSubmit}/>
-                    ]}
-                >
-                    <PanelBlokk >
+                    <Panel className="blokk-s panel-blokk padding-vertikalt-standard" >
                         <div>
                             {errorSummary}
                             <Input
@@ -109,8 +104,18 @@ function SisteArbeidsforholdForm({
                                 </div>
                             </PeriodeValidering>
                         </div>
-                    </PanelBlokk>
-                </PanelBlokkGruppe>
+                    </Panel>
+                    <EkspanderbartInfo
+                        tittelId="siste-arbeidsforhold.info.tittel"
+                        className="blokk-l"
+                        onClick={(e) => e.preventDefault()}
+                    >
+                        <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                    </EkspanderbartInfo>
+                    <Knapperad>
+                        <KnappAvbryt key="1" onClick={onAvbryt} classname="mmr"/>
+                        <KnappNeste key="2" onClick={handleSubmit}/>
+                    </Knapperad>
             </form>
         </React.Fragment>
     );
