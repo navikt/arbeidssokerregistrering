@@ -13,6 +13,7 @@ import { AppState } from '../reducer';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../ducks/api-utils';
+import { FULLFOR_PATH } from '../utils/konstanter';
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
@@ -45,7 +46,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
                 avhengigheter={[sisteArbeidsforhold]}
                 storrelse="XXL"
             >
-                <SisteArbeidsforholdForm onSubmit={(data) => console.log(data)} history={history}/>
+                <SisteArbeidsforholdForm onSubmit={(data) => history.push(FULLFOR_PATH)} history={history}/>
             </Innholdslaster>);
     }
 }
