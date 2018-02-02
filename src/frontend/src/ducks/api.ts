@@ -1,4 +1,6 @@
 import { fetchToJson } from './api-utils';
+import { Data as SisteArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
+
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/arbeid/registrering';
 export const DITTNAV_URL = '/dittnav';
@@ -8,25 +10,43 @@ export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERI
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 
-const config = {
+const MED_CREDENTIALS = {
     credentials: ('same-origin' as RequestCredentials)
 };
 
 export function hentRegistreringStatus() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
-        config});
+        config: MED_CREDENTIALS});
 }
 
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: INNLOGGINGSINFO_URL,
-        config
+        config: MED_CREDENTIALS
+    });
+}
+
+export function hentSisteArbeidsforhold() {
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
+        config: MED_CREDENTIALS,
+        recoverWith: () => ({arbeidsgiver: null, stilling: null, fra: null, til: null})
+    });
+}
+
+export function registrerSisteArbeidsforhold(data: SisteArbeidsforholdData) {
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
+        config: { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(data)}
     });
 }
 
 export function hentKrrStatus() {
-    return fetchToJson({url: `${VEILARBOPPFOLGINGPROXY_URL}/krr`, recoverWith: krrRecoverWith, config});
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/krr`,
+        recoverWith: krrRecoverWith,
+        config: MED_CREDENTIALS});
 }
 
 function krrRecoverWith(status: number) {

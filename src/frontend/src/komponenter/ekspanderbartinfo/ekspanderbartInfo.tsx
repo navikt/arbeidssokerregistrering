@@ -2,10 +2,13 @@ import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { FormattedMessage } from 'react-intl';
+import * as classNames from 'classnames';
 
 interface EgenProps {
     tittelId: string;
     children?: Array<React.ReactElement<Element>> | React.ReactElement<Element>;
+    className?: string;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface EgenStateProps {
@@ -21,15 +24,20 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick() {
+    handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+        const { onClick } = this.props;
+        if (onClick) {
+            onClick(e);
+        }
         this.setState({
             apen: !this.state.apen
         });
     }
 
     render() {
+        const {className } = this.props;
         return (
-            <div className="bla-italic">
+            <div className={classNames('bla-italic', className)}>
                 <button
                     className="knapp-reset blokk-xxs"
                     onClick={this.handleClick}
