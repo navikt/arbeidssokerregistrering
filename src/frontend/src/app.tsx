@@ -21,8 +21,9 @@ import HentInitialData from './initialdata/hent-initial-data';
 import SjekkKrrStatus from './krr/sjekk-krr-status';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH, REGVELLYKKET_PATH,
-    AVBRYT_PATH, FULLFOR_PATH
+    AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH
 } from './utils/konstanter';
+import SisteArbeidsforhold from './arbeidsforhold/siste-arbeidsforhold';
 
 const store = getStore();
 
@@ -31,7 +32,7 @@ class App extends React.Component {
         return (
             <main id="maincontent" role="main" tabIndex={-1} className="arbsokreg_app">
                 <Provider store={store}>
-                    <IntlProvider>
+                    <IntlProvider >
                         <HentInitialData>
                             <SjekkKrrStatus>
                                 <SjekkRegistreringstatus>
@@ -44,6 +45,7 @@ class App extends React.Component {
                                             <Route path={REGVELLYKKET_PATH} component={RegVellykket}/>
                                             <Route path={AVBRYT_PATH} component={Avbryt} />
                                             <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Route path={SISTEARBFORHOLD_PATH} component={SisteArbeidsforhold} />
                                             <Redirect exact={true} from="/" to={START_PATH}/>
                                         </Switch>
                                     </Router>

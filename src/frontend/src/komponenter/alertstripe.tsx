@@ -11,7 +11,7 @@ function Alertstripe({type, tekst}: Props) {
     return (
         <div className="alertstripe-container">
             <NavAlertStripe type={type}>
-                <Normaltekst>{tekst}</Normaltekst>
+                <Normaltekst><span dangerouslySetInnerHTML={{__html: tekst}}/></Normaltekst>
             </NavAlertStripe>
         </div>
     );

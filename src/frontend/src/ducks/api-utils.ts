@@ -68,13 +68,13 @@ export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
 
 interface FetchToJson {
     url: string;
-    config?: { credentials: RequestCredentials};
+    config?: RequestInit;
     recoverWith?: RecoverWith;
 }
 
 export function fetchToJson<DATA>({
                                       url,
-                                      config = {credentials: 'include'},
+                                      config = { },
                                       recoverWith}: FetchToJson): Promise<DATA> {
 
     return fetch(url, config)

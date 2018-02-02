@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
-import { shallowWithIntl, mountWithIntl } from 'enzyme-react-intl';
+import { shallowWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
-import { Store } from 'react-redux';
+import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
 import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import { Data as KrrData, ActionTypes as KrrActionTypes } from '../ducks/krr';
+import IntlProvider from '../Intl-provider';
 
 export const store = getStore();
 
@@ -36,10 +37,14 @@ export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
     }));
 }
 
-export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>) {
-    return mountWithIntl(React.cloneElement(children, {
-        store
-    }));
+export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
+    return mount(
+        <Provider store={withStore || store}>
+            <IntlProvider >
+                {children}
+            </IntlProvider>
+        </Provider>
+        );
 }
 
 export function mountWithIntl(children: React.ReactElement<ElementWithStore>, paramStore?: ElementWithStore) {
@@ -51,9 +56,10 @@ export function stubFetch(fetchStub: FetchStub): Promise<{}> {
 }
 
 function getPromiseResponse(url: string, fetchStub: FetchStub) {
-    const status = fetchStub.getResponse(url).status;
+    const response = fetchStub.getResponse(url);
+    const status = response.status;
     const errorResponse = Promise.resolve({status, text: () => Promise.resolve('Skal kaste feil')});
-    const okResponse = Promise.resolve({status, ok: true, json: () => (fetchStub.getResponse(url).response)});
+    const okResponse = Promise.resolve({status, ok: true, json: () => (response.response)});
 
     return status === 200 ? okResponse : errorResponse;
 }
@@ -62,9 +68,10 @@ export function promiseWithSetTimeout() {
     return new Promise(resolve => setTimeout(resolve, 0));
 }
 
-export function makeHrefWritable() {
+export function resetAndMakeHrefWritable() {
     return Object.defineProperty(document.location, 'href', {
         writable: true,
+        value: ''
     });
 }
 
@@ -86,11 +93,14 @@ export function withError(status: number) {
 
 export class FetchStub {
     urlMap: { [url: string]: {response?: {}, status: number}};
+    callCount: { [url: string]: number };
     constructor() {
         this.urlMap = {};
+        this.callCount = {};
     }
     addResponse(url: string, response: {}) {
         this.urlMap[url] = {response, status: 200};
+        this.callCount[url] = 0;
         return this;
     }
     addErrorResponse(url: string, status: number) {
@@ -98,6 +108,7 @@ export class FetchStub {
             throw new Error('Status should be >= 400');
         }
         this.urlMap[url] = { status };
+        this.callCount[url] = 0;
         return this;
     }
 
@@ -105,7 +116,16 @@ export class FetchStub {
         const keys = Object.keys(this.urlMap);
         const length = keys.length;
         const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
-        const response = (responseKey && this.urlMap[responseKey]) || ({ response: {}, status: 200});
-        return response;
+        if (responseKey) {
+            this.callCount[responseKey] += 1;
+        }
+        return (responseKey && this.urlMap[responseKey]) || ({ response: {}, status: 200});
+    }
+
+    getCallcount(url: string) {
+        const keys = Object.keys(this.callCount);
+        const length = keys.length;
+        const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
+        return (responseKey && this.callCount[responseKey]) || 0;
     }
 }

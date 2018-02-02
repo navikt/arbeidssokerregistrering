@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import * as classNames from 'classnames';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { getIntlMessage } from '../../utils/utils';
@@ -7,6 +8,8 @@ import { getIntlMessage } from '../../utils/utils';
 interface Props {
     tittelId: string;
     children?: Array<React.ReactElement<Element>> | React.ReactElement<Element>;
+    className?: string;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 type EgenProps = Props & InjectedIntlProps;
@@ -24,15 +27,20 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick() {
+    handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+        const { onClick } = this.props;
+        if (onClick) {
+            onClick(e);
+        }
         this.setState({
             apen: !this.state.apen
         });
     }
 
     render() {
+        const {className } = this.props;
         return (
-            <div className="bla-italic">
+            <div className={classNames('bla-italic', className)}>
                 <button
                     className="knapp-reset blokk-xxs"
                     onClick={this.handleClick}
