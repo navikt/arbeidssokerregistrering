@@ -29,7 +29,7 @@ export function registrerBruker() {
 
 export function hentInnloggingsInfo() {
     return fetchToJson({
-        url: INNLOGGINGSINFO_URL,
+        url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
         config: MED_CREDENTIALS
     });
 }
