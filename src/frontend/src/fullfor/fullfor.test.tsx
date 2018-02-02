@@ -10,7 +10,7 @@ import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import {Checkbox} from "nav-frontend-skjema";
 import {
-    FetchStub, mountWithIntl, mountWithStoreAndIntl, promiseWithSetTimeout,
+    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
     stubFetch
 } from "../test/test-utils";
 import {create} from "../store";
@@ -46,7 +46,7 @@ describe('<Fullfor />', () => {
     });
 
     it('Skal vise feilmelding dersom fullfor feiler', () => {
-        const nyStore = {store: create()};
+        const store = create();
         const push = sinon.spy();
         const props = {
             history: {
@@ -56,7 +56,7 @@ describe('<Fullfor />', () => {
 
         stubFetch(new FetchStub().addErrorResponse('/registrerbruker', 500));
 
-        const wrapper = mountWithIntl(<Fullfor {...props} />, nyStore);
+        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
         // marker sjekkboks
         const sjekkboks = wrapper.find(Checkbox);
@@ -75,7 +75,7 @@ describe('<Fullfor />', () => {
     });
 
     it('Skal vise registrering vellykket', () => {
-        const nyStore = {store: create()};
+        const store = create();
         const push = sinon.spy();
         const props = {
             history: {
@@ -85,7 +85,7 @@ describe('<Fullfor />', () => {
 
         stubFetch(new FetchStub().addResponse('/registrerbruker', {}));
 
-        const wrapper = mountWithIntl(<Fullfor {...props} />, nyStore);
+        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
         // marker sjekkboks
         const sjekkboks = wrapper.find(Checkbox);

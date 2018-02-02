@@ -24,7 +24,7 @@ export function hentRegistreringStatus() {
 export function registrerBruker() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/registrerbruker`,
-        config});
+        config: MED_CREDENTIALS});
 }
 
 export function hentInnloggingsInfo() {
