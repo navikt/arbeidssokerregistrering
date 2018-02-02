@@ -74,7 +74,7 @@ describe('<Fullfor />', () => {
             });
     });
 
-    it('Skal vise feilmelding dersom fullfor feiler', () => {
+    it('Skal vise registrering vellykket', () => {
         const nyStore = {store: create()};
         const push = sinon.spy();
         const props = {
