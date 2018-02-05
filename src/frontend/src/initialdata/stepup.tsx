@@ -13,7 +13,7 @@ function StepUp({intl}: InjectedIntlProps) {
             knappAksjoner={
                 <Knapp
                     type="hoved"
-                    onClick={() => document.location.href === VEILARBSTEPUP}
+                    onClick={() => document.location.href = VEILARBSTEPUP}
                 >
                     <Normaltekst>{getIntlMessage(intl.messages, 'knapp-logg-inn')}</Normaltekst>
                 </Knapp>
