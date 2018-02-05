@@ -9,7 +9,7 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { configSelvgaende, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
+import { configIkkeSelvgaende, erIkkeSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
@@ -23,7 +23,6 @@ export interface MatchProps {
 }
 
 interface StateProps {
-    erSelvgaendeBruker: () => boolean;
     erAlleSpmBesvart: () => boolean;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     hentAvgittSvarId: (sporsmalId: string) => string;
@@ -42,13 +41,13 @@ function Skjema({
                     endreSvar,
                     sporsmalErBesvart,
                     erAlleSpmBesvart,
-                    erSelvgaendeBruker,
                     hentAvgittSvarId
                 }: Props) {
 
     const spmId = match.params.id;
 
-    if (parseInt(spmId, 10) > antallSporsmal.length) {
+    if ( spmId !== '1' &&
+        (parseInt(spmId, 10) > antallSporsmal.length || !sporsmalErBesvart(`${parseInt(spmId, 10) - 1}`))) {
         history.push(`${SKJEMA_PATH}/1`);
         return null;
     }
@@ -91,10 +90,10 @@ function Skjema({
                         <KnappNeste
                             disabled={disableKnappFullfor}
                             onClick={() => {
-                                if (erSelvgaendeBruker()) {
-                                    history.push(`${OPPSUMMERING_PATH}`);
-                                } else {
+                                if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
                                     history.push(`${SBLREG_PATH}`);
+                                } else {
+                                    history.push(`${OPPSUMMERING_PATH}`);
                                 }
                             }}
                         />
@@ -102,7 +101,11 @@ function Skjema({
                         <KnappNeste
                             disabled={disableKnappNeste}
                             onClick={(() => {
-                                history.push(`${SKJEMA_PATH}/${(parseInt(spmId, 10) + 1)}`);
+                                if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
+                                    history.push(`${SBLREG_PATH}`);
+                                } else {
+                                    history.push(`${SKJEMA_PATH}/${(parseInt(spmId, 10) + 1)}`);
+                                }
                             })}
                         />
                 }
@@ -112,10 +115,9 @@ function Skjema({
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
-    hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
-    erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
-    erSelvgaendeBruker: () => erSelvgaende(state.svar, configSelvgaende)
+        sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
+        hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
+        erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

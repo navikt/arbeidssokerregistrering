@@ -1,5 +1,3 @@
-import { State as SvarState } from '../ducks/svar';
-
 /*
 * Konfigurasjon
 *
@@ -9,22 +7,16 @@ import { State as SvarState } from '../ducks/svar';
 * value: [svar id] // liste med alternativ svar - gir utslag som selvgående bruker
 *
 * */
-export const configSelvgaende = {
-    1: ['1', '2', '3', '4', '5'],
-    2: ['2', '3'],
-    3: ['1'],
-    4: ['1'],
-    5: ['2'],
+export const configIkkeSelvgaende = {
+    1: ['6'],
+    2: ['1'],
+    3: ['2'],
+    4: ['2', '3'],
+    5: ['1'],
 };
 
-export const erSelvgaende = (svar: SvarState, svarSomGirSelvgaende: {}) => {
-    let resultat = true;
-    Object.keys(svar).map((key) => {
-        const res = svarSomGirSelvgaende[key].filter((configSvar: string) => configSvar === svar[key]);
-        if (res.length === 0) { resultat = false; }
-    });
-
-    return resultat;
+export const erIkkeSelvgaende = (avgittSvar: string, svarSomGirIkkeSelvgaende: string[]) => {
+    return svarSomGirIkkeSelvgaende.includes(avgittSvar);
 };
 
 export const erSvarAlternativMerEnnTo = (spmId: string) => {
