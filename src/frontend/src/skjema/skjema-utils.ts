@@ -1,19 +1,6 @@
 import { State as SvarState } from '../ducks/svar';
 
 /*
-* ConfigSpmPrSide
-* key = sideurl
-* value = sporsmål id
-* */
-export const configSpmPrSide = {
-    1: ['1'],
-    2: ['2'],
-    3: ['3'],
-    4: ['4'],
-    5: ['5']
-};
-
-/*
 * Konfigurasjon
 *
 * Selvgående bruker

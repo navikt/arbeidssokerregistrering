@@ -9,7 +9,7 @@ import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../komponenter/knapp-neste';
-import { configSelvgaende, configSpmPrSide, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
+import { configSelvgaende, erSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
 import KnappAvbryt from './knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 
@@ -46,47 +46,38 @@ function Skjema({
                     hentAvgittSvarId
                 }: Props) {
 
-    const sideId = match.params.id;
-    const spmListePaSiden = configSpmPrSide[sideId];
+    const spmId = match.params.id;
 
-    if (spmListePaSiden === undefined) {
+    if (parseInt(spmId, 10) > antallSporsmal.length) {
         history.push(`${SKJEMA_PATH}/1`);
         return null;
     }
 
-    const disableKnappNeste = spmListePaSiden.filter((spmId: string) => !sporsmalErBesvart(spmId)).length !== 0;
+    const disableKnappNeste = !sporsmalErBesvart(spmId);
     const disableKnappFullfor = erAlleSpmBesvart();
 
     return (
         <div>
-            {
-                spmListePaSiden
-                    .map((spmId: string) => (
-                        <div
-                            key={spmId}
-                            className="blokk panel-skjema-wrapper"
-                        >
-                            <Systemtittel tag="h1" className="spm-tittel">
-                                {intl.messages[`sporsmal-${spmId}-tittel`]}
-                            </Systemtittel>
-                            <Panel className="panel-skjema">
-                                <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
-                                    {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
-                                        .map(i => i + 1)
-                                        .map((key) => <Alternativ
-                                            sporsmalId={spmId}
-                                            endreSvar={endreSvar}
-                                            key={key}
-                                            alternativId={key.toString()}
-                                            tekstId={`sporsmal-${spmId}-alternativ-${key}`}
-                                            checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
-                                            intl={intl}
-                                        />)}
-                                </form>
-                            </Panel>
-                        </div>
-                    ))
-            }
+            <div className="blokk panel-skjema-wrapper">
+                <Systemtittel tag="h1" className="spm-tittel">
+                    {intl.messages[`sporsmal-${spmId}-tittel`]}
+                </Systemtittel>
+                <Panel className="panel-skjema">
+                    <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
+                        {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
+                            .map(i => i + 1)
+                            .map((key) => <Alternativ
+                                sporsmalId={spmId}
+                                endreSvar={endreSvar}
+                                key={key}
+                                alternativId={key.toString()}
+                                tekstId={`sporsmal-${spmId}-alternativ-${key}`}
+                                checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
+                                intl={intl}
+                            />)}
+                    </form>
+                </Panel>
+            </div>
 
             <div className="panel-blokk__knapperad">
                 <KnappAvbryt
@@ -96,7 +87,7 @@ function Skjema({
                     })}
                 />
                 {
-                    parseInt(sideId, 10) === Object.keys(configSpmPrSide).length ?
+                    parseInt(spmId, 10) === antallSporsmal.length ?
                         <KnappNeste
                             disabled={disableKnappFullfor}
                             onClick={() => {
@@ -111,7 +102,7 @@ function Skjema({
                         <KnappNeste
                             disabled={disableKnappNeste}
                             onClick={(() => {
-                                history.push(`${SKJEMA_PATH}/${(parseInt(sideId, 10) + 1)}`);
+                                history.push(`${SKJEMA_PATH}/${(parseInt(spmId, 10) + 1)}`);
                             })}
                         />
                 }
