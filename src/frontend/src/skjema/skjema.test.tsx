@@ -156,7 +156,7 @@ describe('<Skjema />', () => {
     });
 
     it('skal sende bruker til sbl med en gang dersom svar er "feil"', () => {
-        const pushedPath = '';
+        let pushedPath = '';
         const props = {
             match: {
                 params: {
