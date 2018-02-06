@@ -34,84 +34,102 @@ interface DispatchProps {
 
 type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
 
-function Skjema({
-                    match,
-                    history,
-                    intl,
-                    endreSvar,
-                    sporsmalErBesvart,
-                    erAlleSpmBesvart,
-                    hentAvgittSvarId
-                }: Props) {
+class Skjema extends React.Component<Props> {
+    private divRef: HTMLDivElement | null;
 
-    const spmId = match.params.id;
-
-    if ( spmId !== '1' &&
-        (parseInt(spmId, 10) > antallSporsmal.length || !sporsmalErBesvart(`${parseInt(spmId, 10) - 1}`))) {
-        history.push(`${SKJEMA_PATH}/1`);
-        return null;
+    componentDidMount() {
+        if (this.divRef) {
+            this.divRef.focus();
+        }
     }
 
-    const disableKnappNeste = !sporsmalErBesvart(spmId);
-    const disableKnappFullfor = erAlleSpmBesvart();
+    componentDidUpdate(prevProps: Props) {
+        const spmId = this.props.match.params.id;
+        const forrigeSpmId = prevProps.match.params.id;
 
-    return (
-        <div>
-            <div className="blokk panel-skjema-wrapper">
-                <Systemtittel tag="h1" className="spm-tittel">
-                    {intl.messages[`sporsmal-${spmId}-tittel`]}
-                </Systemtittel>
-                <Panel className="panel-skjema">
-                    <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
-                        {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
-                            .map(i => i + 1)
-                            .map((key) => <Alternativ
-                                sporsmalId={spmId}
-                                endreSvar={endreSvar}
-                                key={key}
-                                alternativId={key.toString()}
-                                tekstId={`sporsmal-${spmId}-alternativ-${key}`}
-                                checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
-                                intl={intl}
-                            />)}
-                    </form>
-                </Panel>
-            </div>
+        if (spmId !== forrigeSpmId && this.divRef) {
+            this.divRef.focus();
+        }
+    }
 
-            <div className="panel-blokk__knapperad">
-                <KnappAvbryt
-                    classname="mmr"
-                    onClick={(() => {
-                        history.push(`${AVBRYT_PATH}`);
-                    })}
-                />
-                {
-                    parseInt(spmId, 10) === antallSporsmal.length ?
-                        <KnappNeste
-                            disabled={disableKnappFullfor}
-                            onClick={() => {
-                                if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
-                                    history.push(`${SBLREG_PATH}`);
-                                } else {
-                                    history.push(`${OPPSUMMERING_PATH}`);
-                                }
-                            }}
-                        />
-                        :
-                        <KnappNeste
-                            disabled={disableKnappNeste}
-                            onClick={(() => {
-                                if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
-                                    history.push(`${SBLREG_PATH}`);
-                                } else {
-                                    history.push(`${SKJEMA_PATH}/${(parseInt(spmId, 10) + 1)}`);
-                                }
-                            })}
-                        />
-                }
-            </div>
-        </div>
-    );
+    render() {
+        const { match,
+            history,
+            intl,
+            endreSvar,
+            sporsmalErBesvart,
+            erAlleSpmBesvart,
+            hentAvgittSvarId } = this.props;
+
+        const spmId = match.params.id;
+
+        if (spmId !== '1' &&
+            (parseInt(spmId, 10) > antallSporsmal.length || !sporsmalErBesvart(`${parseInt(spmId, 10) - 1}`))) {
+            history.push(`${SKJEMA_PATH}/1`);
+            return null;
+        }
+
+        const disableKnappNeste = !sporsmalErBesvart(spmId);
+        const disableKnappFullfor = erAlleSpmBesvart();
+
+        return (
+            <React.Fragment>
+                <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
+                    <Systemtittel tag="h1" className="spm-tittel">
+                        {intl.messages[`sporsmal-${spmId}-tittel`]}
+                    </Systemtittel>
+                    <Panel className="panel-skjema">
+                        <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
+                            {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
+                                .map(i => i + 1)
+                                .map((key, index) => <Alternativ
+                                    sporsmalId={spmId}
+                                    endreSvar={endreSvar}
+                                    key={key}
+                                    alternativId={key.toString()}
+                                    tekstId={`sporsmal-${spmId}-alternativ-${key}`}
+                                    checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
+                                    intl={intl}
+                                />)}
+                        </form>
+                    </Panel>
+                </div>
+
+                <div className="panel-blokk__knapperad">
+                    <KnappAvbryt
+                        classname="mmr"
+                        onClick={(() => {
+                            history.push(`${AVBRYT_PATH}`);
+                        })}
+                    />
+                    {
+                        parseInt(spmId, 10) === antallSporsmal.length ?
+                            <KnappNeste
+                                disabled={disableKnappFullfor}
+                                onClick={() => {
+                                    if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
+                                        history.push(`${SBLREG_PATH}`);
+                                    } else {
+                                        history.push(`${OPPSUMMERING_PATH}`);
+                                    }
+                                }}
+                            />
+                            :
+                            <KnappNeste
+                                disabled={disableKnappNeste}
+                                onClick={(() => {
+                                    if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
+                                        history.push(`${SBLREG_PATH}`);
+                                    } else {
+                                        history.push(`${SKJEMA_PATH}/${(parseInt(spmId, 10) + 1)}`);
+                                    }
+                                })}
+                            />
+                    }
+                </div>
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
