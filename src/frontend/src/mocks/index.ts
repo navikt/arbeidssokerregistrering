@@ -22,7 +22,7 @@ if (MOCK_REGISTRER_BRUKER) {
 }
 
 if (MOCK_INNLOGGINGS_INFO) {
-    (mock as any).get('/innloggingslinje/auth', respondWith(delayed(1000, innloggingsInfo)));
+    (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(1000, innloggingsInfo)));
 }
 
 if(MOCK_HENT_KRR_STATUS) {
