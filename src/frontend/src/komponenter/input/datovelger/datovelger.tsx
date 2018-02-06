@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { CustomField } from 'react-redux-form-validation';
+import  * as classNames from 'classnames';
 import { connect, Dispatch } from 'react-redux';
 import { change, touch, WrappedFieldMetaProps } from 'redux-form';
 import {
@@ -208,9 +209,10 @@ interface Datovelger {
     labelId: string;
     disabledDays: (date?: Date) => boolean;
     initialMonth?: Date;
+    className?: string;
 }
 
-function Datovelger({ feltNavn, labelId, intl, ...rest }: Datovelger & InjectedIntlProps) {
+function Datovelger({ feltNavn, labelId, className, intl, ...rest }: Datovelger & InjectedIntlProps) {
     const datoFelt = (
         <ConnectedDatoField
             label={<FormattedMessage id={labelId} />}
@@ -223,7 +225,7 @@ function Datovelger({ feltNavn, labelId, intl, ...rest }: Datovelger & InjectedI
         <CustomField
             name={feltNavn}
             parse={parseDato}
-            className="datovelger__inputelement"
+            className={classNames('datovelger__inputelement', className)}
             errorClass="skjemaelement--harFeil"
             customComponent={datoFelt}
         />

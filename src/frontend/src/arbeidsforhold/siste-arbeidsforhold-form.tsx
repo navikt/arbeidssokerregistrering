@@ -97,6 +97,7 @@ function SisteArbeidsforholdForm({
                                         initialMonth={currentFraDato}
                                     />
                                     <Datovelger
+                                        className="align-left"
                                         feltNavn="tilDato"
                                         labelId="siste-arbeidsforhold.til-dato"
                                         disabledDays={(value) => isBeforeDate(currentFraDato)(value)
