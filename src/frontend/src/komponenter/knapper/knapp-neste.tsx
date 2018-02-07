@@ -7,7 +7,7 @@ import { getIntlMessage } from '../../utils/utils';
 
 interface Props {
     disabled?: boolean;
-    onClick: () => void;
+    onClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
     className?: string;
 }
 
