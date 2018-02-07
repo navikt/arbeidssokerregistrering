@@ -8,10 +8,11 @@ import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import { configIkkeSelvgaende, erIkkeSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
-import KnappAvbryt from './knapp-avbryt';
+import KnappAvbryt from '../komponenter/knapper/knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
+import Knapperad from '../komponenter/knapper/knapperad';
 
 interface SkjemaProps {
     id: string;
@@ -95,7 +96,7 @@ class Skjema extends React.Component<Props> {
                     </Panel>
                 </div>
 
-                <div className="panel-blokk__knapperad">
+                <Knapperad>
                     <KnappAvbryt
                         classname="mmr"
                         onClick={(() => {
@@ -126,7 +127,7 @@ class Skjema extends React.Component<Props> {
                                 })}
                             />
                     }
-                </div>
+                </Knapperad>
             </React.Fragment>
         );
     }

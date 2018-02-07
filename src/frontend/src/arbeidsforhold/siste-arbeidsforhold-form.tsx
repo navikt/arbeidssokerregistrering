@@ -8,8 +8,8 @@ import {
     paakrevdTekst
 } from '../komponenter/input/validering';
 import { getIntlMessage } from '../utils/utils';
-import KnappAvbryt from '../skjema/knapp-avbryt';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappAvbryt from '../komponenter/knapper/knapp-avbryt';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import { Sidetittel } from 'nav-frontend-typografi';
 import { connect } from 'react-redux';
 import PeriodeValidering from '../komponenter/input/datovelger/periodevalidering';
@@ -26,7 +26,7 @@ import { lagreArbeidsforhold,
     selectSisteArbeidsforhold,
     Data as ArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
 import { AVBRYT_PATH } from '../utils/konstanter';
-import Knapperad from '../komponenter/input/knapperad';
+import Knapperad from '../komponenter/knapper/knapperad';
 import { Panel } from 'nav-frontend-paneler';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 

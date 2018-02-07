@@ -3,7 +3,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as classNames from 'classnames';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { getIntlMessage } from '../utils/utils';
+import { getIntlMessage } from '../../utils/utils';
 
 interface Props {
     disabled?: boolean;

@@ -10,7 +10,7 @@ import {
     shallowwithStoreAndIntl,
     store
 } from '../test/test-utils';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import {endreSvarAction, setInitalState} from "../ducks/svar";
 import {configIkkeSelvgaende, configSpmPrSide} from "./skjema-utils";
 import antallSporsmal from '../sporsmal/alle-sporsmal';
