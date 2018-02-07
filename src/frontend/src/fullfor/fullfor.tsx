@@ -16,6 +16,7 @@ import { utforRegistrering, selectRegistrerBruker, State as RegistrerBrukerState
 import { getIntlMessage } from '../utils/utils';
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../innholdslaster/innholdslaster';
+import Tilbakeknapp from '../komponenter/knapper/tilbakeknapp';
 
 interface StateProps {
     registrerBruker: RegistrerBrukerState;
@@ -65,6 +66,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                 avhengigheter={[registrerBruker]}
                 storrelse="XXL"
             >
+                <Tilbakeknapp onClick={() => history.goBack()}/>
                 <PanelBlokkGruppe
                     knappAksjoner={[
                         <Knapp

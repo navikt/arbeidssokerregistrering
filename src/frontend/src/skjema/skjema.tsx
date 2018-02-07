@@ -13,6 +13,7 @@ import { configIkkeSelvgaende, erIkkeSelvgaende, erSvarAlternativMerEnnTo } from
 import KnappAvbryt from '../komponenter/knapper/knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
 import Knapperad from '../komponenter/knapper/knapperad';
+import Tilbakeknapp from '../komponenter/knapper/tilbakeknapp';
 
 interface SkjemaProps {
     id: string;
@@ -76,6 +77,7 @@ class Skjema extends React.Component<Props> {
         return (
             <React.Fragment>
                 <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
+                    <Tilbakeknapp onClick={() => history.goBack()}/>
                     <Systemtittel tag="h1" className="spm-tittel">
                         {intl.messages[`sporsmal-${spmId}-tittel`]}
                     </Systemtittel>
@@ -83,7 +85,7 @@ class Skjema extends React.Component<Props> {
                         <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
                             {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
                                 .map(i => i + 1)
-                                .map((key, index) => <Alternativ
+                                .map((key) => <Alternativ
                                     sporsmalId={spmId}
                                     endreSvar={endreSvar}
                                     key={key}

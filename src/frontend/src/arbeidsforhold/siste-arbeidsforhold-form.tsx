@@ -29,6 +29,7 @@ import { AVBRYT_PATH } from '../utils/konstanter';
 import Knapperad from '../komponenter/knapper/knapperad';
 import { Panel } from 'nav-frontend-paneler';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
+import Tilbakeknapp from '../komponenter/knapper/tilbakeknapp';
 
 const FORM_NAME = 'sisteArbeidsforhold';
 
@@ -55,18 +56,33 @@ function SisteArbeidsforholdForm({
                                      history,
                                      dispatchArbeidsforhold
                                     }: Props & InjectedIntlProps) {
-    function onAvbryt() {
+    function lagraDataIStore() {
         dispatchArbeidsforhold({
             arbeidsgiver,
             stilling,
             fra: dateToLocalDateString(currentFraDato),
             til: dateToLocalDateString(currentTilDato)
         });
+    }
+
+    function onAvbryt() {
+        lagraDataIStore();
         history.push(AVBRYT_PATH);
+    }
+
+    function onTilbake() {
+        lagraDataIStore();
+        history.goBack();
+    }
+
+    function onNeste() {
+        lagraDataIStore();
+        handleSubmit();
     }
 
     return (
         <React.Fragment>
+            <Tilbakeknapp onClick={onTilbake}/>
             <Sidetittel className="text-align-center blokk-l">
                 <FormattedMessage id="siste-arbeidsforhold.tittel"/>
             </Sidetittel>
@@ -117,7 +133,7 @@ function SisteArbeidsforholdForm({
                     </EkspanderbartInfo>
                     <Knapperad>
                         <KnappAvbryt key="1" onClick={onAvbryt} classname="mmr"/>
-                        <KnappNeste key="2" onClick={handleSubmit}/>
+                        <KnappNeste key="2" onClick={onNeste}/>
                     </Knapperad>
             </form>
         </React.Fragment>
