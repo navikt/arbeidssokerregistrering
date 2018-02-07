@@ -7,7 +7,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
 import PanelBlokk from '../felles/panel-blokk';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../ducks/innloggingsinfo';
 import { AppState } from '../reducer';
 import { hentFornavn } from '../utils/utils';

@@ -4,10 +4,10 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { mountWithStoreAndIntl } from '../test/test-utils';
 import SisteArbeidsforholdForm from '../arbeidsforhold/siste-arbeidsforhold-form';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import { create } from '../store';
 import { datePickerToISODate, isoDateToDatePicker } from '../komponenter/input/datovelger/utils';
-import KnappAvbryt from '../skjema/knapp-avbryt';
+import KnappAvbryt from '../komponenter/knapper/knapp-avbryt';
 import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../ducks/siste-arbeidsforhold';
 
 enzyme.configure({adapter: new Adapter()});

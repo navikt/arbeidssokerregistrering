@@ -8,10 +8,12 @@ import { endreSvarAction } from '../ducks/svar';
 import { AppState } from '../reducer';
 import Alternativ, { EndreSvar } from './alternativ';
 import { RouteComponentProps } from 'react-router';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import { configIkkeSelvgaende, erIkkeSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
-import KnappAvbryt from './knapp-avbryt';
+import KnappAvbryt from '../komponenter/knapper/knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../utils/konstanter';
+import Knapperad from '../komponenter/knapper/knapperad';
+import Tilbakeknapp from '../komponenter/knapper/tilbakeknapp';
 
 interface SkjemaProps {
     id: string;
@@ -75,6 +77,7 @@ class Skjema extends React.Component<Props> {
         return (
             <React.Fragment>
                 <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
+                    <Tilbakeknapp onClick={() => history.goBack()}/>
                     <Systemtittel tag="h1" className="spm-tittel">
                         {intl.messages[`sporsmal-${spmId}-tittel`]}
                     </Systemtittel>
@@ -82,7 +85,7 @@ class Skjema extends React.Component<Props> {
                         <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
                             {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
                                 .map(i => i + 1)
-                                .map((key, index) => <Alternativ
+                                .map((key) => <Alternativ
                                     sporsmalId={spmId}
                                     endreSvar={endreSvar}
                                     key={key}
@@ -95,7 +98,7 @@ class Skjema extends React.Component<Props> {
                     </Panel>
                 </div>
 
-                <div className="panel-blokk__knapperad">
+                <Knapperad>
                     <KnappAvbryt
                         classname="mmr"
                         onClick={(() => {
@@ -126,7 +129,7 @@ class Skjema extends React.Component<Props> {
                                 })}
                             />
                     }
-                </div>
+                </Knapperad>
             </React.Fragment>
         );
     }

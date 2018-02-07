@@ -12,6 +12,7 @@ import { AppState } from '../reducer';
 import { hentFornavn } from '../utils/utils';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { SBLREG_PATH, SISTEARBFORHOLD_PATH } from '../utils/konstanter';
+import Tilbakeknapp from '../komponenter/knapper/tilbakeknapp';
 
 interface StateProps {
     innloggingsInfo: InnloggingsInfoState;
@@ -25,6 +26,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
         const { name } = innloggingsInfo.data;
         return (
             <div>
+                <Tilbakeknapp onClick={() => history.goBack()}/>
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [

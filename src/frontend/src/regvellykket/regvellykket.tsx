@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import PanelBlokk from '../felles/panel-blokk';
-import KnappNeste from '../komponenter/knapp-neste';
+import KnappNeste from '../komponenter/knapper/knapp-neste';
 import { RouteComponentProps } from 'react-router';
 import { VEIENTILARBEID_URL } from '../ducks/api';
 
