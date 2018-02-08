@@ -75,7 +75,8 @@ function SisteArbeidsforholdForm({
         history.goBack();
     }
 
-    function onNeste() {
+    function onNeste(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
         lagraDataIStore();
         handleSubmit();
     }
