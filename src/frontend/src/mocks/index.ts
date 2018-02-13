@@ -5,8 +5,8 @@ import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
 import sisteArbeidsforhold from './siste-arbeidsforhold';
 
-const MOCK_START_REGISRERING_STATUS = true;
-const MOCK_REGISTRER_BRUKER = true;
+const MOCK_START_REGISRERING_STATUS = false;
+const MOCK_REGISTRER_BRUKER = false;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_HENT_KRR_STATUS = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
@@ -18,7 +18,7 @@ if (MOCK_START_REGISRERING_STATUS) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    (mock as any).get('/veilarboppfolgingproxy/api/registrerbruker', respondWith(delayed(1000, registrerbruker, 500)));
+    (mock as any).post('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, registrerbruker)));
 }
 
 if (MOCK_INNLOGGINGS_INFO) {

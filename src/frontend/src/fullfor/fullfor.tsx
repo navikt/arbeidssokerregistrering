@@ -12,7 +12,11 @@ import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInf
 import { Checkbox } from 'nav-frontend-skjema';
 import { AVBRYT_PATH, REGVELLYKKET_PATH } from '../utils/konstanter';
 import { AppState } from '../reducer';
-import { utforRegistrering, selectRegistrerBruker, State as RegistrerBrukerState } from '../ducks/registrerbruker';
+import {
+    utforRegistrering,
+    lagBrukerRegistreringsData,
+    State as RegistrerBrukerState,
+    Data as RegistrerBrukerData } from '../ducks/registrerbruker';
 import { getIntlMessage } from '../utils/utils';
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../innholdslaster/innholdslaster';
@@ -23,7 +27,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    onRegistrerBruker: () => Promise<void | {}>;
+    onRegistrerBruker: (data: RegistrerBrukerData ) => Promise<void | {}>;
 }
 
 interface EgenStateProps {
@@ -43,7 +47,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     registrerBrukerOnClick() {
-        this.props.onRegistrerBruker()
+        this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
                     this.props.history.push(`${REGVELLYKKET_PATH}`);
@@ -125,11 +129,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 }
 
 const mapStateToProps = (state) => ({
-    registrerBruker: selectRegistrerBruker(state),
+    registrerBruker: lagBrukerRegistreringsData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    onRegistrerBruker: () => dispatch(utforRegistrering()),
+    onRegistrerBruker: (data) => dispatch(utforRegistrering(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

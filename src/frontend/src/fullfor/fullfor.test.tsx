@@ -15,6 +15,7 @@ import {
 } from "../test/test-utils";
 import {create} from "../store";
 import {REGVELLYKKET_PATH} from "../utils/konstanter";
+// import {endreSvarAction} from "../ducks/svar";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -54,7 +55,7 @@ describe('<Fullfor />', () => {
             }
         };
 
-        stubFetch(new FetchStub().addErrorResponse('/registrerbruker', 500));
+        stubFetch(new FetchStub().addErrorResponse('/startregistrering', 500));
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
@@ -83,7 +84,7 @@ describe('<Fullfor />', () => {
             }
         };
 
-        stubFetch(new FetchStub().addResponse('/registrerbruker', {}));
+        stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
