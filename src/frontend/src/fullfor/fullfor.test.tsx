@@ -15,6 +15,7 @@ import {
 } from "../test/test-utils";
 import {create} from "../store";
 import {REGVELLYKKET_PATH} from "../utils/konstanter";
+import {endreSvarAction} from "../ducks/svar";
 // import {endreSvarAction} from "../ducks/svar";
 
 enzyme.configure({adapter: new Adapter()});
@@ -26,7 +27,13 @@ afterEach(() => {
 
 describe('<Fullfor />', () => {
     it('Skal ha fullfor knapp som er inaktiv', () => {
-        const props = {};
+        const push = sinon.spy();
+        const props = {
+            history: {
+                push
+            }
+        };
+
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />);
         const knappFullfor = wrapper.find(KnappFullfor);
@@ -34,7 +41,13 @@ describe('<Fullfor />', () => {
     });
 
     it('Skal enable fullfor knappen når sjekkboks markeres', () => {
-        const props = {};
+        const push = sinon.spy();
+        const props = {
+            history: {
+                push
+            }
+        };
+
 
         const wrapper = mountWithStoreAndIntl((<Fullfor {...props} />));
         const sjekkboks = wrapper.find(Checkbox);
@@ -84,6 +97,8 @@ describe('<Fullfor />', () => {
             }
         };
 
+        dispatchTilfeldigeSvar(store);
+
         stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
@@ -103,5 +118,13 @@ describe('<Fullfor />', () => {
                 expect(push.firstCall.args[0]).to.be.equal(`${REGVELLYKKET_PATH}`);
             });
     });
+
+    function dispatchTilfeldigeSvar(store) {
+        store.dispatch(endreSvarAction('1', '1'));
+        store.dispatch(endreSvarAction('2', '1'));
+        store.dispatch(endreSvarAction('3', '1'));
+        store.dispatch(endreSvarAction('4', '1'));
+        store.dispatch(endreSvarAction('5', '1'));
+    }
 
 });
