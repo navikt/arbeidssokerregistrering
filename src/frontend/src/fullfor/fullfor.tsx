@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -10,7 +11,7 @@ import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { Checkbox } from 'nav-frontend-skjema';
-import { AVBRYT_PATH, REGVELLYKKET_PATH } from '../utils/konstanter';
+import { AVBRYT_PATH, REGVELLYKKET_PATH, START_PATH} from '../utils/konstanter';
 import { AppState } from '../reducer';
 import {
     utforRegistrering,
@@ -46,11 +47,18 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.registrerBrukerOnClick = this.registrerBrukerOnClick.bind(this);
     }
 
+    componentWillMount() {
+        const { registrerBruker, history } = this.props;
+        if (_.isEmpty(registrerBruker.data)) {
+            history.push(START_PATH);
+        }
+    }
+
     registrerBrukerOnClick() {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    this.props.history.push(`${REGVELLYKKET_PATH}`);
+                    this.props.history.push(REGVELLYKKET_PATH);
                 }
             });
     }
