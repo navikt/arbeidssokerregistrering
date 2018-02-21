@@ -8,6 +8,11 @@ export const AVBRYT_PATH = '/avbryt';
 export const FULLFOR_PATH = '/fullfor';
 export const SISTEARBFORHOLD_PATH = '/sistearbforhold';
 
+/* Besvarelser */
+
+export const YRKESPRAKSIS = ' '; // blank inntil videre
+export const OPPSUMMERING = ' '; // blank inntil videre
+
 export const MISTET_JOBBEN = 'MISTET-JOBBEN';
 export const SAGT_OPP = 'SAGT-OPP';
 export const PERMITTERT = 'PERMITTERT';

@@ -3,10 +3,11 @@ import { expect } from 'chai';
 import { getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn } from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    OPPSUMMERING,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
-    VIL_BYTTE_JOBB
+    VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
 
 describe('utils test', () => {
@@ -49,5 +50,12 @@ describe('utils test', () => {
         expect(getMapJaNeiKanskje('1')).to.equal(JA);
         expect(getMapJaNeiKanskje('2')).to.equal(NEI);
         expect(getMapJaNeiKanskje('3')).to.equal(KANSKJE);
+    });
+
+    it('test blank yrkespraksis', () => {
+        expect(YRKESPRAKSIS).to.equal(' ');
+    });
+    it('test blank oppsummering', () => {
+        expect(OPPSUMMERING).to.equal(' ');
     });
 });

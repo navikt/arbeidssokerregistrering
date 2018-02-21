@@ -2,6 +2,7 @@ import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 import { getMapJaNeiKanskje, getMapNusKode, getMapSituasjon } from '../utils/utils';
+import { OPPSUMMERING, YRKESPRAKSIS } from '../utils/konstanter';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -72,9 +73,9 @@ export function mapBrukerRegistreringsData(state: AppState): State {
     if (svr1 && svr2 && svr3 && svr4 && svr5) {
         data = {
             nusKode: getMapNusKode(svr2),
-            yrkesPraksis: '',
+            yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
-            oppsummering: '',
+            oppsummering: OPPSUMMERING,
             utdanningBestatt: getMapJaNeiKanskje(svr3),
             utdanningGodkjentNorge: getMapJaNeiKanskje(svr4),
             harHelseutfordringer: getMapJaNeiKanskje(svr5),
