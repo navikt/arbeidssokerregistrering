@@ -2,7 +2,7 @@ import { fetchToJson } from './api-utils';
 import { Data as SisteArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
-export const SBLARBEID_URL = '/sbl/arbeid/registrering';
+export const SBLARBEID_URL = '/sbl/nav_security_check';
 export const DITTNAV_URL = '/dittnav';
 export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
