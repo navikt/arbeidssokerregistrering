@@ -11,7 +11,7 @@ import PanelBlokkGruppe from '../felles/panel-blokk-gruppe';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { Checkbox } from 'nav-frontend-skjema';
-import { AVBRYT_PATH, REGVELLYKKET_PATH, START_PATH} from '../utils/konstanter';
+import { AVBRYT_PATH, REGVELLYKKET_PATH, START_PATH } from '../utils/konstanter';
 import { AppState } from '../reducer';
 import {
     utforRegistrering,
