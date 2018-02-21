@@ -5,8 +5,8 @@ import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
 import sisteArbeidsforhold from './siste-arbeidsforhold';
 
-const MOCK_START_REGISRERING_STATUS = false;
-const MOCK_REGISTRER_BRUKER = false;
+const MOCK_START_REGISRERING_STATUS = true;
+const MOCK_REGISTRER_BRUKER = true;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_HENT_KRR_STATUS = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;

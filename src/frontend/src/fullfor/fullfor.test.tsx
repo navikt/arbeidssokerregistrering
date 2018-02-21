@@ -16,7 +16,6 @@ import {
 import {create} from "../store";
 import {REGVELLYKKET_PATH} from "../utils/konstanter";
 import {endreSvarAction} from "../ducks/svar";
-// import {endreSvarAction} from "../ducks/svar";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {

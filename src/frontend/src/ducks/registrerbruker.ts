@@ -61,7 +61,7 @@ export function utforRegistrering(data: Data) {
     });
 }
 
-export function lagBrukerRegistreringsData(state: AppState): State {
+export function mapBrukerRegistreringsData(state: AppState): State {
     const svr1 = state.svar[1];
     const svr2 = state.svar[2];
     const svr3 = state.svar[3];

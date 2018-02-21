@@ -15,7 +15,7 @@ import { AVBRYT_PATH, REGVELLYKKET_PATH, START_PATH } from '../utils/konstanter'
 import { AppState } from '../reducer';
 import {
     utforRegistrering,
-    lagBrukerRegistreringsData,
+    mapBrukerRegistreringsData,
     State as RegistrerBrukerState,
     Data as RegistrerBrukerData } from '../ducks/registrerbruker';
 import { getIntlMessage } from '../utils/utils';
@@ -137,7 +137,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 }
 
 const mapStateToProps = (state) => ({
-    registrerBruker: lagBrukerRegistreringsData(state),
+    registrerBruker: mapBrukerRegistreringsData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
