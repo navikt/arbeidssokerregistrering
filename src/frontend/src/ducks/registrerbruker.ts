@@ -72,9 +72,9 @@ export function lagBrukerRegistreringsData(state: AppState): State {
     if (svr1 && svr2 && svr3 && svr4 && svr5) {
         data = {
             nusKode: getMapNusKode(svr2),
-            yrkesPraksis: 'test',
+            yrkesPraksis: '',
             enigIOppsummering: true,
-            oppsummering: 'test',
+            oppsummering: '',
             utdanningBestatt: getMapJaNeiKanskje(svr3),
             utdanningGodkjentNorge: getMapJaNeiKanskje(svr4),
             harHelseutfordringer: getMapJaNeiKanskje(svr5),
