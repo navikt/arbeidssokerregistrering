@@ -1,8 +1,9 @@
 import { fetchToJson } from './api-utils';
 import { Data as SisteArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
+import { Data as RegistrerBrukerData } from '../ducks/registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
-export const SBLARBEID_URL = '/sbl/arbeid/registrering';
+export const SBLARBEID_URL = '/sbl/nav_security_check';
 export const DITTNAV_URL = '/dittnav';
 export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
@@ -21,10 +22,13 @@ export function hentRegistreringStatus() {
         config: MED_CREDENTIALS});
 }
 
-export function registrerBruker() {
+export function registrerBruker(data: RegistrerBrukerData) {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/registrerbruker`,
-        config: MED_CREDENTIALS});
+        url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        config: { ...MED_CREDENTIALS,
+            method: 'post',
+            body: JSON.stringify(data)}
+    });
 }
 
 export function hentInnloggingsInfo() {
