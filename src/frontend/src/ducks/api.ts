@@ -17,16 +17,15 @@ export const getCookie = name => {
     const match = re.exec(document.cookie);
     return match !== null ? match[1] : '';
 };
+function getHeaders() {
+    return new Headers({
+        'Content-Type': 'application/json',
+        'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'), // eslint-disable-line quote-props
+    });
+}
 
 const MED_CREDENTIALS = {
     credentials: ('same-origin' as RequestCredentials)
-};
-
-const MED_HEADERS = {
-    headers: new Headers({
-        'Content-Type': 'application/json',
-        'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'), // eslint-disable-line quote-props
-    }),
 };
 
 export function hentRegistreringStatus() {
@@ -38,7 +37,8 @@ export function hentRegistreringStatus() {
 export function registrerBruker(data: RegistrerBrukerData) {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
-        config: { ...MED_CREDENTIALS, ...MED_HEADERS,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
             method: 'post',
             body: JSON.stringify(data)}
     });
