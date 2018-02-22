@@ -12,8 +12,21 @@ export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERI
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 
+export const getCookie = name => {
+    const re = new RegExp(`${name}=([^;]+)`);
+    const match = re.exec(document.cookie);
+    return match !== null ? match[1] : '';
+};
+
 const MED_CREDENTIALS = {
     credentials: ('same-origin' as RequestCredentials)
+};
+
+const MED_HEADERS = {
+    headers: new Headers({
+        'Content-Type': 'application/json',
+        'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'), // eslint-disable-line quote-props
+    }),
 };
 
 export function hentRegistreringStatus() {
@@ -25,7 +38,7 @@ export function hentRegistreringStatus() {
 export function registrerBruker(data: RegistrerBrukerData) {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
-        config: { ...MED_CREDENTIALS,
+        config: { ...MED_CREDENTIALS, ...MED_HEADERS,
             method: 'post',
             body: JSON.stringify(data)}
     });
