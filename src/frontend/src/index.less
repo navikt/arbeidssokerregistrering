@@ -28,19 +28,19 @@ main.arbsokreg_app:focus {
 }
 
 main.arbsokreg_app {
-    @import 'felles/utils';
-    @import 'felles/panel-blokk';
+    @import 'komponenter/panel-blokk/utils';
+    @import 'komponenter/panel-blokk/panel-blokk';
     @import '/komponenter/alertstripe';
 
-    @import './skjema/skjema';
-    @import './oppsummering/oppsummering';
+    @import 'sider/skjema/skjema';
+    @import 'sider/oppsummering/oppsummering';
     @import './komponenter/input/datovelger/day-picker';
-    @import './fullfor/fullfor-feilmelding';
-    @import './innholdslaster/innholdslaster';
+    @import 'sider/fullfor/fullfor-feilmelding';
+    @import 'komponenter/innholdslaster/innholdslaster';
     @import './komponenter/knapper/knapper';
 
 
-    @import './avbryt/avbryt';
+    @import 'sider/avbryt/avbryt';
 
     width: @screen-md-min;
     margin: 4em auto;

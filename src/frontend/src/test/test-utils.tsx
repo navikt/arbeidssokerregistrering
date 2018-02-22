@@ -8,7 +8,7 @@ import { AppState } from '../reducer';
 import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import { Data as KrrData, ActionTypes as KrrActionTypes } from '../ducks/krr';
 import IntlProvider from '../Intl-provider';
-import { configIkkeSelvgaende, erIkkeSelvgaende } from '../skjema/skjema-utils';
+import { configIkkeSelvgaende, erIkkeSelvgaende } from '../sider/skjema/skjema-utils';
 
 export const store = getStore();
 
