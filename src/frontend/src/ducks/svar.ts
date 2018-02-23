@@ -8,7 +8,6 @@ export interface State {
     2?: string;
     3?: string;
     4?: string;
-    5?: string;
 }
 
 export interface Data {
@@ -26,7 +25,6 @@ const initialState = {
         2: undefined,
         3: undefined,
         4: undefined,
-        5: undefined,
 };
 
 export default function (state: State = initialState, action: Action): State {

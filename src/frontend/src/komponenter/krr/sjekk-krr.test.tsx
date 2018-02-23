@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { expect } from 'chai';
-import { dispatchKrrStatus, mountWithStoreAndIntl, promiseWithSetTimeout } from '../test/test-utils';
+import { dispatchKrrStatus, mountWithStoreAndIntl, promiseWithSetTimeout } from '../../test/test-utils';
 import SjekkKrrStatus from './sjekk-krr-status';
 import ReservertKrr from './reservert-krr';
 

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import PanelBlokk from '../felles/panel-blokk';
+import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import SblRegistrering from './sbl-registrering';
-import { environmentTestData } from '../SetupTests';
-import { SBLARBEID_URL } from '../ducks/api';
+import { environmentTestData } from '../../SetupTests';
+import { SBLARBEID_URL } from '../../ducks/api';
 
 enzyme.configure({ adapter: new Adapter()});
 

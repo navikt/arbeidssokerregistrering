@@ -8,11 +8,10 @@
 *
 * */
 export const configIkkeSelvgaende = {
-    1: ['6'],
-    2: ['1', '2'],
-    3: ['2'],
-    4: ['2', '3'],
-    5: ['1'],
+    1: ['1', '2'],
+    2: ['2'],
+    3: ['2', '3'],
+    4: ['1'],
 };
 
 export const erIkkeSelvgaende = (avgittSvar: string, svarSomGirIkkeSelvgaende: string[]) => {

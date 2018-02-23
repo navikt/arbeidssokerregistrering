@@ -84,17 +84,14 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (id) => true
         };
 
-        store.dispatch(endreSvarAction('1', '1'));
-        store.dispatch(endreSvarAction('2', '1'));
-        store.dispatch(endreSvarAction('3', '1'));
-        store.dispatch(endreSvarAction('4', '1'));
-        store.dispatch(endreSvarAction('5', '1'));
+        antallSporsmal.forEach(((a, b) => {
+            store.dispatch(endreSvarAction((b + 1).toString(), '1'));
+        }));
 
         const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
-    
     it('Skal navigere til første side (skjema/1), dersom id ikke finnes (f.eks skjema/finnesIkke)', () => {
         const push = sinon.spy();
         const props = {
