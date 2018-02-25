@@ -81,17 +81,32 @@ describe('<Skjema />', () => {
                     id: lastId
                 }
             },
-            sporsmalErBesvart: (id) => true
         };
 
-        antallSporsmal.forEach(((a, b) => {
-            store.dispatch(endreSvarAction((b + 1).toString(), '1'));
-        }));
+        besvarAlleSporsmal(antallSporsmal.length);
 
         const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
+
+    it('Neste knapp på siste side skal være disablet når siste svaret er ikke er besvart', () => {
+        const lastId = Object.keys(antallSporsmal).length.toString();
+        const props = {
+            match: {
+                params: {
+                    id: lastId
+                }
+            },
+        };
+
+        besvarAlleUnntattSisteSporsmal(antallSporsmal.length);
+
+        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
+        const knappNeste = wrapper.find(KnappNeste);
+        expect(knappNeste.props().disabled).to.be.true;
+    });
+
     it('Skal navigere til første side (skjema/1), dersom id ikke finnes (f.eks skjema/finnesIkke)', () => {
         const push = sinon.spy();
         const props = {
@@ -176,3 +191,12 @@ describe('<Skjema />', () => {
 
     });
 });
+
+const besvarAlleSporsmal = (antallSporsmal) => {
+    for(let i = 1; i <= antallSporsmal; i++){
+        store.dispatch(endreSvarAction(i.toString(), '1'));
+    }
+};
+const besvarAlleUnntattSisteSporsmal = (antallSporsmal) => {
+    besvarAlleSporsmal(antallSporsmal - 1)
+};
