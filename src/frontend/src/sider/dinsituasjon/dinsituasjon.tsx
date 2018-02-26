@@ -1,28 +1,20 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
-import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import { MatchProps } from '../skjema/skjema';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
-import { AppState } from '../../reducer';
-import { hentFornavn } from '../../utils/utils';
-import { AVBRYT_PATH, DINSITUASJON_PATH } from '../../utils/konstanter';
+import { AVBRYT_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import { getIntlMessage } from '../../utils/utils';
 
-interface StateProps {
-    innloggingsInfo: InnloggingsInfoState;
-}
+type DinSituasjonProps = RouteComponentProps<MatchProps> & InjectedIntlProps;
 
-type StartProps = StateProps & null;
-
-export class Start extends React.Component<RouteComponentProps<MatchProps> & StartProps> {
+export class DinSituasjon extends React.PureComponent<DinSituasjonProps> {
     render () {
-        const { history, innloggingsInfo } = this.props;
-        const { name } = innloggingsInfo.data;
+        const { history, intl } = this.props;
         return (
             <PanelBlokkGruppe
                 knappAksjoner={
@@ -34,32 +26,32 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                             onClick={() => history.push(`${AVBRYT_PATH}`)}
                         >
                             <Normaltekst>
-                                <FormattedMessage id="knapp-avbryt"/>
+                                {getIntlMessage(intl.messages, 'knapp-avbryt')}
                             </Normaltekst>
                         </Knapp>,
                         <KnappNeste
                             key="2"
                             className="mml"
                             onClick={(() => {
-                                history.push(DINSITUASJON_PATH);
+                                history.push(`${SKJEMA_PATH}/1`);
                             })}
                         />
                     ]
                 }
             >
                 <PanelBlokk
-                    tittelId="overskrift-start"
-                    tittelVerdier={{fornavn: hentFornavn(name)}}
-                    tittelCssNavnVariant="bla-variant"
-                    beskrivelseId="beskrivelse-start"
-                />
+                    tittelId="dinsituasjon-header"
+                    beskrivelseId="dinsituasjon-ingress"
+                >
+                    <ul className="typo-normal blokk pml mmt">
+                        <li>{getIntlMessage(intl.messages, 'dinsituasjon-liste-1')}</li>
+                        <li>{getIntlMessage(intl.messages, 'dinsituasjon-liste-2')}</li>
+                    </ul>
+                </PanelBlokk>
+
             </PanelBlokkGruppe>
         );
     }
 }
 
-const mapStateToProps = (state: AppState) => ({
-    innloggingsInfo: selectInnloggingsinfo(state)
-});
-
-export default connect(mapStateToProps, null)(Start);
+export default injectIntl(DinSituasjon);

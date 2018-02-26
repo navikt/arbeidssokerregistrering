@@ -1,6 +1,8 @@
+/*tslint:disable*/
 import { expect } from 'chai';
+import antallSporsmal from '../../src/sporsmal/alle-sporsmal';
 
-import { getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn } from './utils';
+import {getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     OPPSUMMERING,
@@ -58,4 +60,27 @@ describe('utils test', () => {
     it('test blank oppsummering', () => {
         expect(OPPSUMMERING).to.equal(' ');
     });
+
+    it('test mapSvar', () => {
+        let dummySvar = lagDummySvar(antallSporsmal.length);
+
+        const expectData = {
+            nusKode: getMapNusKode(dummySvar[1]),
+            yrkesPraksis: YRKESPRAKSIS,
+            enigIOppsummering: true,
+            oppsummering: OPPSUMMERING,
+            utdanningBestatt: getMapJaNeiKanskje(dummySvar[2]),
+            utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
+            harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
+        };
+        expect(mapSvar(dummySvar)).to.deep.equal(expectData);
+    });
 });
+
+function lagDummySvar(lengde) {
+    let result = {};
+    for (let i = 1; i <= lengde; i++) {
+        result[i] = '1';
+    }
+    return result;
+}

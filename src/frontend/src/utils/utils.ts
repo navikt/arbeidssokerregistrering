@@ -1,10 +1,12 @@
 import {
-    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    OPPSUMMERING,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
-    VIL_BYTTE_JOBB
+    VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
+import { State as SvarState  } from '../ducks/svar';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -57,3 +59,25 @@ export const getMapJaNeiKanskje = (svarAlternativ: string) => {
     };
     return map[svarAlternativ];
 };
+
+export function mapSvar(svar: SvarState) {
+    const svr1 = svar[1];
+    const svr2 = svar[2];
+    const svr3 = svar[3];
+    const svr4 = svar[4];
+
+    let data = {};
+    if (svr1 && svr2 && svr3 && svr4) {
+        data = {
+            nusKode: getMapNusKode(svr1),
+            yrkesPraksis: YRKESPRAKSIS,
+            enigIOppsummering: true,
+            oppsummering: OPPSUMMERING,
+            utdanningBestatt: getMapJaNeiKanskje(svr2),
+            utdanningGodkjentNorge: getMapJaNeiKanskje(svr3),
+            harHelseutfordringer: getMapJaNeiKanskje(svr4),
+            situasjon: BLANK // inntil videre skal fjernes i backend
+        };
+    }
+    return data;
+}
