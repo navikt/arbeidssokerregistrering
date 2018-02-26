@@ -4,7 +4,7 @@ import antallSporsmal from '../../src/sporsmal/alle-sporsmal';
 
 import {getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
 import {
-    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     OPPSUMMERING,
     PERMITTERT,
     SAGT_OPP,
@@ -72,6 +72,7 @@ describe('utils test', () => {
             utdanningBestatt: getMapJaNeiKanskje(dummySvar[2]),
             utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
             harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
+            situasjon: BLANK // inntil videre skal fjernes i backend
         };
         expect(mapSvar(dummySvar)).to.deep.equal(expectData);
     });
