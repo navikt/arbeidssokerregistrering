@@ -72,7 +72,6 @@ describe('utils test', () => {
             utdanningBestatt: getMapJaNeiKanskje(dummySvar[2]),
             utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
             harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
-            situasjon: BLANK // inntil videre skal fjernes i backend
         };
         expect(mapSvar(dummySvar)).to.deep.equal(expectData);
     });

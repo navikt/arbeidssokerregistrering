@@ -1,5 +1,5 @@
 import {
-    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     OPPSUMMERING,
     PERMITTERT,
     SAGT_OPP,
@@ -76,7 +76,6 @@ export function mapSvar(svar: SvarState) {
             utdanningBestatt: getMapJaNeiKanskje(svr2),
             utdanningGodkjentNorge: getMapJaNeiKanskje(svr3),
             harHelseutfordringer: getMapJaNeiKanskje(svr4),
-            situasjon: BLANK // inntil videre skal fjernes i backend
         };
     }
     return data;

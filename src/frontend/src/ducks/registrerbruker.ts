@@ -21,9 +21,7 @@ export interface Data {
     oppsummering?: string;
     utdanningBestatt?: boolean;
     utdanningGodkjentNorge?: boolean;
-    harJobbetSammenhengende?: boolean;
     harHelseutfordringer?: boolean;
-    situasjon?: string;
 }
 
 interface Action {
