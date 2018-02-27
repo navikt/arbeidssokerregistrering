@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
@@ -13,14 +13,24 @@ import { hentFornavn } from '../../utils/utils';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { SBLREG_PATH, SISTEARBFORHOLD_PATH } from '../../utils/konstanter';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import { settOppsummering } from '../../ducks/oppsummering';
 
 interface StateProps {
     innloggingsInfo: InnloggingsInfoState;
 }
 
+interface DispatchProps {
+    settOppsummering: (data: string ) => void;
+}
+
 type OppsummeringProps = StateProps & null;
 
-class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & OppsummeringProps> {
+type EgenProps = OppsummeringProps & DispatchProps;
+
+class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & EgenProps> {
+    componentDidMount() {
+        // this.props.settOppsummering('test');
+    }
     render() {
         const { history, innloggingsInfo } = this.props;
         const { name } = innloggingsInfo.data;
@@ -96,4 +106,8 @@ const mapStateToProps = (state: AppState) => ({
     innloggingsInfo: selectInnloggingsinfo(state)
 });
 
-export default connect(mapStateToProps, null)(Oppsummering);
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    settOppsummering: (tekst) => dispatch(settOppsummering(tekst)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Oppsummering);
