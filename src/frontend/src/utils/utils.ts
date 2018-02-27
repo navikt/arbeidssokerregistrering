@@ -1,12 +1,12 @@
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
-    OPPSUMMERING,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
     VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
 import { State as SvarState  } from '../ducks/svar';
+import { State as OppsummeringState  } from '../ducks/oppsummering';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -60,7 +60,7 @@ export const getMapJaNeiKanskje = (svarAlternativ: string) => {
     return map[svarAlternativ];
 };
 
-export function mapSvar(svar: SvarState) {
+export function mapSvar(svar: SvarState, oppsummering: OppsummeringState) {
     const svr1 = svar[1];
     const svr2 = svar[2];
     const svr3 = svar[3];
@@ -72,7 +72,7 @@ export function mapSvar(svar: SvarState) {
             nusKode: getMapNusKode(svr1),
             yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
-            oppsummering: OPPSUMMERING,
+            oppsummering: oppsummering.tekst,
             utdanningBestatt: getMapJaNeiKanskje(svr2),
             utdanningGodkjentNorge: getMapJaNeiKanskje(svr3),
             harHelseutfordringer: getMapJaNeiKanskje(svr4),

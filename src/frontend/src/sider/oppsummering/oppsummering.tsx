@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
@@ -9,7 +10,7 @@ import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../duck
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
-import { hentFornavn } from '../../utils/utils';
+import { getIntlMessage, hentFornavn } from '../../utils/utils';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { SBLREG_PATH, SISTEARBFORHOLD_PATH } from '../../utils/konstanter';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
@@ -25,12 +26,21 @@ interface DispatchProps {
 
 type OppsummeringProps = StateProps & null;
 
-type EgenProps = OppsummeringProps & DispatchProps;
+type EgenProps = OppsummeringProps & DispatchProps & InjectedIntlProps;
 
 class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & EgenProps> {
-    componentDidMount() {
-        // this.props.settOppsummering('test');
+
+    componentWillMount() {
+        const { intl } = this.props;
+        const oppsummeringTekst = getIntlMessage(intl.messages, 'det-tyder-pa') + ' ' +
+            getIntlMessage(intl.messages, 'oppgaver-som-skal') + ' ' +
+            getIntlMessage(intl.messages, 'kartlegging-av-deg') + ' ' +
+            getIntlMessage(intl.messages, 'en-digital-plan') + ' ' +
+            getIntlMessage(intl.messages, 'informasjon-om-hva') + ' ' +
+            getIntlMessage(intl.messages, 'du-kan-ta-kontakt');
+        this.props.settOppsummering(oppsummeringTekst);
     }
+
     render() {
         const { history, innloggingsInfo } = this.props;
         const { name } = innloggingsInfo.data;
@@ -110,4 +120,6 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     settOppsummering: (tekst) => dispatch(settOppsummering(tekst)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Oppsummering);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    injectIntl(Oppsummering)
+);

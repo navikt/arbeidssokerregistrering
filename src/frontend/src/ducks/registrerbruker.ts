@@ -61,7 +61,7 @@ export function utforRegistrering(data: Data) {
 
 export function mapBrukerRegistreringsData(state: AppState): State {
     return {
-        data: mapSvar(state.svar),
+        data: mapSvar(state.svar, state.oppsummering),
         status: state.registrerBruker.status
     };
 }

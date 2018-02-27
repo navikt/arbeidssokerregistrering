@@ -4,8 +4,7 @@ import antallSporsmal from '../../src/sporsmal/alle-sporsmal';
 
 import {getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
 import {
-    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
-    OPPSUMMERING,
+    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
@@ -57,24 +56,24 @@ describe('utils test', () => {
     it('test blank yrkespraksis', () => {
         expect(YRKESPRAKSIS).to.equal(' ');
     });
-    it('test blank oppsummering', () => {
-        expect(OPPSUMMERING).to.equal(' ');
-    });
 
     it('test mapSvar', () => {
+
+        const oppsummering = { tekst:  'oppsummer tekst'};
         let dummySvar = lagDummySvar(antallSporsmal.length);
 
         const expectData = {
             nusKode: getMapNusKode(dummySvar[1]),
             yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
-            oppsummering: OPPSUMMERING,
+            oppsummering: oppsummering.tekst,
             utdanningBestatt: getMapJaNeiKanskje(dummySvar[2]),
             utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
             harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
         };
-        expect(mapSvar(dummySvar)).to.deep.equal(expectData);
+        expect(mapSvar(dummySvar, oppsummering)).to.deep.equal(expectData);
     });
+
 });
 
 function lagDummySvar(lengde) {

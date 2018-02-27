@@ -3,11 +3,11 @@ export enum ActionTypes {
 }
 
 export interface State {
-    oppsummering?: string;
+    tekst?: string;
 }
 
 export interface Data {
-    oppsummering: string;
+    tekst: string;
 }
 
 interface Action {
@@ -16,13 +16,13 @@ interface Action {
 }
 
 const initialState = {
-    oppsummering: undefined,
+    tekst: undefined,
 };
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
         case ActionTypes.SETT_OPPSUMMERING: {
-            return {...state, oppsummering: action.data.oppsummering};
+            return {...state, tekst: action.data.tekst};
         }
         default : {
             return state;
@@ -30,11 +30,11 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function settOppsummering(oppsummering: string) {
+export function settOppsummering(tekst: string) {
     return {
         type: ActionTypes.SETT_OPPSUMMERING,
         data: {
-            oppsummering,
+            tekst,
         }
     };
 }
