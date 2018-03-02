@@ -41,11 +41,12 @@ export class DinSituasjon extends React.PureComponent<DinSituasjonProps> {
             >
                 <PanelBlokk
                     tittelId="dinsituasjon-header"
+                    tittelCssNavnVariant="transparent-variant"
                     beskrivelseId="dinsituasjon-ingress"
                 >
                     <ul className="typo-normal blokk pml mmt">
-                        <li>{getIntlMessage(intl.messages, 'dinsituasjon-liste-1')}</li>
-                        <li>{getIntlMessage(intl.messages, 'dinsituasjon-liste-2')}</li>
+                        <li className="din-situasjon-list">{getIntlMessage(intl.messages, 'dinsituasjon-liste-1')}</li>
+                        <li className="din-situasjon-list">{getIntlMessage(intl.messages, 'dinsituasjon-liste-2')}</li>
                     </ul>
                 </PanelBlokk>
 
