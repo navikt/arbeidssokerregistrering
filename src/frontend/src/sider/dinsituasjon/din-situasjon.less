@@ -1,12 +1,16 @@
 .din-situasjon-list {
   list-style-type: none;
   line-height: 1.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+
   &:before {
     content: "";
     width: 16px;
     height: 16px;
-    margin: 0.5rem 0.5rem 0 0 ;
-    display: inline-block;
     background: url("svg/sjekk-sirkel.svg") no-repeat;
+    position: absolute;
+    left: 0;
+    top: 4px;
   }
 }
