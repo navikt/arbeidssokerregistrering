@@ -7,6 +7,7 @@ export const REGVELLYKKET_PATH = '/regvellykket';
 export const AVBRYT_PATH = '/avbryt';
 export const FULLFOR_PATH = '/fullfor';
 export const SISTEARBFORHOLD_PATH = '/sistearbforhold';
+export const UENIG_PATH = '/uenig';
 
 /* Besvarelser */
 

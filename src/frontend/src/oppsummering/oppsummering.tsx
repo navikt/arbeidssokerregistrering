@@ -11,7 +11,7 @@ import { RouteComponentProps } from 'react-router';
 import { AppState } from '../reducer';
 import { hentFornavn } from '../utils/utils';
 import EkspanderbartInfo from '../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { SBLREG_PATH, SISTEARBFORHOLD_PATH } from '../utils/konstanter';
+import { SISTEARBFORHOLD_PATH, UENIG_PATH } from '../utils/konstanter';
 import Tilbakeknapp from '../komponenter/knapper/tilbakeknapp';
 
 interface StateProps {
@@ -33,7 +33,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Opp
                             <Knapp
                                 key="1"
                                 type="standard"
-                                onClick={() => history.push(`${SBLREG_PATH}`)}
+                                onClick={() => history.push(UENIG_PATH)}
                             >
                                 <FormattedMessage id="knapp-uenig"/>
                             </Knapp>,
