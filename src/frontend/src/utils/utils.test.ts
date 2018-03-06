@@ -53,8 +53,8 @@ describe('utils test', () => {
         expect(getMapJaNeiKanskje('3')).to.equal(KANSKJE);
     });
 
-    it('test blank yrkespraksis', () => {
-        expect(YRKESPRAKSIS).to.equal(' ');
+    it('test hardkodet yrkespraksis', () => {
+        expect(YRKESPRAKSIS).to.equal('5120.14');
     });
 
     it('test mapSvar', () => {
