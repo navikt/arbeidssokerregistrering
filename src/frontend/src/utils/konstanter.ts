@@ -11,7 +11,7 @@ export const SISTEARBFORHOLD_PATH = '/sistearbforhold';
 
 /* Besvarelser */
 
-export const YRKESPRAKSIS = ' '; // blank inntil videre
+export const YRKESPRAKSIS = '5120.14'; // hard kodet inntil videre
 
 export const MISTET_JOBBEN = 'MISTET-JOBBEN';
 export const SAGT_OPP = 'SAGT-OPP';
