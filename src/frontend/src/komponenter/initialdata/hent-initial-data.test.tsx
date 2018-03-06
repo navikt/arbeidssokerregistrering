@@ -70,18 +70,33 @@ describe('<HentInitialData />', () => {
                 expect(wrapper.find('StepUp')).to.have.length(1);
             });
     });
-    it('skal sende bruker til veilarbstepup dersom den ikke er innlogget', () => {
+    it('skal rendre <StepUp/> dersom bruker er innlogget på nivå 2', () => {
+        stubFetch(new FetchStub()
+            .addResponse(INNLOGGINGSINFO_URL, { name: 'navn', authenticated: true, securityLevel: '2'})
+            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true})
+            .addResponse('/krr', { reservertIKrr: false }));
+
+        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
+
+        return promiseWithSetTimeout()
+            .then(() => {
+                wrapper.update();
+                expect(wrapper.find('StepUp')).to.have.length(1);
+            });
+    });
+    it('skal rendre <StepUp/> dersom bruker ikke er innlogget', () => {
         stubFetch(new FetchStub()
             .addResponse(INNLOGGINGSINFO_URL, { authenticated: false })
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true})
             .addResponse('/krr', { reservertIKrr: false }));
 
-        resetAndMakeHrefWritable();
-
-        mountWithStoreAndIntl(<HentInitialData />);
+        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
-            .then(() => expect(document.location.href).to.equal(VEILARBSTEPUP));
+            .then(() => {
+                wrapper.update();
+                expect(wrapper.find('StepUp')).to.have.length(1);
+            });
     });
     it('skal ikke hente registreringstatus og krrstatus om bruker ikke er innlogget', () => {
         const fetchStub = new FetchStub()
@@ -115,22 +130,6 @@ describe('<HentInitialData />', () => {
                 expect(fetchStub.getCallcount(INNLOGGINGSINFO_URL)).to.equal(1);
                 expect(fetchStub.getCallcount('/startregistrering')).to.equal(0);
                 expect(fetchStub.getCallcount('/krr')).to.equal(0);
-            });
-    });
-    it('skal sende bruker til veilarbstepup dersom bruker er innlogget på nivå 2', () => {
-        stubFetch(new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, {  name: 'navn', authenticated: true, securityLevel: '2'  })
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true})
-            .addResponse('/krr', { reservertIKrr: false }));
-
-        resetAndMakeHrefWritable();
-
-        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
-
-        return promiseWithSetTimeout()
-            .then(() => {
-                wrapper.update();
-                expect(document.location.href).to.equal(VEILARBSTEPUP);
             });
     });
 });

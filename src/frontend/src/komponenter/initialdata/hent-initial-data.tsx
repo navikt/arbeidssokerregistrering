@@ -14,8 +14,8 @@ import {
     State as RegistreringstatusState } from '../../ducks/registreringstatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import Feilmelding from './feilmelding';
-import { VEILARBSTEPUP } from '../../ducks/api';
 import StepUp from './stepup';
+import { STATUS } from '../../ducks/api-utils';
 
 interface StateProps {
     innloggingsinfo: InnloggingsinfoState;
@@ -44,12 +44,9 @@ export class HentInitialData extends React.Component<Props> {
 
     render() {
         const { children, registreringstatus, innloggingsinfo, krr, intl } = this.props;
-        const { authenticated, securityLevel } = innloggingsinfo.data;
+        const { securityLevel } = innloggingsinfo.data;
 
-        if (authenticated === false || securityLevel === '2' || securityLevel === '1') {
-            document.location.href = VEILARBSTEPUP;
-            return null;
-        } else if (securityLevel === '3') {
+        if (securityLevel !== '4' && innloggingsinfo.status === STATUS.OK) {
             return <StepUp intl={intl} />;
         }
 

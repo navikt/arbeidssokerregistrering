@@ -28,7 +28,7 @@ function Avbryt({history}: Props) {
                 </Normaltekst>
             </div>
             <div className="avbryt-panel__knapperad">
-                <Knapp type="standard" className="knapp mmr" onClick={() => document.location.href = DITTNAV_URL}>
+                <Knapp type="standard" className="knapp" onClick={() => document.location.href = DITTNAV_URL}>
                     <FormattedMessage id="knapp-ja-avbryt"/>
                 </Knapp>
                 <Knapp type="standard" className="knapp" onClick={() => history.goBack()}>

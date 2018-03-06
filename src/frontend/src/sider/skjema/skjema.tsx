@@ -100,7 +100,7 @@ class Skjema extends React.Component<Props> {
 
                 <Knapperad>
                     <KnappAvbryt
-                        classname="mmr"
+                        classname="knapp mmr"
                         onClick={(() => {
                             history.push(`${AVBRYT_PATH}`);
                         })}
