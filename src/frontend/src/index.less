@@ -27,24 +27,25 @@ main.arbsokreg_app:focus {
 }
 
 main.arbsokreg_app {
-    @import 'felles/utils';
-    @import 'felles/panel-blokk';
-    @import '/komponenter/alertstripe';
+    @import 'komponenter/panel-blokk/utils';
+    @import 'komponenter/panel-blokk/panel-blokk';
+    @import 'komponenter/alertstripe';
+    @import 'komponenter/input/datovelger/day-picker';
+    @import 'komponenter/innholdslaster/innholdslaster';
+    @import 'komponenter/knapper/knapper';
 
-    @import './skjema/skjema';
-    @import './oppsummering/oppsummering';
-    @import './komponenter/input/datovelger/day-picker';
-    @import './fullfor/fullfor-feilmelding';
-    @import './innholdslaster/innholdslaster';
-    @import './komponenter/knapper/knapper';
+    @import 'sider/skjema/skjema';
+    @import 'sider/oppsummering/oppsummering';
+    @import 'sider/fullfor/fullfor-feilmelding';
+    @import 'sider/dinsituasjon/din-situasjon';
 
 
-    @import './avbryt/avbryt';
+    @import 'sider/avbryt/avbryt';
 
     width: @screen-md-min;
     margin: 4em auto;
 
-    @media (max-width: @screen-sm-min) {
+    @media (max-width: @screen-md-min) {
         width: 100%
     }
 }
