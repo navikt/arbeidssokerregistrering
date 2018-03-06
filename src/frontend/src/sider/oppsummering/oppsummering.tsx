@@ -36,8 +36,11 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
             getIntlMessage(intl.messages, 'oppgaver-som-skal') + ' ' +
             getIntlMessage(intl.messages, 'kartlegging-av-deg') + ' ' +
             getIntlMessage(intl.messages, 'en-digital-plan') + ' ' +
-            getIntlMessage(intl.messages, 'informasjon-om-hva') + ' ' +
-            getIntlMessage(intl.messages, 'du-kan-ta-kontakt');
+            getIntlMessage(intl.messages, 'du-kan-ta-kontakt') + ' ' +
+            getIntlMessage(intl.messages, 'hva-betyr-dette') + ' ' +
+            getIntlMessage(intl.messages, 'vi-har-basert') + ' ' +
+            getIntlMessage(intl.messages, 'hvis-du-er-enig') + ' ' +
+            getIntlMessage(intl.messages, 'svaret-ditt-har-ingen-betydning');
         this.props.settOppsummering(oppsummeringTekst);
     }
 
