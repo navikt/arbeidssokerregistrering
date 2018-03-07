@@ -3,7 +3,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import { RouteComponentProps } from 'react-router';
-import { VEIENTILARBEID_URL } from '../../ducks/api';
+import { VEIENTILARBEID_MED_OVERLAY_URL } from '../../ducks/api';
 
 function RegVellykket({history}: RouteComponentProps<History>) {
     return (
@@ -12,7 +12,7 @@ function RegVellykket({history}: RouteComponentProps<History>) {
                 <KnappNeste
                     key="2"
                     onClick={(() => {
-                        document.location.href = VEIENTILARBEID_URL;
+                        document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
                     })}
                 />
             }
