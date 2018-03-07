@@ -30,6 +30,7 @@ import Knapperad from '../../komponenter/knapper/knapperad';
 import { Panel } from 'nav-frontend-paneler';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import { selectSisteStillingNavnFraPam } from '../../ducks/stilling-fra-pam';
 
 const FORM_NAME = 'sisteArbeidsforhold';
 
@@ -163,7 +164,7 @@ const mapStateToProps = (state) => {
         currentTilDato: isoDateStringToDate(selector(state, 'tilDato')),
         initialValues: {
             arbeidsgiver: selectSisteArbeidsforhold(state).data.arbeidsgiver,
-            stilling: selectSisteArbeidsforhold(state).data.stilling,
+            stilling: selectSisteStillingNavnFraPam(state),
             fraDato: localDateStringToDate(selectSisteArbeidsforhold(state).data.fra),
             tilDato: localDateStringToDate(selectSisteArbeidsforhold(state).data.til)
         }

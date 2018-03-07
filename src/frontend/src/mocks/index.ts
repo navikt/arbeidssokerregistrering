@@ -4,12 +4,14 @@ import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
 import sisteArbeidsforhold from './siste-arbeidsforhold';
+import stillingFraPam from './stilling-fra-pam';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
+const MOCK_GET_STILLING_FRA_PAM = true;
 
 
 if (MOCK_START_REGISRERING_STATUS) {
@@ -32,6 +34,10 @@ if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
     (mock as any).post('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, (url, config, params) => {
         return params.bodyParams;
     })));
+}
+
+if(MOCK_GET_STILLING_FRA_PAM) {
+    (mock as any).get('glob:/pam-janzz/rest*', respondWith(delayed(500, stillingFraPam)));
 }
 
 

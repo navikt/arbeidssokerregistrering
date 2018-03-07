@@ -12,6 +12,7 @@ export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
+const PAM_JANZZ_URL = '/pam-janzz/rest';
 
 export const getCookie = name => {
     const re = new RegExp(`${name}=([^;]+)`);
@@ -56,7 +57,15 @@ export function hentSisteArbeidsforhold() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
         config: MED_CREDENTIALS,
-        recoverWith: () => ({arbeidsgiver: null, stilling: null, fra: null, til: null})
+        recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
+    });
+}
+
+export function hentStillingFraPAM(styrk: string) {
+    return fetchToJson({
+        url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
+        config: MED_CREDENTIALS,
+        recoverWith: () => ({koder: []})
     });
 }
 
