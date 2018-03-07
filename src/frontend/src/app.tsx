@@ -4,7 +4,6 @@ import IntlProvider from './Intl-provider';
 import getStore from './store';
 import StartRegistrering from './sider/start/start';
 import DinSituasjon from './sider/dinsituasjon/dinsituasjon';
-import RegVellykket from './sider/regvellykket/regvellykket';
 import Avbryt from './sider/avbryt/avbryt';
 import Fullfor from './sider/fullfor/fullfor';
 import {
@@ -20,7 +19,7 @@ import './decorator/decorator-mock';
 import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
-    basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH, REGVELLYKKET_PATH,
+    basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
     AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH
 } from './utils/konstanter';
 import SisteArbeidsforhold from './sider/arbeidsforhold/siste-arbeidsforhold';
@@ -43,7 +42,6 @@ class App extends React.Component {
                                             <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaPanel}/>
                                             <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
                                             <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                                            <Route path={REGVELLYKKET_PATH} component={RegVellykket}/>
                                             <Route path={AVBRYT_PATH} component={Avbryt} />
                                             <Route path={FULLFOR_PATH} component={Fullfor}/>
                                             <Route path={SISTEARBFORHOLD_PATH} component={SisteArbeidsforhold} />
