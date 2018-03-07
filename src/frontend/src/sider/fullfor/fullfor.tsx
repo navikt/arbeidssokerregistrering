@@ -11,7 +11,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { Checkbox } from 'nav-frontend-skjema';
-import { AVBRYT_PATH, REGVELLYKKET_PATH, START_PATH } from '../../utils/konstanter';
+import { AVBRYT_PATH, START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import {
     utforRegistrering,
@@ -22,6 +22,7 @@ import { getIntlMessage } from '../../utils/utils';
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import { VEIENTILARBEID_MED_OVERLAY_URL } from '../../ducks/api';
 
 interface StateProps {
     registrerBruker: RegistrerBrukerState;
@@ -58,7 +59,8 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    this.props.history.push(REGVELLYKKET_PATH);
+
+                    document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
                 }
             });
     }

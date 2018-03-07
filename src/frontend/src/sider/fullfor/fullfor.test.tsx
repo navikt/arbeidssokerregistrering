@@ -14,8 +14,8 @@ import {
     stubFetch
 } from "../../test/test-utils";
 import {create} from "../../store";
-import {REGVELLYKKET_PATH} from "../../utils/konstanter";
 import {endreSvarAction} from "../../ducks/svar";
+import {SBLARBEID_URL, VEIENTILARBEID_MED_OVERLAY_URL} from "../../ducks/api";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -87,20 +87,18 @@ describe('<Fullfor />', () => {
             });
     });
 
-    it('Skal vise registrering vellykket', () => {
+    it('Skal gå til veientilarbeid med overlay hvis registrering fullføres', () => {
         const store = create();
-        const push = sinon.spy();
-        const props = {
-            history: {
-                push
-            }
-        };
+
+        Object.defineProperty(document.location, 'href', {
+            writable: true,
+        });
 
         dispatchTilfeldigeSvar(store);
 
         stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
-        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
+        const wrapper = mountWithStoreAndIntl(<Fullfor />, store);
 
         // marker sjekkboks
         const sjekkboks = wrapper.find(Checkbox);
@@ -113,8 +111,8 @@ describe('<Fullfor />', () => {
         // forventet resultat
         return promiseWithSetTimeout()
             .then(() => {
-                wrapper.update()
-                expect(push.firstCall.args[0]).to.be.equal(`${REGVELLYKKET_PATH}`);
+                wrapper.update();
+                expect(document.location.href).to.equal(VEIENTILARBEID_MED_OVERLAY_URL);
             });
     });
 
