@@ -7,7 +7,6 @@ import {
     selectInnloggingsinfo,
     State as InnloggingsinfoState,
     Data as InnloggingsinfoData } from '../../ducks/innloggingsinfo';
-import { State as KrrState, hentKrrStatus, selectKrr } from '../../ducks/krr';
 import {
     hentRegistreringStatus,
     selectRegistreringstatus,
@@ -20,14 +19,12 @@ import { STATUS } from '../../ducks/api-utils';
 interface StateProps {
     innloggingsinfo: InnloggingsinfoState;
     registreringstatus: RegistreringstatusState;
-    krr: KrrState;
 
 }
 
 interface DispatchProps {
     hentInnloggingsInfo: () => Promise<void | {}>;
     hentRegistreringStatus: () => void;
-    hentKrrStatus: () => void;
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
@@ -37,13 +34,12 @@ export class HentInitialData extends React.Component<Props> {
         this.props.hentInnloggingsInfo().then( (res) => {
             if ((res as InnloggingsinfoData).securityLevel === '4') {
                 this.props.hentRegistreringStatus();
-                this.props.hentKrrStatus();
             }
         });
     }
 
     render() {
-        const { children, registreringstatus, innloggingsinfo, krr, intl } = this.props;
+        const { children, registreringstatus, innloggingsinfo, intl } = this.props;
         const { securityLevel } = innloggingsinfo.data;
 
         if (securityLevel !== '4' && innloggingsinfo.status === STATUS.OK) {
@@ -53,7 +49,7 @@ export class HentInitialData extends React.Component<Props> {
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[registreringstatus, innloggingsinfo, krr]}
+                avhengigheter={[registreringstatus, innloggingsinfo]}
                 storrelse="XXL"
             >
                 {children}
@@ -64,15 +60,12 @@ export class HentInitialData extends React.Component<Props> {
 
 const mapStateToProps = (state) => ({
     innloggingsinfo:  selectInnloggingsinfo(state),
-    registreringstatus: selectRegistreringstatus(state),
-    krr: selectKrr(state)
+    registreringstatus: selectRegistreringstatus(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentInnloggingsInfo:  () => dispatch(hentInnloggingsInfo()),
-    hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
-    hentKrrStatus: () => dispatch(hentKrrStatus()),
-
+    hentRegistreringStatus: () => dispatch(hentRegistreringStatus())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
