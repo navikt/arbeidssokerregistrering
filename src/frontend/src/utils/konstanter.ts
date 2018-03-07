@@ -4,6 +4,7 @@ export const SKJEMA_PATH = '/skjema';
 export const OPPSUMMERING_PATH = '/oppsummering';
 export const SBLREG_PATH = '/sblregistrering';
 export const REGVELLYKKET_PATH = '/regvellykket';
+export const DINSITUASJON_PATH = '/dinsituasjon';
 export const AVBRYT_PATH = '/avbryt';
 export const FULLFOR_PATH = '/fullfor';
 export const SISTEARBFORHOLD_PATH = '/sistearbforhold';
@@ -11,8 +12,7 @@ export const UENIG_PATH = '/uenig';
 
 /* Besvarelser */
 
-export const YRKESPRAKSIS = ' '; // blank inntil videre
-export const OPPSUMMERING = ' '; // blank inntil videre
+export const YRKESPRAKSIS = '5120.14'; // hard kodet inntil videre
 
 export const MISTET_JOBBEN = 'MISTET-JOBBEN';
 export const SAGT_OPP = 'SAGT-OPP';
