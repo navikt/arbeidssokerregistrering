@@ -19,7 +19,6 @@ import SblRegistrering from './sider/oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
 import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
-import SjekkKrrStatus from './komponenter/krr/sjekk-krr-status';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH, REGVELLYKKET_PATH,
     AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH
@@ -36,7 +35,6 @@ class App extends React.Component {
                 <Provider store={store}>
                     <IntlProvider >
                         <HentInitialData>
-                            <SjekkKrrStatus>
                                 <SjekkRegistreringstatus>
                                     <Router basename={basename}>
                                         <Switch>
@@ -54,7 +52,6 @@ class App extends React.Component {
                                         </Switch>
                                     </Router>
                                 </SjekkRegistreringstatus>
-                            </SjekkKrrStatus>
                         </HentInitialData>
                     </IntlProvider>
                 </Provider>

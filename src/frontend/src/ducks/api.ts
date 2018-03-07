@@ -1,6 +1,6 @@
 import { fetchToJson } from './api-utils';
-import { Data as SisteArbeidsforholdData } from '../ducks/siste-arbeidsforhold';
-import { Data as RegistrerBrukerData } from '../ducks/registrerbruker';
+import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold';
+import { Data as RegistrerBrukerData } from './registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/nav_security_check';
@@ -64,21 +64,4 @@ export function registrerSisteArbeidsforhold(data: SisteArbeidsforholdData) {
         url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
         config: { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(data)}
     });
-}
-
-export function hentKrrStatus() {
-    return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/krr`,
-        recoverWith: krrRecoverWith,
-        config: MED_CREDENTIALS});
-}
-
-function krrRecoverWith(status: number) {
-    if (status === 404) {
-        return { reservertIKrr: true};
-    } else if (status >= 500) {
-        return { reservertIKrr: false };
-    } else {
-        return null;
-    }
 }

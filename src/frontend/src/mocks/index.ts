@@ -8,7 +8,6 @@ import sisteArbeidsforhold from './siste-arbeidsforhold';
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_INNLOGGINGS_INFO = true;
-const MOCK_HENT_KRR_STATUS = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 
@@ -23,10 +22,6 @@ if (MOCK_REGISTRER_BRUKER) {
 
 if (MOCK_INNLOGGINGS_INFO) {
     (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(1000, innloggingsInfo)));
-}
-
-if(MOCK_HENT_KRR_STATUS) {
-    (mock as any).get('/veilarboppfolgingproxy/api/krr', respondWith(delayed(1000, { reservertIKrr: false})));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {

@@ -6,7 +6,6 @@ import getStore from '../store';
 import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
 import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
-import { Data as KrrData, ActionTypes as KrrActionTypes } from '../ducks/krr';
 import IntlProvider from '../Intl-provider';
 import { configIkkeSelvgaende, erIkkeSelvgaende } from '../sider/skjema/skjema-utils';
 
@@ -74,10 +73,6 @@ export function resetAndMakeHrefWritable() {
 
 export function dispatchRegistreringstatus(data: RegStatusData) {
     return store.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
-}
-
-export function dispatchKrrStatus(data: KrrData) {
-    return store.dispatch({type: KrrActionTypes.HENT_KRR_STATUS_OK, data});
 }
 
 export function withResponse(response: {}) {
