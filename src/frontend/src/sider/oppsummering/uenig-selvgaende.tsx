@@ -4,8 +4,8 @@ import { RouteComponentProps } from 'react-router';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
-import Knapperad from '../komponenter/knapper/knapperad';
-import { AVBRYT_PATH, SBLREG_PATH } from '../utils/konstanter';
+import Knapperad from '../../komponenter/knapper/knapperad';
+import { AVBRYT_PATH, SBLREG_PATH } from '../../utils/konstanter';
 import { Link } from 'react-router-dom';
 
 function UenigSelvgaende({history}: RouteComponentProps<MatchProps>) {

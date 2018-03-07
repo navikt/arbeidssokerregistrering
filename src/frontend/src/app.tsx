@@ -25,7 +25,7 @@ import {
     AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH
 } from './utils/konstanter';
 import SisteArbeidsforhold from './sider/arbeidsforhold/siste-arbeidsforhold';
-import UenigSelvgaende from './oppsummering/uenig-selvgaende';
+import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 
 const store = getStore();
 
