@@ -21,9 +21,10 @@ import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-regis
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH, REGVELLYKKET_PATH,
-    AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH
+    AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH
 } from './utils/konstanter';
 import SisteArbeidsforhold from './sider/arbeidsforhold/siste-arbeidsforhold';
+import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 
 const store = getStore();
 
@@ -34,22 +35,23 @@ class App extends React.Component {
                 <Provider store={store}>
                     <IntlProvider >
                         <HentInitialData>
-                            <SjekkRegistreringstatus>
-                                <Router basename={basename}>
-                                    <Switch>
-                                        <Route path={START_PATH} component={StartRegistrering}/>
-                                        <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
-                                        <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaPanel}/>
-                                        <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                                        <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                                        <Route path={REGVELLYKKET_PATH} component={RegVellykket}/>
-                                        <Route path={AVBRYT_PATH} component={Avbryt}/>
-                                        <Route path={FULLFOR_PATH} component={Fullfor}/>
-                                        <Route path={SISTEARBFORHOLD_PATH} component={SisteArbeidsforhold}/>
-                                        <Redirect exact={true} from="/" to={START_PATH}/>
-                                    </Switch>
-                                </Router>
-                            </SjekkRegistreringstatus>
+                                <SjekkRegistreringstatus>
+                                    <Router basename={basename}>
+                                        <Switch>
+                                            <Route path={START_PATH} component={StartRegistrering}/>
+                                            <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
+                                            <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaPanel}/>
+                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                            <Route path={REGVELLYKKET_PATH} component={RegVellykket}/>
+                                            <Route path={AVBRYT_PATH} component={Avbryt} />
+                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Route path={SISTEARBFORHOLD_PATH} component={SisteArbeidsforhold} />
+                                            <Route path={UENIG_PATH} component={UenigSelvgaende} />
+                                            <Redirect exact={true} from="/" to={START_PATH}/>
+                                        </Switch>
+                                    </Router>
+                                </SjekkRegistreringstatus>
                         </HentInitialData>
                     </IntlProvider>
                 </Provider>
