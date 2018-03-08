@@ -12,13 +12,9 @@ import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import { Sidetittel } from 'nav-frontend-typografi';
 import { connect } from 'react-redux';
-import PeriodeValidering from '../../komponenter/input/datovelger/periodevalidering';
-import Datovelger from '../../komponenter/input/datovelger/datovelger';
 import { formValueSelector } from 'redux-form';
 import {
     dateToLocalDateString,
-    isAfterDate,
-    isBeforeDate,
     isoDateStringToDate,
     localDateStringToDate,
 } from '../../komponenter/input/datovelger/utils';
@@ -93,37 +89,9 @@ function SisteArbeidsforholdForm({
                         <div>
                             {errorSummary}
                             <Input
-                                feltNavn="arbeidsgiver"
-                                label={getIntlMessage(intl.messages, 'siste-arbeidsforhold.arbeidsgiver')}
-                            />
-                            <Input
                                 feltNavn="stilling"
                                 label={getIntlMessage(intl.messages, 'siste-arbeidsforhold.stilling')}
                             />
-                            <PeriodeValidering
-                                feltNavn="periodeValidering"
-                                fraDato={currentFraDato}
-                                tilDato={currentTilDato}
-                                errorMessageId="datepicker.feilmelding.egen.fradato-etter-frist"
-                            >
-                                <div className="dato-container">
-                                    <Datovelger
-                                        feltNavn="fraDato"
-                                        labelId="siste-arbeidsforhold.fra-dato"
-                                        disabledDays={(value) => isAfterDate(currentTilDato)(value)
-                                        || isAfterDate(new Date())(value)}
-                                        initialMonth={currentFraDato}
-                                    />
-                                    <Datovelger
-                                        className="align-left"
-                                        feltNavn="tilDato"
-                                        labelId="siste-arbeidsforhold.til-dato"
-                                        disabledDays={(value) => isBeforeDate(currentFraDato)(value)
-                                        || isAfterDate(new Date())(value)}
-                                        initialMonth={currentTilDato}
-                                    />
-                                </div>
-                            </PeriodeValidering>
                         </div>
                     </Panel>
                     <EkspanderbartInfo

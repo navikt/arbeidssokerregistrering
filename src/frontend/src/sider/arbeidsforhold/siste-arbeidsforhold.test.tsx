@@ -26,7 +26,10 @@ describe('<SisteArbeidsforhold />', () => {
     it('skal hente siste arbeidsforhold og state', () => {
         const store = create();
         const state = {dummy: 'dummy'};
-        const fetchStub = new FetchStub().addResponse('sistearbeidsforhold', state);
+        const fetchStub = new FetchStub()
+            .addResponse('sistearbeidsforhold', state)
+            .addResponse('kryssklassifiser', {});
+
         stubFetch( fetchStub);
 
         mountWithStoreAndIntl(<SisteArbeidsforhold />, store);

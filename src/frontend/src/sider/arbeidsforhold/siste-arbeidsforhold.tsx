@@ -2,9 +2,9 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import {
-hentSisteArbeidsforhold,
-selectSisteArbeidsforhold,
-State as SisteArbeidsforholdState
+    hentSisteArbeidsforhold,
+    selectSisteArbeidsforhold,
+    State as SisteArbeidsforholdState
 } from '../../ducks/siste-arbeidsforhold';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../komponenter/initialdata/feilmelding';
@@ -39,7 +39,6 @@ class SisteArbeidsforhold extends React.Component<Props> {
 
     componentWillMount() {
         if (this.props.sisteArbeidsforhold.status === STATUS.NOT_STARTED) {
-            
             this.props.hentSisteArbeidsforhold()
                 .then(() => {
                     const { styrk } = this.props.sisteArbeidsforhold.data;
@@ -49,7 +48,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
     }
 
     render() {
-        const { sisteArbeidsforhold, stillingFraPam, intl, history } = this.props;
+        const {sisteArbeidsforhold, stillingFraPam, intl, history} = this.props;
 
         /*tslint:disable:no-console*/
         return (
