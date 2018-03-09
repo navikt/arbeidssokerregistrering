@@ -59,8 +59,9 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    registrerBrukerSBLArbeid();
-                    document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
+                    registrerBrukerSBLArbeid().then(() => {
+                        document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
+                    });
                 }
             });
     }
