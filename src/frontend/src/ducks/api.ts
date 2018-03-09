@@ -46,7 +46,7 @@ export function registrerBruker(data: RegistrerBrukerData) {
 }
 
 export function registrerBrukerSBLArbeid() {
-    return fetch('/sbl/arbeid/opprettMinIdBruker', {method: 'POST'});
+    return fetch('/sbl/arbeid/opprettMinIdBruker', { method: 'POST', credentials: 'same-origin' });
 }
 
 export function hentInnloggingsInfo() {
