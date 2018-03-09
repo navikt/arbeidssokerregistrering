@@ -46,7 +46,13 @@ export function registrerBruker(data: RegistrerBrukerData) {
 }
 
 export function registrerBrukerSBLArbeid() {
-    return fetch('/sbl/arbeid/opprettMinIdBruker', { method: 'POST', credentials: 'same-origin' });
+    return fetch('/sbl/arbeid/opprettMinIdBruker',
+                 {
+                     method: 'POST',
+                     credentials: 'same-origin',
+                     cache: 'no-store',
+                     headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'}
+                 });
 }
 
 export function hentInnloggingsInfo() {
