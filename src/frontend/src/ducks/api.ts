@@ -45,6 +45,10 @@ export function registrerBruker(data: RegistrerBrukerData) {
     });
 }
 
+export function registrerBrukerSBLArbeid() {
+    return fetch('/sbl/arbeid/opprettMinIdBruker', {method: 'POST'});
+}
+
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
