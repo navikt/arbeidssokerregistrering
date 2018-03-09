@@ -51,7 +51,8 @@ export function registrerBrukerSBLArbeid() {
                      method: 'POST',
                      credentials: 'same-origin',
                      cache: 'no-store',
-                     headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'}
+                     headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'},
+                     redirect: 'manual'
                  });
 }
 
