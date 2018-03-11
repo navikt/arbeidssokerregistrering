@@ -10,8 +10,8 @@ export enum ActionTypes {
 
 export interface Data {
     koder: {
-        label?: string,
-        kode?: string
+        label: string,
+        kode: string
     }[];
 }
 
@@ -52,8 +52,8 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function hentStillingFraPAM(styrk: string) {
-    return doThenDispatch(() => Api.hentStillingFraPAM(styrk), {
+export function hentStillingFraPamGittStyrkkode(styrk: string) {
+    return doThenDispatch(() => Api.hentStillingFraPamGittStyrkkode(styrk), {
         PENDING: ActionTypes.STILLING_FRA_PAM_PENDING,
         OK : ActionTypes.STILLING_FRA_PAM_OK,
         FEILET: ActionTypes.STILLING_FRA_PAM_FEILET,
@@ -64,12 +64,12 @@ export function selectStillingFraPam(state: AppState): State {
     return state.stillingFraPam;
 }
 
-export function selectSisteStillingNavnFraPam(state: AppState): string | undefined {
+export function selectSisteStillingNavnFraPam(state: AppState): string {
     const koder = state.stillingFraPam.data.koder;
     return koder.length > 0 ? koder[0].label : '';
 }
 
-export function selectSisteStillingKodeFraPam(state: AppState): string | undefined {
+export function selectSisteStillingKodeFraPam(state: AppState): string {
     const koder = state.stillingFraPam.data.koder;
     return koder.length > 0 ? koder[0].kode : '';
 }

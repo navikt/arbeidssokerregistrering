@@ -8,7 +8,7 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import { create } from '../../store';
 import { datePickerToISODate, isoDateToDatePicker } from '../../komponenter/input/datovelger/utils';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
-import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold';
+import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold-fra-aareg';
 
 enzyme.configure({adapter: new Adapter()});
 

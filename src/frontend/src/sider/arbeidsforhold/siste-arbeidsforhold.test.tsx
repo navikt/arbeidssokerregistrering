@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
-import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold';
+import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold-fra-aareg';
 import { FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, stubFetch } from '../../test/test-utils';
 import SisteArbeidsforhold from './siste-arbeidsforhold';
 

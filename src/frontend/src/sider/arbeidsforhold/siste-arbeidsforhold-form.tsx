@@ -20,7 +20,7 @@ import {
 } from '../../komponenter/input/datovelger/utils';
 import { lagreArbeidsforhold,
     selectSisteArbeidsforhold,
-    Data as ArbeidsforholdData } from '../../ducks/siste-arbeidsforhold';
+    Data as ArbeidsforholdData } from '../../ducks/siste-arbeidsforhold-fra-aareg';
 import { AVBRYT_PATH } from '../../utils/konstanter';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import { Panel } from 'nav-frontend-paneler';

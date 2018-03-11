@@ -3,7 +3,7 @@ import {mock, respondWith, delayed } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
-import sisteArbeidsforhold from './siste-arbeidsforhold';
+import sisteArbeidsforhold from './siste-arbeidsforhold-fra-aareg';
 import stillingFraPam from './stilling-fra-pam';
 
 const MOCK_START_REGISRERING_STATUS = true;

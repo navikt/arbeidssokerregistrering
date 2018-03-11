@@ -6,7 +6,7 @@ import oppsummering, { State as OppsummeringState } from './ducks/oppsummering';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
-import sisteArbeidsforhold, { State as SisteArbeidsforholdState } from './ducks/siste-arbeidsforhold';
+import sisteArbeidsforhold, { State as SisteArbeidsforholdState } from './ducks/siste-arbeidsforhold-fra-aareg';
 import stillingFraPam, { State as StillingFraPamState } from './ducks/stilling-fra-pam';
 
 export interface AppState {

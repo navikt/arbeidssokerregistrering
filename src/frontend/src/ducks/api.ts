@@ -1,5 +1,5 @@
 import { fetchToJson } from './api-utils';
-import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold';
+import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
@@ -53,7 +53,7 @@ export function hentInnloggingsInfo() {
     });
 }
 
-export function hentSisteArbeidsforhold() {
+export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
         config: MED_CREDENTIALS,
@@ -61,7 +61,7 @@ export function hentSisteArbeidsforhold() {
     });
 }
 
-export function hentStillingFraPAM(styrk: string) {
+export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
         url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
         config: MED_CREDENTIALS,
