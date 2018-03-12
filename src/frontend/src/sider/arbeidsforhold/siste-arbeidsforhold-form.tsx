@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import Input from '../../komponenter/input/input';
 import { validForm } from 'react-redux-form-validation';
 import {
-    FeedbackSummaryCreator, gyldigDato, historiskDato, paakrevdDato,
+    FeedbackSummaryCreator,
     paakrevdTekst
 } from '../../komponenter/input/validering';
 import { getIntlMessage } from '../../utils/utils';
@@ -15,11 +15,8 @@ import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import {
     dateToLocalDateString,
-    isoDateStringToDate,
-    localDateStringToDate,
 } from '../../komponenter/input/datovelger/utils';
 import { lagreArbeidsforhold,
-    selectSisteArbeidsforhold,
     Data as ArbeidsforholdData } from '../../ducks/siste-arbeidsforhold-fra-aareg';
 import { AVBRYT_PATH } from '../../utils/konstanter';
 import Knapperad from '../../komponenter/knapper/knapperad';
@@ -115,26 +112,16 @@ const SisteArbeidsforholdReduxForm = validForm({
     listCreator: FeedbackSummaryCreator,
     errorSummaryTitle: (<FormattedMessage id="siste-arbeidsgiver.feiloppsummering-tittel"/>),
     validate: {
-        arbeidsgiver: [paakrevdTekst('siste-arbeidsgiver.feil.arbeidsgiver')],
         stilling: [paakrevdTekst('siste-arbeidsgiver.feil.stilling')],
-        periodeValidering: [],
-        fraDato: [gyldigDato, paakrevdDato('siste-arbeidsgiver.feil.dato'), historiskDato],
-        tilDato: [gyldigDato, historiskDato]
     }
 })(injectIntl(SisteArbeidsforholdForm));
 
 const mapStateToProps = (state) => {
     const selector = formValueSelector(FORM_NAME);
     return {
-        arbeidsgiver: selector(state, 'arbeidsgiver'),
         stilling: selector(state, 'stilling'),
-        currentFraDato: isoDateStringToDate(selector(state, 'fraDato')),
-        currentTilDato: isoDateStringToDate(selector(state, 'tilDato')),
         initialValues: {
-            arbeidsgiver: selectSisteArbeidsforhold(state).data.arbeidsgiver,
             stilling: selectSisteStillingNavnFraPam(state),
-            fraDato: localDateStringToDate(selectSisteArbeidsforhold(state).data.fra),
-            tilDato: localDateStringToDate(selectSisteArbeidsforhold(state).data.til)
         }
     };
 };
