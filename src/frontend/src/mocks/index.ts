@@ -12,6 +12,7 @@ const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_GET_STILLING_FRA_PAM = true;
+const MOCK_SBL = true;
 
 
 if (MOCK_START_REGISRERING_STATUS) {
@@ -34,6 +35,10 @@ if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
     (mock as any).post('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, (url, config, params) => {
         return params.bodyParams;
     })));
+}
+
+if(MOCK_SBL) {
+    (mock as any).post('/sbl/arbeid/opprettMinIdBruker', respondWith(delayed(2000, {}, 404)));
 }
 
 if(MOCK_GET_STILLING_FRA_PAM) {

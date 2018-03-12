@@ -46,6 +46,17 @@ export function registrerBruker(data: RegistrerBrukerData) {
     });
 }
 
+export function registrerBrukerSBLArbeid() {
+    return fetch('/sbl/arbeid/opprettMinIdBruker',
+                 {
+                     method: 'POST',
+                     credentials: 'same-origin',
+                     cache: 'no-store',
+                     headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'},
+                     redirect: 'manual'
+                 });
+}
+
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,

@@ -22,7 +22,7 @@ import { getIntlMessage } from '../../utils/utils';
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
-import { VEIENTILARBEID_MED_OVERLAY_URL } from '../../ducks/api';
+import { registrerBrukerSBLArbeid, VEIENTILARBEID_MED_OVERLAY_URL } from '../../ducks/api';
 
 interface StateProps {
     registrerBruker: RegistrerBrukerState;
@@ -59,8 +59,9 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-
-                    document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
+                    registrerBrukerSBLArbeid().then(() => {
+                        document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
+                    });
                 }
             });
     }
