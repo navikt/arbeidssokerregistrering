@@ -5,6 +5,7 @@ import { AVBRYT_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
+import Tilbakeknapp from "../../komponenter/knapper/tilbakeknapp";
 
 interface SkjemaProps {
     children: {};
@@ -27,21 +28,20 @@ class NyttSkjema extends React.Component<Props> {
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <div className="blokk panel-skjema-wrapper">
-                    sporsmal
-                </div>
+        return <React.Fragment>
+            <div className="blokk panel-skjema-wrapper">
+                <Tilbakeknapp onClick={() => this.props.history.goBack()}/>
+                sporsmal
+            </div>
 
-                <Knapperad>
-                    <KnappAvbryt
-                        classname="knapp mmr"
-                        onClick={() => this.avbrytSkjema()}
-                    />
-                    <KnappNeste onClick={() => this.gaaTilNesteSporsmal()}/>
-                </Knapperad>
-            </React.Fragment>
-        );
+            <Knapperad>
+                <KnappAvbryt
+                    classname="knapp mmr"
+                    onClick={() => this.avbrytSkjema()}
+                />
+                <KnappNeste onClick={() => this.gaaTilNesteSporsmal()}/>
+            </Knapperad>
+        </React.Fragment>;
     }
 
     avbrytSkjema() {
