@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { AVBRYT_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import KnappNeste from '../../komponenter/knapper/knapp-neste';
+import Knapperad from '../../komponenter/knapper/knapperad';
+import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
+import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
-import GeneriskSkjema from './generisk-skjema';
+import Helsesporsmal from './sporsmal-helse';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -26,7 +30,7 @@ export interface MatchProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & SkjemaProps & RouteComponentProps<MatchProps>;
 
-class NyttSkjema extends React.Component<Props> {
+class GeneriskSkjema extends React.Component<Props> {
 
     gjeldendeSporsmal: number;
 
@@ -43,9 +47,20 @@ class NyttSkjema extends React.Component<Props> {
         };
 
         return (
-            <GeneriskSkjema>
-                
-            </GeneriskSkjema>
+            <React.Fragment>
+                <div className="blokk panel-skjema-wrapper">
+                    <Tilbakeknapp onClick={() => this.props.history.goBack()}/>
+                    <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
+                </div>
+
+                <Knapperad>
+                    <KnappAvbryt
+                        classname="knapp mmr"
+                        onClick={() => this.avbrytSkjema()}
+                    />
+                    <KnappNeste onClick={() => this.gaaTilNesteSporsmal()}/>
+                </Knapperad>
+            </React.Fragment>
         );
     }
 
@@ -76,4 +91,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, alternativId) => dispatch(endreSvarAction(sporsmalId, alternativId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(NyttSkjema));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(GeneriskSkjema));

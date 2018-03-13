@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import NyttAlternativ from "./nytt-alternativ";
+import NyttAlternativ from './nytt-alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import getTekstIdForAlternativ from "./sporsmal-utils";
-
+import getTekstIdForAlternativ from './sporsmal-utils';
+import {Systemtittel} from "nav-frontend-typografi";
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -22,12 +22,17 @@ export default function Helsesporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <Panel className="panel-skjema">
-            <form className={`form-flex form-skjema`}>
-                <NyttAlternativ alternativId={1} {...fellesProps}/>
-                <NyttAlternativ alternativId={2} {...fellesProps}/>
-            </form>
-        </Panel>
+        <div>
+            <Systemtittel tag="h1" className="spm-tittel">
+                {props.intl.messages[`${props.sporsmalId}-tittel`]}
+            </Systemtittel>
+            <Panel className="panel-skjema">
+                <form className="form-flex form-skjema">
+                    <NyttAlternativ alternativId={1} {...fellesProps}/>
+                    <NyttAlternativ alternativId={2} {...fellesProps}/>
+                </form>
+            </Panel>
+        </div>
     );
 }
 

@@ -12,7 +12,7 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom';
-import SkjemaPanel from './sider/skjema/nytt-skjema';
+import SkjemaPanel from './sider/skjema/generisk-skjema';
 //import SkjemaPanel from './sider/skjema/skjema';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/oppsummering/sbl-registrering';

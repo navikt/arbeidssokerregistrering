@@ -20,7 +20,9 @@ const initialState = {};
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
         case ActionTypes.AVGI_SVAR: {
-            return {...state, ...action.data};
+            let stateWithAddedProperty = {...state};
+            stateWithAddedProperty[action.data.sporsmalId] = action.data.alternativId;
+            return stateWithAddedProperty;
         }
         case ActionTypes.AVGI_SVAR_RESET: {
             return initialState;
