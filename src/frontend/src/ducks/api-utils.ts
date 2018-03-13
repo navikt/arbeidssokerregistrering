@@ -100,3 +100,14 @@ export function doThenDispatch<DATA>(
             .catch(handterFeil(dispatch, FEILET));
     };
 }
+
+export function fetchWithTimeout(input: RequestInfo, timeoutMillis: number, init?: RequestInit): Promise<Response> {
+    return new Promise((resolve, reject) => {
+        fetch(input, init).then(resolve).catch(reject);
+
+        if (timeoutMillis) {
+            const error = new Error('Connection timed out');
+            setTimeout(reject, timeoutMillis, error);
+        }
+    });
+}

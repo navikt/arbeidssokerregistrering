@@ -47,8 +47,9 @@ export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithSt
         );
 }
 
-export function stubFetch(fetchStub: FetchStub): Promise<{}> {
-    return sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+export function stubFetch(fetchStub: FetchStub): FetchStub {
+    sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+    return fetchStub;
 }
 
 function getPromiseResponse(url: string, fetchStub: FetchStub) {
@@ -60,8 +61,8 @@ function getPromiseResponse(url: string, fetchStub: FetchStub) {
     return status === 200 ? okResponse : errorResponse;
 }
 
-export function promiseWithSetTimeout() {
-    return new Promise(resolve => setTimeout(resolve, 0));
+export function promiseWithSetTimeout(timeout?: number) {
+    return new Promise(resolve => setTimeout(resolve, timeout || 0));
 }
 
 export function resetAndMakeHrefWritable() {
