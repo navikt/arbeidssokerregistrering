@@ -1,4 +1,4 @@
-import { fetchToJson } from './api-utils';
+import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 
