@@ -3,14 +3,15 @@ import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 
 export enum ActionTypes {
-    SISTE_ARBEIDSFORHOLD_PENDING = 'SISTE_ARBEIDSFORHOLD_PENDING',
-    SISTE_ARBEIDSFORHOLD_OK = 'SISTE_ARBEIDSFORHOLD_OK',
-    SISTE_ARBEIDSFORHOLD_FEILET = 'SISTE_ARBEIDSFORHOLD_FEILET',
+    SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING = 'SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING',
+    SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK = 'SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK',
+    SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET = 'SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET',
 }
 
 export interface Data {
     arbeidsgiver?: string;
     stilling?: string;
+    styrk?: string;
     fra?: string;
     til?: string;
 }
@@ -32,14 +33,14 @@ const initialState = {
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
-        case ActionTypes.SISTE_ARBEIDSFORHOLD_PENDING:
+        case ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING:
             if (state.status === STATUS.OK) {
                 return { ...state, status: STATUS.RELOADING };
             }
             return { ...state, status: STATUS.PENDING };
-        case ActionTypes.SISTE_ARBEIDSFORHOLD_FEILET:
+        case ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET:
             return { ...state, status: STATUS.ERROR };
-        case ActionTypes.SISTE_ARBEIDSFORHOLD_OK: {
+        case ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK: {
             return { ...state, status: STATUS.OK, data: action.data };
         }
         default:
@@ -47,26 +48,26 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function hentSisteArbeidsforhold() {
-    return doThenDispatch(() => Api.hentSisteArbeidsforhold(), {
-        PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_PENDING,
-        OK : ActionTypes.SISTE_ARBEIDSFORHOLD_OK,
-        FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FEILET,
+export function hentStyrkkodeForSisteStillingFraAAReg() {
+    return doThenDispatch(() => Api.hentStyrkkodeForSisteStillingFraAAReg(), {
+        PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING,
+        OK : ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK,
+        FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,
     });
 }
 
 export function lagreArbeidsforhold(data: Data) {
     return {
         data,
-        type: ActionTypes.SISTE_ARBEIDSFORHOLD_OK
+        type: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK
     };
 }
 
 export function registrerSisteArbeidsforhold(data: Data) {
     return doThenDispatch(() => Api.registrerSisteArbeidsforhold(data), {
-        PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_PENDING,
-        OK : ActionTypes.SISTE_ARBEIDSFORHOLD_OK,
-        FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FEILET,
+        PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING,
+        OK : ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK,
+        FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,
     });
 }
 

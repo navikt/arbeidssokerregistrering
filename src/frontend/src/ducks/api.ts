@@ -1,5 +1,5 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
-import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold';
+import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
@@ -13,6 +13,7 @@ export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERI
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/arbeid/opprettMinIdBruker';
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
+const PAM_JANZZ_URL = '/pam-janzz/rest';
 
 export const getCookie = name => {
     const re = new RegExp(`${name}=([^;]+)`);
@@ -67,11 +68,19 @@ export function hentInnloggingsInfo() {
     });
 }
 
-export function hentSisteArbeidsforhold() {
+export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
         config: MED_CREDENTIALS,
-        recoverWith: () => ({arbeidsgiver: null, stilling: null, fra: null, til: null})
+        recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
+    });
+}
+
+export function hentStillingFraPamGittStyrkkode(styrk: string) {
+    return fetchToJson({
+        url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
+        config: MED_CREDENTIALS,
+        recoverWith: () => ({koder: []})
     });
 }
 

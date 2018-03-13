@@ -59,19 +59,20 @@ describe('utils test', () => {
 
     it('test mapSvar', () => {
 
+        const yrkesPraksis = 'yrkesPraksis'
         const oppsummering = { tekst:  'oppsummer tekst'};
         let dummySvar = lagDummySvar(antallSporsmal.length);
 
         const expectData = {
             nusKode: getMapNusKode(dummySvar[1]),
-            yrkesPraksis: YRKESPRAKSIS,
+            yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             utdanningBestatt: getMapJaNeiKanskje(dummySvar[2]),
             utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
             harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
         };
-        expect(mapSvar(dummySvar, oppsummering)).to.deep.equal(expectData);
+        expect(mapSvar(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
     });
 
 });
