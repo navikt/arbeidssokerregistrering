@@ -3,13 +3,14 @@ import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aare
 import { Data as RegistrerBrukerData } from './registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
-export const SBLARBEID_URL = '/sbl/nav_security_check';
+export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
 export const DITTNAV_URL = '/dittnav';
 export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
 export const VEIENTILARBEID_MED_OVERLAY_URL = '/veientilarbeid/?visOverlay=true';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
+export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/arbeid/opprettMinIdBruker';
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
@@ -46,15 +47,18 @@ export function registrerBruker(data: RegistrerBrukerData) {
     });
 }
 
-export function registrerBrukerSBLArbeid() {
-    return fetch('/sbl/arbeid/opprettMinIdBruker',
-                 {
-                     method: 'POST',
-                     credentials: 'same-origin',
-                     cache: 'no-store',
-                     headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'},
-                     redirect: 'manual'
-                 });
+const sblOpprettMinIdConfig = {
+    method: 'POST',
+    credentials: 'same-origin',
+    cache: 'no-store',
+    headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'},
+    redirect: 'manual'
+};
+
+export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
+    return timeoutMillis ?
+        fetchWithTimeout(SBLARBEID_OPPRETT_MIN_ID_URL, timeoutMillis, (sblOpprettMinIdConfig as RequestInit)) :
+        fetch(SBLARBEID_OPPRETT_MIN_ID_URL, (sblOpprettMinIdConfig as RequestInit));
 }
 
 export function hentInnloggingsInfo() {

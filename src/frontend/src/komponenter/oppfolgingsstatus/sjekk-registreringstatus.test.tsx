@@ -9,10 +9,11 @@ import {
     resetAndMakeHrefWritable, mountWithStore,
     mountWithStoreAndIntl,
     promiseWithSetTimeout,
-    zeroTimeoutPromise
+    shallowwithStore
 } from '../../test/test-utils';
 import { environmentTestData } from '../../SetupTests';
-import { SBLARBEID_URL, VEIENTILARBEID_URL } from '../../ducks/api';
+import { VEIENTILARBEID_URL } from '../../ducks/api';
+import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -22,10 +23,9 @@ describe('<SjekkRegistreringstatus />', () => {
 
         dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false});
 
-        mountWithStoreAndIntl(<SjekkRegistreringstatus />);
+        const wrapper = shallowwithStore(<SjekkRegistreringstatus />);
 
-        return promiseWithSetTimeout()
-            .then(() => expect(document.location.href).to.equal(SBLARBEID_URL));
+        expect(wrapper.find(SblRegistrering)).to.have.length(1);
 
     });
 
