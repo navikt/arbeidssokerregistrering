@@ -1,7 +1,8 @@
-import { stubFetch, withError, withResponse } from '../test/test-utils';
+import { promiseWithSetTimeout, stubFetch, withError, withResponse } from '../test/test-utils';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
-import { fetchToJson } from './api-utils';
+import * as sinon from 'sinon';
+import { fetchToJson, fetchWithTimeout } from './api-utils';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -45,5 +46,18 @@ describe('Test fetchToJson', () => {
             url: 'url',
             recoverWith: () => ({foo: 'bar'}),
         })).to.eventually.have.property('bar');
+    });
+});
+
+describe('fetchWithTimeout', () => {
+    it('skal time ut', () => {
+        sinon.stub(global, 'fetch').callsFake(() => promiseWithSetTimeout(200));
+
+        return expect(fetchWithTimeout('/minurl', 50)).to.be.rejected;
+    });
+    it('skal ikke time ut', () => {
+        sinon.stub(global, 'fetch').callsFake(() => promiseWithSetTimeout(50));
+
+        return expect(fetchWithTimeout('/minurl', 200)).to.be.fulfilled;
     });
 });
