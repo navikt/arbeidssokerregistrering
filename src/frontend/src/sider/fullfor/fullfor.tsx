@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import { MatchProps } from '../skjema/skjema';
+import { MatchProps } from '../skjema/nytt-skjema';
 import { RouteComponentProps } from 'react-router';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';

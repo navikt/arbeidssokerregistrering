@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -148,3 +149,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
 export default connect(mapStateToProps, mapDispatchToProps)
 (injectIntl(Skjema)
 );
+*/

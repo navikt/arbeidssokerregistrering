@@ -1,19 +1,31 @@
 import * as React from 'react';
-import antallSporsmal from '../../sporsmal/alle-sporsmal';
 import { Panel } from 'nav-frontend-paneler';
-import Alternativ from './alternativ';
+import NyttAlternativ from "./nytt-alternativ";
+import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import getTekstIdForAlternativ from "./sporsmal-utils";
 
-interface Props {
-    children: {};
-    navnPaaSporsmal: string;
-    settSvarPaaSporsmal: (sporsmal, svar) => {};
+
+interface SporsmalProps {
+    sporsmalId: string;
+    endreSvar: (sporsmalId: string, svar: number) => void;
+    hentAvgittSvar: (sporsmalId: string) => number | undefined;
 }
 
-export default function Sporsmal(props: Props) {
+type Props = SporsmalProps & InjectedIntlProps;
+
+export default function Helsesporsmal(props: Props) {
+    const fellesProps = {
+        endreSvar: props.endreSvar,
+        intl: props.intl,
+        avgiSvar: (alternativId: number) => props.endreSvar(props.sporsmalId, alternativId),
+        getTekstId: (alternativId: number) => getTekstIdForAlternativ(props.sporsmalId, alternativId),
+        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
+    };
     return (
         <Panel className="panel-skjema">
             <form className={`form-flex form-skjema`}>
-
+                <NyttAlternativ alternativId={1} {...fellesProps}/>
+                <NyttAlternativ alternativId={2} {...fellesProps}/>
             </form>
         </Panel>
     );
@@ -42,11 +54,11 @@ export default function Sporsmal(props: Props) {
 </Skjema>
 
 
-<Sporsmal>
+<Helsesporsmal>
     <Systemtittel> tittel </Systemtittel>
     <Alternativ> alternativ1 </Alternativ>
     <Alternativ> alternativ1 </Alternativ className="kult-spm">
-</Sporsmal>
+</Helsesporsmal>
 
 
 state.svar = [

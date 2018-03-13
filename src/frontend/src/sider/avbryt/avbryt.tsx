@@ -3,7 +3,7 @@ import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
-import { MatchProps } from '../skjema/skjema';
+import { MatchProps } from '../skjema/nytt-skjema';
 import { RouteComponentProps } from 'react-router';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { DITTNAV_URL } from '../../ducks/api';

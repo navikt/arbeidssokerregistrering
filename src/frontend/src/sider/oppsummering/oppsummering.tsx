@@ -7,7 +7,7 @@ import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import { FormattedMessage } from 'react-intl';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
-import { MatchProps } from '../skjema/skjema';
+import { MatchProps } from '../skjema/nytt-skjema';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { getIntlMessage, hentFornavn } from '../../utils/utils';

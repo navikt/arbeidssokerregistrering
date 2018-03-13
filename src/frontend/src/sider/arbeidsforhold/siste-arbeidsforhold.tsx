@@ -10,7 +10,7 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import SisteArbeidsforholdForm from './siste-arbeidsforhold-form';
 import { AppState } from '../../reducer';
-import { MatchProps } from '../skjema/skjema';
+import { MatchProps } from '../skjema/nytt-skjema';
 import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../../ducks/api-utils';
 import { FULLFOR_PATH } from '../../utils/konstanter';

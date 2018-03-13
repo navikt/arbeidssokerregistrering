@@ -11,19 +11,19 @@ export default function HelseutfordringerSporsmal({}: Props) {
 
 
 <Skjema>
-    <Sporsmal>
+    <Helsesporsmal>
         <HelseutfordringerSporsmal navn="helse"/>
         <UtdanningSporsmal navn="utdanning"/>
-    </Sporsmal>
+    </Helsesporsmal>
     <nesteknapp/>
 </Skjema>
 
 
-<Sporsmal>
+<Helsesporsmal>
     <Systemtittel> tittel </Systemtittel>
     <Alternativ> alternativ1 </Alternativ>
     <Alternativ> alternativ1 </Alternativ className="kult-spm">
-</Sporsmal>
+</Helsesporsmal>
 
 
 state.svar = [
