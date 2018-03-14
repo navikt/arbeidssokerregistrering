@@ -3,7 +3,7 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
-import {erSelvgaende} from "./sporsmal-utils";
+import { erSelvgaende } from './sporsmal-utils';
 
 interface GeneriskSkjemaProps {
     children: {};
@@ -19,7 +19,7 @@ interface GeneriskSkjemaProps {
 
 type Props = GeneriskSkjemaProps;
 
-export default class GeneriskSkjema extends React.Component<Props> {
+export default class Skjema extends React.Component<Props> {
 
     private antallSporsmal: number;
     private sporsmalIder: string[];
@@ -49,7 +49,7 @@ export default class GeneriskSkjema extends React.Component<Props> {
                         onClick={() => this.props.avbrytSkjema()}
                     />
                     <KnappNeste
-                        onClick={() => this.gaaTilNesteSporsmal()}
+                        onClick={() => this.nesteButtonClick()}
                         disabled={disableKnappNeste}
                     />
                 </Knapperad>
@@ -57,16 +57,16 @@ export default class GeneriskSkjema extends React.Component<Props> {
         );
     }
 
-    gaaTilNesteSporsmal() {
+    nesteButtonClick() {
         const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
-        if (erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId))) {
+        if (!erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId))) {
             this.props.gaaTilSblRegistrering();
-        }
-        if (this.sporsmalIder[this.props.gjeldendeSporsmal])
-        if ((this.props.gjeldendeSporsmal === this.antallSporsmal) && this.alleSporsmalErBesvarte()) {
-            this.props.fullforSkjema();
         } else {
-            this.props.gaaTilSporsmal(this.props.gjeldendeSporsmal + 1);
+            if ((this.props.gjeldendeSporsmal === this.antallSporsmal) && this.alleSporsmalErBesvarte()) {
+                this.props.fullforSkjema();
+            } else {
+                this.props.gaaTilSporsmal(this.props.gjeldendeSporsmal + 1);
+            }
         }
     }
 

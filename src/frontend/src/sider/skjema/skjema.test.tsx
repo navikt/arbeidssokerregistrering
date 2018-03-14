@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import Skjema from './skjema';
+import Skjema from './skjema-container';
 import {
     finnAlternativSomGirSelvgaende,
     shallowwithStoreAndIntl,

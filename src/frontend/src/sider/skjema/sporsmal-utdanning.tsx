@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import NyttAlternativ from './nytt-alternativ';
+import NyttAlternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from './sporsmal-utils';
 import { Systemtittel } from 'nav-frontend-typografi';

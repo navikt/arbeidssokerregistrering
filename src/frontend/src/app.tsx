@@ -15,7 +15,7 @@ import {
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
-import SkjemaPanel from './sider/skjema/nytt-skjema';
+import SkjemaPanel from './sider/skjema/skjema-container';
 import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {

@@ -5,7 +5,7 @@ import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
-import GeneriskSkjema from './generisk-skjema';
+import GeneriskSkjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal-utdanning';
 import Helsesporsmal from './sporsmal-helse';
@@ -25,7 +25,7 @@ interface SkjemaProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & SkjemaProps & RouteComponentProps<MatchProps>;
 
-class NyttSkjema extends React.Component<Props> {
+class SkjemaContainer extends React.Component<Props> {
     private divRef: HTMLDivElement | null;
     private gjeldendeSporsmal: number;
 
@@ -106,4 +106,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, alternativId) => dispatch(endreSvarAction(sporsmalId, alternativId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(NyttSkjema));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaContainer));

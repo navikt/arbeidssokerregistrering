@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import NyttAlternativ from './nytt-alternativ';
+import NyttAlternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from './sporsmal-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
@@ -35,44 +35,3 @@ export default function Helsesporsmal(props: Props) {
         </div>
     );
 }
-
-/*
-<Tittel/>
-                <NyttAlternativ tekstId="helse-alternativ-1"/>
-                <NyttAlternativ tekstId="helse-alternativ-2"/>
-                <Alternativ
-                        sporsmalId={spmId}
-                        endreSvar={endreSvar}
-                        key={key}
-                        alternativId={key.toString()}
-                        tekstId={`sporsmal-${spmId}-alternativ-${key}`}
-                        checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
-                        intl={intl}
-                    />
-
-<Skjema>
-    <Sporsmal>
-        <HelseutfordringerSporsmal navn="helse"/>
-        <UtdanningSporsmal navn="utdanning"/>
-    </Sporsmal>
-    <nesteknapp/>
-</Skjema>
-
-<Helsesporsmal>
-    <Systemtittel> tittel </Systemtittel>
-    <Alternativ> alternativ1 </Alternativ>
-    <Alternativ> alternativ1 </Alternativ className="kult-spm">
-</Helsesporsmal>
-
-state.svar = [
-{
-    sporsmal: "helse"
-    svar: 2
-},
-{
-    sporsmal: "utdanning"
-    svar: 4
-}
-]
-
- */
