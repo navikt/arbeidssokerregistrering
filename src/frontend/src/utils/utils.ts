@@ -52,6 +52,7 @@ export const getMapSituasjon = (svarAlternativ: string) => {
     return mapSituasjon[svarAlternativ];
 };
 export const getMapNusKode = (svarAlternativ: string) => {
+    // nuskode ~ utdanningsnivå
     const mapNusKode = {
         '1': NUSKODE_0,
         '2': NUSKODE_2,
@@ -84,7 +85,7 @@ export function mapSvar(svar: SvarState, oppsummering: OppsummeringState) {
             yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
-            utdanningBestatt: getMapJaNeiKanskje(svr2),
+            utdanningBestatt: getMapJaNeiKanskje(svr2), // returner false hvis wsdl krever den
             utdanningGodkjentNorge: getMapJaNeiKanskje(svr3),
             harHelseutfordringer: getMapJaNeiKanskje(svr4),
         };

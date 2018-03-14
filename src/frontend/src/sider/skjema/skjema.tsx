@@ -38,10 +38,8 @@ export default class Skjema extends React.Component<Props> {
 
         return (
             <React.Fragment>
-                <div className="blokk panel-skjema-wrapper" >
-                    <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
-                    {gjeldendeSporsmalComponent}
-                </div>
+                <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
+                {gjeldendeSporsmalComponent}
 
                 <Knapperad>
                     <KnappAvbryt

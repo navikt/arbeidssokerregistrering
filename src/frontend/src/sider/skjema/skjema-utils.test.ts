@@ -1,6 +1,10 @@
 import { expect } from 'chai';
 import { erIkkeSelvgaende } from './skjema-utils';
 
+/*
+sett state, gjør noe, sjekk resultat TODO
+ */
+
 describe('skjema-utils', () => {
     it('test av erIkkeSelvgaende', () => {
 

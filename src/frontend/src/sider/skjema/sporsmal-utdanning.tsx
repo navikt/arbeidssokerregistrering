@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import NyttAlternativ from './alternativ';
+import Alternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from './sporsmal-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
@@ -15,7 +15,6 @@ type Props = SporsmalProps & InjectedIntlProps;
 
 export default function Utdanningsporsmal(props: Props) {
     const fellesProps = {
-        endreSvar: props.endreSvar,
         intl: props.intl,
         avgiSvar: (alternativId: number) => props.endreSvar(props.sporsmalId, alternativId),
         getTekstId: (alternativId: number) => getTekstIdForAlternativ(props.sporsmalId, alternativId),
@@ -28,12 +27,12 @@ export default function Utdanningsporsmal(props: Props) {
             </Systemtittel>
             <Panel className="panel-skjema">
                 <form className="form-skjema">
-                    <NyttAlternativ alternativId={1} {...fellesProps}/>
-                    <NyttAlternativ alternativId={2} {...fellesProps}/>
-                    <NyttAlternativ alternativId={3} {...fellesProps}/>
-                    <NyttAlternativ alternativId={4} {...fellesProps}/>
-                    <NyttAlternativ alternativId={5} {...fellesProps}/>
-                    <NyttAlternativ alternativId={6} {...fellesProps}/>
+                    <Alternativ alternativId={1} {...fellesProps}/>
+                    <Alternativ alternativId={2} {...fellesProps}/>
+                    <Alternativ alternativId={3} {...fellesProps}/>
+                    <Alternativ alternativId={4} {...fellesProps}/>
+                    <Alternativ alternativId={5} {...fellesProps}/>
+                    <Alternativ alternativId={6} {...fellesProps}/>
                 </form>
             </Panel>
         </div>

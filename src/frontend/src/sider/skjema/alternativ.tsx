@@ -9,7 +9,7 @@ interface AlternativProps {
     getTekstId: (alternativId: number) => string;
 }
 
-function NyttAlternativ(props: AlternativProps & InjectedIntlProps) {
+function Alternativ(props: AlternativProps & InjectedIntlProps) {
     const tekst = props.intl.messages[props.getTekstId(props.alternativId)];
     return (
         <Radio
@@ -23,4 +23,4 @@ function NyttAlternativ(props: AlternativProps & InjectedIntlProps) {
     );
 }
 
-export default NyttAlternativ;
+export default Alternativ;
