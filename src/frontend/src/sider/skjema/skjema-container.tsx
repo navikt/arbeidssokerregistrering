@@ -54,7 +54,7 @@ class SkjemaContainer extends React.Component<Props> {
         };
 
         return (
-            <div ref={(ref) => this.divRef = ref} tabIndex={-1}>
+            <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <Skjema {...generiskSkjemaProps}>
                     <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                     <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
@@ -67,6 +67,11 @@ class SkjemaContainer extends React.Component<Props> {
         this.props.history.push(`${SKJEMA_PATH}/${sporsmal}`);
         this.gjeldendeSporsmal = sporsmal;
     }
+
+    settGjeldendeSporsmal(sporsmal: string) {
+        this.gjeldendeSporsmal = parseInt(sporsmal, 10);
+    }
+
     /*
     Gå til spm 1 hvis forrige ikke er besvart
         if (spmId !== '1' &&
@@ -76,8 +81,8 @@ class SkjemaContainer extends React.Component<Props> {
         }
      */
 
-    settGjeldendeSporsmal(sporsmal: string) {
-        this.gjeldendeSporsmal = parseInt(sporsmal, 10);
+    gaaTilForsteSporsmalHvisDetForegaendeIkkeErBesvart() {
+        //TODO ^ if (this.gjeldendeSporsmal )
     }
 
     componentWillUpdate(nextProps: Props) {

@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import antallSporsmal from '../../src/sporsmal/alle-sporsmal';
 
-import {getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
+import {getIntlMessage, getMapJaNeiKanskje, mapTilNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     PERMITTERT,
@@ -39,12 +39,12 @@ describe('utils test', () => {
     });
 
     it('test mapping av nuskode', () => {
-        expect(getMapNusKode('1')).to.equal(NUSKODE_0);
-        expect(getMapNusKode('2')).to.equal(NUSKODE_2);
-        expect(getMapNusKode('3')).to.equal(NUSKODE_3);
-        expect(getMapNusKode('4')).to.equal(NUSKODE_4);
-        expect(getMapNusKode('5')).to.equal(NUSKODE_6);
-        expect(getMapNusKode('6')).to.equal(NUSKODE_7);
+        expect(mapTilNusKode('1')).to.equal(NUSKODE_0);
+        expect(mapTilNusKode('2')).to.equal(NUSKODE_2);
+        expect(mapTilNusKode('3')).to.equal(NUSKODE_3);
+        expect(mapTilNusKode('4')).to.equal(NUSKODE_4);
+        expect(mapTilNusKode('5')).to.equal(NUSKODE_6);
+        expect(mapTilNusKode('6')).to.equal(NUSKODE_7);
     });
 
     it('test mapping av Ja, Nei, Kanskje', () => {
@@ -63,7 +63,7 @@ describe('utils test', () => {
         let dummySvar = lagDummySvar(antallSporsmal.length);
 
         const expectData = {
-            nusKode: getMapNusKode(dummySvar[1]),
+            nusKode: mapTilNusKode(dummySvar[1]),
             yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
