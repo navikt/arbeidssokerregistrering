@@ -16,11 +16,6 @@ body {
     background-color: @white;
 }
 
-.innholdslaster-laster {
-    text-align: center;
-    margin-top: 2em;
-}
-
 main.arbsokreg_app:focus {
     outline: none;
     box-shadow: none;
@@ -33,22 +28,14 @@ main.arbsokreg_app {
     @import 'komponenter/input/datovelger/day-picker';
     @import 'komponenter/innholdslaster/innholdslaster';
     @import 'komponenter/knapper/knapper';
+    @import 'komponenter/side/responsiv-side';
 
     @import 'sider/oppsummering/uenig-selvgaende';
     @import 'sider/skjema/skjema';
     @import 'sider/oppsummering/oppsummering';
     @import 'sider/fullfor/fullfor-feilmelding';
     @import 'sider/dinsituasjon/din-situasjon';
-
-
     @import 'sider/avbryt/avbryt';
-
-    width: @screen-md-min;
-    margin: 4em auto;
-
-    @media (max-width: @screen-md-min) {
-        width: 100%
-    }
 }
 .appContainer {
     height: 100%;

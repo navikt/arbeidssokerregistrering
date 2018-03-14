@@ -7,10 +7,11 @@ import { Knapp } from 'nav-frontend-knapper';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import { AVBRYT_PATH, SBLREG_PATH } from '../../utils/konstanter';
 import { Link } from 'react-router-dom';
+import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 function UenigSelvgaende({history}: RouteComponentProps<MatchProps>) {
     return(
-        <div className="panel-blokk wrapper-uenig-selvgaende">
+        <ResponsivSide className="panel-blokk wrapper-uenig-selvgaende">
             <Sidetittel className="blokk-l text-align-center">
                 <FormattedMessage id="uenig-selvgaende.tittel"/>
             </Sidetittel>
@@ -28,7 +29,7 @@ function UenigSelvgaende({history}: RouteComponentProps<MatchProps>) {
                     <Element tag="span"><FormattedMessage  id="uenig-selvgaende.avbryt"/></Element>
                 </Link>
             </div>
-        </div >
+        </ResponsivSide >
     );
 }
 

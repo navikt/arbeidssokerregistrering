@@ -14,6 +14,7 @@ import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface SkjemaProps {
     id: string;
@@ -75,7 +76,7 @@ class Skjema extends React.Component<Props> {
         const disableKnappFullfor = erAlleSpmBesvart();
 
         return (
-            <React.Fragment>
+            <ResponsivSide>
                 <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                     <Tilbakeknapp onClick={() => history.goBack()}/>
                     <Systemtittel tag="h1" className="spm-tittel">
@@ -130,7 +131,7 @@ class Skjema extends React.Component<Props> {
                             />
                     }
                 </Knapperad>
-            </React.Fragment>
+            </ResponsivSide>
         );
     }
 }

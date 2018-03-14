@@ -24,6 +24,7 @@ import { Panel } from 'nav-frontend-paneler';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import { selectSisteStillingNavnFraPam } from '../../ducks/stilling-fra-pam';
+import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 const FORM_NAME = 'sisteArbeidsforhold';
 
@@ -76,7 +77,7 @@ function SisteArbeidsforholdForm({
     }
 
     return (
-        <React.Fragment>
+        <ResponsivSide>
             <Tilbakeknapp onClick={onTilbake}/>
             <Sidetittel className="text-align-center blokk-l">
                 <FormattedMessage id="siste-arbeidsforhold.tittel"/>
@@ -103,7 +104,7 @@ function SisteArbeidsforholdForm({
                         <KnappNeste key="2" onClick={onNeste}/>
                     </Knapperad>
             </form>
-        </React.Fragment>
+        </ResponsivSide>
     );
 }
 

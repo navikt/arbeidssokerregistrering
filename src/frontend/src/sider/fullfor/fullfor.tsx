@@ -89,7 +89,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                 avhengigheter={[registrerBruker, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 storrelse="XXL"
             >
-                <Tilbakeknapp onClick={() => history.goBack()}/>
                 <PanelBlokkGruppe
                     knappAksjoner={[
                         <Knapp
@@ -110,6 +109,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                         />
                     ]}
                 >
+                    <Tilbakeknapp onClick={() => history.goBack()}/>
                     <PanelBlokk
                         tittelId="fullfor-header"
                         tittelCssNavnVariant="oransje-variant"
