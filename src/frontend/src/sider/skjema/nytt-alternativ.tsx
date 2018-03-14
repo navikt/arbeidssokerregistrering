@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
-export type EndreSvar = (sporsmalId: string, alternativId: string) => void;
-
 interface AlternativProps {
     hentAvgittSvar: () => number | undefined;
     alternativId: number;
@@ -21,7 +19,8 @@ function NyttAlternativ(props: AlternativProps & InjectedIntlProps) {
             label={tekst}
             value={tekst}
             checked={props.hentAvgittSvar() === props.alternativId}
-        />);
+        />
+    );
 }
 
 export default NyttAlternativ;

@@ -16,8 +16,8 @@ import {
     VIL_BYTTE_JOBB,
     YRKESPRAKSIS
 } from './konstanter';
-import {State as SvarState} from '../ducks/svar';
-import {State as OppsummeringState} from '../ducks/oppsummering';
+import { State as SvarState } from '../ducks/svar';
+import { State as OppsummeringState } from '../ducks/oppsummering';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';

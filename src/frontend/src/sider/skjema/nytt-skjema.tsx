@@ -1,13 +1,14 @@
 import * as React from 'react';
-import {RouteComponentProps} from 'react-router';
-import {AVBRYT_PATH, SKJEMA_PATH} from '../../utils/konstanter';
-import {AppState} from '../../reducer';
-import {InjectedIntlProps, injectIntl} from 'react-intl';
-import {connect, Dispatch} from 'react-redux';
-import {endreSvarAction} from '../../ducks/svar';
+import { RouteComponentProps } from 'react-router';
+import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import { AppState } from '../../reducer';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { connect, Dispatch } from 'react-redux';
+import { endreSvarAction } from '../../ducks/svar';
 import GeneriskSkjema from './generisk-skjema';
-import Helsesporsmal from "./sporsmal-helse";
-import {MatchProps} from "../../utils/utils";
+import { MatchProps } from '../../utils/utils';
+import Utdanningsporsmal from './sporsmal-utdanning';
+import Helsesporsmal from './sporsmal-helse';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -25,15 +26,16 @@ interface SkjemaProps {
 type Props = StateProps & DispatchProps & InjectedIntlProps & SkjemaProps & RouteComponentProps<MatchProps>;
 
 class NyttSkjema extends React.Component<Props> {
-
-    gjeldendeSporsmal: number;
+    private divRef: HTMLDivElement | null;
+    private gjeldendeSporsmal: number;
 
     constructor(props: Props) {
         super(props);
-        this.gjeldendeSporsmal = parseInt(props.match.params.id, 10);
+        this.settGjeldendeSporsmal(this.props.match.params.id);
     }
 
     render() {
+
         const fellesProps = {
             endreSvar: (sporsmalId, svar) => this.props.endreSvar(sporsmalId, svar),
             intl: this.props.intl,
@@ -43,20 +45,21 @@ class NyttSkjema extends React.Component<Props> {
         const generiskSkjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
             sporsmalErBesvart: this.props.sporsmalErBesvart,
-            avbrytSkjema: () => this.avbrytSkjema(),
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
-            gaaTilbake: () => this.gaaTilbake()
+            gaaTilbake: () => this.props.history.goBack(),
+            avbrytSkjema: () => this.props.history.push(`${AVBRYT_PATH}`),
+            fullforSkjema: () => this.props.history.push(`${OPPSUMMERING_PATH}`),
+            gaaTilSblRegistrering: () => this.props.history.push(`${SBLREG_PATH}`)
         };
 
         return (
-            <GeneriskSkjema {...generiskSkjemaProps}>
-                <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
-            </GeneriskSkjema>
+            <div ref={(ref) => this.divRef = ref} tabIndex={1}>
+                <GeneriskSkjema {...generiskSkjemaProps}>
+                    <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
+                    <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
+                </GeneriskSkjema>
+            </div>
         );
-    }
-
-    avbrytSkjema() {
-        this.props.history.push(`${AVBRYT_PATH}`);
     }
 
     gaaTilSporsmal(sporsmal: number) {
@@ -64,12 +67,32 @@ class NyttSkjema extends React.Component<Props> {
         this.gjeldendeSporsmal = sporsmal;
     }
 
-    gaaTilbake() {
-        this.props.history.goBack();
+    settGjeldendeSporsmal(sporsmal: string) {
+        this.gjeldendeSporsmal = parseInt(sporsmal, 10);
     }
 
-    erAlleSporsmalBesvart() {
-        // implementer
+    componentWillUpdate(nextProps: Props) {
+        if (this.gjeldendeSporsmalErEndret(nextProps)) {
+            this.settGjeldendeSporsmal(nextProps.match.params.id);
+        }
+    }
+
+    componentDidMount() {
+        if (this.divRef) {
+            this.divRef.focus();
+        }
+    }
+
+    componentDidUpdate(prevProps: Props) {
+        if (this.gjeldendeSporsmalErEndret(prevProps) && this.divRef) {
+            this.divRef.focus();
+        }
+    }
+
+    gjeldendeSporsmalErEndret(otherProps: Props): boolean {
+        const spmId = this.props.match.params.id;
+        const forrigeSpmId = otherProps.match.params.id;
+        return (spmId !== forrigeSpmId);
     }
 }
 

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import NyttAlternativ from './nytt-alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import getTekstIdForAlternativ from './sporsmal-utils';
-import {Systemtittel} from "nav-frontend-typografi";
+import { getTekstIdForAlternativ } from './sporsmal-utils';
+import { Systemtittel } from 'nav-frontend-typografi';
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -58,13 +58,11 @@ export default function Helsesporsmal(props: Props) {
     <nesteknapp/>
 </Skjema>
 
-
 <Helsesporsmal>
     <Systemtittel> tittel </Systemtittel>
     <Alternativ> alternativ1 </Alternativ>
     <Alternativ> alternativ1 </Alternativ className="kult-spm">
 </Helsesporsmal>
-
 
 state.svar = [
 {
