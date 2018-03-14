@@ -49,7 +49,8 @@ class NyttSkjema extends React.Component<Props> {
             gaaTilbake: () => this.props.history.goBack(),
             avbrytSkjema: () => this.props.history.push(`${AVBRYT_PATH}`),
             fullforSkjema: () => this.props.history.push(`${OPPSUMMERING_PATH}`),
-            gaaTilSblRegistrering: () => this.props.history.push(`${SBLREG_PATH}`)
+            gaaTilSblRegistrering: () => this.props.history.push(`${SBLREG_PATH}`),
+            hentAvgittSvar: this.props.hentAvgittSvar
         };
 
         return (

@@ -3,17 +3,18 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import {erSelvgaende} from "./sporsmal-utils";
 
 interface GeneriskSkjemaProps {
     children: {};
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
+    hentAvgittSvar: (sporsmalId: string) => number | undefined;
     avbrytSkjema: () => void;
     gaaTilSporsmal: (sporsmal: number) => void;
     gaaTilbake: () => void;
     fullforSkjema: () => void;
     gaaTilSblRegistrering: () => void;
-    // avgittSvarAngirSelvgaendeBruker: () => boolean;
 }
 
 type Props = GeneriskSkjemaProps;
@@ -57,6 +58,11 @@ export default class GeneriskSkjema extends React.Component<Props> {
     }
 
     gaaTilNesteSporsmal() {
+        const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
+        if (erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId))) {
+            this.props.gaaTilSblRegistrering();
+        }
+        if (this.sporsmalIder[this.props.gjeldendeSporsmal])
         if ((this.props.gjeldendeSporsmal === this.antallSporsmal) && this.alleSporsmalErBesvarte()) {
             this.props.fullforSkjema();
         } else {
