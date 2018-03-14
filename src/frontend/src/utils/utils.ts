@@ -1,12 +1,23 @@
 import {
-    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET,
+    JA,
+    KANSKJE,
+    MISTET_JOBBEN,
+    NEI,
+    NUSKODE_0,
+    NUSKODE_2,
+    NUSKODE_3,
+    NUSKODE_4,
+    NUSKODE_6,
+    NUSKODE_7,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
-    VIL_BYTTE_JOBB, YRKESPRAKSIS
+    VIL_BYTTE_JOBB,
+    YRKESPRAKSIS
 } from './konstanter';
-import { State as SvarState  } from '../ducks/svar';
-import { State as OppsummeringState  } from '../ducks/oppsummering';
+import {State as SvarState} from '../ducks/svar';
+import {State as OppsummeringState} from '../ducks/oppsummering';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -79,4 +90,8 @@ export function mapSvar(svar: SvarState, oppsummering: OppsummeringState) {
         };
     }
     return data;
+}
+
+export interface MatchProps {
+    id: string;
 }

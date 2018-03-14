@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MatchProps } from '../skjema/generisk-skjema';
+import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
