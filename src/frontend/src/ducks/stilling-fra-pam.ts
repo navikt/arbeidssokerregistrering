@@ -29,7 +29,7 @@ const initialState = {
     data : {
         koder: [{
             label: '',
-            kode: ''
+            kode: '-1'
         }]
     },
     status: STATUS.NOT_STARTED
@@ -71,5 +71,5 @@ export function selectSisteStillingNavnFraPam(state: AppState): string {
 
 export function selectSisteStillingKodeFraPam(state: AppState): string {
     const koder = state.stillingFraPam.data.koder;
-    return koder.length > 0 ? koder[0].kode : '';
+    return koder.length > 0 ? koder[0].kode : '-1';
 }
