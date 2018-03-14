@@ -3,7 +3,7 @@ import {
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
-    VIL_BYTTE_JOBB, YRKESPRAKSIS
+    VIL_BYTTE_JOBB
 } from './konstanter';
 import { State as SvarState  } from '../ducks/svar';
 import { State as OppsummeringState  } from '../ducks/oppsummering';
@@ -60,7 +60,7 @@ export const getMapJaNeiKanskje = (svarAlternativ: string) => {
     return map[svarAlternativ];
 };
 
-export function mapSvar(svar: SvarState, oppsummering: OppsummeringState) {
+export function mapSvar(svar: SvarState, oppsummering: OppsummeringState, yrkesPraksis: string | undefined) {
     const svr1 = svar[1];
     const svr2 = svar[2];
     const svr3 = svar[3];
@@ -70,7 +70,7 @@ export function mapSvar(svar: SvarState, oppsummering: OppsummeringState) {
     if (svr1 && svr2 && svr3 && svr4) {
         data = {
             nusKode: getMapNusKode(svr1),
-            yrkesPraksis: YRKESPRAKSIS,
+            yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             utdanningBestatt: getMapJaNeiKanskje(svr2),

@@ -3,13 +3,15 @@ import {mock, respondWith, delayed } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
-import sisteArbeidsforhold from './siste-arbeidsforhold';
+import sisteArbeidsforhold from './siste-arbeidsforhold-fra-aareg';
+import stillingFraPam from './stilling-fra-pam';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
+const MOCK_GET_STILLING_FRA_PAM = true;
 const MOCK_SBL = true;
 
 
@@ -37,6 +39,10 @@ if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
 
 if(MOCK_SBL) {
     (mock as any).post('/sbl/arbeid/opprettMinIdBruker', respondWith(delayed(2000, {}, 404)));
+}
+
+if(MOCK_GET_STILLING_FRA_PAM) {
+    (mock as any).get('glob:/pam-janzz/rest*', respondWith(delayed(500, stillingFraPam)));
 }
 
 
