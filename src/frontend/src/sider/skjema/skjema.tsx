@@ -6,12 +6,12 @@ import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface SkjemaProps {
-    children: {};
+    children: {}; // TODO Type-sett dette slik at alle har sporsmalId
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     avbrytSkjema: () => void;
     gaaTilbake: () => void;
-    gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) => void;
+    gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) => void;
 }
 
 type Props = SkjemaProps;
@@ -29,9 +29,7 @@ export default class Skjema extends React.Component<Props> {
         this.antallSporsmal = React.Children.toArray(this.props.children).length;
         const gjeldendeSporsmalComponent = this.props.children[this.props.gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
-        const disableKnappNeste = (this.props.gjeldendeSporsmal === this.antallSporsmal) ?
-            !this.alleSporsmalErBesvarte() :
-            !this.props.sporsmalErBesvart(this.sporsmalIder[this.props.gjeldendeSporsmal]);
+        const enableNesteKnapp = this.props.sporsmalErBesvart(this.sporsmalIder[this.props.gjeldendeSporsmal]);
 
         return (
             <ResponsivSide>
@@ -44,7 +42,7 @@ export default class Skjema extends React.Component<Props> {
                     />
                     <KnappNeste
                         onClick={() => this.nesteButtonClick()}
-                        disabled={disableKnappNeste}
+                        disabled={!enableNesteKnapp}
                     />
                 </Knapperad>
             </ResponsivSide>
@@ -53,20 +51,16 @@ export default class Skjema extends React.Component<Props> {
 
     nesteButtonClick() {
         const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
-        this.props.gaaTilNesteSide(gjeldendeSporsmalId, this.getSporsmalIder());
-    }
-
-    alleSporsmalErBesvarte(): boolean {
-        const besvarteSporsmal = this.sporsmalIder.filter(sporsmalId => this.props.sporsmalErBesvart(sporsmalId));
-        return besvarteSporsmal.length === this.antallSporsmal;
+        this.props.gaaTilNesteSide(gjeldendeSporsmalId, this.getSporsmalIder().length);
     }
 
     getSporsmalIder(): string[] {
-        let map: string[] = [];
+        let sporsmalIder: string[] = [];
         for (let i = 0; i < this.antallSporsmal; i += 1) {
-            map.push(this.props.children[i].props.sporsmalId);
+            sporsmalIder.push(this.props.children[i].props.sporsmalId);
+            // TODO: Se om dette kan gjøres bedre.
             // For at this.props.children[i] skal funke trenger man minst to children, dvs. minst to spm i skjemaet.
         }
-        return map;
+        return sporsmalIder;
     }
 }

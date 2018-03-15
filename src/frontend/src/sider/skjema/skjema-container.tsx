@@ -43,19 +43,19 @@ class SkjemaContainer extends React.Component<Props> {
             intl: this.props.intl,
             hentAvgittSvar: this.props.hentAvgittSvar
         };
-        
-        const generiskSkjemaProps = {
+
+        const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
             sporsmalErBesvart: this.props.sporsmalErBesvart,
             gaaTilbake: () => this.props.history.goBack(),
             avbrytSkjema: () => this.props.history.push(`${AVBRYT_PATH}`),
-            gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) =>
-                this.gaaTilNesteSide(gjeldendeSporsmalId, alleSporsmalIder)
+            gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) =>
+                this.gaaTilNesteSide(gjeldendeSporsmalId, antallSporsmal)
         };
 
         return (
             <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
-                <Skjema {...generiskSkjemaProps}>
+                <Skjema {...skjemaProps}>
                     <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                     <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                 </Skjema>
@@ -73,16 +73,16 @@ class SkjemaContainer extends React.Component<Props> {
             this.props.history.push(`${SKJEMA_PATH}/0`);
             return;
         }
-        this.gjeldendeSporsmal = parseInt(sporsmal, 10);
+        this.gjeldendeSporsmal = Number(sporsmal);
     }
 
-    gaaTilNesteSide(gjeldendeSporsmalId: string, alleSporsmalIder: string[]) {
+    gaaTilNesteSide(gjeldendeSporsmalId: string, antallSporsmal: number) {
         if (!this.avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId)) {
             this.props.history.push(`${SBLREG_PATH}`);
             return;
         }
 
-        if (this.erSisteSporsmalOgAltErBesvart(alleSporsmalIder)) {
+        if (this.erSisteSporsmal(antallSporsmal)) {
             this.props.history.push(`${OPPSUMMERING_PATH}`);
             return;
         }
@@ -90,12 +90,8 @@ class SkjemaContainer extends React.Component<Props> {
         this.gaaTilSporsmal(this.gjeldendeSporsmal + 1);
     }
 
-    erSisteSporsmalOgAltErBesvart(alleSporsmalIder: string[]) {
-        const besvarteSporsmal = alleSporsmalIder
-            .filter(sporsmalId => this.props.sporsmalErBesvart(sporsmalId));
-        const alleSporsmalErBesvarte = besvarteSporsmal.length === alleSporsmalIder.length;
-        const erPaaSisteSporsmal = this.gjeldendeSporsmal === (alleSporsmalIder.length - 1);
-        return erPaaSisteSporsmal && alleSporsmalErBesvarte;
+    erSisteSporsmal(antallSporsmal: number) {
+        return this.gjeldendeSporsmal === (antallSporsmal - 1);
     }
 
     avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId: string) {

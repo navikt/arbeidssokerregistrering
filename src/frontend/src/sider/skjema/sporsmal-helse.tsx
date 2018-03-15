@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import NyttAlternativ from './alternativ';
+import Alternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from './skjema-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
@@ -28,8 +28,8 @@ export default function Helsesporsmal(props: Props) {
             </Systemtittel>
             <Panel className="panel-skjema">
                 <form className="form-flex form-skjema">
-                    <NyttAlternativ alternativId={1} {...fellesProps}/>
-                    <NyttAlternativ alternativId={2} {...fellesProps}/>
+                    <Alternativ alternativId={1} {...fellesProps}/>
+                    <Alternativ alternativId={2} {...fellesProps}/>
                 </form>
             </Panel>
         </div>
