@@ -75,11 +75,11 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
 };
 
 export function mapAvgitteSvarForBackend(svar: SvarState, oppsummering: OppsummeringState) {
-    const helse = svar['helse'];
-    const utdanning = svar['utdanning'];
+    const helse = svar.helse;
+    const utdanning = svar.utdanning;
 
     let data = {};
-    if (helse && utdanning) {
+    if (helse !== undefined && utdanning !== undefined) {
         data = {
             nusKode: mapTilNuskode(utdanning),
             yrkesPraksis: YRKESPRAKSIS,

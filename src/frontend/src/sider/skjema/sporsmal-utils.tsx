@@ -10,7 +10,7 @@ export const alternativIderSomGirSelvgaendeConfig = {
 export function erSelvgaende(
     sporsmalId: string,
     alternativId: number | undefined,
-    config = alternativIderSomGirSelvgaendeConfig
+    config: Object = alternativIderSomGirSelvgaendeConfig
 ): boolean {
     if ((alternativId === undefined) || (config[sporsmalId] === undefined)) {
         return false;

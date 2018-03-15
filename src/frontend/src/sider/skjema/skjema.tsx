@@ -8,9 +8,7 @@ interface SkjemaProps {
     children: {};
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
     avbrytSkjema: () => void;
-    gaaTilSporsmal: (sporsmal: number) => void;
     gaaTilbake: () => void;
     gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) => void;
 }
@@ -28,7 +26,7 @@ export default class Skjema extends React.Component<Props> {
 
     render() {
         this.antallSporsmal = React.Children.toArray(this.props.children).length;
-        const gjeldendeSporsmalComponent = this.props.children[this.props.gjeldendeSporsmal - 1];
+        const gjeldendeSporsmalComponent = this.props.children[this.props.gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
         const disableKnappNeste = (this.props.gjeldendeSporsmal === this.antallSporsmal) ?
             !this.alleSporsmalErBesvarte() :
@@ -54,11 +52,8 @@ export default class Skjema extends React.Component<Props> {
     }
 
     nesteButtonClick() {
-        //gjeldende sporsmal, sporsmal som skal besvares
         const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
-        let alleSporsmalsIder = [...this.getSporsmalIder()];
-        alleSporsmalsIder.shift();
-        this.props.gaaTilNesteSide(gjeldendeSporsmalId, alleSporsmalsIder);
+        this.props.gaaTilNesteSide(gjeldendeSporsmalId, this.getSporsmalIder());
     }
 
     alleSporsmalErBesvarte(): boolean {
@@ -67,7 +62,7 @@ export default class Skjema extends React.Component<Props> {
     }
 
     getSporsmalIder(): string[] {
-        let map: string[] = ['']; // Det første spørsmålet skal korrespondere med 1, ikke 0 TODO fiks dette.
+        let map: string[] = [];
         for (let i = 0; i < this.antallSporsmal; i += 1) {
             map.push(this.props.children[i].props.sporsmalId);
             // For at this.props.children[i] skal funke trenger man minst to children

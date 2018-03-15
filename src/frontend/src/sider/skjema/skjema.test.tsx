@@ -6,15 +6,11 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
 import {
-    finnAlternativSomGirSelvgaende, mountWithIntl, mountWithStore,
-    shallowwithStoreAndIntl,
+    mountWithIntl, shallowwithStoreAndIntl,
     store
 } from '../../test/test-utils';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import {endreSvarAction, setInitalState} from "../../ducks/svar";
-import {configIkkeSelvgaende, configSpmPrSide} from "./skjema-utils";
-import antallSporsmal from '../../sporsmal/alle-sporsmal';
-import Helsesporsmal from "./sporsmal-helse";
+import {setInitalState} from "../../ducks/svar";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -48,55 +44,19 @@ describe('<Skjema />', () => {
     });
 
     it('Skal navigere til neste side', () => {
-        const gaaTilSporsmal = sinon.spy();
+        const gaaTilNesteSide = sinon.spy();
 
         const props = {
             ...dummyPropsTilSkjema,
             sporsmalErBesvart: (sporsmalId) => true,
-            gaaTilSporsmal: gaaTilSporsmal,
-            gjeldendeSporsmal: 1,
-            hentAvgittSvar: (sporsmalId) => 2
+            gaaTilNesteSide: gaaTilNesteSide
         };
 
         const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
         wrapper.find(KnappNeste).simulate('click');
-        expect(gaaTilSporsmal).to.have.property('callCount', 1);
+        expect(gaaTilNesteSide).to.have.property('callCount', 1);
     });
 
-
-    it('Neste knapp på siste side skal være enablet når alle svarene er besvart', () => {
-        const lastId = Object.keys(antallSporsmal).length.toString();
-        const props = {
-            match: {
-                params: {
-                    id: lastId
-                }
-            },
-        };
-
-        besvarAlleSporsmal(antallSporsmal.length);
-
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
-        const knappNeste = wrapper.find(KnappNeste);
-        expect(knappNeste.props().disabled).to.be.false;
-    });
-
-    it('Neste knapp på siste side skal være disablet når siste svaret er ikke er besvart', () => {
-        const lastId = Object.keys(antallSporsmal).length.toString();
-        const props = {
-            match: {
-                params: {
-                    id: lastId
-                }
-            },
-        };
-
-        besvarAlleUnntattSisteSporsmal(antallSporsmal.length);
-
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
-        const knappNeste = wrapper.find(KnappNeste);
-        expect(knappNeste.props().disabled).to.be.true;
-    });
 
     it('Skal navigere til første side (skjema/1), dersom id ikke finnes (f.eks skjema/finnesIkke)', () => {
         const push = sinon.spy();
@@ -115,6 +75,8 @@ describe('<Skjema />', () => {
         expect(push).to.have.property('callCount', 1);
     });
 
+    /*
+    TODO Dette er egentlig en test av SkjemaContainer::gaaTilNesteSide.
     it('skal navigere til side 1 dersom forrige spm. ikke er besvart', () => {
         const pushedPath = '';
         const props = {
@@ -181,16 +143,8 @@ describe('<Skjema />', () => {
         expect(pushedPath).to.equal('/sblregistrering');
 
     });
+    */
 });
-
-const besvarAlleSporsmal = (antallSporsmal) => {
-    for(let i = 1; i <= antallSporsmal; i++){
-        store.dispatch(endreSvarAction(i.toString(), '1'));
-    }
-};
-const besvarAlleUnntattSisteSporsmal = (antallSporsmal) => {
-    besvarAlleSporsmal(antallSporsmal - 1)
-};
 
 function SkjemaMedChildren(props) {
     return (
@@ -210,9 +164,7 @@ function DummySporsmal({sporsmalId: string}) {
 const dummyPropsTilSkjema = {
     gjeldendeSporsmal: 1,
     sporsmalErBesvart: (sporsmalId: string) => true,
-    hentAvgittSvar: (sporsmalId: string) => undefined,
     avbrytSkjema: () => {},
-    gaaTilSporsmal: (sporsmal: number) => {},
     gaaTilbake: () => {},
     gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) => {}
 };

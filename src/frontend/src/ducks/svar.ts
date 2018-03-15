@@ -3,7 +3,10 @@ export enum ActionTypes {
     AVGI_SVAR_RESET = 'AVGI_SVAR_RESET'
 }
 
-export type State = Object;
+export type State = {
+    helse?: undefined;
+    utdanning?: undefined;
+};
 
 export interface Data {
     alternativId: number;

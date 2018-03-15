@@ -33,7 +33,7 @@ export class DinSituasjon extends React.PureComponent<DinSituasjonProps> {
                             key="2"
                             className="mml"
                             onClick={(() => {
-                                history.push(`${SKJEMA_PATH}/1`);
+                                history.push(`${SKJEMA_PATH}/0`);
                             })}
                         />
                     ]

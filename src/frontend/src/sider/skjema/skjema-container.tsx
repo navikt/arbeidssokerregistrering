@@ -9,7 +9,7 @@ import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal-utdanning';
 import Helsesporsmal from './sporsmal-helse';
-import {erSelvgaende} from "./sporsmal-utils";
+import { erSelvgaende } from './sporsmal-utils';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -47,10 +47,8 @@ class SkjemaContainer extends React.Component<Props> {
         const generiskSkjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
             sporsmalErBesvart: this.props.sporsmalErBesvart,
-            gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
             gaaTilbake: () => this.props.history.goBack(),
             avbrytSkjema: () => this.props.history.push(`${AVBRYT_PATH}`),
-            hentAvgittSvar: this.props.hentAvgittSvar,
             gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) =>
                 this.gaaTilNesteSide(gjeldendeSporsmalId, alleSporsmalIder)
         };
@@ -75,20 +73,29 @@ class SkjemaContainer extends React.Component<Props> {
     }
 
     gaaTilNesteSide(gjeldendeSporsmalId: string, alleSporsmalIder: string[]) {
-        if (!erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId))) {
+        if (!this.avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId)) {
             this.props.history.push(`${SBLREG_PATH}`);
-        } else {
-
-            const besvarteSporsmal = alleSporsmalIder
-                .filter(sporsmalId => this.props.sporsmalErBesvart(sporsmalId));
-            const alleSporsmalErBesvarte = besvarteSporsmal.length === alleSporsmalIder.length;
-
-            if ((this.gjeldendeSporsmal === alleSporsmalIder.length) && alleSporsmalErBesvarte) {
-                this.props.history.push(`${OPPSUMMERING_PATH}`);
-            } else {
-                this.gaaTilSporsmal(this.gjeldendeSporsmal + 1);
-            }
+            return;
         }
+
+        if (this.erSisteSporsmalOgAltErBesvart(alleSporsmalIder)) {
+            this.props.history.push(`${OPPSUMMERING_PATH}`);
+            return;
+        }
+
+        this.gaaTilSporsmal(this.gjeldendeSporsmal + 1);
+    }
+
+    erSisteSporsmalOgAltErBesvart(alleSporsmalIder: string[]) {
+        const besvarteSporsmal = alleSporsmalIder
+            .filter(sporsmalId => this.props.sporsmalErBesvart(sporsmalId));
+        const alleSporsmalErBesvarte = besvarteSporsmal.length === alleSporsmalIder.length;
+        const erPaaSisteSporsmal = this.gjeldendeSporsmal === (alleSporsmalIder.length - 1);
+        return erPaaSisteSporsmal && alleSporsmalErBesvarte;
+    }
+
+    avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId: string) {
+        return !erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId));
     }
 
     componentWillMount() {
@@ -96,8 +103,8 @@ class SkjemaContainer extends React.Component<Props> {
     }
 
     gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart() {
-        if (this.gjeldendeSporsmal > this.props.antallBesvarteSporsmal + 1) {
-            this.props.history.push(`${SKJEMA_PATH}/1`);
+        if (this.gjeldendeSporsmal > this.props.antallBesvarteSporsmal) {
+            this.props.history.push(`${SKJEMA_PATH}/0`);
         }
     }
 
