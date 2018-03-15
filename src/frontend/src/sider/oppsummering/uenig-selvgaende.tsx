@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
-import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 import Knapperad from '../../komponenter/knapper/knapperad';
-import { AVBRYT_PATH, SBLREG_PATH } from '../../utils/konstanter';
-import { Link } from 'react-router-dom';
+import { SBLREG_PATH } from '../../utils/konstanter';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
+import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 
 function UenigSelvgaende({history}: RouteComponentProps<MatchProps>) {
     return(
@@ -25,9 +25,7 @@ function UenigSelvgaende({history}: RouteComponentProps<MatchProps>) {
                 </Knapp>
             </Knapperad>
             <div className="text-align-center">
-                <Link className="lenke-avbryt" to={AVBRYT_PATH}>
-                    <Element tag="span"><FormattedMessage  id="uenig-selvgaende.avbryt"/></Element>
-                </Link>
+                <LenkeAvbryt/>
             </div>
         </ResponsivSide >
     );

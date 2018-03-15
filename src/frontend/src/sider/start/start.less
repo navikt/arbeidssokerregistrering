@@ -1,0 +1,66 @@
+.startside {
+    text-align: center;
+    width: 100%;
+
+    .figur {
+        background-color: #cde7d8;
+        background-image: url("svg/illustrasjon-start.svg");
+        background-repeat: no-repeat;
+        background-size: 80%;
+        background-position: bottom 0 right 50%;
+        padding-top: 60%;
+        margin-bottom: 1rem;
+        margin-right: 0;
+    }
+
+    .tittel {
+        margin-bottom: 2rem;
+    }
+    .beskrivelse {
+        text-align: left;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 2rem;
+    }
+    .knapp-start {
+        margin-bottom: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        display: block;
+    }
+
+    .lenke-avbryt {
+        display: block;
+        margin-bottom: 2rem;
+    }
+
+    @media (min-width: @screen-sm-min) {
+        position: absolute;
+        height: calc(100vh ~"-" @headerHeightDesktop ~"-" @footerHeightDesktop);
+        display: inline-flex;
+        align-items: center;
+
+        .figur {
+            flex-basis: 60%;
+            height: 100%;
+            padding-top: 0;
+            width: 65%;
+            margin-bottom: 0;
+        }
+
+        .innhold-container {
+            flex-basis: 40%;
+
+            .innhold {
+                width: 60%;
+                margin-left: 10%;
+            }
+
+            .knapp-start {
+                width: 8rem;
+            }
+        }
+    }
+
+}
