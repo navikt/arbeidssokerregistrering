@@ -34,35 +34,9 @@ export default class Skjema extends React.Component<Props> {
             !this.props.sporsmalErBesvart(this.sporsmalIder[this.props.gjeldendeSporsmal]);
 
         return (
-<<<<<<< HEAD
-            <React.Fragment>
+            <ResponsivSide>
                 <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
                 {gjeldendeSporsmalComponent}
-=======
-            <ResponsivSide>
-                <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
-                    <Tilbakeknapp onClick={() => history.goBack()}/>
-                    <Systemtittel tag="h1" className="spm-tittel">
-                        {intl.messages[`sporsmal-${spmId}-tittel`]}
-                    </Systemtittel>
-                    <Panel className="panel-skjema">
-                        <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
-                            {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
-                                .map(i => i + 1)
-                                .map((key) => <Alternativ
-                                    sporsmalId={spmId}
-                                    endreSvar={endreSvar}
-                                    key={key}
-                                    alternativId={key.toString()}
-                                    tekstId={`sporsmal-${spmId}-alternativ-${key}`}
-                                    checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
-                                    intl={intl}
-                                />)}
-                        </form>
-                    </Panel>
-                </div>
->>>>>>> master
-
                 <Knapperad>
                     <KnappAvbryt
                         classname="knapp mmr"

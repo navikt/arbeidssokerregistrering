@@ -12,13 +12,7 @@ import {
     NUSKODE_7,
     PERMITTERT,
     SAGT_OPP,
-    UNDER_UTDANNING,
-<<<<<<< HEAD
-    VIL_BYTTE_JOBB,
-    YRKESPRAKSIS
-=======
-    VIL_BYTTE_JOBB
->>>>>>> master
+    UNDER_UTDANNING, VIL_BYTTE_JOBB,
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { State as OppsummeringState } from '../ducks/oppsummering';
