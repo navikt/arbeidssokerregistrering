@@ -13,6 +13,7 @@ import Helsesporsmal from './sporsmal-helse';
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     hentAvgittSvar: (sporsmalId: string) => number | undefined;
+    antallBesvarteSporsmal: number;
 }
 
 interface DispatchProps {
@@ -72,17 +73,14 @@ class SkjemaContainer extends React.Component<Props> {
         this.gjeldendeSporsmal = parseInt(sporsmal, 10);
     }
 
-    /*
-    Gå til spm 1 hvis forrige ikke er besvart
-        if (spmId !== '1' &&
-            (parseInt(spmId, 10) > antallSporsmal.length || !sporsmalErBesvart(`${parseInt(spmId, 10) - 1}`))) {
-            history.push(`${SKJEMA_PATH}/1`);
-            return null;
-        }
-     */
+    componentWillMount() {
+        this.gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart();
+    }
 
-    gaaTilForsteSporsmalHvisDetForegaendeIkkeErBesvart() {
-        //TODO ^ if (this.gjeldendeSporsmal )
+    gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart() {
+        if (this.gjeldendeSporsmal > this.props.antallBesvarteSporsmal + 1) {
+            this.props.history.push(`${SKJEMA_PATH}/1`);
+        }
     }
 
     componentWillUpdate(nextProps: Props) {
@@ -112,7 +110,8 @@ class SkjemaContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
-    hentAvgittSvar: (sporsmalId) => state.svar[sporsmalId]
+    hentAvgittSvar: (sporsmalId) => state.svar[sporsmalId],
+    antallBesvarteSporsmal: Object.keys(state.svar).length
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

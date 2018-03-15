@@ -1,7 +1,7 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
-import { mapSvar } from '../utils/utils';
+import { mapAvgitteSvarForBackend } from '../utils/utils';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -61,7 +61,7 @@ export function utforRegistrering(data: Data) {
 
 export function mapBrukerRegistreringsData(state: AppState): State {
     return {
-        data: mapSvar(state.svar, state.oppsummering),
+        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering),
         status: state.registrerBruker.status
     };
 }

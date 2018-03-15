@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import antallSporsmal from '../../src/sporsmal/alle-sporsmal';
 
-import {getIntlMessage, getMapJaNeiKanskje, mapTilNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
+import {getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend} from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     PERMITTERT,
@@ -39,12 +39,12 @@ describe('utils test', () => {
     });
 
     it('test mapping av nuskode', () => {
-        expect(mapTilNusKode('1')).to.equal(NUSKODE_0);
-        expect(mapTilNusKode('2')).to.equal(NUSKODE_2);
-        expect(mapTilNusKode('3')).to.equal(NUSKODE_3);
-        expect(mapTilNusKode('4')).to.equal(NUSKODE_4);
-        expect(mapTilNusKode('5')).to.equal(NUSKODE_6);
-        expect(mapTilNusKode('6')).to.equal(NUSKODE_7);
+        expect(mapTilNuskode('1')).to.equal(NUSKODE_0);
+        expect(mapTilNuskode('2')).to.equal(NUSKODE_2);
+        expect(mapTilNuskode('3')).to.equal(NUSKODE_3);
+        expect(mapTilNuskode('4')).to.equal(NUSKODE_4);
+        expect(mapTilNuskode('5')).to.equal(NUSKODE_6);
+        expect(mapTilNuskode('6')).to.equal(NUSKODE_7);
     });
 
     it('test mapping av Ja, Nei, Kanskje', () => {
@@ -57,13 +57,13 @@ describe('utils test', () => {
         expect(YRKESPRAKSIS).to.equal('5120.14');
     });
 
-    it('test mapSvar', () => {
+    it('test mapAvgitteSvarForBackend', () => {
 
         const oppsummering = { tekst:  'oppsummer tekst'};
         let dummySvar = lagDummySvar(antallSporsmal.length);
 
         const expectData = {
-            nusKode: mapTilNusKode(dummySvar[1]),
+            nusKode: mapTilNuskode(dummySvar[1]),
             yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
@@ -71,7 +71,7 @@ describe('utils test', () => {
             utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
             harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
         };
-        expect(mapSvar(dummySvar, oppsummering)).to.deep.equal(expectData);
+        expect(mapAvgitteSvarForBackend(dummySvar, oppsummering)).to.deep.equal(expectData);
     });
 
 });

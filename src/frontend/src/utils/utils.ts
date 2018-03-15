@@ -51,7 +51,7 @@ export const getMapSituasjon = (svarAlternativ: string) => {
 
     return mapSituasjon[svarAlternativ];
 };
-export const mapTilNusKode = (svarAlternativ: string) => {
+export const mapTilNuskode = (svarAlternativ: string) => {
     const mapNusKode = {
         '1': NUSKODE_0,
         '2': NUSKODE_2,
@@ -74,19 +74,19 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
     return alternativId === 1;
 };
 
-export function mapSvar(svar: SvarState, oppsummering: OppsummeringState) {
+export function mapAvgitteSvarForBackend(svar: SvarState, oppsummering: OppsummeringState) {
     const helse = svar['helse'];
     const utdanning = svar['utdanning'];
 
     let data = {};
     if (helse && utdanning) {
         data = {
-            nusKode: mapTilNusKode(utdanning),
+            nusKode: mapTilNuskode(utdanning),
             yrkesPraksis: YRKESPRAKSIS,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
-            utdanningBestatt: false, // returner false hvis wsdl krever den
-            utdanningGodkjentNorge: false, // returner false hvis wsdl krever den TODO
+            utdanningBestatt: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
+            utdanningGodkjentNorge: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
             harHelseutfordringer: mapTilBoolean(helse),
         };
     }
