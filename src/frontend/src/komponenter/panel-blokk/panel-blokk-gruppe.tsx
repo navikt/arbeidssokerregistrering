@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import ResponsivSide from '../side/responsiv-side';
 
 interface PanelBlokkProps {
     children?: Array<React.ReactElement<Element>> | React.ReactElement<Element>;
@@ -9,14 +10,14 @@ interface PanelBlokkProps {
 
 function PanelBlokkGruppe({knappAksjoner, children, className}: PanelBlokkProps) {
     return (
-        <div>
+        <ResponsivSide>
             <div className={classNames('blokk', className)}>
                 {children}
             </div>
             <div className="panel-blokk__knapperad">
                 {knappAksjoner}
             </div>
-        </div>
+        </ResponsivSide>
     );
 }
 
