@@ -49,14 +49,14 @@ export const getMapSituasjon = (svarAlternativ: string) => {
 
     return mapSituasjon[svarAlternativ];
 };
-export const mapTilNuskode = (svarAlternativ: string) => {
+export const mapTilNuskode = (svarAlternativ: number) => {
     const mapNusKode = {
-        '1': NUSKODE_0,
-        '2': NUSKODE_2,
-        '3': NUSKODE_3,
-        '4': NUSKODE_4,
-        '5': NUSKODE_6,
-        '6': NUSKODE_7,
+        1: NUSKODE_0,
+        2: NUSKODE_2,
+        3: NUSKODE_3,
+        4: NUSKODE_4,
+        5: NUSKODE_6,
+        6: NUSKODE_7,
     };
     return mapNusKode[svarAlternativ];
 };
@@ -77,8 +77,8 @@ export function mapAvgitteSvarForBackend(
     oppsummering: OppsummeringState,
     yrkesPraksis: string | undefined
 ) {
-    const helse = svar.helse;
-    const utdanning = svar.utdanning;
+    const helse: number | undefined = svar.helse;
+    const utdanning: number | undefined = svar.utdanning;
 
     let data = {};
     if (helse !== undefined && utdanning !== undefined) {

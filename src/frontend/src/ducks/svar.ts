@@ -4,8 +4,8 @@ export enum ActionTypes {
 }
 
 export type State = {
-    helse?: undefined;
-    utdanning?: undefined;
+    helse?: number | undefined;
+    utdanning?: number | undefined;
 };
 
 export interface Data {
