@@ -9,7 +9,7 @@ import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal-utdanning';
 import Helsesporsmal from './sporsmal-helse';
-import { erSelvgaende } from './sporsmal-utils';
+import { erSelvgaende } from './skjema-utils';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -33,7 +33,7 @@ class SkjemaContainer extends React.Component<Props> {
 
     constructor(props: Props) {
         super(props);
-        this.settGjeldendeSporsmal(this.props.match.params.id);
+        this.settGjeldendeSporsmalOgResetHvisNaN(this.props.match.params.id);
     }
 
     render() {
@@ -68,7 +68,11 @@ class SkjemaContainer extends React.Component<Props> {
         this.gjeldendeSporsmal = sporsmal;
     }
 
-    settGjeldendeSporsmal(sporsmal: string) {
+    settGjeldendeSporsmalOgResetHvisNaN(sporsmal: string) {
+        if (isNaN(Number(sporsmal))) {
+            this.props.history.push(`${SKJEMA_PATH}/0`);
+            return;
+        }
         this.gjeldendeSporsmal = parseInt(sporsmal, 10);
     }
 
@@ -95,7 +99,7 @@ class SkjemaContainer extends React.Component<Props> {
     }
 
     avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId: string) {
-        return !erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId));
+        return erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId));
     }
 
     componentWillMount() {
@@ -110,7 +114,7 @@ class SkjemaContainer extends React.Component<Props> {
 
     componentWillUpdate(nextProps: Props) {
         if (this.gjeldendeSporsmalErEndret(nextProps)) {
-            this.settGjeldendeSporsmal(nextProps.match.params.id);
+            this.settGjeldendeSporsmalOgResetHvisNaN(nextProps.match.params.id);
         }
     }
 

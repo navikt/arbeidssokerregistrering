@@ -7,7 +7,6 @@ import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
 import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import IntlProvider from '../Intl-provider';
-import { configIkkeSelvgaende, erIkkeSelvgaende } from '../sider/skjema/skjema-utils';
 
 export const store = getStore();
 
@@ -128,15 +127,4 @@ export class FetchStub {
         const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
         return (responseKey && this.callCount[responseKey]) || 0;
     }
-}
-
-export function finnAlternativSomGirSelvgaende(spmId: string): string {
-    const svarSomGirIkkeSelvgaende = configIkkeSelvgaende[spmId];
-
-    for (let i = 1; i <= svarSomGirIkkeSelvgaende.length + 2; i++ ) {
-        if (!erIkkeSelvgaende(i.toString(), svarSomGirIkkeSelvgaende)) {
-            return i.toString();
-        }
-    }
-    return '';
 }

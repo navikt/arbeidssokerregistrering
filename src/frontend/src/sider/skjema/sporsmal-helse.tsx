@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import NyttAlternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForAlternativ } from './sporsmal-utils';
+import { getTekstIdForAlternativ } from './skjema-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
 
 interface SporsmalProps {

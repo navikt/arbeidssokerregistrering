@@ -58,6 +58,8 @@ describe('<Skjema />', () => {
     });
 
 
+    /*
+    TODO Dette er egentlig en test av SkjemaContainer::settGjeldendeSporsmalOgResetHvisNaN.
     it('Skal navigere til første side (skjema/1), dersom id ikke finnes (f.eks skjema/finnesIkke)', () => {
         const push = sinon.spy();
         const props = {
@@ -74,6 +76,7 @@ describe('<Skjema />', () => {
         shallowwithStoreAndIntl((<Skjema {...props} />));
         expect(push).to.have.property('callCount', 1);
     });
+    */
 
     /*
     TODO Dette er egentlig en test av SkjemaContainer::gaaTilNesteSide.

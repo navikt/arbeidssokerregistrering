@@ -65,7 +65,7 @@ export default class Skjema extends React.Component<Props> {
         let map: string[] = [];
         for (let i = 0; i < this.antallSporsmal; i += 1) {
             map.push(this.props.children[i].props.sporsmalId);
-            // For at this.props.children[i] skal funke trenger man minst to children
+            // For at this.props.children[i] skal funke trenger man minst to children, dvs. minst to spm i skjemaet.
         }
         return map;
     }
