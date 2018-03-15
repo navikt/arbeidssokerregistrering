@@ -12,7 +12,7 @@ import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { getIntlMessage, hentFornavn } from '../../utils/utils';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { FULLFOR_PATH, UENIG_PATH} from '../../utils/konstanter';
+import { FULLFOR_PATH, UENIG_PATH } from '../../utils/konstanter';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import { settOppsummering } from '../../ducks/oppsummering';
 
