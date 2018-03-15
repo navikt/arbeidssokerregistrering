@@ -11,7 +11,7 @@ import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import { configIkkeSelvgaende, erIkkeSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
-import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import { AVBRYT_PATH, SBLREG_PATH, SISTEARBFORHOLD_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 
@@ -113,7 +113,7 @@ class Skjema extends React.Component<Props> {
                                     if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
                                         history.push(`${SBLREG_PATH}`);
                                     } else {
-                                        history.push(`${OPPSUMMERING_PATH}`);
+                                        history.push(`${SISTEARBFORHOLD_PATH}`);
                                     }
                                 }}
                             />

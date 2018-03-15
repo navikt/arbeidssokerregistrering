@@ -1,28 +1,38 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import { Input } from 'nav-frontend-skjema';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteArbeidsforhold,
-    State as SisteArbeidsforholdState
+    State as SisteArbeidsforholdState,
 } from '../../ducks/siste-arbeidsforhold-fra-aareg';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../komponenter/initialdata/feilmelding';
-import SisteArbeidsforholdForm from './siste-arbeidsforhold-form';
 import { AppState } from '../../reducer';
 import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../../ducks/api-utils';
-import { FULLFOR_PATH } from '../../utils/konstanter';
 import {
-    hentStillingFraPamGittStyrkkode,
+    hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectStillingFraPam,
     State as StillingFraPamState
 } from '../../ducks/stilling-fra-pam';
+import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
+import KnappNeste from '../../komponenter/knapper/knapp-neste';
+import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
+import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
+import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
+import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
+import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
     stillingFraPam: StillingFraPamState;
+    stillingNavn: string;
 }
 
 interface DispatchProps {
@@ -35,41 +45,82 @@ type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProp
 class SisteArbeidsforhold extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
+        this.onAvbryt = this.onAvbryt.bind(this);
+        this.onTilbake = this.onTilbake.bind(this);
+        this.onNeste = this.onNeste.bind(this);
     }
 
     componentWillMount() {
         if (this.props.sisteArbeidsforhold.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {
-                    const { styrk } = this.props.sisteArbeidsforhold.data;
+                    const {styrk} = this.props.sisteArbeidsforhold.data;
                     this.props.hentStillingFraPamGittStyrkkode(styrk);
                 });
         }
     }
 
-    render() {
-        const {sisteArbeidsforhold, stillingFraPam, intl, history} = this.props;
+    onAvbryt() {
+        this.props.history.push(AVBRYT_PATH);
+    }
 
-        /*tslint:disable:no-console*/
+    onTilbake() {
+        this.props.history.goBack();
+    }
+
+    onNeste() {
+        this.props.history.push(OPPSUMMERING_PATH);
+    }
+
+    render() {
+        const {sisteArbeidsforhold, stillingFraPam, intl} = this.props;
+
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[sisteArbeidsforhold, stillingFraPam]}
                 storrelse="XXL"
             >
-                <SisteArbeidsforholdForm onSubmit={(data) => history.push(FULLFOR_PATH)} history={history}/>
-            </Innholdslaster>);
+                <Tilbakeknapp onClick={this.onTilbake}/>
+                <PanelBlokkGruppe className="blokk-xs">
+                    <PanelBlokk
+                        tittelId="siste-arbeidsforhold.tittel"
+                        tittelCssNavnVariant="transparent-variant"
+                        beskrivelseId="siste-arbeidsforhold.ingress"
+                        cssVariant="padding-vertikalt-xsmall"
+                    />
+                    <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
+                        <Input
+                            className="blokk-m"
+                            label={''}
+                            defaultValue={this.props.stillingNavn}
+                        />
+                        <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel">
+                            <Normaltekst>
+                                <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                            </Normaltekst>
+                        </EkspanderbartInfo>
+                    </PanelBlokk>
+                </PanelBlokkGruppe>
+                <Knappervertikalt>
+                    <KnappNeste onClick={this.onNeste}/>
+                    <KnappAvbryt onClick={this.onAvbryt}/>
+                </Knappervertikalt>
+            </Innholdslaster>
+        );
+        /*tslint:disable:no-console*/
     }
 }
 
 const mapStateToProps = (state) => ({
     sisteArbeidsforhold: selectSisteArbeidsforhold(state),
-    stillingFraPam: selectStillingFraPam(state)
+    stillingFraPam: selectStillingFraPam(state),
+    stillingNavn: selectSisteStillingNavnFraPam(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
-    hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk))
+    hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

@@ -164,7 +164,7 @@ describe('<Skjema />', () => {
 
         wrapper.find(KnappNeste).simulate('click');
 
-        expect(pushedPath).to.equal('/oppsummering');
+        expect(pushedPath).to.equal('/sistearbforhold');
     });
 
     it('skal sende bruker til sbl med en gang dersom svar er "feil"', () => {
