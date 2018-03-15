@@ -25,15 +25,15 @@ export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWith
     })).dive().dive();
 }
 
-export function shallowwithStore(children: React.ReactElement<ElementWithStore>) {
+export function shallowWithStore(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
     return shallow(React.cloneElement(children, {
-        store
+        store: withStore || store
     })).dive();
 }
 
-export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
+export function mountWithStore(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
     return mount(React.cloneElement(children, {
-        store
+        store: withStore || store
     }));
 }
 
@@ -72,8 +72,8 @@ export function resetAndMakeHrefWritable() {
     });
 }
 
-export function dispatchRegistreringstatus(data: RegStatusData) {
-    return store.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
+export function dispatchRegistreringstatus(data: RegStatusData, s: Store<AppState>) {
+    return s.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
 }
 
 export function withResponse(response: {}) {
