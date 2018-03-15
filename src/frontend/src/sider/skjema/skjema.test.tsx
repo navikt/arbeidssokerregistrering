@@ -4,9 +4,9 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import Skjema from './skjema-container';
+import Skjema from './skjema';
 import {
-    finnAlternativSomGirSelvgaende,
+    finnAlternativSomGirSelvgaende, mountWithIntl, mountWithStore,
     shallowwithStoreAndIntl,
     store
 } from '../../test/test-utils';
@@ -14,6 +14,7 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import {endreSvarAction, setInitalState} from "../../ducks/svar";
 import {configIkkeSelvgaende, configSpmPrSide} from "./skjema-utils";
 import antallSporsmal from '../../sporsmal/alle-sporsmal';
+import Helsesporsmal from "./sporsmal-helse";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -25,53 +26,43 @@ describe('<Skjema />', () => {
     * Navigering til neste side
     * */
     it('Neste skal ikke være disabled når spørsmål er besvart', () => {
-        store.dispatch(endreSvarAction('1', '1'));
         const props = {
-            match: {
-                params: {
-                    id: '1'
-                }
-            }
+            ...dummyPropsTilSkjema,
+            sporsmalErBesvart: (sporsmalId) => true
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
+        const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
 
     it('Neste skal være disabled når spørsmål ikke er besvart', () => {
         const props = {
-            match: {
-                params: {
-                    id: '1'
-                }
-            }
+            ...dummyPropsTilSkjema,
+            sporsmalErBesvart: (sporsmalId) => false
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
+        const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.true;
     });
 
     it('Skal navigere til neste side', () => {
-        const push = sinon.spy();
+        const gaaTilSporsmal = sinon.spy();
+
         const props = {
-            match: {
-                params: {
-                    id: '1'
-                }
-            },
-            history: {
-                push
-            },
-            sporsmalErBesvart: (id) => true,
+            ...dummyPropsTilSkjema,
+            sporsmalErBesvart: (sporsmalId) => true,
+            gaaTilSporsmal: gaaTilSporsmal,
+            gjeldendeSporsmal: 1,
+            hentAvgittSvar: (sporsmalId) => 2
         };
 
-        const wrapper = shallowwithStoreAndIntl((<Skjema {...props} />));
+        const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
         wrapper.find(KnappNeste).simulate('click');
-        expect(push).to.have.property('callCount', 1);
+        expect(gaaTilSporsmal).to.have.property('callCount', 1);
     });
-    
+
 
     it('Neste knapp på siste side skal være enablet når alle svarene er besvart', () => {
         const lastId = Object.keys(antallSporsmal).length.toString();
@@ -199,4 +190,29 @@ const besvarAlleSporsmal = (antallSporsmal) => {
 };
 const besvarAlleUnntattSisteSporsmal = (antallSporsmal) => {
     besvarAlleSporsmal(antallSporsmal - 1)
+};
+
+function SkjemaMedChildren(props) {
+    return (
+        <Skjema {...props}>
+            <DummySporsmal sporsmalId="helse"/>
+            <DummySporsmal sporsmalId="utdanning"/>
+            <DummySporsmal sporsmalId="test"/>
+            <DummySporsmal sporsmalId="test2"/>
+        </Skjema>
+    );
+}
+
+function DummySporsmal({sporsmalId: string}) {
+    return (null);
+}
+
+const dummyPropsTilSkjema = {
+    gjeldendeSporsmal: 1,
+    sporsmalErBesvart: (sporsmalId: string) => true,
+    hentAvgittSvar: (sporsmalId: string) => undefined,
+    avbrytSkjema: () => {},
+    gaaTilSporsmal: (sporsmal: number) => {},
+    gaaTilbake: () => {},
+    gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) => {}
 };

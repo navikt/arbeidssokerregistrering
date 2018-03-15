@@ -44,7 +44,15 @@ export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithSt
                 {children}
             </IntlProvider>
         </Provider>
-        );
+    );
+}
+
+export function mountWithIntl(children: React.ReactElement<ElementWithStore>) {
+    return mount(
+        <IntlProvider >
+            {children}
+        </IntlProvider>
+    );
 }
 
 export function stubFetch(fetchStub: FetchStub): Promise<{}> {

@@ -3,9 +3,8 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
-import { erSelvgaende } from './sporsmal-utils';
 
-interface GeneriskSkjemaProps {
+interface SkjemaProps {
     children: {};
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -13,11 +12,10 @@ interface GeneriskSkjemaProps {
     avbrytSkjema: () => void;
     gaaTilSporsmal: (sporsmal: number) => void;
     gaaTilbake: () => void;
-    fullforSkjema: () => void;
-    gaaTilSblRegistrering: () => void;
+    gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) => void;
 }
 
-type Props = GeneriskSkjemaProps;
+type Props = SkjemaProps;
 
 export default class Skjema extends React.Component<Props> {
 
@@ -56,16 +54,11 @@ export default class Skjema extends React.Component<Props> {
     }
 
     nesteButtonClick() {
+        //gjeldende sporsmal, sporsmal som skal besvares
         const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
-        if (!erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId))) {
-            this.props.gaaTilSblRegistrering();
-        } else {
-            if ((this.props.gjeldendeSporsmal === this.antallSporsmal) && this.alleSporsmalErBesvarte()) {
-                this.props.fullforSkjema();
-            } else {
-                this.props.gaaTilSporsmal(this.props.gjeldendeSporsmal + 1);
-            }
-        }
+        let alleSporsmalsIder = [...this.getSporsmalIder()];
+        alleSporsmalsIder.shift();
+        this.props.gaaTilNesteSide(gjeldendeSporsmalId, alleSporsmalsIder);
     }
 
     alleSporsmalErBesvarte(): boolean {
@@ -74,9 +67,10 @@ export default class Skjema extends React.Component<Props> {
     }
 
     getSporsmalIder(): string[] {
-        let map: string[] = ['']; // Det første spørsmålet skal korrespondere med 1, ikke 0
+        let map: string[] = ['']; // Det første spørsmålet skal korrespondere med 1, ikke 0 TODO fiks dette.
         for (let i = 0; i < this.antallSporsmal; i += 1) {
             map.push(this.props.children[i].props.sporsmalId);
+            // For at this.props.children[i] skal funke trenger man minst to children
         }
         return map;
     }

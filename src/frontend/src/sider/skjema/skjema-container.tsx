@@ -9,6 +9,7 @@ import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal-utdanning';
 import Helsesporsmal from './sporsmal-helse';
+import {erSelvgaende} from "./sporsmal-utils";
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -49,9 +50,9 @@ class SkjemaContainer extends React.Component<Props> {
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
             gaaTilbake: () => this.props.history.goBack(),
             avbrytSkjema: () => this.props.history.push(`${AVBRYT_PATH}`),
-            fullforSkjema: () => this.props.history.push(`${OPPSUMMERING_PATH}`),
-            gaaTilSblRegistrering: () => this.props.history.push(`${SBLREG_PATH}`),
-            hentAvgittSvar: this.props.hentAvgittSvar
+            hentAvgittSvar: this.props.hentAvgittSvar,
+            gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) =>
+                this.gaaTilNesteSide(gjeldendeSporsmalId, alleSporsmalIder)
         };
 
         return (
@@ -71,6 +72,23 @@ class SkjemaContainer extends React.Component<Props> {
 
     settGjeldendeSporsmal(sporsmal: string) {
         this.gjeldendeSporsmal = parseInt(sporsmal, 10);
+    }
+
+    gaaTilNesteSide(gjeldendeSporsmalId: string, alleSporsmalIder: string[]) {
+        if (!erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId))) {
+            this.props.history.push(`${SBLREG_PATH}`);
+        } else {
+
+            const besvarteSporsmal = alleSporsmalIder
+                .filter(sporsmalId => this.props.sporsmalErBesvart(sporsmalId));
+            const alleSporsmalErBesvarte = besvarteSporsmal.length === alleSporsmalIder.length;
+
+            if ((this.gjeldendeSporsmal === alleSporsmalIder.length) && alleSporsmalErBesvarte) {
+                this.props.history.push(`${OPPSUMMERING_PATH}`);
+            } else {
+                this.gaaTilSporsmal(this.gjeldendeSporsmal + 1);
+            }
+        }
     }
 
     componentWillMount() {
