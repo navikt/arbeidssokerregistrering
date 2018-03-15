@@ -50,6 +50,7 @@
     "react-router-dom": "4.2.2",
     "react-scripts-ts": "2.8.0",
     "react-test-renderer": "16.2.0",
+    "react-select": "^1.2.1",
     "redux-form": "7.2.1",
     "redux-thunk": "2.2.0"
   },
@@ -73,6 +74,7 @@
   },
   "devDependencies": {
     "@types/classnames": "2.2.3",
+    "@types/react-select": "^1.2.0",
     "@types/fetch-mock": "5.12.2",
     "@types/jest": "21.1.8",
     "@types/lodash": "4.14.91",

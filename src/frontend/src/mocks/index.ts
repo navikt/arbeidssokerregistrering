@@ -1,5 +1,5 @@
 /*tslint:disable*/
-import {mock, respondWith, delayed } from './utils';
+import {mock, respondWith, delayed, lagPamjanzzRespons} from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
@@ -11,7 +11,8 @@ const MOCK_REGISTRER_BRUKER = true;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
-const MOCK_GET_STILLING_FRA_PAM = true;
+const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
+const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 
 
@@ -27,6 +28,7 @@ if (MOCK_INNLOGGINGS_INFO) {
     (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(1000, innloggingsInfo)));
 }
 
+
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
     (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteArbeidsforhold)));
 }
@@ -41,8 +43,13 @@ if(MOCK_SBL) {
     (mock as any).post('/sbl/arbeid/opprettMinIdBruker', respondWith(delayed(2000, {}, 404)));
 }
 
-if(MOCK_GET_STILLING_FRA_PAM) {
-    (mock as any).get('glob:/pam-janzz/rest*', respondWith(delayed(500, stillingFraPam)));
+if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
+    (mock as any).get('glob:/pam-janzz/rest/kryssklassifiser?kodeForOversetting*', respondWith(delayed(500, stillingFraPam)));
+}
+
+if(MOCK_STYRK08_PAMJANZZ) {
+    (mock as any).get('express:/pam-janzz/rest/typeahead/styrk08NAV*',
+        respondWith(delayed(100, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
 }
 
 

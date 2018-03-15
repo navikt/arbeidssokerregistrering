@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
-import { Input } from 'nav-frontend-skjema';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteArbeidsforhold,
@@ -15,6 +14,7 @@ import { MatchProps } from '../skjema/skjema';
 import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../../ducks/api-utils';
 import {
+    velgStilling,
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectStillingFraPam,
     State as StillingFraPamState
@@ -28,6 +28,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
+import SokeInput from '../../komponenter/input/sokeinput';
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
@@ -38,6 +39,7 @@ interface StateProps {
 interface DispatchProps {
     hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
     hentStillingFraPamGittStyrkkode: (styrk: string | undefined) => void;
+    velgStilling: (label: string, kode: string) => void;
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
@@ -73,7 +75,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
     }
 
     render() {
-        const {sisteArbeidsforhold, stillingFraPam, intl} = this.props;
+        const {sisteArbeidsforhold, stillingFraPam, stillingNavn, intl} = this.props;
 
         return (
             <Innholdslaster
@@ -81,8 +83,8 @@ class SisteArbeidsforhold extends React.Component<Props> {
                 avhengigheter={[sisteArbeidsforhold, stillingFraPam]}
                 storrelse="XXL"
             >
-                <Tilbakeknapp onClick={this.onTilbake}/>
                 <PanelBlokkGruppe className="blokk-xs">
+                    <Tilbakeknapp onClick={this.onTilbake}/>
                     <PanelBlokk
                         tittelId="siste-arbeidsforhold.tittel"
                         tittelCssNavnVariant="transparent-variant"
@@ -90,22 +92,18 @@ class SisteArbeidsforhold extends React.Component<Props> {
                         cssVariant="padding-vertikalt-xsmall"
                     />
                     <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
-                        <Input
-                            className="blokk-m"
-                            label={''}
-                            defaultValue={this.props.stillingNavn}
-                        />
+                        <SokeInput feltNavn={stillingNavn} onChange={this.props.velgStilling}/>
                         <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel">
                             <Normaltekst>
                                 <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
                             </Normaltekst>
                         </EkspanderbartInfo>
                     </PanelBlokk>
+                    <Knappervertikalt>
+                        <KnappNeste onClick={this.onNeste} disabled={!stillingNavn}/>
+                        <KnappAvbryt onClick={this.onAvbryt}/>
+                    </Knappervertikalt>
                 </PanelBlokkGruppe>
-                <Knappervertikalt>
-                    <KnappNeste onClick={this.onNeste}/>
-                    <KnappAvbryt onClick={this.onAvbryt}/>
-                </Knappervertikalt>
             </Innholdslaster>
         );
         /*tslint:disable:no-console*/
@@ -121,6 +119,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
+    velgStilling: (label: string, kode: string) => dispatch(velgStilling(label, kode)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

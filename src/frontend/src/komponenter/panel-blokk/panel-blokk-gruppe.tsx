@@ -14,9 +14,13 @@ function PanelBlokkGruppe({knappAksjoner, children, className}: PanelBlokkProps)
             <div className={classNames('blokk', className)}>
                 {children}
             </div>
-            <div className="panel-blokk__knapperad">
-                {knappAksjoner}
-            </div>
+            {knappAksjoner ?
+                <div className="panel-blokk__knapperad">
+                    {knappAksjoner}
+                </div>
+                :
+                null
+            }
         </ResponsivSide>
     );
 }

@@ -14,6 +14,7 @@ export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/arbeid/opprettMinIdBruker';
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
+const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/styrk08NAV`;
 
 export const getCookie = name => {
     const re = new RegExp(`${name}=([^;]+)`);
@@ -81,6 +82,13 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
         url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
         config: MED_CREDENTIALS,
         recoverWith: () => ({koder: []})
+    });
+}
+
+export function hentStillingMedStyrk08(q: string) {
+    return fetchToJson({
+        url: `${STYRK_URL}?q=${q}`,
+        recoverWith: () => []
     });
 }
 
