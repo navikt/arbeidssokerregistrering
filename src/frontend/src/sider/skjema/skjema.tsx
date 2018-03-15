@@ -33,8 +33,11 @@ export default class Skjema extends React.Component<Props> {
 
         return (
             <ResponsivSide>
-                <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
-                {gjeldendeSporsmalComponent}
+                <div className="blokk sporsmal-wrapper">
+                    <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
+                    {gjeldendeSporsmalComponent}
+                </div>
+
                 <Knapperad>
                     <KnappAvbryt
                         classname="knapp mmr"

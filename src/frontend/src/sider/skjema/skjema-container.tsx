@@ -54,7 +54,7 @@ class SkjemaContainer extends React.Component<Props> {
         };
 
         return (
-            <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
+            <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <Skjema {...skjemaProps}>
                     <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                     <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
