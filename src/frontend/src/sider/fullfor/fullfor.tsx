@@ -23,6 +23,7 @@ import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import { registrerBrukerSBLArbeid, VEIENTILARBEID_MED_OVERLAY_URL } from '../../ducks/api';
+import { STATUS } from '../../ducks/api-utils';
 
 interface StateProps {
     registrerBruker: RegistrerBrukerState;
@@ -34,6 +35,7 @@ interface DispatchProps {
 
 interface EgenStateProps {
     markert: boolean;
+    sblArbeidRegistrerBrukerStatus: string;
 }
 
 type EgenProps = RouteComponentProps<MatchProps> & StateProps & DispatchProps & InjectedIntlProps;
@@ -43,6 +45,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         super(props);
         this.state = {
             markert: false,
+            sblArbeidRegistrerBrukerStatus: STATUS.OK
         };
         this.settMarkert = this.settMarkert.bind(this);
         this.registrerBrukerOnClick = this.registrerBrukerOnClick.bind(this);
@@ -55,13 +58,18 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         }
     }
 
+    sendBrukerTilSblMedOverlay() {
+        document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
+    }
+
     registrerBrukerOnClick() {
+        this.setState((prevState) => ({ ...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
+
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    registrerBrukerSBLArbeid().then(() => {
-                        document.location.href = VEIENTILARBEID_MED_OVERLAY_URL;
-                    });
+                    registrerBrukerSBLArbeid(2500)
+                        .then(this.sendBrukerTilSblMedOverlay, this.sendBrukerTilSblMedOverlay);
                 }
             });
     }
@@ -78,10 +86,9 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} />}
-                avhengigheter={[registrerBruker]}
+                avhengigheter={[registrerBruker, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 storrelse="XXL"
             >
-                <Tilbakeknapp onClick={() => history.goBack()}/>
                 <PanelBlokkGruppe
                     knappAksjoner={[
                         <Knapp
@@ -102,6 +109,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                         />
                     ]}
                 >
+                    <Tilbakeknapp onClick={() => history.goBack()}/>
                     <PanelBlokk
                         tittelId="fullfor-header"
                         tittelCssNavnVariant="oransje-variant"

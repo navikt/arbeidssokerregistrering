@@ -3,6 +3,7 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import Knapperad from '../../komponenter/knapper/knapperad';
 import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
+import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface SkjemaProps {
     children: {};
@@ -33,9 +34,34 @@ export default class Skjema extends React.Component<Props> {
             !this.props.sporsmalErBesvart(this.sporsmalIder[this.props.gjeldendeSporsmal]);
 
         return (
+<<<<<<< HEAD
             <React.Fragment>
                 <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
                 {gjeldendeSporsmalComponent}
+=======
+            <ResponsivSide>
+                <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
+                    <Tilbakeknapp onClick={() => history.goBack()}/>
+                    <Systemtittel tag="h1" className="spm-tittel">
+                        {intl.messages[`sporsmal-${spmId}-tittel`]}
+                    </Systemtittel>
+                    <Panel className="panel-skjema">
+                        <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
+                            {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
+                                .map(i => i + 1)
+                                .map((key) => <Alternativ
+                                    sporsmalId={spmId}
+                                    endreSvar={endreSvar}
+                                    key={key}
+                                    alternativId={key.toString()}
+                                    tekstId={`sporsmal-${spmId}-alternativ-${key}`}
+                                    checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
+                                    intl={intl}
+                                />)}
+                        </form>
+                    </Panel>
+                </div>
+>>>>>>> master
 
                 <Knapperad>
                     <KnappAvbryt
@@ -47,7 +73,7 @@ export default class Skjema extends React.Component<Props> {
                         disabled={disableKnappNeste}
                     />
                 </Knapperad>
-            </React.Fragment>
+            </ResponsivSide>
         );
     }
 

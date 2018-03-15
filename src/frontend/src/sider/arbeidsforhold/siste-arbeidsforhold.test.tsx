@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
-import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold';
+import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold-fra-aareg';
 import { FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, stubFetch } from '../../test/test-utils';
 import SisteArbeidsforhold from './siste-arbeidsforhold';
 
@@ -26,7 +26,10 @@ describe('<SisteArbeidsforhold />', () => {
     it('skal hente siste arbeidsforhold og state', () => {
         const store = create();
         const state = {dummy: 'dummy'};
-        const fetchStub = new FetchStub().addResponse('sistearbeidsforhold', state);
+        const fetchStub = new FetchStub()
+            .addResponse('sistearbeidsforhold', state)
+            .addResponse('kryssklassifiser', {});
+
         stubFetch( fetchStub);
 
         mountWithStoreAndIntl(<SisteArbeidsforhold />, store);

@@ -49,7 +49,6 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
         const { name } = innloggingsInfo.data;
         return (
             <div>
-                <Tilbakeknapp onClick={() => history.goBack()}/>
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [
@@ -71,6 +70,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
                         ]
                     }
                 >
+                    <Tilbakeknapp onClick={() => history.goBack()}/>
                     <PanelBlokk
                         tittelId="du-har-gode-muligheter"
                         tittelVerdier={{fornavn: hentFornavn(name)}}

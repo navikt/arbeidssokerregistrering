@@ -24,15 +24,15 @@ export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWith
     })).dive().dive();
 }
 
-export function shallowwithStore(children: React.ReactElement<ElementWithStore>) {
+export function shallowWithStore(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
     return shallow(React.cloneElement(children, {
-        store
+        store: withStore || store
     })).dive();
 }
 
-export function mountWithStore(children: React.ReactElement<ElementWithStore>) {
+export function mountWithStore(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
     return mount(React.cloneElement(children, {
-        store
+        store: withStore || store
     }));
 }
 
@@ -54,8 +54,9 @@ export function mountWithIntl(children: React.ReactElement<ElementWithStore>) {
     );
 }
 
-export function stubFetch(fetchStub: FetchStub): Promise<{}> {
-    return sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+export function stubFetch(fetchStub: FetchStub): FetchStub {
+    sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+    return fetchStub;
 }
 
 function getPromiseResponse(url: string, fetchStub: FetchStub) {
@@ -67,8 +68,8 @@ function getPromiseResponse(url: string, fetchStub: FetchStub) {
     return status === 200 ? okResponse : errorResponse;
 }
 
-export function promiseWithSetTimeout() {
-    return new Promise(resolve => setTimeout(resolve, 0));
+export function promiseWithSetTimeout(timeout?: number) {
+    return new Promise(resolve => setTimeout(resolve, timeout || 0));
 }
 
 export function resetAndMakeHrefWritable() {
@@ -78,8 +79,8 @@ export function resetAndMakeHrefWritable() {
     });
 }
 
-export function dispatchRegistreringstatus(data: RegStatusData) {
-    return store.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
+export function dispatchRegistreringstatus(data: RegStatusData, s: Store<AppState>) {
+    return s.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
 }
 
 export function withResponse(response: {}) {

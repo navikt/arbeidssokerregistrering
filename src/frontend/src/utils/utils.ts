@@ -13,8 +13,12 @@ import {
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
+<<<<<<< HEAD
     VIL_BYTTE_JOBB,
     YRKESPRAKSIS
+=======
+    VIL_BYTTE_JOBB
+>>>>>>> master
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { State as OppsummeringState } from '../ducks/oppsummering';
@@ -74,7 +78,11 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
     return alternativId === 1;
 };
 
-export function mapAvgitteSvarForBackend(svar: SvarState, oppsummering: OppsummeringState) {
+export function mapAvgitteSvarForBackend(
+    svar: SvarState,
+    oppsummering: OppsummeringState,
+    yrkesPraksis: string | undefined
+) {
     const helse = svar.helse;
     const utdanning = svar.utdanning;
 
@@ -82,7 +90,7 @@ export function mapAvgitteSvarForBackend(svar: SvarState, oppsummering: Oppsumme
     if (helse !== undefined && utdanning !== undefined) {
         data = {
             nusKode: mapTilNuskode(utdanning),
-            yrkesPraksis: YRKESPRAKSIS,
+            yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             utdanningBestatt: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
