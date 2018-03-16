@@ -4,8 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-
-import { MatchProps } from '../skjema/skjema';
+import { MatchProps } from '../../utils/utils';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
 import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';

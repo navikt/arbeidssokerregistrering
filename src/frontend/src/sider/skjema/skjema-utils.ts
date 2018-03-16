@@ -1,27 +1,20 @@
-/*
-* Konfigurasjon
-*
-* Selvgående bruker
-*
-* key: spørsmål id
-* value: [svar id] // liste med alternativ svar - gir utslag som selvgående bruker
-*
-* */
-export const configIkkeSelvgaende = {
-    1: ['1'],
-    2: ['2'],
-    3: ['2', '3'],
-    4: ['1'],
+export function getTekstIdForAlternativ(sporsmalId: string, alternativId: number) {
+    return `${sporsmalId}-alternativ-${alternativId}`;
+}
+
+export const alternativIderSomGirSelvgaendeConfig = {
+    helse: [2],
+    utdanning: [2, 3, 4, 5, 6]
 };
 
-export const erIkkeSelvgaende = (avgittSvar: string, svarSomGirIkkeSelvgaende: string[]) => {
-    return svarSomGirIkkeSelvgaende.includes(avgittSvar);
-};
-
-export const erSvarAlternativMerEnnTo = (spmId: string) => {
-    let classname = '';
-    if (spmId !== '1' && spmId !== '2') {
-        classname = 'form-flex';
+export function erSelvgaende(
+    sporsmalId: string,
+    alternativId: number | undefined,
+    config: Object = alternativIderSomGirSelvgaendeConfig
+): boolean {
+    if ((alternativId === undefined) || (config[sporsmalId] === undefined)) {
+        return false;
+    } else {
+        return config[sporsmalId].includes(alternativId);
     }
-    return classname;
-};
+}

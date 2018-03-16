@@ -1,14 +1,26 @@
 import { expect } from 'chai';
 import { erIkkeSelvgaende } from './skjema-utils';
+import {erSelvgaende} from "./skjema-utils";
 
-describe('skjema-utils', () => {
-    it('test av erIkkeSelvgaende', () => {
+/*
+sett state, gjør noe, sjekk resultat TODO
+ */
 
-        expect(erIkkeSelvgaende('1', ['1'])).to.equal(true);
-        expect(erIkkeSelvgaende('1', ['1', '2', '3'])).to.equal(true);
+const config = {
+    helse: [1, 2, 3],
+    utdanning: [4, 5]
+};
 
-        expect(erIkkeSelvgaende('1', ['2'])).to.equal(false);
-        expect(erIkkeSelvgaende('1', ['4', '2', '3'])).to.equal(false);
+describe('sporsmal-utils', () => {
+    it('test at erSelvgaende fungerer som forventet gitt config', () => {
+        expect(erSelvgaende('helse', 1, config)).to.equal(true);
+        expect(erSelvgaende('helse', 4, config)).to.equal(false);
+        expect(erSelvgaende('helse', undefined, config)).to.equal(false);
+        expect(erSelvgaende('utdanning', 1, config)).to.equal(false);
+        expect(erSelvgaende('utdanning', 4, config)).to.equal(true);
+    });
 
+    it('test at erSelvgaende returnerer false hvis sporsmalsId ikke finnes', () => {
+        expect(erSelvgaende('finnes ikke', 4, config)).to.equal(false);
     });
 });
