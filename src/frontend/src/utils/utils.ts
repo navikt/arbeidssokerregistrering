@@ -87,8 +87,8 @@ export function mapAvgitteSvarForBackend(
             yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
-            utdanningBestatt: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
-            utdanningGodkjentNorge: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
+            utdanningBestatt: true, // TODO: Fjern dette når wsdl ikke krevet det lenger
+            utdanningGodkjentNorge: true, // TODO: Fjern dette når wsdl ikke krevet det lenger
             harHelseutfordringer: mapTilBoolean(helse),
         };
     }
