@@ -1,7 +1,7 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
-import { mapSvar } from '../utils/utils';
+import { mapAvgitteSvarForBackend } from '../utils/utils';
 import { selectSisteStillingKodeFraPam } from './stilling-fra-pam';
 
 export enum ActionTypes {
@@ -63,7 +63,7 @@ export function utforRegistrering(data: Data) {
 export function mapBrukerRegistreringsData(state: AppState): State {
     const yrkesPraksis = selectSisteStillingKodeFraPam(state);
     return {
-        data: mapSvar(state.svar, state.oppsummering, yrkesPraksis),
+        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, yrkesPraksis),
         status: state.registrerBruker.status
     };
 }

@@ -117,11 +117,11 @@ describe('<Fullfor />', () => {
     });
 
     function dispatchTilfeldigeSvar(store) {
-        store.dispatch(endreSvarAction('1', '1'));
-        store.dispatch(endreSvarAction('2', '1'));
-        store.dispatch(endreSvarAction('3', '1'));
-        store.dispatch(endreSvarAction('4', '1'));
-        store.dispatch(endreSvarAction('5', '1'));
+        store.dispatch(endreSvarAction('helse', 1));
+        store.dispatch(endreSvarAction('utdanning', 1));
+        store.dispatch(endreSvarAction('test', 1));
+        store.dispatch(endreSvarAction('test2', 1));
+        store.dispatch(endreSvarAction('test3', 1));
     }
 
 });

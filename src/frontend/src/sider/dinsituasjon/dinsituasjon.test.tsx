@@ -22,6 +22,6 @@ describe('<DinSituasjon />', () => {
 
         const wrapper = shallowwithIntl(<DinSituasjon {...props} />);
         wrapper.find(KnappNeste).simulate('click');
-        expect(pushedPath).to.equal('/skjema/1');
+        expect(pushedPath).to.equal('/skjema/0');
     });
 });

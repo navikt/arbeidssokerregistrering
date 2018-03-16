@@ -1,12 +1,21 @@
 import {
-    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET,
+    JA,
+    KANSKJE,
+    MISTET_JOBBEN,
+    NEI,
+    NUSKODE_0,
+    NUSKODE_2,
+    NUSKODE_3,
+    NUSKODE_4,
+    NUSKODE_6,
+    NUSKODE_7,
     PERMITTERT,
     SAGT_OPP,
-    UNDER_UTDANNING,
-    VIL_BYTTE_JOBB
+    UNDER_UTDANNING, VIL_BYTTE_JOBB,
 } from './konstanter';
-import { State as SvarState  } from '../ducks/svar';
-import { State as OppsummeringState  } from '../ducks/oppsummering';
+import { State as SvarState } from '../ducks/svar';
+import { State as OppsummeringState } from '../ducks/oppsummering';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -40,14 +49,14 @@ export const getMapSituasjon = (svarAlternativ: string) => {
 
     return mapSituasjon[svarAlternativ];
 };
-export const getMapNusKode = (svarAlternativ: string) => {
+export const mapTilNuskode = (svarAlternativ: number) => {
     const mapNusKode = {
-        '1': NUSKODE_0,
-        '2': NUSKODE_2,
-        '3': NUSKODE_3,
-        '4': NUSKODE_4,
-        '5': NUSKODE_6,
-        '6': NUSKODE_7,
+        1: NUSKODE_0,
+        2: NUSKODE_2,
+        3: NUSKODE_3,
+        4: NUSKODE_4,
+        5: NUSKODE_6,
+        6: NUSKODE_7,
     };
     return mapNusKode[svarAlternativ];
 };
@@ -59,24 +68,33 @@ export const getMapJaNeiKanskje = (svarAlternativ: string) => {
     };
     return map[svarAlternativ];
 };
+export const mapTilBoolean = (alternativId: number | undefined) => {
+    return alternativId === 1;
+};
 
-export function mapSvar(svar: SvarState, oppsummering: OppsummeringState, yrkesPraksis: string | undefined) {
-    const svr1 = svar[1];
-    const svr2 = svar[2];
-    const svr3 = svar[3];
-    const svr4 = svar[4];
+export function mapAvgitteSvarForBackend(
+    svar: SvarState,
+    oppsummering: OppsummeringState,
+    yrkesPraksis: string | undefined
+) {
+    const helse: number | undefined = svar.helse;
+    const utdanning: number | undefined = svar.utdanning;
 
     let data = {};
-    if (svr1 && svr2 && svr3 && svr4) {
+    if (helse !== undefined && utdanning !== undefined) {
         data = {
-            nusKode: getMapNusKode(svr1),
+            nusKode: mapTilNuskode(utdanning),
             yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
-            utdanningBestatt: getMapJaNeiKanskje(svr2),
-            utdanningGodkjentNorge: getMapJaNeiKanskje(svr3),
-            harHelseutfordringer: getMapJaNeiKanskje(svr4),
+            utdanningBestatt: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
+            utdanningGodkjentNorge: false, // TODO: Fjern dette når wsdl ikke krevet det lenger
+            harHelseutfordringer: mapTilBoolean(helse),
         };
     }
     return data;
+}
+
+export interface MatchProps {
+    id: string;
 }

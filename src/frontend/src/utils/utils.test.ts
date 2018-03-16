@@ -1,8 +1,11 @@
 /*tslint:disable*/
 import { expect } from 'chai';
-import antallSporsmal from '../../src/sporsmal/alle-sporsmal';
+import { State as SvarState } from '../ducks/svar';
 
-import {getIntlMessage, getMapJaNeiKanskje, getMapNusKode, getMapSituasjon, hentFornavn, mapSvar} from './utils';
+import {
+    getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
+    mapTilBoolean
+} from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     PERMITTERT,
@@ -39,12 +42,12 @@ describe('utils test', () => {
     });
 
     it('test mapping av nuskode', () => {
-        expect(getMapNusKode('1')).to.equal(NUSKODE_0);
-        expect(getMapNusKode('2')).to.equal(NUSKODE_2);
-        expect(getMapNusKode('3')).to.equal(NUSKODE_3);
-        expect(getMapNusKode('4')).to.equal(NUSKODE_4);
-        expect(getMapNusKode('5')).to.equal(NUSKODE_6);
-        expect(getMapNusKode('6')).to.equal(NUSKODE_7);
+        expect(mapTilNuskode(1)).to.equal(NUSKODE_0);
+        expect(mapTilNuskode(2)).to.equal(NUSKODE_2);
+        expect(mapTilNuskode(3)).to.equal(NUSKODE_3);
+        expect(mapTilNuskode(4)).to.equal(NUSKODE_4);
+        expect(mapTilNuskode(5)).to.equal(NUSKODE_6);
+        expect(mapTilNuskode(6)).to.equal(NUSKODE_7);
     });
 
     it('test mapping av Ja, Nei, Kanskje', () => {
@@ -57,30 +60,25 @@ describe('utils test', () => {
         expect(YRKESPRAKSIS).to.equal('5120.14');
     });
 
-    it('test mapSvar', () => {
+    it('test mapAvgitteSvarForBackend', () => {
 
-        const yrkesPraksis = 'yrkesPraksis'
-        const oppsummering = { tekst:  'oppsummer tekst'};
-        let dummySvar = lagDummySvar(antallSporsmal.length);
+        const yrkesPraksis = 'yrkesPraksis';
+        const oppsummering = { tekst:  'oppsummer tekst' };
+        const dummySvar: SvarState = {
+            helse: 1,
+            utdanning: 3
+        };
 
         const expectData = {
-            nusKode: getMapNusKode(dummySvar[1]),
+            nusKode: mapTilNuskode(dummySvar.utdanning),
             yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
-            utdanningBestatt: getMapJaNeiKanskje(dummySvar[2]),
-            utdanningGodkjentNorge: getMapJaNeiKanskje(dummySvar[3]),
-            harHelseutfordringer: getMapJaNeiKanskje(dummySvar[4]),
+            utdanningBestatt: false,
+            utdanningGodkjentNorge: false,
+            harHelseutfordringer: mapTilBoolean(dummySvar.helse),
         };
-        expect(mapSvar(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
+        expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
     });
 
 });
-
-function lagDummySvar(lengde) {
-    let result = {};
-    for (let i = 1; i <= lengde; i++) {
-        result[i] = '1';
-    }
-    return result;
-}
