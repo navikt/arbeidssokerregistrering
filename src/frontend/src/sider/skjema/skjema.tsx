@@ -1,151 +1,69 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import antallSporsmal from '../../sporsmal/alle-sporsmal';
-import { Systemtittel } from 'nav-frontend-typografi';
-import { Panel } from 'nav-frontend-paneler';
-import { endreSvarAction } from '../../ducks/svar';
-import { AppState } from '../../reducer';
-import Alternativ, { EndreSvar } from './alternativ';
-import { RouteComponentProps } from 'react-router';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import { configIkkeSelvgaende, erIkkeSelvgaende, erSvarAlternativMerEnnTo } from './skjema-utils';
-import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
-import { AVBRYT_PATH, SBLREG_PATH, SISTEARBFORHOLD_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import Knapperad from '../../komponenter/knapper/knapperad';
+import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface SkjemaProps {
-    id: string;
-    resetSvar: () => void;
-}
-
-export interface MatchProps {
-    id: string;
-}
-
-interface StateProps {
-    erAlleSpmBesvart: () => boolean;
+    children: {}; // TODO Type-sett dette slik at alle har sporsmalId
+    gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
-    hentAvgittSvarId: (sporsmalId: string) => string;
+    avbrytSkjema: () => void;
+    gaaTilbake: () => void;
+    gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) => void;
 }
 
-interface DispatchProps {
-    endreSvar: EndreSvar;
-}
+type Props = SkjemaProps;
 
-type Props = SkjemaProps & InjectedIntlProps & DispatchProps & StateProps & RouteComponentProps<MatchProps>;
+export default class Skjema extends React.Component<Props> {
 
-class Skjema extends React.Component<Props> {
-    private divRef: HTMLDivElement | null;
+    private antallSporsmal: number;
+    private sporsmalIder: string[];
 
-    componentDidMount() {
-        if (this.divRef) {
-            this.divRef.focus();
-        }
-    }
-
-    componentDidUpdate(prevProps: Props) {
-        const spmId = this.props.match.params.id;
-        const forrigeSpmId = prevProps.match.params.id;
-
-        if (spmId !== forrigeSpmId && this.divRef) {
-            this.divRef.focus();
-        }
+    constructor(props: Props) {
+        super(props);
     }
 
     render() {
-        const { match,
-            history,
-            intl,
-            endreSvar,
-            sporsmalErBesvart,
-            erAlleSpmBesvart,
-            hentAvgittSvarId } = this.props;
-
-        const spmId = match.params.id;
-
-        if (spmId !== '1' &&
-            (parseInt(spmId, 10) > antallSporsmal.length || !sporsmalErBesvart(`${parseInt(spmId, 10) - 1}`))) {
-            history.push(`${SKJEMA_PATH}/1`);
-            return null;
-        }
-
-        const disableKnappNeste = !sporsmalErBesvart(spmId);
-        const disableKnappFullfor = erAlleSpmBesvart();
+        this.antallSporsmal = React.Children.toArray(this.props.children).length;
+        const gjeldendeSporsmalComponent = this.props.children[this.props.gjeldendeSporsmal];
+        this.sporsmalIder = this.getSporsmalIder();
+        const enableNesteKnapp = this.props.sporsmalErBesvart(this.sporsmalIder[this.props.gjeldendeSporsmal]);
 
         return (
             <ResponsivSide>
-                <div className="blokk panel-skjema-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
-                    <Tilbakeknapp onClick={() => history.goBack()}/>
-                    <Systemtittel tag="h1" className="spm-tittel">
-                        {intl.messages[`sporsmal-${spmId}-tittel`]}
-                    </Systemtittel>
-                    <Panel className="panel-skjema">
-                        <form className={`${erSvarAlternativMerEnnTo(spmId)} form-skjema`}>
-                            {Array.from(Array(antallSporsmal[parseInt(spmId, 10) - 1]).keys())
-                                .map(i => i + 1)
-                                .map((key) => <Alternativ
-                                    sporsmalId={spmId}
-                                    endreSvar={endreSvar}
-                                    key={key}
-                                    alternativId={key.toString()}
-                                    tekstId={`sporsmal-${spmId}-alternativ-${key}`}
-                                    checked={key === parseInt(hentAvgittSvarId(spmId), 10)}
-                                    intl={intl}
-                                />)}
-                        </form>
-                    </Panel>
+                <div className="blokk sporsmal-wrapper">
+                    <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
+                    {gjeldendeSporsmalComponent}
                 </div>
 
                 <Knapperad>
                     <KnappAvbryt
                         classname="knapp mmr"
-                        onClick={(() => {
-                            history.push(`${AVBRYT_PATH}`);
-                        })}
+                        onClick={() => this.props.avbrytSkjema()}
                     />
-                    {
-                        parseInt(spmId, 10) === antallSporsmal.length ?
-                            <KnappNeste
-                                disabled={disableKnappFullfor}
-                                onClick={() => {
-                                    if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
-                                        history.push(`${SBLREG_PATH}`);
-                                    } else {
-                                        history.push(`${SISTEARBFORHOLD_PATH}`);
-                                    }
-                                }}
-                            />
-                            :
-                            <KnappNeste
-                                disabled={disableKnappNeste}
-                                onClick={(() => {
-                                    if (erIkkeSelvgaende(hentAvgittSvarId(spmId), configIkkeSelvgaende[spmId])) {
-                                        history.push(`${SBLREG_PATH}`);
-                                    } else {
-                                        history.push(`${SKJEMA_PATH}/${(parseInt(spmId, 10) + 1)}`);
-                                    }
-                                })}
-                            />
-                    }
+                    <KnappNeste
+                        onClick={() => this.nesteButtonClick()}
+                        disabled={!enableNesteKnapp}
+                    />
                 </Knapperad>
             </ResponsivSide>
         );
     }
+
+    nesteButtonClick() {
+        const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
+        this.props.gaaTilNesteSide(gjeldendeSporsmalId, this.getSporsmalIder().length);
+    }
+
+    getSporsmalIder(): string[] {
+        let sporsmalIder: string[] = [];
+        for (let i = 0; i < this.antallSporsmal; i += 1) {
+            sporsmalIder.push(this.props.children[i].props.sporsmalId);
+            // TODO: Se om dette kan gjøres bedre.
+            // For at this.props.children[i] skal funke trenger man minst to children, dvs. minst to spm i skjemaet.
+        }
+        return sporsmalIder;
+    }
 }
-
-const mapStateToProps = (state: AppState): StateProps => ({
-        sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
-        hentAvgittSvarId: (sporsmalId) => state.svar[sporsmalId],
-        erAlleSpmBesvart: () => Object.keys(state.svar).filter(key => state.svar[key] === undefined).length !== 0,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    endreSvar: (sporsmalId, alternativId) => dispatch(endreSvarAction(sporsmalId, alternativId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)
-(injectIntl(Skjema)
-);
