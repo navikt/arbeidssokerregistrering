@@ -12,7 +12,7 @@ import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { getIntlMessage, hentFornavn } from '../../utils/utils';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { SISTEARBFORHOLD_PATH, UENIG_PATH } from '../../utils/konstanter';
+import { FULLFOR_PATH, UENIG_PATH } from '../../utils/konstanter';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import { settOppsummering } from '../../ducks/oppsummering';
 
@@ -62,7 +62,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
                             <Knapp
                                 key="2"
                                 type="hoved"
-                                onClick={() => history.push(`${SISTEARBFORHOLD_PATH}`)}
+                                onClick={() => history.push(`${FULLFOR_PATH}`)}
                                 className="mml"
                             >
                                 <FormattedMessage id="knapp-enig"/>

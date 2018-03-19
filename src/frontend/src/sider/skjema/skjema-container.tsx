@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { AVBRYT_PATH, OPPSUMMERING_PATH, SBLREG_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import { AVBRYT_PATH, SBLREG_PATH, SISTEARBFORHOLD_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
@@ -83,7 +83,7 @@ class SkjemaContainer extends React.Component<Props> {
         }
 
         if (this.erSisteSporsmal(antallSporsmal)) {
-            this.props.history.push(`${OPPSUMMERING_PATH}`);
+            this.props.history.push(`${SISTEARBFORHOLD_PATH}`);
             return;
         }
 
