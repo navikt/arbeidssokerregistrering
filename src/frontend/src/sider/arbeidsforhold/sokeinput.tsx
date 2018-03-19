@@ -56,7 +56,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
                 const options = [
                     ...stillinger,
-                    {styrk08: '-1', tittel: 'Annet stilling', id: id + 1}
+                    {styrk08: '-1', tittel: 'Annen stilling', id: id + 1}
                 ];
                 
                 return {
