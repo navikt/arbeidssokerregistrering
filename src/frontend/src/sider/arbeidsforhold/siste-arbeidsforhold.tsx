@@ -19,7 +19,6 @@ import {
     selectStillingFraPam,
     State as StillingFraPamState
 } from '../../ducks/stilling-fra-pam';
-import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
@@ -28,6 +27,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
+import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from '../../komponenter/input/sokeinput';
 
 interface StateProps {
@@ -93,17 +93,18 @@ class SisteArbeidsforhold extends React.Component<Props> {
                     />
                     <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
                         <SokeInput feltNavn={stillingNavn} onChange={this.props.velgStilling}/>
-                        <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel">
+                        <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="blokk">
                             <Normaltekst>
                                 <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
                             </Normaltekst>
                         </EkspanderbartInfo>
+                        <Knappervertikalt>
+                            <KnappNeste onClick={this.onNeste}/>
+                            <LenkeAvbryt />
+                        </Knappervertikalt>
                     </PanelBlokk>
-                    <Knappervertikalt>
-                        <KnappNeste onClick={this.onNeste} disabled={!stillingNavn}/>
-                        <KnappAvbryt onClick={this.onAvbryt}/>
-                    </Knappervertikalt>
                 </PanelBlokkGruppe>
+
             </Innholdslaster>
         );
         /*tslint:disable:no-console*/

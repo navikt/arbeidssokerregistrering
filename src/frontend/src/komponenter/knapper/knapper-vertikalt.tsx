@@ -6,7 +6,7 @@ interface KnappervertikaltProps {
 
 function Knappervertikalt({ children }: KnappervertikaltProps) {
     return(
-        <div className="knapper_vertikalt">
+        <div className="knapper-vertikalt">
             {children}
         </div>
     );
