@@ -5,7 +5,11 @@ import * as pathRegex from 'path-to-regexp';
 import pamJanzzData from './pam-janzz-data';
 
 export function lagPamjanzzRespons({q}: { q: string}) {
-    return pamJanzzData.filter((data) => data.tittel.toLowerCase().includes(q));
+    const { typeaheadYrkeList } = pamJanzzData;
+    const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q));
+    return {
+        typeaheadYrkeList: filtrertListe
+    }
 }
 
 

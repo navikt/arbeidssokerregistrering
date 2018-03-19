@@ -35,9 +35,21 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     getOptions(input: string) {
         return hentStillingMedStyrk08(input)
-            .then((res) => {
+            .then((res: {typeaheadYrkeList: string}) => {
+
+                const { typeaheadYrkeList } = res;
+
+                const sortertListe = _.take(_.orderBy(typeaheadYrkeList, ['label'], ['asc']), 7);
+                const mapStillingListe = _.map(sortertListe, (stilling: {label: string, styrk08NavListe: {}[]}) => {
+                    const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
+                    return {
+                        tittel: stilling.label,
+                        styrk08
+                    };
+                });
+
                 const options = [
-                    ..._.take(_.orderBy(res, ['tittel'], ['asc']), 7),
+                    ...mapStillingListe,
                     {styrk08: '-1', tittel: 'Annet stilling'}
                 ];
                 return {

@@ -28,7 +28,7 @@ import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import SokeInput from '../../komponenter/input/sokeinput';
+import SokeInput from './sokeinput';
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
