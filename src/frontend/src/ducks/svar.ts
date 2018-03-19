@@ -3,15 +3,13 @@ export enum ActionTypes {
     AVGI_SVAR_RESET = 'AVGI_SVAR_RESET'
 }
 
-export interface State {
-    1?: string;
-    2?: string;
-    3?: string;
-    4?: string;
-}
+export type State = {
+    helse?: number | undefined;
+    utdanning?: number | undefined;
+};
 
 export interface Data {
-    alternativId: string;
+    alternativId: number;
     sporsmalId: string;
 }
 
@@ -20,17 +18,14 @@ interface Action {
     data: Data;
 }
 
-const initialState = {
-        1: undefined,
-        2: undefined,
-        3: undefined,
-        4: undefined,
-};
+const initialState = {};
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
         case ActionTypes.AVGI_SVAR: {
-            return {...state, [action.data.sporsmalId]: action.data.alternativId};
+            let stateWithAddedProperty = {...state};
+            stateWithAddedProperty[action.data.sporsmalId] = action.data.alternativId;
+            return stateWithAddedProperty;
         }
         case ActionTypes.AVGI_SVAR_RESET: {
             return initialState;
@@ -41,7 +36,7 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function endreSvarAction(sporsmalId: string, alternativId: string) {
+export function endreSvarAction(sporsmalId: string, alternativId: number) {
     return {
         type: ActionTypes.AVGI_SVAR,
         data: {
