@@ -88,7 +88,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
 export function hentStillingMedStyrk08(q: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${q}`,
-        recoverWith: () => []
+        recoverWith: () => ({})
     });
 }
 

@@ -40,7 +40,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 const { typeaheadYrkeList } = res;
 
                 const sortertListe = _.take(_.orderBy(typeaheadYrkeList, ['label'], ['asc']), 7);
-                const mapStillingListe = _.map(sortertListe, (stilling: {label: string, styrk08NavListe: {}[]}) => {
+                const mapStillingListe = _.map(sortertListe, (stilling: {label: string, styrk08NavListe: string[]}) => {
                     const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
                     return {
                         tittel: stilling.label,
