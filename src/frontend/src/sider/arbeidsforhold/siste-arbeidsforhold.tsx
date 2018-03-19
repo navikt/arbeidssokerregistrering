@@ -95,17 +95,18 @@ class SisteArbeidsforhold extends React.Component<Props> {
                             label={''}
                             defaultValue={this.props.stillingNavn}
                         />
-                        <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel">
+                        <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="blokk">
                             <Normaltekst>
                                 <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
                             </Normaltekst>
                         </EkspanderbartInfo>
+                        <Knappervertikalt>
+                            <KnappNeste onClick={this.onNeste}/>
+                            <KnappAvbryt onClick={this.onAvbryt}/>
+                        </Knappervertikalt>
                     </PanelBlokk>
                 </PanelBlokkGruppe>
-                <Knappervertikalt>
-                    <KnappNeste onClick={this.onNeste}/>
-                    <KnappAvbryt onClick={this.onAvbryt}/>
-                </Knappervertikalt>
+
             </Innholdslaster>
         );
         /*tslint:disable:no-console*/
