@@ -1,6 +1,9 @@
 @nodeModulesPath: './../../';
 @coreModulePath: './../../';
 
+@headerHeightDesktop: 181px;
+@footerHeightDesktop: 200px;
+
 @import '../node_modules/nav-frontend-core/less/core';
 @import '../node_modules/nav-frontend-knapper-style/src/index';
 @import '../node_modules/nav-frontend-skjema-style/src/index';
@@ -30,23 +33,20 @@ main.arbsokreg_app {
     @import 'komponenter/knapper/knapper';
     @import 'komponenter/side/responsiv-side';
     @import 'komponenter/knapper/knapper-vertikalt';
+    @import 'komponenter/knapper/lenke-avbryt';
 
     @import 'sider/oppsummering/uenig-selvgaende';
     @import 'sider/skjema/skjema';
     @import 'sider/oppsummering/oppsummering';
     @import 'sider/fullfor/fullfor-feilmelding';
     @import 'sider/dinsituasjon/din-situasjon';
+    @import 'sider/start/start';
+
+
     @import 'sider/avbryt/avbryt';
 }
 .appContainer {
     height: 100%;
-}
-
-.pagewrapper {
-    min-height: 100%;
-    height: auto;
-    margin-bottom: -200px;
-    padding-bottom: 200px;
 }
 
 .hodefot-footer {
