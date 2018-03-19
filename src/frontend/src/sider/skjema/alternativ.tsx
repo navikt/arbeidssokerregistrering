@@ -2,33 +2,25 @@ import * as React from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
-export type EndreSvar = (sporsmalId: string, alternativId: string) => void;
-
 interface AlternativProps {
-    tekstId: string;
-    sporsmalId: string;
-    alternativId: string;
-    checked: boolean | undefined;
-    endreSvar: EndreSvar;
+    hentAvgittSvar: () => number | undefined;
+    alternativId: number;
+    avgiSvar: (alternativId: number) => void;
+    getTekstId: (alternativId: number) => string;
 }
 
-const onChange = (
-    endreSvar: EndreSvar, sporsmalId: string, alternativId: string
-) => () => (endreSvar(sporsmalId, alternativId));
-
-function Alternativ(
-    {tekstId, sporsmalId, alternativId, endreSvar, checked, intl}: AlternativProps & InjectedIntlProps
-) {
-    const tekst = intl.messages[tekstId];
+function Alternativ(props: AlternativProps & InjectedIntlProps) {
+    const tekst = props.intl.messages[props.getTekstId(props.alternativId)];
     return (
         <Radio
-            onChange={onChange(endreSvar, sporsmalId, alternativId)}
+            onChange={() => props.avgiSvar(props.alternativId)}
             className="blokk-xs"
             name={'alternativ'}
             label={tekst}
             value={tekst}
-            checked={checked}
-        />);
+            checked={props.hentAvgittSvar() === props.alternativId}
+        />
+    );
 }
 
 export default Alternativ;

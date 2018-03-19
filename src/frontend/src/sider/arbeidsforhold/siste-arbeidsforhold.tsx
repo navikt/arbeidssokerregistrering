@@ -11,7 +11,7 @@ import {
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import { AppState } from '../../reducer';
-import { MatchProps } from '../skjema/skjema';
+import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../../ducks/api-utils';
 import {
