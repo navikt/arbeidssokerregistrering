@@ -19,7 +19,6 @@ import {
     selectStillingFraPam,
     State as StillingFraPamState
 } from '../../ducks/stilling-fra-pam';
-import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
@@ -28,6 +27,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
+import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
@@ -81,8 +81,8 @@ class SisteArbeidsforhold extends React.Component<Props> {
                 avhengigheter={[sisteArbeidsforhold, stillingFraPam]}
                 storrelse="XXL"
             >
-                <Tilbakeknapp onClick={this.onTilbake}/>
                 <PanelBlokkGruppe className="blokk-xs">
+                    <Tilbakeknapp onClick={this.onTilbake}/>
                     <PanelBlokk
                         tittelId="siste-arbeidsforhold.tittel"
                         tittelCssNavnVariant="transparent-variant"
@@ -102,7 +102,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
                         </EkspanderbartInfo>
                         <Knappervertikalt>
                             <KnappNeste onClick={this.onNeste}/>
-                            <KnappAvbryt onClick={this.onAvbryt}/>
+                            <LenkeAvbryt />
                         </Knappervertikalt>
                     </PanelBlokk>
                 </PanelBlokkGruppe>
