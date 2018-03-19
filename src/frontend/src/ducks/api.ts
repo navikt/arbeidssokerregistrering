@@ -85,9 +85,9 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
     });
 }
 
-export function hentStillingMedStyrk08(q: string) {
+export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
-        url: `${STYRK_URL}?q=${q}`,
+        url: `${STYRK_URL}?q=${sokestreng}`,
         recoverWith: () => ({})
     });
 }

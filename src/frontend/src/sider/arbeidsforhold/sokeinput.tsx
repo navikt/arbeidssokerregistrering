@@ -11,6 +11,7 @@ interface SokeInputComponentProps {
 interface Option {
     styrk08: string;
     tittel: string;
+    id: number;
 }
 
 interface SokeInputComponentState {
@@ -28,30 +29,36 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         super(props);
         const {feltNavn} = props;
         const tittel = feltNavn ? feltNavn : '';
-        this.state = {value: {tittel: tittel, styrk08: ''}};
+        this.state = {value: {tittel: tittel, styrk08: '', id: 0}};
 
         this.onChange = this.onChange.bind(this);
     }
 
-    getOptions(input: string) {
-        return hentStillingMedStyrk08(input)
-            .then((res: {typeaheadYrkeList: string}) => {
+    getOptions(sokestreng: string) {
+        return hentStillingMedStyrk08(sokestreng)
+            .then((response: { typeaheadYrkeList: {}[] }) => {
 
-                const { typeaheadYrkeList } = res;
+                const {typeaheadYrkeList} = response;
 
-                const sortertListe = _.take(_.orderBy(typeaheadYrkeList, ['label'], ['asc']), 7);
-                const mapStillingListe = _.map(sortertListe, (stilling: {label: string, styrk08NavListe: string[]}) => {
-                    const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
-                    return {
-                        tittel: stilling.label,
-                        styrk08
-                    };
-                });
+                const sorterteSvaralternativer =
+                    _.take(_.orderBy(typeaheadYrkeList, ['label'], ['asc']), 7);
+
+                let id = 0;
+                const stillinger = _.map(sorterteSvaralternativer,
+                                         (stilling: { label: string, styrk08NavListe: string[] }) => {
+                        const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
+                        return {
+                            id: ++id,
+                            tittel: stilling.label,
+                            styrk08
+                        };
+                    });
 
                 const options = [
-                    ...mapStillingListe,
-                    {styrk08: '-1', tittel: 'Annet stilling'}
+                    ...stillinger,
+                    {styrk08: '-1', tittel: 'Annet stilling', id: id + 1}
                 ];
+                
                 return {
                     options
                 };
@@ -70,18 +77,15 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     render() {
         return (
             <div className="blokk-m">
-                <React.Fragment>
-                    <OptionsAsync
-                        filterOptions={(options, filter, currentValues) => options}
-                        clearable={false}
-                        onChange={this.onChange}
-                        loadOptions={this.getOptions}
-                        value={this.state.value}
-                        id="stilling"
-                        valueKey="styrk08"
-                        labelKey="tittel"
-                    />
-                </React.Fragment>
+                <OptionsAsync
+                    filterOptions={(options, filter, currentValues) => options}
+                    clearable={false}
+                    onChange={this.onChange}
+                    loadOptions={this.getOptions}
+                    value={this.state.value}
+                    valueKey="id"
+                    labelKey="tittel"
+                />
             </div>
         );
     }
