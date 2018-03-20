@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../ducks/api';
-import * as _ from 'lodash';
+import { hentStillingsAlternativer } from '../../utils/utils';
 
 interface SokeInputComponentProps {
     feltNavn: string;
@@ -40,27 +40,13 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
                 const {typeaheadYrkeList} = response;
 
-                const sorterteSvaralternativer =
-                    _.take(_.orderBy(typeaheadYrkeList, ['label'], ['asc']), 7);
+                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
 
-                let id = 0;
-                const stillinger = _.map(sorterteSvaralternativer,
-                                         (stilling: { label: string, styrk08NavListe: string[] }) => {
-                        const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
-                        return {
-                            id: ++id,
-                            tittel: stilling.label,
-                            styrk08
-                        };
-                    });
-
-                const options = [
-                    ...stillinger,
-                    {styrk08: '-1', tittel: 'Annen stilling', id: id + 1}
-                ];
-                
                 return {
-                    options
+                    options: [
+                        ...stillingsAlternativer,
+                        {id: stillingsAlternativer.length, tittel: 'Annen stilling', styrk08: '-1'}
+                    ]
                 };
             });
     }
@@ -76,8 +62,9 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     render() {
         return (
-            <div className="blokk-m">
+            <div className="blokk-m selectContainer input--fullbredde">
                 <OptionsAsync
+                    arrowRenderer={() => null}
                     filterOptions={(options, filter, currentValues) => options}
                     clearable={false}
                     onChange={this.onChange}
