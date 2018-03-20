@@ -65,6 +65,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
             <div className="blokk-m selectContainer input--fullbredde">
                 <OptionsAsync
                     arrowRenderer={() => null}
+                    loadingPlaceholder="Laster..."
+                    searchPromptText="Søk etter stillinger"
                     filterOptions={(options, filter, currentValues) => options}
                     clearable={false}
                     onChange={this.onChange}
