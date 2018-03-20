@@ -62,20 +62,24 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     render() {
         return (
-            <div className="blokk-m selectContainer input--fullbredde">
-                <OptionsAsync
-                    arrowRenderer={() => null}
-                    loadingPlaceholder="Laster..."
-                    searchPromptText="Søk etter stillinger"
-                    filterOptions={(options, filter, currentValues) => options}
-                    clearable={false}
-                    onChange={this.onChange}
-                    loadOptions={this.getOptions}
-                    value={this.state.value}
-                    valueKey="id"
-                    labelKey="tittel"
-                />
-            </div>
+            <React.Fragment>
+                <label htmlFor="stilling" className="invisible">Stilling</label>
+                <div className="blokk-m selectContainer input--fullbredde">
+                    <OptionsAsync
+                        arrowRenderer={() => null}
+                        loadingPlaceholder="Laster..."
+                        searchPromptText="Søk etter stillinger"
+                        filterOptions={(options, filter, currentValues) => options}
+                        clearable={false}
+                        onChange={this.onChange}
+                        loadOptions={this.getOptions}
+                        value={this.state.value}
+                        id="stilling"
+                        valueKey="id"
+                        labelKey="tittel"
+                    />
+                </div>
+            </React.Fragment>
         );
     }
 }
