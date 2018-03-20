@@ -100,7 +100,7 @@ export interface MatchProps {
 }
 
 export function hentStillingsAlternativer (typeaheadYrkeList: {}[]) {
-    return typeaheadYrkeList
+    const alternativer = typeaheadYrkeList
         .sort((a: {label: string}, b: {label: string}) => a.label.localeCompare(b.label))
         .slice(0, 7)
         .map((stilling: { label: string, styrk08NavListe: string[] }, index: number) => {
@@ -111,4 +111,6 @@ export function hentStillingsAlternativer (typeaheadYrkeList: {}[]) {
                 styrk08
             };
         });
+
+    return alternativer.length > 0 ? [...alternativer, {id: 7, tittel: 'Annen stilling', styrk08: '-1'}] : [];
 }

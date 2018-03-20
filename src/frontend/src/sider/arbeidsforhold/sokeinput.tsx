@@ -42,12 +42,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
                 const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
 
-                return {
-                    options: [
-                        ...stillingsAlternativer,
-                        {id: stillingsAlternativer.length, tittel: 'Annen stilling', styrk08: '-1'}
-                    ]
-                };
+                return { options: stillingsAlternativer };
             });
     }
 
@@ -68,7 +63,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                     <OptionsAsync
                         arrowRenderer={() => null}
                         loadingPlaceholder="Laster..."
-                        searchPromptText="Søk etter stillinger"
+                        searchPromptText="Tast for å søke"
                         filterOptions={(options, filter, currentValues) => options}
                         clearable={false}
                         onChange={this.onChange}
