@@ -9,14 +9,18 @@ interface PanelBlokkProps {
 }
 
 function PanelBlokkGruppe({knappAksjoner, children, className}: PanelBlokkProps) {
+    const knappAksjonerComponent = knappAksjoner ? (
+        <div className="panel-blokk__knapperad">
+            {knappAksjoner}
+        </div>
+        ) : (null);
+
     return (
         <ResponsivSide>
             <div className={classNames('blokk', className)}>
                 {children}
             </div>
-            <div className="panel-blokk__knapperad">
-                {knappAksjoner}
-            </div>
+            {knappAksjonerComponent}
         </ResponsivSide>
     );
 }

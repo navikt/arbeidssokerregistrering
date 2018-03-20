@@ -1,6 +1,5 @@
 import { expect } from 'chai';
-import { erIkkeSelvgaende } from './skjema-utils';
-import {erSelvgaende} from "./skjema-utils";
+import { erSelvgaende } from './skjema-utils';
 
 /*
 sett state, gjør noe, sjekk resultat TODO

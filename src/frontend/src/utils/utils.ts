@@ -98,3 +98,17 @@ export function mapAvgitteSvarForBackend(
 export interface MatchProps {
     id: string;
 }
+
+export function hentStillingsAlternativer (typeaheadYrkeList: {}[]) {
+    return typeaheadYrkeList
+        .sort((a: {label: string}, b: {label: string}) => a.label.localeCompare(b.label))
+        .slice(0, 7)
+        .map((stilling: { label: string, styrk08NavListe: string[] }, index: number) => {
+            const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
+            return {
+                id: index,
+                tittel: stilling.label,
+                styrk08
+            };
+        });
+}

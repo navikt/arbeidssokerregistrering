@@ -3,9 +3,10 @@ import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 
 export enum ActionTypes {
-    STILLING_FRA_PAM_PENDING = 'STILLING_FRA_PAM_PENDING',
-    STILLING_FRA_PAM_OK = 'STILLING_FRA_PAM_OK',
-    STILLING_FRA_PAM_FEILET = 'STILLING_FRA_PAM_FEILET',
+    HENT_SISTE_STILLING_PENDING = 'HENT_SISTE_STILLING_PENDING',
+    HENT_SISTE_STILLING_OK = 'HENT_SISTE_STILLING_OK',
+    HENT_SISTE_STILLING_FEILET = 'HENT_SISTE_STILLING_FEILET',
+    ENDRE_SISTE_STILLING= 'ENDRE_SISTE_STILLING',
 }
 
 export interface Data {
@@ -37,14 +38,17 @@ const initialState = {
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
-        case ActionTypes.STILLING_FRA_PAM_PENDING:
+        case ActionTypes.HENT_SISTE_STILLING_PENDING:
             if (state.status === STATUS.OK) {
                 return { ...state, status: STATUS.RELOADING };
             }
             return { ...state, status: STATUS.PENDING };
-        case ActionTypes.STILLING_FRA_PAM_FEILET:
+        case ActionTypes.HENT_SISTE_STILLING_FEILET:
             return { ...state, status: STATUS.ERROR };
-        case ActionTypes.STILLING_FRA_PAM_OK: {
+        case ActionTypes.HENT_SISTE_STILLING_OK: {
+            return { ...state, status: STATUS.OK, data: action.data };
+        }
+        case ActionTypes.ENDRE_SISTE_STILLING: {
             return { ...state, status: STATUS.OK, data: action.data };
         }
         default:
@@ -54,10 +58,22 @@ export default function (state: State = initialState, action: Action): State {
 
 export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return doThenDispatch(() => Api.hentStillingFraPamGittStyrkkode(styrk), {
-        PENDING: ActionTypes.STILLING_FRA_PAM_PENDING,
-        OK : ActionTypes.STILLING_FRA_PAM_OK,
-        FEILET: ActionTypes.STILLING_FRA_PAM_FEILET,
+        PENDING: ActionTypes.HENT_SISTE_STILLING_PENDING,
+        OK : ActionTypes.HENT_SISTE_STILLING_OK,
+        FEILET: ActionTypes.HENT_SISTE_STILLING_FEILET,
     });
+}
+
+export function velgStilling(label: string, kode: string) {
+    return {
+        type: ActionTypes.ENDRE_SISTE_STILLING,
+        data: {
+            koder: [{
+                label: label,
+                kode: kode
+            }]
+        }
+    };
 }
 
 export function selectStillingFraPam(state: AppState): State {

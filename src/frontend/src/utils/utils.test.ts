@@ -4,7 +4,7 @@ import { State as SvarState } from '../ducks/svar';
 
 import {
     getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
-    mapTilBoolean
+    mapTilBoolean, hentStillingsAlternativer
 } from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
@@ -13,6 +13,7 @@ import {
     UNDER_UTDANNING,
     VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
+import pamJanzzData from '../mocks/pam-janzz-data';
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
@@ -79,6 +80,14 @@ describe('utils test', () => {
             harHelseutfordringer: mapTilBoolean(dummySvar.helse),
         };
         expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
+    });
+
+    it('test hentStillingsAlternativer', () => {
+        const { typeaheadYrkeList } = pamJanzzData;
+
+        const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
+
+        expect(stillingsAlternativer.length).to.equal(7);
     });
 
 });

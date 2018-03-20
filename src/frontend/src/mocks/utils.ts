@@ -2,6 +2,16 @@
 import * as fetchMock from 'fetch-mock';
 import * as qs from 'query-string';
 import * as pathRegex from 'path-to-regexp';
+import pamJanzzData from './pam-janzz-data';
+
+export function lagPamjanzzRespons({q}: { q: string}) {
+    const { typeaheadYrkeList } = pamJanzzData;
+    const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q));
+    return {
+        typeaheadYrkeList: filtrertListe
+    }
+}
+
 
 export function delayed(time: any, response: any, failure?: number): any {
     const kanskejFeil = failure ? failure : response;
