@@ -1,15 +1,14 @@
 import * as React from 'react';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import Knapperad from '../../komponenter/knapper/knapperad';
-import KnappAvbryt from '../../komponenter/knapper/knapp-avbryt';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
+import LenkeAvbryt from "../../komponenter/knapper/lenke-avbryt";
+import Knappervertikalt from "../../komponenter/knapper/knapper-vertikalt";
 
 interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
-    avbrytSkjema: () => void;
     gaaTilbake: () => void;
     gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) => void;
 }
@@ -38,16 +37,13 @@ export default class Skjema extends React.Component<Props> {
                     {gjeldendeSporsmalComponent}
                 </div>
 
-                <Knapperad>
-                    <KnappAvbryt
-                        classname="knapp mmr"
-                        onClick={() => this.props.avbrytSkjema()}
-                    />
+                <Knappervertikalt>
                     <KnappNeste
                         onClick={() => this.nesteButtonClick()}
                         disabled={!enableNesteKnapp}
                     />
-                </Knapperad>
+                    <LenkeAvbryt />
+                </Knappervertikalt>
             </ResponsivSide>
         );
     }

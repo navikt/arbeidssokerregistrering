@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { AVBRYT_PATH, SBLREG_PATH, SISTEARBFORHOLD_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import {SBLREG_PATH, SISTEARBFORHOLD_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
@@ -48,7 +48,6 @@ class SkjemaContainer extends React.Component<Props> {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
             sporsmalErBesvart: this.props.sporsmalErBesvart,
             gaaTilbake: () => this.props.history.goBack(),
-            avbrytSkjema: () => this.props.history.push(`${AVBRYT_PATH}`),
             gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) =>
                 this.gaaTilNesteSide(gjeldendeSporsmalId, antallSporsmal)
         };
