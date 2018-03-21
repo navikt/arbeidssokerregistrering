@@ -42,12 +42,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
                 const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
 
-                return {
-                    options: [
-                        ...stillingsAlternativer,
-                        {id: stillingsAlternativer.length, tittel: 'Annen stilling', styrk08: '-1'}
-                    ]
-                };
+                return { options: stillingsAlternativer };
             });
     }
 
@@ -62,20 +57,24 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     render() {
         return (
-            <div className="blokk-m selectContainer input--fullbredde">
-                <OptionsAsync
-                    arrowRenderer={() => null}
-                    loadingPlaceholder="Laster..."
-                    searchPromptText="Søk etter stillinger"
-                    filterOptions={(options, filter, currentValues) => options}
-                    clearable={false}
-                    onChange={this.onChange}
-                    loadOptions={this.getOptions}
-                    value={this.state.value}
-                    valueKey="id"
-                    labelKey="tittel"
-                />
-            </div>
+            <React.Fragment>
+                <label htmlFor="stilling" className="invisible">Stilling</label>
+                <div className="blokk-m selectContainer input--fullbredde">
+                    <OptionsAsync
+                        arrowRenderer={() => null}
+                        loadingPlaceholder="Laster..."
+                        searchPromptText="Tast for å søke"
+                        filterOptions={(options, filter, currentValues) => options}
+                        clearable={false}
+                        onChange={this.onChange}
+                        loadOptions={this.getOptions}
+                        value={this.state.value}
+                        id="stilling"
+                        valueKey="id"
+                        labelKey="tittel"
+                    />
+                </div>
+            </React.Fragment>
         );
     }
 }

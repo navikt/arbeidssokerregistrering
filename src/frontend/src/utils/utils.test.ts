@@ -86,8 +86,9 @@ describe('utils test', () => {
         const { typeaheadYrkeList } = pamJanzzData;
 
         const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
-
-        expect(stillingsAlternativer.length).to.equal(7);
+        const annenStilling = {id: 7, tittel: 'Annen stilling', styrk08: '-1'};
+        expect(stillingsAlternativer.length).to.equal(8);
+        expect(stillingsAlternativer[7]).to.deep.equal(annenStilling)
     });
 
 });
