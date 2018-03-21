@@ -43,6 +43,7 @@
     @media (min-width: 769px) {
         display: flex;
         align-items: center;
+        flex-direction: row-reverse;
 
         .figur__wrapper {
             min-height: calc(100vh ~"-" @headerHeightDesktop ~"-" @footerHeightDesktop);
@@ -55,10 +56,10 @@
         }
 
         .innhold-container {
-
+            display: flex;
+            justify-content: center;
             .innhold {
                 width: 50%;
-                margin-left: 10%;
             }
 
             .knapp-start {
