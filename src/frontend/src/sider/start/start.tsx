@@ -10,6 +10,7 @@ import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
 import { DINSITUASJON_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
+const veilederSvg = require('../../ikoner/illustrasjon-start.svg');
 
 interface StateProps {
     innloggingsInfo: InnloggingsInfoState;
@@ -23,7 +24,9 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
         const {name} = innloggingsInfo.data;
         return (
             <section className="startside">
-                <figure className="figur"/>
+                <div className="figur__wrapper">
+                    <img src={veilederSvg} className="figur"/>
+                </div>
                 <div className="innhold-container">
                     <div className="innhold">
                         <Innholdstittel className="tittel">
