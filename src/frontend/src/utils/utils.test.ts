@@ -85,10 +85,19 @@ describe('utils test', () => {
     it('test hentStillingsAlternativer', () => {
         const { typeaheadYrkeList } = pamJanzzData;
 
-        const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
+        const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, 'sokestreng');
         const annenStilling = {id: 7, tittel: 'Annen stilling', styrk08: '-1'};
         expect(stillingsAlternativer.length).to.equal(8);
         expect(stillingsAlternativer[7]).to.deep.equal(annenStilling)
+    });
+
+    it('test hentStillingsAlternativer er tom', () => {
+        const typeaheadYrkeList = [];
+
+        const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, 'sokestreng');
+        const annenStilling = {id: 7, tittel: 'Annen stilling', styrk08: '-1'};
+        expect(stillingsAlternativer.length).to.equal(1);
+        expect(stillingsAlternativer[0]).to.deep.equal(annenStilling)
     });
 
 });

@@ -99,7 +99,7 @@ export interface MatchProps {
     id: string;
 }
 
-export function hentStillingsAlternativer (typeaheadYrkeList: {}[]) {
+export function hentStillingsAlternativer (typeaheadYrkeList: {}[], sokestreng: string) {
     const alternativer = typeaheadYrkeList
         .sort((a: {label: string}, b: {label: string}) => a.label.localeCompare(b.label))
         .slice(0, 7)
@@ -112,5 +112,11 @@ export function hentStillingsAlternativer (typeaheadYrkeList: {}[]) {
             };
         });
 
-    return alternativer.length > 0 ? [...alternativer, {id: 7, tittel: 'Annen stilling', styrk08: '-1'}] : [];
+    const blankSokestreng = sokestreng.length === 0;
+    const annenStilling = {id: 7, tittel: 'Annen stilling', styrk08: '-1'};
+    const alternativerMedAnnenStilling = [...alternativer, annenStilling];
+
+    return alternativer.length > 0
+        ? alternativerMedAnnenStilling
+        : !blankSokestreng ? [annenStilling] : blankSokestreng && [];
 }
