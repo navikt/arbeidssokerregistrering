@@ -91,7 +91,7 @@ describe('utils test', () => {
         expect(stillingsAlternativer[7]).to.deep.equal(annenStilling)
     });
 
-    it('test hentStillingsAlternativer er tom', () => {
+    it('hvis hentStillingsAlternativer er tom skal man returnere en tom liste', () => {
         const typeaheadYrkeList = [];
 
         const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, 'sokestreng');

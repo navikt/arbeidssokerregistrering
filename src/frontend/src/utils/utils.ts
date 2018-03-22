@@ -113,10 +113,7 @@ export function hentStillingsAlternativer (typeaheadYrkeList: {}[], sokestreng: 
         });
 
     const blankSokestreng = sokestreng.length === 0;
-    const annenStilling = {id: 7, tittel: 'Annen stilling', styrk08: '-1'};
-    const alternativerMedAnnenStilling = [...alternativer, annenStilling];
+    const alternativerMedAnnenStilling = [...alternativer, {id: 7, tittel: 'Annen stilling', styrk08: '-1'}];
 
-    return alternativer.length > 0
-        ? alternativerMedAnnenStilling
-        : !blankSokestreng ? [annenStilling] : blankSokestreng && [];
+    return blankSokestreng ? [] : alternativerMedAnnenStilling;
 }
