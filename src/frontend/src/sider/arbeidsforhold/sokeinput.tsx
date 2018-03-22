@@ -40,8 +40,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
                 const {typeaheadYrkeList} = response;
 
-                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList);
-
+                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokestreng);
+                
                 return { options: stillingsAlternativer };
             });
     }
@@ -61,9 +61,10 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 <label htmlFor="stilling" className="invisible">Stilling</label>
                 <div className="blokk-m selectContainer input--fullbredde">
                     <OptionsAsync
+                        inputProps={{'autoComplete': 'off'}}
                         arrowRenderer={() => null}
                         loadingPlaceholder="Laster..."
-                        searchPromptText="Tast for å søke"
+                        searchPromptText="Skriv for å søke"
                         filterOptions={(options, filter, currentValues) => options}
                         clearable={false}
                         onChange={this.onChange}
