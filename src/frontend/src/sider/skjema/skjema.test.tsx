@@ -27,7 +27,7 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (sporsmalId) => true
         };
 
-        const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
+        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.false;
     });
@@ -38,7 +38,7 @@ describe('<Skjema />', () => {
             sporsmalErBesvart: (sporsmalId) => false
         };
 
-        const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
+        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
         const knappNeste = wrapper.find(KnappNeste);
         expect(knappNeste.props().disabled).to.be.true;
     });
@@ -52,7 +52,7 @@ describe('<Skjema />', () => {
             gaaTilNesteSide: gaaTilNesteSide
         };
 
-        const wrapper = mountWithIntl((<SkjemaMedChildren {...props} />));
+        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
         wrapper.find(KnappNeste).simulate('click');
         expect(gaaTilNesteSide).to.have.property('callCount', 1);
     });
