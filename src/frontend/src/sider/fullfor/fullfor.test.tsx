@@ -15,7 +15,7 @@ import {
 } from "../../test/test-utils";
 import {create} from "../../store";
 import {endreSvarAction} from "../../ducks/svar";
-import {SBLARBEID_URL, VEIENTILARBEID_MED_OVERLAY_URL} from "../../ducks/api";
+import {SBLARBEID_URL, VEIENTILARBEID_MED_NY_REGISTRERING_URL} from "../../ducks/api";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -112,7 +112,7 @@ describe('<Fullfor />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(document.location.href).to.equal(VEIENTILARBEID_MED_OVERLAY_URL);
+                expect(document.location.href).to.equal(VEIENTILARBEID_MED_NY_REGISTRERING_URL);
             });
     });
 

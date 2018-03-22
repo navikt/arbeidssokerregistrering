@@ -7,7 +7,7 @@ export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
 export const DITTNAV_URL = '/dittnav';
 export const MELDEKORT_URL = '/meldekort/genereltommeldekort';
 export const VEIENTILARBEID_URL = '/veientilarbeid';
-export const VEIENTILARBEID_MED_OVERLAY_URL = '/veientilarbeid/?visOverlay=true';
+export const VEIENTILARBEID_MED_NY_REGISTRERING_URL = '/veientilarbeid/?nyRegistrering=true';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/arbeid/opprettMinIdBruker';
