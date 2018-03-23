@@ -24,9 +24,31 @@
     padding-bottom: 0.1rem;
 }
 
+/*
 .form-skjema {
     max-width: 50%;
     margin: 0 auto;
+}
+*/
+.form-skjema {
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form-skjema .alternativ-wrapper {
+    width: 20rem;
+}
+
+.alternativ-wrapper .radioPanel {
+    width: 100%;
+}
+
+.alternativ-wrapper {
+    margin: 0.25rem;
 }
 
 @media (max-width: @screen-sm-min) {
