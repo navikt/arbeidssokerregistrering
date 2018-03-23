@@ -2,8 +2,8 @@ import * as React from 'react';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
-import LenkeAvbryt from "../../komponenter/knapper/lenke-avbryt";
-import Knappervertikalt from "../../komponenter/knapper/knapper-vertikalt";
+import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
+import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 
 interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
