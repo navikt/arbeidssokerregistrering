@@ -5,8 +5,9 @@ import { shallowWithIntl } from 'enzyme-react-intl';
 import getStore from '../store';
 import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
-import { Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
+import {Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import IntlProvider from '../Intl-provider';
+import { MemoryRouter } from 'react-router';
 
 export const store = getStore();
 
@@ -39,9 +40,11 @@ export function mountWithStore(children: React.ReactElement<ElementWithStore>, w
 export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
     return mount(
         <Provider store={withStore || store}>
-            <IntlProvider >
-                {children}
-            </IntlProvider>
+            <MemoryRouter>
+                <IntlProvider >
+                    {children}
+                </IntlProvider>
+            </MemoryRouter>
         </Provider>
     );
 }
