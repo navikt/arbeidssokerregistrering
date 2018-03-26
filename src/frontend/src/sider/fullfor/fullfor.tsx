@@ -24,8 +24,8 @@ import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import Knappekolonne from '../../komponenter/knapper/knappekolonne';
 import { START_PATH } from '../../utils/konstanter';
+import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 
 interface StateProps {
     registrerBruker: RegistrerBrukerState;
@@ -54,7 +54,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     componentWillMount() {
-        const { registrerBruker, history } = this.props;
+        const {registrerBruker, history} = this.props;
         if (_.isEmpty(registrerBruker.data)) {
             history.push(START_PATH);
         }
@@ -113,16 +113,14 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
                             className="bekreft-panel"
                         />
-                        <div className="knapper__wrapper">
-                            <Knappekolonne>
-                                <KnappFullfor
-                                    intl={intl}
-                                    disabled={!this.state.markert}
-                                    onClick={this.registrerBrukerOnClick}
-                                />
-                                <LenkeAvbryt classname="avbryt"/>
-                            </Knappekolonne>
-                        </div>
+                        <Knappervertikalt>
+                            <KnappFullfor
+                                intl={intl}
+                                disabled={!this.state.markert}
+                                onClick={this.registrerBrukerOnClick}
+                            />
+                            <LenkeAvbryt classname="avbryt"/>
+                        </Knappervertikalt>
                     </div>
                 </ResponsivSide>
             </Innholdslaster>
