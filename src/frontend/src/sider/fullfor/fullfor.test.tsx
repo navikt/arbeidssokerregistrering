@@ -10,12 +10,13 @@ import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import {Checkbox} from "nav-frontend-skjema";
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
+    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowWithStore, shallowwithStoreAndIntl,
     stubFetch
 } from "../../test/test-utils";
 import {create} from "../../store";
 import {endreSvarAction} from "../../ducks/svar";
 import {SBLARBEID_URL, VEIENTILARBEID_MED_NY_REGISTRERING_URL} from "../../ducks/api";
+import {BekreftCheckboksPanel} from "../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -34,7 +35,7 @@ describe('<Fullfor />', () => {
         };
 
 
-        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />);
+        const wrapper = shallowwithStoreAndIntl(<Fullfor {...props} />);
         const knappFullfor = wrapper.find(KnappFullfor);
         expect(knappFullfor.props().disabled).to.be.true;
     });
@@ -49,8 +50,7 @@ describe('<Fullfor />', () => {
 
 
         const wrapper = mountWithStoreAndIntl((<Fullfor {...props} />));
-        const sjekkboks = wrapper.find(Checkbox);
-        const input = sjekkboks.find('input[type="checkbox"]');
+        const input = wrapper.find('input[type="checkbox"]');
 
         input.simulate('change');
 
@@ -71,18 +71,14 @@ describe('<Fullfor />', () => {
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
-        // marker sjekkboks
-        const sjekkboks = wrapper.find(Checkbox);
-        const input = sjekkboks.find('input[type="checkbox"]');
+        const input = wrapper.find('input[type="checkbox"]');
         input.simulate('change');
 
-        // simuler klikk
         wrapper.find(KnappFullfor).simulate('click');
 
-        // forventet resultat
         return promiseWithSetTimeout()
             .then(() => {
-                wrapper.update()
+                wrapper.update();
                 expect(wrapper.html()).to.include('innholdslaster-feilmelding');
             });
     });
@@ -100,15 +96,11 @@ describe('<Fullfor />', () => {
 
         const wrapper = mountWithStoreAndIntl(<Fullfor />, store);
 
-        // marker sjekkboks
-        const sjekkboks = wrapper.find(Checkbox);
-        const input = sjekkboks.find('input[type="checkbox"]');
+        const input = wrapper.find('input[type="checkbox"]');
         input.simulate('change');
 
-        // simuler klikk
         wrapper.find(KnappFullfor).simulate('click');
 
-        // forventet resultat
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
