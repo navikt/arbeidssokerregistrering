@@ -1,12 +1,14 @@
 import * as React from 'react';
+import * as classnames from 'classnames';
 
 interface KnapperadProps {
     children: Array<React.ReactElement<Element>>;
+    classname?: string;
 }
 
-function Knapperad({ children }: KnapperadProps) {
+function Knapperad({ children, classname }: KnapperadProps) {
     return(
-        <div className="panel-blokk__knapperad">
+        <div className={classnames('knapperad', classname)}>
             {children}
         </div>
     );
