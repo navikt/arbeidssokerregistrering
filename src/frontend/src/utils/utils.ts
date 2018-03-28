@@ -37,8 +37,6 @@ export function guid() {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }
 
-export const SECOND_IN_MILLIS = 60*1000;
-
 export const getMapSituasjon = (svarAlternativ: string) => {
     const mapSituasjon = {
         '1': MISTET_JOBBEN,

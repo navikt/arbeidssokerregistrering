@@ -70,7 +70,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    registrerBrukerSBLArbeid(SECOND_IN_MILLIS*130)
+                    registrerBrukerSBLArbeid(1000*130) // 130 sekunder
                         .then(
                             this.sendBrukerTilVeientilarbeidSomNyregistrert,
                             this.sendBrukerTilVeientilarbeidSomNyregistrert
