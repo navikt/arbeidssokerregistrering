@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import {getIntlMessage, MatchProps, SECOND_IN_MILLIS} from '../../utils/utils';
+import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
@@ -70,7 +70,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    registrerBrukerSBLArbeid(1000*130) // 130 sekunder
+                    registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
                         .then(
                             this.sendBrukerTilVeientilarbeidSomNyregistrert,
                             this.sendBrukerTilVeientilarbeidSomNyregistrert
