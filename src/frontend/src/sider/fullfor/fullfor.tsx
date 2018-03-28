@@ -60,7 +60,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         }
     }
 
-    sendBrukerTilSblMedOverlay() {
+    sendBrukerTilVeientilarbeidSomNyregistrert() {
         document.location.href = VEIENTILARBEID_MED_NY_REGISTRERING_URL;
     }
 
@@ -70,8 +70,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    registrerBrukerSBLArbeid(2500)
-                        .then(this.sendBrukerTilSblMedOverlay, this.sendBrukerTilSblMedOverlay);
+                    registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
+                        .then(
+                            this.sendBrukerTilVeientilarbeidSomNyregistrert,
+                            this.sendBrukerTilVeientilarbeidSomNyregistrert
+                        );
                 }
             });
     }
