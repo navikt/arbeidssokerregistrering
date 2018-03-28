@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { getIntlMessage, MatchProps } from '../../utils/utils';
+import {getIntlMessage, MatchProps, SECOND_IN_MILLIS} from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
@@ -60,7 +60,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         }
     }
 
-    sendBrukerTilSblMedOverlay() {
+    sendBrukerTilVeientilarbeidSomNyregistrert() {
         document.location.href = VEIENTILARBEID_MED_NY_REGISTRERING_URL;
     }
 
@@ -70,8 +70,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.props.onRegistrerBruker(this.props.registrerBruker.data)
             .then((res) => {
                 if (!!res) {
-                    registrerBrukerSBLArbeid(2500)
-                        .then(this.sendBrukerTilSblMedOverlay, this.sendBrukerTilSblMedOverlay);
+                    registrerBrukerSBLArbeid(SECOND_IN_MILLIS*130)
+                        .then(
+                            this.sendBrukerTilVeientilarbeidSomNyregistrert,
+                            this.sendBrukerTilVeientilarbeidSomNyregistrert
+                        );
                 }
             });
     }
