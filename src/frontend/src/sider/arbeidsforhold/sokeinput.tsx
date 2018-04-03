@@ -67,6 +67,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         searchPromptText="Skriv for å søke"
                         filterOptions={(options, filter, currentValues) => options}
                         clearable={false}
+                        ignoreAccents={false}
                         onChange={this.onChange}
                         loadOptions={this.getOptions}
                         value={this.state.value}
