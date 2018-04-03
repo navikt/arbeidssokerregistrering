@@ -88,6 +88,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
 export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${sokestreng}`,
+        config: {redirect: 'manual'},
         recoverWith: () => ({'typeaheadYrkeList': []})
     });
 }
