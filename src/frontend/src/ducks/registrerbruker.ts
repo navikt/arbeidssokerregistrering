@@ -20,8 +20,6 @@ export interface Data {
     yrkesPraksis?: string;
     enigIOppsummering?: boolean;
     oppsummering?: string;
-    utdanningBestatt?: boolean;
-    utdanningGodkjentNorge?: boolean;
     harHelseutfordringer?: boolean;
 }
 

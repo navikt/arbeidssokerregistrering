@@ -75,8 +75,6 @@ describe('utils test', () => {
             yrkesPraksis: yrkesPraksis,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
-            utdanningBestatt: true,
-            utdanningGodkjentNorge: true,
             harHelseutfordringer: mapTilBoolean(dummySvar.helse),
         };
         expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
