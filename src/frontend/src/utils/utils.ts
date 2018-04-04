@@ -100,7 +100,6 @@ export interface MatchProps {
 export function hentStillingsAlternativer (typeaheadYrkeList: {}[], sokestreng: string) {
     const alternativer = typeaheadYrkeList
         .sort((a: {label: string}, b: {label: string}) => a.label.localeCompare(b.label))
-        .slice(0, 7)
         .map((stilling: { label: string, styrk08NavListe: string[] }, index: number) => {
             const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
             return {
@@ -111,7 +110,8 @@ export function hentStillingsAlternativer (typeaheadYrkeList: {}[], sokestreng: 
         });
 
     const blankSokestreng = sokestreng.length === 0;
-    const alternativerMedAnnenStilling = [...alternativer, {id: 7, tittel: 'Annen stilling', styrk08: '-1'}];
+    const alternativerMedAnnenStilling =
+        [...alternativer, {id: alternativer.length, tittel: 'Annen stilling', styrk08: '-1'}];
 
     return blankSokestreng ? [] : alternativerMedAnnenStilling;
 }
