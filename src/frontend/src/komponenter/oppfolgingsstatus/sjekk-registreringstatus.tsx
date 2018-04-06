@@ -17,7 +17,7 @@ function SjekkRegistreringstatus({ registreringstatusData, children }: Props) {
     } else if (!registreringstatusData.oppfyllerKrav) {
         return <SblRegistrering/>;
     } else {
-        return <React.Fragment>{children}</React.Fragment>;
+        return <>{children}</>;
     }
 }
 

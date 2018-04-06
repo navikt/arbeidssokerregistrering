@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
+import { default as KnappBase } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
@@ -21,7 +21,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    settOppsummering: (data: string ) => void;
+    settOppsummering: (data: string) => void;
 }
 
 type OppsummeringProps = StateProps & null;
@@ -31,7 +31,7 @@ type EgenProps = OppsummeringProps & DispatchProps & InjectedIntlProps;
 class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & EgenProps> {
 
     componentWillMount() {
-        const { intl } = this.props;
+        const {intl} = this.props;
         const oppsummeringTekst = getIntlMessage(intl.messages, 'det-tyder-pa') + ' ' +
             getIntlMessage(intl.messages, 'oppgaver-som-skal') + ' ' +
             getIntlMessage(intl.messages, 'kartlegging-av-deg') + ' ' +
@@ -45,28 +45,28 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
     }
 
     render() {
-        const { history, innloggingsInfo } = this.props;
-        const { name } = innloggingsInfo.data;
+        const {history, innloggingsInfo} = this.props;
+        const {name} = innloggingsInfo.data;
         return (
             <div>
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [
-                            <Knapp
+                            <KnappBase
                                 key="1"
                                 type="standard"
                                 onClick={() => history.push(UENIG_PATH)}
                             >
                                 <FormattedMessage id="knapp-uenig"/>
-                            </Knapp>,
-                            <Knapp
+                            </KnappBase>,
+                            <KnappBase
                                 key="2"
                                 type="hoved"
                                 onClick={() => history.push(`${FULLFOR_PATH}`)}
                                 className="mml"
                             >
                                 <FormattedMessage id="knapp-enig"/>
-                            </Knapp>
+                            </KnappBase>
                         ]
                     }
                 >

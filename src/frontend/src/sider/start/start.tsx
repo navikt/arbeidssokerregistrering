@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
+import { default as KnappBase } from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
 import { AppState } from '../../reducer';
@@ -33,9 +33,9 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                             <FormattedMessage id="overskrift-start" values={{fornavn: hentFornavn(name)}}/>
                         </Innholdstittel>
                         <Normaltekst className="beskrivelse"><FormattedMessage id="beskrivelse-start"/></Normaltekst>
-                        <Knapp type="hoved" className="knapp-start" onClick={() => history.push(DINSITUASJON_PATH)}>
+                        <KnappBase type="hoved" className="knapp-start" onClick={() => history.push(DINSITUASJON_PATH)}>
                             <FormattedMessage id="knapp-start"/>
-                        </Knapp>
+                        </KnappBase>
                         <LenkeAvbryt />
                     </div>
                 </div>
