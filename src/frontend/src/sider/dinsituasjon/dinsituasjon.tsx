@@ -2,7 +2,7 @@ import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
+import { default as KnappBase } from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
@@ -19,7 +19,7 @@ export class DinSituasjon extends React.PureComponent<DinSituasjonProps> {
             <PanelBlokkGruppe
                 knappAksjoner={
                     [
-                        <Knapp
+                        <KnappBase
                             key="1"
                             type="standard"
                             className="knapp"
@@ -28,7 +28,7 @@ export class DinSituasjon extends React.PureComponent<DinSituasjonProps> {
                             <Normaltekst>
                                 {getIntlMessage(intl.messages, 'knapp-avbryt')}
                             </Normaltekst>
-                        </Knapp>,
+                        </KnappBase>,
                         <KnappNeste
                             key="2"
                             className="mml"

@@ -86,14 +86,6 @@ export function dispatchRegistreringstatus(data: RegStatusData, s: Store<AppStat
     return s.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
 }
 
-export function withResponse(response: {}) {
-    return new FetchStub().addResponse('_', response);
-}
-
-export function withError(status: number) {
-    return new FetchStub().addErrorResponse('_', status);
-}
-
 export class FetchStub {
     urlMap: { [url: string]: {response?: {}, status: number}};
     callCount: { [url: string]: number };
@@ -131,4 +123,12 @@ export class FetchStub {
         const responseKey = length === 1 ? keys[0] : keys.find(s => url.includes(s));
         return (responseKey && this.callCount[responseKey]) || 0;
     }
+}
+
+export function withResponse(response: {}) {
+    return new FetchStub().addResponse('_', response);
+}
+
+export function withError(status: number) {
+    return new FetchStub().addErrorResponse('_', status);
 }

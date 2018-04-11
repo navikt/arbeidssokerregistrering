@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as classNames from 'classnames';
-import { Knapp } from 'nav-frontend-knapper';
+import { default as KnappBase } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getIntlMessage } from '../../utils/utils';
 
@@ -14,14 +14,14 @@ interface Props {
 function KnappNeste({ disabled, onClick, className, intl }: Props & InjectedIntlProps) {
     const clsnames = (clName: string | undefined) => classNames(clName);
     return (
-        <Knapp
+        <KnappBase
             type="hoved"
             className={clsnames(className)}
             disabled={disabled}
             onClick={onClick}
         >
             <Normaltekst>{getIntlMessage(intl.messages, 'knapp-neste')}</Normaltekst>
-        </Knapp>
+        </KnappBase>
     );
 }
 

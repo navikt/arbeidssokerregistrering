@@ -41,7 +41,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 const {typeaheadYrkeList} = response;
 
                 const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokestreng);
-                
+
                 return { options: stillingsAlternativer };
             });
     }
@@ -57,7 +57,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <label htmlFor="stilling" className="invisible">Stilling</label>
                 <div className="blokk-m selectContainer input--fullbredde">
                     <OptionsAsync
@@ -77,7 +77,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         labelKey="tittel"
                     />
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 }

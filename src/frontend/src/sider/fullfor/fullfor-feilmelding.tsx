@@ -1,7 +1,7 @@
 import * as React from 'react';
 import InjectedIntl = ReactIntl.InjectedIntl;
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
-import { Knapp } from 'nav-frontend-knapper';
+import { default as KnappBase } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getIntlMessage } from '../../utils/utils';
 import { DITTNAV_URL, MELDEKORT_URL } from '../../ducks/api';
@@ -21,12 +21,12 @@ function Feilmelding({intl}: FeilmeldingProps) {
             />
 
             <div className="text-align-center blokk">
-                <Knapp
+                <KnappBase
                     type="standard"
                     onClick={() => window.location.reload()}
                 >
                     <Normaltekst>{getIntlMessage(intl.messages, 'knapp-tilbake')}</Normaltekst>
-                </Knapp>
+                </KnappBase>
             </div>
             <div className="text-align-center blokk">
                 <ul className="nav ">

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { FormattedMessage } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
+import { default as KnappBase } from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import Lukknapp from 'nav-frontend-lukknapp';
@@ -28,12 +28,12 @@ function Avbryt({history}: Props) {
                 </Normaltekst>
             </div>
             <div className="avbryt-panel__knapperad">
-                <Knapp type="standard" className="knapp" onClick={() => document.location.href = DITTNAV_URL}>
+                <KnappBase type="standard" className="knapp" onClick={() => document.location.href = DITTNAV_URL}>
                     <FormattedMessage id="knapp-ja-avbryt"/>
-                </Knapp>
-                <Knapp type="standard" className="knapp" onClick={() => history.goBack()}>
+                </KnappBase>
+                <KnappBase type="standard" className="knapp" onClick={() => history.goBack()}>
                     <FormattedMessage id="knapp-nei"/>
-                </Knapp>
+                </KnappBase>
             </div>
         </div>
     );
