@@ -2,20 +2,12 @@
 ARG BASE_IMAGE_PREFIX=""
 FROM ${BASE_IMAGE_PREFIX}node as node-builder
 
-ADD /src/frontend /source
+ADD / /source
 ENV CI=true
 WORKDIR /source
 RUN npm install && npm run build
 
 
-FROM ${BASE_IMAGE_PREFIX}maven as maven-builder
-ADD / /source
-COPY --from=node-builder /source/build /source/src/main/webapp
-WORKDIR /source
-RUN mvn install
-
-
-
-
-FROM docker.adeo.no:5000/bekkci/nais-java-app
-COPY --from=maven-builder /source/target/arbeidssokerregistrering /app
+FROM docker.adeo.no:5000/pus/decorator
+ENV APPLICATION_NAME=arbeidssokerregistrering
+COPY --from=node-builder /source/build /app
