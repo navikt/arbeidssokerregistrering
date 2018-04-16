@@ -4,7 +4,7 @@ import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getIntlMessage } from '../../utils/utils';
-import { DITTNAV_URL, MELDEKORT_URL } from '../../ducks/api';
+import { DITTNAV_URL, FORSIDENAV_URL } from '../../ducks/api';
 
 interface FeilmeldingProps {
     intl: InjectedIntl;
@@ -31,13 +31,13 @@ function Feilmelding({intl}: FeilmeldingProps) {
             <div className="text-align-center blokk">
                 <ul className="nav ">
                     <li>
-                        <a href={DITTNAV_URL} className="lenke">
-                            {getIntlMessage(intl.messages, 'tekst-dittnav')}
+                        <a href={FORSIDENAV_URL} className="lenke">
+                            {getIntlMessage(intl.messages, 'tekst-gaatilforside')}
                         </a>
                     </li>
                     <li>
-                        <a href={MELDEKORT_URL} className="lenke">
-                            {getIntlMessage(intl.messages, 'tekst-meldekort')}
+                        <a href={DITTNAV_URL} className="lenke">
+                            {getIntlMessage(intl.messages, 'tekst-dittnav')}
                         </a>
                     </li>
                 </ul>
