@@ -12,7 +12,7 @@ function DuErNaRegistrert() {
     return (
         <ResponsivSide className="du-er-na-registrert-wrapper">
             <div className="du-er-na-registrert__avsjekk-ikon">
-                <img src={avsjekkSvg} alt="Avsjekk" className="illustrasjon"/>
+                <img src={avsjekkSvg} alt="Avsjekk"/>
             </div>
             <Innholdstittel className="du-er-na-registrert__avsjekk-tittel">
                 <FormattedMessage id="duernaregistrert-innholdstittel"/>
