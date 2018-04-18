@@ -11,47 +11,47 @@ const avsjekkSvg = require('./avsjekk.svg');
 function DuErNaRegistrert() {
     return (
         <ResponsivSide className="du-er-na-registrert-wrapper">
-                <div className="du-er-na-registrert__avsjekk-ikon">
-                    <img src={avsjekkSvg} alt="Avsjekk" className="illustrasjon"/>
+            <div className="du-er-na-registrert__avsjekk-ikon">
+                <img src={avsjekkSvg} alt="Avsjekk" className="illustrasjon"/>
+            </div>
+            <Innholdstittel className="du-er-na-registrert__avsjekk-tittel">
+                <FormattedMessage id="duernaregistrert-innholdstittel"/>
+            </Innholdstittel>
+
+            <div className="du-er-na-registrert__aksjonspanel">
+                <div className="du-er-na-registrert__handinfo-ikon">
+                    <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
                 </div>
-                <Innholdstittel className="du-er-na-registrert__avsjekk-tittel">
-                    <FormattedMessage id="duernaregistrert-innholdstittel"/>
-                </Innholdstittel>
+                <div className="du-er-na-registrert__tekster">
+                    <Systemtittel className="blokk-xs">
+                        <FormattedMessage id="duernaregistrert-systemtittel"/>
+                    </Systemtittel>
+                    <Normaltekst className="blokk">
+                        <FormattedMessage id="duernaregistrert-normaltekst"/>
+                    </Normaltekst>
 
-                <div className="du-er-na-registrert__aksjonspanel">
-                    <div className="du-er-na-registrert__handinfo-ikon">
-                        <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
-                    </div>
-                    <div className="du-er-na-registrert__tekster">
-                        <Systemtittel className="blokk-xs">
-                            <FormattedMessage id="duernaregistrert-systemtittel"/>
-                        </Systemtittel>
-                        <Normaltekst className="blokk">
-                            <FormattedMessage id="duernaregistrert-normaltekst"/>
-                        </Normaltekst>
+                    <UndertekstBold className="blokk-xxs">
+                        <FormattedMessage id="duernaregistrert-undertekstbold"/>
 
-                        <UndertekstBold className="blokk-xxs">
-                            <FormattedMessage id="duernaregistrert-undertekstbold"/>
-
-                        </UndertekstBold>
-                        <div className="du-er-na-registrert__knapperad">
-                            <Knapp
-                                type="standard"
-                                className="knapp"
-                                onClick={() => document.location.href = VEIENTILARBEID_URL}
-                            >
-                                <FormattedMessage id="knapp-ikke-na"/>
-                            </Knapp>
-                            <Knapp
-                                type="hoved"
-                                className="knapp"
-                                onClick={() => document.location.href = VEIENTILARBEID_URL}
-                            >
-                                <FormattedMessage id="knapp-ja-vis-meg"/>
-                            </Knapp>
-                        </div>
+                    </UndertekstBold>
+                    <div className="du-er-na-registrert__knapperad">
+                        <Knapp
+                            type="standard"
+                            className="knapp"
+                            onClick={() => document.location.href = VEIENTILARBEID_URL}
+                        >
+                            <FormattedMessage id="knapp-ikke-na"/>
+                        </Knapp>
+                        <Knapp
+                            type="hoved"
+                            className="knapp"
+                            onClick={() => document.location.href = VEIENTILARBEID_URL}
+                        >
+                            <FormattedMessage id="knapp-ja-vis-meg"/>
+                        </Knapp>
                     </div>
                 </div>
+            </div>
         </ResponsivSide>
     );
 }
