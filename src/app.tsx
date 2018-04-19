@@ -20,10 +20,11 @@ import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-regis
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
-    AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH
+    AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH, DUERNAREGISTRERT_PATH
 } from './utils/konstanter';
 import SisteArbeidsforhold from './sider/arbeidsforhold/siste-arbeidsforhold';
 import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
+import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
 
 const store = getStore();
 
@@ -45,6 +46,7 @@ class App extends React.Component {
                                         <Route path={AVBRYT_PATH} component={Avbryt} />
                                         <Route path={FULLFOR_PATH} component={Fullfor}/>
                                         <Route path={SISTEARBFORHOLD_PATH} component={SisteArbeidsforhold} />
+                                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
                                         <Route path={UENIG_PATH} component={UenigSelvgaende} />
                                         <Redirect exact={true} from="/" to={START_PATH}/>
                                     </Switch>

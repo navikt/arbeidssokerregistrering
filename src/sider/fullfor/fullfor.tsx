@@ -18,13 +18,13 @@ import {
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
-import { registrerBrukerSBLArbeid, VEIENTILARBEID_MED_NY_REGISTRERING_URL } from '../../ducks/api';
+import { registrerBrukerSBLArbeid  } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { START_PATH } from '../../utils/konstanter';
+import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 
 interface StateProps {
@@ -60,10 +60,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         }
     }
 
-    sendBrukerTilVeientilarbeidSomNyregistrert() {
-        document.location.href = VEIENTILARBEID_MED_NY_REGISTRERING_URL;
-    }
-
     registrerBrukerOnClick() {
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
@@ -72,8 +68,8 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                 if (!!res) {
                     registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
                         .then(
-                            this.sendBrukerTilVeientilarbeidSomNyregistrert,
-                            this.sendBrukerTilVeientilarbeidSomNyregistrert
+                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
                         );
                 }
             });

@@ -8,15 +8,13 @@ import {Knapp} from 'nav-frontend-knapper';
 import {shallowWithIntl} from 'enzyme-react-intl';
 import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
-import {Checkbox} from "nav-frontend-skjema";
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowWithStore, shallowwithStoreAndIntl,
+    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
 } from "../../test/test-utils";
 import {create} from "../../store";
 import {endreSvarAction} from "../../ducks/svar";
-import {SBLARBEID_URL, VEIENTILARBEID_MED_NY_REGISTRERING_URL} from "../../ducks/api";
-import {BekreftCheckboksPanel} from "../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel";
+import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -83,18 +81,21 @@ describe('<Fullfor />', () => {
             });
     });
 
-    it('Skal gå til veientilarbeid med overlay hvis registrering fullføres', () => {
+    it('Skal gå til neste side hvis registrering fullføres', () => {
         const store = create();
 
-        Object.defineProperty(document.location, 'href', {
-            writable: true,
-        });
+        let pushedPath = '';
+        const props = {
+            history: {
+                push: (path) => pushedPath = path
+            },
+        };
 
         dispatchTilfeldigeSvar(store);
 
         stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
-        const wrapper = mountWithStoreAndIntl(<Fullfor />, store);
+        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
         const input = wrapper.find('input[type="checkbox"]');
         input.simulate('change');
@@ -104,7 +105,7 @@ describe('<Fullfor />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(document.location.href).to.equal(VEIENTILARBEID_MED_NY_REGISTRERING_URL);
+                expect(pushedPath.includes(DUERNAREGISTRERT_PATH)).to.equal(true);
             });
     });
 

@@ -1,0 +1,54 @@
+
+.du-er-na-registrert-wrapper {
+  text-align: center;
+
+  .du-er-na-registrert__avsjekk-ikon {
+    margin-bottom: 2rem;
+  }
+  .du-er-na-registrert__avsjekk-tittel {
+    max-width: 22rem;
+    margin: 2rem auto 4rem auto;
+  }
+
+  .du-er-na-registrert__aksjonspanel {
+    border: 3px solid @navBlaLighten80;
+    border-radius: 8px;
+    padding: 2rem;
+    .du-er-na-registrert__handinfo-ikon {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .du-er-na-registrert__knapperad {
+    display: flex;
+    flex-direction: column;
+    .knapp {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .du-er-na-registrert-wrapper {
+    .du-er-na-registrert__aksjonspanel {
+      text-align: left;
+      display: flex;
+      max-width: 36rem;
+      margin: 0 auto;
+
+      .du-er-na-registrert__handinfo-ikon {
+        margin-right: 2rem;
+      }
+      .du-er-na-registrert__tekster {
+        width: 80%;
+      }
+    }
+
+    .du-er-na-registrert__knapperad {
+      display: inline-block;
+      .knapp:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
