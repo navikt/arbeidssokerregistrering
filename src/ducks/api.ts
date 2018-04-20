@@ -52,8 +52,7 @@ const sblOpprettMinIdConfig = {
     method: 'POST',
     credentials: 'same-origin',
     cache: 'no-store',
-    headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'},
-    redirect: 'manual'
+    headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'}
 };
 
 export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
