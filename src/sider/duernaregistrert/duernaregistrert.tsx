@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Normaltekst, Innholdstittel, Systemtittel, UndertekstBold } from 'nav-frontend-typografi';
+import { Normaltekst, Innholdstittel, Systemtittel, Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import { VEIENTILARBEID_URL } from '../../ducks/api';
 
@@ -29,26 +28,16 @@ function DuErNaRegistrert() {
                     <Normaltekst className="blokk">
                         <FormattedMessage id="duernaregistrert-normaltekst"/>
                     </Normaltekst>
-
-                    <UndertekstBold className="blokk-xxs">
-                        <FormattedMessage id="duernaregistrert-undertekstbold"/>
-
-                    </UndertekstBold>
+                    <Element className="blokk-xxs">
+                        <FormattedMessage id="duernaregistrert-element"/>
+                    </Element>
                     <div className="du-er-na-registrert__knapperad">
-                        <Knapp
-                            type="standard"
-                            className="knapp"
-                            onClick={() => document.location.href = VEIENTILARBEID_URL}
-                        >
+                        <a href={VEIENTILARBEID_URL} className="knapp knapp--standard">
                             <FormattedMessage id="knapp-ikke-na"/>
-                        </Knapp>
-                        <Knapp
-                            type="hoved"
-                            className="knapp"
-                            onClick={() => document.location.href = VEIENTILARBEID_URL}
-                        >
+                        </a>
+                        <a href={VEIENTILARBEID_URL} className="knapp knapp--hoved">
                             <FormattedMessage id="knapp-ja-vis-meg"/>
-                        </Knapp>
+                        </a>
                     </div>
                 </div>
             </div>
