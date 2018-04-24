@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Normaltekst, Innholdstittel, Systemtittel, Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
-import { VEIENTILARBEID_URL } from '../../ducks/api';
+import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 
 const handinfoSvg = require('./handinfo.svg');
 const avsjekkSvg = require('./avsjekk.svg');
@@ -35,7 +35,7 @@ function DuErNaRegistrert() {
                         <a href={VEIENTILARBEID_URL} className="knapp knapp--standard">
                             <FormattedMessage id="knapp-ikke-na"/>
                         </a>
-                        <a href={VEIENTILARBEID_URL} className="knapp knapp--hoved">
+                        <a href={VEIENTILARBEID_MED_DAGPENGER_URL} className="knapp knapp--hoved">
                             <FormattedMessage id="knapp-ja-vis-meg"/>
                         </a>
                     </div>
