@@ -67,16 +67,16 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
         FEILET: ActionTypes.HENT_SISTE_STILLING_FEILET,
     });
 }
-export function selectStillingFraPam(state: AppState): State {
-    return state.stillingFraPam;
+export function selectOversettelseAvStillingFraAAReg(state: AppState): State {
+    return state.oversettelseAvStillingFraAAReg;
 }
 
 export function selectSisteStillingNavnFraPam(state: AppState): string {
-    const koder = state.stillingFraPam.data.koder;
+    const koder = state.oversettelseAvStillingFraAAReg.data.koder;
     return koder.length > 0 ? koder[0].label : '';
 }
 
 export function selectSisteStillingKodeFraPam(state: AppState): string {
-    const koder = state.stillingFraPam.data.koder;
+    const koder = state.oversettelseAvStillingFraAAReg.data.koder;
     return koder.length > 0 ? koder[0].kode : '-1';
 }

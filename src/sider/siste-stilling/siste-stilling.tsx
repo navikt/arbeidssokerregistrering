@@ -4,7 +4,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
-    selectSisteArbeidsforhold,
+    selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
 } from '../../ducks/siste-stilling-fra-aareg';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
@@ -15,8 +15,8 @@ import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../../ducks/api-utils';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
-    selectStillingFraPam,
-    State as StillingFraPamState
+    selectOversettelseAvStillingFraAAReg,
+    State as OversettelseAvStillingFraAARegState
 } from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
@@ -31,14 +31,14 @@ import SokeInput from './sokeinput';
 import {Stilling, velgSisteStilling} from "../../ducks/siste-stilling";
 
 interface StateProps {
-    sisteArbeidsforhold: SisteArbeidsforholdState;
-    stillingFraPam: StillingFraPamState;
-    stillingNavn: string;
+    sisteStillingFraAAReg: SisteArbeidsforholdState;
+    oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
+    labelTilStillingFraAAReg: string;
 }
 
 interface DispatchProps {
     hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
-    hentStillingFraPamGittStyrkkode: (styrk: string | undefined) => void;
+    hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => void;
     velgStilling: (stilling: Stilling) => void;
 }
 
@@ -53,10 +53,10 @@ class SisteStilling extends React.Component<Props> {
     }
 
     componentWillMount() {
-        if (this.props.sisteArbeidsforhold.status === STATUS.NOT_STARTED) {
+        if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {
-                    const {styrk} = this.props.sisteArbeidsforhold.data;
+                    const {styrk} = this.props.sisteStillingFraAAReg.data;
                     this.props.hentStillingFraPamGittStyrkkode(styrk);
                 });
         }
@@ -75,12 +75,12 @@ class SisteStilling extends React.Component<Props> {
     }
 
     render() {
-        const {sisteArbeidsforhold, stillingFraPam, stillingNavn, intl} = this.props;
+        const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, labelTilStillingFraAAReg, intl} = this.props;
 
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[sisteArbeidsforhold, stillingFraPam]}
+                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
             >
                 <PanelBlokkGruppe className="blokk-xs">
@@ -92,7 +92,7 @@ class SisteStilling extends React.Component<Props> {
                         cssVariant="padding-vertikalt-xsmall"
                     />
                     <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
-                        <SokeInput feltNavn={stillingNavn} onChange={this.props.velgStilling}/>
+                        <SokeInput feltNavn={labelTilStillingFraAAReg} onChange={this.props.velgStilling}/>
                         <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="blokk">
                             <Normaltekst>
                                 <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
@@ -112,9 +112,9 @@ class SisteStilling extends React.Component<Props> {
 }
 
 const mapStateToProps = (state) => ({
-    sisteArbeidsforhold: selectSisteArbeidsforhold(state),
-    stillingFraPam: selectStillingFraPam(state),
-    stillingNavn: selectSisteStillingNavnFraPam(state)
+    sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
+    oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
+    labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

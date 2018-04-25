@@ -4,7 +4,7 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-stilling-fra-aareg';
+import { lagreArbeidsforhold, selectSisteStillingFraAAReg } from '../../ducks/siste-stilling-fra-aareg';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
@@ -44,7 +44,7 @@ describe('<SisteArbeidsforhold />', () => {
 
         return promiseWithSetTimeout()
             .then(() => {
-                expect(selectSisteArbeidsforhold(store.getState()).data).to.equal(state);
+                expect(selectSisteStillingFraAAReg(store.getState()).data).to.equal(state);
                 expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(1);
             });
     });

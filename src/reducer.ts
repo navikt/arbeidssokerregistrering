@@ -16,8 +16,8 @@ export interface AppState {
     registreringStatus: RegStatusState;
     registrerBruker: RegistrerBruker;
     innloggingsInfo: InnloggingsInfoState;
-    sisteArbeidsforhold: SisteStillingFraAARegState;
-    stillingFraPam: OversettelseAvStillingFraAARegState;
+    sisteStillingFraAAReg: SisteStillingFraAARegState;
+    oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     sisteStilling: SisteStillingState;
     form: FieldState;
 }
@@ -28,8 +28,8 @@ export default combineReducers<AppState>({
     registreringStatus,
     registrerBruker,
     innloggingsInfo,
-    stillingFraPam: oversettelseAvStillingFraAAReg,
-    sisteArbeidsforhold: sisteStillingFraAAReg,
+    oversettelseAvStillingFraAAReg: oversettelseAvStillingFraAAReg,
+    sisteStillingFraAAReg,
     sisteStilling,
     form: formReducer
 });

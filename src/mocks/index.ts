@@ -3,8 +3,8 @@ import {mock, respondWith, delayed, lagPamjanzzRespons} from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
-import sisteArbeidsforhold from './siste-arbeidsforhold-fra-aareg';
-import stillingFraPam from './stilling-fra-pam';
+import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
+import oversettelseAvStillingFraAAReg from './stilling-fra-pam';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -30,7 +30,7 @@ if (MOCK_INNLOGGINGS_INFO) {
 
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteArbeidsforhold)));
+    (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteStillingFraAAReg)));
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
@@ -44,7 +44,7 @@ if(MOCK_SBL) {
 }
 
 if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-    (mock as any).get('glob:/pam-janzz/rest/kryssklassifiser?kodeForOversetting*', respondWith(delayed(500, stillingFraPam)));
+    (mock as any).get('glob:/pam-janzz/rest/kryssklassifiser?kodeForOversetting*', respondWith(delayed(500, oversettelseAvStillingFraAAReg)));
 }
 
 if(MOCK_STYRK08_PAMJANZZ) {

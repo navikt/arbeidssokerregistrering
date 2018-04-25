@@ -67,6 +67,6 @@ export function registrerSisteArbeidsforhold(data: Data) {
     });
 }
 
-export function selectSisteArbeidsforhold(state: AppState): State {
-    return state.sisteArbeidsforhold;
+export function selectSisteStillingFraAAReg(state: AppState): State {
+    return state.sisteStillingFraAAReg;
 }
