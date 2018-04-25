@@ -17,7 +17,7 @@ import {
     velgStilling,
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectStillingFraPam,
-    State as StillingFraPamState
+    State as StillingFraPamState, Stilling
 } from '../../ducks/stilling-fra-pam';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
@@ -39,7 +39,7 @@ interface StateProps {
 interface DispatchProps {
     hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
     hentStillingFraPamGittStyrkkode: (styrk: string | undefined) => void;
-    velgStilling: (label: string, kode: string) => void;
+    velgStilling: (stilling: Stilling) => void;
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
@@ -120,7 +120,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
-    velgStilling: (label: string, kode: string) => dispatch(velgStilling(label, kode)),
+    velgStilling: (stilling: Stilling) => dispatch(velgStilling(stilling)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

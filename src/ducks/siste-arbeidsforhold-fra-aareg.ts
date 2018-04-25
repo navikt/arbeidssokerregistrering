@@ -9,11 +9,7 @@ export enum ActionTypes {
 }
 
 export interface Data {
-    arbeidsgiver?: string;
-    stilling?: string;
     styrk?: string;
-    fra?: string;
-    til?: string;
 }
 
 export interface State {

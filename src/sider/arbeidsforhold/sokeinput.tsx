@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../ducks/api';
-import { hentStillingsAlternativer } from '../../utils/utils';
+import { Stilling } from "../../ducks/stilling-fra-pam";
+import { hentStillingsAlternativer } from "./sokeinput-utils";
 
 interface SokeInputComponentProps {
     feltNavn: string;
-    onChange: (label: string, kode: string) => void;
+    onChange: (stilling: Stilling) => void;
 }
 
 interface Option {
-    styrk08: string;
-    tittel: string;
+    stilling: Stilling;
+    labelKey: string;
     id: number;
 }
 
@@ -28,8 +29,14 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     constructor(props: SokeInputComponentProps) {
         super(props);
         const {feltNavn} = props;
-        const tittel = feltNavn ? feltNavn : '';
-        this.state = {value: {tittel: tittel, styrk08: '', id: 0}};
+        const label = feltNavn ? feltNavn : '';
+        this.state = {
+            value: {
+                    stilling: { label: label, styrk08: '', konseptId: -1},
+                    labelKey: label,
+                    id: 0
+                }
+        };
 
         this.onChange = this.onChange.bind(this);
     }
@@ -48,7 +55,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     onChange(value: Option) {
         if (value) {
-            this.props.onChange(value.tittel, value.styrk08);
+            this.props.onChange(value.stilling);
             this.setState({
                 value
             });
@@ -74,7 +81,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         value={this.state.value}
                         id="stilling"
                         valueKey="id"
-                        labelKey="tittel"
+                        labelKey="labelKey"
                     />
                 </div>
             </React.Fragment>

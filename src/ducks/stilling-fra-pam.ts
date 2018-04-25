@@ -10,10 +10,13 @@ export enum ActionTypes {
 }
 
 export interface Data {
-    koder: {
-        label: string,
-        kode: string
-    }[];
+    stillinger: Stilling[];
+}
+
+export interface Stilling {
+    label: string;
+    konseptId?: number;
+    styrk08: string;
 }
 
 export interface State {
@@ -28,9 +31,10 @@ interface Action {
 
 const initialState = {
     data : {
-        koder: [{
+        stillinger: [{
             label: '',
-            kode: '-1'
+            styrk08: '-1',
+            konseptId: -1,
         }]
     },
     status: STATUS.NOT_STARTED
@@ -64,14 +68,11 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
     });
 }
 
-export function velgStilling(label: string, kode: string) {
+export function velgStilling(stilling: Stilling) {
     return {
         type: ActionTypes.ENDRE_SISTE_STILLING,
         data: {
-            koder: [{
-                label: label,
-                kode: kode
-            }]
+            stillinger: [stilling]
         }
     };
 }
@@ -81,11 +82,11 @@ export function selectStillingFraPam(state: AppState): State {
 }
 
 export function selectSisteStillingNavnFraPam(state: AppState): string {
-    const koder = state.stillingFraPam.data.koder;
-    return koder.length > 0 ? koder[0].label : '';
+    const stillinger = state.stillingFraPam.data.stillinger;
+    return stillinger.length > 0 ? stillinger[0].label : '';
 }
 
 export function selectSisteStillingKodeFraPam(state: AppState): string {
-    const koder = state.stillingFraPam.data.koder;
-    return koder.length > 0 ? koder[0].kode : '-1';
+    const stillinger = state.stillingFraPam.data.stillinger;
+    return stillinger.length > 0 ? stillinger[0].styrk08 : '-1';
 }
