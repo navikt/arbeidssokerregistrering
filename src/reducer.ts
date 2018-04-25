@@ -8,6 +8,7 @@ import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruk
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
 import sisteArbeidsforhold, { State as SisteArbeidsforholdState } from './ducks/siste-arbeidsforhold-fra-aareg';
 import stillingFraPam, { State as StillingFraPamState } from './ducks/stilling-fra-pam';
+import sisteStilling, { State as SisteStillingState } from './ducks/siste-stilling';
 
 export interface AppState {
     svar: SvarState;
@@ -17,6 +18,7 @@ export interface AppState {
     innloggingsInfo: InnloggingsInfoState;
     sisteArbeidsforhold: SisteArbeidsforholdState;
     stillingFraPam: StillingFraPamState;
+    sisteStilling: SisteStillingState;
     form: FieldState;
 }
 
@@ -28,5 +30,6 @@ export default combineReducers<AppState>({
     innloggingsInfo,
     stillingFraPam,
     sisteArbeidsforhold,
+    sisteStilling,
     form: formReducer
 });

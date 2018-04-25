@@ -14,10 +14,9 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { STATUS } from '../../ducks/api-utils';
 import {
-    velgStilling,
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectStillingFraPam,
-    State as StillingFraPamState, Stilling
+    State as StillingFraPamState
 } from '../../ducks/stilling-fra-pam';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
@@ -29,6 +28,7 @@ import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
+import {Stilling, velgSisteStilling} from "../../ducks/siste-stilling";
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
@@ -120,7 +120,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
-    velgStilling: (stilling: Stilling) => dispatch(velgStilling(stilling)),
+    velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

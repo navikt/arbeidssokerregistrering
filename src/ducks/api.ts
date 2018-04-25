@@ -1,6 +1,7 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
+import {tomStilling} from "./siste-stilling";
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
@@ -80,7 +81,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
         url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
         config: MED_CREDENTIALS,
-        recoverWith: () => ({stillinger: []})
+        recoverWith: () => (tomStilling) // TODO Vil ha samme oppførsel lokalt som i T6. Test.
     });
 }
 
