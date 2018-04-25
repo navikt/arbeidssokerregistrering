@@ -21,9 +21,9 @@ export function hentStillingsAlternativer(typeaheadYrkeList: {}[], sokestreng: s
             id: alternativer.length,
             labelKey: 'Annen stilling',
             stilling: {
-                tittel: 'Annen stilling',
+                label: 'Annen stilling',
                 styrk08: '-1',
-                stilling: -1
+                konseptId: -1
             }
         }
     ];

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../ducks/api';
-import { Stilling } from '../../ducks/siste-stilling';
+import { Stilling, tomStilling } from '../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
 
 interface SokeInputComponentProps {
-    feltNavn: string;
+    defaultStilling: Stilling;
     onChange: (stilling: Stilling) => void;
 }
 
@@ -28,17 +28,26 @@ const OptionsAsync = Async as OptionsAsync;
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
     constructor(props: SokeInputComponentProps) {
         super(props);
-        const {feltNavn} = props;
-        const label = feltNavn ? feltNavn : '';
         this.state = {
             value: {
-                    stilling: { label: label, styrk08: '', konseptId: -1},
-                    labelKey: label,
+                    stilling: tomStilling,
+                    labelKey: tomStilling.label,
                     id: 0
                 }
         };
 
         this.onChange = this.onChange.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps: SokeInputComponentProps) {
+        const defaultStilling = nextProps.defaultStilling ? nextProps.defaultStilling : tomStilling;
+        this.setState({
+            value: {
+                stilling: defaultStilling,
+                labelKey: defaultStilling.label,
+                id: 0
+            }
+        });
     }
 
     getOptions(sokestreng: string) {

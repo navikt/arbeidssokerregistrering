@@ -59,9 +59,9 @@ export function utforRegistrering(data: Data) {
 }
 
 export function mapBrukerRegistreringsData(state: AppState): State {
-    const yrkesPraksis = selectSisteStilling(state).styrk08; // TODO Hvorfor er yrkesPraksis = styrk?
+    const styrk08 = selectSisteStilling(state).styrk08;
     return {
-        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, yrkesPraksis),
+        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, styrk08),
         status: state.registrerBruker.status
     };
 }

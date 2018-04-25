@@ -28,12 +28,13 @@ import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
-import {Stilling, tomStilling, velgSisteStilling} from '../../ducks/siste-stilling';
+import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../ducks/siste-stilling';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     labelTilStillingFraAAReg: string;
+    sisteStilling: Stilling;
 }
 
 interface DispatchProps {
@@ -84,7 +85,7 @@ class SisteStilling extends React.Component<Props> {
     }
 
     render() {
-        const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, labelTilStillingFraAAReg, intl} = this.props;
+        const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, sisteStilling, intl} = this.props;
 
         return (
             <Innholdslaster
@@ -101,7 +102,7 @@ class SisteStilling extends React.Component<Props> {
                         cssVariant="padding-vertikalt-xsmall"
                     />
                     <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
-                        <SokeInput feltNavn={labelTilStillingFraAAReg} onChange={this.props.velgStilling}/>
+                        <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
                         <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="blokk">
                             <Normaltekst>
                                 <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
@@ -123,7 +124,8 @@ class SisteStilling extends React.Component<Props> {
 const mapStateToProps = (state) => ({
     sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
-    labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state)
+    labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),
+    sisteStilling: selectSisteStilling(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

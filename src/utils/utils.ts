@@ -75,7 +75,7 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     oppsummering: OppsummeringState,
-    yrkesPraksis: string | undefined
+    styrk08: string | undefined
 ) {
     const helse: number | undefined = svar.helse;
     const utdanning: number | undefined = svar.utdanning;
@@ -84,7 +84,7 @@ export function mapAvgitteSvarForBackend(
     if (helse !== undefined && utdanning !== undefined) {
         data = {
             nusKode: mapTilNuskode(utdanning),
-            yrkesPraksis: yrkesPraksis,
+            yrkesPraksis: styrk08,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             harHelseutfordringer: mapTilBoolean(helse),
