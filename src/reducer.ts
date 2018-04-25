@@ -6,8 +6,8 @@ import oppsummering, { State as OppsummeringState } from './ducks/oppsummering';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
-import sisteArbeidsforhold, { State as SisteArbeidsforholdState } from './ducks/siste-arbeidsforhold-fra-aareg';
-import stillingFraPam, { State as StillingFraPamState } from './ducks/stilling-fra-pam';
+import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
+import oversettelseAvStillingFraAAReg, { State as OversettelseAvStillingFraAARegState } from './ducks/oversettelse-av-stilling-fra-aareg';
 import sisteStilling, { State as SisteStillingState } from './ducks/siste-stilling';
 
 export interface AppState {
@@ -16,8 +16,8 @@ export interface AppState {
     registreringStatus: RegStatusState;
     registrerBruker: RegistrerBruker;
     innloggingsInfo: InnloggingsInfoState;
-    sisteArbeidsforhold: SisteArbeidsforholdState;
-    stillingFraPam: StillingFraPamState;
+    sisteArbeidsforhold: SisteStillingFraAARegState;
+    stillingFraPam: OversettelseAvStillingFraAARegState;
     sisteStilling: SisteStillingState;
     form: FieldState;
 }
@@ -28,8 +28,8 @@ export default combineReducers<AppState>({
     registreringStatus,
     registrerBruker,
     innloggingsInfo,
-    stillingFraPam,
-    sisteArbeidsforhold,
+    stillingFraPam: oversettelseAvStillingFraAAReg,
+    sisteArbeidsforhold: sisteStillingFraAAReg,
     sisteStilling,
     form: formReducer
 });

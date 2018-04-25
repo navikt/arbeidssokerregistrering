@@ -4,12 +4,12 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-arbeidsforhold-fra-aareg';
+import { lagreArbeidsforhold, selectSisteArbeidsforhold } from '../../ducks/siste-stilling-fra-aareg';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
 } from '../../test/test-utils';
-import SisteArbeidsforhold from './siste-arbeidsforhold';
+import SisteArbeidsforhold from './siste-stilling';
 
 enzyme.configure({adapter: new Adapter()});
 

@@ -6,7 +6,7 @@ import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteArbeidsforhold,
     State as SisteArbeidsforholdState,
-} from '../../ducks/siste-arbeidsforhold-fra-aareg';
+} from '../../ducks/siste-stilling-fra-aareg';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import { AppState } from '../../reducer';
@@ -17,7 +17,7 @@ import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectStillingFraPam,
     State as StillingFraPamState
-} from '../../ducks/stilling-fra-pam';
+} from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
@@ -44,7 +44,7 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class SisteArbeidsforhold extends React.Component<Props> {
+class SisteStilling extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.onAvbryt = this.onAvbryt.bind(this);
@@ -124,5 +124,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(SisteArbeidsforhold)
+    injectIntl(SisteStilling)
 );

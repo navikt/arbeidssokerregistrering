@@ -1,5 +1,5 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
-import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aareg';
+import { Data as SisteArbeidsforholdData } from './siste-stilling-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import {tomStilling} from "./siste-stilling";
 
