@@ -1,8 +1,8 @@
 export function hentStillingsAlternativer(typeaheadYrkeList: {}[], sokestreng: string) {
     const alternativer = typeaheadYrkeList
         .sort((a: { label: string }, b: { label: string }) => a.label.localeCompare(b.label))
-        .map((stilling: { label: string, styrk08NavListe: string[] }, index: number) => {
-            const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
+        .map((stilling: { label: string, styrk08: string[] }, index: number) => {
+            const styrk08 = stilling.styrk08.length > 0 ? stilling.styrk08[0] : '';
             return {
                 id: index,
                 labelKey: stilling.label,

@@ -43,16 +43,6 @@ export default function (state: State = initialState, action: Action): State {
         case ActionTypes.HENT_SISTE_STILLING_FEILET:
             return {...state, status: STATUS.ERROR};
         case ActionTypes.HENT_SISTE_STILLING_OK: {
-            /*
-            const forsteKode = action.data.koder[0];
-            const data = {
-                stilling: {
-                    label: forsteKode.label,
-                    konseptId: -1, // TODO Trenger ny tjeneste fra PAM
-                    styrk08: forsteKode.kode,
-                }
-            };
-            */
             return {...state, status: STATUS.OK, data: action.data};
         }
         default:
@@ -67,6 +57,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
         FEILET: ActionTypes.HENT_SISTE_STILLING_FEILET,
     });
 }
+
 export function selectOversettelseAvStillingFraAAReg(state: AppState): State {
     return state.oversettelseAvStillingFraAAReg;
 }
@@ -74,9 +65,4 @@ export function selectOversettelseAvStillingFraAAReg(state: AppState): State {
 export function selectSisteStillingNavnFraPam(state: AppState): string {
     const koder = state.oversettelseAvStillingFraAAReg.data.koder;
     return koder.length > 0 ? koder[0].label : '';
-}
-
-export function selectSisteStillingKodeFraPam(state: AppState): string {
-    const koder = state.oversettelseAvStillingFraAAReg.data.koder;
-    return koder.length > 0 ? koder[0].kode : '-1';
 }

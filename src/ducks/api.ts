@@ -15,7 +15,7 @@ export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/a
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
-const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08-nav`;
+const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
 export const getCookie = name => {
     const re = new RegExp(`${name}=([^;]+)`);

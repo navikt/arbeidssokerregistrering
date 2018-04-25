@@ -28,7 +28,7 @@ import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
-import { Stilling, velgSisteStilling } from '../../ducks/siste-stilling';
+import {Stilling, tomStilling, velgSisteStilling} from '../../ducks/siste-stilling';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -38,7 +38,7 @@ interface StateProps {
 
 interface DispatchProps {
     hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
-    hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => void;
+    hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
     velgStilling: (stilling: Stilling) => void;
 }
 
@@ -53,11 +53,20 @@ class SisteStilling extends React.Component<Props> {
     }
 
     componentWillMount() {
+        // Tre .then: 1. hent styrk98 fra AAReg, 2. oversett til styrk08 via PAM, 3. sett stillingen som default
         if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {
                     const {styrk} = this.props.sisteStillingFraAAReg.data;
-                    this.props.hentStillingFraPamGittStyrkkode(styrk);
+                    this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
+                        const koderFraPam = this.props.oversettelseAvStillingFraAAReg.data.koder;
+                        const stilling = koderFraPam.length === 0 ? tomStilling : {
+                            label: koderFraPam[0].label,
+                            styrk08: koderFraPam[0].kode,
+                            konseptId: -1
+                        };
+                        this.props.velgStilling(stilling);
+                    });
                 });
         }
     }
