@@ -7,7 +7,9 @@ import registreringStatus, { State as RegStatusState } from './ducks/registrerin
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
 import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
-import oversettelseAvStillingFraAAReg, { State as OversettelseAvStillingFraAARegState } from './ducks/oversettelse-av-stilling-fra-aareg';
+import oversettelseAvStillingFraAAReg, {
+    State as OversettelseAvStillingFraAARegState
+} from './ducks/oversettelse-av-stilling-fra-aareg';
 import sisteStilling, { State as SisteStillingState } from './ducks/siste-stilling';
 
 export interface AppState {

@@ -2,7 +2,7 @@ import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 import { mapAvgitteSvarForBackend } from '../utils/utils';
-import {selectSisteStilling} from "./siste-stilling";
+import { selectSisteStilling } from './siste-stilling';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',

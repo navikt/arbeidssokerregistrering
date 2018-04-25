@@ -1,4 +1,4 @@
-import {AppState} from "../reducer";
+import { AppState } from '../reducer';
 
 export enum ActionTypes {
     ENDRE_SISTE_STILLING = 'ENDRE_SISTE_STILLING',
@@ -10,7 +10,7 @@ export interface Data {
 
 export interface Stilling {
     label: string;
-    konseptId?: number;
+    konseptId: number;
     styrk08: string;
 }
 

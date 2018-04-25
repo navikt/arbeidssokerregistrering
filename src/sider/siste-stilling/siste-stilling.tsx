@@ -28,7 +28,7 @@ import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
-import {Stilling, velgSisteStilling} from "../../ducks/siste-stilling";
+import { Stilling, velgSisteStilling } from '../../ducks/siste-stilling';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;

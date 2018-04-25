@@ -1,6 +1,6 @@
 import * as Api from './api';
-import {doThenDispatch, STATUS} from './api-utils';
-import {AppState} from '../reducer';
+import { doThenDispatch, STATUS } from './api-utils';
+import { AppState } from '../reducer';
 
 export enum ActionTypes {
     HENT_SISTE_STILLING_PENDING = 'HENT_SISTE_STILLING_PENDING',
