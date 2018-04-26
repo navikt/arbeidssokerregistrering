@@ -16,6 +16,7 @@ import {
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { State as OppsummeringState } from '../ducks/oppsummering';
+import {Stilling} from "../ducks/siste-stilling";
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -75,19 +76,21 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     oppsummering: OppsummeringState,
-    styrk08: string | undefined
+    sisteStilling: Stilling
 ) {
     const helse: number | undefined = svar.helse;
     const utdanning: number | undefined = svar.utdanning;
 
     let data = {};
-    if (helse !== undefined && utdanning !== undefined) {
+    if (helse !== undefined && utdanning !== undefined) { // Hvorfor tar vi denne sjekken?
         data = {
             nusKode: mapTilNuskode(utdanning),
-            yrkesPraksis: styrk08,
+            yrkesPraksis: sisteStilling.styrk08,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             harHelseutfordringer: mapTilBoolean(helse),
+            yrkesbeskrivelse: sisteStilling.label,
+            konseptId: sisteStilling.konseptId,
         };
     }
     return data;

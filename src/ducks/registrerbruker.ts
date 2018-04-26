@@ -21,6 +21,8 @@ export interface Data {
     enigIOppsummering?: boolean;
     oppsummering?: string;
     harHelseutfordringer?: boolean;
+    yrkesbeskrivelse?: string;
+    konseptId?: number;
 }
 
 interface Action {
@@ -59,9 +61,8 @@ export function utforRegistrering(data: Data) {
 }
 
 export function mapBrukerRegistreringsData(state: AppState): State {
-    const styrk08 = selectSisteStilling(state).styrk08;
     return {
-        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, styrk08),
+        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, selectSisteStilling(state)),
         status: state.registrerBruker.status
     };
 }
