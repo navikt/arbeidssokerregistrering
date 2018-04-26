@@ -4,7 +4,7 @@ import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import registrerbruker from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
-import oversettelseAvStillingFraAAReg from './stilling-fra-pam';
+import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;

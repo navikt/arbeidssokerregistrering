@@ -10,11 +10,11 @@ import {
     store
 } from '../../test/test-utils';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import {setInitalState} from "../../ducks/svar";
+import {setInitialState} from "../../ducks/svar";
 
 enzyme.configure({adapter: new Adapter()});
 
-beforeEach(() => store.dispatch(setInitalState()));
+beforeEach(() => store.dispatch(setInitialState()));
 
 describe('<Skjema />', () => {
 

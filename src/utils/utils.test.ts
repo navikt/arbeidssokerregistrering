@@ -79,23 +79,4 @@ describe('utils test', () => {
         };
         expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
     });
-
-    it('test hentStillingsAlternativer', () => {
-        const { typeaheadYrkeList } = pamJanzzData;
-
-        const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, 'sokestreng');
-        const annenStilling = {id: 20, tittel: 'Annen stilling', styrk08: '-1'};
-        expect(stillingsAlternativer.length).to.equal(21);
-        expect(stillingsAlternativer[20]).to.deep.equal(annenStilling)
-    });
-
-    it('hvis hentStillingsAlternativer er tom skal man returnere en tom liste', () => {
-        const typeaheadYrkeList = [];
-
-        const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, 'sokestreng');
-        const annenStilling = {id: 0, tittel: 'Annen stilling', styrk08: '-1'};
-        expect(stillingsAlternativer.length).to.equal(1);
-        expect(stillingsAlternativer[0]).to.deep.equal(annenStilling)
-    });
-
 });
