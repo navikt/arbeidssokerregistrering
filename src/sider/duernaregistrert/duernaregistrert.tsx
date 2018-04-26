@@ -3,15 +3,15 @@ import { Normaltekst, Innholdstittel, Systemtittel, Element } from 'nav-frontend
 import { FormattedMessage } from 'react-intl';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
+import AvsjekkAnimasjon from './avsjekk-animasjon';
 
 const handinfoSvg = require('./handinfo.svg');
-const avsjekkSvg = require('./avsjekk.svg');
 
 function DuErNaRegistrert() {
     return (
         <ResponsivSide className="du-er-na-registrert-wrapper">
             <div className="du-er-na-registrert__avsjekk-ikon">
-                <img src={avsjekkSvg} alt="Avsjekk"/>
+                <AvsjekkAnimasjon/>
             </div>
             <Innholdstittel className="du-er-na-registrert__avsjekk-tittel">
                 <FormattedMessage id="duernaregistrert-innholdstittel"/>

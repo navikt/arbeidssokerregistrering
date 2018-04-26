@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Laster from './innholdslaster-laster';
 import { STATUS } from '../../ducks/api-utils';
 import { storrelseType } from 'nav-frontend-spinner';
+import Loader from '../loader/loader';
 
 const array = (value: {}) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status: string[]) =>
@@ -65,7 +65,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     }
 
     render() {
-        const { avhengigheter, feilmeldingKomponent, storrelse } = this.props;
+        const { avhengigheter, feilmeldingKomponent } = this.props;
         if (alleLastet(avhengigheter)) {
             return this.renderChildren();
         } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
@@ -81,7 +81,8 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             );
         }
 
-        return <Laster className="innholdslaster-laster" storrelse={storrelse} />;
+        return <div className="innholdslaster"><Loader/></div>;
+        // return <Laster className="innholdslaster-laster" storrelse={storrelse} />;
     }
 }
 

@@ -1,0 +1,66 @@
+.loader {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 1.4rem;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  animation: loading 5s both;
+  z-index: -100;
+}
+
+.loader__bilde {
+  width: 210px;
+  height: 210px;
+  margin: 20vh 0 3rem;
+
+  .sirkel {
+    transform-origin: 50% 50%;
+  }
+
+  .sirkel {
+    stroke-dasharray: 340, 200;
+    stroke-dashoffset: 540;
+    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.5s infinite;
+  }
+
+  .rettlinje {
+    stroke-dasharray: 80, 120;
+    stroke-dashoffset: 200;
+    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.5s infinite;
+  }
+
+  .rettlinje-liten {
+    stroke-dasharray: 40, 80;
+    stroke-dashoffset: 120;
+    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.8s infinite;
+  }
+}
+
+.loader__tekst {
+  position: fixed;
+  top: 60vh;
+}
+
+
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
