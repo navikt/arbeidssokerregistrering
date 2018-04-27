@@ -61,11 +61,14 @@ class SisteStilling extends React.Component<Props> {
                     const {styrk} = this.props.sisteStillingFraAAReg.data;
                     this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
                         const koderFraPam = this.props.oversettelseAvStillingFraAAReg.data.koder;
-                        const stilling = koderFraPam.length === 0 ? tomStilling : {
-                            label: koderFraPam[0].label,
-                            styrk08: koderFraPam[0].kode,
-                            konseptId: -1
-                        };
+                        let stilling: Stilling = tomStilling;
+                        if (koderFraPam.length > 0) {
+                            stilling = {
+                                label: koderFraPam[0].label,
+                                styrk08: koderFraPam[0].kode,
+                                konseptId: koderFraPam[0].konseptId === undefined ? -1 : koderFraPam[0].konseptId!,
+                            };
+                        }
                         this.props.velgStilling(stilling);
                     });
                 });

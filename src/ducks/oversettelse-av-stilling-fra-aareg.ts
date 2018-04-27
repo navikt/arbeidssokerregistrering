@@ -12,6 +12,7 @@ export interface Data {
     koder: {
         label: string;
         kode: string;
+        konseptId?: number;
     }[];
 }
 
@@ -28,7 +29,8 @@ interface Action {
 const initialState = {
     data: { koder: [{
         label: '',
-        kode: '-1'
+        kode: '-1',
+        konseptId: -1,
     }]},
     status: STATUS.NOT_STARTED
 };
