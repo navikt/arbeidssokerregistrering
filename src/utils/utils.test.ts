@@ -4,7 +4,7 @@ import { State as SvarState } from '../ducks/svar';
 
 import {
     getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
-    mapTilBoolean, hentStillingsAlternativer
+    mapTilBoolean
 } from './utils';
 import {
     ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
@@ -14,6 +14,7 @@ import {
     VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
 import pamJanzzData from '../mocks/pam-janzz-data';
+import {Stilling} from "../ducks/siste-stilling";
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
@@ -63,20 +64,26 @@ describe('utils test', () => {
 
     it('test mapAvgitteSvarForBackend', () => {
 
-        const yrkesPraksis = 'yrkesPraksis';
         const oppsummering = { tekst:  'oppsummer tekst' };
         const dummySvar: SvarState = {
             helse: 1,
             utdanning: 3
         };
+        const stilling: Stilling = {
+            styrk08: '6236',
+            label: 'stilling :)',
+            konseptId: 62352672,
+        };
 
         const expectData = {
             nusKode: mapTilNuskode(dummySvar.utdanning),
-            yrkesPraksis: yrkesPraksis,
+            yrkesPraksis: stilling.styrk08,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             harHelseutfordringer: mapTilBoolean(dummySvar.helse),
+            yrkesbeskrivelse: stilling.label,
+            konseptId: stilling.konseptId,
         };
-        expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, yrkesPraksis)).to.deep.equal(expectData);
+        expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, stilling)).to.deep.equal(expectData);
     });
 });
