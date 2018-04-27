@@ -54,7 +54,7 @@ class SisteStilling extends React.Component<Props> {
     }
 
     componentWillMount() {
-        // Tre .then: 1. hent styrk98 fra AAReg, 2. oversett til styrk08 via PAM, 3. sett stillingen som default
+        // Tre steg: 1. hent styrk98 fra AAReg, 2. oversett til styrk08 via PAM, 3. sett stillingen som default
         if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {

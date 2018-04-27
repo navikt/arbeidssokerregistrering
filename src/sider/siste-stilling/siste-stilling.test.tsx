@@ -11,6 +11,7 @@ import {
 } from '../../test/test-utils';
 import SisteStilling from './siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg';
+import oversettelseAvStillingFraAARegMedKonseptId from '../../mocks/oversettelse-av-stilling-fra-aareg-med-konseptid';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -66,6 +67,26 @@ describe('<SisteStilling />', () => {
                     label: 'IT-rådgiver',
                     styrk08: '2511.01',
                     konseptId: -1,
+                });
+            });
+    });
+
+    it('skal ta i bruk utvidet kryssklassifisertjeneste når den er klar', () => {
+        const store = create();
+        const fetchStub = new FetchStub()
+            .addResponse('sistearbeidsforhold', {})
+            .addResponse('kryssklassifiser', oversettelseAvStillingFraAARegMedKonseptId);
+
+        stubFetch(fetchStub);
+
+        mountWithStoreAndIntl(<SisteStilling/>, store);
+
+        return promiseWithSetTimeout()
+            .then(() => {
+                expect(store.getState().sisteStilling.data.stilling).to.deep.equal({
+                    label: 'IT-rådgiver',
+                    styrk08: '2511.01',
+                    konseptId: 62112,
                 });
             });
     });
