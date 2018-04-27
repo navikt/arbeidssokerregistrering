@@ -12,7 +12,6 @@ import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import { AppState } from '../../reducer';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import { STATUS } from '../../ducks/api-utils';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
@@ -55,7 +54,7 @@ class SisteStilling extends React.Component<Props> {
 
     componentWillMount() {
         // Tre steg: 1. hent styrk98 fra AAReg, 2. oversett til styrk08 via PAM, 3. sett stillingen som default
-        if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
+        if (this.props.sisteStilling === tomStilling) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {
                     const {styrk} = this.props.sisteStillingFraAAReg.data;
@@ -89,7 +88,6 @@ class SisteStilling extends React.Component<Props> {
 
     render() {
         const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, sisteStilling, intl} = this.props;
-
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}

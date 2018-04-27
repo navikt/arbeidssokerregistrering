@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../ducks/api';
-import { Stilling, tomStilling } from '../../ducks/siste-stilling';
+import { Stilling } from '../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
 
 interface SokeInputComponentProps {
@@ -30,8 +30,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         super(props);
         this.state = {
             value: {
-                    stilling: tomStilling,
-                    labelKey: tomStilling.label,
+                    stilling: props.defaultStilling,
+                    labelKey: props.defaultStilling.label,
                     id: 0
                 }
         };
@@ -40,11 +40,10 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     }
 
     componentWillReceiveProps(nextProps: SokeInputComponentProps) {
-        const defaultStilling = nextProps.defaultStilling ? nextProps.defaultStilling : tomStilling;
         this.setState({
             value: {
-                stilling: defaultStilling,
-                labelKey: defaultStilling.label,
+                stilling: nextProps.defaultStilling,
+                labelKey: nextProps.defaultStilling.label,
                 id: 0
             }
         });
