@@ -26,6 +26,7 @@ import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+import Loader from '../../komponenter/loader/loader';
 
 interface StateProps {
     registrerBruker: RegistrerBrukerState;
@@ -87,7 +88,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl}/>}
                 avhengigheter={[registrerBruker, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
-                storrelse="XXL"
+                loaderKomponent={<Loader/>}
             >
                 <ResponsivSide>
                     <div className="fullfor">

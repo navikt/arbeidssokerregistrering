@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { STATUS } from '../../ducks/api-utils';
 import { storrelseType } from 'nav-frontend-spinner';
-import Loader from '../loader/loader';
+import Laster from './innholdslaster-laster';
 
 const array = (value: {}) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status: string[]) =>
-    (element: {status: string}) => array(status).toString().includes(element.status);
+    (element: { status: string }) => array(status).toString().includes(element.status);
 const noenHarFeil = (avhengigheter: {}[]) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
 const alleLastet = (avhengigheter: {}[]) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
 const alleLastetEllerReloading = (avhengigheter: {}[]) => (
@@ -13,9 +13,9 @@ const alleLastetEllerReloading = (avhengigheter: {}[]) => (
 );
 
 interface InnholdslasterProps {
-    avhengigheter: {status: string}[];
-    children: React.ReactNode | React.ReactChild;
-    feilmeldingKomponent?: React.ReactNode | React.ReactChild;
+    avhengigheter: { status: string }[];
+    feilmeldingKomponent?: React.ReactNode;
+    loaderKomponent?: React.ReactNode;
     storrelse?: storrelseType;
 }
 
@@ -29,7 +29,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     constructor(props: InnholdslasterProps) {
         super(props);
 
-        this.state = { timeout: false };
+        this.state = {timeout: false};
         this.timer = undefined;
 
         this.renderChildren = this.renderChildren.bind(this);
@@ -40,7 +40,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     setTimer() {
         if (!this.timer) {
             this.timer = window.setTimeout(() => {
-                this.setState({ timeout: true });
+                this.setState({timeout: true});
             },                             200);
         }
     }
@@ -51,12 +51,12 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             this.timer = undefined;
 
             // Deferred, slik at setState ikke er en del av render
-            setTimeout(() => this.setState({ timeout: false }), 0);
+            setTimeout(() => this.setState({timeout: false}), 0);
         }
     }
 
     renderChildren() {
-        const { avhengigheter, children } = this.props;
+        const {avhengigheter, children} = this.props;
 
         if (typeof children === 'function') {
             return <React.Fragment>{children(avhengigheter)}</React.Fragment>;
@@ -65,7 +65,11 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
     }
 
     render() {
-        const { avhengigheter, feilmeldingKomponent } = this.props;
+        const {avhengigheter, feilmeldingKomponent, loaderKomponent, storrelse} = this.props;
+        const loader = loaderKomponent
+            ? loaderKomponent
+            : <Laster className="innholdslaster-laster" storrelse={storrelse}/>;
+
         if (alleLastet(avhengigheter)) {
             return this.renderChildren();
         } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
@@ -81,8 +85,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             );
         }
 
-        return <div className="innholdslaster"><Loader/></div>;
-        // return <Laster className="innholdslaster-laster" storrelse={storrelse} />;
+        return <div className="innholdslaster">{loader}</div>;
     }
 }
 

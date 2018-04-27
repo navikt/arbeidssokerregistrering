@@ -28,17 +28,17 @@ export default class Loader extends React.Component {
                                 y1="60"
                                 y2="60"
                                 stroke="#99BDCD"
-                                strokeWidth="10"
+                                strokeWidth="9"
                                 strokeLinecap="round"
                             />
                             <line
                                 className={erIE ? '' : 'rettlinje-liten'}
                                 x1="38"
                                 x2="70"
-                                y1="73"
-                                y2="73"
+                                y1="71"
+                                y2="71"
                                 stroke="#99BDCD"
-                                strokeWidth="5"
+                                strokeWidth="4"
                                 strokeLinecap="round"
                             />
                         </g>
@@ -46,7 +46,7 @@ export default class Loader extends React.Component {
                         <circle
                             className={erIE ? '' : 'sirkel'}
                             strokeLinecap="round"
-                            strokeWidth="10"
+                            strokeWidth="9"
                             fill="none"
                             stroke="#CCDEE6"
                             r="55"
@@ -57,7 +57,7 @@ export default class Loader extends React.Component {
                     </svg>
                 </div>
                 <Ingress tag="p">
-                    Registrering pågår. Vi setter opp tjenester til deg. Dett kan ta noen sekunder
+                    Registrering pågår. Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
                 </Ingress>
             </div>
         );
