@@ -16,7 +16,7 @@ import {
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { State as OppsummeringState } from '../ducks/oppsummering';
-import {Stilling} from "../ducks/siste-stilling";
+import { Stilling } from '../ducks/siste-stilling';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
