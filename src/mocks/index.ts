@@ -17,7 +17,7 @@ const MOCK_SBL = true;
 
 
 if (MOCK_START_REGISRERING_STATUS) {
-    (mock as any).get('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, startRegistreringStatus)));
+    (mock as any).get('/veilarboppfolgingproxy/api/startregistrering_', respondWith(delayed(1000, startRegistreringStatus)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
