@@ -44,7 +44,7 @@ if(MOCK_SBL) {
 }
 
 if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-    (mock as any).get('glob:/pam-janzz/rest/kryssklassifiser?kodeForOversetting*', respondWith(delayed(500, oversettelseAvStillingFraAAReg)));
+    (mock as any).get('glob:/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting*', respondWith(delayed(500, oversettelseAvStillingFraAAReg)));
 }
 
 if(MOCK_STYRK08_PAMJANZZ) {

@@ -30,7 +30,7 @@ export default combineReducers<AppState>({
     registreringStatus,
     registrerBruker,
     innloggingsInfo,
-    oversettelseAvStillingFraAAReg: oversettelseAvStillingFraAAReg,
+    oversettelseAvStillingFraAAReg,
     sisteStillingFraAAReg,
     sisteStilling,
     form: formReducer
