@@ -9,11 +9,7 @@ export enum ActionTypes {
 }
 
 export interface Data {
-    arbeidsgiver?: string;
-    stilling?: string;
     styrk?: string;
-    fra?: string;
-    til?: string;
 }
 
 export interface State {
@@ -71,6 +67,6 @@ export function registrerSisteArbeidsforhold(data: Data) {
     });
 }
 
-export function selectSisteArbeidsforhold(state: AppState): State {
-    return state.sisteArbeidsforhold;
+export function selectSisteStillingFraAAReg(state: AppState): State {
+    return state.sisteStillingFraAAReg;
 }
