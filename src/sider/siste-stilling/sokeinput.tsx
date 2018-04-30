@@ -28,22 +28,22 @@ const OptionsAsync = Async as OptionsAsync;
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
     constructor(props: SokeInputComponentProps) {
         super(props);
-        this.state = {
-            value: {
-                    stilling: props.defaultStilling,
-                    labelKey: props.defaultStilling.label,
-                    id: 0
-                }
-        };
-
         this.onChange = this.onChange.bind(this);
     }
 
+    componentWillMount() {
+        this.updateState(this.props);
+    }
+
     componentWillReceiveProps(nextProps: SokeInputComponentProps) {
+        this.updateState(nextProps);
+    }
+
+    updateState(props: SokeInputComponentProps) {
         this.setState({
             value: {
-                stilling: nextProps.defaultStilling,
-                labelKey: nextProps.defaultStilling.label,
+                stilling: props.defaultStilling,
+                labelKey: props.defaultStilling.label,
                 id: 0
             }
         });

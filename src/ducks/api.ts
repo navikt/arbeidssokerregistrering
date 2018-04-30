@@ -81,7 +81,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
         url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
         config: MED_CREDENTIALS,
-        recoverWith: () => ({koder: []}) // TODO Vil ha samme oppførsel lokalt som i T6. Test.
+        recoverWith: () => ({koder: []})
     });
 }
 
