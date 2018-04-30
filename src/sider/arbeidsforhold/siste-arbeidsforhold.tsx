@@ -22,7 +22,6 @@ import {
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
-import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
@@ -84,7 +83,6 @@ class SisteArbeidsforhold extends React.Component<Props> {
                 storrelse="XXL"
             >
                 <PanelBlokkGruppe className="blokk-xs">
-                    <Tilbakeknapp onClick={this.onTilbake}/>
                     <PanelBlokk
                         tittelId="siste-arbeidsforhold.tittel"
                         tittelCssNavnVariant="transparent-variant"
