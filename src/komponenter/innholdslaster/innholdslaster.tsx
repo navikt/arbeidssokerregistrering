@@ -2,6 +2,7 @@ import * as React from 'react';
 import Laster from './innholdslaster-laster';
 import { STATUS } from '../../ducks/api-utils';
 import { storrelseType } from 'nav-frontend-spinner';
+import ResponsivSide from '../side/responsiv-side';
 
 const array = (value: {}) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status: string[]) =>
@@ -77,7 +78,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             this.clearTimer();
 
             return (
-                <div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div>
+                <ResponsivSide><div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div></ResponsivSide>
             );
         }
 
