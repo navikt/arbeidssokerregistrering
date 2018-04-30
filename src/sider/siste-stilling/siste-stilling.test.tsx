@@ -4,7 +4,7 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import { lagreArbeidsforhold, selectSisteStillingFraAAReg } from '../../ducks/siste-stilling-fra-aareg';
+import { selectSisteStillingFraAAReg } from '../../ducks/siste-stilling-fra-aareg';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
@@ -12,6 +12,7 @@ import {
 import SisteStilling from './siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg';
 import oversettelseAvStillingFraAARegMedKonseptId from '../../mocks/oversettelse-av-stilling-fra-aareg-med-konseptid';
+import {velgSisteStilling} from "../../ducks/siste-stilling";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -22,17 +23,23 @@ afterEach(() => {
 });
 
 describe('<SisteStilling />', () => {
-    it('skal ikke hente siste arbeidsforhold dersom state er populert', () => {
+    it('skal ikke hente siste arbeidsforhold dersom state.sisteStilling er populert med ikke-tom stilling', () => {
         const store = create();
-        const fetchStub = new FetchStub().addResponse('sistearbeidsforhold', {});
+        const fetchStub = new FetchStub()
+            .addResponse('sistearbeidsforhold', {});
         stubFetch(fetchStub);
 
-        store.dispatch(lagreArbeidsforhold({}));
+        store.dispatch(velgSisteStilling({
+            label: 'test',
+            styrk08: 'test',
+            konseptId: 72435,
+        }));
 
         mountWithStoreAndIntl(<SisteStilling/>, store);
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
+
     it('skal hente siste arbeidsforhold og state', () => {
         const store = create();
         const state = {dummy: 'dummy'};
@@ -105,4 +112,5 @@ describe('<SisteStilling />', () => {
         expect(pushedPath).to.equal('/oppsummering');
 
     });
+
 });
