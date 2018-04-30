@@ -1,7 +1,6 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as SisteArbeidsforholdData } from './siste-stilling-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
-import { tomStilling } from './siste-stilling';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
