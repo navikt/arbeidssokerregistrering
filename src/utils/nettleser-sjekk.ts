@@ -21,3 +21,7 @@ export function  getTridentVersion() {
     }
     return version;
 }
+
+export function fungereAnimasjonIdenneNettleseren() {
+    return getIEVersion() > -1 || getTridentVersion() > -1;
+}

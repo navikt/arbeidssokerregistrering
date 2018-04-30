@@ -85,7 +85,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             );
         }
 
-        return <div className="innholdslaster">{loader}</div>;
+        return loader;
     }
 }
 

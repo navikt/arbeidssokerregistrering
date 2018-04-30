@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Ingress } from 'nav-frontend-typografi';
-import { getIEVersion, getTridentVersion } from '../../utils/ie-test';
+import { fungereAnimasjonIdenneNettleseren } from '../../utils/nettleser-sjekk';
 
 export default class Loader extends React.Component {
 
     render() {
-        const erIE = getIEVersion() > -1 || getTridentVersion() > -1;
+        const erIE = fungereAnimasjonIdenneNettleseren();
 
         return (
             <div className="loader">
