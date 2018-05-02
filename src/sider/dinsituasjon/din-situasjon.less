@@ -1,16 +1,51 @@
-.din-situasjon-list {
-  list-style-type: none;
-  line-height: 1.5rem;
-  padding-left: 1.5rem;
-  position: relative;
+.din-situasjon {
+  max-width: 768px;
+  margin-right: auto;
+  margin-left: auto;
 
-  &:before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    background: url("svg/sjekk-sirkel.svg") no-repeat;
-    position: absolute;
-    left: 0;
-    top: 4px;
+  .tittel {
+    text-align: center;
+    .blokk-xxs();
+  }
+
+  .beskrivelse {
+    text-align: center;
+    .blokk();
+  }
+
+  .liste {
+    padding-left: 0;
+    .blokk();
+  }
+
+  .din-situasjon-list {
+    list-style-type: none;
+    line-height: 1.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+
+    &:before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background: url("svg/sjekk-sirkel.svg") no-repeat;
+      position: absolute;
+      left: 0;
+      top: 4px;
+    }
+  }
+
+}
+
+@media (min-width: @screen-md) {
+  .din-situasjon {
+    .beskrivelse {
+      padding-left: 15rem;
+      padding-right: 15rem;
+    }
+
+    .liste {
+      padding: 0 8rem;
+    }
   }
 }
