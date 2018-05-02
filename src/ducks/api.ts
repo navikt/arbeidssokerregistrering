@@ -1,5 +1,5 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
-import { Data as SisteArbeidsforholdData } from './siste-arbeidsforhold-fra-aareg';
+import { Data as SisteArbeidsforholdData } from './siste-stilling-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
@@ -15,7 +15,7 @@ export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/a
 
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
-const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08-nav`;
+const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
 export const getCookie = name => {
     const re = new RegExp(`${name}=([^;]+)`);
@@ -79,9 +79,9 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
 
 export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
-        url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
+        url: `${PAM_JANZZ_URL}/kryssklassifiserMedKonsept?kodeForOversetting=${styrk}`,
         config: MED_CREDENTIALS,
-        recoverWith: () => ({koder: []})
+        recoverWith: () => ({konseptMedStyrk08List: []})
     });
 }
 

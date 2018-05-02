@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../ducks/api';
-import { hentStillingsAlternativer } from '../../utils/utils';
+import { Stilling } from '../../ducks/siste-stilling';
+import { hentStillingsAlternativer } from './sokeinput-utils';
 
 interface SokeInputComponentProps {
-    feltNavn: string;
-    onChange: (label: string, kode: string) => void;
+    defaultStilling: Stilling;
+    onChange: (stilling: Stilling) => void;
 }
 
 interface Option {
-    styrk08: string;
-    tittel: string;
+    stilling: Stilling;
+    labelKey: string;
     id: number;
 }
 
@@ -27,11 +28,25 @@ const OptionsAsync = Async as OptionsAsync;
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
     constructor(props: SokeInputComponentProps) {
         super(props);
-        const {feltNavn} = props;
-        const tittel = feltNavn ? feltNavn : '';
-        this.state = {value: {tittel: tittel, styrk08: '', id: 0}};
-
         this.onChange = this.onChange.bind(this);
+    }
+
+    componentWillMount() {
+        this.updateState(this.props);
+    }
+
+    componentWillReceiveProps(nextProps: SokeInputComponentProps) {
+        this.updateState(nextProps);
+    }
+
+    updateState(props: SokeInputComponentProps) {
+        this.setState({
+            value: {
+                stilling: props.defaultStilling,
+                labelKey: props.defaultStilling.label,
+                id: 0
+            }
+        });
     }
 
     getOptions(sokestreng: string) {
@@ -48,7 +63,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     onChange(value: Option) {
         if (value) {
-            this.props.onChange(value.tittel, value.styrk08);
+            this.props.onChange(value.stilling);
             this.setState({
                 value
             });
@@ -74,7 +89,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         value={this.state.value}
                         id="stilling"
                         valueKey="id"
-                        labelKey="tittel"
+                        labelKey="labelKey"
                     />
                 </div>
             </React.Fragment>
