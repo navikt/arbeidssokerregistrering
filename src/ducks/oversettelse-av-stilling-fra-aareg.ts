@@ -9,7 +9,7 @@ export enum ActionTypes {
 }
 
 export interface Data {
-    koder: {
+    konseptMedStyrk08List: {
         label: string;
         kode: string;
         konseptId?: number;
@@ -27,7 +27,7 @@ interface Action {
 }
 
 const initialState = {
-    data: { koder: [{
+    data: { konseptMedStyrk08List: [{
         label: '',
         kode: '-1',
         konseptId: -1,
@@ -65,6 +65,6 @@ export function selectOversettelseAvStillingFraAAReg(state: AppState): State {
 }
 
 export function selectSisteStillingNavnFraPam(state: AppState): string {
-    const koder = state.oversettelseAvStillingFraAAReg.data.koder;
+    const koder = state.oversettelseAvStillingFraAAReg.data.konseptMedStyrk08List;
     return koder.length > 0 ? koder[0].label : '';
 }

@@ -79,9 +79,9 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
 
 export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
-        url: `${PAM_JANZZ_URL}/kryssklassifiser?kodeForOversetting=${styrk}`,
+        url: `${PAM_JANZZ_URL}/kryssklassifiserMedKonsept?kodeForOversetting=${styrk}`,
         config: MED_CREDENTIALS,
-        recoverWith: () => ({koder: []})
+        recoverWith: () => ({konseptMedStyrk08List: []})
     });
 }
 
