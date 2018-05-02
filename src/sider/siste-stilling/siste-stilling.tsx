@@ -64,7 +64,7 @@ class SisteStilling extends React.Component<Props> {
                         if (koderFraPam.length > 0) {
                             stilling = {
                                 label: koderFraPam[0].label,
-                                styrk08: koderFraPam[0].kode,
+                                styrk08: koderFraPam[0].styrk08[0],
                                 konseptId: koderFraPam[0].konseptId === undefined ? -1 : koderFraPam[0].konseptId!,
                             };
                         }
