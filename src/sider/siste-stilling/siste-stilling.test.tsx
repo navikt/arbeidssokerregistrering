@@ -70,9 +70,9 @@ describe('<SisteStilling />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 expect(store.getState().sisteStilling.data.stilling).to.deep.equal({
-                    label: 'IT-rådgiver',
-                    styrk08: '2511.01',
-                    konseptId: 62112,
+                    label: 'Daglig leder',
+                    styrk08: '1120',
+                    konseptId: 313808,
                 });
             });
     });

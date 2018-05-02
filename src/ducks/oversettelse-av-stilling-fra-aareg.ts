@@ -11,8 +11,8 @@ export enum ActionTypes {
 export interface Data {
     konseptMedStyrk08List: {
         label: string;
-        kode: string;
-        konseptId?: number;
+        konseptId: number;
+        styrk08: string[];
     }[];
 }
 
@@ -28,9 +28,9 @@ interface Action {
 
 const initialState = {
     data: { konseptMedStyrk08List: [{
-        label: '',
-        kode: '-1',
+        label: '-1',
         konseptId: -1,
+        styrk08: ['-1'],
     }]},
     status: STATUS.NOT_STARTED
 };
