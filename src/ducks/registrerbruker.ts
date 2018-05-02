@@ -2,7 +2,7 @@ import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 import { mapAvgitteSvarForBackend } from '../utils/utils';
-import { selectSisteStillingKodeFraPam } from './stilling-fra-pam';
+import { selectSisteStilling } from './siste-stilling';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -21,6 +21,8 @@ export interface Data {
     enigIOppsummering?: boolean;
     oppsummering?: string;
     harHelseutfordringer?: boolean;
+    yrkesbeskrivelse?: string;
+    konseptId?: number;
 }
 
 interface Action {
@@ -59,9 +61,8 @@ export function utforRegistrering(data: Data) {
 }
 
 export function mapBrukerRegistreringsData(state: AppState): State {
-    const yrkesPraksis = selectSisteStillingKodeFraPam(state);
     return {
-        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, yrkesPraksis),
+        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, selectSisteStilling(state)),
         status: state.registrerBruker.status
     };
 }
