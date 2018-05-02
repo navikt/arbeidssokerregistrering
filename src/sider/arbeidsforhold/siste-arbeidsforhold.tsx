@@ -22,12 +22,11 @@ import {
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
-import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
-import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
+import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface StateProps {
     sisteArbeidsforhold: SisteArbeidsforholdState;
@@ -82,27 +81,25 @@ class SisteArbeidsforhold extends React.Component<Props> {
                 avhengigheter={[sisteArbeidsforhold, stillingFraPam]}
                 storrelse="XXL"
             >
-                <PanelBlokkGruppe className="blokk-xs">
-                    <PanelBlokk
-                        tittelId="siste-arbeidsforhold.tittel"
-                        tittelCssNavnVariant="transparent-variant"
-                        beskrivelseId="siste-arbeidsforhold.ingress"
-                        cssVariant="padding-vertikalt-xsmall"
-                    />
-                    <PanelBlokk cssVariant="transparent-variant padding-vertikalt-xsmall ">
-                        <SokeInput feltNavn={stillingNavn} onChange={this.props.velgStilling}/>
-                        <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="blokk">
-                            <Normaltekst>
-                                <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
-                            </Normaltekst>
-                        </EkspanderbartInfo>
-                        <Knappervertikalt>
-                            <KnappNeste onClick={this.onNeste}/>
-                            <LenkeAvbryt />
-                        </Knappervertikalt>
-                    </PanelBlokk>
-                </PanelBlokkGruppe>
+                <ResponsivSide className="siste-arbeidsforhold">
+                    <Innholdstittel className="tittel">
+                        <FormattedMessage id="siste-arbeidsforhold.tittel"/>
+                    </Innholdstittel>
+                    <Normaltekst className="beskrivelse">
+                        <FormattedMessage id="siste-arbeidsforhold.ingress"/>
+                    </Normaltekst>
 
+                    <SokeInput feltNavn={stillingNavn} onChange={this.props.velgStilling}/>
+                    <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
+                        <Normaltekst>
+                            <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                        </Normaltekst>
+                    </EkspanderbartInfo>
+                    <Knappervertikalt>
+                        <KnappNeste onClick={this.onNeste}/>
+                        <LenkeAvbryt/>
+                    </Knappervertikalt>
+                </ResponsivSide>
             </Innholdslaster>
         );
         /*tslint:disable:no-console*/
