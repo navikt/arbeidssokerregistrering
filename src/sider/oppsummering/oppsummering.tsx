@@ -13,7 +13,6 @@ import { AppState } from '../../reducer';
 import { getIntlMessage, hentFornavn } from '../../utils/utils';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { FULLFOR_PATH, UENIG_PATH } from '../../utils/konstanter';
-import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import { settOppsummering } from '../../ducks/oppsummering';
 
 interface StateProps {
@@ -70,7 +69,6 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
                         ]
                     }
                 >
-                    <Tilbakeknapp onClick={() => history.goBack()}/>
                     <PanelBlokk
                         tittelId="du-har-gode-muligheter"
                         tittelVerdier={{fornavn: hentFornavn(name)}}

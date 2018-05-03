@@ -17,8 +17,7 @@ import {
 } from '../../ducks/registrerbruker';
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
-import { registrerBrukerSBLArbeid } from '../../ducks/api';
+import { registrerBrukerSBLArbeid  } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
@@ -83,7 +82,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     render() {
-        const {registrerBrukerData, history, intl} = this.props;
+        const {registrerBrukerData, intl} = this.props;
         const loaderTittelElement = (
             <React.Fragment>
                 <Innholdstittel className="blokk-s">
@@ -103,7 +102,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
             >
                 <ResponsivSide>
                     <div className="fullfor">
-                        <Tilbakeknapp onClick={() => history.goBack()}/>
                         <Systemtittel tag="h1" className="tittel"><FormattedMessage id="fullfor-header"/></Systemtittel>
                         <Element className="ingress"><FormattedMessage id="fullfor-ingress"/></Element>
                         <Element><FormattedMessage id="fullfor-overskrift-liste"/></Element>
