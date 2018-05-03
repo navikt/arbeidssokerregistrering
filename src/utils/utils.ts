@@ -16,6 +16,7 @@ import {
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { State as OppsummeringState } from '../ducks/oppsummering';
+import { Stilling } from '../ducks/siste-stilling';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -75,19 +76,21 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     oppsummering: OppsummeringState,
-    yrkesPraksis: string | undefined
+    sisteStilling: Stilling
 ) {
     const helse: number | undefined = svar.helse;
     const utdanning: number | undefined = svar.utdanning;
 
     let data = {};
-    if (helse !== undefined && utdanning !== undefined) {
+    if (helse !== undefined && utdanning !== undefined) { // Hvorfor tar vi denne sjekken?
         data = {
             nusKode: mapTilNuskode(utdanning),
-            yrkesPraksis: yrkesPraksis,
+            yrkesPraksis: sisteStilling.styrk08,
             enigIOppsummering: true,
             oppsummering: oppsummering.tekst,
             harHelseutfordringer: mapTilBoolean(helse),
+            yrkesbeskrivelse: sisteStilling.label,
+            konseptId: sisteStilling.konseptId,
         };
     }
     return data;
@@ -95,23 +98,4 @@ export function mapAvgitteSvarForBackend(
 
 export interface MatchProps {
     id: string;
-}
-
-export function hentStillingsAlternativer (typeaheadYrkeList: {}[], sokestreng: string) {
-    const alternativer = typeaheadYrkeList
-        .sort((a: {label: string}, b: {label: string}) => a.label.localeCompare(b.label))
-        .map((stilling: { label: string, styrk08NavListe: string[] }, index: number) => {
-            const styrk08 = stilling.styrk08NavListe.length > 0 ? stilling.styrk08NavListe[0] : '';
-            return {
-                id: index,
-                tittel: stilling.label,
-                styrk08
-            };
-        });
-
-    const blankSokestreng = sokestreng.length === 0;
-    const alternativerMedAnnenStilling =
-        [...alternativer, {id: alternativer.length, tittel: 'Annen stilling', styrk08: '-1'}];
-
-    return blankSokestreng ? [] : alternativerMedAnnenStilling;
 }

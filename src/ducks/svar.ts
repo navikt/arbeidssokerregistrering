@@ -46,7 +46,7 @@ export function endreSvarAction(sporsmalId: string, alternativId: number) {
     };
 }
 
-export function setInitalState() {
+export function setInitialState() {
     return {
         type: ActionTypes.AVGI_SVAR_RESET
     };

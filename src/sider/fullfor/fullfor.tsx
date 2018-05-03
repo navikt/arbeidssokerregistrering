@@ -27,7 +27,7 @@ import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 
 interface StateProps {
-    registrerBruker: RegistrerBrukerState;
+    registrerBrukerData: RegistrerBrukerState;
 }
 
 interface DispatchProps {
@@ -53,8 +53,8 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     componentWillMount() {
-        const {registrerBruker, history} = this.props;
-        if (_.isEmpty(registrerBruker.data)) {
+        const {registrerBrukerData, history} = this.props;
+        if (_.isEmpty(registrerBrukerData.data)) {
             history.push(START_PATH);
         }
     }
@@ -62,7 +62,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     registrerBrukerOnClick() {
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
-        this.props.onRegistrerBruker(this.props.registrerBruker.data)
+        this.props.onRegistrerBruker(this.props.registrerBrukerData.data)
             .then((res) => {
                 if (!!res) {
                     registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
@@ -81,11 +81,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     render() {
-        const {registrerBruker, intl} = this.props;
+        const {registrerBrukerData, intl} = this.props;
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl}/>}
-                avhengigheter={[registrerBruker, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
+                avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 storrelse="XXL"
             >
                 <ResponsivSide>
@@ -126,7 +126,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 }
 
 const mapStateToProps = (state) => ({
-    registrerBruker: mapBrukerRegistreringsData(state),
+    registrerBrukerData: mapBrukerRegistreringsData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

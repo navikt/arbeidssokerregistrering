@@ -4,21 +4,19 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
-    selectSisteArbeidsforhold,
+    selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
-} from '../../ducks/siste-arbeidsforhold-fra-aareg';
+} from '../../ducks/siste-stilling-fra-aareg';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import { AppState } from '../../reducer';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import { STATUS } from '../../ducks/api-utils';
 import {
-    velgStilling,
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
-    selectStillingFraPam,
-    State as StillingFraPamState
-} from '../../ducks/stilling-fra-pam';
+    selectOversettelseAvStillingFraAAReg,
+    State as OversettelseAvStillingFraAARegState
+} from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
@@ -26,23 +24,25 @@ import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
+import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../ducks/siste-stilling';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface StateProps {
-    sisteArbeidsforhold: SisteArbeidsforholdState;
-    stillingFraPam: StillingFraPamState;
-    stillingNavn: string;
+    sisteStillingFraAAReg: SisteArbeidsforholdState;
+    oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
+    labelTilStillingFraAAReg: string;
+    sisteStilling: Stilling;
 }
 
 interface DispatchProps {
     hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
-    hentStillingFraPamGittStyrkkode: (styrk: string | undefined) => void;
-    velgStilling: (label: string, kode: string) => void;
+    hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
+    velgStilling: (stilling: Stilling) => void;
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class SisteArbeidsforhold extends React.Component<Props> {
+class SisteStilling extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.onAvbryt = this.onAvbryt.bind(this);
@@ -51,11 +51,23 @@ class SisteArbeidsforhold extends React.Component<Props> {
     }
 
     componentWillMount() {
-        if (this.props.sisteArbeidsforhold.status === STATUS.NOT_STARTED) {
+        // Tre steg: 1. hent styrk98 fra AAReg, 2. oversett til styrk08 via PAM, 3. sett stillingen som default
+        if (this.props.sisteStilling === tomStilling) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {
-                    const {styrk} = this.props.sisteArbeidsforhold.data;
-                    this.props.hentStillingFraPamGittStyrkkode(styrk);
+                    const {styrk} = this.props.sisteStillingFraAAReg.data;
+                    this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
+                        const koderFraPam = this.props.oversettelseAvStillingFraAAReg.data.konseptMedStyrk08List;
+                        let stilling: Stilling = tomStilling;
+                        if (koderFraPam.length > 0) {
+                            stilling = {
+                                label: koderFraPam[0].label,
+                                styrk08: koderFraPam[0].styrk08[0],
+                                konseptId: koderFraPam[0].konseptId === undefined ? -1 : koderFraPam[0].konseptId!,
+                            };
+                        }
+                        this.props.velgStilling(stilling);
+                    });
                 });
         }
     }
@@ -73,12 +85,11 @@ class SisteArbeidsforhold extends React.Component<Props> {
     }
 
     render() {
-        const {sisteArbeidsforhold, stillingFraPam, stillingNavn, intl} = this.props;
-
+        const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, sisteStilling, intl} = this.props;
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[sisteArbeidsforhold, stillingFraPam]}
+                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
             >
                 <ResponsivSide className="siste-arbeidsforhold">
@@ -89,7 +100,7 @@ class SisteArbeidsforhold extends React.Component<Props> {
                         <FormattedMessage id="siste-arbeidsforhold.ingress"/>
                     </Normaltekst>
 
-                    <SokeInput feltNavn={stillingNavn} onChange={this.props.velgStilling}/>
+                    <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
                     <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
                         <Normaltekst>
                             <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
@@ -107,17 +118,18 @@ class SisteArbeidsforhold extends React.Component<Props> {
 }
 
 const mapStateToProps = (state) => ({
-    sisteArbeidsforhold: selectSisteArbeidsforhold(state),
-    stillingFraPam: selectStillingFraPam(state),
-    stillingNavn: selectSisteStillingNavnFraPam(state)
+    sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
+    oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
+    labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),
+    sisteStilling: selectSisteStilling(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
-    velgStilling: (label: string, kode: string) => dispatch(velgStilling(label, kode)),
+    velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(SisteArbeidsforhold)
+    injectIntl(SisteStilling)
 );
