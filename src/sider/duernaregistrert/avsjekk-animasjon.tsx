@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { fungereAnimasjonIdenneNettleseren } from '../../utils/nettleser-sjekk';
+import { fungererAnimasjonIdenneNettleseren } from '../../utils/nettleser-sjekk';
 
 export default class AvsjekkAnimasjon extends React.Component {
 
     render() {
-        const erIE = fungereAnimasjonIdenneNettleseren();
+        const brukAnimering = fungererAnimasjonIdenneNettleseren();
 
         return (
             <div className="avsjekk-animasjon">
@@ -18,7 +18,7 @@ export default class AvsjekkAnimasjon extends React.Component {
                     viewBox="0 0 128 128"
                 >
                     <polyline
-                        className={erIE ? '' : 'hake'}
+                        className={brukAnimering ? '' : 'hake'}
                         stroke="#99BDCD"
                         strokeWidth="9"
                         strokeLinecap="round"
@@ -27,7 +27,7 @@ export default class AvsjekkAnimasjon extends React.Component {
                         points="38.9,51.8 66.9,82.7 121.6,11.1 "
                     />
                     <path
-                        className={erIE ? '' : 'sirkel'}
+                        className={brukAnimering ? '' : 'sirkel'}
                         stroke="#CCDEE6"
                         strokeWidth="9"
                         strokeLinecap="round"

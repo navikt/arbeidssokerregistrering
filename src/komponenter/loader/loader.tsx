@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fungereAnimasjonIdenneNettleseren } from '../../utils/nettleser-sjekk';
+import { fungererAnimasjonIdenneNettleseren } from '../../utils/nettleser-sjekk';
 
 interface LoaderProps {
     tittelElement?: React.ReactNode;
@@ -8,7 +8,7 @@ interface LoaderProps {
 export default class Loader extends React.Component<LoaderProps> {
 
     render() {
-        const erIE = fungereAnimasjonIdenneNettleseren();
+        const brukAnimering = fungererAnimasjonIdenneNettleseren();
 
         return (
             <div className="loader">
@@ -24,7 +24,7 @@ export default class Loader extends React.Component<LoaderProps> {
 
                     <g>
                         <line
-                            className={erIE ? '' : 'rettlinje'}
+                            className={brukAnimering ? '' : 'rettlinje'}
                             x1="40"
                             x2="90"
                             y1="60"
@@ -34,7 +34,7 @@ export default class Loader extends React.Component<LoaderProps> {
                             strokeLinecap="round"
                         />
                         <line
-                            className={erIE ? '' : 'rettlinje-liten'}
+                            className={brukAnimering ? '' : 'rettlinje-liten'}
                             x1="38"
                             x2="70"
                             y1="71"
@@ -46,7 +46,7 @@ export default class Loader extends React.Component<LoaderProps> {
                     </g>
 
                     <circle
-                        className={erIE ? '' : 'sirkel'}
+                        className={brukAnimering ? '' : 'sirkel'}
                         strokeLinecap="round"
                         strokeWidth="9"
                         fill="none"
@@ -56,7 +56,7 @@ export default class Loader extends React.Component<LoaderProps> {
                         cx="65"
                     />
                 </svg>
-                {this.props.tittelElement!}
+                {this.props.tittelElement}
             </div>
         );
     }
