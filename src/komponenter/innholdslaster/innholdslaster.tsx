@@ -86,7 +86,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             );
         }
 
-        return loader;
+        return <ResponsivSide>{loader}</ResponsivSide>;
     }
 }
 

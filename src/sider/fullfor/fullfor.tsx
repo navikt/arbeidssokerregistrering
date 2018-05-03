@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
@@ -18,7 +18,7 @@ import {
 import Feilmelding from './fullfor-feilmelding';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
-import { registrerBrukerSBLArbeid  } from '../../ducks/api';
+import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
@@ -84,11 +84,22 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
     render() {
         const {registrerBrukerData, history, intl} = this.props;
+        const loaderTittelElement = (
+            <React.Fragment>
+                <Innholdstittel className="blokk-s">
+                    Registrering pågår.
+                </Innholdstittel>
+                <Normaltekst>
+                    Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
+                </Normaltekst>
+            </React.Fragment>
+        );
+
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl}/>}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
-                loaderKomponent={<Loader/>}
+                loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
             >
                 <ResponsivSide>
                     <div className="fullfor">

@@ -24,7 +24,7 @@ export default class AvsjekkAnimasjon extends React.Component {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         fill="none"
-                        points="27.9,57.8 60.9,90.7 121.6,11.1 "
+                        points="38.9,51.8 66.9,82.7 121.6,11.1 "
                     />
                     <path
                         className={erIE ? '' : 'sirkel'}
@@ -33,7 +33,7 @@ export default class AvsjekkAnimasjon extends React.Component {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         fill="none"
-                        d="M91.88,12.56A58.38,58.38,0,1,0,120.4,48.4"
+                        d="M91.88,12.56A55,55,0,1,0,120.4,48.4"
                     />
                 </svg>
                 

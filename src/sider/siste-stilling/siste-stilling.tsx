@@ -28,6 +28,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
 import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../ducks/siste-stilling';
+import Loader from '../../komponenter/loader/loader';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -93,6 +94,7 @@ class SisteStilling extends React.Component<Props> {
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
+                loaderKomponent={<Loader/>}
             >
                 <PanelBlokkGruppe className="blokk-xs">
                     <Tilbakeknapp onClick={this.onTilbake}/>
