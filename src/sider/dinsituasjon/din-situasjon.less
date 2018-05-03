@@ -1,7 +1,4 @@
 .din-situasjon {
-  max-width: 768px;
-  margin-right: auto;
-  margin-left: auto;
 
   .tittel {
     text-align: center;
@@ -37,15 +34,19 @@
 
 }
 
-@media (min-width: @screen-md) {
+@media (min-width: @screen-sm) {
   .din-situasjon {
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+
     .beskrivelse {
-      padding-left: 15rem;
-      padding-right: 15rem;
+      padding-left: 7rem;
+      padding-right: 7rem;
     }
 
     .liste {
-      padding: 0 8rem;
+      padding: 0 1rem;
     }
   }
 }
