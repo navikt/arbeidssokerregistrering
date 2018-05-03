@@ -92,7 +92,7 @@ class SisteStilling extends React.Component<Props> {
                 avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
             >
-                <ResponsivSide className="siste-arbeidsforhold">
+                <ResponsivSide className="siste-stilling">
                     <Innholdstittel className="tittel">
                         <FormattedMessage id="siste-arbeidsforhold.tittel"/>
                     </Innholdstittel>
