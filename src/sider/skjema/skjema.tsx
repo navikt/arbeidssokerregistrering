@@ -1,6 +1,5 @@
 import * as React from 'react';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import Tilbakeknapp from '../../komponenter/knapper/tilbakeknapp';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
@@ -33,7 +32,6 @@ export default class Skjema extends React.Component<Props> {
         return (
             <ResponsivSide>
                 <div className="blokk sporsmal-wrapper">
-                    <Tilbakeknapp onClick={() => this.props.gaaTilbake()}/>
                     {gjeldendeSporsmalComponent}
                 </div>
 
