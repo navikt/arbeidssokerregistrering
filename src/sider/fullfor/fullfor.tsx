@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
@@ -25,6 +25,7 @@ import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+import Loader from '../../komponenter/loader/loader';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -82,11 +83,22 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
     render() {
         const {registrerBrukerData, intl} = this.props;
+        const loaderTittelElement = (
+            <React.Fragment>
+                <Innholdstittel className="blokk-s">
+                    Registrering pågår.
+                </Innholdstittel>
+                <Normaltekst>
+                    Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
+                </Normaltekst>
+            </React.Fragment>
+        );
+
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl}/>}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
-                storrelse="XXL"
+                loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
             >
                 <ResponsivSide>
                     <div className="fullfor">

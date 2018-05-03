@@ -15,6 +15,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import Feilmelding from './feilmelding';
 import StepUp from './stepup';
 import { STATUS } from '../../ducks/api-utils';
+import Loader from '../loader/loader';
 
 interface StateProps {
     innloggingsinfo: InnloggingsinfoState;
@@ -51,6 +52,7 @@ export class HentInitialData extends React.Component<Props> {
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[registreringstatus, innloggingsinfo]}
                 storrelse="XXL"
+                loaderKomponent={<Loader/>}
             >
                 {children}
             </Innholdslaster>

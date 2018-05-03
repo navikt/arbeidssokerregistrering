@@ -1,13 +1,13 @@
 
 .du-er-na-registrert-wrapper {
   text-align: center;
+  animation: loading 5s both;
 
-  .du-er-na-registrert__avsjekk-ikon {
-    margin-bottom: 2rem;
-  }
   .du-er-na-registrert__avsjekk-tittel {
     max-width: 22rem;
-    margin: 2rem auto 4rem auto;
+    margin-left: auto;
+    margin-right: auto;
+    .blokk-xl();
   }
 
   .du-er-na-registrert__aksjonspanel {
@@ -50,5 +50,14 @@
         margin-right: 1rem;
       }
     }
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
   }
 }
