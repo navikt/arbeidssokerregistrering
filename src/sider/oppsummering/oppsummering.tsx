@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
+import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
@@ -51,21 +51,21 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [
-                            <Knapp
+                            <KnappBase
                                 key="1"
                                 type="standard"
                                 onClick={() => history.push(UENIG_PATH)}
                             >
                                 <FormattedMessage id="knapp-uenig"/>
-                            </Knapp>,
-                            <Knapp
+                            </KnappBase>,
+                            <KnappBase
                                 key="2"
                                 type="hoved"
                                 onClick={() => history.push(`${FULLFOR_PATH}`)}
                                 className="mml"
                             >
                                 <FormattedMessage id="knapp-enig"/>
-                            </Knapp>
+                            </KnappBase>
                         ]
                     }
                 >

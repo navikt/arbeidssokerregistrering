@@ -4,6 +4,7 @@ import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../
 import { AppState } from '../../reducer';
 import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
 import { VEIENTILARBEID_URL } from '../../ducks/api';
+import { sendBrukerTilVeientilarbeid } from './sjekk-registreringstatus-utils';
 
 interface Props {
     registreringstatusData: RegistreringstatusData;

@@ -132,3 +132,11 @@ export class FetchStub {
         return (responseKey && this.callCount[responseKey]) || 0;
     }
 }
+
+export function withResponse(response: {}) {
+    return new FetchStub().addResponse('_', response);
+}
+
+export function withError(status: number) {
+    return new FetchStub().addErrorResponse('_', status);
+}
