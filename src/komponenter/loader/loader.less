@@ -1,0 +1,59 @@
+.loader {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.4rem;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  animation: loading 5s both;
+  z-index: -100;
+}
+
+.loader__bilde {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 2rem;
+
+  .sirkel {
+    transform-origin: 50% 50%;
+  }
+
+  .sirkel {
+    stroke-dasharray: 345;
+    stroke-dashoffset: 690;
+    animation: stroke 1.9s cubic-bezier(0.65, 0, 0.45, 1) 0.2s infinite;
+  }
+
+  .rettlinje {
+    stroke-dasharray: 80, 120;
+    stroke-dashoffset: 200;
+    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.5s infinite;
+  }
+
+  .rettlinje-liten {
+    stroke-dasharray: 40, 80;
+    stroke-dashoffset: 120;
+    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.8s infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+

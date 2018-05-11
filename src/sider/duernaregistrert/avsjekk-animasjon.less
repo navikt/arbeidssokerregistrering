@@ -1,0 +1,38 @@
+.avsjekk-animasjon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: loading 5s both;
+}
+
+.avsjekk-animasjon__bilde {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 2rem;
+
+  .sirkel, .hake {
+    transform-origin: 50% 50%;
+  }
+  .sirkel {
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: stroke 0.7s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+  }
+  .hake {
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: stroke 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+  }
+
+}
+
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}

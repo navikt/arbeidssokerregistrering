@@ -7,6 +7,7 @@ import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { sendBrukerTilSblArbeid } from './utils';
+import Loader from '../../komponenter/loader/loader';
 
 interface State {
     status: string;
@@ -54,7 +55,7 @@ class SblRegistrering extends React.Component<Props, State> {
         }
 
         return (
-            <Innholdslaster avhengigheter={[this.state]} storrelse="XXL">
+            <Innholdslaster avhengigheter={[this.state]} storrelse="XXL" loaderKomponent={<Loader/>}>
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [

@@ -25,6 +25,7 @@ import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
 import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../ducks/siste-stilling';
+import Loader from '../../komponenter/loader/loader';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 
 interface StateProps {
@@ -91,6 +92,7 @@ class SisteStilling extends React.Component<Props> {
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
+                loaderKomponent={<Loader/>}
             >
                 <ResponsivSide className="siste-stilling">
                     <Innholdstittel className="tittel">
