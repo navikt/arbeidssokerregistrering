@@ -3,22 +3,38 @@ import { connect } from 'react-redux';
 import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { AppState } from '../../reducer';
 import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
-import { VEIENTILARBEID_URL } from '../../ducks/api';
-import { sendBrukerTilVeientilarbeid } from './sjekk-registreringstatus-utils';
+import { sendBrukerTilVeientilarbeid } from './utils';
 
-interface Props {
-    registreringstatusData: RegistreringstatusData;
-    children: any; // tslint:disable-line:no-any
+interface SjekkRegistreringstatusConfig {
+    sendBrukerTilVeientilarbeid: () => void;
 }
 
-function SjekkRegistreringstatus({ registreringstatusData, children }: Props) {
-    if (registreringstatusData.underOppfolging) {
-        document.location.href = VEIENTILARBEID_URL;
-        return null;
-    } else if (!registreringstatusData.oppfyllerKrav) {
-        return <SblRegistrering/>;
-    } else {
-        return <React.Fragment>{children}</React.Fragment>;
+interface OwnProps {
+    config?: SjekkRegistreringstatusConfig;
+}
+
+interface StateProps {
+    registreringstatusData: RegistreringstatusData;
+}
+
+type Props = OwnProps & StateProps;
+
+class SjekkRegistreringstatus extends React.PureComponent<Props> {
+    static defaultProps: Partial<Props> = {
+        config: {
+            sendBrukerTilVeientilarbeid: sendBrukerTilVeientilarbeid,
+        }
+    };
+    render () {
+        const {registreringstatusData, config, children} = this.props;
+        if (registreringstatusData.underOppfolging) {
+            config!.sendBrukerTilVeientilarbeid();
+            return null;
+        } else if (!registreringstatusData.oppfyllerKrav) {
+            return <SblRegistrering/>;
+        } else {
+            return <React.Fragment>{children}</React.Fragment>;
+        }
     }
 }
 

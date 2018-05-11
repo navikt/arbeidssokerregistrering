@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as sinon from 'sinon';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
@@ -10,13 +11,20 @@ import {
     FetchStub,
     mountWithStoreAndIntl, promiseWithSetTimeout, stubFetch
 } from '../../test/test-utils';
+import {sendBrukerTilSblArbeid} from "./utils";
 
 enzyme.configure({ adapter: new Adapter()});
+
+let sandbox;
+beforeEach(() => {
+    sandbox = sinon.createSandbox();
+});
 
 afterEach(() => {
     if (fetch.restore) {
         fetch.restore();
     }
+    sandbox.restore();
 });
 
 describe('<SblRegistrering />', () => {
@@ -30,10 +38,6 @@ describe('<SblRegistrering />', () => {
 
         window.innerWidth = 1000;
 
-        Object.defineProperty(document.location, 'href', {
-            writable: true,
-        });
-
         const wrapper = mountWithStoreAndIntl(<SblRegistrering />);
 
         return promiseWithSetTimeout()
@@ -46,14 +50,15 @@ describe('<SblRegistrering />', () => {
 
         window.innerWidth = 1000;
 
-        Object.defineProperty(document.location, 'href', {
-            writable: true,
-        });
+        const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
+        const config = {
+            sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
+        };
 
-        mountWithStoreAndIntl(<SblRegistrering />);
+        mountWithStoreAndIntl(<SblRegistrering config={config} />);
 
         return promiseWithSetTimeout().then(() => {
-            expect(document.location.href).to.equal(SBLARBEID_URL);
+            expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(true);
         });
     });
 });
