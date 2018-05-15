@@ -3,6 +3,9 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+import { FormattedMessage } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
@@ -31,8 +34,15 @@ export default class Skjema extends React.Component<Props> {
 
         return (
             <ResponsivSide>
-                <div className="blokk sporsmal-wrapper">
+                <div className="blokk-xs sporsmal-wrapper">
                     {gjeldendeSporsmalComponent}
+
+                    <NavAlertStripe type="advarsel">
+                        <Normaltekst>
+                            <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                        </Normaltekst>
+                    </NavAlertStripe>
+
                 </div>
 
                 <Knappervertikalt>

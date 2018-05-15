@@ -22,7 +22,7 @@ export default function Helsesporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <div>
+        <React.Fragment>
             <Systemtittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
@@ -32,6 +32,6 @@ export default function Helsesporsmal(props: Props) {
                     <Alternativ alternativId={2} {...fellesProps}/>
                 </form>
             </Panel>
-        </div>
+        </React.Fragment>
     );
 }

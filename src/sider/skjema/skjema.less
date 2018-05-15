@@ -1,71 +1,58 @@
+.sporsmal-wrapper {
+
+    .spm-tittel {
+        padding-top: @padding-small-horizontal;
+        padding-bottom: @padding-small-horizontal;
+        text-align: center;
+    }
+
+    .panel-skjema {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .form-skjema {
+        .alternativ-wrapper {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+    }
+
+    .form-flex {
+        .skjemaelement {
+            margin-right: 2rem;
+        }
+    }
+}
+
 .knapp-neste {
     right:0
 }
 
-.spm-tittel {
-    padding-top: @padding-small-horizontal;
-    padding-bottom: @padding-small-horizontal;
-    text-align: center;
-}
-.sporsmal-wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: @screen-sm-min;
-    &:focus {
-        outline: 0;
+@media (min-width: @screen-md-min) {
+    .skjema-container-wrapper:focus {
+      outline: 0;
     }
-}
 
-.skjema-container-wrapper:focus {
-    outline: 0;
-}
-
-.panel-skjema {
-    padding-bottom: 0.1rem;
-}
-
-/*
-.form-skjema {
-    max-width: 50%;
-    margin: 0 auto;
-}
-*/
-.form-skjema {
-    max-width: 50rem;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.form-skjema .alternativ-wrapper {
-    width: 20rem;
-}
-
-.alternativ-wrapper .radioPanel {
-    width: 100%;
-}
-
-.alternativ-wrapper {
-    margin: 0.25rem;
-}
-
-@media (max-width: @screen-sm-min) {
     .sporsmal-wrapper {
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
-    .form-skjema {
-        max-width: inherit;
-    }
-    .form-flex {
-        display: flex;
-        justify-items: flex-start;
-
-        .skjemaelement {
-            margin-right: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: @screen-sm-min;
+        padding: 0 56px;
+        &:focus {
+            outline: 0;
         }
+
+      .form-skjema {
+        display: flex;
+        flex-wrap: wrap;
+
+        .alternativ-wrapper {
+          width: 48.7%;
+          margin: 0.25rem;
+
+        }
+      }
     }
 }
 
