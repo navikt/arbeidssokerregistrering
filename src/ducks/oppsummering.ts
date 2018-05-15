@@ -1,3 +1,5 @@
+import { BLANK } from '../utils/konstanter';
+
 export enum ActionTypes {
     SETT_OPPSUMMERING = 'SETT_OPPSUMMERING',
 }
@@ -16,7 +18,7 @@ interface Action {
 }
 
 const initialState = {
-    tekst: '',
+    tekst: BLANK,
 };
 
 export default function (state: State = initialState, action: Action): State {
