@@ -16,7 +16,7 @@ interface Action {
 }
 
 const initialState = {
-    tekst: undefined,
+    tekst: '',
 };
 
 export default function (state: State = initialState, action: Action): State {
