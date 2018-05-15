@@ -20,7 +20,7 @@ export const PERMITTERT = 'PERMITTERT';
 export const VIL_BYTTE_JOBB = 'VIL-BYTTE-JOBB';
 export const UNDER_UTDANNING = 'UNDER-UTDANNING';
 export const ANNET = 'ANNET';
-export const BLANK = ' ';
+export const BLANK = '-';
 
 export const NUSKODE_0 = '0';
 export const NUSKODE_2 = '2';
