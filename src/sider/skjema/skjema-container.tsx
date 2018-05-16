@@ -12,6 +12,9 @@ import Helsesporsmal from './sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
 import UtdanningBestattSporsmal from './sporsmal-utdanning-bestatt';
 import UtdanningGodkjentSporsmal from './sporsmal-utdanning-godkjent';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -29,29 +32,60 @@ interface SkjemaProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & SkjemaProps & RouteComponentProps<MatchProps>;
 
-class SkjemaContainer extends React.Component<Props> {
+interface EgenStateProps {
+    visAdvarsel: boolean;
+}
+
+class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     private divRef: HTMLDivElement | null;
     private gjeldendeSporsmal: number;
 
     constructor(props: Props) {
         super(props);
+        this.state = {
+            visAdvarsel: false
+        };
+        
         this.settGjeldendeSporsmalOgResetHvisNaN(this.props.match.params.id);
     }
 
+    toggleAdvarsel(toggle: boolean) {
+        this.setState({
+            visAdvarsel: toggle
+        });
+    }
+
     render() {
+        const advarselElement = (
+            <NavAlertStripe type="advarsel">
+                <Normaltekst>
+                    <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
+                </Normaltekst>
+            </NavAlertStripe>
+        );
 
         const fellesProps = {
-            endreSvar: (sporsmalId, svar) => this.props.endreSvar(sporsmalId, svar),
+            endreSvar: (sporsmalId, svar) => {
+                this.props.endreSvar(sporsmalId, svar);
+                this.toggleAdvarsel(false);
+                },
             intl: this.props.intl,
             hentAvgittSvar: this.props.hentAvgittSvar
         };
 
         const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
-            sporsmalErBesvart: this.props.sporsmalErBesvart,
+            sporsmalErBesvart: (spmId) => {
+                const spmErBesvart = this.props.sporsmalErBesvart(spmId);
+                if (!spmErBesvart) {
+                    this.toggleAdvarsel(true);
+                }
+                return spmErBesvart;
+            },
             gaaTilbake: () => this.props.history.goBack(),
             gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) =>
-                this.gaaTilNesteSide(gjeldendeSporsmalId, antallSporsmal)
+                this.gaaTilNesteSide(gjeldendeSporsmalId, antallSporsmal),
+            advarselElement: this.state.visAdvarsel ? advarselElement : null
         };
 
         return (
