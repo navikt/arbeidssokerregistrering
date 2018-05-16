@@ -1,59 +1,88 @@
 .loader {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: center;
   text-align: center;
-  padding: 0 1.4rem;
-  left: 0;
-  height: 100%;
-  width: 100vw;
-  animation: loading 5s both;
-  z-index: -100;
-}
-
-.loader__bilde {
-  width: 180px;
-  height: 180px;
-  margin-bottom: 2rem;
-
-  .sirkel {
-    transform-origin: 50% 50%;
-  }
-
-  .sirkel {
-    stroke-dasharray: 345;
-    stroke-dashoffset: 690;
-    animation: stroke 1.9s cubic-bezier(0.65, 0, 0.45, 1) 0.2s infinite;
-  }
-
-  .rettlinje {
-    stroke-dasharray: 80, 120;
-    stroke-dashoffset: 200;
-    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.5s infinite;
-  }
-
-  .rettlinje-liten {
-    stroke-dasharray: 40, 80;
-    stroke-dashoffset: 120;
-    animation: stroke 2s cubic-bezier(0.65, 0, 0.45, 1) 0.8s infinite;
+  > .spinner {
+    .blokk-m()
   }
 }
 
-@keyframes loading {
+.spinner {
+  display: inline-block;
+  position: relative;
+  .spinner-mixin(l, 40px);
+  .spinner-mixin(xl, 64px);
+  .spinner-mixin(xxl, 159px);
+  .spinner-mixin(xxxl, 256px);
+
+  .spinner-div-mixin(l, 40px, -7px, -9px, 13px);
+  .spinner-div-mixin(xl, 64px, -4px, -5px, 33px);
+  .spinner-div-mixin(xxl, 159px, 9px, 10px, 113px);
+  .spinner-div-mixin(xxxl, 256px, 24.4px, 23px, 197px);
+
+  > div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+
+    border: 12px solid;
+    border-radius: 50%;
+    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #CCDEE6 transparent transparent transparent;
+  }
+
+  > div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+
+  > div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+
+  > div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+}
+
+@keyframes spinner {
   0% {
-    opacity: 0;
+    transform: rotate(0deg);
   }
-
-  30% {
-    opacity: 1;
-  }
-}
-
-@keyframes stroke {
   100% {
-    stroke-dashoffset: 0;
+    transform: rotate(360deg);
   }
 }
 
+.spinner-beforeafter-mixin {
+  content: '';
+  height: 12px;
+  width: 12px;
+  border-radius: 7px;
+  background-color: #CCDEE6;
+  position: absolute;
+}
+
+.spinner-div-mixin(@name, @size, @top, @leftbefore, @leftafter) {
+  &--@{name} {
+    > div {
+      height: @size;
+      width: @size;
+
+      &::before {
+        .spinner-beforeafter-mixin();
+        top: @top;
+        left: @leftbefore;
+      }
+      &::after {
+        .spinner-beforeafter-mixin();
+        top: @top;
+        left: @leftafter;
+      }
+    }
+  }
+}
+
+.spinner-mixin(@name, @size) {
+  &--@{name} {
+    height: @size;
+    width: @size;
+  }
+}

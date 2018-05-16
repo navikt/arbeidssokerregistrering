@@ -19,7 +19,7 @@ import {
 } from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { AVBRYT_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
+import { AVBRYT_PATH, FULLFOR_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
@@ -82,7 +82,7 @@ class SisteStilling extends React.Component<Props> {
     }
 
     onNeste() {
-        this.props.history.push(OPPSUMMERING_PATH);
+        this.props.history.push(FULLFOR_PATH);
     }
 
     render() {
