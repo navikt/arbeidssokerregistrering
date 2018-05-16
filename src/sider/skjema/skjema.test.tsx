@@ -6,11 +6,12 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
 import {
-    mountWithIntl, shallowwithStoreAndIntl,
+    mountWithIntl, mountWithStore, mountWithStoreAndIntl, shallowwithStoreAndIntl,
     store
 } from '../../test/test-utils';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import {setInitialState} from "../../ducks/svar";
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -18,29 +19,21 @@ beforeEach(() => store.dispatch(setInitialState()));
 
 describe('<Skjema />', () => {
 
-    /*
-    * Navigering til neste side
-    * */
-    it('Neste skal ikke være disabled når spørsmål er besvart', () => {
+    it('Skal vise advarsel dersom spørsmål ikke er besvart', () => {
+        const gaaTilNesteSide = sinon.spy();
+
         const props = {
             ...dummyPropsTilSkjema,
-            sporsmalErBesvart: (sporsmalId) => true
+            sporsmalErBesvart: (sporsmalId) => false,
+            gaaTilNesteSide: gaaTilNesteSide,
+            advarselElement: <div className="dummy-advarsel-element"/>
         };
 
-        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
-        const knappNeste = wrapper.find(KnappNeste);
-        expect(knappNeste.props().disabled).to.be.false;
-    });
+        const wrapper = mountWithStoreAndIntl(<SkjemaMedChildren {...props} />);
+        wrapper.find(KnappNeste).simulate('click');
 
-    it('Neste skal være disabled når spørsmål ikke er besvart', () => {
-        const props = {
-            ...dummyPropsTilSkjema,
-            sporsmalErBesvart: (sporsmalId) => false
-        };
-
-        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
-        const knappNeste = wrapper.find(KnappNeste);
-        expect(knappNeste.props().disabled).to.be.true;
+        expect(gaaTilNesteSide).to.have.property('callCount', 0);
+        expect(wrapper.find('.dummy-advarsel-element')).to.have.length(1);
     });
 
     it('Skal navigere til neste side', () => {
