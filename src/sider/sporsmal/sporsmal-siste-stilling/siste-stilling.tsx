@@ -6,27 +6,27 @@ import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
-} from '../../ducks/siste-stilling-fra-aareg';
-import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import Feilmelding from '../../komponenter/initialdata/feilmelding';
-import { AppState } from '../../reducer';
-import { MatchProps } from '../../utils/utils';
+} from '../../../ducks/siste-stilling-fra-aareg';
+import Innholdslaster from '../../../komponenter/innholdslaster/innholdslaster';
+import Feilmelding from '../../../komponenter/initialdata/feilmelding';
+import { AppState } from '../../../reducer';
+import { MatchProps } from '../../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
     State as OversettelseAvStillingFraAARegState
-} from '../../ducks/oversettelse-av-stilling-fra-aareg';
-import KnappNeste from '../../komponenter/knapper/knapp-neste';
-import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { AVBRYT_PATH, FULLFOR_PATH } from '../../utils/konstanter';
-import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
+import KnappNeste from '../../../komponenter/knapper/knapp-neste';
+import EkspanderbartInfo from '../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
+import { AVBRYT_PATH, FULLFOR_PATH } from '../../../utils/konstanter';
+import Knappervertikalt from '../../../komponenter/knapper/knapper-vertikalt';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
+import LenkeAvbryt from '../../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
-import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../ducks/siste-stilling';
-import Loader from '../../komponenter/loader/loader';
-import ResponsivSide from '../../komponenter/side/responsiv-side';
+import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../../ducks/siste-stilling';
+import Loader from '../../../komponenter/loader/loader';
+import ResponsivSide from '../../../komponenter/side/responsiv-side';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -115,7 +115,6 @@ class SisteStilling extends React.Component<Props> {
                 </ResponsivSide>
             </Innholdslaster>
         );
-        /*tslint:disable:no-console*/
     }
 }
 

@@ -7,7 +7,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import {Knapp} from 'nav-frontend-knapper';
 import {shallowWithIntl} from 'enzyme-react-intl';
 import Fullfor from './fullfor';
-import KnappFullfor from '../skjema/knapp-fullfor';
+import KnappFullfor from '../sporsmal/knapp-fullfor';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch

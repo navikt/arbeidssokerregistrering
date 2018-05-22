@@ -15,14 +15,14 @@ import {
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
-import Skjema from './sider/skjema/skjema-container';
+import Skjema from './sider/sporsmal/skjema-container';
 import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
     AVBRYT_PATH, FULLFOR_PATH, SISTEARBFORHOLD_PATH, DINSITUASJON_PATH, UENIG_PATH, DUERNAREGISTRERT_PATH
 } from './utils/konstanter';
-import SisteArbeidsforhold from './sider/siste-stilling/siste-stilling';
+import SisteArbeidsforhold from './sider/sporsmal/sporsmal-siste-stilling/siste-stilling';
 import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
 
