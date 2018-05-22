@@ -33,7 +33,7 @@
     right:0
 }
 
-@media (min-width: @screen-md-min) {
+@media (min-width: @screen-sm-min) {
     .skjema-container-wrapper:focus {
       outline: 0;
     }
@@ -42,7 +42,7 @@
         margin-left: auto;
         margin-right: auto;
         max-width: @screen-sm-min;
-        padding: 0 56px;
+        padding: 0 43px;
         &:focus {
             outline: 0;
         }
@@ -50,10 +50,11 @@
       .form-skjema {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
 
         .alternativ-wrapper {
-          width: 48.7%;
-          margin: 0.25rem;
+          width: 49.2%;
+          margin: 0.3rem 0;
 
         }
       }
