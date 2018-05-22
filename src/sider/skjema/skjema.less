@@ -4,62 +4,80 @@
 
 .sporsmal-wrapper {
 
-    .spm-tittel {
-        padding-top: @padding-small-horizontal;
-        padding-bottom: @padding-small-horizontal;
-        text-align: center;
-    }
+  .spm-element-wrapper {
+    max-width: 20rem;
+  }
+  .spm-tittel {
+    padding-top: @padding-small-horizontal;
+    padding-bottom: @padding-small-horizontal;
+    text-align: center;
+  }
 
-    .panel-skjema {
-        padding-left: 0;
-        padding-right: 0;
-    }
+  .spm-ingress {
+    text-align: center;
+  }
 
-    .form-skjema {
-        .alternativ-wrapper {
-            width: 100%;
-            margin: 0.5rem 0;
-        }
+  .spm-info {
+    border: none;
+    .blokk-s()
+  }
+
+  .panel-skjema {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .form-skjema {
+    .alternativ-wrapper {
+      width: 100%;
+      margin: 0.5rem 0;
     }
+  }
 
 }
 
 .knapp-neste {
-    right:0
+  right: 0
 }
 
 @media (min-width: @screen-sm-min) {
-    .skjema-container-wrapper:focus {
+  .skjema-container-wrapper:focus {
+    outline: 0;
+  }
+
+  .sporsmal-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: @screen-sm-min;
+    padding: 0 43px;
+    &:focus {
       outline: 0;
     }
 
-    .sporsmal-wrapper {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: @screen-sm-min;
-        padding: 0 43px;
-        &:focus {
-            outline: 0;
-        }
+    .form-skjema {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
 
-      .form-skjema {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+      &--center {
+        justify-content: center;
+      }
 
-        &--center {
-          justify-content: center;
-        }
+      .alternativ-wrapper {
+        width: 48.2%;
+        margin: 0.3rem;
 
-        .alternativ-wrapper {
-          width: 48.2%;
-          margin: 0.3rem;
-
-          &--small {
-            width: 25%;
-          }
+        &--small {
+          width: 25%;
         }
       }
     }
+
+    .spm-advarsel,
+    .spm-info {
+      width: 31rem;
+      margin: 0 auto;
+    }
+  }
 }
 
