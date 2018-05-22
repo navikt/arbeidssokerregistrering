@@ -3,7 +3,8 @@ import { Panel } from 'nav-frontend-paneler';
 import Alternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from './skjema-utils';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -32,6 +33,11 @@ export default function HelseHinder(props: Props) {
                     <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
                 </form>
             </Panel>
+            <NavAlertStripe type="info" className="spm-info">
+                <Normaltekst>
+                    {props.intl.messages[`${props.sporsmalId}-info`]}
+                </Normaltekst>
+            </NavAlertStripe>
         </div>
     );
 }
