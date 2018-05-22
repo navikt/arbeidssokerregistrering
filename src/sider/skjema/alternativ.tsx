@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RadioPanel } from 'nav-frontend-skjema';
+import * as classNames from 'classnames';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
 interface AlternativProps {
@@ -7,12 +8,13 @@ interface AlternativProps {
     alternativId: number;
     avgiSvar: (alternativId: number) => void;
     getTekstId: (alternativId: number) => string;
+    className?: string;
 }
 
 function Alternativ(props: AlternativProps & InjectedIntlProps) {
     const tekst = props.intl.messages[props.getTekstId(props.alternativId)];
     return (
-        <div className="alternativ-wrapper">
+        <div className={classNames('alternativ-wrapper', props.className)}>
             <RadioPanel
                 onChange={() => props.avgiSvar(props.alternativId)}
                 className="blokk-xs"
