@@ -22,11 +22,6 @@
         }
     }
 
-    .form-flex {
-        .skjemaelement {
-            margin-right: 2rem;
-        }
-    }
 }
 
 .knapp-neste {
@@ -52,10 +47,17 @@
         flex-wrap: wrap;
         justify-content: space-between;
 
-        .alternativ-wrapper {
-          width: 49.2%;
-          margin: 0.3rem 0;
+        &--center {
+          justify-content: center;
+        }
 
+        .alternativ-wrapper {
+          width: 48.2%;
+          margin: 0.3rem;
+
+          &--small {
+            width: 25%;
+          }
         }
       }
     }

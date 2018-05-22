@@ -27,10 +27,10 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
             <Panel className="panel-skjema">
-                <form className="form-flex form-skjema">
-                    <Alternativ alternativId={1} {...fellesProps}/>
-                    <Alternativ alternativId={2} {...fellesProps}/>
-                    <Alternativ alternativId={3} {...fellesProps}/>
+                <form className="form-skjema form-skjema--center">
+                    <Alternativ className="alternativ-wrapper--small" alternativId={1} {...fellesProps}/>
+                    <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
+                    <Alternativ className="alternativ-wrapper--small" alternativId={3} {...fellesProps}/>
                 </form>
             </Panel>
         </div>
