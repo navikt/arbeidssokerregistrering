@@ -10,6 +10,7 @@ import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal-utdanning';
 import Helsesporsmal from './sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
+import SisteStilling from './sporsmal-siste-stilling/siste-stilling';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -57,6 +58,7 @@ class SkjemaContainer extends React.Component<Props> {
                 <Skjema {...skjemaProps}>
                     <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                     <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
+                    <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                 </Skjema>
             </div>
         );

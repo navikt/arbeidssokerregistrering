@@ -6,7 +6,7 @@ import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend
 import { FormattedMessage } from 'react-intl';
 import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import KnappFullfor from '../sporsmal/knapp-fullfor';
+import KnappFullfor from '../skjema/knapp-fullfor';
 import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AppState } from '../../reducer';
 import {

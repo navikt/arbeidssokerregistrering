@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
@@ -10,23 +9,23 @@ import {
 import Innholdslaster from '../../../komponenter/innholdslaster/innholdslaster';
 import Feilmelding from '../../../komponenter/initialdata/feilmelding';
 import { AppState } from '../../../reducer';
-import { MatchProps } from '../../../utils/utils';
-import { RouteComponentProps } from 'react-router';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
     State as OversettelseAvStillingFraAARegState
 } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import KnappNeste from '../../../komponenter/knapper/knapp-neste';
 import EkspanderbartInfo from '../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { AVBRYT_PATH, FULLFOR_PATH } from '../../../utils/konstanter';
-import Knappervertikalt from '../../../komponenter/knapper/knapper-vertikalt';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import LenkeAvbryt from '../../../komponenter/knapper/lenke-avbryt';
 import SokeInput from './sokeinput';
 import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../../ducks/siste-stilling';
 import Loader from '../../../komponenter/loader/loader';
-import ResponsivSide from '../../../komponenter/side/responsiv-side';
+import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+
+interface SkjemaProps {
+    sporsmalId: string;
+    endreSvar: (sporsmalId: string, svar: number) => void;
+    hentAvgittSvar: (sporsmalId: string) => number | undefined;
+}
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -41,16 +40,9 @@ interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+type Props = SkjemaProps & StateProps & DispatchProps & InjectedIntlProps;
 
 class SisteStilling extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-        this.onAvbryt = this.onAvbryt.bind(this);
-        this.onTilbake = this.onTilbake.bind(this);
-        this.onNeste = this.onNeste.bind(this);
-    }
-
     componentWillMount() {
         // Tre steg: 1. hent styrk98 fra AAReg, 2. oversett til styrk08 via PAM, 3. sett stillingen som default
         if (this.props.sisteStilling === tomStilling) {
@@ -73,18 +65,6 @@ class SisteStilling extends React.Component<Props> {
         }
     }
 
-    onAvbryt() {
-        this.props.history.push(AVBRYT_PATH);
-    }
-
-    onTilbake() {
-        this.props.history.goBack();
-    }
-
-    onNeste() {
-        this.props.history.push(FULLFOR_PATH);
-    }
-
     render() {
         const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, sisteStilling, intl} = this.props;
         return (
@@ -94,25 +74,19 @@ class SisteStilling extends React.Component<Props> {
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >
-                <ResponsivSide className="siste-stilling">
-                    <Innholdstittel className="tittel">
-                        <FormattedMessage id="siste-arbeidsforhold.tittel"/>
-                    </Innholdstittel>
-                    <Normaltekst className="beskrivelse">
-                        <FormattedMessage id="siste-arbeidsforhold.ingress"/>
-                    </Normaltekst>
+                <Innholdstittel className="tittel">
+                    <FormattedMessage id="siste-arbeidsforhold.tittel"/>
+                </Innholdstittel>
+                <Normaltekst className="beskrivelse">
+                    <FormattedMessage id="siste-arbeidsforhold.ingress"/>
+                </Normaltekst>
 
-                    <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
-                    <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
-                        <Normaltekst>
-                            <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
-                        </Normaltekst>
-                    </EkspanderbartInfo>
-                    <Knappervertikalt>
-                        <KnappNeste onClick={this.onNeste}/>
-                        <LenkeAvbryt/>
-                    </Knappervertikalt>
-                </ResponsivSide>
+                <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
+                <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
+                    <Normaltekst>
+                        <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                    </Normaltekst>
+                </EkspanderbartInfo>
             </Innholdslaster>
         );
     }
@@ -131,6 +105,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(SisteStilling)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(SisteStilling);
