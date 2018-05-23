@@ -17,11 +17,11 @@ const MOCK_SBL = true;
 
 
 if (MOCK_START_REGISRERING_STATUS) {
-    (mock as any).get('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, startRegistreringStatus)));
+    (mock as any).get('/veilarbregistrering/api/startregistrering', respondWith(delayed(1000, startRegistreringStatus)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    (mock as any).post('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, registrerbruker)));
+    (mock as any).post('/veilarbregistrering/api/startregistrering', respondWith(delayed(1000, registrerbruker)));
 }
 
 if (MOCK_INNLOGGINGS_INFO) {
@@ -30,11 +30,11 @@ if (MOCK_INNLOGGINGS_INFO) {
 
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteStillingFraAAReg)));
+    (mock as any).get('/veilarbregistrering/api/sistearbeidsforhold', respondWith(delayed(1000, sisteStillingFraAAReg)));
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, (url, config, params) => {
+    (mock as any).post('/veilarbregistrering/api/sistearbeidsforhold', respondWith(delayed(1000, (url, config, params) => {
         return params.bodyParams;
     })));
 }
