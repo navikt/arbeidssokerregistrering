@@ -4,7 +4,7 @@ import Alternativ from './alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from './skjema-utils';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import NavAlertStripe from 'nav-frontend-alertstriper';
+import Ikon from 'nav-frontend-ikoner-assets';
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -36,11 +36,14 @@ export default function HelseAndreForhold(props: Props) {
                     <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
                 </form>
             </Panel>
-            <NavAlertStripe type="info" className="spm-info">
+            <div className="spm-info">
+                <span className="spm-info__ikon" aria-label="info">
+                    <Ikon kind="info-sirkel" size="1.5em"/>
+                </span>
                 <Normaltekst>
                     {props.intl.messages[`${props.sporsmalId}-info`]}
                 </Normaltekst>
-            </NavAlertStripe>
+            </div>
         </React.Fragment>
     );
 }

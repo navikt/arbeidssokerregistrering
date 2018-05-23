@@ -4,9 +4,6 @@
 
 .sporsmal-wrapper {
 
-  .spm-element-wrapper {
-    max-width: 20rem;
-  }
   .spm-tittel {
     padding-top: @padding-small-horizontal;
     padding-bottom: @padding-small-horizontal;
@@ -17,23 +14,33 @@
     text-align: center;
   }
 
-  .spm-info {
-    border: none;
-    .blokk-s()
-  }
-
   .panel-skjema {
     padding-left: 0;
     padding-right: 0;
-  }
 
-  .form-skjema {
-    .alternativ-wrapper {
-      width: 100%;
-      margin: 0.5rem 0;
+    .form-skjema {
+      .alternativ-wrapper {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
     }
   }
 
+  .spm-info {
+    display: flex;
+    color: @navMorkGra;
+    .blokk-s();
+
+    &__ikon {
+      border-right: 1px solid @navGra40;
+      margin-right: 0.75rem;
+      padding-right: 0.75rem;
+      width: 2.5rem;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+    }
+  }
 }
 
 .knapp-neste {
@@ -54,29 +61,37 @@
       outline: 0;
     }
 
-    .form-skjema {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    .panel-skjema {
+      .form-skjema {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
 
-      &--center {
-        justify-content: center;
-      }
+        &--center {
+          justify-content: center;
+        }
 
-      .alternativ-wrapper {
-        width: 48.2%;
-        margin: 0.3rem;
+        .alternativ-wrapper {
+          width: 48.2%;
+          margin: 0.3rem;
 
-        &--small {
-          width: 25%;
+          &--small {
+            width: 25%;
+          }
         }
       }
     }
 
-    .spm-advarsel,
     .spm-info {
-      width: 31rem;
-      margin: 0 auto;
+      width: 354px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .spm-advarsel {
+      width: 460px;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 }

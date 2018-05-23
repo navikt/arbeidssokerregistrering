@@ -3,9 +3,9 @@ declare module 'nav-frontend-ikoner-assets' {
 
     interface IkonProps {
         kind: string;
-        size: number | string;
+        size?: number | string;
         style?: string;
-        className: string;
+        className?: string;
     }
 
     export class Ikon extends React.Component<IkonProps, {}> {
