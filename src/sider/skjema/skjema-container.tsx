@@ -7,18 +7,18 @@ import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
-import Utdanningsporsmal from './sporsmal-utdanning';
-import Helsesporsmal from './sporsmal-helse';
+import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
+import Helsesporsmal from './sporsmal/sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
-import SisteStilling from './sporsmal-siste-stilling/siste-stilling';
-import LastInnSisteStilling from './sporsmal-siste-stilling/last-inn-siste-stilling';
-import UtdanningBestattSporsmal from './sporsmal-utdanning-bestatt';
-import UtdanningGodkjentSporsmal from './sporsmal-utdanning-godkjent';
+import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
+import LastInnSisteStilling from './sporsmal/sporsmal-siste-stilling/last-inn-siste-stilling';
+import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
+import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import HelseAndreForhold from './sporsmal-helse-andre-forhold';
-import HelseHinder from './sporsmal-helse-hinder';
+import HelseAndreForhold from './sporsmal/sporsmal-helse-andre-forhold';
+import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;

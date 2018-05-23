@@ -5,14 +5,14 @@ import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
-} from '../../../ducks/siste-stilling-fra-aareg';
-import { AppState } from '../../../reducer';
+} from '../../../../ducks/siste-stilling-fra-aareg';
+import { AppState } from '../../../../reducer';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
     State as OversettelseAvStillingFraAARegState
-} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import EkspanderbartInfo from '../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
+} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
+import EkspanderbartInfo from '../../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import SokeInput from './sokeinput';
 import {
@@ -20,9 +20,9 @@ import {
     selectSisteStilling,
     Stilling,
     velgSisteStilling
-} from '../../../ducks/siste-stilling';
-import { getTekstIdForAlternativ } from '../skjema-utils';
-import Alternativ from '../alternativ';
+} from '../../../../ducks/siste-stilling';
+import { getTekstIdForAlternativ } from '../../skjema-utils';
+import Alternativ from '../../alternativ';
 import { Panel } from 'nav-frontend-paneler';
 import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
 

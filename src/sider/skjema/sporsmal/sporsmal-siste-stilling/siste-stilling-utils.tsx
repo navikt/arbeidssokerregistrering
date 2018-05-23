@@ -1,5 +1,5 @@
-import { Stilling, tomStilling } from '../../../ducks/siste-stilling';
-import { Data } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
+import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
+import { Data } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 
 export function hentOversattStillingFraAAReg(
     data: Data

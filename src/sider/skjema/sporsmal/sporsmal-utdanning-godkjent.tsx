@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import Alternativ from './alternativ';
+import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForAlternativ } from './skjema-utils';
+import { getTekstIdForAlternativ } from '../skjema-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
 
 interface SporsmalProps {
@@ -13,7 +13,7 @@ interface SporsmalProps {
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function UtdanningBestattSporsmal(props: Props) {
+export default function UtdanningGodkjentSporsmal(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
@@ -30,6 +30,7 @@ export default function UtdanningBestattSporsmal(props: Props) {
                 <form className="form-skjema form-skjema--center">
                     <Alternativ className="alternativ-wrapper--small" alternativId={1} {...fellesProps}/>
                     <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
+                    <Alternativ className="alternativ-wrapper--small" alternativId={3} {...fellesProps}/>
                 </form>
             </Panel>
         </div>

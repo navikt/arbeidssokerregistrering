@@ -2,16 +2,16 @@ import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { create } from '../../../store';
-import KnappNeste from '../../../komponenter/knapper/knapp-neste';
-import { selectSisteStillingFraAAReg } from '../../../ducks/siste-stilling-fra-aareg';
+import { create } from '../../../../store';
+import KnappNeste from '../../../../komponenter/knapper/knapp-neste';
+import { selectSisteStillingFraAAReg } from '../../../../ducks/siste-stilling-fra-aareg';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
-} from '../../../test/test-utils';
+} from '../../../../test/test-utils';
 import SisteStilling from './siste-stilling';
-import oversettelseAvStillingFraAAReg from '../../../mocks/oversettelse-av-stilling-fra-aareg';
-import { velgSisteStilling } from '../../../ducks/siste-stilling';
+import oversettelseAvStillingFraAAReg from '../../../../mocks/oversettelse-av-stilling-fra-aareg';
+import { velgSisteStilling } from '../../../../ducks/siste-stilling';
 
 enzyme.configure({adapter: new Adapter()});
 
