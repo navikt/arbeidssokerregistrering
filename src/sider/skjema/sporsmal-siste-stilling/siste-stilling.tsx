@@ -15,11 +15,14 @@ import {
     State as OversettelseAvStillingFraAARegState
 } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
 import EkspanderbartInfo from '../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import SokeInput from './sokeinput';
 import { selectSisteStilling, Stilling, tomStilling, velgSisteStilling } from '../../../ducks/siste-stilling';
 import Loader from '../../../komponenter/loader/loader';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import { getTekstIdForAlternativ } from '../skjema-utils';
+import Alternativ from '../alternativ';
+import { Panel } from 'nav-frontend-paneler';
 
 interface SkjemaProps {
     sporsmalId: string;
@@ -65,8 +68,28 @@ class SisteStilling extends React.Component<Props> {
         }
     }
 
+    brukerHarHattJobb() {
+        return (this.props.hentAvgittSvar(this.props.sporsmalId) === 1);
+    }
+
     render() {
-        const {sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, sisteStilling, intl} = this.props;
+        const {
+            sisteStillingFraAAReg,
+            oversettelseAvStillingFraAAReg,
+            sisteStilling,
+            intl,
+            endreSvar,
+            sporsmalId,
+            hentAvgittSvar,
+        } = this.props;
+
+        const alternativProps = {
+            intl,
+            avgiSvar: (alternativId: number) => endreSvar(sporsmalId, alternativId),
+            getTekstId: (alternativId: number) => getTekstIdForAlternativ(sporsmalId, alternativId),
+            hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
+        };
+
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
@@ -74,14 +97,28 @@ class SisteStilling extends React.Component<Props> {
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >
-                <Innholdstittel className="tittel">
-                    <FormattedMessage id="siste-arbeidsforhold.tittel"/>
-                </Innholdstittel>
-                <Normaltekst className="beskrivelse">
-                    <FormattedMessage id="siste-arbeidsforhold.ingress"/>
-                </Normaltekst>
-
-                <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
+                <div>
+                    <Systemtittel tag="h1" className="spm-tittel">
+                        {intl.messages[`${sporsmalId}-tittel`]}
+                    </Systemtittel>
+                    <Normaltekst className="beskrivelse">
+                        <FormattedMessage id="siste-arbeidsforhold.ingress"/>
+                    </Normaltekst>
+                    <Panel className="panel-skjema">
+                        <form className="form-skjema">
+                            <Alternativ alternativId={1} {...alternativProps}/>
+                            <Alternativ alternativId={2} {...alternativProps}/>
+                        </form>
+                    </Panel>
+                </div>
+                { this.brukerHarHattJobb() &&
+                    <React.Fragment>
+                        <Undertittel>
+                            <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
+                        </Undertittel>
+                        <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
+                    </React.Fragment>
+                }
                 <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
                     <Normaltekst>
                         <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
