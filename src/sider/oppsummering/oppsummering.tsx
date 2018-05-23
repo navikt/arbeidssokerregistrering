@@ -15,6 +15,8 @@ import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbart
 import { FULLFOR_PATH, UENIG_PATH } from '../../utils/konstanter';
 import { settOppsummering } from '../../ducks/oppsummering';
 
+// TODO: Sletter ikke denne filen. Denne filen skal brukes i FO-1021
+
 interface StateProps {
     innloggingsInfo: InnloggingsInfoState;
 }
