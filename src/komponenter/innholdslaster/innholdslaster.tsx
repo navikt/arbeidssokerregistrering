@@ -18,6 +18,7 @@ interface InnholdslasterProps {
     feilmeldingKomponent?: React.ReactNode;
     loaderKomponent?: React.ReactNode;
     storrelse?: storrelseType;
+    ikkeWrapIResponsivSide?: boolean;
 }
 
 interface InnholdslasterState {
@@ -81,12 +82,18 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
         if (noenHarFeil(avhengigheter)) {
             this.clearTimer();
 
-            return (
-                <ResponsivSide><div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div></ResponsivSide>
+            return this.props.ikkeWrapIResponsivSide ? (
+                <div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div>
+            ) : (
+                <ResponsivSide>
+                    <div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div>
+                </ResponsivSide>
             );
         }
 
-        return <ResponsivSide>{loader}</ResponsivSide>;
+        return this.props.ikkeWrapIResponsivSide ? loader : (
+            <ResponsivSide>{loader}</ResponsivSide>
+        );
     }
 }
 

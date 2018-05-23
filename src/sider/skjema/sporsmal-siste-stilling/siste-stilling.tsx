@@ -118,6 +118,7 @@ class SisteStilling extends React.Component<Props> {
                 avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
+                ikkeWrapIResponsivSide={true}
             >
                 <div>
                     <Systemtittel tag="h1" className="spm-tittel">
