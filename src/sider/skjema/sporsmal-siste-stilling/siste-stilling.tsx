@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps } from 'react-intl';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
 } from '../../../ducks/siste-stilling-fra-aareg';
-import Innholdslaster from '../../../komponenter/innholdslaster/innholdslaster';
-import Feilmelding from '../../../komponenter/initialdata/feilmelding';
 import { AppState } from '../../../reducer';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
@@ -21,14 +19,12 @@ import {
     ingenYrkesbakgrunn,
     selectSisteStilling,
     Stilling,
-    tomStilling,
     velgSisteStilling
 } from '../../../ducks/siste-stilling';
-import Loader from '../../../komponenter/loader/loader';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from '../skjema-utils';
 import Alternativ from '../alternativ';
 import { Panel } from 'nav-frontend-paneler';
+import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
 
 interface SkjemaProps {
     sporsmalId: string;
@@ -55,40 +51,11 @@ class SisteStilling extends React.Component<Props> {
     componentWillMount() {
         const {
             endreSvar,
-            velgStilling,
             sporsmalId,
+            sisteStilling,
         } = this.props;
 
-        if (this.props.sisteStilling === tomStilling) {
-            this.props.hentStyrkkodeForSisteStillingFraAAReg()
-                .then(() => {
-                    const {styrk} = this.props.sisteStillingFraAAReg.data;
-
-                    this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
-                        if (styrk !== 'utenstyrkkode') {
-                            this.velgStillingFraAAReg();
-                            endreSvar(sporsmalId, 1);
-                        } else {
-                            velgStilling(ingenYrkesbakgrunn);
-                            endreSvar(sporsmalId, 2);
-                        }
-
-                    });
-                });
-        }
-    }
-
-    velgStillingFraAAReg() {
-        const koderFraPam = this.props.oversettelseAvStillingFraAAReg.data.konseptMedStyrk08List;
-        let stilling: Stilling = tomStilling;
-        if (koderFraPam.length > 0) {
-            stilling = {
-                label: koderFraPam[0].label,
-                styrk08: koderFraPam[0].styrk08[0],
-                konseptId: koderFraPam[0].konseptId === undefined ? -1 : koderFraPam[0].konseptId!,
-            };
-        }
-        this.props.velgStilling(stilling);
+        endreSvar(sporsmalId, sisteStilling === ingenYrkesbakgrunn ? 2 : 1);
     }
 
     brukerHarHattJobb() {
@@ -97,13 +64,13 @@ class SisteStilling extends React.Component<Props> {
 
     render() {
         const {
-            sisteStillingFraAAReg,
-            oversettelseAvStillingFraAAReg,
             sisteStilling,
             intl,
             endreSvar,
             sporsmalId,
             hentAvgittSvar,
+            velgStilling,
+            oversettelseAvStillingFraAAReg
         } = this.props;
 
         const alternativProps = {
@@ -113,41 +80,33 @@ class SisteStilling extends React.Component<Props> {
         };
 
         return (
-            <Innholdslaster
-                feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
-                storrelse="XXL"
-                loaderKomponent={<Loader/>}
-                ikkeWrapIResponsivSide={true}
-            >
-                <div>
-                    <Systemtittel tag="h1" className="spm-tittel">
-                        {intl.messages[`${sporsmalId}-tittel`]}
-                    </Systemtittel>
-                    <Normaltekst className="beskrivelse">
-                        <FormattedMessage id="siste-arbeidsforhold.ingress"/>
-                    </Normaltekst>
-                    <Panel className="panel-skjema">
-                        <form className="form-skjema">
-                            <Alternativ
-                                alternativId={1}
-                                {...alternativProps}
-                                avgiSvar={(alternativId: number) => {
-                                    endreSvar(sporsmalId, alternativId);
-                                    this.velgStillingFraAAReg();
-                                }}
-                            />
-                            <Alternativ
-                                alternativId={2}
-                                {...alternativProps}
-                                avgiSvar={(alternativId: number) => {
-                                    endreSvar(sporsmalId, alternativId);
-                                    this.props.velgStilling(ingenYrkesbakgrunn);
-                                }}
-                            />
-                        </form>
-                    </Panel>
-                </div>
+            <div>
+                <Systemtittel tag="h1" className="spm-tittel">
+                    {intl.messages[`${sporsmalId}-tittel`]}
+                </Systemtittel>
+                <Normaltekst className="beskrivelse">
+                    <FormattedMessage id="siste-arbeidsforhold.ingress"/>
+                </Normaltekst>
+                <Panel className="panel-skjema">
+                    <form className="form-skjema">
+                        <Alternativ
+                            alternativId={1}
+                            {...alternativProps}
+                            avgiSvar={(alternativId: number) => {
+                                endreSvar(sporsmalId, alternativId);
+                                velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
+                            }}
+                        />
+                        <Alternativ
+                            alternativId={2}
+                            {...alternativProps}
+                            avgiSvar={(alternativId: number) => {
+                                endreSvar(sporsmalId, alternativId);
+                                velgStilling(ingenYrkesbakgrunn);
+                            }}
+                        />
+                    </form>
+                </Panel>
                 {this.brukerHarHattJobb() &&
                     <React.Fragment>
                         <Undertittel>
@@ -161,7 +120,7 @@ class SisteStilling extends React.Component<Props> {
                         <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
                     </Normaltekst>
                 </EkspanderbartInfo>
-            </Innholdslaster>
+            </div>
         );
     }
 }
