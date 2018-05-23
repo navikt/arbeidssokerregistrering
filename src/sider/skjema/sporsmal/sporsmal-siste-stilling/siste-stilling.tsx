@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
@@ -138,4 +138,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SisteStilling);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SisteStilling));
