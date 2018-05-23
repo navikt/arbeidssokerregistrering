@@ -13,7 +13,7 @@ interface SporsmalProps {
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function Helsesporsmal(props: Props) {
+export default function UtdanningBestattSporsmal(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
@@ -22,7 +22,7 @@ export default function Helsesporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <React.Fragment>
+        <div>
             <Systemtittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
@@ -32,6 +32,6 @@ export default function Helsesporsmal(props: Props) {
                     <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
                 </form>
             </Panel>
-        </React.Fragment>
+        </div>
     );
 }
