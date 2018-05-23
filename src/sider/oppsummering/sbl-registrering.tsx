@@ -1,18 +1,33 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
+import KnappBase from 'nav-frontend-knapper';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
-import { DITTNAV_URL, registrerBrukerSBLArbeid, SBLARBEID_URL } from '../../ducks/api';
+import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
+import { sendBrukerTilSblArbeid } from './utils';
 import Loader from '../../komponenter/loader/loader';
 
 interface State {
     status: string;
 }
 
-class SblRegistrering extends React.Component<{}, State> {
+interface SblRegistreringConfig {
+    sendBrukerTilSblArbeid: () => void;
+}
+
+interface Props {
+    config?: SblRegistreringConfig;
+}
+
+class SblRegistrering extends React.Component<Props, State> {
+    static defaultProps: Partial<Props> = {
+        config: {
+            sendBrukerTilSblArbeid: sendBrukerTilSblArbeid,
+        }
+    };
+
     constructor(props: {}) {
         super(props);
         this.state = {status: STATUS.OK};
@@ -25,14 +40,11 @@ class SblRegistrering extends React.Component<{}, State> {
         }
     }
 
-    sendBrukerTilSbl() {
-        document.location.href = SBLARBEID_URL;
-    }
-
     opprettMinIdISblOgSendBrukerTilSbl() {
+        const { config } = this.props;
         this.setState({status: STATUS.PENDING},
                       () => registrerBrukerSBLArbeid()
-                        .then(this.sendBrukerTilSbl, this.sendBrukerTilSbl));
+                        .then(config!.sendBrukerTilSblArbeid, config!.sendBrukerTilSblArbeid));
     }
 
     render() {
@@ -47,17 +59,17 @@ class SblRegistrering extends React.Component<{}, State> {
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [
-                            <Knapp key="1" type="standard" onClick={() => document.location.href = DITTNAV_URL}>
+                            <KnappBase key="1" type="standard" onClick={() => document.location.href = DITTNAV_URL}>
                                 <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
-                            </Knapp>,
-                            <Knapp
+                            </KnappBase>,
+                            <KnappBase
                                 key="2"
                                 type="hoved"
                                 className="mml"
                                 onClick={this.opprettMinIdISblOgSendBrukerTilSbl}
                             >
                                 <FormattedMessage id="knapp-sbl-registrering-neste"/>
-                            </Knapp>
+                            </KnappBase>
                         ]
                     }
                 >

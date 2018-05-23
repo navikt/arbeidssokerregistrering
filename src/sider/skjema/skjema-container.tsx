@@ -17,6 +17,8 @@ import UtdanningGodkjentSporsmal from './sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
+import HelseAndreForhold from './sporsmal-helse-andre-forhold';
+import HelseHinder from './sporsmal-helse-hinder';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -47,7 +49,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.state = {
             visAdvarsel: false
         };
-        
+
         this.settGjeldendeSporsmalOgResetHvisNaN(this.props.match.params.id);
     }
 
@@ -59,7 +61,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
     render() {
         const advarselElement = (
-            <NavAlertStripe type="advarsel">
+            <NavAlertStripe type="advarsel" className="spm-advarsel">
                 <Normaltekst>
                     <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
                 </Normaltekst>
@@ -98,6 +100,8 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                         <UtdanningBestattSporsmal sporsmalId="utdanning-bestatt" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanning-godkjent" {...fellesProps}/>
+                        <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
+                        <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
                         <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
