@@ -34,7 +34,7 @@ describe('<LastInnSisteStilling />', () => {
             konseptId: 72435,
         }));
 
-        mountWithStoreAndIntl(<LastInnSisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
@@ -48,7 +48,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -65,7 +65,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -83,7 +83,7 @@ describe('<LastInnSisteStilling />', () => {
             .addResponse('sistearbeidsforhold', brukerSomIkkeFinnesIAAReg);
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
