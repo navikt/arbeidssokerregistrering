@@ -52,6 +52,7 @@ class LastInnSisteStilling extends React.Component<Props> {
         const velgStilling = (stilling: Stilling) => {
             this.props.velgStilling(stilling);
             this.stillingErSatt = {status: STATUS.OK};
+            this.forceUpdate();
         };
 
         if (this.props.sisteStilling === tomStilling) {
