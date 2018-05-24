@@ -3,5 +3,5 @@ export const brukerSomIkkeFinnesIAAReg = {
 };
 
 export default {
-    styrk: '3415123'
+    styrk: 'utenstyrkkode'
 };

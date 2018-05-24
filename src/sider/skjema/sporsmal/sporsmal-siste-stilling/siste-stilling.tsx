@@ -80,12 +80,12 @@ class SisteStilling extends React.Component<Props> {
         };
 
         return (
-            <div>
+            <div className="siste-stilling">
                 <Systemtittel tag="h1" className="spm-tittel">
                     {intl.messages[`${sporsmalId}-tittel`]}
                 </Systemtittel>
                 <Normaltekst className="beskrivelse">
-                    <FormattedMessage id="siste-arbeidsforhold.ingress"/>
+                    <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
                 </Normaltekst>
                 <Panel className="panel-skjema">
                     <form className="form-skjema">
@@ -107,6 +107,7 @@ class SisteStilling extends React.Component<Props> {
                         />
                     </form>
                 </Panel>
+                <div className="siste-stilling__nedre-halvdel">
                 {this.brukerHarHattJobb() &&
                     <React.Fragment>
                         <Undertittel>
@@ -120,6 +121,7 @@ class SisteStilling extends React.Component<Props> {
                         <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
                     </Normaltekst>
                 </EkspanderbartInfo>
+                </div>
             </div>
         );
     }

@@ -5,24 +5,25 @@ import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
-} from '../../../ducks/siste-stilling-fra-aareg';
-import { AppState } from '../../../reducer';
+} from '../../ducks/siste-stilling-fra-aareg';
+import { AppState } from '../../reducer';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
     State as OversettelseAvStillingFraAARegState
-} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
+} from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import {
     ingenYrkesbakgrunn,
     selectSisteStilling,
     Stilling,
     tomStilling,
     velgSisteStilling
-} from '../../../ducks/siste-stilling';
-import Innholdslaster from '../../../komponenter/innholdslaster/innholdslaster';
-import Feilmelding from '../../../komponenter/initialdata/feilmelding';
-import Loader from '../../../komponenter/loader/loader';
-import { hentOversattStillingFraAAReg } from './sporsmal-siste-stilling/siste-stilling-utils';
+} from '../../ducks/siste-stilling';
+import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
+import Feilmelding from '../../komponenter/initialdata/feilmelding';
+import Loader from '../../komponenter/loader/loader';
+import { hentOversattStillingFraAAReg } from './sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
+import { STATUS } from '../../ducks/api-utils';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -39,8 +40,24 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
-class LastInnSisteStilling extends React.Component<Props> {
+interface State {
+    stillingErSatt: {status: string} ;
+}
+
+class LastInnSisteStilling extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            stillingErSatt: {status: STATUS.NOT_STARTED}
+        };
+    }
+
     componentWillMount() {
+        const velgStilling = (stilling: Stilling) => {
+            this.props.velgStilling(stilling);
+            this.setState({stillingErSatt: {status: STATUS.OK}});
+        };
+
         if (this.props.sisteStilling === tomStilling) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then(() => {
@@ -48,11 +65,11 @@ class LastInnSisteStilling extends React.Component<Props> {
 
                     this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
                         if (styrk !== 'utenstyrkkode') {
-                            this.props.velgStilling(hentOversattStillingFraAAReg(
+                            velgStilling(hentOversattStillingFraAAReg(
                                 this.props.oversettelseAvStillingFraAAReg.data
                             ));
                         } else {
-                            this.props.velgStilling(ingenYrkesbakgrunn);
+                            velgStilling(ingenYrkesbakgrunn);
                         }
                     });
                 });
@@ -69,7 +86,7 @@ class LastInnSisteStilling extends React.Component<Props> {
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
+                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, this.state.stillingErSatt]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >

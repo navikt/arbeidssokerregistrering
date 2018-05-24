@@ -11,7 +11,7 @@ import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
 import Helsesporsmal from './sporsmal/sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
-import LastInnSisteStilling from './sporsmal/last-inn-siste-stilling';
+import LastInnSisteStilling from './last-inn-siste-stilling';
 import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
 import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -96,13 +96,13 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
+                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                         <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                         <UtdanningBestattSporsmal sporsmalId="utdanning-bestatt" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanning-godkjent" {...fellesProps}/>
                         <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
                         <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
-                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>
