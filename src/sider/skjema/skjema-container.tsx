@@ -95,8 +95,8 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                 <Skjema {...skjemaProps}>
                     <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                     <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                    <UtdanningBestattSporsmal sporsmalId="utdanning-bestatt" {...fellesProps}/>
-                    <UtdanningGodkjentSporsmal sporsmalId="utdanning-godkjent" {...fellesProps}/>
+                    <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
+                    <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
                     <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
                     <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
                 </Skjema>

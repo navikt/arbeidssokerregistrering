@@ -1,8 +1,27 @@
-.info-rod {
-    &::before {
-        background: url("svg/info-sirkel-rod.svg") no-repeat;
-    }
-    &::after {
-        color: @navRod;
-    }
+.oppsummering-tittel,
+.oppsummering-ingress {
+  text-align: center;
+  .blokk-s();
+}
+
+.oppsummering-besvarelser {
+  border: 1px solid @navLysGra;
+  padding: 2rem;
+  p {
+    .blokk-s()
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .oppsummering-ingress {
+    max-width: 305px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .oppsummering-besvarelser {
+    max-width: 635px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
