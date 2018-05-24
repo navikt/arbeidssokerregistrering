@@ -35,6 +35,12 @@ export const ingenYrkesbakgrunn: Stilling = {
     konseptId: -1,
 };
 
+export const annenStilling: Stilling = {
+    label: 'Annen stilling',
+    styrk08: '-1',
+    konseptId: -1
+};
+
 const initialState = {
     data: {
         stilling: tomStilling

@@ -41,7 +41,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
 interface State {
-    stillingErSatt: {status: string} ;
+    stillingErSatt: {status: string};
 }
 
 class LastInnSisteStilling extends React.Component<Props, State> {

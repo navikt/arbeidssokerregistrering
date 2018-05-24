@@ -1,11 +1,11 @@
-import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
+import { annenStilling, Stilling } from '../../../../ducks/siste-stilling';
 import { Data } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 
 export function hentOversattStillingFraAAReg(
     data: Data
 ) {
     const koderFraPam = data.konseptMedStyrk08List;
-    let stilling: Stilling = tomStilling;
+    let stilling: Stilling = annenStilling;
     if (koderFraPam.length > 0) {
         stilling = {
             label: koderFraPam[0].label,
