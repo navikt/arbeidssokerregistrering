@@ -5,24 +5,24 @@ import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
-} from '../../../../ducks/siste-stilling-fra-aareg';
-import { AppState } from '../../../../reducer';
+} from '../../../ducks/siste-stilling-fra-aareg';
+import { AppState } from '../../../reducer';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
     State as OversettelseAvStillingFraAARegState
-} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
+} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
 import {
     ingenYrkesbakgrunn,
     selectSisteStilling,
     Stilling,
     tomStilling,
     velgSisteStilling
-} from '../../../../ducks/siste-stilling';
-import Innholdslaster from '../../../../komponenter/innholdslaster/innholdslaster';
-import Feilmelding from '../../../../komponenter/initialdata/feilmelding';
-import Loader from '../../../../komponenter/loader/loader';
-import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
+} from '../../../ducks/siste-stilling';
+import Innholdslaster from '../../../komponenter/innholdslaster/innholdslaster';
+import Feilmelding from '../../../komponenter/initialdata/feilmelding';
+import Loader from '../../../komponenter/loader/loader';
+import { hentOversattStillingFraAAReg } from './sporsmal-siste-stilling/siste-stilling-utils';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;

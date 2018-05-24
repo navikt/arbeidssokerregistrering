@@ -2,16 +2,16 @@ import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { create } from '../../../../store';
-import { selectSisteStillingFraAAReg } from '../../../../ducks/siste-stilling-fra-aareg';
+import { create } from '../../../store';
+import { selectSisteStillingFraAAReg } from '../../../ducks/siste-stilling-fra-aareg';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
     stubFetch
-} from '../../../../test/test-utils';
+} from '../../../test/test-utils';
 import LastInnSisteStilling from './last-inn-siste-stilling';
-import oversettelseAvStillingFraAAReg from '../../../../mocks/oversettelse-av-stilling-fra-aareg';
-import { ingenYrkesbakgrunn, velgSisteStilling } from '../../../../ducks/siste-stilling';
-import { brukerSomIkkeFinnesIAAReg } from '../../../../mocks/siste-stilling-fra-aareg';
+import oversettelseAvStillingFraAAReg from '../../../mocks/oversettelse-av-stilling-fra-aareg';
+import { ingenYrkesbakgrunn, velgSisteStilling } from '../../../ducks/siste-stilling';
+import { brukerSomIkkeFinnesIAAReg } from '../../../mocks/siste-stilling-fra-aareg';
 
 enzyme.configure({adapter: new Adapter()});
 

@@ -11,7 +11,7 @@ import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
 import Helsesporsmal from './sporsmal/sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
-import LastInnSisteStilling from './sporsmal/sporsmal-siste-stilling/last-inn-siste-stilling';
+import LastInnSisteStilling from './sporsmal/last-inn-siste-stilling';
 import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
 import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
