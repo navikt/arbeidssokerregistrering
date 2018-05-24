@@ -25,7 +25,7 @@ import {
 import SisteArbeidsforhold from './sider/siste-stilling/siste-stilling';
 import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
-import Banner from "./komponenter/banner/banner";
+import Banner from './komponenter/banner/banner';
 
 const store = getStore();
 
@@ -39,7 +39,7 @@ class App extends React.Component {
                             <SjekkRegistreringstatus>
                                 <Router basename={basename}>
                                     <div>
-                                        <Route path={`/(${START_PATH}|)`} component={Banner}/>
+                                        <Route path="/" component={Banner}/>
                                         <Switch>
                                             <Route path={START_PATH} component={StartRegistrering}/>
                                             <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
