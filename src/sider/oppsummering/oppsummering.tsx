@@ -23,6 +23,7 @@ type EgenProps = StateProps & null;
 
 const oppsummeringBesvarelser = (state: AppState) => {
 
+    if (_.isEmpty(state.svar)) { return null; }
     return (
         <div className="oppsummering-besvarelser">
             <Normaltekst>

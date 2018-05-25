@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { SBLREG_PATH, FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import { SBLREG_PATH, SKJEMA_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
@@ -129,7 +129,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         }
 
         if (this.erSisteSporsmal(antallSporsmal)) {
-            this.props.history.push(`${FULLFOR_PATH}`);
+            this.props.history.push(`${OPPSUMMERING_PATH}`);
             return;
         }
 
