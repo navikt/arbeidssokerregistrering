@@ -8,7 +8,8 @@ export const alternativIderSomGirSelvgaendeConfig = {
     helseandreforhold: [1, 2],
     helsehinder: [1, 2],
     utdanningbestatt: [1, 2],
-    utdanninggodkjent: [1, 2, 3]
+    utdanninggodkjent: [1, 2, 3],
+    'siste-stilling': [1, 2],
 };
 
 export function erSelvgaende(

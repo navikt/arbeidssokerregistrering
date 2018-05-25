@@ -3,15 +3,15 @@ import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
-import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import { selectSisteStillingFraAAReg } from '../../ducks/siste-stilling-fra-aareg';
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
+    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
     stubFetch
 } from '../../test/test-utils';
-import SisteStilling from './siste-stilling';
+import LastInnSisteStilling from './last-inn-siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg';
-import { velgSisteStilling } from '../../ducks/siste-stilling';
+import { ingenYrkesbakgrunn, velgSisteStilling } from '../../ducks/siste-stilling';
+import { brukerSomIkkeFinnesIAAReg } from '../../mocks/siste-stilling-fra-aareg';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -21,7 +21,7 @@ afterEach(() => {
     }
 });
 
-describe('<SisteStilling />', () => {
+describe('<LastInnSisteStilling />', () => {
     it('skal ikke hente siste arbeidsforhold dersom state.sisteStilling er populert med ikke-tom stilling', () => {
         const store = create();
         const fetchStub = new FetchStub()
@@ -34,7 +34,7 @@ describe('<SisteStilling />', () => {
             konseptId: 72435,
         }));
 
-        mountWithStoreAndIntl(<SisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
@@ -48,7 +48,7 @@ describe('<SisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<SisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -65,7 +65,7 @@ describe('<SisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<SisteStilling/>, store);
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -77,19 +77,18 @@ describe('<SisteStilling />', () => {
             });
     });
 
-    it('skal navigere til oppsummering ved klikk på neste knapp', () => {
-        let pushedPath = '';
-        const props = {
-            history: {
-                push: (path) => pushedPath = path
-            },
-        };
+    it('Hvis AAreg ikke har informasjon om siste stilling, så skal ingenYrkesbakgrunn settes i state', () => {
+        const store = create();
+        const fetchStub = new FetchStub()
+            .addResponse('sistearbeidsforhold', brukerSomIkkeFinnesIAAReg);
+        stubFetch(fetchStub);
 
-        const wrapper = shallowwithStoreAndIntl(<SisteStilling {...props} />);
-        wrapper.find(KnappNeste).simulate('click');
+        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
-        expect(pushedPath).to.equal('/oppsummering');
-
+        return promiseWithSetTimeout()
+            .then(() => {
+                expect(store.getState().sisteStilling.data.stilling).to.deep.equal(ingenYrkesbakgrunn);
+            });
     });
 
 });
