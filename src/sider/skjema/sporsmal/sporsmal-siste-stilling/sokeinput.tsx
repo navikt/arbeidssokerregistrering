@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Async } from 'react-select';
-import { hentStillingMedStyrk08 } from '../../ducks/api';
-import { Stilling } from '../../ducks/siste-stilling';
+import { hentStillingMedStyrk08 } from '../../../../ducks/api';
+import { Stilling } from '../../../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
 
 interface SokeInputComponentProps {

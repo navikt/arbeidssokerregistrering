@@ -36,7 +36,6 @@ export default class Skjema extends React.Component<Props> {
                     {gjeldendeSporsmalComponent}
                     {advarselElement}
                 </div>
-
                 <Knappervertikalt>
                     <KnappNeste onClick={() => this.nesteButtonClick()} />
                     <LenkeAvbryt/>

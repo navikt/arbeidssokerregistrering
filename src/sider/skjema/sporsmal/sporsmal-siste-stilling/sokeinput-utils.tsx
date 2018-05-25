@@ -1,3 +1,5 @@
+import { annenStilling } from '../../../../ducks/siste-stilling';
+
 export function hentStillingsAlternativer(typeaheadYrkeList: {}[], sokestreng: string) {
     const alternativer = typeaheadYrkeList
         .sort((a: { label: string }, b: { label: string }) => a.label.localeCompare(b.label))
@@ -20,11 +22,7 @@ export function hentStillingsAlternativer(typeaheadYrkeList: {}[], sokestreng: s
         {
             id: alternativer.length,
             labelKey: 'Annen stilling',
-            stilling: {
-                label: 'Annen stilling',
-                styrk08: '-1',
-                konseptId: -1
-            }
+            stilling: annenStilling,
         }
     ];
 

@@ -6,6 +6,7 @@ export enum ActionTypes {
 export type State = {
     helse?: number | undefined;
     utdanning?: number | undefined;
+    'siste-stilling'?: number | undefined;
 };
 
 export interface Data {
