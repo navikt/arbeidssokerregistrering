@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import Alternativ from './alternativ';
+import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForAlternativ } from './skjema-utils';
+import { getTekstIdForAlternativ } from '../skjema-utils';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 

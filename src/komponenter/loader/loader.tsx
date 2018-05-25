@@ -8,7 +8,7 @@ export default class Loader extends React.Component<LoaderProps> {
 
     /*
         Har flyttet ut spinner komponent i nav-frontend-spinner
-        Ta i bruk det i bruk når PR'en er merget
+        TODO Ta i bruk det i bruk når PR'en er merget
     */
     render() {
         return (
