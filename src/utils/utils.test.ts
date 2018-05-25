@@ -7,7 +7,7 @@ import {
     mapTilBoolean
 } from './utils';
 import {
-    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
@@ -64,7 +64,6 @@ describe('utils test', () => {
 
     it('test mapAvgitteSvarForBackend', () => {
 
-        const oppsummering = { tekst:  'oppsummer tekst' };
         const dummySvar: SvarState = {
             helse: 1,
             utdanning: 3
@@ -79,11 +78,11 @@ describe('utils test', () => {
             nusKode: mapTilNuskode(dummySvar.utdanning),
             yrkesPraksis: stilling.styrk08,
             enigIOppsummering: true,
-            oppsummering: oppsummering.tekst,
+            oppsummering: BLANK,
             harHelseutfordringer: mapTilBoolean(dummySvar.helse),
             yrkesbeskrivelse: stilling.label,
             konseptId: stilling.konseptId,
         };
-        expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, stilling)).to.deep.equal(expectData);
+        expect(mapAvgitteSvarForBackend(dummySvar, stilling)).to.deep.equal(expectData);
     });
 });

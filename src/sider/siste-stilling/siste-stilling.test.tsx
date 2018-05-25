@@ -88,7 +88,7 @@ describe('<SisteStilling />', () => {
         const wrapper = shallowwithStoreAndIntl(<SisteStilling {...props} />);
         wrapper.find(KnappNeste).simulate('click');
 
-        expect(pushedPath).to.equal('/fullfor');
+        expect(pushedPath).to.equal('/oppsummering');
 
     });
 

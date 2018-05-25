@@ -1,5 +1,5 @@
 import {
-    ANNET,
+    ANNET, BLANK,
     JA,
     KANSKJE,
     MISTET_JOBBEN,
@@ -15,7 +15,6 @@ import {
     UNDER_UTDANNING, VIL_BYTTE_JOBB,
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
-import { State as OppsummeringState } from '../ducks/oppsummering';
 import { Stilling } from '../ducks/siste-stilling';
 
 export function hentFornavn(name: string | undefined) {
@@ -75,7 +74,6 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
-    oppsummering: OppsummeringState,
     sisteStilling: Stilling
 ) {
     const helse: number | undefined = svar.helse;
@@ -87,7 +85,7 @@ export function mapAvgitteSvarForBackend(
             nusKode: mapTilNuskode(utdanning),
             yrkesPraksis: sisteStilling.styrk08,
             enigIOppsummering: true,
-            oppsummering: oppsummering.tekst,
+            oppsummering: BLANK, // TODO slettes samtidig med backend endringer
             harHelseutfordringer: mapTilBoolean(helse),
             yrkesbeskrivelse: sisteStilling.label,
             konseptId: sisteStilling.konseptId,
