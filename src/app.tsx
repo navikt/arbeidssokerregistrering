@@ -23,6 +23,7 @@ import {
 } from './utils/konstanter';
 import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
+import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 
 const store = getStore();
 
@@ -33,20 +34,25 @@ class App extends React.Component {
                 <Provider store={store}>
                     <IntlProvider >
                         <HentInitialData>
-                            <Router basename={basename}>
-                                <Switch>
-                                    <Route path={START_PATH} component={StartRegistrering}/>
-                                    <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
-                                    <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
-                                    <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                                    <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                                    <Route path={AVBRYT_PATH} component={Avbryt} />
-                                    <Route path={FULLFOR_PATH} component={Fullfor}/>
-                                    <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
-                                    <Route path={UENIG_PATH} component={UenigSelvgaende} />
-                                    <Redirect exact={true} from="/" to={START_PATH}/>
-                                </Switch>
-                            </Router>
+                            <div>
+                                <Router basename={basename}>
+                                    <div>
+                                        <Route path={'/:url'} component={ProgressBarContainer}/>
+                                        <Switch>
+                                            <Route path={START_PATH} component={StartRegistrering}/>
+                                            <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
+                                            <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
+                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                            <Route path={AVBRYT_PATH} component={Avbryt} />
+                                            <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
+                                            <Route path={UENIG_PATH} component={UenigSelvgaende} />
+                                            <Redirect exact={true} from="/" to={START_PATH}/>
+                                        </Switch>
+                                    </div>
+                                </Router>
+                            </div>
                         </HentInitialData>
                     </IntlProvider>
                 </Provider>
