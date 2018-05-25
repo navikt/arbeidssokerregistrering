@@ -16,7 +16,6 @@ import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/oppsummering/sbl-registrering';
 import './decorator/decorator-mock';
 import Skjema from './sider/skjema/skjema-container';
-import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
