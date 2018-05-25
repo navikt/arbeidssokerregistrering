@@ -39,20 +39,25 @@ interface DispatchProps {
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
+interface State {
+    stillingErSatt: {status: string};
+}
 
-class LastInnSisteStilling extends React.Component<Props> {
-    private stillingErSatt: {status: string};
+class LastInnSisteStilling extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.stillingErSatt = {status: this.props.sisteStilling === tomStilling ? STATUS.NOT_STARTED : STATUS.OK};
+        this.state = {
+            stillingErSatt: {status: this.props.sisteStilling === tomStilling ? STATUS.NOT_STARTED : STATUS.OK}
+        };
     }
 
     componentWillMount() {
         const velgStilling = (stilling: Stilling) => {
             this.props.velgStilling(stilling);
-            this.stillingErSatt = {status: STATUS.OK};
-            this.forceUpdate();
+            this.setState({
+                stillingErSatt: {status: STATUS.OK}
+            });
         };
 
         if (this.props.sisteStilling === tomStilling) {
@@ -83,7 +88,7 @@ class LastInnSisteStilling extends React.Component<Props> {
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, this.stillingErSatt]}
+                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, this.state.stillingErSatt]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >
