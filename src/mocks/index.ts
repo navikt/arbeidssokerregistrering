@@ -44,11 +44,11 @@ if(MOCK_SBL) {
 }
 
 if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-    (mock as any).get('glob:/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting*', respondWith(delayed(500, oversettelseAvStillingFraAAReg)));
+    (mock as any).get('express:/pam-janzz/rest/kryssklassifiserMedKonsept(.*)', respondWith(delayed(500, oversettelseAvStillingFraAAReg)));
 }
 
 if(MOCK_STYRK08_PAMJANZZ) {
-    (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08*',
+    (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
         respondWith(delayed(100, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
 }
 
