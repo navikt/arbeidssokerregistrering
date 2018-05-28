@@ -33,10 +33,14 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 <FormattedMessage id="dinsituasjon-liste-2"/>
             </Normaltekst>
             <Normaltekst>
-                <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
+                Siste stilling: {
+                state.svar['siste-stilling'] === 1
+                ? state.sisteStilling.data.stilling.label
+                    : <FormattedMessage id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}/>
+                }
             </Normaltekst>
             <Normaltekst>
-                Siste stilling: {state.sisteStilling.data.stilling.label}
+                Høyeste fullførte utdanning: <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
             </Normaltekst>
             <Normaltekst>
                 <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
