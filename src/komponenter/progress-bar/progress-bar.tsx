@@ -10,10 +10,15 @@ export default class ProgressBar extends React.Component<OwnProps> {
     private framdriftIndikator: HTMLDivElement;
 
     scrolling() {
-        let scrollHeight = 0;
+        const REGISTRERING_BANNER_HEIGHT = 0;
+        let scrollHeight = REGISTRERING_BANNER_HEIGHT;
         const header = document.querySelector('.siteheader');
+        const banner = document.querySelector('.registrering-banner');
         if (header) {
-            scrollHeight = header.getBoundingClientRect().height;
+            scrollHeight += header.getBoundingClientRect().height;
+        }
+        if (banner) {
+            scrollHeight += banner.getBoundingClientRect().height;
         }
         if (window.pageYOffset >= scrollHeight) {
             if (this.framdriftContainer) {
