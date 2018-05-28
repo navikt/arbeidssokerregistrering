@@ -24,6 +24,7 @@ import {
 } from './utils/konstanter';
 import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
+import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
 import Feilhandtering from './sider/feilhandtering/feilhandtering';
 
@@ -34,12 +35,13 @@ class App extends React.Component {
         return (
             <main id="maincontent" role="main" tabIndex={-1} className="arbsokreg_app">
                 <Provider store={store}>
-                    <IntlProvider >
+                    <IntlProvider>
                         <HentInitialData>
                             <SjekkRegistreringstatus>
                                 <Router basename={basename}>
                                     <div>
                                         <Route path="/" component={Banner}/>
+                                        <Route path={'/:url'} component={ProgressBarContainer}/>
                                         <Switch>
                                             <Route path={START_PATH} component={StartRegistrering}/>
                                             <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
