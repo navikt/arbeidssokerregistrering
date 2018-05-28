@@ -23,6 +23,7 @@ import {
     AVBRYT_PATH, FULLFOR_PATH, DINSITUASJON_PATH, DUERNAREGISTRERT_PATH
 } from './utils/konstanter';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
+import Banner from './komponenter/banner/banner';
 
 const store = getStore();
 
@@ -35,7 +36,9 @@ class App extends React.Component {
                         <HentInitialData>
                             <SjekkRegistreringstatus>
                                 <Router basename={basename}>
-                                    <Switch>
+                                    <div>
+                                        <Route path="/" component={Banner}/>
+                                        <Switch>
                                         <Route path={START_PATH} component={StartRegistrering}/>
                                         <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
                                         <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
@@ -45,7 +48,7 @@ class App extends React.Component {
                                         <Route path={FULLFOR_PATH} component={Fullfor}/>
                                         <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
                                         <Redirect exact={true} from="/" to={START_PATH}/>
-                                    </Switch>
+                                    </Switch></div>
                                 </Router>
                             </SjekkRegistreringstatus>
                         </HentInitialData>

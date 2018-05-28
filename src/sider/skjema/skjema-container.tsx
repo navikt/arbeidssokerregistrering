@@ -96,13 +96,13 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
+                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                         <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                         <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
                         <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
                         <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
-                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>
