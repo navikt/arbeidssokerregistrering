@@ -14,6 +14,8 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 
+const oppsummeringSvg = require('./oppsummering.svg');
+
 interface StateProps {
     innloggingsInfo: InnloggingsInfoState;
     state: AppState;
@@ -26,34 +28,60 @@ const oppsummeringBesvarelser = (state: AppState) => {
     if (_.isEmpty(state.svar)) { return null; }
     return (
         <div className="oppsummering-besvarelser">
-            <Normaltekst>
-                <FormattedMessage id="dinsituasjon-liste-1"/>
-            </Normaltekst>
-            <Normaltekst>
-                <FormattedMessage id="dinsituasjon-liste-2"/>
-            </Normaltekst>
-            <Normaltekst>
-                Siste stilling: {
-                state.svar['siste-stilling'] === 1
-                ? state.sisteStilling.data.stilling.label
-                    : <FormattedMessage id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}/>
-                }
-            </Normaltekst>
-            <Normaltekst>
-                Høyeste fullførte utdanning: <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
-            </Normaltekst>
-            <Normaltekst>
-                <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
-            </Normaltekst>
-            <Normaltekst>
-                <FormattedMessage id={`oppsummering-utdanninggodkjent-svar-${state.svar.utdanninggodkjent}`}/>
-            </Normaltekst>
-            <Normaltekst>
-                <FormattedMessage id={`oppsummering-helsehinder-svar-${state.svar.helsehinder}`}/>
-            </Normaltekst>
-            <Normaltekst>
-                <FormattedMessage id={`oppsummering-helseandreforhold-svar-${state.svar.helseandreforhold}`}/>
-            </Normaltekst>
+            <img
+                src={oppsummeringSvg}
+                alt="Oppsummering sjekkliste"
+                className="oppsummering-besvarelser__illustrasjon"
+            />
+            <ul className="oppsummering-besvarelser__list">
+                <li>
+                    <Normaltekst>
+                        <FormattedMessage id="dinsituasjon-liste-1"/>
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        <FormattedMessage id="dinsituasjon-liste-2"/>
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        Siste stilling:&nbsp;{
+                            state.svar['siste-stilling'] === 1
+                                ? state.sisteStilling.data.stilling.label
+                                : <FormattedMessage
+                                    id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
+                                />
+                    }
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        Høyeste fullførte utdanning:&nbsp;
+                        <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        <FormattedMessage id={`oppsummering-utdanninggodkjent-svar-${state.svar.utdanninggodkjent}`}/>
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        <FormattedMessage id={`oppsummering-helsehinder-svar-${state.svar.helsehinder}`}/>
+                    </Normaltekst>
+                </li>
+                <li>
+                    <Normaltekst>
+                        <FormattedMessage id={`oppsummering-helseandreforhold-svar-${state.svar.helseandreforhold}`}/>
+                    </Normaltekst>
+                </li>
+            </ul>
         </div>
     );
 };

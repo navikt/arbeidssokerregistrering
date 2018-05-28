@@ -1,12 +1,31 @@
-.oppsummering-tittel,
 .oppsummering-ingress {
+  text-align: center;
+  .blokk-xl();
+}
+
+.oppsummering-tittel{
   text-align: center;
   .blokk-s();
 }
 
 .oppsummering-besvarelser {
-  border: 1px solid @navLysGra;
-  padding: 2rem;
+  padding: 3rem 1rem 1rem 1rem;
+  border-radius: 5px;
+  border: 3px solid @navBlaLighten80;
+  position: relative;
+
+  &__illustrasjon {
+    position: absolute;
+    top: -53px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  &__list {
+    padding-left: 1rem;
+  }
+
   p {
     .blokk-s()
   }
@@ -20,6 +39,7 @@
   }
 
   .oppsummering-besvarelser {
+    padding: 4rem 9rem 1rem 9rem;
     max-width: 635px;
     margin-left: auto;
     margin-right: auto;
