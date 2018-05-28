@@ -54,7 +54,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
                     aria-valuenow={Math.round(framdriftBredde)}
                     aria-valuemin={0}
                     aria-valuemax={100}
-                    tabIndex={0}
+                    tabIndex={-1}
                 >
                     <div
                         ref={(div: HTMLDivElement) => this.framdriftIndikator = div}
@@ -63,7 +63,6 @@ export default class ProgressBar extends React.Component<OwnProps> {
                     />
                     {this.scrolling()}
                 </div>
-                {gjeldendeSporsmal} / {antallSporsmal}
             </div>
         );
     }
