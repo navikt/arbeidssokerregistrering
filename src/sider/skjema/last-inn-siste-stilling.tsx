@@ -48,7 +48,7 @@ class LastInnSisteStilling extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            stillingErSatt: {status: STATUS.NOT_STARTED}
+            stillingErSatt: {status: this.props.sisteStilling === tomStilling ? STATUS.NOT_STARTED : STATUS.OK}
         };
     }
 
