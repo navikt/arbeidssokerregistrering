@@ -21,7 +21,7 @@ interface StateProps {
     state: AppState;
 }
 
-type EgenProps = StateProps & null;
+type EgenProps = StateProps;
 
 const oppsummeringBesvarelser = (state: AppState) => {
 
@@ -128,6 +128,6 @@ const mapStateToProps = (state: AppState) => ({
     state: state
 });
 
-export default connect(mapStateToProps, null)(
+export default connect(mapStateToProps)(
     Oppsummering
 );
