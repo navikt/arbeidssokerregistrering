@@ -21,7 +21,7 @@ if (MOCK_START_REGISRERING_STATUS) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    (mock as any).post('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, registrerbruker)));
+    (mock as any).post('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, registrerbruker, 500)));
 }
 
 if (MOCK_INNLOGGINGS_INFO) {

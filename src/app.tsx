@@ -26,7 +26,7 @@ import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
-import Feilhandtering from './sider/feilhandtering/feilhandtering';
+import Feilhandtering from './sider/fullfor/feilhandtering/feilmelding-spesiell';
 
 const store = getStore();
 

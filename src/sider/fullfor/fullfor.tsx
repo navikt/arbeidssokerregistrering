@@ -15,7 +15,7 @@ import {
     State as RegistrerBrukerState,
     Data as RegistrerBrukerData
 } from '../../ducks/registrerbruker';
-import Feilmelding from './fullfor-feilmelding';
+import Feilhandtering from './feilhandtering/feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid  } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
@@ -82,6 +82,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     render() {
+        console.log('fullfor', this.props); // tslint:disable-line
         const {registrerBrukerData, intl} = this.props;
         const loaderTittelElement = (
             <React.Fragment>
@@ -96,7 +97,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<Feilmelding intl={intl}/>}
+                feilmeldingKomponent={<Feilhandtering/>}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
             >

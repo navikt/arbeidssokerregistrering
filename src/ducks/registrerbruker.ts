@@ -15,7 +15,21 @@ export interface State {
     status: string;
 }
 
-export interface Data {
+export enum ErrorType {
+    BRUKER_FORSVUNNET = 'BRUKER_FORSVUNNET',
+    FINNES_IKKE_I_TPS = 'FINNES_IKKE_I_TPS',
+    MANGLER_ARBEIDSTILLATELSE = 'MANGLER_ARBEIDSTILLATELSE',
+    ANNET = 'ANNET',
+}
+
+export interface ErrorData {
+    data: string;
+    response?: {
+        errorType?: ErrorType;
+    };
+}
+
+interface OwnData {
     nusKode?: string;
     yrkesPraksis?: string;
     enigIOppsummering?: boolean;
@@ -24,6 +38,8 @@ export interface Data {
     yrkesbeskrivelse?: string;
     konseptId?: number;
 }
+
+export type Data = OwnData | ErrorData;
 
 interface Action {
     type: ActionTypes;
@@ -43,7 +59,7 @@ export default function (state: State = initialState, action: Action): State {
             }
             return {...state, status: STATUS.PENDING};
         case ActionTypes.REG_BRUKER_STATUS_FEILET:
-            return {...state, status: STATUS.ERROR};
+            return {...state, status: STATUS.ERROR, data: action.data};
         case ActionTypes.REG_BRUKER_STATUS_OK: {
             return {...state, status: STATUS.OK, data: action.data};
         }
