@@ -7,7 +7,11 @@ import {
     selectInnloggingsinfo,
     State as InnloggingsinfoState,
     Data as InnloggingsinfoData } from '../../ducks/innloggingsinfo';
-import { hentBrukerInfo } from '../../ducks/brukerinfo';
+import {
+    hentBrukerInfo,
+    selectBrukerInfo,
+    State as BrukerinfoState,
+} from '../../ducks/brukerinfo';
 import {
     hentRegistreringStatus,
     selectRegistreringstatus,
@@ -21,6 +25,7 @@ import Loader from '../loader/loader';
 interface StateProps {
     innloggingsinfo: InnloggingsinfoState;
     registreringstatus: RegistreringstatusState;
+    brukerinfo: BrukerinfoState;
 
 }
 
@@ -45,7 +50,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, innloggingsinfo, intl } = this.props;
+        const { children, registreringstatus, innloggingsinfo, brukerinfo, intl } = this.props;
         const { securityLevel } = innloggingsinfo.data;
 
         if (securityLevel !== '4' && innloggingsinfo.status === STATUS.OK) {
@@ -55,7 +60,11 @@ export class HentInitialData extends React.Component<Props> {
         return (
             <Innholdslaster
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
-                avhengigheter={[registreringstatus, innloggingsinfo]}
+                avhengigheter={[
+                    registreringstatus,
+                    innloggingsinfo,
+                    brukerinfo
+                ]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >
@@ -67,7 +76,8 @@ export class HentInitialData extends React.Component<Props> {
 
 const mapStateToProps = (state) => ({
     innloggingsinfo:  selectInnloggingsinfo(state),
-    registreringstatus: selectRegistreringstatus(state)
+    registreringstatus: selectRegistreringstatus(state),
+    brukerinfo: selectBrukerInfo(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
