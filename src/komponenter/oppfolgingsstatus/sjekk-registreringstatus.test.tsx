@@ -11,7 +11,7 @@ import {
 } from '../../test/test-utils';
 import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
 import { create } from '../../store';
-import {sendBrukerTilVeientilarbeid} from "./utils";
+import { sendBrukerTilVeientilarbeid } from './utils';
 
 enzyme.configure({adapter: new Adapter()});
 

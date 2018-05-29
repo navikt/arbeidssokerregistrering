@@ -11,7 +11,7 @@ import {
     FetchStub,
     mountWithStoreAndIntl, promiseWithSetTimeout, stubFetch
 } from '../../test/test-utils';
-import {sendBrukerTilSblArbeid} from "./utils";
+import { sendBrukerTilSblArbeid } from './utils';
 
 enzyme.configure({ adapter: new Adapter()});
 

@@ -11,9 +11,9 @@ import {
 import SisteStilling from './siste-stilling';
 import { ingenYrkesbakgrunn, velgSisteStilling } from '../../../../ducks/siste-stilling';
 import { sisteStillingMock } from '../../../../mocks/siste-stilling';
-import oversettelseAvStillingFraAAReg from "../../../../mocks/oversettelse-av-stilling-fra-aareg";
-import {hentOversattStillingFraAAReg} from "./siste-stilling-utils";
-import {ActionTypes} from "../../../../ducks/oversettelse-av-stilling-fra-aareg";
+import oversettelseAvStillingFraAAReg from '../../../../mocks/oversettelse-av-stilling-fra-aareg';
+import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
+import { ActionTypes } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -31,12 +31,14 @@ afterEach(() => {
 
 const dummyProps = {
     sporsmalId: '',
-    endreSvar: (sporsmalId: string, svar: number) => {},
+    endreSvar: (sporsmalId: string, svar: number) => {}, // tslint:disable-line;
     hentAvgittSvar: (sporsmalId: string) => 0,
 };
 
 describe('<SisteStilling />', () => {
-    it('Hvis bruker ikke er i AAreg (som medfører at sisteStilling er ingenYrkespraksis), så skal "Har ikke hatt jobb" være default svar.', () => {
+    it('Hvis bruker ikke er i AAreg (som medfører at sisteStilling er ingenYrkespraksis), ' +
+        'så skal "Har ikke hatt jobb" være default svar.',
+        () => {
         const store = create();
         const fetchStub = new FetchStub()
             .addResponse('sistearbeidsforhold', {});
@@ -55,7 +57,9 @@ describe('<SisteStilling />', () => {
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(2);
     });
 
-    it('Hvis bruker har stilling i AAReg (som medfører at sisteStilling _ikke_ er ingenYrkespraksis), så skal "Har hatt jobb" være default svar.', () => {
+    it('Hvis bruker har stilling i AAReg (som medfører at sisteStilling _ikke_ er ingenYrkespraksis),' +
+        'så skal "Har hatt jobb" være default svar.',
+        () => {
         const store = create();
         const fetchStub = new FetchStub()
             .addResponse('sistearbeidsforhold', {});
@@ -73,7 +77,9 @@ describe('<SisteStilling />', () => {
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(1);
     });
 
-    it('Hvis bruker endrer svar til "Har ikke hatt jobb", så skal state.sisteStilling bli ingenYrkesbakgrunn', () => {
+    it('Hvis bruker endrer svar til "Har ikke hatt jobb", ' +
+        'så skal state.sisteStilling bli ingenYrkesbakgrunn',
+        () => {
         const store = create();
         const fetchStub = new FetchStub()
             .addResponse('sistearbeidsforhold', {});
@@ -92,10 +98,12 @@ describe('<SisteStilling />', () => {
 
     });
 
-    it('Hvis bruker endrer svar til "Har hatt jobb", så skal state.sisteStilling endres til det som er hentet fra AAReg', () => {
+    it('Hvis bruker endrer svar til "Har hatt jobb", ' +
+        'så skal state.sisteStilling endres til det som er hentet fra AAReg',
+        () => {
         const store = create();
         const fetchStub = new FetchStub()
-            .addResponse('sistearbeidsforhold', {})
+            .addResponse('sistearbeidsforhold', {});
         stubFetch(fetchStub);
 
         store.dispatch({
