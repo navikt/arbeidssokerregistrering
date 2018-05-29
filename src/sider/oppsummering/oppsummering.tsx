@@ -37,9 +37,10 @@ const oppsummeringBesvarelser = (state: AppState) => {
             <ul className="oppsummering-besvarelser__list">
                 <li>
                     <Normaltekst>
-                        Alder:&nbsp;{
-                            personId && hentAlder(personId)
-                        }&nbsp;år
+                        <FormattedMessage
+                            id="oppsummering-alder"
+                            values={{alder: personId && hentAlder(personId)}}
+                        />
                     </Normaltekst>
                 </li>
                 <li>
