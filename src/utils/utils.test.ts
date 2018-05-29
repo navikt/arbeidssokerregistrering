@@ -1,6 +1,7 @@
 /*tslint:disable*/
 import { expect } from 'chai';
 import { State as SvarState } from '../ducks/svar';
+import * as moment from 'moment';
 
 import {
     getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
@@ -34,11 +35,11 @@ describe('utils test', () => {
     });
 
     it('test av hentAlder', () => {
+        const fodselsdato = moment().subtract(40, 'years').format('DDMMYY')
         // parameter er fnr
-        expect(hentAlder('11027836105')).to.equal(40);
+        expect(hentAlder(`${fodselsdato}36105`)).to.equal(40);
         // parameter er d-nummer
-        expect(hentAlder('411027836105')).to.equal(40);
-
+        expect(hentAlder(`4${fodselsdato}36105`)).to.equal(40);
     });
 
     it('test mapping av situasjon', () => {
