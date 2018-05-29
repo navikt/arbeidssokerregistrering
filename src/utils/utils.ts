@@ -1,5 +1,5 @@
 import {
-    ANNET,
+    ANNET, BLANK,
     JA,
     KANSKJE,
     MISTET_JOBBEN,
@@ -15,11 +15,20 @@ import {
     UNDER_UTDANNING, VIL_BYTTE_JOBB,
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
-import { State as OppsummeringState } from '../ducks/oppsummering';
 import { Stilling } from '../ducks/siste-stilling';
+import * as moment from 'moment';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
+}
+
+export function hentAlder(personId: string) {
+
+    const fnrForsteSeksSiffer =
+        personId.substring(0, 1) === '4' ? personId.substring(1, 7) : personId.substring(0, 6) ;
+
+    const fodselsdato = moment(`${fnrForsteSeksSiffer}`, 'DDMMYY');
+    return moment().diff(fodselsdato, 'years');
 }
 
 function forsteTegnStorBokstav(name: string) {
@@ -75,7 +84,6 @@ export const mapTilBoolean = (alternativId: number | undefined) => {
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
-    oppsummering: OppsummeringState,
     sisteStilling: Stilling
 ) {
     const helse: number | undefined = svar.helse;
@@ -87,7 +95,7 @@ export function mapAvgitteSvarForBackend(
             nusKode: mapTilNuskode(utdanning),
             yrkesPraksis: sisteStilling.styrk08,
             enigIOppsummering: true,
-            oppsummering: oppsummering.tekst,
+            oppsummering: BLANK, // TODO slettes samtidig med backend endringer
             harHelseutfordringer: mapTilBoolean(helse),
             yrkesbeskrivelse: sisteStilling.label,
             konseptId: sisteStilling.konseptId,
