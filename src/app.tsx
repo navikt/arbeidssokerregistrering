@@ -43,6 +43,7 @@ class App extends React.Component {
                                         <Route path="/" component={Banner}/>
                                         <Route path={'/:url'} component={ProgressBarContainer}/>
                                         <Switch>
+                                            <Route path={'feil'} component={Feilhandtering}/>
                                             <Route path={START_PATH} component={StartRegistrering}/>
                                             <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
                                             <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>

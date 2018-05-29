@@ -24,9 +24,7 @@ export enum ErrorType {
 
 export interface ErrorData {
     data: string;
-    response?: {
-        errorType?: ErrorType;
-    };
+    response?: Response;
 }
 
 interface OwnData {
