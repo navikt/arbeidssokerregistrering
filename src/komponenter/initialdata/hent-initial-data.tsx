@@ -7,6 +7,7 @@ import {
     selectInnloggingsinfo,
     State as InnloggingsinfoState,
     Data as InnloggingsinfoData } from '../../ducks/innloggingsinfo';
+import { hentBrukerInfo } from '../../ducks/brukerinfo';
 import {
     hentRegistreringStatus,
     selectRegistreringstatus,
@@ -25,6 +26,7 @@ interface StateProps {
 
 interface DispatchProps {
     hentInnloggingsInfo: () => Promise<void | {}>;
+    hentBrukerInfo: () => void;
     hentRegistreringStatus: () => void;
 }
 
@@ -32,6 +34,9 @@ type Props = StateProps & DispatchProps & InjectedIntlProps;
 
 export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
+
+        this.props.hentBrukerInfo();
+
         this.props.hentInnloggingsInfo().then( (res) => {
             if ((res as InnloggingsinfoData).securityLevel === '4') {
                 this.props.hentRegistreringStatus();
@@ -67,6 +72,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentInnloggingsInfo:  () => dispatch(hentInnloggingsInfo()),
+    hentBrukerInfo:  () => dispatch(hentBrukerInfo()),
     hentRegistreringStatus: () => dispatch(hentRegistreringStatus())
 });
 

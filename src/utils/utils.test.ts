@@ -4,7 +4,7 @@ import { State as SvarState } from '../ducks/svar';
 
 import {
     getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
-    mapTilBoolean
+    mapTilBoolean, hentAlder
 } from './utils';
 import {
     ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
@@ -13,7 +13,6 @@ import {
     UNDER_UTDANNING,
     VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
-import pamJanzzData from '../mocks/pam-janzz-data';
 import {Stilling} from "../ducks/siste-stilling";
 
 describe('utils test', () => {
@@ -32,6 +31,14 @@ describe('utils test', () => {
         expect(hentFornavn('TEST TESTESEN')).to.equal('Test');
         expect(hentFornavn('test testesen')).to.equal('Test');
         expect(hentFornavn('tEST TESTESEN')).to.equal('Test');
+    });
+
+    it('test av hentAlder', () => {
+        // parameter er fnr
+        expect(hentAlder('11027836105')).to.equal(40);
+        // parameter er d-nummer
+        expect(hentAlder('411027836105')).to.equal(40);
+
     });
 
     it('test mapping av situasjon', () => {

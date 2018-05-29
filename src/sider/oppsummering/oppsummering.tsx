@@ -5,7 +5,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
-import { MatchProps } from '../../utils/utils';
+import { hentAlder, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
@@ -26,6 +26,7 @@ type EgenProps = StateProps;
 const oppsummeringBesvarelser = (state: AppState) => {
 
     if (_.isEmpty(state.svar)) { return null; }
+    const { brukerInfo } = state, { data } = brukerInfo, personId = data.id;
     return (
         <div className="oppsummering-besvarelser">
             <img
@@ -34,6 +35,13 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 className="oppsummering-besvarelser__illustrasjon"
             />
             <ul className="oppsummering-besvarelser__list">
+                <li>
+                    <Normaltekst>
+                        Alder:&nbsp;{
+                            personId && hentAlder(personId)
+                        }&nbsp;år
+                    </Normaltekst>
+                </li>
                 <li>
                     <Normaltekst>
                         <FormattedMessage id="dinsituasjon-liste-1"/>

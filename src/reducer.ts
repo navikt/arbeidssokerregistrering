@@ -5,6 +5,7 @@ import svar, { State as SvarState } from './ducks/svar';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
+import brukerInfo, { State as BrukerInfoState } from './ducks/brukerinfo';
 import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg, {
     State as OversettelseAvStillingFraAARegState
@@ -16,6 +17,7 @@ export interface AppState {
     registreringStatus: RegStatusState;
     registrerBruker: RegistrerBruker;
     innloggingsInfo: InnloggingsInfoState;
+    brukerInfo: BrukerInfoState;
     sisteStillingFraAAReg: SisteStillingFraAARegState;
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     sisteStilling: SisteStillingState;
@@ -27,6 +29,7 @@ export default combineReducers<AppState>({
     registreringStatus,
     registrerBruker,
     innloggingsInfo,
+    brukerInfo,
     oversettelseAvStillingFraAAReg,
     sisteStillingFraAAReg,
     sisteStilling,

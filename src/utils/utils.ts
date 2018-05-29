@@ -16,9 +16,22 @@ import {
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { Stilling } from '../ducks/siste-stilling';
+import * as moment from 'moment';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
+}
+
+export function hentAlder(personId: string) {
+
+    const fnrForsteSeksSiffer =
+        personId.substring(0, 1) === '4' ? personId.substring(1, 7) : personId.substring(0, 6) ;
+    const dd = fnrForsteSeksSiffer.substring(0, 2);
+    const mm = fnrForsteSeksSiffer.substring(2, 4);
+    const yy = fnrForsteSeksSiffer.substring(4, 6);
+
+    const fodselsdato = moment(`${dd}.${mm}.${yy}`, 'DD.MM.YY');
+    return moment().diff(fodselsdato, 'years');
 }
 
 function forsteTegnStorBokstav(name: string) {
