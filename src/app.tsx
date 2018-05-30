@@ -20,9 +20,8 @@ import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-regis
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
-    AVBRYT_PATH, FULLFOR_PATH, DINSITUASJON_PATH, UENIG_PATH, DUERNAREGISTRERT_PATH, FEIL_PATH
+    AVBRYT_PATH, FULLFOR_PATH, DINSITUASJON_PATH, DUERNAREGISTRERT_PATH, FEIL_PATH
 } from './utils/konstanter';
-import UenigSelvgaende from './sider/oppsummering/uenig-selvgaende';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
@@ -52,7 +51,6 @@ class App extends React.Component {
                                             <Route path={AVBRYT_PATH} component={Avbryt} />
                                             <Route path={FULLFOR_PATH} component={Fullfor}/>
                                             <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
-                                            <Route path={UENIG_PATH} component={UenigSelvgaende} />
                                             <Route path={FEIL_PATH} component={Feilhandtering} />
                                             <Redirect exact={true} from="/" to={START_PATH}/>
                                         </Switch>
