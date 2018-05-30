@@ -1,14 +1,19 @@
-.du-er-na-registrert-wrapper {
+.du-er-na-registrert {
   max-width: 36rem;
-  margin: auto;
+  // margin: auto;
   text-align: center;
   animation: loading 5s both;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
 
   .du-er-na-registrert__topp {
     .blokk-s();
   }
 
-  .du-er-na-registrert__avsjekk-tittel {
+  &__avsjekk-tittel {
     margin-top: 1rem;
   }
 
@@ -19,7 +24,7 @@
     justify-content: center;
     border: 3px solid @navBlaLighten80;
     border-radius: 8px;
-    padding: 2rem 4rem;
+    padding: 2rem;
 
     .du-er-na-registrert__handinfo-ikon {
       display: none;
@@ -37,30 +42,34 @@
 }
 
 @media (min-width: @screen-sm-min) {
-  .du-er-na-registrert-wrapper {
+  .du-er-na-registrert {
     text-align: left;
 
-    .du-er-na-registrert__topp {
+    &__topp {
       position: relative;
       height: 60px;
       display: flex;
       align-items: center;
+      margin: 0;
+      left: -1px;
       .blokk-s();
     }
 
-    .du-er-na-registrert__avsjekk-tittel {
+    &__avsjekk-tittel {
       max-width: 100%;
-      padding-left: 7rem;
+      padding-left: 8rem;
       margin: 0;
     }
 
     .du-er-na-registrert__avsjekk-ikon {
       position: absolute;
-      left: 30px;
+      left: 24px;
+      top: 0;
     }
 
     .du-er-na-registrert__aksjonspanel {
       display: flex;
+      padding: 2rem 3rem 2rem 5rem;
 
       .du-er-na-registrert__tekster {
         width: 80%;

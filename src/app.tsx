@@ -41,16 +41,17 @@ class App extends React.Component {
                                         <Route path="/" component={Banner}/>
                                         <Route path={'/:url'} component={ProgressBarContainer}/>
                                         <Switch>
-                                        <Route path={START_PATH} component={StartRegistrering}/>
-                                        <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
-                                        <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
-                                        <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                                        <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                                        <Route path={AVBRYT_PATH} component={Avbryt} />
-                                        <Route path={FULLFOR_PATH} component={Fullfor}/>
-                                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
-                                        <Redirect exact={true} from="/" to={START_PATH}/>
-                                    </Switch></div>
+                                            <Route path={START_PATH} component={StartRegistrering}/>
+                                            <Route path={DINSITUASJON_PATH} component={DinSituasjon}/>
+                                            <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
+                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                            <Route path={AVBRYT_PATH} component={Avbryt} />
+                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
+                                            <Redirect exact={true} from="/" to={START_PATH}/>
+                                        </Switch>
+                                    </div>
                                 </Router>
                             </SjekkRegistreringstatus>
                         </HentInitialData>
