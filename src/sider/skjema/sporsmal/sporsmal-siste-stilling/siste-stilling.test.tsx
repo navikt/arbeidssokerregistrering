@@ -29,9 +29,10 @@ afterEach(() => {
     }
 });
 
+//tslint:disable
 const dummyProps = {
     sporsmalId: '',
-    endreSvar: (sporsmalId: string, svar: number) => {}, // tslint:disable-line;
+    endreSvar: (sporsmalId: string, svar: number) => {},
     hentAvgittSvar: (sporsmalId: string) => 0,
 };
 
