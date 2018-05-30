@@ -5,12 +5,22 @@
   border: 2px solid @redError;
   border-radius: 3px;
 
-  &__ikon {
-    margin-bottom: 1.5rem;
-  }
-
   &__innhold {
     padding-top: 1.5rem;
-    border-top: 1px solid @navGra20;
+  }
+}
+
+@media(min-width: @screen-sm-min) {
+  .feilmelding {
+    flex-direction: row;
+
+    &__innhold {
+      padding: 0 0 0 1.5rem;
+      border-left: 1px solid @navGra40;
+    }
+
+    &__ikon {
+      margin-right: 1.5rem;
+    }
   }
 }
