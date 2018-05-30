@@ -50,7 +50,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     }
 
     getOptions(sokestreng: string) {
-        return hentStillingMedStyrk08(sokestreng)
+        return hentStillingMedStyrk08(encodeURI(sokestreng))
             .then((response: { typeaheadYrkeList: {}[] }) => {
 
                 const {typeaheadYrkeList} = response;

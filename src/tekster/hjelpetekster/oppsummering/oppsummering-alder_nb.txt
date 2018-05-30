@@ -1,1 +1,1 @@
-Alder {alder} år
+Alder: {alder} år

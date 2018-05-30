@@ -34,12 +34,20 @@ describe('utils test', () => {
         expect(hentFornavn('tEST TESTESEN')).to.equal('Test');
     });
 
-    it('test av hentAlder', () => {
-        const fodselsdato = moment().subtract(40, 'years').format('DDMMYY')
+    it('test av hentAlder 18 år', () => {
+        const fodselsdato = moment().subtract(18, 'years').format('DDMMYY')
         // parameter er fnr
-        expect(hentAlder(`${fodselsdato}36105`)).to.equal(40);
+        expect(hentAlder(`${fodselsdato}50105`)).to.equal(18);
         // parameter er d-nummer
-        expect(hentAlder(`4${fodselsdato}36105`)).to.equal(40);
+        expect(hentAlder(`4${fodselsdato}56105`)).to.equal(18);
+    });
+
+    it('test av hentAlder 56 år', () => {
+        const fodselsdato = moment().subtract(56, 'years').format('DDMMYY')
+        // parameter er fnr
+        expect(hentAlder(`${fodselsdato}30105`)).to.equal(56);
+        // parameter er d-nummer
+        expect(hentAlder(`4${fodselsdato}36105`)).to.equal(56);
     });
 
     it('test mapping av situasjon', () => {
