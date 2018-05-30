@@ -1,19 +1,19 @@
 /*tslint:disable*/
 import { expect } from 'chai';
 import { State as SvarState } from '../ducks/svar';
+import * as moment from 'moment';
 
 import {
     getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
-    mapTilBoolean
+    mapTilBoolean, hentAlder
 } from './utils';
 import {
-    ANNET, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
     VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
-import pamJanzzData from '../mocks/pam-janzz-data';
 import {Stilling} from "../ducks/siste-stilling";
 
 describe('utils test', () => {
@@ -32,6 +32,22 @@ describe('utils test', () => {
         expect(hentFornavn('TEST TESTESEN')).to.equal('Test');
         expect(hentFornavn('test testesen')).to.equal('Test');
         expect(hentFornavn('tEST TESTESEN')).to.equal('Test');
+    });
+
+    it('test av hentAlder 18 år', () => {
+        const fodselsdato = moment().subtract(18, 'years').format('DDMMYY')
+        // parameter er fnr
+        expect(hentAlder(`${fodselsdato}50105`)).to.equal(18);
+        // parameter er d-nummer
+        expect(hentAlder(`4${fodselsdato}56105`)).to.equal(18);
+    });
+
+    it('test av hentAlder 56 år', () => {
+        const fodselsdato = moment().subtract(56, 'years').format('DDMMYY')
+        // parameter er fnr
+        expect(hentAlder(`${fodselsdato}30105`)).to.equal(56);
+        // parameter er d-nummer
+        expect(hentAlder(`4${fodselsdato}36105`)).to.equal(56);
     });
 
     it('test mapping av situasjon', () => {
@@ -64,7 +80,6 @@ describe('utils test', () => {
 
     it('test mapAvgitteSvarForBackend', () => {
 
-        const oppsummering = { tekst:  'oppsummer tekst' };
         const dummySvar: SvarState = {
             helse: 1,
             utdanning: 3
@@ -79,11 +94,11 @@ describe('utils test', () => {
             nusKode: mapTilNuskode(dummySvar.utdanning),
             yrkesPraksis: stilling.styrk08,
             enigIOppsummering: true,
-            oppsummering: oppsummering.tekst,
+            oppsummering: BLANK,
             harHelseutfordringer: mapTilBoolean(dummySvar.helse),
             yrkesbeskrivelse: stilling.label,
             konseptId: stilling.konseptId,
         };
-        expect(mapAvgitteSvarForBackend(dummySvar, oppsummering, stilling)).to.deep.equal(expectData);
+        expect(mapAvgitteSvarForBackend(dummySvar, stilling)).to.deep.equal(expectData);
     });
 });

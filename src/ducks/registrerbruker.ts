@@ -62,7 +62,7 @@ export function utforRegistrering(data: Data) {
 
 export function mapBrukerRegistreringsData(state: AppState): State {
     return {
-        data: mapAvgitteSvarForBackend(state.svar, state.oppsummering, selectSisteStilling(state)),
+        data: mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state)),
         status: state.registrerBruker.status
     };
 }

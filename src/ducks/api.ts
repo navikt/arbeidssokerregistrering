@@ -13,6 +13,7 @@ export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 
+const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
 const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
@@ -65,6 +66,13 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
+        config: MED_CREDENTIALS
+    });
+}
+
+export function hentBrukerInfo() {
+    return fetchToJson({
+        url: `${VEILARBOPPFOLGINGPROXY_ME_URL}`,
         config: MED_CREDENTIALS
     });
 }
