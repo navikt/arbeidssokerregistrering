@@ -32,8 +32,8 @@ export default function HelseAndreForhold(props: Props) {
             </Normaltekst>
             <Panel className="panel-skjema">
                 <form className="form-skjema form-skjema--center">
-                    <Alternativ className="alternativ-wrapper--small" alternativId={1} {...fellesProps}/>
-                    <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
+                    <Alternativ alternativId={1} {...fellesProps}/>
+                    <Alternativ alternativId={2} {...fellesProps}/>
                 </form>
             </Panel>
             <div className="spm-info">

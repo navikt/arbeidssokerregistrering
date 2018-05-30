@@ -28,9 +28,9 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
             </Systemtittel>
             <Panel className="panel-skjema">
                 <form className="form-skjema form-skjema--center">
-                    <Alternativ className="alternativ-wrapper--small" alternativId={1} {...fellesProps}/>
-                    <Alternativ className="alternativ-wrapper--small" alternativId={2} {...fellesProps}/>
-                    <Alternativ className="alternativ-wrapper--small" alternativId={3} {...fellesProps}/>
+                    <Alternativ alternativId={1} {...fellesProps}/>
+                    <Alternativ alternativId={2} {...fellesProps}/>
+                    <Alternativ alternativId={3} {...fellesProps}/>
                 </form>
             </Panel>
         </div>
