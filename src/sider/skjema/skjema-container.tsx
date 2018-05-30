@@ -16,7 +16,7 @@ import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import HelseAndreForhold from './sporsmal/sporsmal-helse-andre-forhold';
+import AndreForhold from './sporsmal/sporsmal-andre-forhold';
 import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 
 interface StateProps {
@@ -100,7 +100,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                         <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
                         <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
                         <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
-                        <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
+                        <AndreForhold sporsmalId="andreforhold" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>

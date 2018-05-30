@@ -87,7 +87,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 </li>
                 <li>
                     <Normaltekst>
-                        <FormattedMessage id={`oppsummering-helseandreforhold-svar-${state.svar.helseandreforhold}`}/>
+                        <FormattedMessage id={`oppsummering-andreforhold-svar-${state.svar.andreforhold}`}/>
                     </Normaltekst>
                 </li>
             </ul>

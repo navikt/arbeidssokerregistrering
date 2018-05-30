@@ -9,7 +9,7 @@ export type State = {
     utdanningbestatt?: number | undefined;
     utdanninggodkjent?: number | undefined;
     helsehinder?: number | undefined;
-    helseandreforhold?: number | undefined;
+    andreforhold?: number | undefined;
     'siste-stilling'?: number | undefined;
 };
 
