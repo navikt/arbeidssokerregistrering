@@ -1,4 +1,4 @@
-export default {
+const oversettelseAvStillingFraAAReg = {
     'konseptMedStyrk08List': [
         {
             'konseptId': 313808,
@@ -18,3 +18,5 @@ export default {
         }
     ]
 };
+
+export default oversettelseAvStillingFraAAReg;

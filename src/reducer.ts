@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'react-redux-form-validation';
 import { FieldState } from 'redux-form';
 import svar, { State as SvarState } from './ducks/svar';
-import oppsummering, { State as OppsummeringState } from './ducks/oppsummering';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
+import brukerInfo, { State as BrukerInfoState } from './ducks/brukerinfo';
 import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg, {
     State as OversettelseAvStillingFraAARegState
@@ -14,10 +14,10 @@ import sisteStilling, { State as SisteStillingState } from './ducks/siste-stilli
 
 export interface AppState {
     svar: SvarState;
-    oppsummering: OppsummeringState;
     registreringStatus: RegStatusState;
     registrerBruker: RegistrerBruker;
     innloggingsInfo: InnloggingsInfoState;
+    brukerInfo: BrukerInfoState;
     sisteStillingFraAAReg: SisteStillingFraAARegState;
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     sisteStilling: SisteStillingState;
@@ -26,10 +26,10 @@ export interface AppState {
 
 export default combineReducers<AppState>({
     svar,
-    oppsummering,
     registreringStatus,
     registrerBruker,
     innloggingsInfo,
+    brukerInfo,
     oversettelseAvStillingFraAAReg,
     sisteStillingFraAAReg,
     sisteStilling,

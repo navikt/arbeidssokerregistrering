@@ -1,22 +1,24 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { SBLREG_PATH, SISTEARBFORHOLD_PATH, SKJEMA_PATH } from '../../utils/konstanter';
+import { SBLREG_PATH, SKJEMA_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
-import Utdanningsporsmal from './sporsmal-utdanning';
-import Helsesporsmal from './sporsmal-helse';
+import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
+import Helsesporsmal from './sporsmal/sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
+import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
+import LastInnSisteStilling from './last-inn-siste-stilling';
+import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
+import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import HelseAndreForhold from './sporsmal-helse-andre-forhold';
-import UtdanningBestattSporsmal from './sporsmal-utdanning-bestatt';
-import UtdanningGodkjentSporsmal from './sporsmal-utdanning-godkjent';
-import HelseHinder from './sporsmal-helse-hinder';
+import HelseAndreForhold from './sporsmal/sporsmal-helse-andre-forhold';
+import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -92,14 +94,17 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
         return (
             <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
-                <Skjema {...skjemaProps}>
-                    <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
-                    <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                    <UtdanningBestattSporsmal sporsmalId="utdanning-bestatt" {...fellesProps}/>
-                    <UtdanningGodkjentSporsmal sporsmalId="utdanning-godkjent" {...fellesProps}/>
-                    <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
-                    <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
-                </Skjema>
+                <LastInnSisteStilling>
+                    <Skjema {...skjemaProps}>
+                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
+                        <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
+                        <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
+                        <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
+                        <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
+                        <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
+                        <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
+                    </Skjema>
+                </LastInnSisteStilling>
             </div>
         );
     }
@@ -124,7 +129,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         }
 
         if (this.erSisteSporsmal(antallSporsmal)) {
-            this.props.history.push(`${SISTEARBFORHOLD_PATH}`);
+            this.props.history.push(`${OPPSUMMERING_PATH}`);
             return;
         }
 
