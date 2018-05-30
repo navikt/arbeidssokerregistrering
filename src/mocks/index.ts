@@ -2,12 +2,14 @@
 import {mock, respondWith, delayed, lagPamjanzzRespons} from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
+import brukerInfo from './bruker-info';
 import registrerbruker from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
+const MOCK_BRUKER_INFO = true;
 const MOCK_INNLOGGINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
@@ -26,6 +28,10 @@ if (MOCK_REGISTRER_BRUKER) {
 
 if (MOCK_INNLOGGINGS_INFO) {
     (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(1000, innloggingsInfo)));
+}
+
+if (MOCK_BRUKER_INFO) {
+    (mock as any).get('/veilarboppfolgingproxy/api/oppfolging/me', respondWith(delayed(1000, brukerInfo)));
 }
 
 
