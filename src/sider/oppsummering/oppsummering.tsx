@@ -27,6 +27,21 @@ const oppsummeringBesvarelser = (state: AppState) => {
 
     if (_.isEmpty(state.svar)) { return null; }
     const { brukerInfo } = state, { data } = brukerInfo, personId = data.id;
+
+    let alderElement;
+    if (!_.isEmpty(data)) {
+        alderElement = (
+            <li>
+                <Normaltekst>
+                    <FormattedMessage
+                        id="oppsummering-alder"
+                        values={{alder: personId && hentAlder(personId)}}
+                    />
+                </Normaltekst>
+            </li>
+        );
+    }
+
     return (
         <div className="oppsummering-besvarelser">
             <img
@@ -35,14 +50,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 className="oppsummering-besvarelser__illustrasjon"
             />
             <ul className="oppsummering-besvarelser__list">
-                <li>
-                    <Normaltekst>
-                        <FormattedMessage
-                            id="oppsummering-alder"
-                            values={{alder: personId && hentAlder(personId)}}
-                        />
-                    </Normaltekst>
-                </li>
+                {alderElement}
                 <li>
                     <Normaltekst>
                         <FormattedMessage id="dinsituasjon-liste-1"/>

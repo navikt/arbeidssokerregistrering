@@ -52,21 +52,6 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
     });
 }
 
-export function lagreArbeidsforhold(data: Data) {
-    return {
-        data,
-        type: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK
-    };
-}
-
-export function registrerSisteArbeidsforhold(data: Data) {
-    return doThenDispatch(() => Api.registrerSisteArbeidsforhold(data), {
-        PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING,
-        OK : ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK,
-        FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,
-    });
-}
-
 export function selectSisteStillingFraAAReg(state: AppState): State {
     return state.sisteStillingFraAAReg;
 }
