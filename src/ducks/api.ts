@@ -1,5 +1,4 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
-import { Data as SisteArbeidsforholdData } from './siste-stilling-fra-aareg';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
@@ -8,7 +7,6 @@ export const DITTNAV_URL = '/dittnav/';
 export const FORSIDENAV_URL = 'https://www.nav.no/';
 export const VEIENTILARBEID_URL = '/veientilarbeid/';
 export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjonsmodul=true&visdagpenger=true';
-export const VEIENTILARBEID_MED_NY_REGISTRERING_URL = '/veientilarbeid/?nyRegistrering=true';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
@@ -39,7 +37,10 @@ const MED_CREDENTIALS = {
 export function hentRegistreringStatus() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
-        config: MED_CREDENTIALS});
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
+    });
 }
 
 export function registrerBruker(data: RegistrerBrukerData) {
@@ -68,21 +69,27 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
-        config: MED_CREDENTIALS
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
     });
 }
 
 export function hentBrukerInfo() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_ME_URL}`,
-        config: MED_CREDENTIALS
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
     });
 }
 
 export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
-        config: MED_CREDENTIALS,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        },
         recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
     });
 }
@@ -90,7 +97,9 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
 export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
         url: `${PAM_JANZZ_URL}/kryssklassifiserMedKonsept?kodeForOversetting=${styrk}`,
-        config: MED_CREDENTIALS,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        },
         recoverWith: () => ({konseptMedStyrk08List: []})
     });
 }
@@ -98,14 +107,9 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
 export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${sokestreng}`,
-        config: {redirect: 'manual'},
+        config: {...{redirect: 'manual'},
+            headers: getHeaders()
+        },
         recoverWith: () => ({'typeaheadYrkeList': []})
-    });
-}
-
-export function registrerSisteArbeidsforhold(data: SisteArbeidsforholdData) {
-    return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
-        config: { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(data)}
     });
 }

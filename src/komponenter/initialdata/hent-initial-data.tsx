@@ -50,7 +50,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, innloggingsinfo, brukerinfo, intl } = this.props;
+        const { children, registreringstatus, innloggingsinfo, intl } = this.props;
         const { securityLevel } = innloggingsinfo.data;
 
         if (securityLevel !== '4' && innloggingsinfo.status === STATUS.OK) {
@@ -62,8 +62,7 @@ export class HentInitialData extends React.Component<Props> {
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[
                     registreringstatus,
-                    innloggingsinfo,
-                    brukerinfo
+                    innloggingsinfo
                 ]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
