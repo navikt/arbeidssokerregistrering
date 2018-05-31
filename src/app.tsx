@@ -48,7 +48,8 @@ class App extends React.Component {
                                             <Route path={FULLFOR_PATH} component={Fullfor}/>
                                             <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
                                             <Redirect exact={true} from="/" to={START_PATH}/>
-                                        </Switch></div>
+                                        </Switch>
+                                    </div>
                                 </Router>
                             </SjekkRegistreringstatus>
                         </HentInitialData>
