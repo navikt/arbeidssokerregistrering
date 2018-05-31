@@ -27,7 +27,7 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
             <Panel className="panel-skjema">
-                <form className="form-skjema form-skjema--center">
+                <form className="form-skjema">
                     <Alternativ alternativId={1} {...fellesProps}/>
                     <Alternativ alternativId={2} {...fellesProps}/>
                     <Alternativ alternativId={3} {...fellesProps}/>
