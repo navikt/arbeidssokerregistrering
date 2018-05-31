@@ -14,7 +14,7 @@ interface SporsmalProps {
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function HelseAndreForhold(props: Props) {
+export default function AndreForhold(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,

@@ -77,7 +77,7 @@ export function mapAvgitteSvarForBackend(
     svar: SvarState,
     sisteStilling: Stilling
 ) {
-    const helse: number | undefined = svar.helse;
+    const helse: number | undefined = svar.helsehinder;
     const utdanning: number | undefined = svar.utdanning;
 
     let data = {};

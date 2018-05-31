@@ -4,12 +4,11 @@ export enum ActionTypes {
 }
 
 export type State = {
-    helse?: number | undefined;
     utdanning?: number | undefined;
     utdanningbestatt?: number | undefined;
     utdanninggodkjent?: number | undefined;
     helsehinder?: number | undefined;
-    helseandreforhold?: number | undefined;
+    andreforhold?: number | undefined;
     'siste-stilling'?: number | undefined;
 };
 

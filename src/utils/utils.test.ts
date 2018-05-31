@@ -81,7 +81,7 @@ describe('utils test', () => {
     it('test mapAvgitteSvarForBackend', () => {
 
         const dummySvar: SvarState = {
-            helse: 1,
+            helsehinder: 1,
             utdanning: 3
         };
         const stilling: Stilling = {
@@ -95,7 +95,7 @@ describe('utils test', () => {
             yrkesPraksis: stilling.styrk08,
             enigIOppsummering: true,
             oppsummering: BLANK,
-            harHelseutfordringer: mapTilBoolean(dummySvar.helse),
+            harHelseutfordringer: mapTilBoolean(dummySvar.helsehinder),
             yrkesbeskrivelse: stilling.label,
             konseptId: stilling.konseptId,
         };
