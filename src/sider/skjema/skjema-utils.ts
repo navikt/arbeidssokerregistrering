@@ -5,7 +5,7 @@ export function getTekstIdForAlternativ(sporsmalId: string, alternativId: number
 export const alternativIderSomGirSelvgaendeConfig = {
     helse: [2],
     utdanning: [2, 3, 4, 5, 6],
-    helseandreforhold: [1, 2],
+    andreforhold: [1, 2],
     helsehinder: [1, 2],
     utdanningbestatt: [1, 2],
     utdanninggodkjent: [1, 2, 3],

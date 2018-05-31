@@ -7,7 +7,6 @@ export const progressBarConfig: string[] = [
     `${SKJEMA_PATH}/3`,
     `${SKJEMA_PATH}/4`,
     `${SKJEMA_PATH}/5`,
-    `${SKJEMA_PATH}/6`,
     OPPSUMMERING_PATH,
     FULLFOR_PATH,
 ].map(path => `${basename}${path}`);
