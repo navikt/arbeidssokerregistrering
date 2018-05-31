@@ -21,3 +21,8 @@ fasitResources:
   used:
   - alias: appres.cms
     resourceType: baseUrl
+
+  - alias: feature_endpoint_sbs
+    resourceType: restservice
+    propertyMap:
+      url: PUBLIC_FEATURE_ENDPOINT_URL

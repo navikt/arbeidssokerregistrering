@@ -6,6 +6,7 @@ import brukerInfo from './bruker-info';
 import registrerbruker from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
+import {featureTogglesMock} from "./feature-toggles";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -16,10 +17,15 @@ const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
+const MOCK_FEATURE_TOGGLES = true;
 
 
 if (MOCK_START_REGISRERING_STATUS) {
     (mock as any).get('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, startRegistreringStatus)));
+}
+
+if (MOCK_FEATURE_TOGGLES) {
+    (mock as any).get('https://feature-fss-q6.nais.preprod.local/feature?feature=forenkletdeploy.dashboard&feature=test.noe.rart', respondWith(delayed(1000, featureTogglesMock)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
@@ -33,7 +39,6 @@ if (MOCK_INNLOGGINGS_INFO) {
 if (MOCK_BRUKER_INFO) {
     (mock as any).get('/veilarboppfolgingproxy/api/oppfolging/me', respondWith(delayed(1000, brukerInfo)));
 }
-
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
     (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteStillingFraAAReg)));

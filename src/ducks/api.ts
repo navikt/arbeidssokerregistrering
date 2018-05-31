@@ -109,3 +109,11 @@ export function registrerSisteArbeidsforhold(data: SisteArbeidsforholdData) {
         config: { ...MED_CREDENTIALS, method: 'post', body: JSON.stringify(data)}
     });
 }
+
+export function hentFeatureToggles() {
+    return fetchToJson({
+        url: 'https://feature-fss-q6.nais.preprod.local/feature?feature=forenkletdeploy.dashboard&feature=test.noe.rart', // tslint:disable-line
+        config: MED_CREDENTIALS,
+        recoverWith: () => ({})
+    });
+}
