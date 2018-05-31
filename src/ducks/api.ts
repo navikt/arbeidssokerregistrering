@@ -39,7 +39,10 @@ const MED_CREDENTIALS = {
 export function hentRegistreringStatus() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
-        config: MED_CREDENTIALS});
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
+    });
 }
 
 export function registrerBruker(data: RegistrerBrukerData) {
@@ -68,21 +71,27 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
-        config: MED_CREDENTIALS
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
     });
 }
 
 export function hentBrukerInfo() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_ME_URL}`,
-        config: MED_CREDENTIALS
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
     });
 }
 
 export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
-        config: MED_CREDENTIALS,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        },
         recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
     });
 }
@@ -90,7 +99,9 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
 export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
         url: `${PAM_JANZZ_URL}/kryssklassifiserMedKonsept?kodeForOversetting=${styrk}`,
-        config: MED_CREDENTIALS,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        },
         recoverWith: () => ({konseptMedStyrk08List: []})
     });
 }
