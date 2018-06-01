@@ -1,6 +1,6 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
-import { backendToggle, getRegistreringBackendUrl } from './feature-toggles';
+import { backendToggle, getRegistreringBackendUrl, Data as FeatureTogglesData } from './feature-toggles';
 import { FEATURE_BASE_URL } from '../environment';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
@@ -36,18 +36,18 @@ const MED_CREDENTIALS = {
     credentials: ('same-origin' as RequestCredentials)
 };
 
-export function hentRegistreringStatus() {
+export function hentRegistreringStatus(featureToggles: FeatureTogglesData) {
     return fetchToJson({
-        url: `${getRegistreringBackendUrl()}/startregistrering`,
+        url: `${getRegistreringBackendUrl(featureToggles)}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
     });
 }
 
-export function registrerBruker(data: RegistrerBrukerData) {
+export function registrerBruker(data: RegistrerBrukerData, featureToggles: FeatureTogglesData) {
     return fetchToJson({
-        url: `${getRegistreringBackendUrl()}/startregistrering`,
+        url: `${getRegistreringBackendUrl(featureToggles)}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
@@ -86,9 +86,9 @@ export function hentBrukerInfo() {
     });
 }
 
-export function hentStyrkkodeForSisteStillingFraAAReg() {
+export function hentStyrkkodeForSisteStillingFraAAReg(featureToggles: FeatureTogglesData) {
     return fetchToJson({
-        url: `${getRegistreringBackendUrl()}/sistearbeidsforhold`,
+        url: `${getRegistreringBackendUrl(featureToggles)}/sistearbeidsforhold`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },

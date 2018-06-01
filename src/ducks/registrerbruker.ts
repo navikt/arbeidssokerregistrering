@@ -3,6 +3,7 @@ import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 import { mapAvgitteSvarForBackend } from '../utils/utils';
 import { selectSisteStilling } from './siste-stilling';
+import { Data as FeatureTogglesData } from './feature-toggles';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -52,8 +53,8 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function utforRegistrering(data: Data) {
-    return doThenDispatch(() => Api.registrerBruker(data), {
+export function utforRegistrering(data: Data, featureToggles: FeatureTogglesData) {
+    return doThenDispatch(() => Api.registrerBruker(data, featureToggles), {
         PENDING: ActionTypes.REG_BRUKER_STATUS_PENDING,
         OK: ActionTypes.REG_BRUKER_STATUS_OK,
         FEILET: ActionTypes.REG_BRUKER_STATUS_FEILET,
