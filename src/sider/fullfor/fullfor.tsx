@@ -115,7 +115,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         const advarselElement = this.state.visAdvarsel && (
             <NavAlertStripe type="advarsel">
                 <Normaltekst>
-                    <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
+                    <FormattedMessage id="fullfor-advarsel"/>
                 </Normaltekst>
             </NavAlertStripe>
         );
