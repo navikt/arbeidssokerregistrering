@@ -118,7 +118,7 @@ export function hentStillingMedStyrk08(sokestreng: string) {
 
 export function hentFeatureToggles() {
     return fetchToJson({
-        url: `${FEATURE_URL}?feature=${backendToggle}`,
+        url: `${FEATURE_URL}/?feature=${backendToggle}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
