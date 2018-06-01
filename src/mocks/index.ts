@@ -7,9 +7,8 @@ import registrerbruker from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
-import {FEATURE_BASE_URL} from "../environment";
 import { backendToggle } from '../ducks/feature-toggles';
-import {VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL} from "../ducks/api";
+import {FEATURE_URL, VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL} from "../ducks/api";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -28,7 +27,7 @@ if (MOCK_START_REGISRERING_STATUS) {
 }
 
 if (MOCK_FEATURE_TOGGLES) {
-    (mock as any).get(`${FEATURE_BASE_URL}?feature=${backendToggle}`, respondWith(delayed(1000, featureTogglesMock)));
+    (mock as any).get(`${FEATURE_URL}?feature=${backendToggle}`, respondWith(delayed(1000, featureTogglesMock)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {

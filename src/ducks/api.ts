@@ -1,7 +1,6 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { backendToggle, getRegistreringBackendUrl, Data as FeatureTogglesData } from './feature-toggles';
-import { FEATURE_BASE_URL } from '../environment';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
@@ -14,6 +13,7 @@ export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERI
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 export const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
+export const FEATURE_URL = '/feature';
 
 const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
@@ -118,7 +118,7 @@ export function hentStillingMedStyrk08(sokestreng: string) {
 
 export function hentFeatureToggles() {
     return fetchToJson({
-        url: `${FEATURE_BASE_URL}?feature=${backendToggle}`,
+        url: `${FEATURE_URL}?feature=${backendToggle}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
