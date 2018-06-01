@@ -26,6 +26,7 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import Loader from '../../komponenter/loader/loader';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -37,6 +38,7 @@ interface DispatchProps {
 
 interface EgenStateProps {
     markert: boolean;
+    visAdvarsel: boolean;
     sblArbeidRegistrerBrukerStatus: string;
 }
 
@@ -47,6 +49,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         super(props);
         this.state = {
             markert: false,
+            visAdvarsel: false,
             sblArbeidRegistrerBrukerStatus: STATUS.OK
         };
         this.settMarkert = this.settMarkert.bind(this);
@@ -61,28 +64,43 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     registrerBrukerOnClick() {
-        this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
-
-        this.props.onRegistrerBruker(this.props.registrerBrukerData.data)
-            .then((res) => {
-                if (!!res) {
-                    registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
-                        .then(
-                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                        );
-                }
+        const {markert} = this.state;
+        if (!markert) {
+            this.setState({
+                visAdvarsel: true
             });
+        } else {
+            this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
+
+            this.props.onRegistrerBruker(this.props.registrerBrukerData.data)
+                .then((res) => {
+                    if (!!res) {
+                        registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
+                            .then(
+                                () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                                () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                            );
+                    }
+                });
+        }
     }
 
     settMarkert() {
         this.setState({
             markert: !this.state.markert
         });
+
+        const {markert} = this.state;
+        if (!markert) {
+            this.setState({
+                visAdvarsel: false
+            });
+        }
     }
 
     render() {
         const {registrerBrukerData, intl} = this.props;
+
         const loaderTittelElement = (
             <React.Fragment>
                 <Innholdstittel className="blokk-s">
@@ -92,6 +110,14 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                     Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
                 </Normaltekst>
             </React.Fragment>
+        );
+
+        const advarselElement = this.state.visAdvarsel && (
+            <NavAlertStripe type="advarsel">
+                <Normaltekst>
+                    <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
+                </Normaltekst>
+            </NavAlertStripe>
         );
 
         return (
@@ -122,10 +148,10 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
                             className="bekreft-panel"
                         />
+                        {advarselElement}
                         <Knappervertikalt>
                             <KnappFullfor
                                 intl={intl}
-                                disabled={!this.state.markert}
                                 onClick={this.registrerBrukerOnClick}
                             />
                             <LenkeAvbryt classname="avbryt"/>
