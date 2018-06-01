@@ -1,5 +1,5 @@
 /*tslint:disable*/
-import {mock, respondWith, delayed, lagPamjanzzRespons} from './utils';
+import { mock, respondWith, delayed, lagPamjanzzRespons } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import brukerInfo from './bruker-info';
@@ -7,6 +7,9 @@ import registrerbruker from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
+import {FEATURE_BASE_URL} from "../environment";
+import { backendToggle } from '../ducks/feature-toggles';
+import {VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL} from "../ducks/api";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -19,17 +22,18 @@ const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
 
-
 if (MOCK_START_REGISRERING_STATUS) {
-    (mock as any).get('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, startRegistreringStatus)));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, startRegistreringStatus)));
+    (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, respondWith(delayed(1000, startRegistreringStatus)));
 }
 
 if (MOCK_FEATURE_TOGGLES) {
-    (mock as any).get('https://feature-fss-q6.nais.preprod.local/feature?feature=forenkletdeploy.dashboard&feature=test.noe.rart', respondWith(delayed(1000, featureTogglesMock)));
+    (mock as any).get(`${FEATURE_BASE_URL}?feature=${backendToggle}`, respondWith(delayed(1000, featureTogglesMock)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    (mock as any).post('/veilarboppfolgingproxy/api/startregistrering', respondWith(delayed(1000, registrerbruker)));
+    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, registrerbruker)));
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, respondWith(delayed(1000, registrerbruker)));
 }
 
 if (MOCK_INNLOGGINGS_INFO) {
@@ -37,15 +41,19 @@ if (MOCK_INNLOGGINGS_INFO) {
 }
 
 if (MOCK_BRUKER_INFO) {
-    (mock as any).get('/veilarboppfolgingproxy/api/oppfolging/me', respondWith(delayed(1000, brukerInfo)));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/oppfolging/me`, respondWith(delayed(1000, brukerInfo)));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).get('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, sisteStillingFraAAReg)));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`, respondWith(delayed(1000, sisteStillingFraAAReg)));
+    (mock as any).get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(1000, sisteStillingFraAAReg)));
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post('/veilarboppfolgingproxy/api/sistearbeidsforhold', respondWith(delayed(1000, (url, config, params) => {
+    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`, respondWith(delayed(1000, (url, config, params) => {
+        return params.bodyParams;
+    })));
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(1000, (url, config, params) => {
         return params.bodyParams;
     })));
 }

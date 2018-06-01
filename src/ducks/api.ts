@@ -1,5 +1,7 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
+import { backendToggle, getRegistreringBackendUrl } from './feature-toggles';
+import { FEATURE_BASE_URL } from '../environment';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
@@ -10,10 +12,10 @@ export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjon
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
+export const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
+export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 
 const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
-const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
-const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
@@ -22,6 +24,7 @@ export const getCookie = name => {
     const match = re.exec(document.cookie);
     return match !== null ? match[1] : '';
 };
+
 function getHeaders() {
     return new Headers({
         'Content-Type': 'application/json',
@@ -35,7 +38,7 @@ const MED_CREDENTIALS = {
 
 export function hentRegistreringStatus() {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        url: `${getRegistreringBackendUrl()}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
@@ -44,7 +47,7 @@ export function hentRegistreringStatus() {
 
 export function registrerBruker(data: RegistrerBrukerData) {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        url: `${getRegistreringBackendUrl()}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
@@ -85,7 +88,7 @@ export function hentBrukerInfo() {
 
 export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
+        url: `${getRegistreringBackendUrl()}/sistearbeidsforhold`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
@@ -115,7 +118,7 @@ export function hentStillingMedStyrk08(sokestreng: string) {
 
 export function hentFeatureToggles() {
     return fetchToJson({
-        url: 'https://feature-fss-q6.nais.preprod.local/feature?feature=forenkletdeploy.dashboard&feature=test.noe.rart', // tslint:disable-line
+        url: `${FEATURE_BASE_URL}?feature=${backendToggle}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },

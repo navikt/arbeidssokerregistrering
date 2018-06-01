@@ -50,9 +50,6 @@ export class HentInitialData extends React.Component<Props> {
                 }
             });
         });
-
-        // tslint:disable
-        console.log(process.env);
     }
 
     render() {

@@ -1,6 +1,17 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
+import getStore from '../store';
+import { VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL } from './api';
+
+export const backendToggle = 'arbeidssokerregistrering.veilarbregistrering';
+
+export const getRegistreringBackendUrl = () => {
+    const featureToggles = selectFeatureToggles(getStore().getState()).data;
+    return (featureToggles[backendToggle]) ?
+        VEILARBREGISTRERING_URL : VEILARBOPPFOLGINGPROXY_URL;
+
+};
 
 export enum ActionTypes {
     FEATURE_TOGGLES_PENDING = 'FEATURE_TOGGLES_PENDING',
