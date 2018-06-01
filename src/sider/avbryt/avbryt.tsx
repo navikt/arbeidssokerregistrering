@@ -15,6 +15,7 @@ const avbrytSvg = require('./avbryt.svg');
 function Avbryt({history}: Props) {
     return (
         <Container className="avbryt-panel-wrapper">
+            <div className="graa-bakgrunn"/>
             <Row className="avbryt-panel__lukkknapperad">
                 <Lukknapp onClick={() => history.goBack()}>
                     Lukk
