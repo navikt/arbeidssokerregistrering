@@ -27,7 +27,7 @@ if (MOCK_START_REGISRERING_STATUS) {
 }
 
 if (MOCK_FEATURE_TOGGLES) {
-    (mock as any).get(`${FEATURE_URL}?feature=${backendToggle}`, respondWith(delayed(1000, featureTogglesMock)));
+    (mock as any).get(`${FEATURE_URL}/?feature=${backendToggle}`, respondWith(delayed(1000, featureTogglesMock)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {

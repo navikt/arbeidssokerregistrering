@@ -1,3 +1,3 @@
 export const featureTogglesMock = {
-    'arbeidssokerregistrering.veilarbregistrering': true
+    'arbeidssokerregistrering.ta-i-bruk-ny-backend': true
 };
