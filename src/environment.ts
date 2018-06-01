@@ -1,5 +1,6 @@
 export function getEndpointVariable() {
-    return (window as any).arbeidssokerregistrering.FEATURE_ENDPOINT_URL; // tslint:disable-line no-any
+    const variabler = (window as any).arbeidssokerregistrering; // tslint:disable-line no-any
+    return (variabler) ? variabler.FEATURE_ENDPOINT_URL : 'no-url';
 }
 
 export const FEATURE_BASE_URL = getEndpointVariable();
