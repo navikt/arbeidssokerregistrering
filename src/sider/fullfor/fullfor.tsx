@@ -26,13 +26,15 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import Loader from '../../komponenter/loader/loader';
+import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
+    featureToggles: FeatureTogglesData;
 }
 
 interface DispatchProps {
-    onRegistrerBruker: (data: RegistrerBrukerData) => Promise<void | {}>;
+    onRegistrerBruker: (data: RegistrerBrukerData, featureToggles: FeatureTogglesData) => Promise<void | {}>;
 }
 
 interface EgenStateProps {
@@ -63,7 +65,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     registrerBrukerOnClick() {
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
-        this.props.onRegistrerBruker(this.props.registrerBrukerData.data)
+        this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
             .then((res) => {
                 if (!!res) {
                     registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
@@ -140,10 +142,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
 const mapStateToProps = (state) => ({
     registrerBrukerData: mapBrukerRegistreringsData(state),
+    featureToggles: selectFeatureToggles(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    onRegistrerBruker: (data) => dispatch(utforRegistrering(data)),
+    onRegistrerBruker: (data, featureToggles) => dispatch(utforRegistrering(data, featureToggles)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

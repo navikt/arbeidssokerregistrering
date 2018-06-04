@@ -7,6 +7,7 @@ import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruk
 import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
 import brukerInfo, { State as BrukerInfoState } from './ducks/brukerinfo';
 import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
+import featureToggles, { State as FeatureTogglesState } from './ducks/feature-toggles';
 import oversettelseAvStillingFraAAReg, {
     State as OversettelseAvStillingFraAARegState
 } from './ducks/oversettelse-av-stilling-fra-aareg';
@@ -22,6 +23,7 @@ export interface AppState {
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     sisteStilling: SisteStillingState;
     form: FieldState;
+    featureToggles: FeatureTogglesState;
 }
 
 export default combineReducers<AppState>({
@@ -33,5 +35,6 @@ export default combineReducers<AppState>({
     oversettelseAvStillingFraAAReg,
     sisteStillingFraAAReg,
     sisteStilling,
-    form: formReducer
+    form: formReducer,
+    featureToggles,
 });

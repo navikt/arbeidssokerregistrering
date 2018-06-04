@@ -8,7 +8,7 @@ import { MatchProps } from '../../utils/utils';
 import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
 import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
-import { DINSITUASJON_PATH } from '../../utils/konstanter';
+import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 const veilederSvg = require('../../ikoner/illustrasjon-start.svg');
 
@@ -33,7 +33,11 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                             <FormattedMessage id="overskrift-start" values={{fornavn: hentFornavn(name)}}/>
                         </Innholdstittel>
                         <Normaltekst className="beskrivelse"><FormattedMessage id="beskrivelse-start"/></Normaltekst>
-                        <KnappBase type="hoved" className="knapp-start" onClick={() => history.push(DINSITUASJON_PATH)}>
+                        <KnappBase
+                            type="hoved"
+                            className="knapp-start"
+                            onClick={() => history.push(`${SKJEMA_PATH}/0`)}
+                        >
                             <FormattedMessage id="knapp-start"/>
                         </KnappBase>
                         <LenkeAvbryt />

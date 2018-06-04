@@ -1,6 +1,7 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
+import { Data as FeatureTogglesData } from './feature-toggles';
 
 export enum ActionTypes {
     SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING = 'SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING',
@@ -44,23 +45,8 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function hentStyrkkodeForSisteStillingFraAAReg() {
-    return doThenDispatch(() => Api.hentStyrkkodeForSisteStillingFraAAReg(), {
-        PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING,
-        OK : ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK,
-        FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,
-    });
-}
-
-export function lagreArbeidsforhold(data: Data) {
-    return {
-        data,
-        type: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK
-    };
-}
-
-export function registrerSisteArbeidsforhold(data: Data) {
-    return doThenDispatch(() => Api.registrerSisteArbeidsforhold(data), {
+export function hentStyrkkodeForSisteStillingFraAAReg(featureToggles: FeatureTogglesData) {
+    return doThenDispatch(() => Api.hentStyrkkodeForSisteStillingFraAAReg(featureToggles), {
         PENDING: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING,
         OK : ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK,
         FEILET: ActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,

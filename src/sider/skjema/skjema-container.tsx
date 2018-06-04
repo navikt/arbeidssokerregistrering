@@ -8,7 +8,6 @@ import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
-import Helsesporsmal from './sporsmal/sporsmal-helse';
 import { erSelvgaende } from './skjema-utils';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
 import LastInnSisteStilling from './last-inn-siste-stilling';
@@ -17,7 +16,7 @@ import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import HelseAndreForhold from './sporsmal/sporsmal-helse-andre-forhold';
+import AndreForhold from './sporsmal/sporsmal-andre-forhold';
 import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 
 interface StateProps {
@@ -97,12 +96,11 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
                         <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
-                        <Helsesporsmal sporsmalId="helse" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                        <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
+                        <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
                         <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
-                        <HelseAndreForhold sporsmalId="helseandreforhold" {...fellesProps}/>
+                        <AndreForhold sporsmalId="andreforhold" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>
