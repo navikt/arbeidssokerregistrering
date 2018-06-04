@@ -23,7 +23,7 @@ afterEach(() => {
 });
 
 describe('<Fullfor />', () => {
-    it('Skal ha fullfor knapp som er inaktiv', () => {
+    it('Skal ha fullfor knapp som er aktiv', () => {
         const push = sinon.spy();
         const props = {
             history: {
@@ -33,11 +33,10 @@ describe('<Fullfor />', () => {
 
 
         const wrapper = shallowwithStoreAndIntl(<Fullfor {...props} />);
-        const knappFullfor = wrapper.find(KnappFullfor);
-        expect(knappFullfor.props().disabled).to.be.true;
+        expect(wrapper.find(KnappFullfor)).to.be.have.length(1);
     });
 
-    it('Skal enable fullfor knappen når sjekkboks markeres', () => {
+    it('Skal vise advarsel når sjekkboks ikke er marker, når fullknapp klikkes', () => {
         const push = sinon.spy();
         const props = {
             history: {
@@ -45,14 +44,13 @@ describe('<Fullfor />', () => {
             }
         };
 
-
         const wrapper = mountWithStoreAndIntl((<Fullfor {...props} />));
-        const input = wrapper.find('input[type="checkbox"]');
 
-        input.simulate('change');
+        // Klikk på fullfør knapp
+        wrapper.find(KnappFullfor).simulate('click');
 
-        const knappFullfor = wrapper.find(KnappFullfor);
-        expect(knappFullfor.props().disabled).to.be.false;
+        // Forvent advarsel
+        expect(wrapper.html()).to.include('advarsel');
     });
 
     it('Skal vise feilmelding dersom fullfor feiler', () => {

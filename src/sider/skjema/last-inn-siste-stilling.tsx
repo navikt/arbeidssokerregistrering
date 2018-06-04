@@ -24,16 +24,18 @@ import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import Loader from '../../komponenter/loader/loader';
 import { hentOversattStillingFraAAReg } from './sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
 import { STATUS } from '../../ducks/api-utils';
+import { selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     labelTilStillingFraAAReg: string;
     sisteStilling: Stilling;
+    featureToggles: FeatureTogglesData;
 }
 
 interface DispatchProps {
-    hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
+    hentStyrkkodeForSisteStillingFraAAReg: (featureToggles: FeatureTogglesData) => Promise<void | {}>;
     hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
     velgStilling: (stilling: Stilling) => void;
 }
@@ -61,7 +63,7 @@ class LastInnSisteStilling extends React.Component<Props, State> {
         };
 
         if (this.props.sisteStilling === tomStilling) {
-            this.props.hentStyrkkodeForSisteStillingFraAAReg()
+            this.props.hentStyrkkodeForSisteStillingFraAAReg(this.props.featureToggles)
                 .then(() => {
                     const {styrk} = this.props.sisteStillingFraAAReg.data;
 
@@ -103,10 +105,13 @@ const mapStateToProps = (state) => ({
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
     labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),
     sisteStilling: selectSisteStilling(state),
+    featureToggles: selectFeatureToggles(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
+    hentStyrkkodeForSisteStillingFraAAReg: (featureToggles) => dispatch(
+        hentStyrkkodeForSisteStillingFraAAReg(featureToggles)
+    ),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });

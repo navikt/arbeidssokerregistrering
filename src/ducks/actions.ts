@@ -5,6 +5,7 @@ import { ActionTypes as SisteStillingFraAARegActionTypes } from './siste-stillin
 import { ActionTypes as OversettelseAvStillingFraAARegActionTypes } from './oversettelse-av-stilling-fra-aareg';
 import { ActionTypes as RegistrerBrukerActionTypes } from './registrerbruker';
 import { ActionTypes as BrukerInfoActionTypes } from './brukerinfo';
+import { ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
 
 type ActionTypes =
     BrukerInfoActionTypes |
@@ -13,6 +14,7 @@ type ActionTypes =
     SvarActionTypes |
     RegistrerBrukerActionTypes |
     OversettelseAvStillingFraAARegActionTypes |
-    SisteStillingFraAARegActionTypes;
+    SisteStillingFraAARegActionTypes |
+    FeatureTogglesActionTypes;
 
 export default ActionTypes;
