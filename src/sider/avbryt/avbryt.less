@@ -23,8 +23,8 @@
 
     &__tittel {
       .blokk-s();
-      max-width: 400px;
       padding-left: 0.5rem;
+      text-align: center;
     }
   }
 
@@ -34,22 +34,12 @@
   }
 
   .avbryt-panel__knapperad {
+    text-align: center;
     .knapp {
       margin: 0.5rem;
     }
   }
 
-}
-
-@media (max-width: 320px) {
-  .avbryt-panel-wrapper {
-    .avbryt-panel{
-      &__knapperad {
-        text-align: center;
-      }
-    }
-
-  }
 }
 
 @media (min-width: @screen-sm-min) {
@@ -64,6 +54,15 @@
       &__illustrasjon {
         display: block;
       }
+
+      &__tittel {
+        max-width: 400px;
+        text-align: inherit;
+      }
+    }
+
+    .avbryt-panel__knapperad {
+      text-align: inherit;
     }
   }
 }
