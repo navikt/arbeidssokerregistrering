@@ -1,5 +1,6 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
+import { backendToggle, getRegistreringBackendUrl, Data as FeatureTogglesData } from './feature-toggles';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
@@ -10,11 +11,11 @@ export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjon
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
+export const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
+export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
+export const FEATURE_URL = '/feature';
 
 const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
-const VEILARBOPPFOLGINGPROXY_URL = document.location.href.includes('nyreg')
-    ? '/veilarbregistrering/api'
-    : '/veilarboppfolgingproxy/api';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
@@ -23,6 +24,7 @@ export const getCookie = name => {
     const match = re.exec(document.cookie);
     return match !== null ? match[1] : '';
 };
+
 function getHeaders() {
     return new Headers({
         'Content-Type': 'application/json',
@@ -34,18 +36,18 @@ const MED_CREDENTIALS = {
     credentials: ('same-origin' as RequestCredentials)
 };
 
-export function hentRegistreringStatus() {
+export function hentRegistreringStatus(featureToggles: FeatureTogglesData) {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        url: `${getRegistreringBackendUrl(featureToggles)}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
     });
 }
 
-export function registrerBruker(data: RegistrerBrukerData) {
+export function registrerBruker(data: RegistrerBrukerData, featureToggles: FeatureTogglesData) {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`,
+        url: `${getRegistreringBackendUrl(featureToggles)}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
@@ -84,9 +86,9 @@ export function hentBrukerInfo() {
     });
 }
 
-export function hentStyrkkodeForSisteStillingFraAAReg() {
+export function hentStyrkkodeForSisteStillingFraAAReg(featureToggles: FeatureTogglesData) {
     return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`,
+        url: `${getRegistreringBackendUrl(featureToggles)}/sistearbeidsforhold`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
@@ -111,5 +113,15 @@ export function hentStillingMedStyrk08(sokestreng: string) {
             headers: getHeaders()
         },
         recoverWith: () => ({'typeaheadYrkeList': []})
+    });
+}
+
+export function hentFeatureToggles() {
+    return fetchToJson({
+        url: `${FEATURE_URL}/?feature=${backendToggle}`,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        },
+        recoverWith: () => ({})
     });
 }

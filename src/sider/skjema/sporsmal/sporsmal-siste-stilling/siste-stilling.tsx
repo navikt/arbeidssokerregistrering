@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import {
-    hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
 } from '../../../../ducks/siste-stilling-fra-aareg';
@@ -40,7 +39,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
     hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
     velgStilling: (stilling: Stilling) => void;
 }
@@ -135,7 +133,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
