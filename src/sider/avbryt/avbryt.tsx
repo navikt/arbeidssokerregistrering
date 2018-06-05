@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
@@ -22,17 +22,16 @@ function Avbryt({history}: Props) {
                 </Lukknapp>
             </Row>
             <Row className="avbryt-panel">
-                <Column sm="4">
+                <Column sm="3">
                     <img src={avbrytSvg} alt="Avsjekk" className="avbryt-panel__illustrasjon"/>
                 </Column>
-                <Column sm="8" xs="12">
-                    <Systemtittel className="avbryt-panel__tittel">
+                <Column sm="9" xs="12">
+                    <Innholdstittel className="avbryt-panel__tittel">
                         <FormattedMessage id="beskrivelse-avbryt"/>
-                    </Systemtittel>
+                    </Innholdstittel>
                     <div className="avbryt-panel__knapperad">
                         <KnappBase
                             type="standard"
-                            mini={true}
                             onClick={() => document.location.href = DITTNAV_URL}
                         >
                             <FormattedMessage id="knapp-ja-avbryt"/>
@@ -40,7 +39,6 @@ function Avbryt({history}: Props) {
                         <KnappBase
                             type="standard"
                             onClick={() => history.goBack()}
-                            mini={true}
                         >
                             <FormattedMessage id="knapp-nei"/>
                         </KnappBase>
