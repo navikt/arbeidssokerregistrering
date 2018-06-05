@@ -37,7 +37,10 @@ function Avbryt({history}: Props) {
                         >
                             <FormattedMessage id="knapp-ja-avbryt"/>
                         </KnappBase>
-                        <KnappBase type="standard" onClick={() => history.goBack()}>
+                        <KnappBase
+                            type="standard"
+                            onClick={() => history.goBack()}
+                        >
                             <FormattedMessage id="knapp-nei"/>
                         </KnappBase>
                     </div>
