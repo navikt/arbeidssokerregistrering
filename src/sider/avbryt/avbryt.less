@@ -37,6 +37,9 @@
     text-align: center;
     .knapp {
       margin: 0.5rem;
+      padding-left: 0;
+      padding-right: 0;
+      width: 151px;
     }
   }
 
@@ -44,15 +47,16 @@
 
 @media (min-width: @screen-sm-min) {
   .avbryt-panel-wrapper {
-    max-width: 768px;
+    max-width: 780px;
 
     .avbryt-panel {
       display: flex;
       align-items: center;
-      padding: 2.5rem 2rem;
+      padding: 2rem;
 
       &__illustrasjon {
         display: block;
+        margin: 0 auto;
       }
 
       &__tittel {
