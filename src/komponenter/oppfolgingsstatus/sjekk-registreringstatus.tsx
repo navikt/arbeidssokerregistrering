@@ -4,6 +4,8 @@ import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../
 import { AppState } from '../../reducer';
 import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
 import { sendBrukerTilVeientilarbeid } from './utils';
+import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface SjekkRegistreringstatusConfig {
     sendBrukerTilVeientilarbeid: () => void;
@@ -17,7 +19,7 @@ interface StateProps {
     registreringstatusData: RegistreringstatusData;
 }
 
-type Props = OwnProps & StateProps;
+type Props = OwnProps & StateProps & InjectedIntlProps;
 
 class SjekkRegistreringstatus extends React.PureComponent<Props> {
     static defaultProps: Partial<Props> = {
@@ -26,10 +28,10 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
         }
     };
     render () {
-        const {registreringstatusData, config, children} = this.props;
+        const {registreringstatusData, children} = this.props;
         if (registreringstatusData.underOppfolging) {
-            config!.sendBrukerTilVeientilarbeid();
-            return null;
+            // sendt til veientilarbeid
+            return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!registreringstatusData.oppfyllerKrav) {
             return <SblRegistrering/>;
         } else {
@@ -43,5 +45,5 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 export default connect(mapStateToProps)(
-    SjekkRegistreringstatus
+    injectIntl(SjekkRegistreringstatus)
 );
