@@ -11,7 +11,6 @@ import {
 } from '../../test/test-utils';
 import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
 import { create } from '../../store';
-import { sendBrukerTilVeientilarbeid } from './utils';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 
 enzyme.configure({adapter: new Adapter()});
@@ -38,14 +37,9 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
-        const sendBrukerTilVeientilarbeidSpy = sandbox.spy(sendBrukerTilVeientilarbeid);
-        const config = {
-            sendBrukerTilVeientilarbeid: sendBrukerTilVeientilarbeidSpy,
-        };
-
         dispatchRegistreringstatus({underOppfolging: true, oppfyllerKrav: false}, store);
 
-        const wrapper = mountWithStoreAndIntl(<SjekkRegistreringstatus config={config}/>, store);
+        const wrapper = mountWithStoreAndIntl(<SjekkRegistreringstatus/>, store);
 
         expect(wrapper.find(AlleredeRegistrert)).to.have.length(1);
     });
