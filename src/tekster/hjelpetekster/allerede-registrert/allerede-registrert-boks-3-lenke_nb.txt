@@ -1,1 +1,1 @@
-/aktivitetsplan/dialog/
+/aktivitetsplan/dialog/ny/
