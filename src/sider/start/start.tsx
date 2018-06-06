@@ -29,9 +29,9 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                 <div className="startside__banner">
                     <div className="limit">
                         <div className="startside__intro">
-                            <h1 className="typo-undertittel">
+                            <p className="typo-undertittel">
                                 <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
-                            </h1>
+                            </p>
                             <p className="typo-normal">
                                 <FormattedMessage id="beskrivelse-start-dialog"/>
                             </p>
@@ -56,7 +56,7 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
                             >
                                 <FormattedMessage id="knapp-start"/>
                             </KnappBase>
-                            <LenkeAvbryt/>
+                            <LenkeAvbryt tekstId="avbryt-lenke"/>
                         </Knappervertikalt>
                     </div>
                 </div>
