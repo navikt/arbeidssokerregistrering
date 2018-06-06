@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { DITTNAV_URL } from '../../ducks/api';
 import { Container, Column, Row } from 'nav-frontend-grid';
+import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 
 type Props = RouteComponentProps<MatchProps>;
 
@@ -15,7 +16,7 @@ const avbrytSvg = require('./avbryt.svg');
 function Avbryt({history}: Props) {
     return (
         <Container className="avbryt-panel-wrapper">
-            <div className="graa-bakgrunn"/>
+            <GraaBakgrunn />
             <Row className="avbryt-panel__lukkknapperad">
                 <Lukknapp onClick={() => history.goBack()}>
                     Lukk
