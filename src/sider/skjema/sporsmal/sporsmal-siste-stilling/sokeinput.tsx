@@ -79,7 +79,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         inputProps={{'autoComplete': 'off'}}
                         arrowRenderer={() => null}
                         loadingPlaceholder="Laster..."
-                        searchPromptText="Skriv for å søke"
                         filterOptions={(options, filter, currentValues) => options}
                         clearable={false}
                         autoload={false}

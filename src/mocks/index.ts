@@ -8,18 +8,26 @@ import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
 import { backendToggle } from '../ducks/feature-toggles';
-import {FEATURE_URL, VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL} from "../ducks/api";
+import {
+    FEATURE_URL, VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL
+} from '../ducks/api';
+import autentisert from './autentisert';
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_BRUKER_INFO = true;
 const MOCK_INNLOGGINGS_INFO = true;
+const MOCK_AUTENTISERINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
+
+if (MOCK_AUTENTISERINGS_INFO) {
+    (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(1000, autentisert)));
+}
 
 if (MOCK_START_REGISRERING_STATUS) {
     (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, startRegistreringStatus)));

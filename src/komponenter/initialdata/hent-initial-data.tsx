@@ -5,13 +5,15 @@ import { AppState } from '../../reducer';
 import {
     hentInnloggingsInfo,
     selectInnloggingsinfo,
-    State as InnloggingsinfoState,
-    Data as InnloggingsinfoData } from '../../ducks/innloggingsinfo';
+    State as InnloggingsinfoState } from '../../ducks/innloggingsinfo';
 import {
     hentBrukerInfo,
     selectBrukerInfo,
     State as BrukerinfoState,
 } from '../../ducks/brukerinfo';
+import { hentAutentiseringsInfo,
+    State as AuthState,
+    Data as AuthData } from '../../ducks/autentiseringsinfo';
 import {
     hentRegistreringStatus,
     selectRegistreringstatus,
@@ -22,9 +24,11 @@ import StepUp from './stepup';
 import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import { hentFeatureToggles, selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
+import { selectAutentiseringsinfo } from '../../ducks/autentiseringsinfo';
 
 interface StateProps {
     innloggingsinfo: InnloggingsinfoState;
+    autentiseringsinfo: AuthState;
     registreringstatus: RegistreringstatusState;
     brukerinfo: BrukerinfoState;
     featureToggles: FeatureTogglesData;
@@ -32,6 +36,7 @@ interface StateProps {
 
 interface DispatchProps {
     hentInnloggingsInfo: () => Promise<void | {}>;
+    hentAutentiseringsInfo: () => Promise<void | {}>;
     hentBrukerInfo: () => void;
     hentRegistreringStatus: (featureToggles: FeatureTogglesData) => void;
     hentFeatureToggles: () => Promise<void | {}>;
@@ -44,8 +49,9 @@ export class HentInitialData extends React.Component<Props> {
 
         this.props.hentFeatureToggles().then(() => {
             this.props.hentBrukerInfo();
-            this.props.hentInnloggingsInfo().then((res) => {
-                if ((res as InnloggingsinfoData).securityLevel === '4') {
+            this.props.hentInnloggingsInfo();
+            this.props.hentAutentiseringsInfo().then((res) => {
+                if ((res as AuthData).niva === 4) {
                     this.props.hentRegistreringStatus(this.props.featureToggles);
                 }
             });
@@ -53,10 +59,10 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, innloggingsinfo, intl } = this.props;
-        const { securityLevel } = innloggingsinfo.data;
+        const { children, registreringstatus, autentiseringsinfo, innloggingsinfo, intl } = this.props;
+        const { niva } = autentiseringsinfo.data;
 
-        if (securityLevel !== '4' && innloggingsinfo.status === STATUS.OK) {
+        if (niva !== 4 && autentiseringsinfo.status === STATUS.OK) {
             return <StepUp intl={intl} />;
         }
 
@@ -65,7 +71,8 @@ export class HentInitialData extends React.Component<Props> {
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[
                     registreringstatus,
-                    innloggingsinfo
+                    innloggingsinfo,
+                    autentiseringsinfo
                 ]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
@@ -77,6 +84,7 @@ export class HentInitialData extends React.Component<Props> {
 }
 
 const mapStateToProps = (state) => ({
+    autentiseringsinfo: selectAutentiseringsinfo(state),
     innloggingsinfo:  selectInnloggingsinfo(state),
     registreringstatus: selectRegistreringstatus(state),
     brukerinfo: selectBrukerInfo(state),
@@ -85,6 +93,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentInnloggingsInfo:  () => dispatch(hentInnloggingsInfo()),
+    hentAutentiseringsInfo:  () => dispatch(hentAutentiseringsInfo()),
     hentBrukerInfo:  () => dispatch(hentBrukerInfo()),
     hentRegistreringStatus: (featureToggles) => dispatch(hentRegistreringStatus(featureToggles)),
     hentFeatureToggles: () => dispatch(hentFeatureToggles()),
