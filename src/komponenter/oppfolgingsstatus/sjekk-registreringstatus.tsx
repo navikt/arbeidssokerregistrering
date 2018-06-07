@@ -3,33 +3,20 @@ import { connect } from 'react-redux';
 import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { AppState } from '../../reducer';
 import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
-import { sendBrukerTilVeientilarbeid } from './utils';
-
-interface SjekkRegistreringstatusConfig {
-    sendBrukerTilVeientilarbeid: () => void;
-}
-
-interface OwnProps {
-    config?: SjekkRegistreringstatusConfig;
-}
+import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
 }
 
-type Props = OwnProps & StateProps;
+type Props = StateProps & InjectedIntlProps;
 
 class SjekkRegistreringstatus extends React.PureComponent<Props> {
-    static defaultProps: Partial<Props> = {
-        config: {
-            sendBrukerTilVeientilarbeid: sendBrukerTilVeientilarbeid,
-        }
-    };
     render () {
-        const {registreringstatusData, config, children} = this.props;
+        const {registreringstatusData, children} = this.props;
         if (registreringstatusData.underOppfolging) {
-            config!.sendBrukerTilVeientilarbeid();
-            return null;
+            return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!registreringstatusData.oppfyllerKrav) {
             return <SblRegistrering/>;
         } else {
@@ -43,5 +30,5 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 export default connect(mapStateToProps)(
-    SjekkRegistreringstatus
+    injectIntl(SjekkRegistreringstatus)
 );

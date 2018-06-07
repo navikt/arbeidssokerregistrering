@@ -19,9 +19,9 @@ export function shallowwithIntl(children: React.ReactElement<ElementWithStore>) 
     return shallowWithIntl(React.cloneElement(children)).dive();
 }
 
-export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWithStore>) {
+export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
     return shallowWithIntl(React.cloneElement(children, {
-        store
+        store: withStore || store
     })).dive().dive();
 }
 
