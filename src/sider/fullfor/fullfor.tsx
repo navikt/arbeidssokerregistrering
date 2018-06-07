@@ -75,16 +75,12 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     registrerBrukerOnClick() {
-        // tslint:disable
-        this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
-
-        const {markert} = this.state;
-        if (!markert) {
+        if (!this.state.markert) {
             this.setState({ visAdvarsel: true });
-            console.log('not marked');
             return;
         }
-        console.log('registerin');
+
+        this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
         this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
             .then((res: { brukerStatus: RegistreringStatus }) => {
                 if (!!res && res.brukerStatus === RegistreringStatus.STATUS_SUKSESS) {
