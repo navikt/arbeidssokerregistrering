@@ -75,8 +75,16 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     registrerBrukerOnClick() {
+        // tslint:disable
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
+        const {markert} = this.state;
+        if (!markert) {
+            this.setState({ visAdvarsel: true });
+            console.log('not marked');
+            return;
+        }
+        console.log('registerin');
         this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
             .then((res: { brukerStatus: RegistreringStatus }) => {
                 if (!!res && res.brukerStatus === RegistreringStatus.STATUS_SUKSESS) {
@@ -90,11 +98,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                     this.giBrukerPassendeFeilmelding(res);
                 }
             });
-
-        const {markert} = this.state;
-        if (!markert) {
-            this.setState({ visAdvarsel: true });
-        }
     }
 
     giBrukerPassendeFeilmelding(res?: { brukerStatus: RegistreringStatus }) {
@@ -145,7 +148,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
             <Innholdslaster
                 feilmeldingKomponent={<FeilmeldingGenerell intl={intl}/>}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
-                loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
+                loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
                 <ResponsivSide>
                     <div className="fullfor">

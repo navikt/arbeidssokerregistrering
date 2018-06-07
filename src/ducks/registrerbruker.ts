@@ -16,12 +16,7 @@ export interface State {
     status: string;
 }
 
-export interface ErrorData {
-    data: string;
-    response?: Response;
-}
-
-interface OwnData {
+export interface Data {
     nusKode?: string;
     yrkesPraksis?: string;
     enigIOppsummering?: boolean;
@@ -29,10 +24,7 @@ interface OwnData {
     harHelseutfordringer?: boolean;
     yrkesbeskrivelse?: string;
     konseptId?: number;
-
 }
-
-export type Data = OwnData;
 
 interface Action {
     type: ActionTypes;
