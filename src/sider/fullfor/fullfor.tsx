@@ -15,7 +15,7 @@ import {
     State as RegistrerBrukerState,
     Data as RegistrerBrukerData
 } from '../../ducks/registrerbruker';
-import Feilhandtering from './feilhandtering/feilhandtering';
+import FeilmeldingGenerell from './feilhandtering/feilmelding-generell';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid  } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
@@ -23,10 +23,19 @@ import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
+import { DUERNAREGISTRERT_PATH, FEIL_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import Loader from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
+
+export enum RegistreringStatus {
+    INGEN_STATUS = 'INGEN_STATUS',
+    STATUS_SUKSESS = 'STATUS_SUKSESS',
+    BRUKER_ER_UKJENT = 'BRUKER_ER_UKJENT',
+    BRUKER_KAN_IKKE_REAKTIVERES = 'BRUKER_KAN_IKKE_REAKTIVERES',
+    BRUKER_MANGLER_ARBEIDSTILLATELSE = 'BRUKER_MANGLER_ARBEIDSTILLATELSE',
+    BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET = 'BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET',
+}
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -66,15 +75,27 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
         this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
-            .then((res) => {
-                if (!!res) {
+            .then((res: { brukerStatus: RegistreringStatus }) => {
+                if (!!res && res.brukerStatus === RegistreringStatus.STATUS_SUKSESS) {
+                    // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
                     registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
                         .then(
                             () => this.props.history.push(DUERNAREGISTRERT_PATH),
                             () => this.props.history.push(DUERNAREGISTRERT_PATH),
                         );
+                } else {
+                    this.giBrukerPassendeFeilmelding(res);
                 }
             });
+    }
+
+    giBrukerPassendeFeilmelding(res?: { brukerStatus: RegistreringStatus }) {
+        const goTo = this.props.history.push;
+        if (!res) {
+            goTo(FEIL_PATH);
+        } else {
+            goTo(`${FEIL_PATH}/${res.brukerStatus}`);
+        }
     }
 
     settMarkert() {
@@ -84,7 +105,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     render() {
-        console.log('fullfor', this.props); // tslint:disable-line
         const {registrerBrukerData, intl} = this.props;
         const loaderTittelElement = (
             <React.Fragment>
@@ -99,7 +119,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<Feilhandtering/>}
+                feilmeldingKomponent={<FeilmeldingGenerell intl={intl}/>}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
             >

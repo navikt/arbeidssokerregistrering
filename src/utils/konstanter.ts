@@ -6,6 +6,7 @@ export const SBLREG_PATH = '/sblregistrering';
 export const AVBRYT_PATH = '/avbryt';
 export const FULLFOR_PATH = '/fullfor';
 export const DUERNAREGISTRERT_PATH = '/duernaregistrert';
+export const FEIL_PATH = '/feil';
 
 /* Besvarelser */
 

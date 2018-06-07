@@ -3,9 +3,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import ResponsivSide from '../../../komponenter/side/responsiv-side';
 import Feilmelding from './feilmelding/feilmelding';
-// import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
 
-class FeilmeldingSpesiell extends React.Component<InjectedIntlProps> {
+class FeilmeldingBrukersStatusUgyldig extends React.Component<InjectedIntlProps> {
     render() {
         const messages = this.props.intl.messages;
         return (
@@ -27,4 +26,4 @@ class FeilmeldingSpesiell extends React.Component<InjectedIntlProps> {
     }
 }
 
-export default injectIntl(FeilmeldingSpesiell);
+export default injectIntl(FeilmeldingBrukersStatusUgyldig);

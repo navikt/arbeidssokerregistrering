@@ -16,13 +16,6 @@ export interface State {
     status: string;
 }
 
-export enum ErrorType {
-    BRUKER_FORSVUNNET = 'BRUKER_FORSVUNNET',
-    FINNES_IKKE_I_TPS = 'FINNES_IKKE_I_TPS',
-    MANGLER_ARBEIDSTILLATELSE = 'MANGLER_ARBEIDSTILLATELSE',
-    ANNET = 'ANNET',
-}
-
 export interface ErrorData {
     data: string;
     response?: Response;
@@ -36,9 +29,10 @@ interface OwnData {
     harHelseutfordringer?: boolean;
     yrkesbeskrivelse?: string;
     konseptId?: number;
+
 }
 
-export type Data = OwnData | ErrorData;
+export type Data = OwnData;
 
 interface Action {
     type: ActionTypes;

@@ -1,9 +1,10 @@
 export default {
-    id: 'fab292f56216d3e0090ab173faf00664',
-    type: 'UKJENT',
-    detaljer: null,
-    data: 'data',
-    response: {
-        errorType: 'BRUKER_FORSVUNNET'
-    },
+    'id' : 55,
+    'nusKode' : '7',
+    'yrkesPraksis' : '5223',
+    'opprettetDato' : '2018-06-06T00:00:00+02:00',
+    'enigIOppsummering' : true,
+    'oppsummering' : '-',
+    'harHelseutfordringer' : false,
+    'brukerStatus' : 'STATUS_SUKSESS'
 };
