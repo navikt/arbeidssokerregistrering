@@ -1,41 +1,52 @@
 import * as React from 'react';
-import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
-import Ikon from 'nav-frontend-ikoner-assets';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { DITTNAV_URL } from '../../ducks/api';
+import { Container, Column, Row } from 'nav-frontend-grid';
+import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 
 type Props = RouteComponentProps<MatchProps>;
 
+const avbrytSvg = require('./avbryt.svg');
+
 function Avbryt({history}: Props) {
     return (
-        <div className="avbryt-panel-wrapper">
-            <div className="avbryt-panel__lukkknapperad">
+        <Container className="avbryt-panel-wrapper">
+            <GraaBakgrunn />
+            <Row className="avbryt-panel__lukkknapperad">
                 <Lukknapp onClick={() => history.goBack()}>
                     Lukk
                 </Lukknapp>
-            </div>
-            <div className="avbryt-panel">
-                <Sidetittel className="blokk">
-                    <FormattedMessage id="overskrift-avbryt"/>
-                </Sidetittel>
-                <Normaltekst className="avbryt-fokus blokk-xs">
-                    <span className="mmr"><Ikon kind="info-sirkel-fylt" size={32} className=""/></span>
-                    <FormattedMessage id="beskrivelse-avbryt"/>
-                </Normaltekst>
-            </div>
-            <div className="avbryt-panel__knapperad">
-                <KnappBase type="standard" className="knapp" onClick={() => document.location.href = DITTNAV_URL}>
-                    <FormattedMessage id="knapp-ja-avbryt"/>
-                </KnappBase>
-                <KnappBase type="standard" className="knapp" onClick={() => history.goBack()}>
-                    <FormattedMessage id="knapp-nei"/>
-                </KnappBase>
-            </div>
-        </div>
+            </Row>
+            <Row className="avbryt-panel">
+                <Column sm="3">
+                    <img src={avbrytSvg} alt="Avsjekk" className="avbryt-panel__illustrasjon"/>
+                </Column>
+                <Column sm="9" xs="12">
+                    <Innholdstittel className="avbryt-panel__tittel">
+                        <FormattedMessage id="beskrivelse-avbryt"/>
+                    </Innholdstittel>
+                    <div className="avbryt-panel__knapperad">
+                        <KnappBase
+                            type="standard"
+                            onClick={() => document.location.href = DITTNAV_URL}
+                        >
+                            <FormattedMessage id="knapp-ja-avbryt"/>
+                        </KnappBase>
+                        <KnappBase
+                            type="standard"
+                            onClick={() => history.goBack()}
+                        >
+                            <FormattedMessage id="knapp-nei"/>
+                        </KnappBase>
+                    </div>
+                </Column>
+            </Row>
+        </Container>
     );
 }
 

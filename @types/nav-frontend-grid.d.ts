@@ -11,7 +11,7 @@ declare module "nav-frontend-grid" {
 	}
 
 	export interface ColumnProps {
-		xs: string;
+		xs?: string;
 		sm?: string;
 		md?: string;
 		lg?: string;

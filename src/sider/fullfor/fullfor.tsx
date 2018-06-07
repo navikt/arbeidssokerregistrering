@@ -27,6 +27,7 @@ import { DUERNAREGISTRERT_PATH, FEIL_PATH, START_PATH } from '../../utils/konsta
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import Loader from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 export enum RegistreringStatus {
     INGEN_STATUS = 'INGEN_STATUS',
@@ -48,6 +49,7 @@ interface DispatchProps {
 
 interface EgenStateProps {
     markert: boolean;
+    visAdvarsel: boolean;
     sblArbeidRegistrerBrukerStatus: string;
 }
 
@@ -58,6 +60,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         super(props);
         this.state = {
             markert: false,
+            visAdvarsel: false,
             sblArbeidRegistrerBrukerStatus: STATUS.OK
         };
         this.settMarkert = this.settMarkert.bind(this);
@@ -87,6 +90,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                     this.giBrukerPassendeFeilmelding(res);
                 }
             });
+
+        const {markert} = this.state;
+        if (!markert) {
+            this.setState({ visAdvarsel: true })
+        }
     }
 
     giBrukerPassendeFeilmelding(res?: { brukerStatus: RegistreringStatus }) {
@@ -102,10 +110,18 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         this.setState({
             markert: !this.state.markert
         });
+
+        const {markert} = this.state;
+        if (!markert) {
+            this.setState({
+                visAdvarsel: false
+            });
+        }
     }
 
     render() {
         const {registrerBrukerData, intl} = this.props;
+
         const loaderTittelElement = (
             <React.Fragment>
                 <Innholdstittel className="blokk-s">
@@ -115,6 +131,14 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                     Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
                 </Normaltekst>
             </React.Fragment>
+        );
+
+        const advarselElement = this.state.visAdvarsel && (
+            <NavAlertStripe type="advarsel">
+                <Normaltekst>
+                    <FormattedMessage id="fullfor-advarsel"/>
+                </Normaltekst>
+            </NavAlertStripe>
         );
 
         return (
@@ -145,10 +169,10 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
                             className="bekreft-panel"
                         />
+                        {advarselElement}
                         <Knappervertikalt>
                             <KnappFullfor
                                 intl={intl}
-                                disabled={!this.state.markert}
                                 onClick={this.registrerBrukerOnClick}
                             />
                             <LenkeAvbryt classname="avbryt"/>

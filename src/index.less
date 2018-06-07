@@ -12,6 +12,7 @@
 @import '../node_modules/nav-frontend-alertstriper-style/src/index';
 @import '../node_modules/nav-frontend-lenker-style/src/lenker-style';
 @import '../node_modules/nav-frontend-chevron-style/src/index';
+@import '../node_modules/nav-frontend-grid-style/src/index';
 
 
 body {
@@ -37,11 +38,14 @@ main.arbsokreg_app {
     @import 'komponenter/loader/loader';
     @import 'komponenter/progress-bar/progress-bar';
     @import 'komponenter/banner/banner';
+    @import 'komponenter/graa-bakgrunn/graa-bakgrunn';
+
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/sokeinput';
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/siste-stilling';
     @import 'sider/fullfor/feilhandtering/feilmelding-brukers-status-ugyldig';
     @import 'sider/fullfor/feilhandtering/feilmelding/feilmelding';
 
+    @import 'sider/allerede-registrert/allerede-registrert';
     @import 'sider/skjema/skjema';
     @import 'sider/duernaregistrert/duernaregistrert';
     @import 'sider/duernaregistrert/avsjekk-animasjon';
@@ -49,12 +53,11 @@ main.arbsokreg_app {
     @import 'sider/fullfor/feilhandtering/feilmelding-generell';
     @import (less) '../node_modules/react-select/dist/react-select.css';
 
-
     @import 'sider/start/start';
     @import 'sider/fullfor/fullfor';
-
-
     @import 'sider/avbryt/avbryt';
+
+    @import (less) '../node_modules/react-select/dist/react-select.css';
 }
 .appContainer {
     height: 100%;

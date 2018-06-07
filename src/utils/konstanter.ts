@@ -7,6 +7,7 @@ export const AVBRYT_PATH = '/avbryt';
 export const FULLFOR_PATH = '/fullfor';
 export const DUERNAREGISTRERT_PATH = '/duernaregistrert';
 export const FEIL_PATH = '/feil';
+export const ALLEREDEREGISTRERT_PATH = '/allerederegistrert';
 
 /* Besvarelser */
 
