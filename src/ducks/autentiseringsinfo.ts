@@ -15,7 +15,7 @@ export interface State {
 
 export interface Data {
     harGyldigOidcToken?: boolean;
-    niva?: string;
+    niva?: number;
 }
 
 interface Action {

@@ -51,7 +51,7 @@ export class HentInitialData extends React.Component<Props> {
             this.props.hentBrukerInfo();
             this.props.hentInnloggingsInfo();
             this.props.hentAutentiseringsInfo().then((res) => {
-                if ((res as AuthData).niva === '4') {
+                if ((res as AuthData).niva === 4) {
                     this.props.hentRegistreringStatus(this.props.featureToggles);
                 }
             });
@@ -62,7 +62,7 @@ export class HentInitialData extends React.Component<Props> {
         const { children, registreringstatus, autentiseringsinfo, innloggingsinfo, intl } = this.props;
         const { niva } = autentiseringsinfo.data;
 
-        if (niva !== '4' && autentiseringsinfo.status === STATUS.OK) {
+        if (niva !== 4 && autentiseringsinfo.status === STATUS.OK) {
             return <StepUp intl={intl} />;
         }
 
