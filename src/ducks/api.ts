@@ -80,7 +80,7 @@ export function hentInnloggingsInfo() {
 
 export function hentAutentiseringsInfo() {
     return fetchToJson({
-        url: `${AUTENTISERINGSINFO_URL}?randomness=${Math.random()}`,
+        url: `${AUTENTISERINGSINFO_URL}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
