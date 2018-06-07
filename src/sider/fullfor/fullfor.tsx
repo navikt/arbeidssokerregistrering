@@ -93,7 +93,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
         const {markert} = this.state;
         if (!markert) {
-            this.setState({ visAdvarsel: true })
+            this.setState({ visAdvarsel: true });
         }
     }
 
