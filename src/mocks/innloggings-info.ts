@@ -1,5 +1,3 @@
 export default {
-    authenticated: true,
-    name: 'TEST TESTESEN',
-    securityLevel: '4'
+    name: 'TEST TESTESEN'
 };
