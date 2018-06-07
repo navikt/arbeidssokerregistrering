@@ -3,13 +3,14 @@ import { Data as RegistrerBrukerData } from './registrerbruker';
 import { backendToggle, getRegistreringBackendUrl, Data as FeatureTogglesData } from './feature-toggles';
 
 export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
+export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
 export const DITTNAV_URL = '/dittnav/';
 export const FORSIDENAV_URL = 'https://www.nav.no/';
 export const VEIENTILARBEID_URL = '/veientilarbeid/';
 export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjonsmodul=true&visdagpenger=true';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
-export const VEILARBSTEPUP = `/veilarbstepup/niva/4?url=${ARBEIDSSOKERREGISTRERING_START}`;
+export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 export const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
@@ -71,6 +72,15 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
 export function hentInnloggingsInfo() {
     return fetchToJson({
         url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
+    });
+}
+
+export function hentAutentiseringsInfo() {
+    return fetchToJson({
+        url: `${AUTENTISERINGSINFO_URL}?randomness=${Math.random()}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
