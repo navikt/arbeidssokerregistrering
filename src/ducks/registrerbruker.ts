@@ -44,7 +44,7 @@ export default function (state: State = initialState, action: Action): State {
             }
             return {...state, status: STATUS.PENDING};
         case ActionTypes.REG_BRUKER_STATUS_FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
+            return {...state, status: STATUS.ERROR};
         case ActionTypes.REG_BRUKER_STATUS_OK: {
             return {...state, status: STATUS.OK, data: action.data};
         }
