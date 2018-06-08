@@ -87,7 +87,7 @@ export function dispatchRegistreringstatus(data: RegStatusData, s: Store<AppStat
 }
 
 export class FetchStub {
-    urlMap: { [url: string]: {response?: {}, status: number}};
+    urlMap: { [url: string]: {response?: any, status: number}}; // tslint:disable-line no-any
     callCount: { [url: string]: number };
     constructor() {
         this.urlMap = {};
@@ -98,11 +98,11 @@ export class FetchStub {
         this.callCount[url] = 0;
         return this;
     }
-    addErrorResponse(url: string, status: number) {
+    addErrorResponse(url: string, status: number, response?: any) { // tslint:disable-line no-any
         if  (status < 400) {
             throw new Error('Status should be >= 400');
         }
-        this.urlMap[url] = { status };
+        this.urlMap[url] = { status, response };
         this.callCount[url] = 0;
         return this;
     }

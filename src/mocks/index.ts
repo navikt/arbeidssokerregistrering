@@ -3,7 +3,6 @@ import { mock, respondWith, delayed, lagPamjanzzRespons } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import brukerInfo from './bruker-info';
-import { registreringFeilrespons } from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
@@ -30,8 +29,9 @@ if (MOCK_AUTENTISERINGS_INFO) {
 }
 
 if (MOCK_START_REGISRERING_STATUS) {
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, startRegistreringStatus)));
-    (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, respondWith(delayed(1000, startRegistreringStatus)));
+    const response = respondWith(delayed(1000, startRegistreringStatus));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, response);
+    (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_FEATURE_TOGGLES) {
@@ -39,8 +39,9 @@ if (MOCK_FEATURE_TOGGLES) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, registreringFeilrespons, 500)));
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, respondWith(delayed(1000, registreringFeilrespons, 500)));
+    const response = respondWith(delayed(1000, undefined));
+    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, response);
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_INNLOGGINGS_INFO) {
@@ -52,8 +53,9 @@ if (MOCK_BRUKER_INFO) {
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`, respondWith(delayed(1000, sisteStillingFraAAReg)));
-    (mock as any).get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(1000, sisteStillingFraAAReg)));
+    const response = respondWith(delayed(1000, sisteStillingFraAAReg));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`, response);
+    (mock as any).get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, response);
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {

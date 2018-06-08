@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import FeilmeldingBrukersStatusUgyldig from './feilmelding-brukers-status-ugyldig';
-import FeilmeldingGenerell from './feilmelding-generell';
+import FeilmeldingGenerell from '../../feilmelding/feilmelding-generell';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { AppState } from '../../../reducer';
 import { ErrorData as FullforErrorData, ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
@@ -12,7 +12,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-class Feilhandtering extends React.Component<Props> {
+class FullforFeilhandtering extends React.Component<Props> {
     render() {
         const errorData = this.props.errorData;
         if (errorData && errorData.data) {
@@ -39,4 +39,4 @@ function mapStateToProps(state: AppState) {
     };
 }
 
-export default connect(mapStateToProps)(injectIntl(Feilhandtering));
+export default connect(mapStateToProps)(injectIntl(FullforFeilhandtering));

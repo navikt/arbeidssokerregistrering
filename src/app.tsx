@@ -24,7 +24,7 @@ import {
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
-import Feilhandtering from './sider/fullfor/feilhandtering/feilhandtering';
+import FeilmeldingContainer from './sider/feilmelding/feilmelding-container';
 
 const store = getStore();
 
@@ -48,7 +48,7 @@ class App extends React.Component {
                                             <Route path={AVBRYT_PATH} component={Avbryt}/>
                                             <Route path={FULLFOR_PATH} component={Fullfor}/>
                                             <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
-                                            <Route path={`${FEIL_PATH}/:status?`} component={Feilhandtering}/>
+                                            <Route path={FEIL_PATH} component={FeilmeldingContainer}/>
                                             <Redirect exact={true} from="/" to={START_PATH}/>
                                         </Switch>
                                     </div>

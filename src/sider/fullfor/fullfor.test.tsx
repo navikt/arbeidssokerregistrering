@@ -14,6 +14,7 @@ import {
 import {create} from "../../store";
 import {endreSvarAction} from "../../ducks/svar";
 import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
+import {ErrorTypes} from "../../ducks/registrerbruker";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -90,7 +91,7 @@ describe('<Fullfor />', () => {
 
         dispatchTilfeldigeSvar(store);
 
-        stubFetch(new FetchStub().addResponse('/startregistrering', {brukerStatus: RegistreringStatus.STATUS_SUKSESS}));
+        stubFetch(new FetchStub().addResponse('/startregistrering', {data: {type: ErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES}}));
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 

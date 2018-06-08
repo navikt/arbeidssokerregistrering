@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import PanelBlokk from '../../../komponenter/panel-blokk/panel-blokk';
+import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { getIntlMessage } from '../../../utils/utils';
-import { DITTNAV_URL, FORSIDENAV_URL } from '../../../ducks/api';
+import { getIntlMessage } from '../../utils/utils';
+import { DITTNAV_URL, FORSIDENAV_URL } from '../../ducks/api';
 
 function Feilmelding(props: InjectedIntlProps) {
     const intl = props.intl;
