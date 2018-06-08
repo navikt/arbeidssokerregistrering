@@ -1,3 +1,4 @@
+// tslint:disable no-any
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
@@ -87,18 +88,18 @@ export function dispatchRegistreringstatus(data: RegStatusData, s: Store<AppStat
 }
 
 export class FetchStub {
-    urlMap: { [url: string]: {response?: any, status: number}}; // tslint:disable-line no-any
+    urlMap: { [url: string]: {response?: any, status: number}};
     callCount: { [url: string]: number };
     constructor() {
         this.urlMap = {};
         this.callCount = {};
     }
-    addResponse(url: string, response: {}) {
+    addResponse(url: string, response: any) {
         this.urlMap[url] = {response, status: 200};
         this.callCount[url] = 0;
         return this;
     }
-    addErrorResponse(url: string, status: number, response?: any) { // tslint:disable-line no-any
+    addErrorResponse(url: string, status: number, response?: any) {
         if  (status < 400) {
             throw new Error('Status should be >= 400');
         }

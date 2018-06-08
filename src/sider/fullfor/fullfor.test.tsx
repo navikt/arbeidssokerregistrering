@@ -13,7 +13,7 @@ import {
 } from "../../test/test-utils";
 import {create} from "../../store";
 import {endreSvarAction} from "../../ducks/svar";
-import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
+import {DUERNAREGISTRERT_PATH, FEIL_PATH} from "../../utils/konstanter";
 import {ErrorTypes} from "../../ducks/registrerbruker";
 
 enzyme.configure({adapter: new Adapter()});
@@ -104,6 +104,34 @@ describe('<Fullfor />', () => {
             .then(() => {
                 wrapper.update();
                 expect(pushedPath.includes(DUERNAREGISTRERT_PATH)).to.equal(true);
+            });
+    });
+
+    it('Skal gå til egen feilside hvis responsen er null', () => {
+        const store = create();
+
+        let pushedPath = '';
+        const props = {
+            history: {
+                push: (path) => pushedPath = path
+            },
+        };
+
+        dispatchTilfeldigeSvar(store);
+
+        stubFetch(new FetchStub().addResponse('/startregistrering', null));
+
+        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
+
+        const input = wrapper.find('input[type="checkbox"]');
+        input.simulate('change');
+
+        wrapper.find(KnappFullfor).simulate('click');
+
+        return promiseWithSetTimeout()
+            .then(() => {
+                wrapper.update();
+                expect(pushedPath.includes(FEIL_PATH)).to.equal(true);
             });
     });
 
