@@ -91,7 +91,7 @@ describe('<Fullfor />', () => {
 
         dispatchTilfeldigeSvar(store);
 
-        stubFetch(new FetchStub().addResponse('/startregistrering', {data: {type: ErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES}}));
+        stubFetch(new FetchStub().addErrorResponse('/startregistrering', 500, {data: {type: ErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES}}));
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 

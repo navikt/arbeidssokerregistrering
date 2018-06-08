@@ -23,7 +23,7 @@ import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { DUERNAREGISTRERT_PATH, FEIL_PATH, START_PATH } from '../../utils/konstanter';
+import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import Loader from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
@@ -81,8 +81,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             () => this.props.history.push(DUERNAREGISTRERT_PATH),
                             () => this.props.history.push(DUERNAREGISTRERT_PATH),
                         );
-                } else {
-                    this.props.history.push(FEIL_PATH);
                 }
             });
     }
