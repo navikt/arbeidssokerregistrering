@@ -1,16 +1,13 @@
 import * as React from 'react';
-import InjectedIntl = ReactIntl.InjectedIntl;
-import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import PanelBlokk from '../../../komponenter/panel-blokk/panel-blokk';
 import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { getIntlMessage } from '../../utils/utils';
-import { DITTNAV_URL, FORSIDENAV_URL } from '../../ducks/api';
+import { getIntlMessage } from '../../../utils/utils';
+import { DITTNAV_URL, FORSIDENAV_URL } from '../../../ducks/api';
 
-interface FeilmeldingProps {
-    intl: InjectedIntl;
-}
-
-function Feilmelding({intl}: FeilmeldingProps) {
+function Feilmelding(props: InjectedIntlProps) {
+    const intl = props.intl;
     return (
         <div className="fullfor-feilmelding">
             <PanelBlokk
@@ -53,4 +50,4 @@ function Feilmelding({intl}: FeilmeldingProps) {
         </div>);
 }
 
-export default Feilmelding;
+export default injectIntl(Feilmelding);

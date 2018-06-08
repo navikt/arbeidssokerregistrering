@@ -3,7 +3,7 @@ import { mock, respondWith, delayed, lagPamjanzzRespons } from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import innloggingsInfo from './innloggings-info';
 import brukerInfo from './bruker-info';
-import registrerbruker from './registrer-bruker';
+import { registreringFeilrespons } from './registrer-bruker';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
@@ -39,8 +39,8 @@ if (MOCK_FEATURE_TOGGLES) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, registrerbruker)));
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, respondWith(delayed(1000, registrerbruker)));
+    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, respondWith(delayed(1000, registreringFeilrespons, 500)));
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, respondWith(delayed(1000, registreringFeilrespons, 500)));
 }
 
 if (MOCK_INNLOGGINGS_INFO) {

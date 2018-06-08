@@ -17,6 +17,7 @@ import {
 import { State as SvarState } from '../ducks/svar';
 import { Stilling } from '../ducks/siste-stilling';
 import * as moment from 'moment';
+import { RegistreringStatus } from '../sider/fullfor/fullfor';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -97,6 +98,7 @@ export function mapAvgitteSvarForBackend(
 
 export interface MatchProps {
     id: string;
+    status: RegistreringStatus;
 }
 
 /*
