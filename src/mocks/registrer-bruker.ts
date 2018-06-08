@@ -8,3 +8,13 @@ export default {
     'harHelseutfordringer' : false,
     'brukerStatus' : 'STATUS_SUKSESS'
 };
+
+export const registreringFeilrespons = {
+    'id': 'fa5ec8e51366d8b9722bb564f2534e7e',
+    'type': 'asd',
+    'detaljer': {
+        'detaljertType': 'no.nav.apiapp.feil.Feil',
+        'feilMelding': 'BRUKER_KAN_IKKE_REAKTIVERES',
+        'stackTrace': 'no.nav.apiapp.feil.Feil: BRUKER_KAN_IKKE_REAKTIVERES'
+    }
+};

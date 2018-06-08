@@ -1,22 +1,26 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import FeilmeldingBrukersStatusUgyldig from './feilmelding-brukers-status-ugyldig';
 import FeilmeldingGenerell from './feilmelding-generell';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { RegistreringStatus } from '../fullfor';
-import { MatchProps } from '../../../utils/utils';
-import { RouteComponentProps } from 'react-router';
+import { AppState } from '../../../reducer';
+import { ErrorData as FullforErrorData, ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
 
-type Props = InjectedIntlProps & RouteComponentProps<MatchProps>;
+interface StateProps {
+    errorData: FullforErrorData;
+}
+
+type Props = StateProps & InjectedIntlProps;
 
 class Feilhandtering extends React.Component<Props> {
     render() {
-        const status: RegistreringStatus | undefined = this.props.match.params.status;
-
-        if (status !== undefined) {
-            switch (status) {
-                case (RegistreringStatus.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET):
-                case (RegistreringStatus.BRUKER_ER_UKJENT):
-                case (RegistreringStatus.BRUKER_MANGLER_ARBEIDSTILLATELSE): {
+        const errorData = this.props.errorData;
+        if (errorData && errorData.data) {
+            switch (errorData.data.type) {
+                case (FullforErrorTypes.BRUKER_ER_UKJENT):
+                case (FullforErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES):
+                case (FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE):
+                case (FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET): {
                     return (<FeilmeldingBrukersStatusUgyldig intl={this.props.intl}/>);
                 }
                 default: {
@@ -29,4 +33,10 @@ class Feilhandtering extends React.Component<Props> {
     }
 }
 
-export default injectIntl(Feilhandtering);
+function mapStateToProps(state: AppState) {
+    return {
+        errorData: (state.registrerBruker.data) as FullforErrorData
+    };
+}
+
+export default connect(mapStateToProps)(injectIntl(Feilhandtering));
