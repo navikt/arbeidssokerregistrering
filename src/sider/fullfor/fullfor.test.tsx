@@ -4,8 +4,7 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {shallowWithIntl} from 'enzyme-react-intl';
-import Fullfor, {RegistreringStatus} from './fullfor';
+import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import {
     FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
@@ -13,8 +12,7 @@ import {
 } from "../../test/test-utils";
 import {create} from "../../store";
 import {endreSvarAction} from "../../ducks/svar";
-import {DUERNAREGISTRERT_PATH, FEIL_PATH} from "../../utils/konstanter";
-import {ErrorTypes} from "../../ducks/registrerbruker";
+import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {

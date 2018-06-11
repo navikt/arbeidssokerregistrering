@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
+import PanelBlokk from '../panel-blokk/panel-blokk';
 import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getIntlMessage } from '../../utils/utils';
@@ -47,7 +47,8 @@ function Feilmelding(props: InjectedIntlProps) {
                    />
                 </Normaltekst>
             </div>
-        </div>);
+        </div>
+    );
 }
 
 export default injectIntl(Feilmelding);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import FeilmeldingBrukersStatusUgyldig from './feilmelding-brukers-status-ugyldig';
-import FeilmeldingGenerell from '../../feilmelding/feilmelding-generell';
+import FeilmeldingGenerell from '../../../komponenter/feilmelding-generell/feilmelding-generell';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { AppState } from '../../../reducer';
 import { ErrorData as FullforErrorData, ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';

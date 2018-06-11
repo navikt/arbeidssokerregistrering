@@ -11,6 +11,7 @@ import {
     FEATURE_URL, VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL
 } from '../ducks/api';
 import autentisert from './autentisert';
+import registreringRespons from "./registrer-bruker";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -39,7 +40,7 @@ if (MOCK_FEATURE_TOGGLES) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    const response = respondWith(delayed(1000, undefined));
+    const response = respondWith(delayed(1000, registreringRespons));
     (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, response);
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }

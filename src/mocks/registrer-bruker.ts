@@ -6,7 +6,6 @@ const registreringRespons = {
     'enigIOppsummering' : true,
     'oppsummering' : '-',
     'harHelseutfordringer' : false,
-    'brukerStatus' : 'STATUS_SUKSESS'
 };
 export default registreringRespons;
 
