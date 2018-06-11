@@ -56,9 +56,9 @@ export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
     return (error: FetchError): void => {
         if (error.response) {
             error.response.text().then((data: string) => {
-                try {
+                if (isJsonString(data)) {
                     dispatch({type: action, data: {response: error.response, data: JSON.parse(data)}});
-                } catch (dataNotJsonStringException) {
+                } else {
                     dispatch({type: action, data: {response: error.response, data}});
                 }
             }).catch();
@@ -67,6 +67,15 @@ export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
             dispatch({ type: action, data: error.toString() });
         }
     };
+}
+
+function isJsonString(str: string) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 
 interface FetchToJson {
