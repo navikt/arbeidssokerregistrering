@@ -8,7 +8,6 @@ import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
-import { erSelvgaende } from './skjema-utils';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
@@ -121,11 +120,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     }
 
     gaaTilNesteSide(gjeldendeSporsmalId: string, antallSporsmal: number) {
-        if (!this.avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId)) {
-            this.props.history.push(`${SBLREG_PATH}`);
-            return;
-        }
-
         if (this.erSisteSporsmal(antallSporsmal)) {
             this.props.history.push(`${OPPSUMMERING_PATH}`);
             return;
@@ -136,10 +130,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
     erSisteSporsmal(antallSporsmal: number) {
         return this.gjeldendeSporsmal === (antallSporsmal - 1);
-    }
-
-    avgittSvarGirSelvgaendeBruker(gjeldendeSporsmalId: string) {
-        return erSelvgaende(gjeldendeSporsmalId, this.props.hentAvgittSvar(gjeldendeSporsmalId));
     }
 
     componentWillMount() {
