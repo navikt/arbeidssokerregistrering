@@ -36,7 +36,7 @@ class App extends React.Component {
                         <HentInitialData>
                             <SjekkRegistreringstatus>
                                 <Router basename={basename}>
-                                    <div>
+                                    <>
                                         <Route path="/" component={Banner}/>
                                         <Route path={'/:url'} component={ProgressBarContainer}/>
                                         <Switch>
@@ -49,7 +49,7 @@ class App extends React.Component {
                                             <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
                                             <Redirect exact={true} from="/" to={START_PATH}/>
                                         </Switch>
-                                    </div>
+                                    </>
                                 </Router>
                             </SjekkRegistreringstatus>
                         </HentInitialData>
