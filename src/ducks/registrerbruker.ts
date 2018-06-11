@@ -11,12 +11,19 @@ export enum ActionTypes {
     REG_BRUKER_STATUS_PENDING = 'REG_BRUKER_STATUS_PENDING'
 }
 
+export enum ErrorTypes {
+    BRUKER_ER_UKJENT = 'BRUKER_ER_UKJENT',
+    BRUKER_KAN_IKKE_REAKTIVERES = 'BRUKER_KAN_IKKE_REAKTIVERES',
+    BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET = 'BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET',
+    BRUKER_MANGLER_ARBEIDSTILLATELSE = 'BRUKER_MANGLER_ARBEIDSTILLATELSE',
+}
+
 export interface State {
     data: Data;
     status: string;
 }
 
-export interface Data {
+export interface OwnData {
     nusKode?: string;
     yrkesPraksis?: string;
     enigIOppsummering?: boolean;
@@ -25,6 +32,12 @@ export interface Data {
     yrkesbeskrivelse?: string;
     konseptId?: number;
 }
+
+export interface ErrorData {
+    data: {type: ErrorTypes | string};
+}
+
+export type Data = OwnData | ErrorData;
 
 interface Action {
     type: ActionTypes;
@@ -44,7 +57,7 @@ export default function (state: State = initialState, action: Action): State {
             }
             return {...state, status: STATUS.PENDING};
         case ActionTypes.REG_BRUKER_STATUS_FEILET:
-            return {...state, status: STATUS.ERROR};
+            return {...state, status: STATUS.ERROR, data: action.data};
         case ActionTypes.REG_BRUKER_STATUS_OK: {
             return {...state, status: STATUS.OK, data: action.data};
         }

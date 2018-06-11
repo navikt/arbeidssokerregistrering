@@ -59,7 +59,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, autentiseringsinfo, innloggingsinfo, intl } = this.props;
+        const { children, registreringstatus, autentiseringsinfo, innloggingsinfo, intl, brukerinfo } = this.props;
         const { niva } = autentiseringsinfo.data;
 
         if (niva !== 4 && autentiseringsinfo.status === STATUS.OK) {
@@ -72,7 +72,8 @@ export class HentInitialData extends React.Component<Props> {
                 avhengigheter={[
                     registreringstatus,
                     innloggingsinfo,
-                    autentiseringsinfo
+                    autentiseringsinfo,
+                    brukerinfo
                 ]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}

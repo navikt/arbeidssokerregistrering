@@ -15,7 +15,7 @@ import {
     State as RegistrerBrukerState,
     Data as RegistrerBrukerData
 } from '../../ducks/registrerbruker';
-import Feilmelding from './fullfor-feilmelding';
+import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid  } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
@@ -66,25 +66,23 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     registrerBrukerOnClick() {
-        const {markert} = this.state;
-        if (!markert) {
-            this.setState({
-                visAdvarsel: true
-            });
-        } else {
-            this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
-
-            this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
-                .then((res) => {
-                    if (!!res) {
-                        registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
-                            .then(
-                                () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                                () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                            );
-                    }
-                });
+        if (!this.state.markert) {
+            this.setState({ visAdvarsel: true });
+            return;
         }
+
+        this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
+        this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
+            .then((res) => {
+                if (!!res) {
+                    // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
+                    registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
+                        .then(
+                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                        );
+                }
+            });
     }
 
     settMarkert() {
@@ -124,9 +122,9 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<Feilmelding intl={intl}/>}
+                feilmeldingKomponent={<FullforFeilhandtering />}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
-                loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
+                loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
                 <ResponsivSide>
                     <div className="fullfor">

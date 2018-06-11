@@ -14,12 +14,12 @@ export function lagPamjanzzRespons({q}: { q: string}) {
 
 
 export function delayed(time: any, response: any, failure?: number): any {
-    const kanskejFeil = failure ? failure : response;
+    const kanskjeFeil = failure ? {status: failure, body: response} : response;
     return (...args) => new Promise((resolve) => setTimeout(() => {
-        if(typeof kanskejFeil === 'function') {
-            return resolve(kanskejFeil(...args));
+        if(typeof kanskjeFeil === 'function') {
+            return resolve(kanskjeFeil(...args));
         }
-        return resolve(kanskejFeil)
+        return resolve(kanskjeFeil)
     }, time));
 }
 
