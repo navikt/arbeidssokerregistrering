@@ -91,7 +91,7 @@ describe('<Fullfor />', () => {
 
         dispatchTilfeldigeSvar(store);
 
-        stubFetch(new FetchStub().addErrorResponse('/startregistrering', 500, {data: {type: ErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES}}));
+        stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
         const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
 
@@ -104,34 +104,6 @@ describe('<Fullfor />', () => {
             .then(() => {
                 wrapper.update();
                 expect(pushedPath.includes(DUERNAREGISTRERT_PATH)).to.equal(true);
-            });
-    });
-
-    it('Skal gå til egen feilside hvis responsen er null', () => {
-        const store = create();
-
-        let pushedPath = '';
-        const props = {
-            history: {
-                push: (path) => pushedPath = path
-            },
-        };
-
-        dispatchTilfeldigeSvar(store);
-
-        stubFetch(new FetchStub().addResponse('/startregistrering', null));
-
-        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
-
-        const input = wrapper.find('input[type="checkbox"]');
-        input.simulate('change');
-
-        wrapper.find(KnappFullfor).simulate('click');
-
-        return promiseWithSetTimeout()
-            .then(() => {
-                wrapper.update();
-                expect(pushedPath.includes(FEIL_PATH)).to.equal(true);
             });
     });
 
