@@ -54,8 +54,6 @@ class SblRegistrering extends React.Component<Props, State> {
             return null;
         }
 
-        console.log('test'); //tslint:disable-line
-
         return (
             <Innholdslaster avhengigheter={[this.state]} storrelse="XXL" loaderKomponent={<Loader/>}>
                 <PanelBlokkGruppe
