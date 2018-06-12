@@ -9,7 +9,7 @@ import {
     dispatchRegistreringstatus,
     promiseWithSetTimeout, mountWithStoreAndIntl, shallowwithStoreAndIntl
 } from '../../test/test-utils';
-import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
+import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import { create } from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 

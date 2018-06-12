@@ -6,7 +6,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { sendBrukerTilSblArbeid } from './utils';
+import { sendBrukerTilSblArbeid } from '../oppsummering/utils';
 import Loader from '../../komponenter/loader/loader';
 
 interface State {
@@ -54,18 +54,25 @@ class SblRegistrering extends React.Component<Props, State> {
             return null;
         }
 
+        console.log('test'); //tslint:disable-line
+
         return (
             <Innholdslaster avhengigheter={[this.state]} storrelse="XXL" loaderKomponent={<Loader/>}>
                 <PanelBlokkGruppe
                     knappAksjoner={
                         [
-                            <KnappBase key="1" type="standard" onClick={() => document.location.href = DITTNAV_URL}>
+                            <KnappBase
+                                key="1"
+                                type="standard"
+                                onClick={() => document.location.href = DITTNAV_URL}
+                                className="sbl-registrering__knapp"
+                            >
                                 <FormattedMessage id="knapp-sbl-registrering-avbryt"/>
                             </KnappBase>,
                             <KnappBase
                                 key="2"
                                 type="hoved"
-                                className="mml"
+                                className="sbl-registrering__knapp"
                                 onClick={this.opprettMinIdISblOgSendBrukerTilSbl}
                             >
                                 <FormattedMessage id="knapp-sbl-registrering-neste"/>

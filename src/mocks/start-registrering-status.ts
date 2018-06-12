@@ -1,4 +1,4 @@
 export default {
-    underOppfolging: true,
-    oppfyllerKrav: true
+    underOppfolging: false,
+    oppfyllerKrav: false
 };

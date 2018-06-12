@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { SBLREG_PATH, SKJEMA_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
+import { SKJEMA_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
