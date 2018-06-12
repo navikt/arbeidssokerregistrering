@@ -4,7 +4,6 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {shallowWithIntl} from 'enzyme-react-intl';
 import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import {
@@ -74,7 +73,7 @@ describe('<Fullfor />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(wrapper.html()).to.include('innholdslaster-feilmelding');
+                expect(wrapper.html()).to.include('feilmelding');
             });
     });
 

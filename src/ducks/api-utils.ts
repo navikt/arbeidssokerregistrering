@@ -56,14 +56,26 @@ export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
     return (error: FetchError): void => {
         if (error.response) {
             error.response.text().then((data: string) => {
-                console.error(error, error.stack, data); // tslint:disable-line no-console
-                dispatch({ type: action, data: { response: error.response, data } });
-            });
+                if (isJsonString(data)) {
+                    dispatch({type: action, data: {response: error.response, data: JSON.parse(data)}});
+                } else {
+                    dispatch({type: action, data: {response: error.response, data}});
+                }
+            }).catch();
         } else {
             console.error(error, error.stack); // tslint:disable-line no-console
             dispatch({ type: action, data: error.toString() });
         }
     };
+}
+
+function isJsonString(str: string) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 
 interface FetchToJson {

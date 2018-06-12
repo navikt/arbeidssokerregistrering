@@ -19,7 +19,7 @@ import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-regis
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
-    AVBRYT_PATH, FULLFOR_PATH, DUERNAREGISTRERT_PATH
+    AVBRYT_PATH, FULLFOR_PATH, DUERNAREGISTRERT_PATH,
 } from './utils/konstanter';
 import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
@@ -36,7 +36,7 @@ class App extends React.Component {
                         <HentInitialData>
                             <SjekkRegistreringstatus>
                                 <Router basename={basename}>
-                                    <div>
+                                    <>
                                         <Route path="/" component={Banner}/>
                                         <Route path={'/:url'} component={ProgressBarContainer}/>
                                         <Switch>
@@ -49,7 +49,7 @@ class App extends React.Component {
                                             <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
                                             <Redirect exact={true} from="/" to={START_PATH}/>
                                         </Switch>
-                                    </div>
+                                    </>
                                 </Router>
                             </SjekkRegistreringstatus>
                         </HentInitialData>
