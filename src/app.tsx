@@ -12,7 +12,7 @@ import {
     Switch
 } from 'react-router-dom';
 import Oppsummering from './sider/oppsummering/oppsummering';
-import SblRegistrering from './sider/oppsummering/sbl-registrering';
+import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import './decorator/decorator-mock';
 import Skjema from './sider/skjema/skjema-container';
 import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';

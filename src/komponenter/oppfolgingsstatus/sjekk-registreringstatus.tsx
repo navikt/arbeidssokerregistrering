@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { AppState } from '../../reducer';
-import SblRegistrering from '../../sider/oppsummering/sbl-registrering';
+import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 
