@@ -64,11 +64,11 @@ export class HentInitialData extends React.Component<Props> {
         const { niva } = autentiseringsinfo.data;
         const { harGyldigOidcToken } = autentiseringsinfo.data;
 
-        if(autentiseringsinfo.status === STATUS.OK){
+        if (autentiseringsinfo.status === STATUS.OK) {
             if (niva !== 4) {
                 return <StepUp intl={intl}/>;
             } else if (!harGyldigOidcToken) {
-                // er innlogget med OpenAM, men mangler innlogging med AzureAD.
+                // er innlogget med OpenAM nivå 4, men mangler innlogging med AzureAD.
                 window.location.href = VEILARBSTEPUP;
             }
         }
