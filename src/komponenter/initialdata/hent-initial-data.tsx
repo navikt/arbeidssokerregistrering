@@ -25,6 +25,7 @@ import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import { hentFeatureToggles, selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
 import { selectAutentiseringsinfo } from '../../ducks/autentiseringsinfo';
+import { VEILARBSTEPUP } from '../../ducks/api';
 
 interface StateProps {
     innloggingsinfo: InnloggingsinfoState;
@@ -61,8 +62,14 @@ export class HentInitialData extends React.Component<Props> {
     render() {
         const { children, registreringstatus, autentiseringsinfo, innloggingsinfo, intl, brukerinfo } = this.props;
         const { niva } = autentiseringsinfo.data;
+        const { harGyldigOidcToken } = autentiseringsinfo.data;
 
-        if (niva !== 4 && autentiseringsinfo.status === STATUS.OK) {
+        if (niva === 4 && harGyldigOidcToken === false && autentiseringsinfo.status === STATUS.OK) {
+            // er innlogget med OpenAM, men mangler innlogging med AzureAD.
+            window.location.href = VEILARBSTEPUP;
+        }
+
+        if (harGyldigOidcToken === false && autentiseringsinfo.status === STATUS.OK) {
             return <StepUp intl={intl} />;
         }
 
