@@ -7,7 +7,7 @@ import {
     mountWithStoreAndIntl } from '../../test/test-utils';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { INNLOGGINGSINFO_URL } from '../../ducks/api';
+import { AUTENTISERINGSINFO_URL } from '../../ducks/api';
 import HentInitialData from './hent-initial-data';
 import StepUp from './stepup';
 import Feilmelding from './feilmelding';
@@ -19,7 +19,7 @@ afterEach(() => fetch.restore());
 describe('<HentInitialData />', () => {
     it('skal rendre feilmelding dersom api-kall til registreringstatus feiler', () => {
         stubFetch(new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, { name: 'navn', authenticated: true, securityLevel: '4'})
+            .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: true, niva: 4})
             .addErrorResponse('/startregistrering', 500));
 
         const wrapper = mountWithStoreAndIntl(<HentInitialData />);
@@ -30,22 +30,9 @@ describe('<HentInitialData />', () => {
                 expect(wrapper.find(Feilmelding)).to.have.length(1);
             });
     });
-    it('skal rendre <StepUp/> dersom bruker er innlogget på nivå 3', () => {
+    it('skal rendre <StepUp/> dersom bruker ikke har gyldig oidc-token og ikke er på nivå 4', () => {
         stubFetch(new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, { name: 'navn', authenticated: true, securityLevel: '3'})
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
-
-        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
-
-        return promiseWithSetTimeout()
-            .then(() => {
-                wrapper.update();
-                expect(wrapper.find('StepUp')).to.have.length(1);
-            });
-    });
-    it('skal rendre <StepUp/> dersom bruker er innlogget på nivå 2', () => {
-        stubFetch(new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, { name: 'navn', authenticated: true, securityLevel: '2'})
+            .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: 3})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
 
         const wrapper = mountWithStoreAndIntl(<HentInitialData />);
@@ -58,7 +45,7 @@ describe('<HentInitialData />', () => {
     });
     it('skal rendre <StepUp/> dersom bruker ikke er innlogget', () => {
         stubFetch(new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, { authenticated: false })
+            .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: ''})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
 
         const wrapper = mountWithStoreAndIntl(<HentInitialData />);
@@ -69,9 +56,10 @@ describe('<HentInitialData />', () => {
                 expect(wrapper.find('StepUp')).to.have.length(1);
             });
     });
+
     it('skal ikke hente registreringstatus om bruker ikke er innlogget', () => {
         const fetchStub = new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, { authenticated: false })
+            .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: ''})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true});
 
         stubFetch(fetchStub);
@@ -80,13 +68,13 @@ describe('<HentInitialData />', () => {
 
         return promiseWithSetTimeout()
             .then(() => {
-                expect(fetchStub.getCallcount(INNLOGGINGSINFO_URL)).to.equal(1);
+                expect(fetchStub.getCallcount(AUTENTISERINGSINFO_URL)).to.equal(1);
                 expect(fetchStub.getCallcount('/startregistrering')).to.equal(0);
             });
     });
     it('skal ikke hente registreringstatus om bruker er innlogget på nivå 3', () => {
         const fetchStub = new FetchStub()
-            .addResponse(INNLOGGINGSINFO_URL, { name: 'navn', authenticated: true, securityLevel: '3' })
+            .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: 3})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true});
 
         stubFetch(fetchStub);
@@ -95,8 +83,9 @@ describe('<HentInitialData />', () => {
 
         return promiseWithSetTimeout()
             .then(() => {
-                expect(fetchStub.getCallcount(INNLOGGINGSINFO_URL)).to.equal(1);
+                expect(fetchStub.getCallcount(AUTENTISERINGSINFO_URL)).to.equal(1);
                 expect(fetchStub.getCallcount('/startregistrering')).to.equal(0);
             });
     });
+
 });
