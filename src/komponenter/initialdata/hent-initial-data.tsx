@@ -69,7 +69,7 @@ export class HentInitialData extends React.Component<Props> {
             window.location.href = VEILARBSTEPUP;
         }
 
-        if (harGyldigOidcToken === false && autentiseringsinfo.status === STATUS.OK) {
+        if (niva !== 4 && autentiseringsinfo.status === STATUS.OK) {
             return <StepUp intl={intl} />;
         }
 
