@@ -87,5 +87,18 @@ describe('<HentInitialData />', () => {
                 expect(fetchStub.getCallcount('/startregistrering')).to.equal(0);
             });
     });
+    it('skal ikke rendre <StepUp/> dersom bruker ikke har gyldig oidc-token og er på nivå 4', () => {
+        stubFetch(new FetchStub()
+            .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: 4})
+            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
+
+        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
+
+        return promiseWithSetTimeout()
+            .then(() => {
+                wrapper.update();
+                expect(wrapper.find('StepUp')).to.have.length(0);
+            });
+    });
 
 });
