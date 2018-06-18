@@ -17,6 +17,7 @@ import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import AndreForhold from './sporsmal/sporsmal-andre-forhold';
 import HelseHinder from './sporsmal/sporsmal-helse-hinder';
+import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 
 interface StateProps {
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -94,6 +95,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
+                        <SporsmalDinSituasjon sporsmalId="din-situasjon" {...fellesProps}/>
                         <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
