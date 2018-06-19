@@ -17,11 +17,23 @@ class FullforFeilhandtering extends React.Component<Props> {
         const errorData = this.props.errorData;
         if (errorData && errorData.data) {
             switch (errorData.data.type) {
-                case (FullforErrorTypes.BRUKER_ER_UKJENT):
-                case (FullforErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES):
-                case (FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE):
+                case (FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE): {
+                    return (
+                        <FeilmeldingBrukersStatusUgyldig
+                            feilType={FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE}
+                            intl={this.props.intl}
+                        />);
+                }
                 case (FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET): {
-                    return (<FeilmeldingBrukersStatusUgyldig intl={this.props.intl}/>);
+                    return (
+                        <FeilmeldingBrukersStatusUgyldig
+                            feilType={FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET}
+                            intl={this.props.intl}
+                        />);
+                }
+                case (FullforErrorTypes.BRUKER_ER_UKJENT):
+                case (FullforErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES): {
+                    return (<FeilmeldingBrukersStatusUgyldig feilType={''} intl={this.props.intl}/>);
                 }
                 default: {
                     return (<FeilmeldingGenerell intl={this.props.intl}/>);
