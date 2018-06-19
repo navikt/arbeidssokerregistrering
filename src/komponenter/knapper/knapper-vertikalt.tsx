@@ -2,12 +2,12 @@ import * as React from 'react';
 
 interface KnappervertikaltProps {
     children: Array<React.ReactElement<Element>>;
-    flag?: number;
+    className?: string;
 }
 
-function Knappervertikalt({ children }: KnappervertikaltProps) {
+function Knappervertikalt({ children, className }: KnappervertikaltProps) {
     return(
-        <div className="knapper-vertikalt">
+        <div className={'knapper-vertikalt ' + className}>
             {children}
         </div>
     );
