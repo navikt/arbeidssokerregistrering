@@ -3,6 +3,7 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+import Animasjon from './animasjon';
 
 interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
@@ -36,10 +37,12 @@ export default class Skjema extends React.Component<Props> {
                     {gjeldendeSporsmalComponent}
                     {advarselElement}
                 </div>
-                <Knappervertikalt>
-                    <KnappNeste onClick={() => this.nesteButtonClick()} />
-                    <LenkeAvbryt/>
-                </Knappervertikalt>
+                <Animasjon flag={this.props.gjeldendeSporsmal}>
+                    <Knappervertikalt>
+                        <KnappNeste onClick={() => this.nesteButtonClick()}/>
+                        <LenkeAvbryt/>
+                    </Knappervertikalt>
+                </Animasjon>
             </ResponsivSide>
         );
     }

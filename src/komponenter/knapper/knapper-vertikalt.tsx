@@ -6,11 +6,8 @@ interface KnappervertikaltProps {
 }
 
 function Knappervertikalt({ children }: KnappervertikaltProps) {
-    const style = {
-        animation: 'slideUp 2s both'
-    };
     return(
-        <div className="knapper-vertikalt" style={style}>
+        <div className="knapper-vertikalt">
             {children}
         </div>
     );
