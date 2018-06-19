@@ -4,9 +4,6 @@ import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from '../skjema-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
-import Knappervertikalt from '../../../komponenter/knapper/knapper-vertikalt';
-import LenkeAvbryt from '../../../komponenter/knapper/lenke-avbryt';
-import KnappNeste from '../../../komponenter/knapper/knapp-neste';
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -38,10 +35,6 @@ export default function Utdanningsporsmal(props: Props) {
                     <Alternativ alternativId={6} {...fellesProps}/>
                 </form>
             </Panel>
-            <Knappervertikalt>
-                <KnappNeste onClick={() => {/*tslint:disable-line*/}} />
-                <LenkeAvbryt/>
-            </Knappervertikalt>
         </>
     );
 }

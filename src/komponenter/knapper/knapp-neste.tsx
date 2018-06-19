@@ -14,8 +14,6 @@ interface Props {
 
 function KnappNeste({ disabled, onClick, className, intl }: Props & InjectedIntlProps) {
     const clsnames = (clName: string | undefined) => classNames(clName);
-    console.log('heihei...'); // tslint:disable-line
-
     return (
         <KnappBase
             type="hoved"
