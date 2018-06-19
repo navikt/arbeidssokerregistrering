@@ -106,19 +106,19 @@ class SisteStilling extends React.Component<Props> {
                     </form>
                 </Panel>
                 <div className="siste-stilling__nedre-halvdel">
-                {this.brukerHarHattJobb() &&
-                    <React.Fragment>
+                    {this.brukerHarHattJobb() &&
+                    <>
                         <Undertittel>
                             <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
                         </Undertittel>
                         <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
-                    </React.Fragment>
-                }
-                <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
-                    <Normaltekst>
-                        <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
-                    </Normaltekst>
-                </EkspanderbartInfo>
+                    </>
+                    }
+                    <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
+                        <Normaltekst>
+                            <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                        </Normaltekst>
+                    </EkspanderbartInfo>
                 </div>
             </div>
         );

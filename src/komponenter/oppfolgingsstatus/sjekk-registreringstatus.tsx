@@ -20,7 +20,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
         } else if (!registreringstatusData.oppfyllerKrav) {
             return <SblRegistrering/>;
         } else {
-            return <React.Fragment>{children}</React.Fragment>;
+            return <>{children}</>;
         }
     }
 }

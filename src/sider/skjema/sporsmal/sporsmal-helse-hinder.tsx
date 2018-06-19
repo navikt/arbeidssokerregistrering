@@ -23,7 +23,7 @@ export default function HelseHinder(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <div>
+        <>
             <Systemtittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
@@ -42,6 +42,6 @@ export default function HelseHinder(props: Props) {
                     {props.intl.messages[`${props.sporsmalId}-info`]}
                 </Normaltekst>
             </div>
-        </div>
+        </>
     );
 }

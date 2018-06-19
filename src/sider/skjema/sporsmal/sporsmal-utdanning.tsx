@@ -21,7 +21,7 @@ export default function Utdanningsporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <div>
+        <>
             <Systemtittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
@@ -35,6 +35,6 @@ export default function Utdanningsporsmal(props: Props) {
                     <Alternativ alternativId={6} {...fellesProps}/>
                 </form>
             </Panel>
-        </div>
+        </>
     );
 }
