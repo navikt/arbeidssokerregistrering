@@ -3,26 +3,29 @@ import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
+import { State as SvarState } from '../../ducks/svar';
+import { getAlleSporsmalSomIkkeSkalBesvares } from './skjema-utils';
 
 interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     gaaTilbake: () => void;
-    gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) => void;
+    gaaTilSporsmal: (sporsmal: number) => void;
+    fullforSkjema: () => void;
     advarselElement: React.ReactElement<Element> | null;
+    svar: SvarState;
+}
+
+interface State {
+    visAdvarsel: boolean;
 }
 
 type Props = SkjemaProps;
 
-export default class Skjema extends React.Component<Props> {
-
+export default class Skjema extends React.Component<Props, State> {
     private antallSporsmal: number;
     private sporsmalIder: string[];
-
-    constructor(props: Props) {
-        super(props);
-    }
 
     render() {
         const {  advarselElement, children, gjeldendeSporsmal } = this.props;
@@ -45,12 +48,40 @@ export default class Skjema extends React.Component<Props> {
     }
 
     nesteButtonClick() {
-        const gjeldendeSporsmalId = this.sporsmalIder[this.props.gjeldendeSporsmal];
-        const spmErBesvart = this.props.sporsmalErBesvart(this.sporsmalIder[this.props.gjeldendeSporsmal]);
+        const spmErBesvart = this.props.sporsmalErBesvart(this.getSporsmalId(this.props.gjeldendeSporsmal));
 
         if (spmErBesvart) {
-            this.props.gaaTilNesteSide(gjeldendeSporsmalId, this.getSporsmalIder().length);
+            const nesteSporsmal = this.finnNesteSporsmal();
+            if (nesteSporsmal === -1) {
+                this.props.fullforSkjema();
+            } else {
+                this.props.gaaTilSporsmal(nesteSporsmal);
+            }
         }
+    }
+
+    finnNesteSporsmal(): number {
+        const foregaendeSporsmalIder =
+            this.sporsmalIder.filter((sporsmalId, indeks) => indeks <= this.props.gjeldendeSporsmal);
+
+        const sporsmalIderSomIkkeSkalBesvares =
+            getAlleSporsmalSomIkkeSkalBesvares(foregaendeSporsmalIder, this.props.svar);
+
+        const gjenstaendeSporsmalSomSkalBesvares = this.sporsmalIder
+            .filter(sporsmalId => !foregaendeSporsmalIder.includes(sporsmalId))
+            .filter(sporsmalId => !sporsmalIderSomIkkeSkalBesvares.includes(sporsmalId))
+            .map(sporsmalId => this.getSporsmal(sporsmalId))
+            .filter(sporsmal => sporsmal !== this.props.gjeldendeSporsmal);
+
+        return gjenstaendeSporsmalSomSkalBesvares.length !== 0 ? gjenstaendeSporsmalSomSkalBesvares[0] : -1;
+    }
+
+    getSporsmalId(sporsmal: number) {
+        return this.sporsmalIder[sporsmal];
+    }
+
+    getSporsmal(sporsmalId: string) {
+        return this.sporsmalIder.indexOf(sporsmalId);
     }
 
     getSporsmalIder(): string[] {
