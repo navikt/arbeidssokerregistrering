@@ -10,6 +10,10 @@ const defaultSkjemaConfig: SkjemaConfig = {
     'din-situasjon': {
         alternativId: 2,
         skip: ['siste-stilling'],
+    },
+    'utdanning': {
+        alternativId: 1,
+        skip: ['utdanningbestatt', 'utdanninggodkjent'],
     }
 };
 
