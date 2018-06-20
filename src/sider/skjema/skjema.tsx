@@ -5,6 +5,7 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { State as SvarState } from '../../ducks/svar';
 import {  getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
+import Animasjon from './animasjon';
 
 export interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
@@ -41,10 +42,12 @@ export default class Skjema extends React.Component<Props, State> {
                     {gjeldendeSporsmalComponent}
                     {advarselElement}
                 </div>
-                <Knappervertikalt>
-                    <KnappNeste onClick={() => this.nesteButtonClick()} />
-                    <LenkeAvbryt/>
-                </Knappervertikalt>
+                <Animasjon flag={this.props.gjeldendeSporsmal}>
+                    <Knappervertikalt className="animasjon">
+                        <KnappNeste onClick={() => this.nesteButtonClick()}/>
+                        <LenkeAvbryt/>
+                    </Knappervertikalt>
+                </Animasjon>
             </ResponsivSide>
         );
     }

@@ -51,7 +51,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
         };
 
         return (
-            <div>
+            <>
                 <div
                     ref={(div: HTMLDivElement) => this.framdriftContainer = div}
                     className="framdrift"
@@ -68,7 +68,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
                     />
                     {this.scrolling()}
                 </div>
-            </div>
+            </>
         );
     }
 }

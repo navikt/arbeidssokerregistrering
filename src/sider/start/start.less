@@ -1,76 +1,76 @@
 .startside {
-  .limit {
-    margin: 0 auto;
-  }
-
-  &__banner {
-    margin: 0 auto;
-    padding: 0.65rem 0 1.5rem 0;
-    background-color: @navDypBlaLighten80;
-  }
-
-  &__intro {
-    position: relative;
-    background-color: @white;
-    margin: 0 1rem;
-    border-radius: 10px;
-    padding: 1rem 1.5rem 1rem;
-
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: -13px;
-      left: 65%;
-      top: 80%;
-      border-left: 10px solid transparent;
-      border-right: 31px solid transparent;
-      border-bottom: 64px solid #ffffff;
-      transform: rotate(88deg);
+    .limit {
+        margin: 0 auto;
     }
 
-    &__ikon {
-      display: block;
-      margin: 5px auto -80px;
-      width: 100px;
-    }
-  }
-
-  .innhold-container {
-    display: flex;
-    justify-content: center;
-
-    .innhold {
-      padding-top: 5rem;
-      text-align: center;
-
-      .tittel {
-        .blokk-xs();
-      }
-      .beskrivelse {
-        .blokk-s();
-      }
+    &__banner {
+        margin: 0 auto;
+        padding: 0.65rem 0 1.5rem 0;
+        background-color: @navDypBlaLighten80;
     }
 
-    .knapp-start {
-      width: 8rem;
+    &__intro {
+        position: relative;
+        background-color: @white;
+        margin: 0 1rem;
+        border-radius: 10px;
+        padding: 1rem 1.5rem 1rem;
+
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: -13px;
+            left: 65%;
+            top: 80%;
+            border-left: 10px solid transparent;
+            border-right: 31px solid transparent;
+            border-bottom: 64px solid #ffffff;
+            transform: rotate(88deg);
+        }
+
+        &__ikon {
+            display: block;
+            margin: 5px auto -80px;
+            width: 100px;
+        }
     }
-  }
+
+    .innhold-container {
+        display: flex;
+        justify-content: center;
+
+        .innhold {
+            padding-top: 5rem;
+            text-align: center;
+
+            .tittel {
+                .blokk-xs();
+            }
+            .beskrivelse {
+                .blokk-s();
+            }
+        }
+
+        .knapp-start {
+            width: 8rem;
+        }
+    }
 }
 
 @media (min-width: 500px) {
 
-  .startside {
-    .limit {
-      width: 479px;
-    }
+    .startside {
+        .limit {
+            width: 479px;
+        }
 
-    &__intro {
-      padding: 1rem 2.5rem 1rem;
+        &__intro {
+            padding: 1rem 2.5rem 1rem;
 
-      &:after {
-        left: 59%;
-        top: 74%;
-      }
+            &:after {
+                left: 59%;
+                top: 74%;
+            }
+        }
     }
-  }
 }

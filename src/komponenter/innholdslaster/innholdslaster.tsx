@@ -60,9 +60,9 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
         const {avhengigheter, children} = this.props;
 
         if (children instanceof Function) {
-            return <React.Fragment>{children(avhengigheter)}</React.Fragment>;
+            return <>{children(avhengigheter)}</>;
         }
-        return <React.Fragment>{children}</React.Fragment>;
+        return <>{children}</>;
     }
 
     render() {

@@ -23,7 +23,7 @@ export default function AndreForhold(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <React.Fragment>
+        <>
             <Systemtittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
@@ -44,6 +44,6 @@ export default function AndreForhold(props: Props) {
                     {props.intl.messages[`${props.sporsmalId}-info`]}
                 </Normaltekst>
             </div>
-        </React.Fragment>
+        </>
     );
 }

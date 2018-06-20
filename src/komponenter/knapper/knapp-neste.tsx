@@ -9,6 +9,7 @@ interface Props {
     disabled?: boolean;
     onClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
     className?: string;
+    flag?: number;
 }
 
 function KnappNeste({ disabled, onClick, className, intl }: Props & InjectedIntlProps) {

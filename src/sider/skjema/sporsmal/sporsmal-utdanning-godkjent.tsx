@@ -22,7 +22,7 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
-        <div>
+        <>
             <Systemtittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Systemtittel>
@@ -33,6 +33,6 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
                     <Alternativ alternativId={3} {...fellesProps}/>
                 </form>
             </Panel>
-        </div>
+        </>
     );
 }

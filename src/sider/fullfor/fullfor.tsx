@@ -102,14 +102,14 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         const {registrerBrukerData, intl} = this.props;
 
         const loaderTittelElement = (
-            <React.Fragment>
+            <>
                 <Innholdstittel className="blokk-s">
                     Registrering pågår.
                 </Innholdstittel>
                 <Normaltekst>
                     Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
                 </Normaltekst>
-            </React.Fragment>
+            </>
         );
 
         const advarselElement = this.state.visAdvarsel && (
