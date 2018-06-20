@@ -17,6 +17,15 @@
 
 body {
     background-color: @white;
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background-color: @navLysGra;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: @navGra60;
+        border-radius: 3px;
+    }
 }
 
 main.arbsokreg_app:focus {
@@ -59,6 +68,7 @@ main.arbsokreg_app {
 
     @import (less) '../node_modules/react-select/dist/react-select.css';
 }
+
 .appContainer {
     height: 100%;
 }

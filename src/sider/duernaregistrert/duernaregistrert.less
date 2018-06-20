@@ -1,104 +1,104 @@
 .du-er-na-registrert {
-  text-align: center;
-  animation: loading 5s both;
-
-  &__wrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .du-er-na-registrert__topp {
-    .blokk-s();
-  }
-
-  &__avsjekk-tittel {
-    margin-top: 1rem;
-  }
-
-  .du-er-na-registrert__aksjonspanel {
-    text-align: left;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    border: 3px solid @navBlaLighten80;
-    border-radius: 8px;
-    padding: 2rem;
-
-    .du-er-na-registrert__handinfo-ikon {
-      display: none;
-    }
-  }
-
-  .du-er-na-registrert__knapperad {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    .knapp {
-      margin: 0.5rem 0;
+    animation: loading 5s both;
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
     }
-  }
-}
 
-@media (min-width: @screen-sm-min) {
-  .du-er-na-registrert {
-    text-align: left;
-    width: 36rem;
-
-    &__topp {
-      position: relative;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      margin: 0;
-      left: -1px;
-      .blokk-s();
+    .du-er-na-registrert__topp {
+        .blokk-s();
     }
 
     &__avsjekk-tittel {
-      max-width: 100%;
-      padding-left: 8rem;
-      margin: 0;
-    }
-
-    .du-er-na-registrert__avsjekk-ikon {
-      position: absolute;
-      left: 24px;
-      top: 0;
+        margin-top: 1rem;
     }
 
     .du-er-na-registrert__aksjonspanel {
-      display: flex;
-      padding: 2rem 3rem 2rem 5rem;
-
-      .du-er-na-registrert__tekster {
-        width: 80%;
-      }
-
-      .du-er-na-registrert__handinfo-ikon {
-        position: absolute;
-        height: 100%;
-        left: -80px;
-        top: 0;
+        text-align: left;
+        position: relative;
         display: flex;
-        align-items: center;
-      }
+        justify-content: center;
+        border: 3px solid @navBlaLighten80;
+        border-radius: 8px;
+        padding: 2rem;
+
+        .du-er-na-registrert__handinfo-ikon {
+            display: none;
+        }
     }
 
     .du-er-na-registrert__knapperad {
-      display: inline-block;
-      .knapp:first-child {
-        margin-right: 1rem;
-      }
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        .knapp {
+            margin: 0.5rem 0;
+        }
     }
+}
 
-  }
+@media (min-width: @screen-sm-min) {
+    .du-er-na-registrert {
+        text-align: left;
+        width: 36rem;
+
+        &__topp {
+            position: relative;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            left: -1px;
+            .blokk-s();
+        }
+
+        &__avsjekk-tittel {
+            max-width: 100%;
+            padding-left: 8rem;
+            margin: 0;
+        }
+
+        .du-er-na-registrert__avsjekk-ikon {
+            position: absolute;
+            left: 24px;
+            top: 0;
+        }
+
+        .du-er-na-registrert__aksjonspanel {
+            display: flex;
+            padding: 2rem 3rem 2rem 5rem;
+
+            .du-er-na-registrert__tekster {
+                width: 80%;
+            }
+
+            .du-er-na-registrert__handinfo-ikon {
+                position: absolute;
+                height: 100%;
+                left: -80px;
+                top: 0;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .du-er-na-registrert__knapperad {
+            display: inline-block;
+            .knapp:first-child {
+                margin-right: 1rem;
+            }
+        }
+
+    }
 }
 
 @keyframes loading {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
 }
