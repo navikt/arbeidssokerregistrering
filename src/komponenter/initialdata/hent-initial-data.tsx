@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentInnloggingsInfo:  () => dispatch(hentInnloggingsInfo()),
     hentAutentiseringsInfo:  () => dispatch(hentAutentiseringsInfo()),
     hentBrukerInfo:  () => dispatch(hentBrukerInfo()),
-    hentRegistreringStatus: (featureToggles) => dispatch(hentRegistreringStatus(featureToggles)),
+    hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
     hentFeatureToggles: () => dispatch(hentFeatureToggles()),
 });
 

@@ -1,7 +1,6 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
-import { Data as FeatureTogglesData } from './feature-toggles';
 
 export enum ActionTypes {
     HENT_REG_STATUS_OK = 'HENT_REG_STATUS_OK',
@@ -46,8 +45,8 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function hentRegistreringStatus(featureToggles: FeatureTogglesData) {
-    return doThenDispatch(() => Api.hentRegistreringStatus(featureToggles), {
+export function hentRegistreringStatus() {
+    return doThenDispatch(() => Api.hentRegistreringStatus(), {
         PENDING: ActionTypes.HENT_REG_STATUS_PENDING,
         OK : ActionTypes.HENT_REG_STATUS_OK,
         FEILET: ActionTypes.HENT_REG_STATUS_FEILET,
