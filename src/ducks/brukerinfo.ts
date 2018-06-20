@@ -45,7 +45,7 @@ export default function (state: State = initialState, action: Action): State {
 }
 
 export function hentBrukerInfo() {
-    return doThenDispatch(() => Api.hentBrukerInfo(), {
+    return doThenDispatch(() => Api.hentBrukersFnr(), {
         PENDING: ActionTypes.HENT_BRUKERINFO_PENDING,
         OK: ActionTypes.HENT_BRUKERINFO_OK,
         FEILET: ActionTypes.HENT_BRUKERINFO_FEILET,

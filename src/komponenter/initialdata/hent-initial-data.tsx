@@ -3,9 +3,9 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { AppState } from '../../reducer';
 import {
-    hentInnloggingsInfo,
-    selectInnloggingsinfo,
-    State as InnloggingsinfoState } from '../../ducks/innloggingsinfo';
+    hentBrukersNavn,
+    selectBrukersNavn,
+    State as BrukersNavnState } from '../../ducks/brukers-navn';
 import {
     hentBrukerInfo,
     selectBrukerInfo,
@@ -28,7 +28,7 @@ import { selectAutentiseringsinfo } from '../../ducks/autentiseringsinfo';
 import { VEILARBSTEPUP } from '../../ducks/api';
 
 interface StateProps {
-    innloggingsinfo: InnloggingsinfoState;
+    brukersNavn: BrukersNavnState;
     autentiseringsinfo: AuthState;
     registreringstatus: RegistreringstatusState;
     brukerinfo: BrukerinfoState;
@@ -36,7 +36,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    hentInnloggingsInfo: () => Promise<void | {}>;
+    hentBrukersNavn: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
     hentBrukerInfo: () => void;
     hentRegistreringStatus: (featureToggles: FeatureTogglesData) => void;
@@ -50,7 +50,7 @@ export class HentInitialData extends React.Component<Props> {
 
         this.props.hentFeatureToggles().then(() => {
             this.props.hentBrukerInfo();
-            this.props.hentInnloggingsInfo();
+            this.props.hentBrukersNavn();
             this.props.hentAutentiseringsInfo().then((res) => {
                 if ((res as AuthData).harGyldigOidcToken) {
                     this.props.hentRegistreringStatus(this.props.featureToggles);
@@ -60,7 +60,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, autentiseringsinfo, innloggingsinfo, intl, brukerinfo } = this.props;
+        const { children, registreringstatus, autentiseringsinfo, brukersNavn, intl, brukerinfo } = this.props;
         const { niva } = autentiseringsinfo.data;
         const { harGyldigOidcToken } = autentiseringsinfo.data;
 
@@ -78,7 +78,7 @@ export class HentInitialData extends React.Component<Props> {
                 feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
                 avhengigheter={[
                     registreringstatus,
-                    innloggingsinfo,
+                    brukersNavn,
                     autentiseringsinfo,
                     brukerinfo
                 ]}
@@ -93,16 +93,16 @@ export class HentInitialData extends React.Component<Props> {
 
 const mapStateToProps = (state) => ({
     autentiseringsinfo: selectAutentiseringsinfo(state),
-    innloggingsinfo:  selectInnloggingsinfo(state),
+    brukersNavn:  selectBrukersNavn(state),
     registreringstatus: selectRegistreringstatus(state),
     brukerinfo: selectBrukerInfo(state),
     featureToggles: selectFeatureToggles(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    hentInnloggingsInfo:  () => dispatch(hentInnloggingsInfo()),
-    hentAutentiseringsInfo:  () => dispatch(hentAutentiseringsInfo()),
-    hentBrukerInfo:  () => dispatch(hentBrukerInfo()),
+    hentBrukersNavn: () => dispatch(hentBrukersNavn()),
+    hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
+    hentBrukerInfo: () => dispatch(hentBrukerInfo()),
     hentRegistreringStatus: (featureToggles) => dispatch(hentRegistreringStatus(featureToggles)),
     hentFeatureToggles: () => dispatch(hentFeatureToggles()),
 });

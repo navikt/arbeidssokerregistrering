@@ -1,5 +1,5 @@
 import { ActionTypes as RegStatusActionTypes } from './registreringstatus';
-import { ActionTypes as InnloggingsinfoActionTypes } from './innloggingsinfo';
+import { ActionTypes as BrukersNavnActionTypes } from './brukers-navn';
 import { ActionTypes as AutentiseringsinfoActionTypes } from './autentiseringsinfo';
 import { ActionTypes as SvarActionTypes } from './svar';
 import { ActionTypes as SisteStillingFraAARegActionTypes } from './siste-stilling-fra-aareg';
@@ -11,7 +11,7 @@ import { ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
 type ActionTypes =
     BrukerInfoActionTypes |
     RegStatusActionTypes |
-    InnloggingsinfoActionTypes |
+    BrukersNavnActionTypes |
     AutentiseringsinfoActionTypes |
     SvarActionTypes |
     RegistrerBrukerActionTypes |
