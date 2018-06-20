@@ -49,11 +49,11 @@ export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
 
         this.props.hentFeatureToggles().then(() => {
-            this.props.hentBrukersFnr();
-            this.props.hentBrukersNavn();
             this.props.hentAutentiseringsInfo().then((res) => {
                 if ((res as AuthData).harGyldigOidcToken) {
                     this.props.hentRegistreringStatus(this.props.featureToggles);
+                    this.props.hentBrukersFnr();
+                    this.props.hentBrukersNavn();
                 }
             });
         });
