@@ -1,42 +1,42 @@
 .avsjekk-animasjon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  animation: avsjekk-loading 5s both;
-  .blokk-s();
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: avsjekk-loading 5s both;
+    .blokk-s();
 }
 
 .avsjekk-animasjon__bilde {
-  width: 180px;
-  height: 180px;
+    width: 180px;
+    height: 180px;
 
-  .sirkel, .hake {
-    transform-origin: 50% 50%;
-  }
-  .sirkel {
-    stroke-dasharray: 320;
-    stroke-dashoffset: 320;
-    animation: avsjekk-stroke 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
-  }
-  .hake {
-    stroke-dasharray: 180;
-    stroke-dashoffset: 180;
-    animation: avsjekk-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
-  }
+    .sirkel, .hake {
+        transform-origin: 50% 50%;
+    }
+    .sirkel {
+        stroke-dasharray: 320;
+        stroke-dashoffset: 320;
+        animation: avsjekk-stroke 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+    }
+    .hake {
+        stroke-dasharray: 180;
+        stroke-dashoffset: 180;
+        animation: avsjekk-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+    }
 }
 
 @keyframes avsjekk-loading {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
 }
 
 @keyframes avsjekk-stroke {
-  100% {
-    stroke-dashoffset: 0;
-  }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
