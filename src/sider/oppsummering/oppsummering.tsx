@@ -26,7 +26,7 @@ type EgenProps = StateProps;
 const oppsummeringBesvarelser = (state: AppState) => {
 
     if (_.isEmpty(state.svar)) { return null; }
-    const { brukerInfo } = state, { data } = brukerInfo, personId = data.id;
+    const { brukersFnr } = state, { data } = brukersFnr, personId = data.id;
 
     let alderElement;
     if (!_.isEmpty(data)) {

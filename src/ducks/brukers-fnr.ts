@@ -3,9 +3,9 @@ import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 
 export enum ActionTypes {
-    HENT_BRUKERINFO_OK = 'HENT_BRUKERINFO_OK',
-    HENT_BRUKERINFO_PENDING = 'HENT_BRUKERINFO_PENDING',
-    HENT_BRUKERINFO_FEILET = 'HENT_BRUKERINFO_FEILET'
+    HENT_BRUKERS_FNR_OK = 'HENT_BRUKERS_FNR_OK',
+    HENT_BRUKERS_FNR_PENDING = 'HENT_BRUKERS_FNR_PENDING',
+    HENT_BRUKERS_FNR_FEILET = 'HENT_BRUKERS_FNR_FEILET'
 }
 
 export interface State {
@@ -29,14 +29,14 @@ const initialState = {
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
-        case ActionTypes.HENT_BRUKERINFO_PENDING:
+        case ActionTypes.HENT_BRUKERS_FNR_PENDING:
             if (state.status === STATUS.OK) {
                 return {...state, status: STATUS.RELOADING};
             }
             return {...state, status: STATUS.PENDING};
-        case ActionTypes.HENT_BRUKERINFO_FEILET:
+        case ActionTypes.HENT_BRUKERS_FNR_FEILET:
             return {...state, status: STATUS.ERROR};
-        case ActionTypes.HENT_BRUKERINFO_OK: {
+        case ActionTypes.HENT_BRUKERS_FNR_OK: {
             return {...state, status: STATUS.OK, data: action.data};
         }
         default:
@@ -44,14 +44,14 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function hentBrukerInfo() {
+export function hentBrukersFnr() {
     return doThenDispatch(() => Api.hentBrukersFnr(), {
-        PENDING: ActionTypes.HENT_BRUKERINFO_PENDING,
-        OK: ActionTypes.HENT_BRUKERINFO_OK,
-        FEILET: ActionTypes.HENT_BRUKERINFO_FEILET,
+        PENDING: ActionTypes.HENT_BRUKERS_FNR_PENDING,
+        OK: ActionTypes.HENT_BRUKERS_FNR_OK,
+        FEILET: ActionTypes.HENT_BRUKERS_FNR_FEILET,
     });
 }
 
-export function selectBrukerInfo(state: AppState): State {
-    return state.brukerInfo;
+export function selectBrukersFnr(state: AppState): State {
+    return state.brukersFnr;
 }
