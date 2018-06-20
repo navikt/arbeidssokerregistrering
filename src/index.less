@@ -14,18 +14,18 @@
 @import '../node_modules/nav-frontend-chevron-style/src/index';
 @import '../node_modules/nav-frontend-grid-style/src/index';
 
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: @navLysGra;
+}
+*::-webkit-scrollbar-thumb {
+    background: @navGra60;
+    border-radius: 3px;
+}
 
 body {
     background-color: @white;
-    &::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-        background-color: @navLysGra;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: @navGra60;
-        border-radius: 3px;
-    }
 }
 
 main.arbsokreg_app:focus {
