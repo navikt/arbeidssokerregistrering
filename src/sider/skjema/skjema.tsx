@@ -4,9 +4,9 @@ import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { State as SvarState } from '../../ducks/svar';
-import { getAlleSporsmalSomIkkeSkalBesvares } from './skjema-utils';
+import {  getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
 
-interface SkjemaProps {
+export interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
@@ -15,6 +15,7 @@ interface SkjemaProps {
     fullforSkjema: () => void;
     advarselElement: React.ReactElement<Element> | null;
     svar: SvarState;
+    config?: SkjemaConfig;
 }
 
 interface State {
@@ -65,7 +66,7 @@ export default class Skjema extends React.Component<Props, State> {
             this.sporsmalIder.filter((sporsmalId, indeks) => indeks <= this.props.gjeldendeSporsmal);
 
         const sporsmalIderSomIkkeSkalBesvares =
-            getAlleSporsmalSomIkkeSkalBesvares(foregaendeSporsmalIder, this.props.svar);
+            getAlleSporsmalSomIkkeSkalBesvares(foregaendeSporsmalIder, this.props.svar, this.props.config);
 
         const gjenstaendeSporsmalSomSkalBesvares = this.sporsmalIder
             .filter(sporsmalId => !foregaendeSporsmalIder.includes(sporsmalId))
