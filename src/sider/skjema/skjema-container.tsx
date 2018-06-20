@@ -38,6 +38,8 @@ interface EgenStateProps {
     visAdvarsel: boolean;
 }
 
+export const INGEN_SVAR = -1;
+
 class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     private divRef: HTMLDivElement | null;
     private gjeldendeSporsmal: number;
@@ -89,6 +91,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             fullforSkjema: () => this.fullforSkjema(),
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
+            hoppOverSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
         };
 
         return (

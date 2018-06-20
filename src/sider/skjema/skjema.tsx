@@ -16,6 +16,7 @@ export interface SkjemaProps {
     advarselElement: React.ReactElement<Element> | null;
     svar: SvarState;
     config?: SkjemaConfig;
+    hoppOverSporsmal: (sporsmalId: string) => void;
 }
 
 interface State {
@@ -49,15 +50,25 @@ export default class Skjema extends React.Component<Props, State> {
     }
 
     nesteButtonClick() {
-        const spmErBesvart = this.props.sporsmalErBesvart(this.getSporsmalId(this.props.gjeldendeSporsmal));
+        const { gjeldendeSporsmal } = this.props;
+        const spmErBesvart = this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal));
 
         if (spmErBesvart) {
             const nesteSporsmal = this.finnNesteSporsmal();
             if (nesteSporsmal === -1) {
                 this.props.fullforSkjema();
             } else {
+                if (nesteSporsmal > gjeldendeSporsmal + 1) {
+                    this.hoppOverSporsmal(gjeldendeSporsmal + 1, nesteSporsmal - gjeldendeSporsmal - 1);
+                }
                 this.props.gaaTilSporsmal(nesteSporsmal);
             }
+        }
+    }
+
+    hoppOverSporsmal(sporsmal: number, antall: number) {
+        for (let i = sporsmal; i < sporsmal + antall; i += 1) {
+            this.props.hoppOverSporsmal(this.getSporsmalId(i));
         }
     }
 

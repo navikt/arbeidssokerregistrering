@@ -6,7 +6,7 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
 import {
-    mountWithIntl, mountWithStore, mountWithStoreAndIntl, shallowwithStoreAndIntl,
+    mountWithStoreAndIntl,
     store
 } from '../../test/test-utils';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
@@ -53,8 +53,9 @@ describe('<Skjema />', () => {
     });
 
 
-    it('Skal hoppe over gitte spørsmål', () => {
+    it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
         const gaaTilSporsmal = sinon.spy();
+        const hoppOverSporsmal = sinon.spy();
 
         const svar = {
             helse: 2,
@@ -77,6 +78,7 @@ describe('<Skjema />', () => {
             ...dummyPropsTilSkjema,
             sporsmalErBesvart: (sporsmalId) => true,
             gaaTilSporsmal: gaaTilSporsmal,
+            hoppOverSporsmal: hoppOverSporsmal,
             gjeldendeSporsmal: 2,
             svar: svar,
             config: config,
@@ -95,7 +97,22 @@ describe('<Skjema />', () => {
         wrapper.find(KnappNeste).simulate('click');
         expect(gaaTilSporsmal).to.have.property('callCount', 1);
         expect(gaaTilSporsmal.getCall(0).args[0]).to.be.equal(5);
+        expect(hoppOverSporsmal).to.have.property('callCount', 2);
+        expect(hoppOverSporsmal.getCall(0).args[0]).to.be.equal('oppsummering');
+        expect(hoppOverSporsmal.getCall(1).args[0]).to.be.equal('test');
+    });
 
+    it('Skal ikke hoppe over spørsmål hvis det ikke er konfigurert', () => {
+        const hoppOverSporsmal = sinon.spy();
+
+        const props = {
+            ...dummyPropsTilSkjema,
+            hoppOverSporsmal: hoppOverSporsmal,
+        };
+
+        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
+        wrapper.find(KnappNeste).simulate('click');
+        expect(hoppOverSporsmal).to.have.property('callCount', 0);
     });
 });
 
@@ -124,8 +141,8 @@ const dummyPropsTilSkjema: SkjemaProps = {
         test2: 4,
     },
     gaaTilbake: () => {},
-    gaaTilNesteSide: (gjeldendeSporsmalId: string, alleSporsmalIder: string[]) => {},
     gaaTilSporsmal: (sporsmal: number) => {},
     fullforSkjema: () => {},
     advarselElement: null,
+    hoppOverSporsmal: (sporsmalId) => {},
 };
