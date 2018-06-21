@@ -4,9 +4,9 @@ import { FieldState } from 'redux-form';
 import svar, { State as SvarState } from './ducks/svar';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
-import innloggingsInfo, { State as InnloggingsInfoState } from './ducks/innloggingsinfo';
+import brukersNavn, { State as BrukersNavnState } from './ducks/brukers-navn';
 import autentiseringsInfo, { State as AutentiseringsInfoState } from './ducks/autentiseringsinfo';
-import brukerInfo, { State as BrukerInfoState } from './ducks/brukerinfo';
+import brukersFnr, { State as BrukersFnrState } from './ducks/brukers-fnr';
 import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import featureToggles, { State as FeatureTogglesState } from './ducks/feature-toggles';
 import oversettelseAvStillingFraAAReg, {
@@ -18,9 +18,9 @@ export interface AppState {
     svar: SvarState;
     registreringStatus: RegStatusState;
     registrerBruker: RegistrerBruker;
-    innloggingsInfo: InnloggingsInfoState;
+    brukersNavn: BrukersNavnState;
     autentiseringsInfo: AutentiseringsInfoState;
-    brukerInfo: BrukerInfoState;
+    brukersFnr: BrukersFnrState;
     sisteStillingFraAAReg: SisteStillingFraAARegState;
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     sisteStilling: SisteStillingState;
@@ -32,9 +32,9 @@ export default combineReducers<AppState>({
     svar,
     registreringStatus,
     registrerBruker,
-    innloggingsInfo,
+    brukersNavn,
     autentiseringsInfo,
-    brukerInfo,
+    brukersFnr,
     oversettelseAvStillingFraAAReg,
     sisteStillingFraAAReg,
     sisteStilling,

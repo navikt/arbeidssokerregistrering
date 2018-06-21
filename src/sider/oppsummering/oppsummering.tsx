@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
+import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { hentAlder, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
@@ -17,7 +17,7 @@ import ResponsivSide from '../../komponenter/side/responsiv-side';
 const oppsummeringSvg = require('./oppsummering.svg');
 
 interface StateProps {
-    innloggingsInfo: InnloggingsInfoState;
+    brukersNavn: BrukersNavnState;
     state: AppState;
 }
 
@@ -26,7 +26,7 @@ type EgenProps = StateProps;
 const oppsummeringBesvarelser = (state: AppState) => {
 
     if (_.isEmpty(state.svar)) { return null; }
-    const { brukerInfo } = state, { data } = brukerInfo, personId = data.id;
+    const { brukersFnr } = state, { data } = brukersFnr, personId = data.id;
 
     let alderElement;
     if (!_.isEmpty(data)) {
@@ -113,8 +113,8 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
     }
 
     render() {
-        const {history, innloggingsInfo, state} = this.props;
-        const {name} = innloggingsInfo.data;
+        const {history, brukersNavn, state} = this.props;
+        const {name} = brukersNavn.data;
         return (
             <ResponsivSide>
                 <Systemtittel tag="h1" className="oppsummering-tittel">
@@ -141,7 +141,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
 }
 
 const mapStateToProps = (state: AppState) => ({
-    innloggingsInfo: selectInnloggingsinfo(state),
+    brukersNavn: selectBrukersNavn(state),
     state: state
 });
 
