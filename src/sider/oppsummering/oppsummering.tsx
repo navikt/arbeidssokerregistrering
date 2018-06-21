@@ -43,6 +43,15 @@ const oppsummeringBesvarelser = (state: AppState) => {
         );
     }
 
+    const dinSituasjon = state.svar['din-situasjon'] === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-din-situasjon`}/>
+                <FormattedMessage id={`oppsummering-din-situasjon-svar-${state.svar['din-situasjon']}`}/>
+            </Normaltekst>
+        </li>
+    );
+
     const sisteStilling = state.svar['siste-stilling'] === INGEN_SVAR ? (null) : (
         <li>
             <Normaltekst>
@@ -92,6 +101,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
                         <FormattedMessage id="dinsituasjon-liste-2"/>
                     </Normaltekst>
                 </li>
+                {dinSituasjon}
                 {sisteStilling}
                 <li>
                     <Normaltekst>
