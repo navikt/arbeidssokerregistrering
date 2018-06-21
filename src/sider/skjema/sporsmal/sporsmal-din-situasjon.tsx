@@ -6,7 +6,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { getTekstIdForAlternativ } from '../skjema-utils';
 import { Systemtittel } from 'nav-frontend-typografi';
 import {
-    ingenYrkesbakgrunn,
+    ingenYrkesbakgrunn, selectSisteStilling,
     Stilling,
     velgSisteStilling
 } from '../../../ducks/siste-stilling';
@@ -22,6 +22,7 @@ interface DispatchProps {
 
 interface StateProps {
     defaultStilling: Stilling;
+    sisteStilling: Stilling;
 }
 
 interface SporsmalProps {
@@ -34,12 +35,16 @@ type Props = SporsmalProps & InjectedIntlProps & DispatchProps & StateProps;
 
 class SporsmalDinSituasjon extends React.Component<Props> {
     render() {
-        const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling} = this.props;
+        const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling, sisteStilling} = this.props;
         const fellesProps = {
             intl: intl,
             avgiSvar: (alternativId: number) => {
                 endreSvar(sporsmalId, alternativId);
-                velgStilling(alternativId === 2 ? ingenYrkesbakgrunn : defaultStilling);
+                if (alternativId === 2) {
+                    velgStilling(ingenYrkesbakgrunn);
+                } else if (sisteStilling.label !== defaultStilling.label) {
+                    velgStilling(defaultStilling);
+                }
             },
             getTekstId: (alternativId: number) => getTekstIdForAlternativ(sporsmalId, alternativId),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
@@ -69,6 +74,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     defaultStilling: hentOversattStillingFraAAReg(selectOversettelseAvStillingFraAAReg(state).data),
+    sisteStilling: selectSisteStilling(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
