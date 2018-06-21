@@ -1,33 +1,22 @@
 .framdrift {
-  background-color: @navLysGra;
-  z-index: 10000;
-  height: 18px;
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
-  .andel {
-    height: 18px;
-    border-top-right-radius: 9px;
-    border-bottom-right-radius: 9px;
-    background-color: @navGra60;
-    transition: width ease-in-out 1s;
-  }
-  &.framdrift-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-}
-
-@media (min-width: @screen-sm-min) {
-  .framdrift {
+    background-color: @navLysGra;
+    z-index: 10000;
     height: 10px;
-    .andel {
-      height: 10px;
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
+    width: 100%;
+    &:focus {
+        outline: none;
     }
-  }
+    .andel {
+        height: 10px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        background-color: @navGra60;
+        transition: width ease-in-out 1s;
+    }
+    &.framdrift-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
 }
