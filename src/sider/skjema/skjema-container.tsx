@@ -128,10 +128,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.props.history.push(`${OPPSUMMERING_PATH}`);
     }
 
-    erSisteSporsmal(antallSporsmal: number) {
-        return this.gjeldendeSporsmal === (antallSporsmal - 1);
-    }
-
     componentWillMount() {
         this.gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart();
     }

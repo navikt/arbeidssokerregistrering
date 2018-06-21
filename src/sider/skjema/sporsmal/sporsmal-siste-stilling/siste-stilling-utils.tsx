@@ -3,7 +3,7 @@ import { Data } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 
 export function hentOversattStillingFraAAReg(
     data: Data
-) {
+): Stilling {
     const koderFraPam = data.konseptMedStyrk08List;
     let stilling: Stilling = annenStilling;
     if (koderFraPam.length > 0) {
