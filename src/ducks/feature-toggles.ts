@@ -1,13 +1,6 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
-import { VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL } from './api';
-
-export const backendToggle = 'arbeidssokerregistrering.ta-i-bruk-ny-backend';
-
-export function getRegistreringBackendUrl(featureToggles: Data) {
-    return (featureToggles[backendToggle]) ? VEILARBREGISTRERING_URL : VEILARBOPPFOLGINGPROXY_URL;
-}
 
 export enum ActionTypes {
     FEATURE_TOGGLES_PENDING = 'FEATURE_TOGGLES_PENDING',
@@ -16,7 +9,7 @@ export enum ActionTypes {
 }
 
 export interface Data {
-    'arbeidssokerregistrering.ta-i-bruk-ny-backend': boolean;
+    'arbeidssokerregistrering.bruk-ny-registrering': boolean;
 }
 
 export interface State {
@@ -29,9 +22,13 @@ interface Action {
     data: Data;
 }
 
+export const alleFeatureToggles = [
+    'arbeidssokerregistrering.bruk-ny-registrering'
+];
+
 const initialState = {
     data : {
-        'arbeidssokerregistrering.ta-i-bruk-ny-backend': false
+        'arbeidssokerregistrering.bruk-ny-registrering': false
     },
     status: STATUS.NOT_STARTED
 };

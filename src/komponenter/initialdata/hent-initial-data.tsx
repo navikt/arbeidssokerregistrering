@@ -39,7 +39,7 @@ interface DispatchProps {
     hentInnloggingsInfo: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
     hentBrukerInfo: () => void;
-    hentRegistreringStatus: (featureToggles: FeatureTogglesData) => void;
+    hentRegistreringStatus: () => void;
     hentFeatureToggles: () => Promise<void | {}>;
 }
 
@@ -53,7 +53,7 @@ export class HentInitialData extends React.Component<Props> {
             this.props.hentInnloggingsInfo();
             this.props.hentAutentiseringsInfo().then((res) => {
                 if ((res as AuthData).harGyldigOidcToken) {
-                    this.props.hentRegistreringStatus(this.props.featureToggles);
+                    this.props.hentRegistreringStatus();
                 }
             });
         });
@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentInnloggingsInfo:  () => dispatch(hentInnloggingsInfo()),
     hentAutentiseringsInfo:  () => dispatch(hentAutentiseringsInfo()),
     hentBrukerInfo:  () => dispatch(hentBrukerInfo()),
-    hentRegistreringStatus: (featureToggles) => dispatch(hentRegistreringStatus(featureToggles)),
+    hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
     hentFeatureToggles: () => dispatch(hentFeatureToggles()),
 });
 

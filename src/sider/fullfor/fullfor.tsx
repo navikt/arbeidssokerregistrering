@@ -169,7 +169,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    onRegistrerBruker: (data, featureToggles) => dispatch(utforRegistrering(data, featureToggles)),
+    onRegistrerBruker: (data) => dispatch(utforRegistrering(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
