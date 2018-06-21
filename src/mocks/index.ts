@@ -6,9 +6,8 @@ import brukersFnr from './brukers-fnr';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
-import { backendToggle } from '../ducks/feature-toggles';
 import {
-    FEATURE_URL, VEILARBOPPFOLGINGPROXY_URL, VEILARBREGISTRERING_URL
+    FEATURE_URL, VEILARBOPPFOLGINGPROXY_ME_URL, VEILARBREGISTRERING_URL
 } from '../ducks/api';
 import autentisert from './autentisert';
 import registreringRespons from "./registrer-bruker";
@@ -31,17 +30,15 @@ if (MOCK_AUTENTISERINGS_INFO) {
 
 if (MOCK_START_REGISRERING_STATUS) {
     const response = respondWith(delayed(1000, startRegistreringStatus));
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, response);
     (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_FEATURE_TOGGLES) {
-    (mock as any).get(`${FEATURE_URL}/?feature=${backendToggle}`, respondWith(delayed(1000, featureTogglesMock)));
+    (mock as any).get(`express:${FEATURE_URL}/?feature(.*)`, respondWith(delayed(1000, featureTogglesMock)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
     const response = respondWith(delayed(1000, registreringRespons));
-    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/startregistrering`, response);
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
@@ -50,19 +47,15 @@ if (MOCK_BRUKERS_NAVN) {
 }
 
 if (MOCK_BRUKERS_FNR) {
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/oppfolging/me`, respondWith(delayed(1000, brukersFnr)));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_ME_URL}`, respondWith(delayed(1000, brukersFnr)));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
     const response = respondWith(delayed(1000, sisteStillingFraAAReg));
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`, response);
     (mock as any).get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, response);
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post(`${VEILARBOPPFOLGINGPROXY_URL}/sistearbeidsforhold`, respondWith(delayed(1000, (url, config, params) => {
-        return params.bodyParams;
-    })));
     (mock as any).post(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(1000, (url, config, params) => {
         return params.bodyParams;
     })));

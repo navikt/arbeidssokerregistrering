@@ -39,7 +39,7 @@ interface DispatchProps {
     hentBrukersNavn: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
     hentBrukersFnr: () => void;
-    hentRegistreringStatus: (featureToggles: FeatureTogglesData) => void;
+    hentRegistreringStatus: () => void;
     hentFeatureToggles: () => Promise<void | {}>;
 }
 
@@ -101,9 +101,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentBrukersNavn: () => dispatch(hentBrukersNavn()),
-    hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
     hentBrukersFnr: () => dispatch(hentBrukersFnr()),
-    hentRegistreringStatus: (featureToggles) => dispatch(hentRegistreringStatus(featureToggles)),
+    hentAutentiseringsInfo:  () => dispatch(hentAutentiseringsInfo()),
+    hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
     hentFeatureToggles: () => dispatch(hentFeatureToggles()),
 });
 
