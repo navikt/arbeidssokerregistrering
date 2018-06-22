@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import KnappBase from 'nav-frontend-knapper';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
+import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { hentAlder, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
@@ -13,11 +13,12 @@ import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
+import { INGEN_SVAR } from '../skjema/skjema-container';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
 interface StateProps {
-    innloggingsInfo: InnloggingsInfoState;
+    brukersNavn: BrukersNavnState;
     state: AppState;
 }
 
@@ -26,7 +27,7 @@ type EgenProps = StateProps;
 const oppsummeringBesvarelser = (state: AppState) => {
 
     if (_.isEmpty(state.svar)) { return null; }
-    const { brukerInfo } = state, { data } = brukerInfo, personId = data.id;
+    const { brukersFnr } = state, { data } = brukersFnr, personId = data.id;
 
     let alderElement;
     if (!_.isEmpty(data)) {
@@ -41,6 +42,45 @@ const oppsummeringBesvarelser = (state: AppState) => {
             </li>
         );
     }
+
+    const dinSituasjon = state.svar['din-situasjon'] === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-din-situasjon`}/>
+                <FormattedMessage id={`oppsummering-din-situasjon-svar-${state.svar['din-situasjon']}`}/>
+            </Normaltekst>
+        </li>
+    );
+
+    const sisteStilling = state.svar['siste-stilling'] === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                Siste stilling:&nbsp;{
+                state.svar['siste-stilling'] === 1
+                    ? state.sisteStilling.data.stilling.label
+                    : <FormattedMessage
+                        id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
+                    />
+            }
+            </Normaltekst>
+        </li>
+    );
+
+    const utdanningBestatt = state.svar.utdanningbestatt === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
+            </Normaltekst>
+        </li>
+    );
+
+    const utdanningGodkjent = state.svar.utdanninggodkjent === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
+            </Normaltekst>
+        </li>
+    );
 
     return (
         <div className="oppsummering-besvarelser">
@@ -61,33 +101,16 @@ const oppsummeringBesvarelser = (state: AppState) => {
                         <FormattedMessage id="dinsituasjon-liste-2"/>
                     </Normaltekst>
                 </li>
-                <li>
-                    <Normaltekst>
-                        Siste stilling:&nbsp;{
-                            state.svar['siste-stilling'] === 1
-                                ? state.sisteStilling.data.stilling.label
-                                : <FormattedMessage
-                                    id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
-                                />
-                    }
-                    </Normaltekst>
-                </li>
+                {dinSituasjon}
+                {sisteStilling}
                 <li>
                     <Normaltekst>
                         Høyeste fullførte utdanning:&nbsp;
                         <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
                     </Normaltekst>
                 </li>
-                <li>
-                    <Normaltekst>
-                        <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
-                    </Normaltekst>
-                </li>
-                <li>
-                    <Normaltekst>
-                        <FormattedMessage id={`oppsummering-utdanninggodkjent-svar-${state.svar.utdanninggodkjent}`}/>
-                    </Normaltekst>
-                </li>
+                {utdanningBestatt}
+                {utdanningGodkjent}
                 <li>
                     <Normaltekst>
                         <FormattedMessage id={`oppsummering-helsehinder-svar-${state.svar.helsehinder}`}/>
@@ -113,8 +136,8 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
     }
 
     render() {
-        const {history, innloggingsInfo, state} = this.props;
-        const {name} = innloggingsInfo.data;
+        const {history, brukersNavn, state} = this.props;
+        const {name} = brukersNavn.data;
         return (
             <ResponsivSide>
                 <Systemtittel tag="h1" className="oppsummering-tittel">
@@ -141,7 +164,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
 }
 
 const mapStateToProps = (state: AppState) => ({
-    innloggingsInfo: selectInnloggingsinfo(state),
+    brukersNavn: selectBrukersNavn(state),
     state: state
 });
 

@@ -26,25 +26,6 @@ interface OptionsAsync {
 const OptionsAsync = Async as OptionsAsync;
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
-
-    // onFocus- og onBlur-funksjonene er lagt til for å kontrollere z-index
-    // på '.knapper-vertikalt' når SokeInputComponent (denne) ekspanderer.
-    // Problemet oppstår fordi side-animasjonen påvirker z-index på elementene som animeres.
-
-    static onFocus() {
-        const elem = document.querySelector('.knapper-vertikalt')!;
-        if (elem) {
-            elem.setAttribute('style', 'z-index: -1');
-        }
-    }
-
-    static onBlur() {
-        const elem = document.querySelector('.knapper-vertikalt')!;
-        if (elem) {
-            elem.setAttribute('style', 'z-index: 1');
-        }
-    }
-
     constructor(props: SokeInputComponentProps) {
         super(props);
         this.onChange = this.onChange.bind(this);
@@ -87,7 +68,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 value
             });
         }
-        SokeInputComponent.onBlur();
     }
 
     render() {
@@ -109,8 +89,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         id="stilling"
                         valueKey="id"
                         labelKey="labelKey"
-                        onFocus={SokeInputComponent.onFocus}
-                        onBlur={SokeInputComponent.onBlur}
                     />
                 </div>
             </>

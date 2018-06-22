@@ -2,7 +2,7 @@ import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 
-export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
+export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
 export const DITTNAV_URL = '/dittnav/';
@@ -68,9 +68,9 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
         fetch(SBLARBEID_OPPRETT_MIN_ID_URL, (sblOpprettMinIdConfig as RequestInit));
 }
 
-export function hentInnloggingsInfo() {
+export function hentBrukersNavn() {
     return fetchToJson({
-        url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
+        url: `${INNLOGGINGSLINJE_URL}?randomness=${Math.random()}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
@@ -86,7 +86,7 @@ export function hentAutentiseringsInfo() {
     });
 }
 
-export function hentBrukerInfo() {
+export function hentBrukersFnr() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_ME_URL}`,
         config: { ...MED_CREDENTIALS,

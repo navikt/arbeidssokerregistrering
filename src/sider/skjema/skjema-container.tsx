@@ -17,11 +17,11 @@ import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import AndreForhold from './sporsmal/sporsmal-andre-forhold';
 import HelseHinder from './sporsmal/sporsmal-helse-hinder';
+import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
+import { State as SvarState } from '../../ducks/svar';
 
 interface StateProps {
-    sporsmalErBesvart: (sporsmalId: string) => boolean;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
-    antallBesvarteSporsmal: number;
+    svarState: SvarState;
 }
 
 interface DispatchProps {
@@ -37,6 +37,8 @@ type Props = StateProps & DispatchProps & InjectedIntlProps & SkjemaProps & Rout
 interface EgenStateProps {
     visAdvarsel: boolean;
 }
+
+export const INGEN_SVAR = -1;
 
 class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     private divRef: HTMLDivElement | null;
@@ -72,28 +74,31 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                 this.toggleAdvarsel(false);
                 },
             intl: this.props.intl,
-            hentAvgittSvar: this.props.hentAvgittSvar
+            hentAvgittSvar: (sporsmalId: string) => this.props.svarState[sporsmalId],
         };
 
         const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
             sporsmalErBesvart: (spmId) => {
-                const spmErBesvart = this.props.sporsmalErBesvart(spmId);
+                const spmErBesvart = this.sporsmalErBesvart(spmId);
                 if (!spmErBesvart) {
                     this.toggleAdvarsel(true);
                 }
                 return spmErBesvart;
             },
             gaaTilbake: () => this.props.history.goBack(),
-            gaaTilNesteSide: (gjeldendeSporsmalId: string, antallSporsmal: number) =>
-                this.gaaTilNesteSide(gjeldendeSporsmalId, antallSporsmal),
-            advarselElement: this.state.visAdvarsel ? advarselElement : null
+            gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
+            fullforSkjema: () => this.fullforSkjema(),
+            advarselElement: this.state.visAdvarsel ? advarselElement : null,
+            svar: this.props.svarState,
+            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
         };
 
         return (
             <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
+                        <SporsmalDinSituasjon sporsmalId="din-situasjon" {...fellesProps}/>
                         <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
@@ -119,17 +124,8 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.gjeldendeSporsmal = Number(sporsmal);
     }
 
-    gaaTilNesteSide(gjeldendeSporsmalId: string, antallSporsmal: number) {
-        if (this.erSisteSporsmal(antallSporsmal)) {
-            this.props.history.push(`${OPPSUMMERING_PATH}`);
-            return;
-        }
-
-        this.gaaTilSporsmal(this.gjeldendeSporsmal + 1);
-    }
-
-    erSisteSporsmal(antallSporsmal: number) {
-        return this.gjeldendeSporsmal === (antallSporsmal - 1);
+    fullforSkjema() {
+        this.props.history.push(`${OPPSUMMERING_PATH}`);
     }
 
     componentWillMount() {
@@ -137,7 +133,8 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     }
 
     gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart() {
-        if (this.gjeldendeSporsmal > this.props.antallBesvarteSporsmal) {
+        const antallBesvarteSporsmal = Object.keys(this.props.svarState).length;
+        if (this.gjeldendeSporsmal > antallBesvarteSporsmal) {
             this.props.history.push(`${SKJEMA_PATH}/0`);
         }
     }
@@ -165,12 +162,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         const forrigeSpmId = otherProps.match.params.id;
         return (spmId !== forrigeSpmId);
     }
+
+    sporsmalErBesvart(sporsmalId: string): boolean { return !!this.props.svarState[sporsmalId]; }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    sporsmalErBesvart: (sporsmalId) => !!state.svar[sporsmalId],
-    hentAvgittSvar: (sporsmalId) => state.svar[sporsmalId],
-    antallBesvarteSporsmal: Object.keys(state.svar).length
+    svarState: state.svar,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
