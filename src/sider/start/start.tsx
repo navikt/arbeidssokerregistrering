@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
-import { selectInnloggingsinfo, State as InnloggingsInfoState } from '../../ducks/innloggingsinfo';
+import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
 import { SKJEMA_PATH } from '../../utils/konstanter';
@@ -15,15 +15,15 @@ import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 const personSvg = require('./person-komprimert.svg');
 
 interface StateProps {
-    innloggingsInfo: InnloggingsInfoState;
+    brukersNavn: BrukersNavnState;
 }
 
 type StartProps = StateProps & null;
 
 export class Start extends React.Component<RouteComponentProps<MatchProps> & StartProps> {
     render() {
-        const {innloggingsInfo, history} = this.props;
-        const {name} = innloggingsInfo.data;
+        const {brukersNavn, history} = this.props;
+        const {name} = brukersNavn.data;
         return (
             <section className="startside">
                 <div className="startside__banner">
@@ -66,7 +66,7 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
 }
 
 const mapStateToProps = (state: AppState) => ({
-    innloggingsInfo: selectInnloggingsinfo(state)
+    brukersNavn: selectBrukersNavn(state)
 });
 
 export default connect(mapStateToProps, null)(Start);
