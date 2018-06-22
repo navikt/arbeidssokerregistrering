@@ -7,6 +7,7 @@ import getStore from '../store';
 import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
 import {Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
+import {Data as FeatureStatusData, ActionTypes as FeatureStatusActionTypes } from '../ducks/feature-toggles';
 import IntlProvider from '../Intl-provider';
 import { MemoryRouter } from 'react-router';
 
@@ -85,6 +86,10 @@ export function resetAndMakeHrefWritable() {
 
 export function dispatchRegistreringstatus(data: RegStatusData, s: Store<AppState>) {
     return s.dispatch({type: RegStatusActionTypes.HENT_REG_STATUS_OK, data});
+}
+
+export function dispatchFeaturestatus(data: FeatureStatusData, s: Store<AppState>) {
+    return s.dispatch({type: FeatureStatusActionTypes.FEATURE_TOGGLES_OK, data});
 }
 
 export class FetchStub {

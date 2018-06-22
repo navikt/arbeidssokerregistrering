@@ -61,3 +61,7 @@ export function hentFeatureToggles() {
 export function selectFeatureToggles(state: AppState): Data {
     return state.featureToggles.data;
 }
+
+export function selectBrukNyRegistreringFeatureToggle(state: AppState): boolean {
+    return state.featureToggles.data['arbeidssokerregistrering.bruk-ny-registrering'];
+}
