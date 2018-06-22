@@ -1,8 +1,8 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
-import { backendToggle, getRegistreringBackendUrl, Data as FeatureTogglesData } from './feature-toggles';
+import { alleFeatureToggles } from './feature-toggles';
 
-export const INNLOGGINGSINFO_URL = '/innloggingslinje/auth';
+export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
 export const DITTNAV_URL = '/dittnav/';
@@ -12,11 +12,10 @@ export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjon
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
-export const VEILARBOPPFOLGINGPROXY_URL = '/veilarboppfolgingproxy/api';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/feature';
+export const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
 
-const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
@@ -37,18 +36,18 @@ const MED_CREDENTIALS = {
     credentials: ('same-origin' as RequestCredentials)
 };
 
-export function hentRegistreringStatus(featureToggles: FeatureTogglesData) {
+export function hentRegistreringStatus() {
     return fetchToJson({
-        url: `${getRegistreringBackendUrl(featureToggles)}/startregistrering`,
+        url: `${VEILARBREGISTRERING_URL}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
     });
 }
 
-export function registrerBruker(data: RegistrerBrukerData, featureToggles: FeatureTogglesData) {
+export function registrerBruker(data: RegistrerBrukerData) {
     return fetchToJson({
-        url: `${getRegistreringBackendUrl(featureToggles)}/startregistrering`,
+        url: `${VEILARBREGISTRERING_URL}/startregistrering`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
@@ -69,9 +68,9 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
         fetch(SBLARBEID_OPPRETT_MIN_ID_URL, (sblOpprettMinIdConfig as RequestInit));
 }
 
-export function hentInnloggingsInfo() {
+export function hentBrukersNavn() {
     return fetchToJson({
-        url: `${INNLOGGINGSINFO_URL}?randomness=${Math.random()}`,
+        url: `${INNLOGGINGSLINJE_URL}?randomness=${Math.random()}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
@@ -87,7 +86,7 @@ export function hentAutentiseringsInfo() {
     });
 }
 
-export function hentBrukerInfo() {
+export function hentBrukersFnr() {
     return fetchToJson({
         url: `${VEILARBOPPFOLGINGPROXY_ME_URL}`,
         config: { ...MED_CREDENTIALS,
@@ -96,9 +95,9 @@ export function hentBrukerInfo() {
     });
 }
 
-export function hentStyrkkodeForSisteStillingFraAAReg(featureToggles: FeatureTogglesData) {
+export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
-        url: `${getRegistreringBackendUrl(featureToggles)}/sistearbeidsforhold`,
+        url: `${VEILARBREGISTRERING_URL}/sistearbeidsforhold`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
@@ -127,8 +126,9 @@ export function hentStillingMedStyrk08(sokestreng: string) {
 }
 
 export function hentFeatureToggles() {
+    const parameters = alleFeatureToggles.map(element => 'feature=' + element).join('&');
     return fetchToJson({
-        url: `${FEATURE_URL}/?feature=${backendToggle}`,
+        url: `${FEATURE_URL}/?${parameters}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
