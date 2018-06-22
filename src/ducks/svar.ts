@@ -4,12 +4,13 @@ export enum ActionTypes {
 }
 
 export type State = {
-    utdanning?: number | undefined;
-    utdanningbestatt?: number | undefined;
-    utdanninggodkjent?: number | undefined;
-    helsehinder?: number | undefined;
-    andreforhold?: number | undefined;
-    'siste-stilling'?: number | undefined;
+    utdanning?: number;
+    utdanningbestatt?: number;
+    utdanninggodkjent?: number;
+    helsehinder?: number;
+    andreforhold?: number;
+    'siste-stilling'?: number;
+    'din-situasjon'?: number;
 };
 
 export interface Data {

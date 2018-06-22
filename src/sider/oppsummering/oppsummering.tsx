@@ -13,6 +13,7 @@ import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
+import { INGEN_SVAR } from '../skjema/skjema-container';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -42,6 +43,45 @@ const oppsummeringBesvarelser = (state: AppState) => {
         );
     }
 
+    const dinSituasjon = state.svar['din-situasjon'] === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-din-situasjon`}/>
+                <FormattedMessage id={`oppsummering-din-situasjon-svar-${state.svar['din-situasjon']}`}/>
+            </Normaltekst>
+        </li>
+    );
+
+    const sisteStilling = state.svar['siste-stilling'] === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                Siste stilling:&nbsp;{
+                state.svar['siste-stilling'] === 1
+                    ? state.sisteStilling.data.stilling.label
+                    : <FormattedMessage
+                        id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
+                    />
+            }
+            </Normaltekst>
+        </li>
+    );
+
+    const utdanningBestatt = state.svar.utdanningbestatt === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
+            </Normaltekst>
+        </li>
+    );
+
+    const utdanningGodkjent = state.svar.utdanninggodkjent === INGEN_SVAR ? (null) : (
+        <li>
+            <Normaltekst>
+                <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
+            </Normaltekst>
+        </li>
+    );
+
     return (
         <div className="oppsummering-besvarelser">
             <img
@@ -61,33 +101,16 @@ const oppsummeringBesvarelser = (state: AppState) => {
                         <FormattedMessage id="dinsituasjon-liste-2"/>
                     </Normaltekst>
                 </li>
-                <li>
-                    <Normaltekst>
-                        Siste stilling:&nbsp;{
-                            state.svar['siste-stilling'] === 1
-                                ? state.sisteStilling.data.stilling.label
-                                : <FormattedMessage
-                                    id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
-                                />
-                    }
-                    </Normaltekst>
-                </li>
+                {dinSituasjon}
+                {sisteStilling}
                 <li>
                     <Normaltekst>
                         Høyeste fullførte utdanning:&nbsp;
                         <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
                     </Normaltekst>
                 </li>
-                <li>
-                    <Normaltekst>
-                        <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
-                    </Normaltekst>
-                </li>
-                <li>
-                    <Normaltekst>
-                        <FormattedMessage id={`oppsummering-utdanninggodkjent-svar-${state.svar.utdanninggodkjent}`}/>
-                    </Normaltekst>
-                </li>
+                {utdanningBestatt}
+                {utdanningGodkjent}
                 <li>
                     <Normaltekst>
                         <FormattedMessage id={`oppsummering-helsehinder-svar-${state.svar.helsehinder}`}/>
