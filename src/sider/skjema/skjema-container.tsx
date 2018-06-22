@@ -91,7 +91,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             fullforSkjema: () => this.fullforSkjema(),
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
-            hoppOverSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
+            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
         };
 
         return (
@@ -99,12 +99,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
                         <SporsmalDinSituasjon sporsmalId="din-situasjon" {...fellesProps}/>
-                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
                         <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
                         <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
                         <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
                         <AndreForhold sporsmalId="andreforhold" {...fellesProps}/>
+                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>

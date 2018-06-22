@@ -55,7 +55,7 @@ describe('<Skjema />', () => {
 
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
         const gaaTilSporsmal = sinon.spy();
-        const hoppOverSporsmal = sinon.spy();
+        const settStateForUbesvartSporsmal = sinon.spy();
 
         const svar = {
             helse: 2,
@@ -78,7 +78,7 @@ describe('<Skjema />', () => {
             ...dummyPropsTilSkjema,
             sporsmalErBesvart: (sporsmalId) => true,
             gaaTilSporsmal: gaaTilSporsmal,
-            hoppOverSporsmal: hoppOverSporsmal,
+            settStateForUbesvartSporsmal: settStateForUbesvartSporsmal,
             gjeldendeSporsmal: 2,
             svar: svar,
             config: config,
@@ -97,22 +97,22 @@ describe('<Skjema />', () => {
         wrapper.find(KnappNeste).simulate('click');
         expect(gaaTilSporsmal).to.have.property('callCount', 1);
         expect(gaaTilSporsmal.getCall(0).args[0]).to.be.equal(5);
-        expect(hoppOverSporsmal).to.have.property('callCount', 2);
-        expect(hoppOverSporsmal.getCall(0).args[0]).to.be.equal('oppsummering');
-        expect(hoppOverSporsmal.getCall(1).args[0]).to.be.equal('test');
+        expect(settStateForUbesvartSporsmal).to.have.property('callCount', 2);
+        expect(settStateForUbesvartSporsmal.getCall(0).args[0]).to.be.equal('oppsummering');
+        expect(settStateForUbesvartSporsmal.getCall(1).args[0]).to.be.equal('test');
     });
 
     it('Skal ikke hoppe over spørsmål hvis det ikke er konfigurert', () => {
-        const hoppOverSporsmal = sinon.spy();
+        const settStateForUbesvartSporsmal = sinon.spy();
 
         const props = {
             ...dummyPropsTilSkjema,
-            hoppOverSporsmal: hoppOverSporsmal,
+            settStateForUbesvartSporsmal: settStateForUbesvartSporsmal,
         };
 
         const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
         wrapper.find(KnappNeste).simulate('click');
-        expect(hoppOverSporsmal).to.have.property('callCount', 0);
+        expect(settStateForUbesvartSporsmal).to.have.property('callCount', 0);
     });
 });
 
@@ -144,5 +144,5 @@ const dummyPropsTilSkjema: SkjemaProps = {
     gaaTilSporsmal: (sporsmal: number) => {},
     fullforSkjema: () => {},
     advarselElement: null,
-    hoppOverSporsmal: (sporsmalId) => {},
+    settStateForUbesvartSporsmal: (sporsmalId) => {},
 };

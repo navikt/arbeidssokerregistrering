@@ -17,7 +17,7 @@ export interface SkjemaProps {
     advarselElement: React.ReactElement<Element> | null;
     svar: SvarState;
     config?: SkjemaConfig;
-    hoppOverSporsmal: (sporsmalId: string) => void;
+    settStateForUbesvartSporsmal: (sporsmalId: string) => void;
 }
 
 interface State {
@@ -58,20 +58,33 @@ export default class Skjema extends React.Component<Props, State> {
 
         if (spmErBesvart) {
             const nesteSporsmal = this.finnNesteSporsmal();
+            const sisteSporsmal = this.antallSporsmal - 1;
             if (nesteSporsmal === -1) {
+                this.settStateTilEventuelleUbesvarteSporsmal(sisteSporsmal + 1);
                 this.props.fullforSkjema();
             } else {
-                if (nesteSporsmal > gjeldendeSporsmal + 1) {
-                    this.hoppOverSporsmal(gjeldendeSporsmal + 1, nesteSporsmal - gjeldendeSporsmal - 1);
-                }
+                this.settStateTilEventuelleUbesvarteSporsmal(nesteSporsmal);
                 this.props.gaaTilSporsmal(nesteSporsmal);
             }
         }
     }
 
-    hoppOverSporsmal(sporsmal: number, antall: number) {
+    settStateTilEventuelleUbesvarteSporsmal(nesteSporsmal: number) {
+        if (this.skalHoppeOverSporsmal(nesteSporsmal)) {
+            this.settStateForAlleUbesvarteSporsmal(
+                this.props.gjeldendeSporsmal + 1,
+                nesteSporsmal - this.props.gjeldendeSporsmal - 1
+            );
+        }
+    }
+
+    skalHoppeOverSporsmal(nesteSporsmal: number) {
+        return nesteSporsmal > this.props.gjeldendeSporsmal + 1;
+    }
+
+    settStateForAlleUbesvarteSporsmal(sporsmal: number, antall: number) {
         for (let i = sporsmal; i < sporsmal + antall; i += 1) {
-            this.props.hoppOverSporsmal(this.getSporsmalId(i));
+            this.props.settStateForUbesvartSporsmal(this.getSporsmalId(i));
         }
     }
 
@@ -88,7 +101,11 @@ export default class Skjema extends React.Component<Props, State> {
             .map(sporsmalId => this.getSporsmal(sporsmalId))
             .filter(sporsmal => sporsmal !== this.props.gjeldendeSporsmal);
 
-        return gjenstaendeSporsmalSomSkalBesvares.length !== 0 ? gjenstaendeSporsmalSomSkalBesvares[0] : -1;
+        if (gjenstaendeSporsmalSomSkalBesvares.length === 0 ) {
+            return -1;
+        } else {
+            return gjenstaendeSporsmalSomSkalBesvares[0];
+        }
     }
 
     getSporsmalId(sporsmal: number) {
