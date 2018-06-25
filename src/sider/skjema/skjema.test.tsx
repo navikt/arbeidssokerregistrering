@@ -145,4 +145,5 @@ const dummyPropsTilSkjema: SkjemaProps = {
     fullforSkjema: () => {},
     advarselElement: null,
     settStateForUbesvartSporsmal: (sporsmalId) => {},
+    onNesteClick: (sporsmalId) => {},
 };
