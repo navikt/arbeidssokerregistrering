@@ -79,12 +79,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
         const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
-            sporsmalErBesvart: (spmId) => {
+            sporsmalErBesvart: (spmId) => this.sporsmalErBesvart(spmId),
+            onNesteClick: (spmId: string) => {
                 const spmErBesvart = this.sporsmalErBesvart(spmId);
                 if (!spmErBesvart) {
                     this.toggleAdvarsel(true);
                 }
-                return spmErBesvart;
             },
             gaaTilbake: () => this.props.history.goBack(),
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
@@ -163,7 +163,9 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         return (spmId !== forrigeSpmId);
     }
 
-    sporsmalErBesvart(sporsmalId: string): boolean { return !!this.props.svarState[sporsmalId]; }
+    sporsmalErBesvart(sporsmalId: string): boolean {
+        return !!this.props.svarState[sporsmalId];
+    }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
