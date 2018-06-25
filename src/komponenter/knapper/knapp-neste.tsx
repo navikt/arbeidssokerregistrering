@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import * as classnames from 'classnames';
 
 interface Props {
     disabled?: boolean;
@@ -10,9 +11,12 @@ interface Props {
 }
 
 function KnappNeste({disabled, onClick, className, erAktiv}: Props & InjectedIntlProps) {
-    const cssclass = 'nesteknapp ' + className + (erAktiv ? 'erBesvart' : '');
     return (
-        <button className={cssclass} disabled={disabled} onClick={onClick}>
+        <button
+            className={classnames('nesteknapp', className, {erAktiv})}
+            disabled={disabled}
+            onClick={onClick}
+        >
             <span className="gjemt">
                 <FormattedMessage id="knapp-neste"/>
             </span>

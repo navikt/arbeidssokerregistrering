@@ -44,7 +44,7 @@ export default class Skjema extends React.Component<Props, State> {
                 <Animasjon flag={this.props.gjeldendeSporsmal}>
                     <KnappNeste
                         onClick={() => this.nesteButtonClick()}
-                        erAktiv={true}
+                        erAktiv={this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))}
                     />
                     <KnappTilbake/>
                     <LenkeAvbryt/>
