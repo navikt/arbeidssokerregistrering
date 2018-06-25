@@ -32,7 +32,7 @@ export default class Skjema extends React.Component<Props, State> {
     private sporsmalIder: string[];
 
     render() {
-        const {  advarselElement, children, gjeldendeSporsmal, sporsmalErBesvart } = this.props;
+        const {  advarselElement, children, gjeldendeSporsmal } = this.props;
         this.antallSporsmal = React.Children.toArray(children).length;
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
