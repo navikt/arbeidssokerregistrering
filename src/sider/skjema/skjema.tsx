@@ -18,6 +18,7 @@ export interface SkjemaProps {
     svar: SvarState;
     config?: SkjemaConfig;
     settStateForUbesvartSporsmal: (sporsmalId: string) => void;
+    onNesteClick: (sporsmalId: string) => void;
 }
 
 interface State {
@@ -53,8 +54,10 @@ export default class Skjema extends React.Component<Props, State> {
     }
 
     nesteButtonClick() {
-        const {gjeldendeSporsmal} = this.props;
-        const spmErBesvart = this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal));
+        const { onNesteClick, gjeldendeSporsmal } = this.props;
+        const gjeldendeSporsmalId = this.getSporsmalId(gjeldendeSporsmal);
+        onNesteClick(gjeldendeSporsmalId);
+        const spmErBesvart = this.props.sporsmalErBesvart(gjeldendeSporsmalId);
 
         if (spmErBesvart) {
             const nesteSporsmal = this.finnNesteSporsmal();
