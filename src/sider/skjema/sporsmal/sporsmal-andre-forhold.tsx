@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Panel } from 'nav-frontend-paneler';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from '../skjema-utils';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 
 interface SporsmalProps {
@@ -24,18 +23,18 @@ export default function AndreForhold(props: Props) {
     };
     return (
         <>
-            <Systemtittel tag="h1" className="spm-tittel">
-                {props.intl.messages[`${props.sporsmalId}-tittel`]}
-            </Systemtittel>
-            <Normaltekst className="spm-ingress">
-                {props.intl.messages[`${props.sporsmalId}-ingress`]}
-            </Normaltekst>
-            <Panel className="panel-skjema">
-                <form className="form-skjema">
-                    <Alternativ alternativId={1} {...fellesProps}/>
-                    <Alternativ alternativId={2} {...fellesProps}/>
-                </form>
-            </Panel>
+            <div className="sporsmal__oppe">
+                <Innholdstittel tag="h1" className="spm-tittel">
+                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                </Innholdstittel>
+                <Normaltekst className="spm-ingress">
+                    {props.intl.messages[`${props.sporsmalId}-ingress`]}
+                </Normaltekst>
+            </div>
+            <form className="form-skjema">
+                <Alternativ alternativId={1} {...fellesProps}/>
+                <Alternativ alternativId={2} {...fellesProps}/>
+            </form>
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">
                     <Ikon kind="info-sirkel" size="1.5em"/>

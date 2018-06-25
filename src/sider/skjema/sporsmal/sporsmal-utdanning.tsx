@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Panel } from 'nav-frontend-paneler';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from '../skjema-utils';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -22,19 +21,17 @@ export default function Utdanningsporsmal(props: Props) {
     };
     return (
         <>
-            <Systemtittel tag="h1" className="spm-tittel">
+            <Innholdstittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
-            </Systemtittel>
-            <Panel className="panel-skjema">
-                <form className="form-skjema">
-                    <Alternativ alternativId={1} {...fellesProps}/>
-                    <Alternativ alternativId={2} {...fellesProps}/>
-                    <Alternativ alternativId={3} {...fellesProps}/>
-                    <Alternativ alternativId={4} {...fellesProps}/>
-                    <Alternativ alternativId={5} {...fellesProps}/>
-                    <Alternativ alternativId={6} {...fellesProps}/>
-                </form>
-            </Panel>
+            </Innholdstittel>
+            <form className="form-skjema">
+                <Alternativ alternativId={1} {...fellesProps}/>
+                <Alternativ alternativId={2} {...fellesProps}/>
+                <Alternativ alternativId={3} {...fellesProps}/>
+                <Alternativ alternativId={4} {...fellesProps}/>
+                <Alternativ alternativId={5} {...fellesProps}/>
+                <Alternativ alternativId={6} {...fellesProps}/>
+            </form>
         </>
     );
 }

@@ -1,9 +1,21 @@
-.lenke-avbryt {
-    text-decoration: underline;
-    padding: 1rem;
-    color: #000000;
+.lenke-avbryt-wrapper {
+    text-align: center;
 
-    &-focus {
+    &:not('.no-anim') {
+        animation: slideUp 600ms both;
+    }
+}
+
+.lenke-avbryt {
+    margin: 0 auto;
+    color: @navMorkGra;
+
+    &:hover {
+        color: @navMorkGra;
+        border-bottom-color: @navMorkGra;
+    }
+
+    &:focus {
         box-shadow: 0 0 0 3px @orangeFocus
     }
 }

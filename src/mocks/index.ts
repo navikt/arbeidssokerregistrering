@@ -23,55 +23,56 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
+const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
-    (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(1000, autentisert)));
+    (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(DELAY, autentisert)));
 }
 
 if (MOCK_START_REGISRERING_STATUS) {
-    const response = respondWith(delayed(1000, startRegistreringStatus));
+    const response = respondWith(delayed(DELAY, startRegistreringStatus));
     (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_FEATURE_TOGGLES) {
-    (mock as any).get(`express:${FEATURE_URL}/?feature(.*)`, respondWith(delayed(1000, featureTogglesMock)));
+    (mock as any).get(`express:${FEATURE_URL}/?feature(.*)`, respondWith(delayed(DELAY, featureTogglesMock)));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    const response = respondWith(delayed(1000, registreringRespons));
+    const response = respondWith(delayed(DELAY, registreringRespons));
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_BRUKERS_NAVN) {
-    (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(1000, brukersNavn)));
+    (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(DELAY, brukersNavn)));
 }
 
 if (MOCK_BRUKERS_FNR) {
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_ME_URL}`, respondWith(delayed(1000, brukersFnr)));
+    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_ME_URL}`, respondWith(delayed(DELAY, brukersFnr)));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-    const response = respondWith(delayed(1000, sisteStillingFraAAReg));
+    const response = respondWith(delayed(DELAY, sisteStillingFraAAReg));
     (mock as any).get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, response);
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(1000, (url, config, params) => {
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(DELAY, (url, config, params) => {
         return params.bodyParams;
     })));
 }
 
 if(MOCK_SBL) {
-    (mock as any).post('/sbl/arbeid/opprettMinIdBruker', respondWith(delayed(2000, {}, 404)));
+    (mock as any).post('/sbl/arbeid/opprettMinIdBruker', respondWith(delayed(DELAY * 2, {}, 404)));
 }
 
 if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-    (mock as any).get('express:/pam-janzz/rest/kryssklassifiserMedKonsept(.*)', respondWith(delayed(500, oversettelseAvStillingFraAAReg)));
+    (mock as any).get('express:/pam-janzz/rest/kryssklassifiserMedKonsept(.*)', respondWith(delayed(DELAY / 2, oversettelseAvStillingFraAAReg)));
 }
 
 if(MOCK_STYRK08_PAMJANZZ) {
     (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
-        respondWith(delayed(100, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
+        respondWith(delayed(DELAY / 10, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
 }
 
 

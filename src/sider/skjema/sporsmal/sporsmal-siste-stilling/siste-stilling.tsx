@@ -12,7 +12,7 @@ import {
     State as OversettelseAvStillingFraAARegState
 } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 import EkspanderbartInfo from '../../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import SokeInput from './sokeinput';
 import {
     ingenYrkesbakgrunn,
@@ -22,7 +22,6 @@ import {
 } from '../../../../ducks/siste-stilling';
 import { getTekstIdForAlternativ } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
-import { Panel } from 'nav-frontend-paneler';
 import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
 
 interface SkjemaProps {
@@ -78,34 +77,34 @@ class SisteStilling extends React.Component<Props> {
         };
 
         return (
-            <div className="siste-stilling">
-                <Systemtittel tag="h1" className="spm-tittel">
-                    {intl.messages[`${sporsmalId}-tittel`]}
-                </Systemtittel>
-                <Normaltekst className="beskrivelse">
-                    <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
-                </Normaltekst>
-                <Panel className="panel-skjema">
-                    <form className="form-skjema">
-                        <Alternativ
-                            alternativId={1}
-                            {...alternativProps}
-                            avgiSvar={(alternativId: number) => {
-                                endreSvar(sporsmalId, alternativId);
-                                velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
-                            }}
-                        />
-                        <Alternativ
-                            alternativId={2}
-                            {...alternativProps}
-                            avgiSvar={(alternativId: number) => {
-                                endreSvar(sporsmalId, alternativId);
-                                velgStilling(ingenYrkesbakgrunn);
-                            }}
-                        />
-                    </form>
-                </Panel>
-                <div className="siste-stilling__nedre-halvdel">
+            <>
+                <div className="sporsmal__oppe">
+                    <Innholdstittel tag="h1" className="spm-tittel">
+                        {intl.messages[`${sporsmalId}-tittel`]}
+                    </Innholdstittel>
+                    <Normaltekst className="beskrivelse">
+                        <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
+                    </Normaltekst>
+                </div>
+                <form className="form-skjema">
+                    <Alternativ
+                        alternativId={1}
+                        {...alternativProps}
+                        avgiSvar={(alternativId: number) => {
+                            endreSvar(sporsmalId, alternativId);
+                            velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
+                        }}
+                    />
+                    <Alternativ
+                        alternativId={2}
+                        {...alternativProps}
+                        avgiSvar={(alternativId: number) => {
+                            endreSvar(sporsmalId, alternativId);
+                            velgStilling(ingenYrkesbakgrunn);
+                        }}
+                    />
+                </form>
+                <div className="sporsmal__nede">
                     {this.brukerHarHattJobb() &&
                     <>
                         <Undertittel>
@@ -120,7 +119,7 @@ class SisteStilling extends React.Component<Props> {
                         </Normaltekst>
                     </EkspanderbartInfo>
                 </div>
-            </div>
+            </>
         );
     }
 }

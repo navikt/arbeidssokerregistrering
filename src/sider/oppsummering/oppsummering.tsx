@@ -11,7 +11,6 @@ import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
 import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import { INGEN_SVAR } from '../skjema/skjema-container';
 
@@ -149,15 +148,12 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
 
                 {oppsummeringBesvarelser(state)}
 
-                <Knappervertikalt>
-                    <KnappBase
-                        type="hoved"
-                        onClick={() => history.push(FULLFOR_PATH)}
-                    >
+                <div className="knapper-vertikalt">
+                    <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
                         <FormattedMessage id="knapp-riktig"/>
                     </KnappBase>
                     <LenkeAvbryt/>
-                </Knappervertikalt>
+                </div>
             </ResponsivSide>
         );
     }

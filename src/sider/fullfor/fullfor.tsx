@@ -24,7 +24,6 @@ import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
-import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import Loader from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';
@@ -149,13 +148,13 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             className="bekreft-panel"
                         />
                         {advarselElement}
-                        <Knappervertikalt>
+                        <div className={'knapper-vertikalt'}>
                             <KnappFullfor
                                 intl={intl}
                                 onClick={this.registrerBrukerOnClick}
                             />
-                            <LenkeAvbryt classname="avbryt"/>
-                        </Knappervertikalt>
+                            <LenkeAvbryt/>
+                        </div>
                     </div>
                 </ResponsivSide>
             </Innholdslaster>

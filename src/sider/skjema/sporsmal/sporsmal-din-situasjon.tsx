@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { Panel } from 'nav-frontend-paneler';
 import Alternativ from '../alternativ';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { getTekstIdForAlternativ } from '../skjema-utils';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import {
     ingenYrkesbakgrunn, selectSisteStilling,
     Stilling,
@@ -51,23 +50,21 @@ class SporsmalDinSituasjon extends React.Component<Props> {
         };
 
         return (
-            <div>
-                <Systemtittel tag="h1" className="spm-tittel">
+            <>
+                <Innholdstittel tag="h1" className="spm-tittel">
                     {intl.messages[`${sporsmalId}-tittel`]}
-                </Systemtittel>
-                <Panel className="panel-skjema">
-                    <form className="form-skjema">
-                        <Alternativ alternativId={1} {...fellesProps}/>
-                        <Alternativ alternativId={2} {...fellesProps}/>
-                        <Alternativ alternativId={3} {...fellesProps}/>
-                        <Alternativ alternativId={4} {...fellesProps}/>
-                        <Alternativ alternativId={5} {...fellesProps}/>
-                        <Alternativ alternativId={6} {...fellesProps}/>
-                        <Alternativ alternativId={7} {...fellesProps}/>
-                        <Alternativ alternativId={8} {...fellesProps}/>
-                    </form>
-                </Panel>
-            </div>
+                </Innholdstittel>
+                <form className="form-skjema">
+                    <Alternativ alternativId={1} {...fellesProps}/>
+                    <Alternativ alternativId={2} {...fellesProps}/>
+                    <Alternativ alternativId={3} {...fellesProps}/>
+                    <Alternativ alternativId={4} {...fellesProps}/>
+                    <Alternativ alternativId={5} {...fellesProps}/>
+                    <Alternativ alternativId={6} {...fellesProps}/>
+                    <Alternativ alternativId={7} {...fellesProps}/>
+                    <Alternativ alternativId={8} {...fellesProps}/>
+                </form>
+            </>
         );
     }
 }
