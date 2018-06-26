@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
@@ -17,7 +17,7 @@ import {
 } from '../../ducks/registrerbruker';
 import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { registrerBrukerSBLArbeid  } from '../../ducks/api';
+import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import AvhuketLI from '../../komponenter/liste/avhuket-li';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
@@ -66,7 +66,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
     registrerBrukerOnClick() {
         if (!this.state.markert) {
-            this.setState({ visAdvarsel: true });
+            this.setState({visAdvarsel: true});
             return;
         }
 
@@ -121,21 +121,35 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<FullforFeilhandtering />}
+                feilmeldingKomponent={<FullforFeilhandtering/>}
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
                 <ResponsivSide>
                     <div className="fullfor">
-                        <Systemtittel tag="h1" className="tittel"><FormattedMessage id="fullfor-header"/></Systemtittel>
-                        <Element className="ingress"><FormattedMessage id="fullfor-ingress"/></Element>
-                        <Element><FormattedMessage id="fullfor-overskrift-liste"/></Element>
+                        <Innholdstittel tag="h1" className="tittel">
+                            <FormattedMessage id="fullfor-header"/>
+                        </Innholdstittel>
+                        <Element className="ingress">
+                            <FormattedMessage id="fullfor-ingress"/>
+                        </Element>
+                        <Element>
+                            <FormattedMessage id="fullfor-overskrift-liste"/>
+                        </Element>
 
                         <ul className="fullfor-liste">
-                            <AvhuketLI><Normaltekst><FormattedMessage id="fullfor-liste-1"/></Normaltekst></AvhuketLI>
-                            <AvhuketLI><Normaltekst><FormattedMessage id="fullfor-liste-2"/></Normaltekst></AvhuketLI>
-                            <AvhuketLI><Normaltekst><FormattedMessage id="fullfor-liste-3"/></Normaltekst></AvhuketLI>
-                            <AvhuketLI><Normaltekst><FormattedMessage id="fullfor-liste-4"/></Normaltekst></AvhuketLI>
+                            <AvhuketLI classname="typo-normal">
+                                <FormattedMessage id="fullfor-liste-1"/>
+                            </AvhuketLI>
+                            <AvhuketLI classname="typo-normal">
+                                <FormattedMessage id="fullfor-liste-2"/>
+                            </AvhuketLI>
+                            <AvhuketLI classname="typo-normal">
+                                <FormattedMessage id="fullfor-liste-3"/>
+                            </AvhuketLI>
+                            <AvhuketLI classname="typo-normal">
+                                <FormattedMessage id="fullfor-liste-4"/>
+                            </AvhuketLI>
                         </ul>
 
                         <EkspanderbartInfo tittelId="fullfor-les-mer" className="infopanel">
@@ -153,7 +167,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                                 intl={intl}
                                 onClick={this.registrerBrukerOnClick}
                             />
-                            <LenkeAvbryt/>
+                            <LenkeAvbryt wrapperClassname="no-anim"/>
                         </div>
                     </div>
                 </ResponsivSide>

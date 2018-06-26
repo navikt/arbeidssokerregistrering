@@ -12,7 +12,7 @@ import {
     State as OversettelseAvStillingFraAARegState
 } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 import EkspanderbartInfo from '../../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
-import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import SokeInput from './sokeinput';
 import {
     ingenYrkesbakgrunn,
@@ -82,7 +82,7 @@ class SisteStilling extends React.Component<Props> {
                     <Innholdstittel tag="h1" className="spm-tittel">
                         {intl.messages[`${sporsmalId}-tittel`]}
                     </Innholdstittel>
-                    <Normaltekst className="beskrivelse">
+                    <Normaltekst className="spm-beskrivelse">
                         <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
                     </Normaltekst>
                 </div>
@@ -107,9 +107,6 @@ class SisteStilling extends React.Component<Props> {
                 <div className="sporsmal__nede">
                     {this.brukerHarHattJobb() &&
                     <>
-                        <Undertittel>
-                            <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
-                        </Undertittel>
                         <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
                     </>
                     }

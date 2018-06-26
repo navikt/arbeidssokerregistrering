@@ -6,7 +6,7 @@ const onClick = () => {
 
 function KnappTilbake() {
     return (
-        <a href="#" className="tilbakeknapp" onClick={onClick}>Tilbake</a>
+        <a href="#" className="tilbakeknapp typo-element" onClick={onClick}>Tilbake</a>
     );
 }
 

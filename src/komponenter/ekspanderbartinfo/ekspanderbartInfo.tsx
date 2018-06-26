@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import * as classNames from 'classnames';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { getIntlMessage } from '../../utils/utils';
@@ -28,7 +27,7 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-        const { onClick } = this.props;
+        const {onClick} = this.props;
         if (onClick) {
             onClick(e);
         }
@@ -38,25 +37,20 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     render() {
-        const {className } = this.props;
+        const {className} = this.props;
         return (
-            <div className={classNames('bla-italic', className)}>
+            <div className={className}>
                 <button
-                    className="knapp-reset blokk-xxs"
+                    className="knapp-reset ekspanderbartinfo__knapp"
                     onClick={this.handleClick}
                     aria-expanded={this.state.apen}
                 >
-                    <Normaltekst className="flex-align-items-start">
-                        <span className="mmr"><Ikon kind="help-circle" size={25} className=""/></span>
+                    <Normaltekst className="ekspanderbartinfo__label">
+                        <Ikon kind="help-circle" size={25} className="ekspanderbartinfo__ikon"/>
                         {getIntlMessage(this.props.intl.messages, this.props.tittelId)}
                     </Normaltekst>
                 </button>
-                {
-                    this.state.apen
-                        ?
-                        <div className="pxll">{this.props.children}</div>
-                        : null
-                }
+                {this.state.apen && <div className="ekspanderbartinfo__innhold">{this.props.children}</div>}
             </div>
         );
     }

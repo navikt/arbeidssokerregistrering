@@ -33,7 +33,6 @@ main.arbsokreg_app:focus {
 }
 
 main.arbsokreg_app {
-    @import 'komponenter/panel-blokk/utils';
     @import 'komponenter/alertstripe';
     @import 'komponenter/innholdslaster/innholdslaster';
     @import 'komponenter/knapper/knapper';
@@ -46,6 +45,7 @@ main.arbsokreg_app {
     @import 'komponenter/progress-bar/progress-bar';
     @import 'komponenter/banner/banner';
     @import 'komponenter/graa-bakgrunn/graa-bakgrunn';
+    @import 'komponenter/ekspanderbartinfo/ekspanderbartinfo';
 
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/sokeinput';
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/siste-stilling';
@@ -88,9 +88,8 @@ main.arbsokreg_app {
     }
     .lukknapp {
         border: 1px solid @navGra60;
-        display: block;
+        display: inline-block;
         position: relative;
-        right: -695px;
-        top: 30px;
+        right: 5px;
     }
 }
