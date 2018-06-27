@@ -6,7 +6,6 @@ interface Props {
     disabled?: boolean;
     onClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
     className?: string;
-    flag?: number;
     erAktiv: boolean;
 }
 
