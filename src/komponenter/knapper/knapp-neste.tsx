@@ -1,25 +1,27 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import * as classnames from 'classnames';
+import { Link } from 'react-router-dom';
 
 interface Props {
     disabled?: boolean;
-    onClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
+    onClick: (e: React.SyntheticEvent<HTMLAnchorElement>) => void;
     className?: string;
     erAktiv: boolean;
+    href: string;
 }
 
-function KnappNeste({disabled, onClick, className, erAktiv}: Props & InjectedIntlProps) {
+function KnappNeste({disabled, onClick, className, erAktiv, href}: Props & InjectedIntlProps) {
     return (
-        <button
+        <Link
             className={classnames('nesteknapp', className, {erAktiv})}
-            disabled={disabled}
+            to={href}
             onClick={onClick}
         >
             <span className="gjemt">
                 <FormattedMessage id="knapp-neste"/>
             </span>
-        </button>
+        </Link>
     );
 }
 

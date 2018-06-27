@@ -72,7 +72,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             endreSvar: (sporsmalId, svar) => {
                 this.props.endreSvar(sporsmalId, svar);
                 this.toggleAdvarsel(false);
-                },
+            },
             intl: this.props.intl,
             hentAvgittSvar: (sporsmalId: string) => this.props.svarState[sporsmalId],
         };
@@ -88,10 +88,11 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             },
             gaaTilbake: () => this.props.history.goBack(),
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
-            fullforSkjema: () => this.fullforSkjema(),
+            hrefTilFullfor: `${OPPSUMMERING_PATH}`,
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
             settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
+            hrefTilSporsmal: (sporsmal) => `${SKJEMA_PATH}/${sporsmal}`,
         };
 
         return (
@@ -122,10 +123,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             return;
         }
         this.gjeldendeSporsmal = Number(sporsmal);
-    }
-
-    fullforSkjema() {
-        this.props.history.push(`${OPPSUMMERING_PATH}`);
     }
 
     componentWillMount() {

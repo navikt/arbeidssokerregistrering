@@ -11,18 +11,18 @@ export interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
-    gaaTilbake: () => void;
     gaaTilSporsmal: (sporsmal: number) => void;
-    fullforSkjema: () => void;
     advarselElement: React.ReactElement<Element> | null;
     svar: SvarState;
     config?: SkjemaConfig;
     settStateForUbesvartSporsmal: (sporsmalId: string) => void;
     onNesteClick: (sporsmalId: string) => void;
+    hrefTilSporsmal: (sporsmal: number) => string;
+    hrefTilFullfor: string;
 }
 
 interface State {
-    visAdvarsel: boolean;
+    tilbake: boolean;
 }
 
 type Props = SkjemaProps;
@@ -31,19 +31,41 @@ export default class Skjema extends React.Component<Props, State> {
     private antallSporsmal: number;
     private sporsmalIder: string[];
 
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            tilbake: false,
+        };
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.gjeldendeSporsmal !== this.props.gjeldendeSporsmal) {
+            this.setState({
+                ...this.state,
+                tilbake: this.props.gjeldendeSporsmal > nextProps.gjeldendeSporsmal,
+            });
+        }
+    }
+
     render() {
-        const {advarselElement, children, gjeldendeSporsmal} = this.props;
+        const {advarselElement, children, gjeldendeSporsmal, hrefTilSporsmal, hrefTilFullfor} = this.props;
         this.antallSporsmal = React.Children.toArray(children).length;
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
 
+        const nesteSporsmal = this.finnNesteSporsmal();
+        const href = nesteSporsmal !== -1
+            ? hrefTilSporsmal(nesteSporsmal)
+            : hrefTilFullfor;
+
         return (
-            <ResponsivSide>
+            <ResponsivSide className={this.state.tilbake ? 'tilbake' : ''}>
                 {gjeldendeSporsmalComponent}
                 {advarselElement}
                 <Animasjon flag={this.props.gjeldendeSporsmal}>
                     <KnappNeste
                         onClick={() => this.nesteButtonClick()}
+                        href={href}
                         erAktiv={this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))}
                     />
                     <KnappTilbake/>
@@ -54,7 +76,7 @@ export default class Skjema extends React.Component<Props, State> {
     }
 
     nesteButtonClick() {
-        const { onNesteClick, gjeldendeSporsmal } = this.props;
+        const {onNesteClick, gjeldendeSporsmal} = this.props;
         const gjeldendeSporsmalId = this.getSporsmalId(gjeldendeSporsmal);
         onNesteClick(gjeldendeSporsmalId);
         const spmErBesvart = this.props.sporsmalErBesvart(gjeldendeSporsmalId);
@@ -64,10 +86,8 @@ export default class Skjema extends React.Component<Props, State> {
             const sisteSporsmal = this.antallSporsmal - 1;
             if (nesteSporsmal === -1) {
                 this.settStateTilEventuelleUbesvarteSporsmal(sisteSporsmal + 1);
-                this.props.fullforSkjema();
             } else {
                 this.settStateTilEventuelleUbesvarteSporsmal(nesteSporsmal);
-                this.props.gaaTilSporsmal(nesteSporsmal);
             }
         }
     }
