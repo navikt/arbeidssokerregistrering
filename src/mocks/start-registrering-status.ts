@@ -1,4 +1,5 @@
 export default {
     underOppfolging: false,
-    oppfyllerKrav: true
+    jobbetSeksAvTolvSisteManeder: true,
+    registrertNavSisteToAr: true,
 };

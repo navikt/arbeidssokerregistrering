@@ -43,7 +43,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
 
     const dinSituasjon = state.svar['din-situasjon'] === INGEN_SVAR ? (null) : (
         <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-din-situasjon`}/>
+            <FormattedMessage id={`oppsummering-din-situasjon`}/> &nbsp;
             <FormattedMessage id={`oppsummering-din-situasjon-svar-${state.svar['din-situasjon']}`}/>
         </li>
     );
@@ -68,7 +68,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
 
     const utdanningGodkjent = state.svar.utdanninggodkjent === INGEN_SVAR ? (null) : (
         <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
+            <FormattedMessage id={`oppsummering-utdanninggodkjent-svar-${state.svar.utdanningbestatt}`}/>
         </li>
     );
 
