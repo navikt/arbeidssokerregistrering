@@ -1,27 +1,25 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import * as classNames from 'classnames';
-import KnappBase from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { getIntlMessage } from '../../utils/utils';
+import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import * as classnames from 'classnames';
 
 interface Props {
     disabled?: boolean;
     onClick: (e: React.SyntheticEvent<HTMLButtonElement>) => void;
     className?: string;
+    erAktiv: boolean;
 }
 
-function KnappNeste({ disabled, onClick, className, intl }: Props & InjectedIntlProps) {
-    const clsnames = (clName: string | undefined) => classNames(clName);
+function KnappNeste({disabled, onClick, className, erAktiv}: Props & InjectedIntlProps) {
     return (
-        <KnappBase
-            type="hoved"
-            className={clsnames(className)}
+        <button
+            className={classnames('nesteknapp', className, {erAktiv})}
             disabled={disabled}
             onClick={onClick}
         >
-            <Normaltekst>{getIntlMessage(intl.messages, 'knapp-neste')}</Normaltekst>
-        </KnappBase>
+            <span className="gjemt">
+                <FormattedMessage id="knapp-neste"/>
+            </span>
+        </button>
     );
 }
 

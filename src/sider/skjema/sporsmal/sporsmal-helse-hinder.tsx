@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Panel } from 'nav-frontend-paneler';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForAlternativ } from '../skjema-utils';
-import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 
 interface SporsmalProps {
@@ -24,15 +23,13 @@ export default function HelseHinder(props: Props) {
     };
     return (
         <>
-            <Systemtittel tag="h1" className="spm-tittel">
+            <Innholdstittel tag="h1" className="spm-tittel">
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
-            </Systemtittel>
-            <Panel className="panel-skjema">
-                <form className="form-skjema">
-                    <Alternativ alternativId={1} {...fellesProps}/>
-                    <Alternativ alternativId={2} {...fellesProps}/>
-                </form>
-            </Panel>
+            </Innholdstittel>
+            <form className="form-skjema">
+                <Alternativ alternativId={1} {...fellesProps}/>
+                <Alternativ alternativId={2} {...fellesProps}/>
+            </form>
 
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">

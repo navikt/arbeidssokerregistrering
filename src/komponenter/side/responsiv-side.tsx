@@ -8,7 +8,7 @@ interface ResponsivSideProps {
 
 function ResponsivSide({children, className}: ResponsivSideProps) {
     return(
-        <section className={classnames('responsiv-side', className)}>
+        <section className={classnames('sporsmal', className)}>
             {children}
         </section>
     );

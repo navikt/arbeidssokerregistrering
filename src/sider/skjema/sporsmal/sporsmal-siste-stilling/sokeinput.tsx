@@ -3,6 +3,7 @@ import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../../../ducks/api';
 import { Stilling } from '../../../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
+import { FormattedMessage } from 'react-intl';
 
 interface SokeInputComponentProps {
     defaultStilling: Stilling;
@@ -26,6 +27,11 @@ interface OptionsAsync {
 const OptionsAsync = Async as OptionsAsync;
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
+
+    static clickLabel() {
+        document.getElementById('stilling')!.focus();
+    }
+
     constructor(props: SokeInputComponentProps) {
         super(props);
         this.onChange = this.onChange.bind(this);
@@ -73,7 +79,13 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     render() {
         return (
             <>
-                <label htmlFor="stilling" className="invisible">Stilling</label>
+                <label
+                    htmlFor="stilling"
+                    className="typo-undertittel sokeinput__label"
+                    onClick={SokeInputComponent.clickLabel}
+                >
+                    <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
+                </label>
                 <div className="blokk-m selectContainer input--fullbredde">
                     <OptionsAsync
                         inputProps={{'autoComplete': 'off'}}

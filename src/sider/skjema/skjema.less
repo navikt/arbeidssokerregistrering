@@ -1,31 +1,33 @@
-.skjema-container-wrapper:focus {
+.limit:focus {
     outline: 0;
 }
 
-.sporsmal-wrapper {
+.sporsmal {
+    margin-top: 12vh;
+    padding: 1rem 1.4rem;
 
     .spm-tittel {
+        margin-bottom: 1.5rem;
         animation: slideUp 500ms both;
-        padding-top: @padding-small-horizontal;
-        padding-bottom: @padding-small-horizontal;
         text-align: center;
     }
 
     .spm-ingress {
+        margin: 2rem 0 3rem;
         animation: slideUp 500ms both;
         text-align: center;
     }
 
-    .panel-skjema {
-        animation: slideUp 550ms both;
-        padding-left: 0;
-        padding-right: 0;
+    .spm-beskrivelse {
+        text-align: center;
+        animation: slideUp 500ms both;
+    }
 
-        .form-skjema {
-            .alternativ-wrapper {
-                width: 100%;
-                margin: 0.5rem 0;
-            }
+    .form-skjema {
+        margin-top: 3rem;
+        animation: slideUp 550ms both;
+        .alternativ-wrapper {
+            margin: 0.5rem 0;
         }
     }
 
@@ -33,7 +35,7 @@
         animation: slideUp 550ms both;
         display: flex;
         color: @navMorkGra;
-        .blokk-s();
+        margin: 3rem auto;
 
         &__ikon {
             border-right: 1px solid @navGra40;
@@ -47,55 +49,35 @@
     }
 }
 
-.knapp-neste {
-    right: 0
-}
-
 @media (min-width: @screen-sm-min) {
-    .skjema-container-wrapper:focus {
-        outline: 0;
-    }
+    .sporsmal {
+        margin-top: 9vh;
 
-    .sporsmal-wrapper {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: @screen-sm-min;
-        padding: 0 43px;
         &:focus {
             outline: 0;
         }
 
-        .panel-skjema {
-            .form-skjema {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
+        .form-skjema {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
 
-                .alternativ-wrapper {
-                    width: 48.2%;
-                    margin: 0.3rem;
+            .alternativ-wrapper {
+                width: 48.2%;
+                margin: 0.3rem;
 
-                    &--small {
-                        width: 25%;
-                    }
+                &--small {
+                    width: 25%;
+                }
 
-                    > .inputPanel {
-                        height: 100%;
-                    }
+                > .inputPanel {
+                    height: 100%;
                 }
             }
         }
 
         .spm-info {
-            width: 354px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .spm-advarsel {
-            width: 460px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 60%;
         }
     }
 }

@@ -95,7 +95,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         };
 
         return (
-            <div className="skjema-container-wrapper" ref={(ref) => this.divRef = ref} tabIndex={-1}>
+            <div className="limit" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
                         <SporsmalDinSituasjon sporsmalId="din-situasjon" {...fellesProps}/>

@@ -2,10 +2,10 @@ import * as React from 'react';
 import KnappNeste from '../../komponenter/knapper/knapp-neste';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import Knappervertikalt from '../../komponenter/knapper/knapper-vertikalt';
 import { State as SvarState } from '../../ducks/svar';
-import {  getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
+import { getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
 import Animasjon from './animasjon';
+import KnappTilbake from '../../komponenter/knapper/knapp-tilbake';
 
 export interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
@@ -32,22 +32,22 @@ export default class Skjema extends React.Component<Props, State> {
     private sporsmalIder: string[];
 
     render() {
-        const {  advarselElement, children, gjeldendeSporsmal } = this.props;
+        const {advarselElement, children, gjeldendeSporsmal} = this.props;
         this.antallSporsmal = React.Children.toArray(children).length;
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
 
         return (
             <ResponsivSide>
-                <div className="blokk-xs sporsmal-wrapper">
-                    {gjeldendeSporsmalComponent}
-                    {advarselElement}
-                </div>
+                {gjeldendeSporsmalComponent}
+                {advarselElement}
                 <Animasjon flag={this.props.gjeldendeSporsmal}>
-                    <Knappervertikalt className="animasjon">
-                        <KnappNeste onClick={() => this.nesteButtonClick()} />
-                        <LenkeAvbryt/>
-                    </Knappervertikalt>
+                    <KnappNeste
+                        onClick={() => this.nesteButtonClick()}
+                        erAktiv={this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))}
+                    />
+                    <KnappTilbake/>
+                    <LenkeAvbryt/>
                 </Animasjon>
             </ResponsivSide>
         );
@@ -104,7 +104,7 @@ export default class Skjema extends React.Component<Props, State> {
             .map(sporsmalId => this.getSporsmal(sporsmalId))
             .filter(sporsmal => sporsmal !== this.props.gjeldendeSporsmal);
 
-        if (gjenstaendeSporsmalSomSkalBesvares.length === 0 ) {
+        if (gjenstaendeSporsmalSomSkalBesvares.length === 0) {
             return -1;
         } else {
             return gjenstaendeSporsmalSomSkalBesvares[0];

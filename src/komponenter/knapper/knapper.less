@@ -1,2 +1,122 @@
-@import './tilbakeknapp';
-@import './knapperad';
+.pil-mixin(@color, @rotation) {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid @color;
+    border-bottom: 2px solid @color;
+    transform: rotate(@rotation);
+}
+
+.gjemt-mixin() {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+.knapper-vertikalt {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+
+    > * {
+        margin: 0.5rem 0;
+    }
+}
+
+.nesteknapp {
+    animation: slideUp 600ms both;
+    display: block;
+    background-color: @white;
+    margin: 2rem auto;
+    text-align: center;
+    border-radius: 50%;
+    border: 1.5px solid @navMorkGra;
+    width: 48px;
+    height: 48px;
+    &:after {
+        .pil-mixin(@navMorkGra, 45deg);
+    }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px @orangeFocus;
+        background-color: @white;
+    }
+    &.erAktiv {
+        border-color: @navBla;
+        background-color: @navBla;
+        &:after {
+            .pil-mixin(@white, 45deg);
+        }
+        &:focus {
+            background-color: @navBla;
+        }
+    }
+
+    .gjemt {
+        .gjemt-mixin();
+    }
+}
+
+.nesteknapp--IE {
+    display: block;
+    margin: 2rem auto;
+    text-align: center;
+    background-color: @navBla;
+    color: @white;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px @orangeFocus;
+        background-color: @navBla;
+    }
+    &:after {
+        .pil-mixin(@white, 45deg);
+    }
+
+    .gjemt {
+        .gjemt-mixin();
+    }
+}
+
+.tilbakeknapp {
+    animation: slideUp 400ms both;
+    display: inline-block;
+    position: absolute;
+    top: 8rem;
+    left: ~'calc(50vw - 25px)';
+    background: none;
+    cursor: pointer;
+    border-bottom: 1px solid @navGra40;
+    text-decoration: none;
+    color: @navMorkGra;
+
+    &:hover {
+        border-bottom-color: @navMorkGra;
+    }
+
+    &:focus {
+        outline: none;
+        background: @orangeFocus;
+    }
+
+    &:before {
+        .pil-mixin(@navMorkGra, 225deg);
+        position: absolute;
+        margin-top: -16px;
+        left: ~'calc(50% - 6px)';
+    }
+
+    .gjemt {
+        .gjemt-mixin();
+    }
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel, Element, Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
@@ -16,9 +16,9 @@ function DuErNaRegistrert() {
                         <span className="du-er-na-registrert__avsjekk-ikon">
                             <img src={avsjekkSvg} alt="Avsjekk" className="illustrasjon"/>
                         </span>
-                        <Systemtittel className="du-er-na-registrert__avsjekk-tittel">
+                        <Innholdstittel className="du-er-na-registrert__avsjekk-tittel">
                             <FormattedMessage id="duernaregistrert-innholdstittel"/>
-                        </Systemtittel>
+                        </Innholdstittel>
                     </div>
                     <div className="du-er-na-registrert__aksjonspanel">
                         <div className="du-er-na-registrert__handinfo-ikon">

@@ -1,8 +1,7 @@
 @nodeModulesPath: './../../';
 @coreModulePath: './../../';
 
-@headerHeightDesktop: 180px;
-@footerHeightDesktop: 200px;
+@desktopLimitWidth: 740px;
 
 @import '../node_modules/nav-frontend-core/less/core';
 @import '../node_modules/nav-frontend-knapper-style/src/index';
@@ -34,13 +33,11 @@ main.arbsokreg_app:focus {
 }
 
 main.arbsokreg_app {
-    @import 'komponenter/panel-blokk/utils';
-    @import 'komponenter/panel-blokk/panel-blokk';
     @import 'komponenter/alertstripe';
     @import 'komponenter/innholdslaster/innholdslaster';
     @import 'komponenter/knapper/knapper';
     @import 'komponenter/side/responsiv-side';
-    @import 'komponenter/knapper/knapper-vertikalt';
+    @import 'komponenter/knapper/knapper';
     @import 'komponenter/knapper/lenke-avbryt';
     @import 'komponenter/liste/avhuket-li';
     @import 'komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
@@ -48,6 +45,7 @@ main.arbsokreg_app {
     @import 'komponenter/progress-bar/progress-bar';
     @import 'komponenter/banner/banner';
     @import 'komponenter/graa-bakgrunn/graa-bakgrunn';
+    @import 'komponenter/ekspanderbartinfo/ekspanderbartinfo';
 
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/sokeinput';
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/siste-stilling';
@@ -69,11 +67,29 @@ main.arbsokreg_app {
     @import (less) '../node_modules/react-select/dist/react-select.css';
 }
 
-.appContainer {
-    height: 100%;
+.limit {
+    margin: 0 auto;
 }
 
 .hodefot-footer {
     width: 100%;
     bottom: 0;
+}
+
+@media (min-width: @screen-sm-min) {
+    .pagewrapper {
+        padding-bottom: 200px !important;
+    }
+    .limit {
+        width: @desktopLimitWidth;
+    }
+    .sitefooter {
+        display: block;
+    }
+    .lukknapp {
+        border: 1px solid @navGra60;
+        display: inline-block;
+        position: relative;
+        right: 5px;
+    }
 }
