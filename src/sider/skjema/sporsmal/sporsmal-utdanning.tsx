@@ -21,10 +21,12 @@ export default function Utdanningsporsmal(props: Props) {
     };
     return (
         <>
-            <Innholdstittel tag="h1" className="spm-tittel">
-                {props.intl.messages[`${props.sporsmalId}-tittel`]}
-            </Innholdstittel>
-            <form className="form-skjema">
+            <div className="spm-hode">
+                <Innholdstittel tag="h1" className="spm-tittel">
+                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                </Innholdstittel>
+            </div>
+            <form className="spm-skjema">
                 <Alternativ alternativId={1} {...fellesProps}/>
                 <Alternativ alternativId={2} {...fellesProps}/>
                 <Alternativ alternativId={3} {...fellesProps}/>
