@@ -20,7 +20,6 @@
 }
 
 .knapper-vertikalt {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,7 +89,7 @@
 .tilbakelenke {
     display: inline-block;
     position: absolute;
-    top: 4rem;
+    top: 3rem;
     left: ~'calc(50% - 25px)';
     background: none;
     cursor: pointer;
@@ -116,5 +115,11 @@
 
     .gjemt {
         .gjemt-mixin();
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .tilbakelenke {
+        top: 4rem;
     }
 }

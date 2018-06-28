@@ -12,6 +12,8 @@ import { hentFornavn } from '../../utils/utils';
 import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { INGEN_SVAR } from '../skjema/skjema-container';
+import { erIE } from '../../utils/ie-test';
+import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -118,9 +120,12 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
     render() {
         const {history, brukersNavn, state} = this.props;
         const {name} = brukersNavn.data;
+        let classnames = 'oppsummering ';
+        classnames += erIE() ? 'erIE' : '';
+
         return (
             <div className="limit">
-                <section className="oppsummering">
+                <section className={classnames}>
                     <Innholdstittel tag="h1" className="oppsummering-tittel">
                         <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}} />
                     </Innholdstittel>
@@ -134,6 +139,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
                         <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
                             <FormattedMessage id="knapp-riktig" />
                         </KnappBase>
+                        <LenkeTilbake />
                         <LenkeAvbryt wrapperClassname="no-anim" />
                     </div>
                 </section>
