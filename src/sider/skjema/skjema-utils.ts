@@ -1,5 +1,5 @@
 import { State as SvarState } from '../../ducks/svar';
-import { Svar } from '../../ducks/svar-utils';
+import { DinSituasjonSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 
 export type SkjemaConfig = any; // tslint:disable-line no-any
 
@@ -7,7 +7,7 @@ export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
     return `${sporsmalId}-svar-${svarSuffiksTilTekstId(svar)}`;
 }
 
-function svarSuffiksTilTekstId(svar: Svar) {
+export function svarSuffiksTilTekstId(svar: Svar) {
     return svar.toString()
         .toLowerCase()
         .split('_')
@@ -16,23 +16,23 @@ function svarSuffiksTilTekstId(svar: Svar) {
 
 const defaultSkjemaConfig: SkjemaConfig = {
     'din-situasjon': {
-        alternativId: 2,
+        svar: DinSituasjonSvar.ALDRI_HATT_JOBB,
         skip: ['siste-stilling'],
     },
     'utdanning': {
-        alternativId: 1,
+        svar: UtdanningSvar.INGEN_UTDANNING,
         skip: ['utdanningbestatt', 'utdanninggodkjent'],
     }
 };
 
 function getSporsmalSomIkkeSkalBesvares(
     sporsmalId: string,
-    alternativId: number,
+    svar: Svar,
     skjemaConfig?: SkjemaConfig
 ): string[] {
     const config = skjemaConfig === undefined ? defaultSkjemaConfig : skjemaConfig;
 
-    if (config[sporsmalId] === undefined || config[sporsmalId].alternativId !== alternativId) {
+    if (config[sporsmalId] === undefined || config[sporsmalId].svar !== svar) {
         return [];
     }  else {
         return config[sporsmalId].skip;
@@ -41,11 +41,11 @@ function getSporsmalSomIkkeSkalBesvares(
 
 export function getAlleSporsmalSomIkkeSkalBesvares(
     sporsmalIder: string[],
-    svar: SvarState,
+    svarState: SvarState,
     config?: SkjemaConfig
 ): string[] {
     let sporsmal: string[] = [];
     sporsmalIder.forEach(sporsmalId =>
-        sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(sporsmalId, svar[sporsmalId], config)]);
+        sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(sporsmalId, svarState[sporsmalId], config)]);
     return sporsmal;
 }

@@ -92,7 +92,10 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             fullforSkjema: () => this.fullforSkjema(),
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
-            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
+            settStateForUbesvartSporsmal: (sporsmalId) => {
+                console.log('setter state:', sporsmalId); // tslint:disable-line
+                this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR);
+            },
         };
 
         return (
