@@ -9,7 +9,7 @@ import {
     NUSKODE_3,
     NUSKODE_4,
     NUSKODE_6,
-    NUSKODE_7,
+    NUSKODE_7, NUSKODE_9,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING, VIL_BYTTE_JOBB,
@@ -17,6 +17,7 @@ import {
 import { State as SvarState } from '../ducks/svar';
 import { Stilling } from '../ducks/siste-stilling';
 import * as moment from 'moment';
+import { UtdanningSvar } from '../ducks/svar-utils';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -50,16 +51,18 @@ export const getMapSituasjon = (svarAlternativ: string) => {
 
     return mapSituasjon[svarAlternativ];
 };
-export const mapTilNuskode = (svarAlternativ: number) => {
-    const mapNusKode = {
-        1: NUSKODE_0,
-        2: NUSKODE_2,
-        3: NUSKODE_3,
-        4: NUSKODE_4,
-        5: NUSKODE_6,
-        6: NUSKODE_7,
-    };
-    return mapNusKode[svarAlternativ];
+
+export const mapTilNuskode = (svar: UtdanningSvar) => {
+    switch (svar) {
+        case (UtdanningSvar.INGEN_UTDANNING): return NUSKODE_0;
+        case (UtdanningSvar.GRUNNSKOLE): return NUSKODE_2;
+        case (UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING): return NUSKODE_3;
+        case (UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV): return NUSKODE_4;
+        case (UtdanningSvar.HOYERE_UTDANNING_1_TIL_4): return NUSKODE_6;
+        case (UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER): return NUSKODE_7;
+        case (UtdanningSvar.INGEN_SVAR): return NUSKODE_9;
+        default: return NUSKODE_9;
+    }
 };
 export const getMapJaNeiKanskje = (svarAlternativ: string) => {
     const map = {
@@ -77,17 +80,14 @@ export function mapAvgitteSvarForBackend(
     svar: SvarState,
     sisteStilling: Stilling
 ) {
-    const helse: number | undefined = svar.helsehinder;
-    const utdanning: number | undefined = svar.utdanning;
-
     let data = {};
-    if (helse !== undefined && utdanning !== undefined) { // Hvorfor tar vi denne sjekken?
+    if (svar.helsehinder !== undefined && svar.utdanning !== undefined) { // Hvorfor tar vi denne sjekken?
         data = {
-            nusKode: mapTilNuskode(utdanning),
+            nusKode: mapTilNuskode(svar.utdanning),
             yrkesPraksis: sisteStilling.styrk08,
             enigIOppsummering: true,
             oppsummering: BLANK, // TODO slettes samtidig med backend endringer
-            harHelseutfordringer: mapTilBoolean(helse),
+            harHelseutfordringer: svar.helsehinder,
             yrkesbeskrivelse: sisteStilling.label,
             konseptId: sisteStilling.konseptId,
         };

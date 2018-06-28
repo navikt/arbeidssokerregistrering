@@ -4,7 +4,12 @@ export type Svar = UtdanningSvar
     | HelseHinderSvar
     | AndreForholdSvar
     | SisteStillingSvar
-    | DinSituasjonSvar;
+    | DinSituasjonSvar
+    | IngenSvar;
+
+export enum IngenSvar {
+    INGEN_SVAR = 'INGEN_SVAR',
+}
 
 export enum DinSituasjonSvar {
     MISTET_JOBBEN = 'MISTET_JOBBEN',
@@ -15,6 +20,7 @@ export enum DinSituasjonSvar {
     USIKKER_JOBBSITUASJON = 'USIKKER_JOBBSITUASJON',
     JOBB_OVER_2_AAR = 'JOBB_OVER_2_AAR',
     VIL_FORTSETTE_I_JOBB = 'VIL_FORTSETTE_I_JOBB',
+    INGEN_SVAR = 'INGEN_SVAR',
 }
 
 export enum SisteStillingSvar {
@@ -30,6 +36,7 @@ export enum UtdanningSvar {
     VIDEREGAENDE_FAGBREV_SVENNEBREV = 'VIDEREGAENDE_FAGBREV_SVENNEBREV',
     HOYERE_UTDANNING_1_TIL_4 = 'HOYERE_UTDANNING_1_TIL_4',
     HOYERE_UTDANNING_5_ELLER_MER = 'HOYERE_UTDANNING_5_ELLER_MER',
+    INGEN_SVAR = 'INGEN_SVAR',
 }
 
 export enum UtdanningGodkjentSvar {
@@ -48,9 +55,11 @@ export enum UtdanningBestattSvar {
 export enum HelseHinderSvar {
     JA = 'JA',
     NEI = 'NEI',
+    INGEN_SVAR = 'INGEN_SVAR',
 }
 
 export enum AndreForholdSvar {
     JA = 'JA',
     NEI = 'NEI',
+    INGEN_SVAR = 'INGEN_SVAR',
 }

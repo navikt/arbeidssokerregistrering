@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RadioPanel } from 'nav-frontend-skjema';
 import * as classNames from 'classnames';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { Svar} from '../../ducks/svar-utils';
+import { Svar } from '../../ducks/svar-utils';
 
 interface AlternativProps {
     hentAvgittSvar: () => Svar | undefined;

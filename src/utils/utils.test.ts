@@ -5,16 +5,17 @@ import * as moment from 'moment';
 
 import {
     getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
-    mapTilBoolean, hentAlder
+    hentAlder
 } from './utils';
 import {
-    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI, NUSKODE_0, NUSKODE_2, NUSKODE_3, NUSKODE_4, NUSKODE_6, NUSKODE_7,
+    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI,
     PERMITTERT,
     SAGT_OPP,
     UNDER_UTDANNING,
     VIL_BYTTE_JOBB, YRKESPRAKSIS
 } from './konstanter';
 import {Stilling} from "../ducks/siste-stilling";
+import {HelseHinderSvar, UtdanningSvar} from "../ducks/svar-utils";
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
@@ -59,15 +60,6 @@ describe('utils test', () => {
         expect(getMapSituasjon('6')).to.equal(ANNET);
     });
 
-    it('test mapping av nuskode', () => {
-        expect(mapTilNuskode(1)).to.equal(NUSKODE_0);
-        expect(mapTilNuskode(2)).to.equal(NUSKODE_2);
-        expect(mapTilNuskode(3)).to.equal(NUSKODE_3);
-        expect(mapTilNuskode(4)).to.equal(NUSKODE_4);
-        expect(mapTilNuskode(5)).to.equal(NUSKODE_6);
-        expect(mapTilNuskode(6)).to.equal(NUSKODE_7);
-    });
-
     it('test mapping av Ja, Nei, Kanskje', () => {
         expect(getMapJaNeiKanskje('1')).to.equal(JA);
         expect(getMapJaNeiKanskje('2')).to.equal(NEI);
@@ -81,8 +73,8 @@ describe('utils test', () => {
     it('test mapAvgitteSvarForBackend', () => {
 
         const dummySvar: SvarState = {
-            helsehinder: 1,
-            utdanning: 3
+            helsehinder: HelseHinderSvar.JA,
+            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
         };
         const stilling: Stilling = {
             styrk08: '6236',
@@ -91,11 +83,11 @@ describe('utils test', () => {
         };
 
         const expectData = {
-            nusKode: mapTilNuskode(dummySvar.utdanning),
+            nusKode: mapTilNuskode(dummySvar.utdanning!),
             yrkesPraksis: stilling.styrk08,
             enigIOppsummering: true,
             oppsummering: BLANK,
-            harHelseutfordringer: mapTilBoolean(dummySvar.helsehinder),
+            harHelseutfordringer: dummySvar.helsehinder,
             yrkesbeskrivelse: stilling.label,
             konseptId: stilling.konseptId,
         };

@@ -10,9 +10,9 @@ export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
 function svarSuffiksTilTekstId(svar: Svar) {
     return svar.toString()
         .toLowerCase()
-        .replace('_', '-');
+        .split('_')
+        .join('-');
 }
-
 
 const defaultSkjemaConfig: SkjemaConfig = {
     'din-situasjon': {

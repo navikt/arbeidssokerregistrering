@@ -19,13 +19,14 @@ import AndreForhold from './sporsmal/sporsmal-andre-forhold';
 import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import { State as SvarState } from '../../ducks/svar';
+import { IngenSvar, Svar } from '../../ducks/svar-utils';
 
 interface StateProps {
     svarState: SvarState;
 }
 
 interface DispatchProps {
-    endreSvar: (sporsmalId: string, svar: number) => void;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
 }
 
 interface SkjemaProps {
@@ -91,7 +92,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             fullforSkjema: () => this.fullforSkjema(),
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
-            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
+            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
         };
 
         return (
@@ -173,7 +174,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    endreSvar: (sporsmalId, alternativId) => dispatch(endreSvarAction(sporsmalId, alternativId)),
+    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaContainer));

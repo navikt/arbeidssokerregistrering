@@ -3,11 +3,12 @@ import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
 
 interface SporsmalProps {
     sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: number) => void;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
+    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
 }
 
 type Props = SporsmalProps & InjectedIntlProps;
@@ -16,8 +17,8 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
-        avgiSvar: (alternativId: number) => props.endreSvar(props.sporsmalId, alternativId),
-        getTekstId: (alternativId: number) => getTekstIdForSvar(props.sporsmalId, alternativId),
+        avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
+        getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
@@ -26,9 +27,9 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
                 {props.intl.messages[`${props.sporsmalId}-tittel`]}
             </Innholdstittel>
             <form className="form-skjema">
-                <Alternativ alternativId={1} {...fellesProps}/>
-                <Alternativ alternativId={2} {...fellesProps}/>
-                <Alternativ alternativId={3} {...fellesProps}/>
+                <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps}/>
+                <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps}/>
+                <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps}/>
             </form>
         </>
     );

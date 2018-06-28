@@ -14,7 +14,7 @@ import {
     selectOversettelseAvStillingFraAAReg,
 } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
 import { hentOversattStillingFraAAReg } from './sporsmal-siste-stilling/siste-stilling-utils';
-import {DinSituasjonSvar, Svar} from "../../../ducks/svar-utils";
+import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
 
 interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
@@ -28,7 +28,7 @@ interface StateProps {
 interface SporsmalProps {
     sporsmalId: string;
     endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
+    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
 }
 
 type Props = SporsmalProps & InjectedIntlProps & DispatchProps & StateProps;
@@ -56,7 +56,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                     {intl.messages[`${sporsmalId}-tittel`]}
                 </Innholdstittel>
                 <form className="form-skjema">
-                    <Alternativ svar={DinSituasjonSvar.DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.ALDRI_HATT_JOBB} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.VIL_BYTTE_JOBB} {...fellesProps}/>

@@ -23,11 +23,12 @@ import {
 import { getTekstIdForSvar } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
 import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
+import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
 
 interface SkjemaProps {
     sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: number) => void;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
+    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
 }
 
 interface StateProps {
@@ -52,11 +53,16 @@ class SisteStilling extends React.Component<Props> {
             sisteStilling,
         } = this.props;
 
-        endreSvar(sporsmalId, sisteStilling === ingenYrkesbakgrunn ? 2 : 1);
+        endreSvar(
+            sporsmalId,
+            sisteStilling === ingenYrkesbakgrunn
+                ? SisteStillingSvar.HAR_IKKE_HATT_JOBB
+                : SisteStillingSvar.HAR_HATT_JOBB
+        );
     }
 
     brukerHarHattJobb() {
-        return (this.props.hentAvgittSvar(this.props.sporsmalId) === 1);
+        return (this.props.hentAvgittSvar(this.props.sporsmalId) === SisteStillingSvar.HAR_HATT_JOBB);
     }
 
     render() {
@@ -72,7 +78,7 @@ class SisteStilling extends React.Component<Props> {
 
         const alternativProps = {
             intl,
-            getTekstId: (alternativId: number) => getTekstIdForSvar(sporsmalId, alternativId),
+            getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
 
@@ -88,18 +94,18 @@ class SisteStilling extends React.Component<Props> {
                 </div>
                 <form className="form-skjema">
                     <Alternativ
-                        alternativId={1}
+                        svar={SisteStillingSvar.HAR_HATT_JOBB}
                         {...alternativProps}
-                        avgiSvar={(alternativId: number) => {
-                            endreSvar(sporsmalId, alternativId);
+                        avgiSvar={(svar: Svar) => {
+                            endreSvar(sporsmalId, svar);
                             velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
                         }}
                     />
                     <Alternativ
-                        alternativId={2}
+                        svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
                         {...alternativProps}
-                        avgiSvar={(alternativId: number) => {
-                            endreSvar(sporsmalId, alternativId);
+                        avgiSvar={(svar: Svar) => {
+                            endreSvar(sporsmalId, svar);
                             velgStilling(ingenYrkesbakgrunn);
                         }}
                     />

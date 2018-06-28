@@ -19,7 +19,7 @@ export type State = {
     andreforhold?: AndreForholdSvar;
     'siste-stilling'?: SisteStillingSvar;
     'din-situasjon'?: DinSituasjonSvar;
-}
+};
 
 export interface Data {
     svar: Svar;

@@ -4,11 +4,12 @@ import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
+import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
 
 interface SporsmalProps {
     sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: number) => void;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
+    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
 }
 
 type Props = SporsmalProps & InjectedIntlProps;
@@ -17,8 +18,8 @@ export default function AndreForhold(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
-        avgiSvar: (alternativId: number) => props.endreSvar(props.sporsmalId, alternativId),
-        getTekstId: (alternativId: number) => getTekstIdForSvar(props.sporsmalId, alternativId),
+        avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
+        getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (
@@ -32,8 +33,8 @@ export default function AndreForhold(props: Props) {
                 </Normaltekst>
             </div>
             <form className="form-skjema">
-                <Alternativ alternativId={1} {...fellesProps}/>
-                <Alternativ alternativId={2} {...fellesProps}/>
+                <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
+                <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
             </form>
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">
