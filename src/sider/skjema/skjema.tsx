@@ -6,6 +6,7 @@ import { State as SvarState } from '../../ducks/svar';
 import { getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
 import Animasjon from './animasjon';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
+import { erIE } from '../../utils/ie-test';
 
 export interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
@@ -33,7 +34,7 @@ export default class Skjema extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            tilbake: false,
+            tilbake: false
         };
     }
 
@@ -51,9 +52,11 @@ export default class Skjema extends React.Component<Props, State> {
         this.antallSporsmal = React.Children.toArray(children).length;
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
+        let classnames = this.state.tilbake ? 'tilbake ' : '';
+        classnames += erIE() ? 'erIE' : '';
 
         return (
-            <ResponsivSide className={this.state.tilbake ? 'tilbake' : ''}>
+            <ResponsivSide className={classnames}>
                 {gjeldendeSporsmalComponent}
                 {advarselElement}
                 <Animasjon flag={this.props.gjeldendeSporsmal}>
@@ -61,8 +64,8 @@ export default class Skjema extends React.Component<Props, State> {
                         onClick={() => this.nesteButtonClick()}
                         erAktiv={this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))}
                     />
-                    <LenkeTilbake/>
-                    <LenkeAvbryt/>
+                    <LenkeTilbake />
+                    <LenkeAvbryt />
                 </Animasjon>
             </ResponsivSide>
         );

@@ -1,26 +1,42 @@
+.limit {
+    .fullfor {
+        margin-top: -6vh;
+        padding: 1rem 1.4rem;
+    }
+}
+
 .fullfor {
     width: 100%;
     margin: auto;
+
     .tittel {
         text-align: center;
         margin-bottom: 2rem;
     }
+
     .fullfor-liste {
         text-align: left;
         margin-bottom: 2rem;
     }
+
     .bekreft-panel {
         margin-bottom: 2rem;
     }
+
     .infopanel {
         margin-bottom: 2rem;
     }
+
     .knapper__wrapper {
         display: flex;
         justify-content: center;
     }
+}
 
-    @media (min-width: 769px) {
-        width: 375px;
+@media (min-width: @screen-sm-min) {
+    .limit {
+        .fullfor {
+            margin-top: -9vh;
+        }
     }
 }

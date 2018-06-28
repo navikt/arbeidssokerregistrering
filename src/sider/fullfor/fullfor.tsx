@@ -20,7 +20,6 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import AvhuketLI from '../../komponenter/liste/avhuket-li';
-import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
@@ -125,8 +124,8 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
-                <ResponsivSide>
-                    <div className="fullfor">
+                <div className="limit">
+                    <section className="fullfor">
                         <Innholdstittel tag="h1" className="tittel">
                             <FormattedMessage id="fullfor-header"/>
                         </Innholdstittel>
@@ -169,8 +168,8 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             />
                             <LenkeAvbryt wrapperClassname="no-anim"/>
                         </div>
-                    </div>
-                </ResponsivSide>
+                    </section>
+                </div>
             </Innholdslaster>
         );
     }
