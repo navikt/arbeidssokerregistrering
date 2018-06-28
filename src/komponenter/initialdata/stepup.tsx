@@ -11,7 +11,6 @@ function StepUp({intl}: InjectedIntlProps) {
     return (
         <div className="stepup__wrapper">
             <PanelBlokkGruppe
-                className="test-test"
                 knappAksjoner={
                     <KnappBase
                         type="hoved"
