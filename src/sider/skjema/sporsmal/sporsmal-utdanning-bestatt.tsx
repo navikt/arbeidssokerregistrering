@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForAlternativ } from '../skjema-utils';
+import { getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface SporsmalProps {
@@ -17,7 +17,7 @@ export default function UtdanningBestattSporsmal(props: Props) {
         endreSvar: props.endreSvar,
         intl: props.intl,
         avgiSvar: (alternativId: number) => props.endreSvar(props.sporsmalId, alternativId),
-        getTekstId: (alternativId: number) => getTekstIdForAlternativ(props.sporsmalId, alternativId),
+        getTekstId: (alternativId: number) => getTekstIdForSvar(props.sporsmalId, alternativId),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
     return (

@@ -20,7 +20,7 @@ import {
     Stilling,
     velgSisteStilling
 } from '../../../../ducks/siste-stilling';
-import { getTekstIdForAlternativ } from '../../skjema-utils';
+import { getTekstIdForSvar } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
 import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
 
@@ -72,7 +72,7 @@ class SisteStilling extends React.Component<Props> {
 
         const alternativProps = {
             intl,
-            getTekstId: (alternativId: number) => getTekstIdForAlternativ(sporsmalId, alternativId),
+            getTekstId: (alternativId: number) => getTekstIdForSvar(sporsmalId, alternativId),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
 

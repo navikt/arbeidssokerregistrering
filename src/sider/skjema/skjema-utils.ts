@@ -1,10 +1,18 @@
 import { State as SvarState } from '../../ducks/svar';
+import { Svar } from '../../ducks/svar-utils';
 
 export type SkjemaConfig = any; // tslint:disable-line no-any
 
-export function getTekstIdForAlternativ(sporsmalId: string, alternativId: number) {
-    return `${sporsmalId}-alternativ-${alternativId}`;
+export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
+    return `${sporsmalId}-svar-${svarSuffiksTilTekstId(svar)}`;
 }
+
+function svarSuffiksTilTekstId(svar: Svar) {
+    return svar.toString()
+        .toLowerCase()
+        .replace('_', '-');
+}
+
 
 const defaultSkjemaConfig: SkjemaConfig = {
     'din-situasjon': {

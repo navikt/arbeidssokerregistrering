@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import Alternativ from '../alternativ';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { getTekstIdForAlternativ } from '../skjema-utils';
+import { getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import {
     ingenYrkesbakgrunn, selectSisteStilling,
@@ -14,6 +14,7 @@ import {
     selectOversettelseAvStillingFraAAReg,
 } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
 import { hentOversattStillingFraAAReg } from './sporsmal-siste-stilling/siste-stilling-utils';
+import {DinSituasjonSvar, Svar} from "../../../ducks/svar-utils";
 
 interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
@@ -26,7 +27,7 @@ interface StateProps {
 
 interface SporsmalProps {
     sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: number) => void;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
     hentAvgittSvar: (sporsmalId: string) => number | undefined;
 }
 
@@ -37,15 +38,15 @@ class SporsmalDinSituasjon extends React.Component<Props> {
         const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling, sisteStilling} = this.props;
         const fellesProps = {
             intl: intl,
-            avgiSvar: (alternativId: number) => {
-                endreSvar(sporsmalId, alternativId);
-                if (alternativId === 2) {
+            avgiSvar: (svar: Svar) => {
+                endreSvar(sporsmalId, svar);
+                if (svar === DinSituasjonSvar.ALDRI_HATT_JOBB) {
                     velgStilling(ingenYrkesbakgrunn);
                 } else if (sisteStilling.label !== defaultStilling.label) {
                     velgStilling(defaultStilling);
                 }
             },
-            getTekstId: (alternativId: number) => getTekstIdForAlternativ(sporsmalId, alternativId),
+            getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
 
@@ -55,14 +56,14 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                     {intl.messages[`${sporsmalId}-tittel`]}
                 </Innholdstittel>
                 <form className="form-skjema">
-                    <Alternativ alternativId={1} {...fellesProps}/>
-                    <Alternativ alternativId={2} {...fellesProps}/>
-                    <Alternativ alternativId={3} {...fellesProps}/>
-                    <Alternativ alternativId={4} {...fellesProps}/>
-                    <Alternativ alternativId={5} {...fellesProps}/>
-                    <Alternativ alternativId={6} {...fellesProps}/>
-                    <Alternativ alternativId={7} {...fellesProps}/>
-                    <Alternativ alternativId={8} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.ALDRI_HATT_JOBB} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.VIL_BYTTE_JOBB} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.ER_PERMITTERT} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.USIKKER_JOBBSITUASJON} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.JOBB_OVER_2_AAR} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.VIL_FORTSETTE_I_JOBB} {...fellesProps}/>
                 </form>
             </>
         );
