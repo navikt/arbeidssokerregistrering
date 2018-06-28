@@ -1,40 +1,34 @@
-.limit:focus {
-    outline: 0;
-}
-
 .sporsmal {
-    margin-top: 12vh;
     padding: 1rem 1.4rem;
 
     .spm-tittel {
         margin-bottom: 1.5rem;
-        animation: slideUp 500ms both;
         text-align: center;
     }
 
     .spm-ingress {
         margin: 2rem 0 3rem;
-        animation: slideUp 500ms both;
         text-align: center;
     }
 
     .spm-beskrivelse {
         text-align: center;
-        animation: slideUp 500ms both;
     }
 
-    .form-skjema {
+    .spm-skjema {
         margin-top: 3rem;
-        animation: slideUp 550ms both;
         .alternativ-wrapper {
             margin: 0.5rem 0;
         }
     }
 
-    .spm-info {
-        animation: slideUp 550ms both;
+    .spm-valg {
         display: flex;
-        color: @navMorkGra;
+        flex-direction: column;
+    }
+
+    .spm-info {
+        display: flex;
         margin: 3rem auto;
 
         &__ikon {
@@ -51,13 +45,12 @@
 
 @media (min-width: @screen-sm-min) {
     .sporsmal {
-        margin-top: 9vh;
 
         &:focus {
             outline: 0;
         }
 
-        .form-skjema {
+        .spm-skjema {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;

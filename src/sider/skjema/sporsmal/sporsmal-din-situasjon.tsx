@@ -51,10 +51,12 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 
         return (
             <>
-                <Innholdstittel tag="h1" className="spm-tittel">
-                    {intl.messages[`${sporsmalId}-tittel`]}
-                </Innholdstittel>
-                <form className="form-skjema">
+                <div className="spm-hode">
+                    <Innholdstittel tag="h1" className="spm-tittel">
+                        {intl.messages[`${sporsmalId}-tittel`]}
+                    </Innholdstittel>
+                </div>
+                <form className="spm-skjema">
                     <Alternativ alternativId={1} {...fellesProps}/>
                     <Alternativ alternativId={2} {...fellesProps}/>
                     <Alternativ alternativId={3} {...fellesProps}/>
