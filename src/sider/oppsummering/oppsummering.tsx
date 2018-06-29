@@ -12,6 +12,7 @@ import { hentFornavn } from '../../utils/utils';
 import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { SisteStillingSvar, UtdanningBestattSvar, UtdanningGodkjentSvar } from '../../ducks/svar-utils';
+import OppsummeringElement from './oppsummering-element';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -60,18 +61,6 @@ const oppsummeringBesvarelser = (state: AppState) => {
         </li>
     );
 
-    const utdanningBestatt = state.svar.utdanningbestatt === UtdanningBestattSvar.INGEN_SVAR ? (null) : (
-        <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
-        </li>
-    );
-
-    const utdanningGodkjent = state.svar.utdanninggodkjent === UtdanningGodkjentSvar.INGEN_SVAR ? (null) : (
-        <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`}/>
-        </li>
-    );
-
     return (
         <div className="oppsummering-besvarelser">
             <img
@@ -81,26 +70,23 @@ const oppsummeringBesvarelser = (state: AppState) => {
             />
             <ul className="oppsummering-besvarelser__list">
                 {alderElement}
-                <li className="typo-normal">
-                    <FormattedMessage id="dinsituasjon-liste-1"/>
-                </li>
-                <li className="typo-normal">
-                    <FormattedMessage id="dinsituasjon-liste-2"/>
-                </li>
+                <OppsummeringElement tekstId="dinsituasjon-liste-1"/>
+                <OppsummeringElement tekstId="dinsituasjon-liste-2"/>
                 {dinSituasjon}
                 {sisteStilling}
-                <li className="typo-normal">
+                <OppsummeringElement sporsmalId={'utdanning'}>
                     Høyeste fullførte utdanning:&nbsp;
-                    <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`}/>
-                </li>
-                {utdanningBestatt}
-                {utdanningGodkjent}
-                <li className="typo-normal">
-                    <FormattedMessage id={`oppsummering-helsehinder-svar-${state.svar.helsehinder}`}/>
-                </li>
-                <li className="typo-normal">
-                    <FormattedMessage id={`oppsummering-andreforhold-svar-${state.svar.andreforhold}`}/>
-                </li>
+                </OppsummeringElement>
+                <OppsummeringElement
+                    sporsmalId={'utdanningbestatt'}
+                    skjul={state.svar.utdanningbestatt === UtdanningBestattSvar.INGEN_SVAR}
+                />
+                <OppsummeringElement
+                    sporsmalId={'utdanninggodkjent'}
+                    skjul={state.svar.utdanninggodkjent === UtdanningGodkjentSvar.INGEN_SVAR}
+                />
+                <OppsummeringElement sporsmalId={'helsehinder'}/>
+                <OppsummeringElement sporsmalId={'andreforhold'}/>
             </ul>
         </div>
     );
