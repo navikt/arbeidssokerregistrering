@@ -9,18 +9,21 @@ import { VEILARBSTEPUP } from '../../ducks/api';
 
 function StepUp({intl}: InjectedIntlProps) {
     return (
-        <PanelBlokkGruppe
-            knappAksjoner={
-                <KnappBase
-                    type="hoved"
-                    onClick={() => document.location.href = VEILARBSTEPUP}
-                >
-                    <Normaltekst>{getIntlMessage(intl.messages, 'knapp-logg-inn')}</Normaltekst>
-                </KnappBase>
-            }
-        >
-            <Feilmelding intl={intl} id="stepup-melding" type="info"/>
-        </PanelBlokkGruppe>
+        <div className="stepup__wrapper">
+            <PanelBlokkGruppe
+                knappAksjoner={
+                    <KnappBase
+                        type="hoved"
+                        className="stepup__knapp"
+                        onClick={() => document.location.href = VEILARBSTEPUP}
+                    >
+                        <Normaltekst>{getIntlMessage(intl.messages, 'knapp-logg-inn')}</Normaltekst>
+                    </KnappBase>
+                }
+            >
+                <Feilmelding intl={intl} id="stepup-melding" type="info"/>
+            </PanelBlokkGruppe>
+        </div>
     );
 }
 
