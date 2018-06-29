@@ -25,15 +25,14 @@ interface StateProps {
 type EgenProps = StateProps;
 
 const oppsummeringBesvarelser = (state: AppState) => {
+    const {brukersFnr} = state, {data} = brukersFnr, personId = data.id;
+    const svar = state.svar;
 
-    if (_.isEmpty(state.svar)) {
+    if (_.isEmpty(svar)) {
         return null;
     }
-    const {brukersFnr} = state, {data} = brukersFnr, personId = data.id;
 
-    let alderElement;
-    if (!_.isEmpty(data)) {
-        alderElement = (
+    const alderElement = _.isEmpty(data) ? (null) : (
             <li className="typo-normal">
                 <FormattedMessage
                     id="oppsummering-alder"
@@ -41,36 +40,43 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 />
             </li>
         );
-    }
 
-    const dinSituasjon = state.svar['din-situasjon'] === INGEN_SVAR ? (null) : (
+    const registreringStatus = state.registreringStatus.data;
+    const jobbetSeksAvTolvSisteManederTekstId = registreringStatus.jobbetSeksAvTolvSisteManeder
+        ? 'oppsummering-arbeidserfaring-1'
+        : 'oppsummering-arbeidserfaring-2';
+    const registrertNavSisteToArTekstId = registreringStatus.registrertNavSisteToAr
+        ? 'oppsummering-inaktivitet-1'
+        : 'oppsummering-inaktivitet-2';
+
+    const dinSituasjon = svar['din-situasjon'] === INGEN_SVAR ? (null) : (
         <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-din-situasjon`} />
-            <FormattedMessage id={`oppsummering-din-situasjon-svar-${state.svar['din-situasjon']}`} />
+            <FormattedMessage id={`oppsummering-din-situasjon`} /> &nbsp;
+            <FormattedMessage id={`oppsummering-din-situasjon-svar-${svar['din-situasjon']}`} />
         </li>
     );
 
-    const sisteStilling = state.svar['siste-stilling'] === INGEN_SVAR ? (null) : (
+    const sisteStilling = svar['siste-stilling'] === INGEN_SVAR ? (null) : (
         <li className="typo-normal">
             Siste stilling:&nbsp;{
-            state.svar['siste-stilling'] === 1
+            svar['siste-stilling'] === 1
                 ? state.sisteStilling.data.stilling.label
                 : <FormattedMessage
-                    id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
+                    id={`oppsummering-sistestilling-svar-${svar['siste-stilling']}`}
                 />
         }
         </li>
     );
 
-    const utdanningBestatt = state.svar.utdanningbestatt === INGEN_SVAR ? (null) : (
+    const utdanningBestatt = svar.utdanningbestatt === INGEN_SVAR ? (null) : (
         <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`} />
+            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${svar.utdanningbestatt}`} />
         </li>
     );
 
-    const utdanningGodkjent = state.svar.utdanninggodkjent === INGEN_SVAR ? (null) : (
+    const utdanningGodkjent = svar.utdanninggodkjent === INGEN_SVAR ? (null) : (
         <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${state.svar.utdanningbestatt}`} />
+            <FormattedMessage id={`oppsummering-utdanningbestatt-svar-${svar.utdanningbestatt}`} />
         </li>
     );
 
@@ -84,24 +90,24 @@ const oppsummeringBesvarelser = (state: AppState) => {
             <ul className="oppsummering-besvarelser__list">
                 {alderElement}
                 <li className="typo-normal">
-                    <FormattedMessage id="dinsituasjon-liste-1" />
+                    <FormattedMessage id={jobbetSeksAvTolvSisteManederTekstId}/>
                 </li>
                 <li className="typo-normal">
-                    <FormattedMessage id="dinsituasjon-liste-2" />
+                    <FormattedMessage id={registrertNavSisteToArTekstId}/>
                 </li>
                 {dinSituasjon}
                 {sisteStilling}
                 <li className="typo-normal">
                     Høyeste fullførte utdanning:&nbsp;
-                    <FormattedMessage id={`utdanning-alternativ-${state.svar.utdanning}`} />
+                    <FormattedMessage id={`utdanning-alternativ-${svar.utdanning}`} />
                 </li>
                 {utdanningBestatt}
                 {utdanningGodkjent}
                 <li className="typo-normal">
-                    <FormattedMessage id={`oppsummering-helsehinder-svar-${state.svar.helsehinder}`} />
+                    <FormattedMessage id={`oppsummering-helsehinder-svar-${svar.helsehinder}`} />
                 </li>
                 <li className="typo-normal">
-                    <FormattedMessage id={`oppsummering-andreforhold-svar-${state.svar.andreforhold}`} />
+                    <FormattedMessage id={`oppsummering-andreforhold-svar-${svar.andreforhold}`} />
                 </li>
             </ul>
         </div>
