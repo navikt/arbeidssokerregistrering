@@ -20,13 +20,13 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import AvhuketLI from '../../komponenter/liste/avhuket-li';
-import ResponsivSide from '../../komponenter/side/responsiv-side';
 import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';
+import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -125,15 +125,16 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
-                <ResponsivSide>
-                    <div className="fullfor">
-                        <Innholdstittel tag="h1" className="tittel">
+                <div className="limit">
+                    <section className="fullfor">
+                        <Innholdstittel tag="h1" className="fullfor-tittel">
                             <FormattedMessage id="fullfor-header"/>
                         </Innholdstittel>
-                        <Element className="ingress">
+                        <Element className="fullfor-ingress">
                             <FormattedMessage id="fullfor-ingress"/>
                         </Element>
-                        <Element>
+
+                        <Element tag="h2" className="fullfor-liste-heading">
                             <FormattedMessage id="fullfor-overskrift-liste"/>
                         </Element>
 
@@ -152,14 +153,14 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                             </AvhuketLI>
                         </ul>
 
-                        <EkspanderbartInfo tittelId="fullfor-les-mer" className="infopanel">
+                        <EkspanderbartInfo tittelId="fullfor-les-mer" className="fullfor-info">
                             <Normaltekst><FormattedMessage id="fullfor-les-mer-beskrivelse"/></Normaltekst>
                         </EkspanderbartInfo>
                         <BekreftCheckboksPanel
                             onChange={this.settMarkert}
                             checked={this.state.markert}
                             label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
-                            className="bekreft-panel"
+                            className="fullfor-bekreft"
                         />
                         {advarselElement}
                         <div className={'knapper-vertikalt'}>
@@ -167,10 +168,11 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                                 intl={intl}
                                 onClick={this.registrerBrukerOnClick}
                             />
+                            <LenkeTilbake />
                             <LenkeAvbryt wrapperClassname="no-anim"/>
                         </div>
-                    </div>
-                </ResponsivSide>
+                    </section>
+                </div>
             </Innholdslaster>
         );
     }

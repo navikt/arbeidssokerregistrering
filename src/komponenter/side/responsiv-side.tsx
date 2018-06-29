@@ -6,12 +6,30 @@ interface ResponsivSideProps {
     className?: string;
 }
 
-function ResponsivSide({children, className}: ResponsivSideProps) {
-    return(
-        <section className={classnames('sporsmal', className)}>
-            {children}
-        </section>
-    );
+class ResponsivSide extends React.Component<ResponsivSideProps> {
+
+    constructor(props: ResponsivSideProps) {
+        super(props);
+    }
+
+    componentDidMount() {
+        let scrollHeight = 0;
+        const header = document.querySelector('.siteheader');
+        if (header) {
+            scrollHeight = header.getBoundingClientRect().height;
+        }
+        window.scrollTo(0, scrollHeight);
+    }
+
+    render() {
+        const {children, className} = this.props;
+
+        return (
+            <section className={classnames('sporsmal', className)}>
+                {children}
+            </section>
+        );
+    }
 }
 
 export default ResponsivSide;
