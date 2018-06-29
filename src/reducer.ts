@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'react-redux-form-validation';
 import { FieldState } from 'redux-form';
 import svar, { State as SvarState } from './ducks/svar';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
@@ -38,6 +37,5 @@ export default combineReducers<AppState>({
     oversettelseAvStillingFraAAReg,
     sisteStillingFraAAReg,
     sisteStilling,
-    form: formReducer,
     featureToggles,
 });

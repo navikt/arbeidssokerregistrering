@@ -24,7 +24,7 @@ export default function AndreForhold(props: Props) {
     };
     return (
         <>
-            <div className="sporsmal__oppe">
+            <div className="spm-hode">
                 <Innholdstittel tag="h1" className="spm-tittel">
                     {props.intl.messages[`${props.sporsmalId}-tittel`]}
                 </Innholdstittel>
@@ -32,7 +32,7 @@ export default function AndreForhold(props: Props) {
                     {props.intl.messages[`${props.sporsmalId}-ingress`]}
                 </Normaltekst>
             </div>
-            <form className="form-skjema">
+            <form className="spm-skjema">
                 <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
                 <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
             </form>

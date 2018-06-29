@@ -1,0 +1,65 @@
+.sporsmal:not(.tilbake) {
+    .tilbakelenke {
+        animation: slideUp 400ms;
+    }
+    .spm-hode {
+        animation: slideUp 500ms;
+    }
+    .spm-skjema, .spm-valg, .spm-info {
+        animation: slideUp 550ms;
+    }
+    .nesteknapp, .lenke-avbryt-wrapper {
+        animation: slideUp 600ms;
+    }
+}
+
+.sporsmal.tilbake {
+    .tilbakelenke {
+        animation: slideDown 600ms;
+    }
+    .spm-hode {
+        animation: slideDown 550ms;
+    }
+    .spm-skjema, .spm-valg, .spm-info {
+        animation: slideDown 500ms;
+    }
+    .nesteknapp, .lenke-avbryt-wrapper {
+        animation: slideDown 400ms;
+    }
+}
+
+.sporsmal.erIE, .sporsmal.tilbake.erIE {
+    .tilbakelenke, .spm-hode, .spm-skjema, .spm-valg, .spm-info, .nesteknapp, .lenke-avbryt-wrapper {
+        animation: none;
+    }
+}
+
+.oppsummering {
+    .oppsummering-tittel, .oppsummering-ingress {
+        animation: slideUp 500ms;
+    }
+    .oppsummering-besvarelser {
+        animation: slideUp 550ms;
+    }
+    .knapper-vertikalt {
+        animation: slideUp 600ms;
+    }
+}
+
+.oppsummering.erIE {
+    .oppsummering-tittel, .oppsummering-ingress, .oppsummering-besvarelser, .knapper-vertikalt {
+        animation: none;
+    }
+}
+
+.fullfor {
+    .fullfor-tittel, .fullfor-ingress {
+        animation: slideUp 500ms;
+    }
+    .fullfor-liste-heading, .fullfor-liste, .fullfor-bekreft, .fullfor-info {
+        animation: slideUp 550ms;
+    }
+    .knapper-vertikalt {
+        animation: slideUp 600ms;
+    }
+}

@@ -11,8 +11,15 @@ import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
 import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { SisteStillingSvar, UtdanningBestattSvar, UtdanningGodkjentSvar } from '../../ducks/svar-utils';
+import {
+    DinSituasjonSvar,
+    SisteStillingSvar,
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar
+} from '../../ducks/svar-utils';
 import OppsummeringElement from './oppsummering-element';
+import { erIE } from '../../utils/ie-test';
+import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -24,15 +31,14 @@ interface StateProps {
 type EgenProps = StateProps;
 
 const oppsummeringBesvarelser = (state: AppState) => {
+    const {brukersFnr} = state, {data} = brukersFnr, personId = data.id;
+    const svar = state.svar;
 
-    if (_.isEmpty(state.svar)) {
+    if (_.isEmpty(svar)) {
         return null;
     }
-    const {brukersFnr} = state, {data} = brukersFnr, personId = data.id;
 
-    let alderElement;
-    if (!_.isEmpty(data)) {
-        alderElement = (
+    const alderElement = _.isEmpty(data) ? (null) : (
             <li className="typo-normal">
                 <FormattedMessage
                     id="oppsummering-alder"
@@ -40,12 +46,20 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 />
             </li>
         );
-    }
 
-    const dinSituasjon = (
+    const registreringStatus = state.registreringStatus.data;
+
+    const jobbetSeksAvTolvSisteManederTekstId = registreringStatus.jobbetSeksAvTolvSisteManeder
+        ? 'oppsummering-arbeidserfaring-1'
+        : 'oppsummering-arbeidserfaring-2';
+    const registrertNavSisteToArTekstId = registreringStatus.registrertNavSisteToAr
+        ? 'oppsummering-inaktivitet-1'
+        : 'oppsummering-inaktivitet-2';
+
+    const dinSituasjon = svar['din-situasjon'] === DinSituasjonSvar.INGEN_SVAR ? (null) : (
         <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-din-situasjon`}/>
-            <FormattedMessage id={`oppsummering-din-situasjon-svar-${state.svar['din-situasjon']}`}/>
+            <FormattedMessage id={`oppsummering-din-situasjon`} /> &nbsp;
+            <FormattedMessage id={`oppsummering-din-situasjon-svar-${svar['din-situasjon']}`} />
         </li>
     );
 
@@ -55,7 +69,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
             state.svar['siste-stilling'] === SisteStillingSvar.HAR_HATT_JOBB
                 ? state.sisteStilling.data.stilling.label
                 : <FormattedMessage
-                    id={`oppsummering-sistestilling-svar-${state.svar['siste-stilling']}`}
+                    id={`oppsummering-sistestilling-svar-${svar['siste-stilling']}`}
                 />
         }
         </li>
@@ -70,8 +84,8 @@ const oppsummeringBesvarelser = (state: AppState) => {
             />
             <ul className="oppsummering-besvarelser__list">
                 {alderElement}
-                <OppsummeringElement tekstId="dinsituasjon-liste-1"/>
-                <OppsummeringElement tekstId="dinsituasjon-liste-2"/>
+                <OppsummeringElement tekstId={jobbetSeksAvTolvSisteManederTekstId}/>
+                <OppsummeringElement tekstId={registrertNavSisteToArTekstId}/>
                 {dinSituasjon}
                 {sisteStilling}
                 <OppsummeringElement sporsmalId={'utdanning'}>
@@ -104,26 +118,30 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
     render() {
         const {history, brukersNavn, state} = this.props;
         const {name} = brukersNavn.data;
+        let classnames = 'oppsummering ';
+        classnames += erIE() ? 'erIE' : '';
+
         return (
-            <section className="oppsummering">
-                <div className="limit">
+            <div className="limit">
+                <section className={classnames}>
                     <Innholdstittel tag="h1" className="oppsummering-tittel">
-                        <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}}/>
+                        <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}} />
                     </Innholdstittel>
                     <Normaltekst className="oppsummering-ingress">
-                        <FormattedMessage id="oppsummering-ingress"/>
+                        <FormattedMessage id="oppsummering-ingress" />
                     </Normaltekst>
 
                     {oppsummeringBesvarelser(state)}
 
                     <div className="knapper-vertikalt">
                         <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
-                            <FormattedMessage id="knapp-riktig"/>
+                            <FormattedMessage id="knapp-riktig" />
                         </KnappBase>
-                        <LenkeAvbryt wrapperClassname="no-anim"/>
+                        <LenkeTilbake />
+                        <LenkeAvbryt wrapperClassname="no-anim" />
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         );
     }
 }

@@ -18,6 +18,7 @@
     height: 10px;
     background-color: @navLysGra;
 }
+
 *::-webkit-scrollbar-thumb {
     background: @navGra60;
     border-radius: 3px;
@@ -46,14 +47,15 @@ main.arbsokreg_app {
     @import 'komponenter/banner/banner';
     @import 'komponenter/graa-bakgrunn/graa-bakgrunn';
     @import 'komponenter/ekspanderbartinfo/ekspanderbartinfo';
+    @import 'komponenter/initialdata/stepup';
 
     @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/sokeinput';
-    @import 'sider/skjema/sporsmal/sporsmal-siste-stilling/siste-stilling';
     @import 'sider/fullfor/feilhandtering/feilmelding-brukers-status-ugyldig';
     @import 'sider/fullfor/feilhandtering/feilmelding/feilmelding';
 
     @import 'sider/allerede-registrert/allerede-registrert';
     @import 'sider/skjema/skjema';
+    @import 'sider/skjema/sideanimasjon';
     @import 'sider/duernaregistrert/duernaregistrert';
     @import 'sider/duernaregistrert/avsjekk-animasjon';
     @import 'sider/oppsummering/oppsummering';
@@ -68,7 +70,13 @@ main.arbsokreg_app {
 }
 
 .limit {
+    position: relative;
     margin: 0 auto;
+    padding-top: 6rem;
+
+    &:focus {
+        outline: 0;
+    }
 }
 
 .hodefot-footer {
@@ -80,12 +88,16 @@ main.arbsokreg_app {
     .pagewrapper {
         padding-bottom: 200px !important;
     }
+
     .limit {
+        padding-top: 9rem;
         width: @desktopLimitWidth;
     }
+
     .sitefooter {
         display: block;
     }
+
     .lukknapp {
         border: 1px solid @navGra60;
         display: inline-block;

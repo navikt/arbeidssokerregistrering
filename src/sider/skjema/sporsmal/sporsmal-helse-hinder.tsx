@@ -24,14 +24,15 @@ export default function HelseHinder(props: Props) {
     };
     return (
         <>
-            <Innholdstittel tag="h1" className="spm-tittel">
-                {props.intl.messages[`${props.sporsmalId}-tittel`]}
-            </Innholdstittel>
-            <form className="form-skjema">
+            <div className="spm-hode">
+                <Innholdstittel tag="h1" className="spm-tittel">
+                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                </Innholdstittel>
+            </div>
+            <form className="spm-skjema">
                 <Alternativ svar={HelseHinderSvar.JA} {...fellesProps}/>
                 <Alternativ svar={HelseHinderSvar.NEI} {...fellesProps}/>
             </form>
-
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">
                     <Ikon kind="info-sirkel" size="1.5em"/>
