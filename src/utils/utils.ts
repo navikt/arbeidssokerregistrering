@@ -1,23 +1,16 @@
 import {
-    ANNET, BLANK,
-    JA,
-    KANSKJE,
-    MISTET_JOBBEN,
-    NEI,
     NUSKODE_0,
     NUSKODE_2,
     NUSKODE_3,
     NUSKODE_4,
     NUSKODE_6,
     NUSKODE_7, NUSKODE_9,
-    PERMITTERT,
-    SAGT_OPP,
-    UNDER_UTDANNING, VIL_BYTTE_JOBB,
 } from './konstanter';
 import { State as SvarState } from '../ducks/svar';
 import { Stilling } from '../ducks/siste-stilling';
 import * as moment from 'moment';
 import { UtdanningSvar } from '../ducks/svar-utils';
+import { RegistreringData } from '../ducks/registrerbruker';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -39,19 +32,6 @@ export function guid() {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }
 
-export const getMapSituasjon = (svarAlternativ: string) => {
-    const mapSituasjon = {
-        '1': MISTET_JOBBEN,
-        '2': SAGT_OPP,
-        '3': PERMITTERT,
-        '4': VIL_BYTTE_JOBB,
-        '5': UNDER_UTDANNING,
-        '6': ANNET,
-    };
-
-    return mapSituasjon[svarAlternativ];
-};
-
 export const mapTilNuskode = (svar: UtdanningSvar) => {
     switch (svar) {
         case (UtdanningSvar.INGEN_UTDANNING): return NUSKODE_0;
@@ -64,35 +44,34 @@ export const mapTilNuskode = (svar: UtdanningSvar) => {
         default: return NUSKODE_9;
     }
 };
-export const getMapJaNeiKanskje = (svarAlternativ: string) => {
-    const map = {
-        '1': JA,
-        '2': NEI,
-        '3': KANSKJE,
-    };
-    return map[svarAlternativ];
-};
-export const mapTilBoolean = (alternativId: number | undefined) => {
-    return alternativId === 1;
-};
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     sisteStilling: Stilling
-) {
-    let data = {};
-    if (svar.helsehinder !== undefined && svar.utdanning !== undefined) { // Hvorfor tar vi denne sjekken?
-        data = {
-            nusKode: mapTilNuskode(svar.utdanning),
-            yrkesPraksis: sisteStilling.styrk08,
+): RegistreringData {
+    if (besvarelseErGyldig(svar)) {
+        return {
+            nusKode: mapTilNuskode(svar.utdanning!),
             enigIOppsummering: true,
-            oppsummering: BLANK, // TODO slettes samtidig med backend endringer
-            harHelseutfordringer: svar.helsehinder,
-            yrkesbeskrivelse: sisteStilling.label,
-            konseptId: sisteStilling.konseptId,
+            sisteStilling: sisteStilling,
+            besvarelse: svar,
+            oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
         };
+    } else {
+        throw new Error('Besvarelsen er ikke gyldig.');
     }
-    return data;
+}
+
+export function besvarelseErGyldig(svar: SvarState) {
+    return (
+        svar['din-situasjon'] &&
+        svar['siste-stilling'] &&
+        svar.utdanning &&
+        svar.utdanninggodkjent &&
+        svar.utdanningbestatt &&
+        svar.helsehinder &&
+        svar.andreforhold
+    );
 }
 
 export interface MatchProps {

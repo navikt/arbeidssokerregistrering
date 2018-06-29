@@ -17,8 +17,8 @@ import svarMock from "./svar";
 import { ActionTypes as SisteStillingActionTypes } from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling";
 
-const MOCK_START_REGISRERING_STATUS = true;
-const MOCK_REGISTRER_BRUKER = true;
+const MOCK_START_REGISRERING_STATUS = false;
+const MOCK_REGISTRER_BRUKER = false;
 const MOCK_BRUKERS_FNR = true;
 const MOCK_BRUKERS_NAVN = true;
 const MOCK_AUTENTISERINGS_INFO = true;
@@ -28,7 +28,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = true;
+const MOCK_BESVARELSE = false;
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
