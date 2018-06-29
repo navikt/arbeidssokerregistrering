@@ -12,5 +12,5 @@ export function getTekstIdForOppsummering(sporsmalId: string, svar: Svar) {
     ];
     const prefiks = sporsmalIderDerOppsummeringenSkalTasFraSporsmalstekstene.includes(sporsmalId)
         ? '' : 'oppsummering-';
-    return `${prefiks}${sporsmalId}-svar-${svarSuffiksTilTekstId(svar)}`;
+    return `${prefiks}${sporsmalId.toLowerCase()}-svar-${svarSuffiksTilTekstId(svar)}`;
 }

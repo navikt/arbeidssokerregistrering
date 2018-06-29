@@ -13,12 +13,12 @@ export enum ActionTypes {
 
 export type State = {
     utdanning?: UtdanningSvar;
-    utdanningbestatt?: UtdanningBestattSvar;
-    utdanninggodkjent?: UtdanningGodkjentSvar;
-    helsehinder?: HelseHinderSvar;
-    andreforhold?: AndreForholdSvar;
-    'siste-stilling'?: SisteStillingSvar;
-    'din-situasjon'?: DinSituasjonSvar;
+    utdanningBestatt?: UtdanningBestattSvar;
+    utdanningGodkjent?: UtdanningGodkjentSvar;
+    helseHinder?: HelseHinderSvar;
+    andreForhold?: AndreForholdSvar;
+    sisteStilling?: SisteStillingSvar;
+    dinSituasjon?: DinSituasjonSvar;
 };
 
 export interface Data {

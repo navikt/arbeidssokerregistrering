@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import Alternativ from '../alternativ';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import {
     ingenYrkesbakgrunn, selectSisteStilling,
@@ -54,7 +54,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
             <>
                 <div className="spm-hode">
                     <Innholdstittel tag="h1" className="spm-tittel">
-                        {intl.messages[`${sporsmalId}-tittel`]}
+                        {getIntlTekst(sporsmalId, 'tittel', intl)}
                     </Innholdstittel>
                 </div>
                 <form className="spm-skjema">

@@ -57,11 +57,11 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 <OppsummeringElement tekstId="oppsummering-alder" values={{alder: personId && hentAlder(personId)}}/>
                 <OppsummeringElement tekstId={jobbetSeksAvTolvSisteManederTekstId}/>
                 <OppsummeringElement tekstId={registrertNavSisteToArTekstId}/>
-                <OppsummeringElement sporsmalId="din-situasjon">
-                    <FormattedMessage id={`oppsummering-din-situasjon`}/> &nbsp;
+                <OppsummeringElement sporsmalId="dinSituasjon">
+                    <FormattedMessage id={`oppsummering-dinsituasjon`}/>&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
-                    sporsmalId="siste-stilling"
+                    sporsmalId="sisteStilling"
                     tekst={state.sisteStilling.data.stilling.label}
                     skjulHvisSvarErLik={[SisteStillingSvar.INGEN_SVAR, SisteStillingSvar.HAR_IKKE_HATT_JOBB]}
                 >
@@ -71,15 +71,15 @@ const oppsummeringBesvarelser = (state: AppState) => {
                     Høyeste fullførte utdanning:&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
-                    sporsmalId={'utdanningbestatt'}
+                    sporsmalId={'utdanningBestatt'}
                     skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
                 />
                 <OppsummeringElement
-                    sporsmalId={'utdanninggodkjent'}
+                    sporsmalId={'utdanningGodkjent'}
                     skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
                 />
-                <OppsummeringElement sporsmalId={'helsehinder'}/>
-                <OppsummeringElement sporsmalId={'andreforhold'}/>
+                <OppsummeringElement sporsmalId={'helseHinder'}/>
+                <OppsummeringElement sporsmalId={'andreForhold'}/>
             </ul>
         </div>
     );

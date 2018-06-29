@@ -28,6 +28,6 @@ describe('skjema-utils', () => {
     });
 
     it('test getTekstIdForSvar', () => {
-        expect(getTekstIdForSvar('din-situasjon', DinSituasjonSvar.ALDRI_HATT_JOBB)).to.equal('din-situasjon-svar-aldri-hatt-jobb');
+        expect(getTekstIdForSvar('dinSituasjon', DinSituasjonSvar.ALDRI_HATT_JOBB)).to.equal('din-situasjon-svar-aldri-hatt-jobb');
     });
 });

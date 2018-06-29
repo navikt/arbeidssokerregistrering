@@ -99,13 +99,13 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             <div className="limit" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
-                        <SporsmalDinSituasjon sporsmalId="din-situasjon" {...fellesProps}/>
-                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
+                        <SporsmalDinSituasjon sporsmalId="dinSituasjon" {...fellesProps}/>
+                        <SisteStilling sporsmalId="sisteStilling" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                        <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
-                        <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
-                        <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
-                        <AndreForhold sporsmalId="andreforhold" {...fellesProps}/>
+                        <UtdanningGodkjentSporsmal sporsmalId="utdanningGodkjent" {...fellesProps}/>
+                        <UtdanningBestattSporsmal sporsmalId="utdanningBestatt" {...fellesProps}/>
+                        <HelseHinder sporsmalId="helseHinder" {...fellesProps}/>
+                        <AndreForhold sporsmalId="andreForhold" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>

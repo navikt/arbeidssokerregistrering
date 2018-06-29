@@ -8,13 +8,13 @@ import {
 } from '../ducks/svar-utils';
 
 const svarMock = {
-    'din-situasjon': DinSituasjonSvar.ER_PERMITTERT,
-    'siste-stilling': SisteStillingSvar.HAR_HATT_JOBB,
+    'dinSituasjon': DinSituasjonSvar.ER_PERMITTERT,
+    'sisteStilling': SisteStillingSvar.HAR_HATT_JOBB,
     'utdanning': UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
-    'utdanninggodkjent': UtdanningGodkjentSvar.NEI,
-    'utdanningbestatt': UtdanningBestattSvar.JA,
-    'helsehinder': HelseHinderSvar.NEI,
-    'andreforhold': AndreForholdSvar.NEI,
+    'utdanningGodkjent': UtdanningGodkjentSvar.NEI,
+    'utdanningBestatt': UtdanningBestattSvar.JA,
+    'helseHinder': HelseHinderSvar.NEI,
+    'andreForhold': AndreForholdSvar.NEI,
 };
 
 export default svarMock;

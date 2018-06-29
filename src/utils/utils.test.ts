@@ -73,7 +73,7 @@ describe('utils test', () => {
     it('test mapAvgitteSvarForBackend', () => {
 
         const dummySvar: SvarState = {
-            helsehinder: HelseHinderSvar.JA,
+            helseHinder: HelseHinderSvar.JA,
             utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
         };
         const stilling: Stilling = {
@@ -87,7 +87,7 @@ describe('utils test', () => {
             yrkesPraksis: stilling.styrk08,
             enigIOppsummering: true,
             oppsummering: BLANK,
-            harHelseutfordringer: dummySvar.helsehinder,
+            harHelseutfordringer: dummySvar.helseHinder,
             yrkesbeskrivelse: stilling.label,
             konseptId: stilling.konseptId,
         };

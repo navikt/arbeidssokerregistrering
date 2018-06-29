@@ -64,13 +64,13 @@ export function mapAvgitteSvarForBackend(
 
 export function besvarelseErGyldig(svar: SvarState) {
     return (
-        svar['din-situasjon'] &&
-        svar['siste-stilling'] &&
+        svar.dinSituasjon &&
+        svar.sisteStilling &&
         svar.utdanning &&
-        svar.utdanninggodkjent &&
-        svar.utdanningbestatt &&
-        svar.helsehinder &&
-        svar.andreforhold
+        svar.utdanningGodkjent &&
+        svar.utdanningBestatt &&
+        svar.helseHinder &&
+        svar.andreForhold
     );
 }
 

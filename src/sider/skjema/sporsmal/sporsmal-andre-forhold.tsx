@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
@@ -15,21 +15,24 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps;
 
 export default function AndreForhold(props: Props) {
+    const { intl, sporsmalId } = props;
     const fellesProps = {
         endreSvar: props.endreSvar,
-        intl: props.intl,
+        intl: intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
+    const getTekst = (kontekst: string) => getIntlTekst(sporsmalId, kontekst, intl);
+
     return (
         <>
             <div className="spm-hode">
                 <Innholdstittel tag="h1" className="spm-tittel">
-                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                    {getTekst('tittel')}
                 </Innholdstittel>
                 <Normaltekst className="spm-ingress">
-                    {props.intl.messages[`${props.sporsmalId}-ingress`]}
+                    {getTekst('ingress')}
                 </Normaltekst>
             </div>
             <form className="spm-skjema">
@@ -41,7 +44,7 @@ export default function AndreForhold(props: Props) {
                     <Ikon kind="info-sirkel" size="1.5em"/>
                 </span>
                 <Normaltekst>
-                    {props.intl.messages[`${props.sporsmalId}-info`]}
+                    {getTekst('info')}
                 </Normaltekst>
             </div>
         </>

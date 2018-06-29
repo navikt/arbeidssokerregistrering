@@ -1,10 +1,15 @@
 import { State as SvarState } from '../../ducks/svar';
 import { DinSituasjonSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
+import { InjectedIntl } from 'react-intl';
 
 export type SkjemaConfig = any; // tslint:disable-line no-any
 
 export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
-    return `${sporsmalId}-svar-${svarSuffiksTilTekstId(svar)}`;
+    return `${sporsmalId.toLowerCase()}-svar-${svarSuffiksTilTekstId(svar)}`;
+}
+
+export function getIntlTekst(sporsmalId: string, kontekst: string, intl: InjectedIntl) {
+    return intl.messages[`${sporsmalId.toLowerCase()}-${kontekst}`];
 }
 
 export function svarSuffiksTilTekstId(svar: Svar) {
@@ -15,13 +20,13 @@ export function svarSuffiksTilTekstId(svar: Svar) {
 }
 
 const defaultSkjemaConfig: SkjemaConfig = {
-    'din-situasjon': {
+    'dinSituasjon': {
         svar: DinSituasjonSvar.ALDRI_HATT_JOBB,
-        skip: ['siste-stilling'],
+        skip: ['sisteStilling'],
     },
     'utdanning': {
         svar: UtdanningSvar.INGEN_UTDANNING,
-        skip: ['utdanningbestatt', 'utdanninggodkjent'],
+        skip: ['utdanningBestatt', 'utdanningGodkjent'],
     }
 };
 

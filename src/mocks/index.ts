@@ -17,8 +17,8 @@ import svarMock from "./svar";
 import { ActionTypes as SisteStillingActionTypes } from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling";
 
-const MOCK_START_REGISRERING_STATUS = false;
-const MOCK_REGISTRER_BRUKER = false;
+const MOCK_START_REGISRERING_STATUS = true;
+const MOCK_REGISTRER_BRUKER = true;
 const MOCK_BRUKERS_FNR = true;
 const MOCK_BRUKERS_NAVN = true;
 const MOCK_AUTENTISERINGS_INFO = true;
@@ -85,12 +85,12 @@ if (MOCK_BESVARELSE) {
     const store = getStore();
     [
         'utdanning',
-        'utdanningbestatt',
-        'utdanninggodkjent',
-        'helsehinder',
-        'andreforhold',
-        'siste-stilling',
-        'din-situasjon',
+        'utdanningBestatt',
+        'utdanningGodkjent',
+        'helseHinder',
+        'andreForhold',
+        'sisteStilling',
+        'dinSituasjon',
     ].forEach(sporsmalId => store.dispatch({
         type: SvarActionTypes.AVGI_SVAR,
         data: {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
 
@@ -21,11 +21,12 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
+    const getTekst = (kontekst: string) => getIntlTekst(props.sporsmalId, kontekst, props.intl);
     return (
         <>
             <div className="spm-hode">
                 <Innholdstittel tag="h1" className="spm-tittel">
-                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                    {getTekst('tittel')}
                 </Innholdstittel>
             </div>
             <form className="spm-skjema">

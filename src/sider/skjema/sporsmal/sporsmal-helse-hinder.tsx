@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { HelseHinderSvar, Svar } from '../../../ducks/svar-utils';
@@ -22,11 +22,13 @@ export default function HelseHinder(props: Props) {
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
+    const getTekst = (kontekst: string) => getIntlTekst(props.sporsmalId, kontekst, props.intl);
+
     return (
         <>
             <div className="spm-hode">
                 <Innholdstittel tag="h1" className="spm-tittel">
-                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                    {getTekst('tittel')}
                 </Innholdstittel>
             </div>
             <form className="spm-skjema">
@@ -38,7 +40,7 @@ export default function HelseHinder(props: Props) {
                     <Ikon kind="info-sirkel" size="1.5em"/>
                 </span>
                 <Normaltekst>
-                    {props.intl.messages[`${props.sporsmalId}-info`]}
+                    {getTekst('info')}
                 </Normaltekst>
             </div>
         </>

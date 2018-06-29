@@ -20,7 +20,7 @@ import {
     Stilling,
     velgSisteStilling
 } from '../../../../ducks/siste-stilling';
-import { getTekstIdForSvar } from '../../skjema-utils';
+import { getIntlTekst, getTekstIdForSvar } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
 import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
 import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
@@ -81,12 +81,13 @@ class SisteStilling extends React.Component<Props> {
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
+        const getTekst = (kontekst: string) => getIntlTekst(sporsmalId, kontekst, intl);
 
         return (
             <>
                 <div className="spm-hode">
                     <Innholdstittel tag="h1" className="spm-tittel">
-                        {intl.messages[`${sporsmalId}-tittel`]}
+                        {getTekst('tittel')}
                     </Innholdstittel>
                     <Normaltekst className="spm-beskrivelse">
                         <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
