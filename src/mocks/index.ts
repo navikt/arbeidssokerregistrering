@@ -103,7 +103,6 @@ if (MOCK_BESVARELSE) {
         data: {
             stilling: sisteStillingMock,
         }
-
     });
 }
 

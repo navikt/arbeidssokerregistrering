@@ -5,13 +5,14 @@ import { AppState } from '../../reducer';
 import { FormattedMessage } from 'react-intl';
 import { getTekstIdForOppsummering } from './oppsummering-utils';
 import { Svar } from '../../ducks/svar-utils';
+import { MessageValue } from 'react-intl';
 
 interface OwnProps {
     sporsmalId?: string;
     tekstId?: string;
     tekst?: string;
     skjulHvisSvarErLik?: Svar | Svar[];
-    values?: any; // tslint:disable-line no-any
+    values?: {[key: string]: MessageValue | JSX.Element};
 }
 
 interface StateProps {
@@ -40,12 +41,14 @@ class OppsummeringElement extends React.Component<Props> {
         );
     }
 
-    getIntlTekstId() {
-        const { sporsmalId, } = this.props;
+    getIntlTekstId(): string {
+        const { sporsmalId, tekstId, } = this.props;
 
-        return (!sporsmalId || this.props.tekstId)
-            ? this.props.tekstId!
-            : getTekstIdForOppsummering(sporsmalId, this.props.svarState[sporsmalId]);
+        if (sporsmalId) {
+            return getTekstIdForOppsummering(sporsmalId, this.props.svarState[sporsmalId]);
+        } else {
+            return tekstId || '';
+        }
     }
 
     skalViseElement() {
