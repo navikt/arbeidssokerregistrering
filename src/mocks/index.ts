@@ -14,6 +14,8 @@ import registreringRespons from "./registrer-bruker";
 import getStore from "../store";
 import { ActionTypes as SvarActionTypes } from '../ducks/svar';
 import svarMock from "./svar";
+import { ActionTypes as SisteStillingActionTypes } from '../ducks/siste-stilling';
+import {sisteStillingMock} from "./siste-stilling";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -93,9 +95,16 @@ if (MOCK_BESVARELSE) {
         type: SvarActionTypes.AVGI_SVAR,
         data: {
             sporsmalId,
-            alternativId: svarMock[sporsmalId],
+            svar: svarMock[sporsmalId],
         }
     }));
+    store.dispatch({
+        type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+        data: {
+            stilling: sisteStillingMock,
+        }
+
+    });
 }
 
 (mock as any).mock('*', respondWith((url: string, config: {}) => mock.realFetch.call(window, url, config)));

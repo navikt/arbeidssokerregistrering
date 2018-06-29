@@ -12,7 +12,6 @@ import { hentFornavn } from '../../utils/utils';
 import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import {
-    DinSituasjonSvar,
     SisteStillingSvar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar
@@ -31,21 +30,12 @@ interface StateProps {
 type EgenProps = StateProps;
 
 const oppsummeringBesvarelser = (state: AppState) => {
-    const {brukersFnr} = state, {data} = brukersFnr, personId = data.id;
+    const personId = state.brukersFnr.data.id;
     const svar = state.svar;
 
     if (_.isEmpty(svar)) {
         return null;
     }
-
-    const alderElement = _.isEmpty(data) ? (null) : (
-            <li className="typo-normal">
-                <FormattedMessage
-                    id="oppsummering-alder"
-                    values={{alder: personId && hentAlder(personId)}}
-                />
-            </li>
-        );
 
     const registreringStatus = state.registreringStatus.data;
 
@@ -56,25 +46,6 @@ const oppsummeringBesvarelser = (state: AppState) => {
         ? 'oppsummering-inaktivitet-1'
         : 'oppsummering-inaktivitet-2';
 
-    const dinSituasjon = svar['din-situasjon'] === DinSituasjonSvar.INGEN_SVAR ? (null) : (
-        <li className="typo-normal">
-            <FormattedMessage id={`oppsummering-din-situasjon`} /> &nbsp;
-            <FormattedMessage id={`oppsummering-din-situasjon-svar-${svar['din-situasjon']}`} />
-        </li>
-    );
-
-    const sisteStilling = state.svar['siste-stilling'] === SisteStillingSvar.INGEN_SVAR ? (null) : (
-        <li className="typo-normal">
-            Siste stilling:&nbsp;{
-            state.svar['siste-stilling'] === SisteStillingSvar.HAR_HATT_JOBB
-                ? state.sisteStilling.data.stilling.label
-                : <FormattedMessage
-                    id={`oppsummering-sistestilling-svar-${svar['siste-stilling']}`}
-                />
-        }
-        </li>
-    );
-
     return (
         <div className="oppsummering-besvarelser">
             <img
@@ -83,21 +54,29 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 className="oppsummering-besvarelser__illustrasjon"
             />
             <ul className="oppsummering-besvarelser__list">
-                {alderElement}
+                <OppsummeringElement tekstId="oppsummering-alder" values={{alder: personId && hentAlder(personId)}}/>
                 <OppsummeringElement tekstId={jobbetSeksAvTolvSisteManederTekstId}/>
                 <OppsummeringElement tekstId={registrertNavSisteToArTekstId}/>
-                {dinSituasjon}
-                {sisteStilling}
+                <OppsummeringElement sporsmalId="din-situasjon">
+                    <FormattedMessage id={`oppsummering-din-situasjon`}/> &nbsp;
+                </OppsummeringElement>
+                <OppsummeringElement
+                    sporsmalId="siste-stilling"
+                    tekst={state.sisteStilling.data.stilling.label}
+                    skjulHvisSvarErLik={[SisteStillingSvar.INGEN_SVAR, SisteStillingSvar.HAR_IKKE_HATT_JOBB]}
+                >
+                    Siste stilling:&nbsp;
+                </OppsummeringElement>
                 <OppsummeringElement sporsmalId={'utdanning'}>
                     Høyeste fullførte utdanning:&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
                     sporsmalId={'utdanningbestatt'}
-                    skjul={state.svar.utdanningbestatt === UtdanningBestattSvar.INGEN_SVAR}
+                    skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
                 />
                 <OppsummeringElement
                     sporsmalId={'utdanninggodkjent'}
-                    skjul={state.svar.utdanninggodkjent === UtdanningGodkjentSvar.INGEN_SVAR}
+                    skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
                 />
                 <OppsummeringElement sporsmalId={'helsehinder'}/>
                 <OppsummeringElement sporsmalId={'andreforhold'}/>

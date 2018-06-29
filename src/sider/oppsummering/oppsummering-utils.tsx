@@ -7,5 +7,10 @@ export function sendBrukerTilSblArbeid() {
 }
 
 export function getTekstIdForOppsummering(sporsmalId: string, svar: Svar) {
-    return `${sporsmalId}-svar-${svarSuffiksTilTekstId(svar)}`;
+    const sporsmalIderDerOppsummeringenSkalTasFraSporsmalstekstene = [
+        'utdanning',
+    ];
+    const prefiks = sporsmalIderDerOppsummeringenSkalTasFraSporsmalstekstene.includes(sporsmalId)
+        ? '' : 'oppsummering-';
+    return `${prefiks}${sporsmalId}-svar-${svarSuffiksTilTekstId(svar)}`;
 }
