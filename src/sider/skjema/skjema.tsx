@@ -55,8 +55,6 @@ export default class Skjema extends React.Component<Props, State> {
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
 
-        const main = document.getElementById('maincontent')!;
-        main.classList.remove('tilbake', 'erIE');
         let classnames: string[] = [];
 
         if (this.state.tilbake) {
@@ -65,7 +63,12 @@ export default class Skjema extends React.Component<Props, State> {
         if (erIE()) {
             classnames.push('erIE');
         }
-        main.classList.add(...classnames);
+
+        const main = document.getElementById('maincontent')!;
+        if (main) {
+            main.classList.remove('tilbake', 'erIE');
+            main.classList.add(...classnames);
+        }
 
         const nesteSporsmal = this.finnNesteSporsmal();
         const href = nesteSporsmal !== -1
