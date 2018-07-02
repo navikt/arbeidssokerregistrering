@@ -78,7 +78,7 @@ class SisteStilling extends React.Component<Props> {
 
         return (
             <>
-                <div className="sporsmal__oppe">
+                <div className="spm-hode">
                     <Innholdstittel tag="h1" className="spm-tittel">
                         {intl.messages[`${sporsmalId}-tittel`]}
                     </Innholdstittel>
@@ -86,7 +86,7 @@ class SisteStilling extends React.Component<Props> {
                         <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
                     </Normaltekst>
                 </div>
-                <form className="form-skjema">
+                <form className="spm-skjema">
                     <Alternativ
                         alternativId={1}
                         {...alternativProps}
@@ -104,7 +104,7 @@ class SisteStilling extends React.Component<Props> {
                         }}
                     />
                 </form>
-                <div className="sporsmal__nede">
+                <div className="spm-valg">
                     {this.brukerHarHattJobb() &&
                     <>
                         <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>

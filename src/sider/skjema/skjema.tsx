@@ -5,13 +5,15 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { State as SvarState } from '../../ducks/svar';
 import { getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
 import Animasjon from './animasjon';
-import KnappTilbake from '../../komponenter/knapper/knapp-tilbake';
+import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
+import { erIE } from '../../utils/ie-test';
 
 export interface SkjemaProps {
     children: {}; // TODO Type-sett dette slik at alle har sporsmalId
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     gaaTilSporsmal: (sporsmal: number) => void;
+    fullforSkjema: () => void;
     advarselElement: React.ReactElement<Element> | null;
     svar: SvarState;
     config?: SkjemaConfig;
@@ -34,7 +36,7 @@ export default class Skjema extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            tilbake: false,
+            tilbake: false
         };
     }
 
@@ -52,6 +54,8 @@ export default class Skjema extends React.Component<Props, State> {
         this.antallSporsmal = React.Children.toArray(children).length;
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
+        let classnames = this.state.tilbake ? 'tilbake ' : '';
+        classnames += erIE() ? 'erIE' : '';
 
         const nesteSporsmal = this.finnNesteSporsmal();
         const href = nesteSporsmal !== -1
@@ -59,7 +63,7 @@ export default class Skjema extends React.Component<Props, State> {
             : hrefTilFullfor;
 
         return (
-            <ResponsivSide className={this.state.tilbake ? 'tilbake' : ''}>
+            <ResponsivSide className={classnames}>
                 {gjeldendeSporsmalComponent}
                 {advarselElement}
                 <Animasjon flag={this.props.gjeldendeSporsmal}>
@@ -68,8 +72,8 @@ export default class Skjema extends React.Component<Props, State> {
                         href={href}
                         erAktiv={this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))}
                     />
-                    <KnappTilbake/>
-                    <LenkeAvbryt/>
+                    <LenkeTilbake />
+                    <LenkeAvbryt />
                 </Animasjon>
             </ResponsivSide>
         );
@@ -86,8 +90,10 @@ export default class Skjema extends React.Component<Props, State> {
             const sisteSporsmal = this.antallSporsmal - 1;
             if (nesteSporsmal === -1) {
                 this.settStateTilEventuelleUbesvarteSporsmal(sisteSporsmal + 1);
+                this.props.fullforSkjema();
             } else {
                 this.settStateTilEventuelleUbesvarteSporsmal(nesteSporsmal);
+                this.props.gaaTilSporsmal(nesteSporsmal);
             }
         }
     }
