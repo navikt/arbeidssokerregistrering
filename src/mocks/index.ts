@@ -11,6 +11,9 @@ import {
 } from '../ducks/api';
 import autentisert from './autentisert';
 import registreringRespons from "./registrer-bruker";
+import getStore from "../store";
+import { ActionTypes as SvarActionTypes } from '../ducks/svar';
+import svarMock from "./svar";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -23,6 +26,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
+const MOCK_BESVARELSE = true;
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
@@ -75,6 +79,24 @@ if(MOCK_STYRK08_PAMJANZZ) {
         respondWith(delayed(DELAY / 10, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
 }
 
+if (MOCK_BESVARELSE) {
+    const store = getStore();
+    [
+        'utdanning',
+        'utdanningbestatt',
+        'utdanninggodkjent',
+        'helsehinder',
+        'andreforhold',
+        'siste-stilling',
+        'din-situasjon',
+    ].forEach(sporsmalId => store.dispatch({
+        type: SvarActionTypes.AVGI_SVAR,
+        data: {
+            sporsmalId,
+            alternativId: svarMock[sporsmalId],
+        }
+    }));
+}
 
 (mock as any).mock('*', respondWith((url: string, config: {}) => mock.realFetch.call(window, url, config)));
 
