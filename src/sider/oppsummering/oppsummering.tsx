@@ -139,7 +139,7 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
                         <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
                             <FormattedMessage id="knapp-riktig" />
                         </KnappBase>
-                        <LenkeTilbake />
+                        <LenkeTilbake onClick={() => this.props.history.goBack()}/>
                         <LenkeAvbryt wrapperClassname="no-anim" />
                     </div>
                 </section>

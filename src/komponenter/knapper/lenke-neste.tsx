@@ -11,18 +11,23 @@ interface Props {
     href: string;
 }
 
-function KnappNeste({disabled, onClick, className, erAktiv, href}: Props & InjectedIntlProps) {
+function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & InjectedIntlProps) {
     return (
         <Link
-            className={classnames('nesteknapp', className, {erAktiv})}
+            className={classnames('nestelenke', className, {erAktiv})}
             to={href}
-            onClick={onClick}
+            onClick={e => {
+                if (!erAktiv) {
+                    e.preventDefault();
+                }
+                onClick(e);
+            }}
         >
             <span className="gjemt">
-                <FormattedMessage id="knapp-neste"/>
+                <FormattedMessage id="lenke-neste"/>
             </span>
         </Link>
     );
 }
 
-export default injectIntl(KnappNeste);
+export default injectIntl(LenkeNeste);

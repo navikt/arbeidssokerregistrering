@@ -9,7 +9,7 @@ import {
     mountWithStoreAndIntl,
     store
 } from '../../test/test-utils';
-import KnappNeste from '../../komponenter/knapper/knapp-neste';
+import KnappNeste from '../../komponenter/knapper/lenke-neste';
 import {setInitialState} from "../../ducks/svar";
 import { SkjemaProps } from './skjema';
 

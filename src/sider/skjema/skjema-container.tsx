@@ -49,7 +49,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.state = {
             visAdvarsel: false
         };
-
         this.settGjeldendeSporsmalOgResetHvisNaN(this.props.match.params.id);
     }
 
@@ -151,6 +150,18 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     componentDidUpdate(prevProps: Props) {
         if (this.gjeldendeSporsmalErEndret(prevProps) && this.divRef) {
             this.divRef.focus();
+
+            setTimeout(
+                () => {
+                    let scrollHeight = 0;
+                    const header = document.querySelector('.siteheader');
+                    if (header) {
+                        scrollHeight = header.getBoundingClientRect().height;
+                    }
+                    window.scrollTo(0, scrollHeight);
+                },
+                0
+            );
         }
     }
 
