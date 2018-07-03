@@ -21,7 +21,7 @@ import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
     AVBRYT_PATH, FULLFOR_PATH, DUERNAREGISTRERT_PATH,
 } from './utils/konstanter';
-import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
+import DuErNaRegistrert from './sider/registrert/registrert';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
 

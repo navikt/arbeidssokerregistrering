@@ -1,0 +1,53 @@
+@keyframes avsjekk-stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes avsjekk-plassering {
+    0% {
+        height: 280px;
+        margin-top: 15rem;
+    }
+    67% {
+        height: 280px;
+        margin-top: 15rem;
+    }
+    100% {
+        height: 70px;
+        margin-top: 0;
+    }
+}
+
+@keyframes avsjekk-size {
+    0% {
+        width: 280px;
+        margin-left: auto;
+    }
+    67% {
+        width: 280px;
+        margin-left: auto;
+    }
+    100% {
+        width: 70px;
+        margin-left: 0;
+    }
+}
+
+.avsjekk__bilde {
+    animation: avsjekk-size 5s both;
+
+    .sirkel, .hake {
+        transform-origin: 50% 50%;
+    }
+    .sirkel {
+        stroke-dasharray: 320;
+        stroke-dashoffset: 320;
+        animation: avsjekk-stroke 1.5s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+    .hake {
+        stroke-dasharray: 180;
+        stroke-dashoffset: 180;
+        animation: avsjekk-stroke 2.0s cubic-bezier(0.65, 0, 0.45, 1) 1.7s forwards;
+    }
+}
