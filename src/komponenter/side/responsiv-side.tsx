@@ -12,15 +12,6 @@ class ResponsivSide extends React.Component<ResponsivSideProps> {
         super(props);
     }
 
-    componentDidMount() {
-        let scrollHeight = 0;
-        const header = document.querySelector('.siteheader');
-        if (header) {
-            scrollHeight = header.getBoundingClientRect().height;
-        }
-        window.scrollTo(0, scrollHeight);
-    }
-
     render() {
         const {children, className} = this.props;
 

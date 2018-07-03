@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-const onClick = () => {
-    window.history.back();
-};
+interface Props {
+    onClick: () => void;
+}
 
-function LenkeTilbake() {
+function LenkeTilbake({onClick}: Props) {
     return (
-        <a href="#" className="tilbakelenke typo-element" onClick={onClick}>Tilbake</a>
+        <a href="javascript:void(0);" className="tilbakelenke typo-element" onClick={onClick}>Tilbake</a>
     );
 }
 

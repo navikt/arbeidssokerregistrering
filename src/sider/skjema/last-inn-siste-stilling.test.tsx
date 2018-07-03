@@ -5,7 +5,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
 import { selectSisteStillingFraAAReg } from '../../ducks/siste-stilling-fra-aareg';
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
+    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout,
     stubFetch
 } from '../../test/test-utils';
 import LastInnSisteStilling from './last-inn-siste-stilling';
@@ -34,7 +34,7 @@ describe('<LastInnSisteStilling />', () => {
             konseptId: 72435,
         }));
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
@@ -48,7 +48,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -65,7 +65,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -83,7 +83,7 @@ describe('<LastInnSisteStilling />', () => {
             .addResponse('sistearbeidsforhold', brukerSomIkkeFinnesIAAReg);
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
