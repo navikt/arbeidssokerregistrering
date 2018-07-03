@@ -4,18 +4,20 @@ import { State as SvarState } from '../ducks/svar';
 import * as moment from 'moment';
 
 import {
-    getIntlMessage, getMapJaNeiKanskje, mapTilNuskode, getMapSituasjon, hentFornavn, mapAvgitteSvarForBackend,
+    getIntlMessage, mapTilNuskode, hentFornavn, mapAvgitteSvarForBackend,
     hentAlder
 } from './utils';
 import {
-    ANNET, BLANK, JA, KANSKJE, MISTET_JOBBEN, NEI,
-    PERMITTERT,
-    SAGT_OPP,
-    UNDER_UTDANNING,
-    VIL_BYTTE_JOBB, YRKESPRAKSIS
+    YRKESPRAKSIS
 } from './konstanter';
 import {Stilling} from "../ducks/siste-stilling";
-import {HelseHinderSvar, UtdanningSvar} from "../ducks/svar-utils";
+import {
+    AndreForholdSvar, DinSituasjonSvar,
+    HelseHinderSvar, SisteStillingSvar,
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar,
+    UtdanningSvar
+} from "../ducks/svar-utils";
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
@@ -51,46 +53,36 @@ describe('utils test', () => {
         expect(hentAlder(`4${fodselsdato}36105`)).to.equal(56);
     });
 
-    it('test mapping av situasjon', () => {
-        expect(getMapSituasjon('1')).to.equal(MISTET_JOBBEN);
-        expect(getMapSituasjon('2')).to.equal(SAGT_OPP);
-        expect(getMapSituasjon('3')).to.equal(PERMITTERT);
-        expect(getMapSituasjon('4')).to.equal(VIL_BYTTE_JOBB);
-        expect(getMapSituasjon('5')).to.equal(UNDER_UTDANNING);
-        expect(getMapSituasjon('6')).to.equal(ANNET);
-    });
-
-    it('test mapping av Ja, Nei, Kanskje', () => {
-        expect(getMapJaNeiKanskje('1')).to.equal(JA);
-        expect(getMapJaNeiKanskje('2')).to.equal(NEI);
-        expect(getMapJaNeiKanskje('3')).to.equal(KANSKJE);
-    });
-
     it('test hardkodet yrkespraksis', () => {
         expect(YRKESPRAKSIS).to.equal('5120.14');
     });
 
     it('test mapAvgitteSvarForBackend', () => {
 
-        const dummySvar: SvarState = {
-            helseHinder: HelseHinderSvar.JA,
-            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
-        };
         const stilling: Stilling = {
             styrk08: '6236',
             label: 'stilling :)',
             konseptId: 62352672,
         };
 
+        const dummySvar: SvarState = {
+            helseHinder: HelseHinderSvar.JA,
+            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
+            utdanningBestatt: UtdanningBestattSvar.INGEN_SVAR,
+            utdanningGodkjent: UtdanningGodkjentSvar.NEI,
+            andreForhold: AndreForholdSvar.NEI,
+            sisteStilling: SisteStillingSvar.HAR_HATT_JOBB,
+            dinSituasjon: DinSituasjonSvar.ER_PERMITTERT,
+        };
+
         const expectData = {
             nusKode: mapTilNuskode(dummySvar.utdanning!),
-            yrkesPraksis: stilling.styrk08,
+            sisteStilling: stilling,
             enigIOppsummering: true,
-            oppsummering: BLANK,
-            harHelseutfordringer: dummySvar.helseHinder,
-            yrkesbeskrivelse: stilling.label,
-            konseptId: stilling.konseptId,
+            oppsummering: '',
+            besvarelse: dummySvar,
         };
-        expect(mapAvgitteSvarForBackend(dummySvar, stilling)).to.deep.equal(expectData);
+        const mappet = mapAvgitteSvarForBackend(dummySvar, stilling);
+        expect(mappet).to.deep.equal(expectData);
     });
 });
