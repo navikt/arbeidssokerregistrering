@@ -2,7 +2,8 @@ import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 import { mapAvgitteSvarForBackend } from '../utils/utils';
-import { selectSisteStilling } from './siste-stilling';
+import { selectSisteStilling, Stilling } from './siste-stilling';
+import { State as SvarState } from './svar';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -22,21 +23,19 @@ export interface State {
     status: string;
 }
 
-export interface OwnData {
+export interface RegistreringData {
     nusKode?: string;
-    yrkesPraksis?: string;
     enigIOppsummering?: boolean;
     oppsummering?: string;
-    harHelseutfordringer?: boolean;
-    yrkesbeskrivelse?: string;
-    konseptId?: number;
+    sisteStilling?: Stilling;
+    besvarelse?: SvarState;
 }
 
 export interface ErrorData {
     data: {type: ErrorTypes | string};
 }
 
-export type Data = OwnData | ErrorData;
+export type Data = RegistreringData | ErrorData;
 
 interface Action {
     type: ActionTypes;

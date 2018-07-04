@@ -11,8 +11,9 @@ import {
     stubFetch
 } from "../../test/test-utils";
 import {create} from "../../store";
-import {endreSvarAction} from "../../ducks/svar";
+import {ActionTypes as SvarActionTypes} from "../../ducks/svar";
 import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
+import svarMock from "../../mocks/svar";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
@@ -23,6 +24,9 @@ afterEach(() => {
 
 describe('<Fullfor />', () => {
     it('Skal ha fullfor knapp som er aktiv', () => {
+        const store = create();
+        dispatchTilfeldigeSvar(store);
+
         const push = sinon.spy();
         const props = {
             history: {
@@ -31,11 +35,14 @@ describe('<Fullfor />', () => {
         };
 
 
-        const wrapper = shallowwithStoreAndIntl(<Fullfor {...props} />);
+        const wrapper = shallowwithStoreAndIntl(<Fullfor {...props} />, store);
         expect(wrapper.find(KnappFullfor)).to.be.have.length(1);
     });
 
     it('Skal vise advarsel når sjekkboks ikke er marker, når fullknapp klikkes', () => {
+        const store = create();
+        dispatchTilfeldigeSvar(store);
+
         const push = sinon.spy();
         const props = {
             history: {
@@ -43,7 +50,7 @@ describe('<Fullfor />', () => {
             }
         };
 
-        const wrapper = mountWithStoreRouterAndIntl((<Fullfor {...props} />));
+        const wrapper = mountWithStoreRouterAndIntl((<Fullfor {...props} />), store);
 
         // Klikk på fullfør knapp
         wrapper.find(KnappFullfor).simulate('click');
@@ -54,6 +61,7 @@ describe('<Fullfor />', () => {
 
     it('Skal vise feilmelding dersom fullfor feiler', () => {
         const store = create();
+        dispatchTilfeldigeSvar(store);
         const push = sinon.spy();
         const props = {
             history: {
@@ -106,11 +114,21 @@ describe('<Fullfor />', () => {
     });
 
     function dispatchTilfeldigeSvar(store) {
-        store.dispatch(endreSvarAction('helse', 1));
-        store.dispatch(endreSvarAction('utdanning', 1));
-        store.dispatch(endreSvarAction('test', 1));
-        store.dispatch(endreSvarAction('test2', 1));
-        store.dispatch(endreSvarAction('test3', 1));
+        [
+            'utdanning',
+            'utdanningBestatt',
+            'utdanningGodkjent',
+            'helseHinder',
+            'andreForhold',
+            'sisteStilling',
+            'dinSituasjon',
+        ].forEach(sporsmalId => store.dispatch({
+            type: SvarActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId,
+                svar: svarMock[sporsmalId],
+            }
+        }));
     }
 
 });
