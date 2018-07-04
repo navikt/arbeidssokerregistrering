@@ -18,7 +18,7 @@ function Alternativ(props: AlternativProps & InjectedIntlProps) {
         <div className={classNames('alternativ-wrapper', props.className)}>
             <RadioPanel
                 onChange={() => props.avgiSvar(props.svar)}
-                className="blokk-xs"
+                inputProps={{className: 'blokk-xs'}}
                 name={'alternativ'}
                 label={tekst}
                 value={tekst}
