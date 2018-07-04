@@ -1,5 +1,5 @@
 import * as React from 'react';
-import KnappNeste from '../../komponenter/knapper/knapp-neste';
+import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { State as SvarState } from '../../ducks/svar';
@@ -13,12 +13,14 @@ export interface SkjemaProps {
     gjeldendeSporsmal: number;
     sporsmalErBesvart: (sporsmalId: string) => boolean;
     gaaTilSporsmal: (sporsmal: number) => void;
-    fullforSkjema: () => void;
+    gaaTilbake: () => void;
     advarselElement: React.ReactElement<Element> | null;
     svar: SvarState;
     config?: SkjemaConfig;
     settStateForUbesvartSporsmal: (sporsmalId: string) => void;
     onNesteClick: (sporsmalId: string) => void;
+    hrefTilSporsmal: (sporsmal: number) => string;
+    hrefTilFullfor: string;
 }
 
 interface State {
@@ -48,24 +50,45 @@ export default class Skjema extends React.Component<Props, State> {
     }
 
     render() {
-        const {advarselElement, children, gjeldendeSporsmal} = this.props;
+        const {advarselElement, children, gjeldendeSporsmal, hrefTilSporsmal, hrefTilFullfor} = this.props;
         this.antallSporsmal = React.Children.toArray(children).length;
         const gjeldendeSporsmalComponent = this.props.children[gjeldendeSporsmal];
         this.sporsmalIder = this.getSporsmalIder();
-        let classnames = this.state.tilbake ? 'tilbake ' : '';
-        classnames += erIE() ? 'erIE' : '';
+
+        let classnames: string[] = [];
+
+        if (this.state.tilbake) {
+            classnames.push('tilbake');
+        }
+        if (erIE()) {
+            classnames.push('erIE');
+        }
+
+        const main = document.getElementById('maincontent')!;
+        if (main) {
+            main.classList.remove('tilbake', 'erIE');
+            main.classList.add(...classnames);
+        }
+
+        const nesteSporsmal = this.finnNesteSporsmal();
+        const href = nesteSporsmal !== -1
+            ? hrefTilSporsmal(nesteSporsmal)
+            : hrefTilFullfor;
 
         return (
-            <ResponsivSide className={classnames}>
+            <ResponsivSide className={classnames.join(' ')}>
                 {gjeldendeSporsmalComponent}
                 {advarselElement}
                 <Animasjon flag={this.props.gjeldendeSporsmal}>
-                    <KnappNeste
+                    <LenkeNeste
                         onClick={() => this.nesteButtonClick()}
+                        href={href}
                         erAktiv={this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))}
                     />
-                    <LenkeTilbake />
-                    <LenkeAvbryt />
+                    <LenkeTilbake
+                        onClick={() => this.props.gaaTilbake()}
+                    />
+                    <LenkeAvbryt/>
                 </Animasjon>
             </ResponsivSide>
         );
@@ -82,10 +105,8 @@ export default class Skjema extends React.Component<Props, State> {
             const sisteSporsmal = this.antallSporsmal - 1;
             if (nesteSporsmal === -1) {
                 this.settStateTilEventuelleUbesvarteSporsmal(sisteSporsmal + 1);
-                this.props.fullforSkjema();
             } else {
                 this.settStateTilEventuelleUbesvarteSporsmal(nesteSporsmal);
-                this.props.gaaTilSporsmal(nesteSporsmal);
             }
         }
     }

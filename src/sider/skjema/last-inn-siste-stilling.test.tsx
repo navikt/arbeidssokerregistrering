@@ -8,7 +8,7 @@ import {
     ActionTypes as SisteStillingFraAARegActionTypes
 } from '../../ducks/siste-stilling-fra-aareg';
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
+    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout,
     stubFetch
 } from '../../test/test-utils';
 import LastInnSisteStilling from './last-inn-siste-stilling';
@@ -36,7 +36,7 @@ describe('<LastInnSisteStilling />', () => {
             type: SisteStillingFraAARegActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING
         });
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
@@ -50,7 +50,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -67,7 +67,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -85,7 +85,7 @@ describe('<LastInnSisteStilling />', () => {
             .addResponse('sistearbeidsforhold', brukerSomIkkeFinnesIAAReg);
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {

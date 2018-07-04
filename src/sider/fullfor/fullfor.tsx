@@ -168,7 +168,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                                 intl={intl}
                                 onClick={this.registrerBrukerOnClick}
                             />
-                            <LenkeTilbake />
+                            <LenkeTilbake onClick={() => this.props.history.goBack()}/>
                             <LenkeAvbryt wrapperClassname="no-anim"/>
                         </div>
                     </section>

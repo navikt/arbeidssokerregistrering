@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-    flag: number;
+    flag: number | string;
 }
 
 interface State {
@@ -11,7 +11,7 @@ interface State {
 class Animasjon extends React.Component<Props, State> {
     // Denne komponenten re-mounter children hver gang flag endrer seg.
     // Det vil trigge at CSS-animasjonen kjører om igjen.
-    
+
     constructor(props: Props) {
         super(props);
         this.state = {

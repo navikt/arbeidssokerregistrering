@@ -39,8 +39,6 @@ interface EgenStateProps {
     visAdvarsel: boolean;
 }
 
-export const INGEN_SVAR = -1;
-
 class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     private divRef: HTMLDivElement | null;
     private gjeldendeSporsmal: number;
@@ -50,7 +48,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.state = {
             visAdvarsel: false
         };
-
         this.settGjeldendeSporsmalOgResetHvisNaN(this.props.match.params.id);
     }
 
@@ -73,7 +70,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             endreSvar: (sporsmalId, svar) => {
                 this.props.endreSvar(sporsmalId, svar);
                 this.toggleAdvarsel(false);
-                },
+            },
             intl: this.props.intl,
             hentAvgittSvar: (sporsmalId: string) => this.props.svarState[sporsmalId],
         };
@@ -89,10 +86,11 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             },
             gaaTilbake: () => this.props.history.goBack(),
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
-            fullforSkjema: () => this.fullforSkjema(),
+            hrefTilFullfor: `${OPPSUMMERING_PATH}`,
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
             settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
+            hrefTilSporsmal: (sporsmal) => `${SKJEMA_PATH}/${sporsmal}`,
         };
 
         return (
@@ -125,10 +123,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.gjeldendeSporsmal = Number(sporsmal);
     }
 
-    fullforSkjema() {
-        this.props.history.push(`${OPPSUMMERING_PATH}`);
-    }
-
     componentWillMount() {
         this.gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart();
     }
@@ -155,6 +149,18 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     componentDidUpdate(prevProps: Props) {
         if (this.gjeldendeSporsmalErEndret(prevProps) && this.divRef) {
             this.divRef.focus();
+
+            setTimeout(
+                () => {
+                    let scrollHeight = 0;
+                    const header = document.querySelector('.siteheader');
+                    if (header) {
+                        scrollHeight = header.getBoundingClientRect().height;
+                    }
+                    window.scrollTo(0, scrollHeight);
+                },
+                0
+            );
         }
     }
 

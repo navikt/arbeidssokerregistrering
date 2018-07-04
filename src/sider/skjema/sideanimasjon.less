@@ -1,3 +1,15 @@
+&:not(.tilbake) {
+    .registrering-banner, .framdrift {
+        animation: slideUp 400ms;
+    }
+}
+
+&.tilbake {
+    .registrering-banner, .framdrift {
+        animation: slideDown 600ms;
+    }
+}
+
 .sporsmal:not(.tilbake) {
     .tilbakelenke {
         animation: slideUp 400ms;
@@ -8,7 +20,7 @@
     .spm-skjema, .spm-valg, .spm-info {
         animation: slideUp 550ms;
     }
-    .nesteknapp, .lenke-avbryt-wrapper {
+    .nestelenke, .lenke-avbryt-wrapper {
         animation: slideUp 600ms;
     }
 }
@@ -23,13 +35,13 @@
     .spm-skjema, .spm-valg, .spm-info {
         animation: slideDown 500ms;
     }
-    .nesteknapp, .lenke-avbryt-wrapper {
+    .nestelenke, .lenke-avbryt-wrapper {
         animation: slideDown 400ms;
     }
 }
 
 .sporsmal.erIE, .sporsmal.tilbake.erIE {
-    .tilbakelenke, .spm-hode, .spm-skjema, .spm-valg, .spm-info, .nesteknapp, .lenke-avbryt-wrapper {
+    .tilbakelenke, .spm-hode, .spm-skjema, .spm-valg, .spm-info, .nestelenke, .lenke-avbryt-wrapper {
         animation: none;
     }
 }

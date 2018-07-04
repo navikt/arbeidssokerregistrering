@@ -9,7 +9,7 @@ import { environmentTestData } from '../../SetupTests';
 import { SBLARBEID_OPPRETT_MIN_ID_URL, SBLARBEID_URL } from '../../ducks/api';
 import {
     FetchStub,
-    mountWithStoreAndIntl, promiseWithSetTimeout, stubFetch
+    mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch
 } from '../../test/test-utils';
 import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
 
@@ -30,7 +30,7 @@ afterEach(() => {
 describe('<SblRegistrering />', () => {
     it('skal vise informasjon om window.innerWidth < 768px', () => {
         window.innerWidth = 700;
-        const wrapper = mountWithStoreAndIntl(<SblRegistrering />);
+        const wrapper = mountWithStoreRouterAndIntl(<SblRegistrering />);
         expect(wrapper.find(PanelBlokk)).to.have.length(1);
     });
     it('skal ikke vise informasjon om window.innerWidth > 768px', () => {
@@ -38,7 +38,7 @@ describe('<SblRegistrering />', () => {
 
         window.innerWidth = 1000;
 
-        const wrapper = mountWithStoreAndIntl(<SblRegistrering />);
+        const wrapper = mountWithStoreRouterAndIntl(<SblRegistrering />);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -55,7 +55,7 @@ describe('<SblRegistrering />', () => {
             sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
         };
 
-        mountWithStoreAndIntl(<SblRegistrering config={config} />);
+        mountWithStoreRouterAndIntl(<SblRegistrering config={config} />);
 
         return promiseWithSetTimeout().then(() => {
             expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(true);

@@ -39,7 +39,10 @@ export function mountWithStore(children: React.ReactElement<ElementWithStore>, w
     }));
 }
 
-export function mountWithStoreAndIntl(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
+export function mountWithStoreRouterAndIntl(
+    children: React.ReactElement<ElementWithStore>,
+    withStore?: Store<AppState>
+) {
     return mount(
         <Provider store={withStore || store}>
             <MemoryRouter>

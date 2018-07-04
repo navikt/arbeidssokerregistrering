@@ -20,7 +20,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
         if (banner) {
             scrollHeight += banner.getBoundingClientRect().height;
         }
-        if (window.pageYOffset >= scrollHeight) {
+        if (window.pageYOffset > scrollHeight) {
             if (this.framdriftContainer) {
                 this.framdriftContainer.classList.add('framdrift-fixed');
             }

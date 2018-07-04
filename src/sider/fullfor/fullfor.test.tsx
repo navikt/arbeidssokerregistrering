@@ -7,11 +7,11 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import Fullfor from './fullfor';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
+    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
 } from "../../test/test-utils";
 import {create} from "../../store";
-import {ActionTypes as SvarActionTypes, endreSvarAction} from "../../ducks/svar";
+import {ActionTypes as SvarActionTypes} from "../../ducks/svar";
 import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
 import svarMock from "../../mocks/svar";
 
@@ -50,7 +50,7 @@ describe('<Fullfor />', () => {
             }
         };
 
-        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
+        const wrapper = mountWithStoreRouterAndIntl((<Fullfor {...props} />), store);
 
         // Klikk på fullfør knapp
         wrapper.find(KnappFullfor).simulate('click');
@@ -71,7 +71,7 @@ describe('<Fullfor />', () => {
 
         stubFetch(new FetchStub().addErrorResponse('/startregistrering', 500));
 
-        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
+        const wrapper = mountWithStoreRouterAndIntl(<Fullfor {...props} />, store);
 
         const input = wrapper.find('input[type="checkbox"]');
         input.simulate('change');
@@ -99,7 +99,7 @@ describe('<Fullfor />', () => {
 
         stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
-        const wrapper = mountWithStoreAndIntl(<Fullfor {...props} />, store);
+        const wrapper = mountWithStoreRouterAndIntl(<Fullfor {...props} />, store);
 
         const input = wrapper.find('input[type="checkbox"]');
         input.simulate('change');
