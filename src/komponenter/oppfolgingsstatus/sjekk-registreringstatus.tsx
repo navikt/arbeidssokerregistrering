@@ -4,6 +4,7 @@ import {Data as RegistreringstatusData, selectRegistreringstatus } from '../../d
 import { AppState } from '../../reducer';
 import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
+import KreverReaktivering from '../../sider/krever-reaktivering/krever-reaktivering';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectBrukNyRegistreringFeatureToggle } from '../../ducks/feature-toggles';
 
@@ -19,6 +20,8 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
         const {registreringstatusData, children, brukNyRegistrering} = this.props;
         if (registreringstatusData.underOppfolging) {
             return <AlleredeRegistrert intl={this.props.intl} />;
+        } else if (registreringstatusData.kreverReaktivering) {
+            return <KreverReaktivering intl={this.props.intl} />;
         } else if (!brukNyRegistrering) {
             return <SblRegistrering/>;
         } else {
