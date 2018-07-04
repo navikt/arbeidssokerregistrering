@@ -3,6 +3,7 @@ import ProgressBar from './progress-bar';
 import { progressBarConfig } from './progress-bar-utils';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
+import Animasjon from '../../sider/skjema/animasjon';
 
 interface OwnProps {
     config?: string[];
@@ -17,10 +18,12 @@ class ProgressBarContainer extends React.Component<Props> {
         const pathname = document.location.pathname;
         if (progressBarConfig.includes(pathname)) {
             return (
-                <ProgressBar
-                    gjeldendeSporsmal={progressBarConfig.indexOf(pathname) + 1}
-                    antallSporsmal={config.length}
-                />
+                <Animasjon flag={document.location.href}>
+                    <ProgressBar
+                        gjeldendeSporsmal={progressBarConfig.indexOf(pathname) + 1}
+                        antallSporsmal={config.length}
+                    />
+                </Animasjon>
             );
         } else {
             return (null);

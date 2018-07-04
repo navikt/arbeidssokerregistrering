@@ -7,7 +7,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import SjekkRegistreringstatus from './sjekk-registreringstatus';
 import {
     dispatchRegistreringstatus,
-    promiseWithSetTimeout, mountWithStoreAndIntl, shallowwithStoreAndIntl, dispatchFeaturestatus
+    promiseWithSetTimeout, mountWithStoreRouterAndIntl, shallowwithStoreAndIntl, dispatchFeaturestatus
 } from '../../test/test-utils';
 import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import { create } from '../../store';
@@ -51,7 +51,7 @@ describe('<SjekkRegistreringstatus />', () => {
 
         dispatchRegistreringstatus({underOppfolging: true, oppfyllerKrav: false}, store);
 
-        const wrapper = mountWithStoreAndIntl(<SjekkRegistreringstatus/>, store);
+        const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
         expect(wrapper.find(AlleredeRegistrert)).to.have.length(1);
     });
@@ -67,7 +67,7 @@ describe('<SjekkRegistreringstatus />', () => {
             </SjekkRegistreringstatus>
         );
 
-        const wrapper = mountWithStoreAndIntl(component, store);
+        const wrapper = mountWithStoreRouterAndIntl(component, store);
 
         return promiseWithSetTimeout()
             .then(() => {

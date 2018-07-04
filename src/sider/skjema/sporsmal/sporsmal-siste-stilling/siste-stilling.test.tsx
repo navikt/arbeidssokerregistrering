@@ -5,7 +5,7 @@ import * as sinon from 'sinon';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../../../store';
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
+    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout,
     stubFetch
 } from '../../../../test/test-utils';
 import SisteStilling from './siste-stilling';
@@ -53,7 +53,7 @@ describe('<SisteStilling />', () => {
             endreSvar: endreSvarSpy,
         };
 
-        mountWithStoreAndIntl(<SisteStilling {...props}/>, store);
+        mountWithStoreRouterAndIntl(<SisteStilling {...props}/>, store);
 
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(2);
     });
@@ -73,7 +73,7 @@ describe('<SisteStilling />', () => {
             ...dummyProps,
             endreSvar: endreSvarSpy,
         };
-        mountWithStoreAndIntl(<SisteStilling {...props}/>, store);
+        mountWithStoreRouterAndIntl(<SisteStilling {...props}/>, store);
 
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(1);
     });
@@ -88,7 +88,7 @@ describe('<SisteStilling />', () => {
 
         store.dispatch(velgSisteStilling(sisteStillingMock));
 
-        const wrapper = mountWithStoreAndIntl(<SisteStilling {...dummyProps}/>, store);
+        const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
 
         wrapper.find(`.inputPanel__field`).at(1).simulate('change'); // klikk på "Har ikke hatt jobb"
 
@@ -113,7 +113,7 @@ describe('<SisteStilling />', () => {
         });
         store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
 
-        const wrapper = mountWithStoreAndIntl(<SisteStilling {...dummyProps}/>, store);
+        const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
 
         wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "Har hatt jobb"
 

@@ -36,12 +36,14 @@ main.arbsokreg_app:focus {
 }
 
 main.arbsokreg_app {
+    @import '/mixins';
     @import 'komponenter/alertstripe';
     @import 'komponenter/innholdslaster/innholdslaster';
-    @import 'komponenter/knapper/knapper';
-    @import 'komponenter/side/responsiv-side';
-    @import 'komponenter/knapper/knapper';
+    @import 'komponenter/knapper/knapperad';
+    @import 'komponenter/knapper/lenke-neste';
+    @import 'komponenter/knapper/lenke-tilbake';
     @import 'komponenter/knapper/lenke-avbryt';
+    @import 'komponenter/side/responsiv-side';
     @import 'komponenter/liste/avhuket-li';
     @import 'komponenter/loader/loader';
     @import 'komponenter/progress-bar/progress-bar';
@@ -91,7 +93,7 @@ main.arbsokreg_app {
     }
 
     .limit {
-        padding-top: 9rem;
+        padding-top: 7rem;
         width: @desktopLimitWidth;
     }
 

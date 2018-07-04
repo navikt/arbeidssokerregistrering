@@ -4,7 +4,7 @@ import {
     promiseWithSetTimeout,
     stubFetch,
     FetchStub,
-    mountWithStoreAndIntl } from '../../test/test-utils';
+    mountWithStoreRouterAndIntl } from '../../test/test-utils';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { AUTENTISERINGSINFO_URL } from '../../ducks/api';
@@ -22,7 +22,7 @@ describe('<HentInitialData />', () => {
             .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: true, niva: 4})
             .addErrorResponse('/startregistrering', 500));
 
-        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
+        const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -35,7 +35,7 @@ describe('<HentInitialData />', () => {
             .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: 3})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
 
-        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
+        const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -48,7 +48,7 @@ describe('<HentInitialData />', () => {
             .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: ''})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
 
-        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
+        const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -64,7 +64,7 @@ describe('<HentInitialData />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<HentInitialData />);
+        mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -79,7 +79,7 @@ describe('<HentInitialData />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<HentInitialData />);
+        mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -92,7 +92,7 @@ describe('<HentInitialData />', () => {
             .addResponse(AUTENTISERINGSINFO_URL, { harGyldigOidcToken: false, niva: 4})
             .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
 
-        const wrapper = mountWithStoreAndIntl(<HentInitialData />);
+        const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
