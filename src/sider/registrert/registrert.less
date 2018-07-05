@@ -1,0 +1,129 @@
+@keyframes avsjekk-plassering {
+    0% {
+        left: ~'calc((100% - 280px) / 2)';
+        top: ~'calc((90% - 280px) / 2)';
+        height: 280px;
+    }
+    67% {
+        left: ~'calc((100% - 280px) / 2)';
+        top: ~'calc((90% - 280px) / 2)';
+        height: 280px;
+    }
+    100% {
+        left: 22px;
+        top: 30px;
+        height: 70px;
+    }
+}
+
+@keyframes tittel-plassering {
+    0% {
+        opacity: 0;
+        margin-top: 120px;
+    }
+    80% {
+        opacity: 0;
+        margin-top: 120px;
+    }
+    100% {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+@keyframes panel-plassering {
+    0% {
+        opacity: 0;
+        margin-top: 400px;
+    }
+    80% {
+        opacity: 0;
+        margin-top: 400px;
+    }
+    100% {
+        opacity: 1;
+        margin-top: 110px;
+    }
+}
+
+.registrert {
+    position: relative;
+    height: 100vh;
+
+    &.limit {
+        padding: 1rem 1.4rem;
+    }
+
+    &__avsjekk {
+        position: absolute;
+        left: ~'calc((100% - 280px) / 2)';
+        top: ~'calc((90% - 280px) / 2)';
+        animation: avsjekk-plassering 5s both;
+    }
+
+    &__tittel {
+        position: absolute;
+        left: 88px;
+        top: 7px;
+        width: ~'calc(100vw - 70px)';
+        opacity: 0;
+        animation: tittel-plassering 6s both;
+    }
+
+    &__aksjonspanel {
+        text-align: left;
+        position: relative;
+        opacity: 0;
+        border: 3px solid @navBlaLighten80;
+        border-radius: 8px;
+        padding: 2rem;
+        animation: panel-plassering 6.5s both;
+    }
+
+    &__handinfo-ikon {
+        display: none;
+    }
+
+    &__knapperad {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        .knapp {
+            margin: 0.5rem 0;
+        }
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .registrert {
+        text-align: left;
+        width: 36rem;
+        height: ~'calc(100vh - 180px)';
+        margin: 0 auto;
+
+        &__tittel {
+            width: ~'calc(36rem - 140px)';
+            top: 0;
+        }
+
+        &__aksjonspanel {
+            padding: 2rem 3rem 2rem 7rem;
+        }
+
+        &__handinfo-ikon {
+            position: absolute;
+            height: 100%;
+            left: -80px;
+            top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        &__knapperad {
+            display: inline-block;
+            .knapp:first-child {
+                margin-right: 1rem;
+            }
+        }
+    }
+}
