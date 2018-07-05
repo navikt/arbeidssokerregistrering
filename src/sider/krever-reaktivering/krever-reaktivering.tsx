@@ -4,7 +4,7 @@ import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Banner from '../../komponenter/banner/banner';
 import KnappBase from 'nav-frontend-knapper';
-import { AVBRYT_PATH } from '../../utils/konstanter';
+import { DITTNAV_URL } from '../../ducks/api';
 
 const handinfoSvg = require('./handinfo.svg');
 
@@ -38,7 +38,7 @@ class KreverReaktivering extends React.Component<Props> {
                             <KnappBase type="hoved" >
                                 <FormattedMessage id="Ja"/>
                             </KnappBase>
-                            <a href={AVBRYT_PATH} className="lenke-avbryt typo-element">
+                            <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
                                 <FormattedMessage id="avbryt-lenke" />
                             </a>
                         </div>
