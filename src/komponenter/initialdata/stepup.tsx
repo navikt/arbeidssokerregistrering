@@ -1,28 +1,27 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-import Feilmelding from './feilmelding';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { default as KnappBase } from 'nav-frontend-knapper';
 import { getIntlMessage } from '../../utils/utils';
-import PanelBlokkGruppe from '../panel-blokk/panel-blokk-gruppe';
 import { VEILARBSTEPUP } from '../../ducks/api';
+import ResponsivSide from '../side/responsiv-side';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
 function StepUp({intl}: InjectedIntlProps) {
     return (
-        <div className="stepup__wrapper">
-            <PanelBlokkGruppe
-                knappAksjoner={
-                    <KnappBase
-                        type="hoved"
-                        className="stepup__knapp"
+        <div className="limit">
+            <ResponsivSide className="stepup">
+                <NavAlertStripe type="info">
+                    <div dangerouslySetInnerHTML={{__html: getIntlMessage(intl.messages, 'stepup-melding')}}/>
+                </NavAlertStripe>
+                <div className="knapperad">
+                    <button
+                        className="knapp knapp--hoved stepup__knapp"
                         onClick={() => document.location.href = VEILARBSTEPUP}
                     >
                         <Normaltekst>{getIntlMessage(intl.messages, 'knapp-logg-inn')}</Normaltekst>
-                    </KnappBase>
-                }
-            >
-                <Feilmelding intl={intl} id="stepup-melding" type="info"/>
-            </PanelBlokkGruppe>
+                    </button>
+                </div>
+            </ResponsivSide>
         </div>
     );
 }
