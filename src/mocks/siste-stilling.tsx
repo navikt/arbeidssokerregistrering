@@ -1,5 +1,5 @@
 export const sisteStillingMock = {
-    label: 'label',
+    label: 'Lastebilsjåfør',
     styrk08: '1234',
     konseptId: 0,
 };

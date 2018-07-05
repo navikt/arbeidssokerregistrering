@@ -3,15 +3,19 @@ import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { create } from '../../store';
-import { selectSisteStillingFraAAReg } from '../../ducks/siste-stilling-fra-aareg';
 import {
-    FetchStub, mountWithStoreAndIntl, promiseWithSetTimeout,
+    selectSisteStillingFraAAReg,
+    ActionTypes as SisteStillingFraAARegActionTypes
+} from '../../ducks/siste-stilling-fra-aareg';
+import {
+    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout,
     stubFetch
 } from '../../test/test-utils';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg';
 import { ingenYrkesbakgrunn, velgSisteStilling } from '../../ducks/siste-stilling';
 import { brukerSomIkkeFinnesIAAReg } from '../../mocks/siste-stilling-fra-aareg';
+import {STATUS} from "../../ducks/api-utils";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -22,19 +26,17 @@ afterEach(() => {
 });
 
 describe('<LastInnSisteStilling />', () => {
-    it('skal ikke hente siste arbeidsforhold dersom state.sisteStilling er populert med ikke-tom stilling', () => {
+    it('skal ikke hente siste arbeidsforhold dersom sisteStillingFraAAReg.status ikke er STATUS.NOT_STARTED', () => {
         const store = create();
         const fetchStub = new FetchStub()
             .addResponse('sistearbeidsforhold', {});
         stubFetch(fetchStub);
 
-        store.dispatch(velgSisteStilling({
-            label: 'test',
-            styrk08: 'test',
-            konseptId: 72435,
-        }));
+        store.dispatch({
+            type: SisteStillingFraAARegActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_PENDING
+        });
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
@@ -48,7 +50,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -65,7 +67,7 @@ describe('<LastInnSisteStilling />', () => {
 
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {
@@ -83,7 +85,7 @@ describe('<LastInnSisteStilling />', () => {
             .addResponse('sistearbeidsforhold', brukerSomIkkeFinnesIAAReg);
         stubFetch(fetchStub);
 
-        mountWithStoreAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
+        mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
 
         return promiseWithSetTimeout()
             .then(() => {

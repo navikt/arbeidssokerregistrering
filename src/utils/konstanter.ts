@@ -26,6 +26,7 @@ export const NUSKODE_3 = '3';
 export const NUSKODE_4 = '4';
 export const NUSKODE_6 = '6';
 export const NUSKODE_7 = '7';
+export const NUSKODE_9 = '9';
 
 export const JA = true;
 export const NEI = false;

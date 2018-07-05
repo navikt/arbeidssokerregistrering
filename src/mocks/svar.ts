@@ -1,11 +1,20 @@
+import {
+    AndreForholdSvar,
+    DinSituasjonSvar, HelseHinderSvar,
+    SisteStillingSvar,
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar,
+    UtdanningSvar
+} from '../ducks/svar-utils';
+
 const svarMock = {
-    'din-situasjon': 1,
-    'siste-stilling': 1,
-    'utdanning': 4,
-    'utdanninggodkjent': 3,
-    'utdanningbestatt': 1,
-    'helsehinder': 2,
-    'andreforhold': 1,
+    'dinSituasjon': DinSituasjonSvar.ER_PERMITTERT,
+    'sisteStilling': SisteStillingSvar.HAR_HATT_JOBB,
+    'utdanning': UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
+    'utdanningGodkjent': UtdanningGodkjentSvar.NEI,
+    'utdanningBestatt': UtdanningBestattSvar.JA,
+    'helseHinder': HelseHinderSvar.NEI,
+    'andreForhold': AndreForholdSvar.NEI,
 };
 
 export default svarMock;

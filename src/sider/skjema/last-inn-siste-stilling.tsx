@@ -62,7 +62,7 @@ class LastInnSisteStilling extends React.Component<Props, State> {
             });
         };
 
-        if (this.props.sisteStilling === tomStilling) {
+        if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg(this.props.featureToggles)
                 .then(() => {
                     const {styrk} = this.props.sisteStillingFraAAReg.data;

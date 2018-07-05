@@ -6,7 +6,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { sendBrukerTilSblArbeid } from '../oppsummering/utils';
+import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
 import Loader from '../../komponenter/loader/loader';
 
 interface State {

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getTekstIdForAlternativ } from '../skjema-utils';
+import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import { Svar, UtdanningSvar } from '../../../ducks/svar-utils';
 
 interface SporsmalProps {
     sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: number) => void;
-    hentAvgittSvar: (sporsmalId: string) => number | undefined;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
+    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
 }
 
 type Props = SporsmalProps & InjectedIntlProps;
@@ -15,24 +16,26 @@ type Props = SporsmalProps & InjectedIntlProps;
 export default function Utdanningsporsmal(props: Props) {
     const fellesProps = {
         intl: props.intl,
-        avgiSvar: (alternativId: number) => props.endreSvar(props.sporsmalId, alternativId),
-        getTekstId: (alternativId: number) => getTekstIdForAlternativ(props.sporsmalId, alternativId),
+        avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
+        getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
+    const getTekst = (kontekst: string) => getIntlTekst(props.sporsmalId, kontekst, props.intl);
+
     return (
         <>
             <div className="spm-hode">
                 <Innholdstittel tag="h1" className="spm-tittel">
-                    {props.intl.messages[`${props.sporsmalId}-tittel`]}
+                    {getTekst('tittel')}
                 </Innholdstittel>
             </div>
             <form className="spm-skjema">
-                <Alternativ alternativId={1} {...fellesProps}/>
-                <Alternativ alternativId={2} {...fellesProps}/>
-                <Alternativ alternativId={3} {...fellesProps}/>
-                <Alternativ alternativId={4} {...fellesProps}/>
-                <Alternativ alternativId={5} {...fellesProps}/>
-                <Alternativ alternativId={6} {...fellesProps}/>
+                <Alternativ svar={UtdanningSvar.INGEN_UTDANNING} {...fellesProps}/>
+                <Alternativ svar={UtdanningSvar.GRUNNSKOLE} {...fellesProps}/>
+                <Alternativ svar={UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING} {...fellesProps}/>
+                <Alternativ svar={UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV} {...fellesProps}/>
+                <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_1_TIL_4} {...fellesProps}/>
+                <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER} {...fellesProps}/>
             </form>
         </>
     );

@@ -6,12 +6,14 @@ import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
 import {
-    mountWithStoreAndIntl,
+    mountWithStoreRouterAndIntl,
     store
 } from '../../test/test-utils';
-import KnappNeste from '../../komponenter/knapper/lenke-neste';
+import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import {setInitialState} from "../../ducks/svar";
 import { SkjemaProps } from './skjema';
+import {DinSituasjonSvar, HelseHinderSvar, UtdanningSvar} from "../../ducks/svar-utils";
+import {SkjemaProps} from './skjema';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -29,62 +31,55 @@ describe('<Skjema />', () => {
             advarselElement: <div className="dummy-advarsel-element"/>
         };
 
-        const wrapper = mountWithStoreAndIntl(<SkjemaMedChildren {...props} />);
-        wrapper.find(KnappNeste).simulate('click');
+        const wrapper = mountWithStoreRouterAndIntl(<SkjemaMedChildren {...props} />);
+        wrapper.find(LenkeNeste).simulate('click');
 
         expect(gaaTilSporsmal).to.have.property('callCount', 0);
         expect(wrapper.find('.dummy-advarsel-element')).to.have.length(1);
     });
 
-    it('Skal navigere til neste side', () => {
-        const gaaTilSporsmal = sinon.spy();
-
-        const props = {
+    it('Neste-lenke skal ha riktig href', () => {
+        const props: SkjemaProps = {
             ...dummyPropsTilSkjema,
             sporsmalErBesvart: (sporsmalId) => true,
             gjeldendeSporsmal: 2,
-            gaaTilSporsmal: gaaTilSporsmal,
+            hrefTilSporsmal: (n: number) => `skjema/${n}`,
         };
-
-        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
-        wrapper.find(KnappNeste).simulate('click');
-        expect(gaaTilSporsmal).to.have.property('callCount', 1);
-        expect(gaaTilSporsmal.getCall(0).args[0]).to.be.equal(3);
+        const wrapper = mountWithStoreRouterAndIntl((<SkjemaMedChildren {...props} />));
+        expect(wrapper.find(LenkeNeste).find({href: 'skjema/3'})).to.not.have.length(0);
     });
 
-
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
-        const gaaTilSporsmal = sinon.spy();
         const settStateForUbesvartSporsmal = sinon.spy();
 
         const svar = {
-            helse: 2,
-            utdanning: 1,
-            situasjon: 3,
+            helse: HelseHinderSvar.NEI,
+            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
+            situasjon: DinSituasjonSvar.ER_PERMITTERT,
         };
 
         const config = {
             helse: {
-                alternativId: 2,
+                svar: HelseHinderSvar.NEI,
                 skip: ['oppsummering', 'test']
             },
             utdanning: {
-                alternativId: 99,
+                svar: UtdanningSvar.INGEN_UTDANNING,
                 skip: ['test2'],
             }
         };
 
-        const props = {
+        const props: SkjemaProps = {
             ...dummyPropsTilSkjema,
             sporsmalErBesvart: (sporsmalId) => true,
-            gaaTilSporsmal: gaaTilSporsmal,
             settStateForUbesvartSporsmal: settStateForUbesvartSporsmal,
             gjeldendeSporsmal: 2,
+            hrefTilSporsmal: (n: number) => `skjema/${n}`,
             svar: svar,
             config: config,
         };
 
-        const wrapper = enzyme.shallow((
+        const wrapper = mountWithStoreRouterAndIntl((
             <Skjema {...props}>
                 <DummySporsmal sporsmalId="helse"/>
                 <DummySporsmal sporsmalId="utdanning"/>
@@ -93,10 +88,10 @@ describe('<Skjema />', () => {
                 <DummySporsmal sporsmalId="test"/>
                 <DummySporsmal sporsmalId="test2"/>
             </Skjema>
-        )).dive();
-        wrapper.find(KnappNeste).simulate('click');
-        expect(gaaTilSporsmal).to.have.property('callCount', 1);
-        expect(gaaTilSporsmal.getCall(0).args[0]).to.be.equal(5);
+        ));
+
+        expect(wrapper.find(LenkeNeste).find({href: 'skjema/5'})).to.not.have.length(0);
+        wrapper.find(LenkeNeste).simulate('click');
         expect(settStateForUbesvartSporsmal).to.have.property('callCount', 2);
         expect(settStateForUbesvartSporsmal.getCall(0).args[0]).to.be.equal('oppsummering');
         expect(settStateForUbesvartSporsmal.getCall(1).args[0]).to.be.equal('test');
@@ -111,7 +106,7 @@ describe('<Skjema />', () => {
         };
 
         const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
-        wrapper.find(KnappNeste).simulate('click');
+        wrapper.find(LenkeNeste).simulate('click');
         expect(settStateForUbesvartSporsmal).to.have.property('callCount', 0);
     });
 });
@@ -141,8 +136,8 @@ const dummyPropsTilSkjema: SkjemaProps = {
         test2: 4,
     },
     gaaTilbake: () => {},
-    gaaTilSporsmal: (sporsmal: number) => {},
-    fullforSkjema: () => {},
+    hrefTilSporsmal: (hei: number) => 'test',
+    hrefTilFullfor: '/fullfor',
     advarselElement: null,
     settStateForUbesvartSporsmal: (sporsmalId) => {},
     onNesteClick: (sporsmalId) => {},
