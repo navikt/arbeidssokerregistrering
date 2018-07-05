@@ -113,6 +113,7 @@ function hentAarhundre (personId: string) {
 
     return result;
 }
+
 export function hentAlder(personId: string) {
 
     const fnr = parseDNummer(personId);
@@ -124,4 +125,13 @@ export function hentAlder(personId: string) {
     const fodselsdato = moment(`${fnrForsteFireSiffer}${aarhundre}${toSifferFAar}`, 'DDMMYYYY');
 
     return moment().diff(fodselsdato, 'years');
+}
+
+export function scrollToBanner() {
+    let scrollHeight = 0;
+    const header = document.querySelector('.siteheader');
+    if (header) {
+        scrollHeight = header.getBoundingClientRect().height;
+    }
+    window.scrollTo(0, scrollHeight);
 }

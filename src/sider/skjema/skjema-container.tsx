@@ -6,7 +6,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
-import { MatchProps } from '../../utils/utils';
+import { MatchProps, scrollToBanner } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
 import LastInnSisteStilling from './last-inn-siste-stilling';
@@ -143,6 +143,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     componentDidMount() {
         if (this.divRef) {
             this.divRef.focus();
+            scrollToBanner();
         }
     }
 
@@ -152,12 +153,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
             setTimeout(
                 () => {
-                    let scrollHeight = 0;
-                    const header = document.querySelector('.siteheader');
-                    if (header) {
-                        scrollHeight = header.getBoundingClientRect().height;
-                    }
-                    window.scrollTo(0, scrollHeight);
+                    scrollToBanner();
                 },
                 0
             );
