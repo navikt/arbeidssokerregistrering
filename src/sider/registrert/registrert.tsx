@@ -15,7 +15,6 @@ class DuErNaRegistrert extends React.Component {
             scrollHeight = header.getBoundingClientRect().height;
         }
         window.scrollTo(0, scrollHeight);
-        console.log('scrollHeight', scrollHeight); // tslint:disable-line no-console
     }
 
     render() {
