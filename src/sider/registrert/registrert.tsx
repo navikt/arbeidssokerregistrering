@@ -6,10 +6,21 @@ import AvsjekkBilde from './avsjekk-bilde';
 
 const handinfoSvg = require('./handinfo.svg');
 
-function DuErNaRegistrert() {
-    return (
-        <div className="limit">
-            <section className="registrert">
+class DuErNaRegistrert extends React.Component {
+
+    componentDidMount() {
+        let scrollHeight = 0;
+        const header = document.querySelector('.siteheader');
+        if (header) {
+            scrollHeight = header.getBoundingClientRect().height;
+        }
+        window.scrollTo(0, scrollHeight);
+        console.log('scrollHeight', scrollHeight); // tslint:disable-line no-console
+    }
+
+    render() {
+        return (
+            <section className="registrert limit">
 
                 <div className="registrert__avsjekk">
                     <AvsjekkBilde/>
@@ -43,8 +54,8 @@ function DuErNaRegistrert() {
                     </div>
                 </div>
             </section>
-        </div>
-    );
+        );
+    }
 }
 
 export default DuErNaRegistrert;

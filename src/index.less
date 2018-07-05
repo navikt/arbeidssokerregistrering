@@ -30,12 +30,12 @@ body {
     background-color: @white;
 }
 
-main.arbsokreg_app:focus {
+.arbsokreg_app:focus {
     outline: none;
     box-shadow: none;
 }
 
-main.arbsokreg_app {
+.arbsokreg_app {
     @import '/mixins';
     @import 'komponenter/alertstripe';
     @import 'komponenter/innholdslaster/innholdslaster';
@@ -82,9 +82,18 @@ main.arbsokreg_app {
     }
 }
 
+.hodefot {
+    position: relative;
+    z-index: 1;
+}
+
 .hodefot-footer {
     width: 100%;
     bottom: 0;
+}
+
+.maincontent {
+    min-height: 100vh;
 }
 
 @media (min-width: @screen-sm-min) {

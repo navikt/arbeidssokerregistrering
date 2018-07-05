@@ -1,11 +1,13 @@
 .framdrift {
     background-color: @navLysGra;
+    position: relative;
     z-index: 10000;
-    height: 10px;
     width: 100%;
+
     &:focus {
         outline: none;
     }
+
     .andel {
         height: 10px;
         border-top-right-radius: 3px;
@@ -13,6 +15,7 @@
         background-color: @navGra60;
         transition: width ease-in-out 2s;
     }
+
     &.framdrift-fixed {
         position: fixed;
         top: 0;
