@@ -28,7 +28,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = false;
+const MOCK_BESVARELSE = true;
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
