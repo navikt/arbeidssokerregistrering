@@ -1,18 +1,4 @@
-/*
-&:not(.tilbake) {
-    .registrering-banner, .framdrift {
-        animation: slideUp 400ms;
-    }
-}
-
-&.tilbake {
-    .registrering-banner, .framdrift {
-        animation: slideDown 600ms;
-    }
-}
-*/
-
-.sporsmal:not(.tilbake) {
+.limit.forover {
     .tilbakelenke {
         animation: slideUp 400ms;
     }
@@ -25,9 +11,33 @@
     .nestelenke, .lenke-avbryt-wrapper {
         animation: slideUp 600ms;
     }
+
+    .startside .lenke-avbryt-wrapper {
+        animation: none;
+    }
+
+    .oppsummering-tittel, .oppsummering-ingress {
+        animation: slideUp 500ms;
+    }
+    .oppsummering-besvarelser {
+        animation: slideUp 550ms;
+    }
+    .oppsummering .knapper-vertikalt {
+        animation: slideUp 600ms;
+    }
+
+    .fullfor-tittel, .fullfor-ingress {
+        animation: slideUp 500ms;
+    }
+    .fullfor-liste-heading, .fullfor-liste, .fullfor-bekreft, .fullfor-info, .fullfor-sjekkliste {
+        animation: slideUp 550ms;
+    }
+    .fullfor .knapper-vertikalt {
+        animation: slideUp 600ms;
+    }
 }
 
-.sporsmal.tilbake {
+.limit.bakover {
     .tilbakelenke {
         animation: slideDown 600ms;
     }
@@ -40,6 +50,30 @@
     .nestelenke, .lenke-avbryt-wrapper {
         animation: slideDown 400ms;
     }
+
+    .startside .lenke-avbryt-wrapper {
+        animation: none;
+    }
+
+    .oppsummering-tittel, .oppsummering-ingress {
+        animation: slideDown 500ms;
+    }
+    .oppsummering-besvarelser {
+        animation: slideDown 550ms;
+    }
+    .oppsummering .knapper-vertikalt {
+        animation: slideDown 600ms;
+    }
+
+    .fullfor-tittel, .fullfor-ingress {
+        animation: slideDown 500ms;
+    }
+    .fullfor-liste-heading, .fullfor-liste, .fullfor-bekreft, .fullfor-info, .fullfor-sjekkliste {
+        animation: slideDown 550ms;
+    }
+    .fullfor .knapper-vertikalt {
+        animation: slideDown 600ms;
+    }
 }
 
 .sporsmal.erIE, .sporsmal.tilbake.erIE {
@@ -48,32 +82,8 @@
     }
 }
 
-.oppsummering {
-    .oppsummering-tittel, .oppsummering-ingress {
-        animation: slideUp 500ms;
-    }
-    .oppsummering-besvarelser {
-        animation: slideUp 550ms;
-    }
-    .knapper-vertikalt {
-        animation: slideUp 600ms;
-    }
-}
-
 .oppsummering.erIE {
     .oppsummering-tittel, .oppsummering-ingress, .oppsummering-besvarelser, .knapper-vertikalt {
         animation: none;
-    }
-}
-
-.fullfor {
-    .fullfor-tittel, .fullfor-ingress {
-        animation: slideUp 500ms;
-    }
-    .fullfor-liste-heading, .fullfor-liste, .fullfor-bekreft, .fullfor-info, .fullfor-sjekkliste {
-        animation: slideUp 550ms;
-    }
-    .knapper-vertikalt {
-        animation: slideUp 600ms;
     }
 }

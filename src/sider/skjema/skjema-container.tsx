@@ -94,19 +94,17 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         };
 
         return (
-            <div className="limit" ref={(ref) => this.divRef = ref} tabIndex={-1}>
-                <LastInnSisteStilling>
-                    <Skjema {...skjemaProps}>
-                        <SporsmalDinSituasjon sporsmalId="dinSituasjon" {...fellesProps}/>
-                        <SisteStilling sporsmalId="sisteStilling" {...fellesProps}/>
-                        <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                        <UtdanningGodkjentSporsmal sporsmalId="utdanningGodkjent" {...fellesProps}/>
-                        <UtdanningBestattSporsmal sporsmalId="utdanningBestatt" {...fellesProps}/>
-                        <HelseHinder sporsmalId="helseHinder" {...fellesProps}/>
-                        <AndreForhold sporsmalId="andreForhold" {...fellesProps}/>
-                    </Skjema>
-                </LastInnSisteStilling>
-            </div>
+            <LastInnSisteStilling>
+                <Skjema {...skjemaProps}>
+                    <SporsmalDinSituasjon sporsmalId="dinSituasjon" {...fellesProps}/>
+                    <SisteStilling sporsmalId="sisteStilling" {...fellesProps}/>
+                    <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
+                    <UtdanningGodkjentSporsmal sporsmalId="utdanningGodkjent" {...fellesProps}/>
+                    <UtdanningBestattSporsmal sporsmalId="utdanningBestatt" {...fellesProps}/>
+                    <HelseHinder sporsmalId="helseHinder" {...fellesProps}/>
+                    <AndreForhold sporsmalId="andreForhold" {...fellesProps}/>
+                </Skjema>
+            </LastInnSisteStilling>
         );
     }
 

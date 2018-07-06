@@ -105,26 +105,24 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
         classnames += erIE() ? 'erIE' : '';
 
         return (
-            <div className="limit">
-                <section className={classnames}>
-                    <Innholdstittel tag="h1" className="oppsummering-tittel">
-                        <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}} />
-                    </Innholdstittel>
-                    <Normaltekst className="oppsummering-ingress">
-                        <FormattedMessage id="oppsummering-ingress" />
-                    </Normaltekst>
+            <section className={classnames}>
+                <Innholdstittel tag="h1" className="oppsummering-tittel">
+                    <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}}/>
+                </Innholdstittel>
+                <Normaltekst className="oppsummering-ingress">
+                    <FormattedMessage id="oppsummering-ingress"/>
+                </Normaltekst>
 
-                    {oppsummeringBesvarelser(state)}
+                {oppsummeringBesvarelser(state)}
 
-                    <div className="knapper-vertikalt">
-                        <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
-                            <FormattedMessage id="knapp-riktig" />
-                        </KnappBase>
-                        <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt wrapperClassname="no-anim" />
-                    </div>
-                </section>
-            </div>
+                <div className="knapper-vertikalt">
+                    <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
+                        <FormattedMessage id="knapp-riktig"/>
+                    </KnappBase>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
+                    <LenkeAvbryt wrapperClassname="no-anim"/>
+                </div>
+            </section>
         );
     }
 }

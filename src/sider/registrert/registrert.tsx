@@ -15,7 +15,7 @@ class DuErNaRegistrert extends React.Component {
 
     render() {
         return (
-            <section className="registrert limit">
+            <section className="registrert">
 
                 <div className="registrert__avsjekk">
                     <AvsjekkBilde/>
