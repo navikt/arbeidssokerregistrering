@@ -26,8 +26,13 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Banner from './komponenter/banner/banner';
 
 const store = getStore();
+const paths = [START_PATH, SKJEMA_PATH, OPPSUMMERING_PATH, SBLREG_PATH, AVBRYT_PATH, FULLFOR_PATH, DUERNAREGISTRERT_PATH];
 
 class App extends React.Component {
+
+    componentDidMount() {
+    }
+
     render() {
         return (
             <Provider store={store}>
