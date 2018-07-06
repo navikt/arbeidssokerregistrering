@@ -14,7 +14,7 @@ class KreverReaktivering extends React.Component<Props> {
     render() {
         return (
             <>
-            <Banner intl={this.props.intl}/>
+            <Banner />
             <div className="limit">
                 <section className="krever-reaktivering">
                     <Innholdstittel className="krever-reaktivering__tittel">
