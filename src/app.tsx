@@ -21,7 +21,7 @@ import {
     basename, START_PATH, OPPSUMMERING_PATH, SKJEMA_PATH, SBLREG_PATH,
     AVBRYT_PATH, FULLFOR_PATH, DUERNAREGISTRERT_PATH,
 } from './utils/konstanter';
-import DuErNaRegistrert from './sider/duernaregistrert/duernaregistrert';
+import DuErNaRegistrert from './sider/registrert/registrert';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
 
@@ -30,32 +30,30 @@ const store = getStore();
 class App extends React.Component {
     render() {
         return (
-            <main id="maincontent" role="main" tabIndex={-1} className="arbsokreg_app">
-                <Provider store={store}>
-                    <IntlProvider>
-                        <HentInitialData>
-                            <SjekkRegistreringstatus>
-                                <Router basename={basename}>
-                                    <>
-                                        <Route path="/" component={Banner}/>
-                                        <Route path={'/:url'} component={ProgressBarContainer}/>
-                                        <Switch>
-                                            <Route path={START_PATH} component={StartRegistrering}/>
-                                            <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
-                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                                            <Route path={AVBRYT_PATH} component={Avbryt}/>
-                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
-                                            <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
-                                            <Redirect exact={true} from="/" to={START_PATH}/>
-                                        </Switch>
-                                    </>
-                                </Router>
-                            </SjekkRegistreringstatus>
-                        </HentInitialData>
-                    </IntlProvider>
-                </Provider>
-            </main>
+            <Provider store={store}>
+                <IntlProvider>
+                    <HentInitialData>
+                        <SjekkRegistreringstatus>
+                            <Router basename={basename}>
+                                <>
+                                    <Route path="/" component={Banner}/>
+                                    <Route path={'/:url'} component={ProgressBarContainer}/>
+                                    <Switch>
+                                        <Route path={START_PATH} component={StartRegistrering}/>
+                                        <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
+                                        <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                        <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                        <Route path={AVBRYT_PATH} component={Avbryt}/>
+                                        <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
+                                        <Redirect exact={true} from="/" to={START_PATH}/>
+                                    </Switch>
+                                </>
+                            </Router>
+                        </SjekkRegistreringstatus>
+                    </HentInitialData>
+                </IntlProvider>
+            </Provider>
         );
     }
 }

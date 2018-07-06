@@ -4,10 +4,9 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { getIntlMessage, MatchProps } from '../../utils/utils';
+import { getIntlMessage, MatchProps, scrollToBanner } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema/knapp-fullfor';
-import EkspanderbartInfo from '../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
 import { AppState } from '../../reducer';
 import {
     utforRegistrering,
@@ -19,14 +18,20 @@ import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
-import AvhuketLI from '../../komponenter/liste/avhuket-li';
-import BekreftCheckboksPanel from '../../komponenter/godta-vilkar-panel/bekreft-checkboks-panel';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+
+const utropstegnSvg = require('./utropstegn.svg');
+const kalenderSvg = require('./kalender.svg');
+const filnySvg = require('./fil-ny.svg');
+const epostSvg = require('./epost.svg');
+const ikonytelserSvg = require('./ikon-ytelser.svg');
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -62,6 +67,10 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         if (_.isEmpty(registrerBrukerData.data)) {
             history.push(START_PATH);
         }
+    }
+
+    componentDidMount() {
+        scrollToBanner();
     }
 
     registrerBrukerOnClick() {
@@ -130,32 +139,87 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                         <Innholdstittel tag="h1" className="fullfor-tittel">
                             <FormattedMessage id="fullfor-header"/>
                         </Innholdstittel>
-                        <Element className="fullfor-ingress">
+                        <Normaltekst className="fullfor-ingress">
                             <FormattedMessage id="fullfor-ingress"/>
-                        </Element>
+                        </Normaltekst>
 
-                        <Element tag="h2" className="fullfor-liste-heading">
-                            <FormattedMessage id="fullfor-overskrift-liste"/>
-                        </Element>
+                        <div className="fullfor-sjekkliste">
+                            <img
+                                src={utropstegnSvg}
+                                alt="Fullfør sjekkliste"
+                                className="fullfor-sjekkliste__illustrasjon"
+                            />
 
-                        <ul className="fullfor-liste">
-                            <AvhuketLI classname="typo-normal">
-                                <FormattedMessage id="fullfor-liste-1"/>
-                            </AvhuketLI>
-                            <AvhuketLI classname="typo-normal">
-                                <FormattedMessage id="fullfor-liste-2"/>
-                            </AvhuketLI>
-                            <AvhuketLI classname="typo-normal">
-                                <FormattedMessage id="fullfor-liste-3"/>
-                            </AvhuketLI>
-                            <AvhuketLI classname="typo-normal">
-                                <FormattedMessage id="fullfor-liste-4"/>
-                            </AvhuketLI>
-                        </ul>
+                            <Element tag="h2" className="fullfor-sjekkliste__heading">
+                                <FormattedMessage id="fullfor-overskrift-liste"/>
+                            </Element>
 
-                        <EkspanderbartInfo tittelId="fullfor-les-mer" className="fullfor-info">
-                            <Normaltekst><FormattedMessage id="fullfor-les-mer-beskrivelse"/></Normaltekst>
-                        </EkspanderbartInfo>
+                            <ul className="fullfor-sjekkliste__liste">
+                                <li className="typo-normal">
+                                    <FormattedMessage id="fullfor-liste-1"/>
+                                </li>
+                                <li className="typo-normal">
+                                    <FormattedMessage id="fullfor-liste-2"/>
+                                </li>
+                                <li className="typo-normal">
+                                    <FormattedMessage id="fullfor-liste-3"/>
+                                </li>
+                                <li className="typo-normal">
+                                    <FormattedMessage id="fullfor-liste-4"/>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="fullfor-info">
+                            <Ekspanderbartpanel
+                                tittel={getIntlMessage(intl.messages, 'fullfor-les-mer')}
+                                tittelProps="normaltekst"
+                                border={true}
+                            >
+                                <ul className="fullfor-info-liste">
+                                    <li className="fullfor-info-liste__element">
+                                        <img
+                                            src={epostSvg}
+                                            alt="Meldekort"
+                                            className="illustrasjon"
+                                        />
+                                        <Element className="tittel">Meldekort</Element>
+                                        <Normaltekst><FormattedMessage id="fullfor-les-mer-meldekort"/></Normaltekst>
+                                    </li>
+                                    <li className="fullfor-info-liste__element">
+                                        <img
+                                            src={filnySvg}
+                                            alt="CV"
+                                            className="illustrasjon"
+                                        />
+                                        <Element className="tittel">CV</Element>
+                                        <Normaltekst><FormattedMessage id="fullfor-les-mer-CV"/></Normaltekst>
+                                    </li>
+                                    <li className="fullfor-info-liste__element">
+                                        <img
+                                            src={kalenderSvg}
+                                            alt="Aktivitetsplan"
+                                            className="illustrasjon"
+                                        />
+                                        <Element className="tittel">Aktivitetsplanen</Element>
+                                        <Normaltekst>
+                                            <FormattedMessage id="fullfor-les-mer-aktivitetsplan"/>
+                                        </Normaltekst>
+                                    </li>
+                                    <li className="fullfor-info-liste__element">
+                                        <img
+                                            src={ikonytelserSvg}
+                                            alt="Ytelser"
+                                            className="illustrasjon"
+                                        />
+                                        <Element className="tittel">Ytelser</Element>
+                                        <Normaltekst><FormattedMessage id="fullfor-les-mer-ytelser"/></Normaltekst>
+                                    </li>
+                                </ul>
+
+                            </Ekspanderbartpanel>
+                        </div>
+
                         <BekreftCheckboksPanel
                             onChange={this.settMarkert}
                             checked={this.state.markert}

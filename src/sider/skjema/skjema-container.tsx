@@ -6,7 +6,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
-import { MatchProps } from '../../utils/utils';
+import { MatchProps, scrollToBanner } from '../../utils/utils';
 import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
 import LastInnSisteStilling from './last-inn-siste-stilling';
@@ -19,13 +19,14 @@ import AndreForhold from './sporsmal/sporsmal-andre-forhold';
 import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import { State as SvarState } from '../../ducks/svar';
+import { IngenSvar, Svar } from '../../ducks/svar-utils';
 
 interface StateProps {
     svarState: SvarState;
 }
 
 interface DispatchProps {
-    endreSvar: (sporsmalId: string, svar: number) => void;
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
 }
 
 interface SkjemaProps {
@@ -37,8 +38,6 @@ type Props = StateProps & DispatchProps & InjectedIntlProps & SkjemaProps & Rout
 interface EgenStateProps {
     visAdvarsel: boolean;
 }
-
-export const INGEN_SVAR = -1;
 
 class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     private divRef: HTMLDivElement | null;
@@ -90,7 +89,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             hrefTilFullfor: `${OPPSUMMERING_PATH}`,
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
             svar: this.props.svarState,
-            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, INGEN_SVAR),
+            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
             hrefTilSporsmal: (sporsmal) => `${SKJEMA_PATH}/${sporsmal}`,
         };
 
@@ -98,13 +97,13 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             <div className="limit" ref={(ref) => this.divRef = ref} tabIndex={-1}>
                 <LastInnSisteStilling>
                     <Skjema {...skjemaProps}>
-                        <SporsmalDinSituasjon sporsmalId="din-situasjon" {...fellesProps}/>
-                        <SisteStilling sporsmalId="siste-stilling" {...fellesProps}/>
+                        <SporsmalDinSituasjon sporsmalId="dinSituasjon" {...fellesProps}/>
+                        <SisteStilling sporsmalId="sisteStilling" {...fellesProps}/>
                         <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                        <UtdanningGodkjentSporsmal sporsmalId="utdanninggodkjent" {...fellesProps}/>
-                        <UtdanningBestattSporsmal sporsmalId="utdanningbestatt" {...fellesProps}/>
-                        <HelseHinder sporsmalId="helsehinder" {...fellesProps}/>
-                        <AndreForhold sporsmalId="andreforhold" {...fellesProps}/>
+                        <UtdanningGodkjentSporsmal sporsmalId="utdanningGodkjent" {...fellesProps}/>
+                        <UtdanningBestattSporsmal sporsmalId="utdanningBestatt" {...fellesProps}/>
+                        <HelseHinder sporsmalId="helseHinder" {...fellesProps}/>
+                        <AndreForhold sporsmalId="andreForhold" {...fellesProps}/>
                     </Skjema>
                 </LastInnSisteStilling>
             </div>
@@ -144,6 +143,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     componentDidMount() {
         if (this.divRef) {
             this.divRef.focus();
+            scrollToBanner();
         }
     }
 
@@ -153,12 +153,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
             setTimeout(
                 () => {
-                    let scrollHeight = 0;
-                    const header = document.querySelector('.siteheader');
-                    if (header) {
-                        scrollHeight = header.getBoundingClientRect().height;
-                    }
-                    window.scrollTo(0, scrollHeight);
+                    scrollToBanner();
                 },
                 0
             );
@@ -181,7 +176,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    endreSvar: (sporsmalId, alternativId) => dispatch(endreSvarAction(sporsmalId, alternativId)),
+    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaContainer));

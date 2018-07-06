@@ -1,20 +1,28 @@
+import {
+    AndreForholdSvar, DinSituasjonSvar,
+    HelseHinderSvar, SisteStillingSvar, Svar,
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar,
+    UtdanningSvar
+} from './svar-utils';
+
 export enum ActionTypes {
     AVGI_SVAR = 'AVGI_SVAR',
     AVGI_SVAR_RESET = 'AVGI_SVAR_RESET'
 }
 
 export type State = {
-    utdanning?: number;
-    utdanningbestatt?: number;
-    utdanninggodkjent?: number;
-    helsehinder?: number;
-    andreforhold?: number;
-    'siste-stilling'?: number;
-    'din-situasjon'?: number;
+    utdanning?: UtdanningSvar;
+    utdanningBestatt?: UtdanningBestattSvar;
+    utdanningGodkjent?: UtdanningGodkjentSvar;
+    helseHinder?: HelseHinderSvar;
+    andreForhold?: AndreForholdSvar;
+    sisteStilling?: SisteStillingSvar;
+    dinSituasjon?: DinSituasjonSvar;
 };
 
 export interface Data {
-    alternativId: number;
+    svar: Svar;
     sporsmalId: string;
 }
 
@@ -29,7 +37,7 @@ export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
         case ActionTypes.AVGI_SVAR: {
             let stateWithAddedProperty = {...state};
-            stateWithAddedProperty[action.data.sporsmalId] = action.data.alternativId;
+            stateWithAddedProperty[action.data.sporsmalId] = action.data.svar;
             return stateWithAddedProperty;
         }
         case ActionTypes.AVGI_SVAR_RESET: {
@@ -41,12 +49,12 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function endreSvarAction(sporsmalId: string, alternativId: number) {
+export function endreSvarAction(sporsmalId: string, svar: Svar) {
     return {
         type: ActionTypes.AVGI_SVAR,
         data: {
             sporsmalId,
-            alternativId
+            svar,
         }
     };
 }

@@ -11,6 +11,8 @@ import {
 } from '../../test/test-utils';
 import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import {setInitialState} from "../../ducks/svar";
+import { SkjemaProps } from './skjema';
+import {DinSituasjonSvar, HelseHinderSvar, UtdanningSvar} from "../../ducks/svar-utils";
 import {SkjemaProps} from './skjema';
 
 enzyme.configure({adapter: new Adapter()});
@@ -47,24 +49,22 @@ describe('<Skjema />', () => {
         expect(wrapper.find(LenkeNeste).find({href: 'skjema/3'})).to.not.have.length(0);
     });
 
-
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
-        const gaaTilSporsmal = sinon.spy();
         const settStateForUbesvartSporsmal = sinon.spy();
 
         const svar = {
-            helse: 2,
-            utdanning: 1,
-            situasjon: 3,
+            helse: HelseHinderSvar.NEI,
+            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
+            situasjon: DinSituasjonSvar.ER_PERMITTERT,
         };
 
         const config = {
             helse: {
-                alternativId: 2,
+                svar: HelseHinderSvar.NEI,
                 skip: ['oppsummering', 'test']
             },
             utdanning: {
-                alternativId: 99,
+                svar: UtdanningSvar.INGEN_UTDANNING,
                 skip: ['test2'],
             }
         };
