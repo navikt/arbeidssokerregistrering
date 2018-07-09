@@ -59,8 +59,8 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                 </div>
                 <form className="spm-skjema">
                     <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
-                    <Alternativ svar={DinSituasjonSvar.DELTIDSJOBB_VIL_MER} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps}/>
+                    <Alternativ svar={DinSituasjonSvar.DELTIDSJOBB_VIL_MER} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.VIL_BYTTE_JOBB} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.ER_PERMITTERT} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.ALDRI_HATT_JOBB} {...fellesProps}/>
