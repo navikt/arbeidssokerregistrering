@@ -14,7 +14,9 @@ import { sisteStillingMock } from '../../../../mocks/siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../../../mocks/oversettelse-av-stilling-fra-aareg';
 import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
 import { ActionTypes } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
-import {IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
+import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
+import { ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
+import Alternativ from "../../alternativ";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -125,5 +127,55 @@ describe('<SisteStilling />', () => {
                 );
             });
 
+    });
+
+    it('Skal skjule alternativene hvis (og bare hvis) man svarer visse alternativer på spm om din situasjon',() => {
+        const svarDerAlternativeneSkalSkjules: (DinSituasjonSvar | undefined)[] = [
+            DinSituasjonSvar.MISTET_JOBBEN,
+            DinSituasjonSvar.HAR_SAGT_OPP,
+            DinSituasjonSvar.ER_PERMITTERT,
+            DinSituasjonSvar.JOBB_OVER_2_AAR,
+            DinSituasjonSvar.DELTIDSJOBB_VIL_MER,
+            DinSituasjonSvar.VIL_BYTTE_JOBB,
+            DinSituasjonSvar.ALDRI_HATT_JOBB,
+            DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
+        ];
+        const store = create();
+
+        Object.keys(DinSituasjonSvar).forEach((svar: DinSituasjonSvar) => {
+            store.dispatch({
+                type: DinSituasjonActionTypes.AVGI_SVAR,
+                data: {
+                    sporsmalId: 'dinSituasjon',
+                    svar: svar,
+                }
+            });
+            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+            const expectedLength = svarDerAlternativeneSkalSkjules.includes(svar) ? 0 : 2;
+
+            expect(wrapper.find(Alternativ)).to.have.length(expectedLength);
+        });
+    });
+
+    it('Skal endre svar til INGEN_SVAR hvis alternativene er skjult',() => {
+        const store = create();
+        store.dispatch({
+            type: DinSituasjonActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId: 'dinSituasjon',
+                svar: DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
+            }
+        });
+        const endreSvarSpy = sinon.spy();
+        const sisteStillingProps = {
+            ...dummyProps,
+            sporsmalId: 'sisteStilling',
+            endreSvar: endreSvarSpy,
+        };
+        mountWithStoreRouterAndIntl(<SisteStilling {...sisteStillingProps}/>, store);
+
+        // Bruker .getCall(1) i stedet for .getCall(0) fordi komponenten setter default besvarelse først.
+        expect(endreSvarSpy.getCall(1).args[0]).to.be.equal('sisteStilling');
+        expect(endreSvarSpy.getCall(1).args[1]).to.be.equal(SisteStillingSvar.INGEN_SVAR);
     });
 });
