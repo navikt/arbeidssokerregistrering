@@ -1,4 +1,4 @@
 export default {
     harGyldigOidcToken: true,
-    niva: 3
+    niva: 4
 };
