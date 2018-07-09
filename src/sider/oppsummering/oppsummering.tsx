@@ -5,7 +5,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
-import { hentAlder, MatchProps, scrollToBanner } from '../../utils/utils';
+import { hentAlder, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
@@ -92,10 +92,6 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
         if (_.isEmpty(state.svar)) {
             history.push(`${SKJEMA_PATH}/0`);
         }
-    }
-
-    componentDidMount() {
-        scrollToBanner();
     }
 
     render() {

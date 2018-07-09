@@ -3,15 +3,10 @@ import { Normaltekst, Systemtittel, Element, Innholdstittel } from 'nav-frontend
 import { FormattedMessage } from 'react-intl';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
-import { scrollToBanner } from '../../utils/utils';
 
 const handinfoSvg = require('./handinfo.svg');
 
 class DuErNaRegistrert extends React.Component {
-
-    componentDidMount() {
-        scrollToBanner();
-    }
 
     render() {
         return (

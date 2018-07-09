@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { getIntlMessage, MatchProps, scrollToBanner } from '../../utils/utils';
+import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema/knapp-fullfor';
 import { AppState } from '../../reducer';
@@ -67,10 +67,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         if (_.isEmpty(registrerBrukerData.data)) {
             history.push(START_PATH);
         }
-    }
-
-    componentDidMount() {
-        scrollToBanner();
     }
 
     registrerBrukerOnClick() {

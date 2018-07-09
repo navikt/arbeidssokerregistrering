@@ -7,7 +7,7 @@ import {
     START_PATH
 } from '../../utils/konstanter';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { MatchProps } from '../../utils/utils';
+import { MatchProps, scrollToBanner } from '../../utils/utils';
 
 const paths = [
     START_PATH,
@@ -34,6 +34,7 @@ class Sideanimasjon extends React.Component<Props, State> {
 
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.location !== this.props.location) {
+            scrollToBanner();
             this.setState({
                 ...this.state,
                 forover: this.skalAnimereForover(nextProps),
