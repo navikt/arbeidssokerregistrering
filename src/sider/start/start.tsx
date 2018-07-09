@@ -26,21 +26,19 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
         return (
             <section className="startside">
                 <div className="startside__banner">
-                    <div className="limit">
-                        <div className="startside__intro">
-                            <p className="typo-undertittel">
-                                <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
-                            </p>
-                            <p className="typo-normal">
-                                <FormattedMessage id="beskrivelse-start-dialog"/>
-                            </p>
-                        </div>
-                        <img
-                            className="startside__intro__ikon"
-                            src={personSvg}
-                            alt="Person-ikon"
-                        />
+                    <div className="startside__intro">
+                        <p className="typo-undertittel">
+                            <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
+                        </p>
+                        <p className="typo-normal">
+                            <FormattedMessage id="beskrivelse-start-dialog"/>
+                        </p>
                     </div>
+                    <img
+                        className="startside__intro__ikon"
+                        src={personSvg}
+                        alt="Person-ikon"
+                    />
                 </div>
                 <div className="startside__innhold">
                     <Innholdstittel className="tittel">

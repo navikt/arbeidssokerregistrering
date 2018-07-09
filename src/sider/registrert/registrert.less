@@ -10,6 +10,24 @@
         height: 280px;
     }
     100% {
+        left: 108px;
+        top: 30px;
+        height: 70px;
+    }
+}
+
+@keyframes avsjekk-plassering-mobil {
+    0% {
+        left: ~'calc((100% - 280px) / 2)';
+        top: ~'calc((90% - 280px) / 2)';
+        height: 280px;
+    }
+    67% {
+        left: ~'calc((100% - 280px) / 2)';
+        top: ~'calc((90% - 280px) / 2)';
+        height: 280px;
+    }
+    100% {
         left: 22px;
         top: 30px;
         height: 70px;
@@ -42,23 +60,24 @@
     }
     100% {
         opacity: 1;
-        margin-top: 110px;
+        margin-top: 180px;
+    }
+}
+
+.registrering-banner + .limit {
+    padding: 1rem 1.4rem;
+    & > .registrert {
+        margin-top: -12rem;
     }
 }
 
 .registrert {
-    position: relative;
-    height: 100vh;
-
-    &.limit {
-        padding: 1rem 1.4rem;
-    }
 
     &__avsjekk {
         position: absolute;
         left: ~'calc((100% - 280px) / 2)';
         top: ~'calc((90% - 280px) / 2)';
-        animation: avsjekk-plassering 5s both;
+        animation: avsjekk-plassering-mobil 5s both;
     }
 
     &__tittel {
@@ -71,6 +90,7 @@
     }
 
     &__aksjonspanel {
+        top: 8rem;
         text-align: left;
         position: relative;
         opacity: 0;
@@ -100,6 +120,10 @@
         width: 36rem;
         height: ~'calc(100vh - 180px)';
         margin: 0 auto;
+
+        &__avsjekk {
+            animation: avsjekk-plassering 5s both;
+        }
 
         &__tittel {
             width: ~'calc(36rem - 140px)';
