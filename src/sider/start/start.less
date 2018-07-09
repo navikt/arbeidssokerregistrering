@@ -1,14 +1,14 @@
 .startside {
 
     &__banner {
-        margin: -7rem ~'calc((740px - 100vw) / 2)' 0;
+        // margin: -7rem ~'calc((740px - 100vw) / 2)' 0;
+        margin: -7rem 0 0;
         padding: 3.3rem 0 1.5rem 0;
         background-color: @navDypBlaLighten80;
     }
 
     &__intro {
         position: relative;
-        width: @desktopLimitWidth;
         background-color: @white;
         margin: 0 auto;
         border-radius: 10px;
@@ -62,10 +62,6 @@
 @media (min-width: 500px) {
 
     .startside {
-        .limit {
-            width: 479px;
-        }
-
         &__intro {
             padding: 1rem 2.5rem 1rem;
 
@@ -73,6 +69,18 @@
                 left: 59%;
                 top: 74%;
             }
+        }
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .startside {
+        &__banner {
+            margin: -7rem ~'calc((740px - 100vw) / 2)' 0;
+        }
+
+        &__intro {
+            width: @desktopLimitWidth;
         }
     }
 }
