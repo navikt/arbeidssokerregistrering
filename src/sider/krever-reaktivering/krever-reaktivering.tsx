@@ -3,7 +3,6 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import Banner from '../../komponenter/banner/banner';
-import KnappBase from 'nav-frontend-knapper';
 import { DITTNAV_URL } from '../../ducks/api';
 
 const handinfoSvg = require('./handinfo.svg');
