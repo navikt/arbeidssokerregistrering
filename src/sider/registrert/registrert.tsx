@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
 
-const handinfoSvg = require('./handinfo.svg');
+const handinfoSvg = require('./clipboard.svg');
 
 class DuErNaRegistrert extends React.Component {
 
@@ -20,9 +20,7 @@ class DuErNaRegistrert extends React.Component {
                 </div>
 
                 <div className="registrert__aksjonspanel">
-                    <div className="registrert__handinfo-ikon">
-                        <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
-                    </div>
+                    <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon"/>
                     <div className="registrert__tekster">
                         <Systemtittel tag="h2" className="blokk-xs">
                             <FormattedMessage id="duernaregistrert-systemtittel"/>
