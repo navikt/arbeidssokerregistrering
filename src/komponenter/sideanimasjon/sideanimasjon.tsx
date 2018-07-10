@@ -31,7 +31,7 @@ class Sideanimasjon extends React.Component<Props, State> {
 
     render() {
         return (
-            <div className={"limit " + (this.state.forover ? 'forover' : 'bakover')}>
+            <div className={'limit ' + (this.state.forover ? 'forover' : 'bakover')}>
                 {this.props.children}
             </div>
         );
