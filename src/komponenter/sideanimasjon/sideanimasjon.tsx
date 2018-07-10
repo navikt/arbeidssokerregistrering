@@ -1,21 +1,7 @@
 import * as React from 'react';
-import {
-    DUERNAREGISTRERT_PATH,
-    FULLFOR_PATH,
-    OPPSUMMERING_PATH,
-    SKJEMA_PATH,
-    START_PATH
-} from '../../utils/konstanter';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { MatchProps, scrollToBanner } from '../../utils/utils';
-
-const paths = [
-    START_PATH,
-    SKJEMA_PATH,
-    OPPSUMMERING_PATH,
-    FULLFOR_PATH,
-    DUERNAREGISTRERT_PATH
-];
+import { skalAnimereForover } from './sideanimasjon-utils';
 
 interface State {
     forover: boolean;
@@ -33,45 +19,19 @@ class Sideanimasjon extends React.Component<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.location !== this.props.location) {
+        const currentLocation = this.props.location;
+        if (nextProps.location !== currentLocation) {
             scrollToBanner();
             this.setState({
                 ...this.state,
-                forover: this.skalAnimereForover(nextProps),
+                forover: skalAnimereForover(currentLocation.pathname, nextProps.location.pathname),
             });
         }
     }
 
-    skalAnimereForover(nextProps: Props): boolean {
-        const currentPath = this.trimPath(this.props.location.pathname);
-        const nextPath = this.trimPath(nextProps.location.pathname);
-
-        if (currentPath === SKJEMA_PATH && nextPath === SKJEMA_PATH) {
-            return this.nesteSporsmalIdErStorreEnnNavaerende(nextProps);
-        } else {
-            return paths.indexOf(currentPath) < paths.indexOf(nextPath);
-        }
-    }
-
-    nesteSporsmalIdErStorreEnnNavaerende(nextProps: Props): boolean {
-        return this.getIdFromPath(this.props.location.pathname) < this.getIdFromPath(nextProps.location.pathname);
-    }
-
-    trimPath(path: string): string {
-        if (path.startsWith(SKJEMA_PATH)) {
-            return SKJEMA_PATH;
-        } else {
-            return path;
-        }
-    }
-
-    getIdFromPath(path: string): number {
-        return Number(path.split('/')[2]);
-    }
-
     render() {
         return (
-            <div className={!this.state.forover ? 'limit bakover' : 'limit forover'}>
+            <div className={"limit " + (this.state.forover ? 'forover' : 'bakover')}>
                 {this.props.children}
             </div>
         );
