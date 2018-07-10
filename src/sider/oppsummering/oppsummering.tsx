@@ -5,7 +5,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
-import { hentAlder, MatchProps, scrollToBanner } from '../../utils/utils';
+import { hentAlder, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
@@ -94,10 +94,6 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
         }
     }
 
-    componentDidMount() {
-        scrollToBanner();
-    }
-
     render() {
         const {history, brukersNavn, state} = this.props;
         const {name} = brukersNavn.data;
@@ -105,26 +101,24 @@ class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & Ege
         classnames += erIE() ? 'erIE' : '';
 
         return (
-            <div className="limit">
-                <section className={classnames}>
-                    <Innholdstittel tag="h1" className="oppsummering-tittel">
-                        <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}} />
-                    </Innholdstittel>
-                    <Normaltekst className="oppsummering-ingress">
-                        <FormattedMessage id="oppsummering-ingress" />
-                    </Normaltekst>
+            <section className={classnames}>
+                <Innholdstittel tag="h1" className="oppsummering-tittel">
+                    <FormattedMessage id="oppsummering-tittel" values={{fornavn: hentFornavn(name)}}/>
+                </Innholdstittel>
+                <Normaltekst className="oppsummering-ingress">
+                    <FormattedMessage id="oppsummering-ingress"/>
+                </Normaltekst>
 
-                    {oppsummeringBesvarelser(state)}
+                {oppsummeringBesvarelser(state)}
 
-                    <div className="knapper-vertikalt">
-                        <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
-                            <FormattedMessage id="knapp-riktig" />
-                        </KnappBase>
-                        <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt wrapperClassname="no-anim" />
-                    </div>
-                </section>
-            </div>
+                <div className="knapper-vertikalt">
+                    <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
+                        <FormattedMessage id="knapp-riktig"/>
+                    </KnappBase>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
+                    <LenkeAvbryt wrapperClassname="no-anim"/>
+                </div>
+            </section>
         );
     }
 }
