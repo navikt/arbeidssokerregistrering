@@ -16,7 +16,6 @@ export interface State {
 export interface Data {
     underOppfolging?: boolean;
     jobbetSeksAvTolvSisteManeder?: boolean;
-    registrertNavSisteToAr?: boolean;
 }
 
 interface Action {

@@ -42,9 +42,6 @@ const oppsummeringBesvarelser = (state: AppState) => {
     const jobbetSeksAvTolvSisteManederTekstId = registreringStatus.jobbetSeksAvTolvSisteManeder
         ? 'oppsummering-arbeidserfaring-1'
         : 'oppsummering-arbeidserfaring-2';
-    const registrertNavSisteToArTekstId = registreringStatus.registrertNavSisteToAr
-        ? 'oppsummering-inaktivitet-1'
-        : 'oppsummering-inaktivitet-2';
 
     return (
         <div className="oppsummering-besvarelser">
@@ -56,7 +53,6 @@ const oppsummeringBesvarelser = (state: AppState) => {
             <ul className="oppsummering-besvarelser__list">
                 <OppsummeringElement tekstId="oppsummering-alder" values={{alder: personId && hentAlder(personId)}}/>
                 <OppsummeringElement tekstId={jobbetSeksAvTolvSisteManederTekstId}/>
-                <OppsummeringElement tekstId={registrertNavSisteToArTekstId}/>
                 <OppsummeringElement sporsmalId="dinSituasjon">
                     <FormattedMessage id={`oppsummering-dinsituasjon`}/>&nbsp;
                 </OppsummeringElement>
