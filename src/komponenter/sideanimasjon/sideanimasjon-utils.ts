@@ -6,7 +6,7 @@ import {
     START_PATH
 } from '../../utils/konstanter';
 
-const paths = [
+export const paths = [
     START_PATH,
     SKJEMA_PATH,
     OPPSUMMERING_PATH,
