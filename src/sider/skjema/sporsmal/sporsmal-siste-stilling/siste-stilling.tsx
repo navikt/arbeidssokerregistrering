@@ -22,8 +22,8 @@ import {
 } from '../../../../ducks/siste-stilling';
 import { getIntlTekst, getTekstIdForSvar } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
-import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
-import { DinSituasjonSvar, SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
+import { hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
+import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
 import { State as SvarState } from '../../../../ducks/svar';
 
 interface SkjemaProps {
@@ -67,20 +67,6 @@ class SisteStilling extends React.Component<Props> {
         return (this.props.hentAvgittSvar(this.props.sporsmalId) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB);
     }
 
-    skalSkjuleSvaralternativer() {
-        const situasjonerDerViAlleredeVetAtBrukerenHarHattJobb: (DinSituasjonSvar | undefined)[] = [
-            DinSituasjonSvar.MISTET_JOBBEN,
-            DinSituasjonSvar.HAR_SAGT_OPP,
-            DinSituasjonSvar.ER_PERMITTERT,
-            DinSituasjonSvar.JOBB_OVER_2_AAR,
-            DinSituasjonSvar.DELTIDSJOBB_VIL_MER,
-            DinSituasjonSvar.VIL_BYTTE_JOBB,
-            DinSituasjonSvar.ALDRI_HATT_JOBB,
-            DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
-        ];
-        return situasjonerDerViAlleredeVetAtBrukerenHarHattJobb.includes(this.props.svarState.dinSituasjon);
-    }
-
     angiSvarPaaDetteSporsmaletSomIkkeBesvart() {
         const {svarState, endreSvar, sporsmalId} = this.props;
         if (svarState.sisteStilling !== SisteStillingSvar.INGEN_SVAR) {
@@ -104,7 +90,7 @@ class SisteStilling extends React.Component<Props> {
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
-        const skjulSvaralternativer = this.skalSkjuleSvaralternativer();
+        const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
         if (skjulSvaralternativer) {
             this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
         }

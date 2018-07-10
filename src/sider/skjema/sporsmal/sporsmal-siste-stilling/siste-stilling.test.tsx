@@ -175,7 +175,6 @@ describe('<SisteStilling />', () => {
         mountWithStoreRouterAndIntl(<SisteStilling {...sisteStillingProps}/>, store);
 
         // Bruker .getCall(1) i stedet for .getCall(0) fordi komponenten setter default besvarelse først.
-        expect(endreSvarSpy.getCall(1).args[0]).to.be.equal('sisteStilling');
-        expect(endreSvarSpy.getCall(1).args[1]).to.be.equal(SisteStillingSvar.INGEN_SVAR);
+        expect(endreSvarSpy.getCall(1).args).to.deep.equal(['sisteStilling', SisteStillingSvar.INGEN_SVAR]);
     });
 });
