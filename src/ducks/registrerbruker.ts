@@ -24,7 +24,6 @@ export interface State {
 }
 
 export interface RegistreringData {
-    nusKode?: string;
     enigIOppsummering?: boolean;
     oppsummering?: string;
     sisteStilling?: Stilling;
