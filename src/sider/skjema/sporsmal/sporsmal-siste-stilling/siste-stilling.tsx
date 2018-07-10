@@ -22,8 +22,9 @@ import {
 } from '../../../../ducks/siste-stilling';
 import { getIntlTekst, getTekstIdForSvar } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
-import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
+import { hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
 import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
+import { State as SvarState } from '../../../../ducks/svar';
 
 interface SkjemaProps {
     sporsmalId: string;
@@ -36,6 +37,7 @@ interface StateProps {
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     labelTilStillingFraAAReg: string;
     sisteStilling: Stilling;
+    svarState: SvarState;
 }
 
 interface DispatchProps {
@@ -61,8 +63,15 @@ class SisteStilling extends React.Component<Props> {
         );
     }
 
-    brukerHarHattJobb() {
-        return (this.props.hentAvgittSvar(this.props.sporsmalId) === SisteStillingSvar.HAR_HATT_JOBB);
+    skalViseStillingsfelt() {
+        return (this.props.hentAvgittSvar(this.props.sporsmalId) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB);
+    }
+
+    angiSvarPaaDetteSporsmaletSomIkkeBesvart() {
+        const {svarState, endreSvar, sporsmalId} = this.props;
+        if (svarState.sisteStilling !== SisteStillingSvar.INGEN_SVAR) {
+            endreSvar(sporsmalId, SisteStillingSvar.INGEN_SVAR);
+        }
     }
 
     render() {
@@ -81,6 +90,31 @@ class SisteStilling extends React.Component<Props> {
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
+        const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
+        if (skjulSvaralternativer) {
+            this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
+        }
+        const alternativer = skjulSvaralternativer ? (null) : (
+            <form className="spm-skjema">
+                <Alternativ
+                    svar={SisteStillingSvar.HAR_HATT_JOBB}
+                    {...alternativProps}
+                    avgiSvar={(svar: Svar) => {
+                        endreSvar(sporsmalId, svar);
+                        velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
+                    }}
+                />
+                <Alternativ
+                    svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
+                    {...alternativProps}
+                    avgiSvar={(svar: Svar) => {
+                        endreSvar(sporsmalId, svar);
+                        velgStilling(ingenYrkesbakgrunn);
+                    }}
+                />
+            </form>
+        );
+
         const getTekst = (kontekst: string) => getIntlTekst(sporsmalId, kontekst, intl);
 
         return (
@@ -93,29 +127,10 @@ class SisteStilling extends React.Component<Props> {
                         <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
                     </Normaltekst>
                 </div>
-                <form className="spm-skjema">
-                    <Alternativ
-                        svar={SisteStillingSvar.HAR_HATT_JOBB}
-                        {...alternativProps}
-                        avgiSvar={(svar: Svar) => {
-                            endreSvar(sporsmalId, svar);
-                            velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
-                        }}
-                    />
-                    <Alternativ
-                        svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
-                        {...alternativProps}
-                        avgiSvar={(svar: Svar) => {
-                            endreSvar(sporsmalId, svar);
-                            velgStilling(ingenYrkesbakgrunn);
-                        }}
-                    />
-                </form>
+                {alternativer}
                 <div className="spm-valg">
-                    {this.brukerHarHattJobb() &&
-                    <>
+                    {this.skalViseStillingsfelt() &&
                         <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
-                    </>
                     }
                     <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
                         <Normaltekst>
@@ -133,6 +148,7 @@ const mapStateToProps = (state) => ({
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
     labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),
     sisteStilling: selectSisteStilling(state),
+    svarState: state.svar,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
