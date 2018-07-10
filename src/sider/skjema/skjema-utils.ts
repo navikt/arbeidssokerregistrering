@@ -19,9 +19,13 @@ export function svarSuffiksTilTekstId(svar: Svar) {
         .join('-');
 }
 
-const defaultSkjemaConfig: SkjemaConfig = new Map<Svar, string[]>([
+const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[]>([
+    // Denne configgen sier noe om hvilke spørsmål man skal hoppe over, gitt brukerens svar.
+    // For eksempel betyr [ALDRI_HATT_JOBB, ['sisteStilling']] at man skal hoppe over spørsmålet om sisteStilling
+    // hvis man svarer ALDRI_HATT_JOBB på spørsmålet om dinSituasjon.
+
     [DinSituasjonSvar.ALDRI_HATT_JOBB, ['sisteStilling']],
-    [DinSituasjonSvar.VIL_FORTSETTE_I_JOBB, ['sisteStilling', 'utdanning', 'utdanningBestatt', 'utdanningGodkjent']],
+    [DinSituasjonSvar.VIL_FORTSETTE_I_JOBB, ['utdanning', 'utdanningBestatt', 'utdanningGodkjent']],
     [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
 ]);
 
@@ -35,7 +39,7 @@ export function getAlleSporsmalSomIkkeSkalBesvares(
     config?: SkjemaConfig
 ): string[] {
     let sporsmal: string[] = [];
-    const skjemaConfig = config ? config : defaultSkjemaConfig;
+    const skjemaConfig = config ? config : defaultConfigForSporsmalsflyt;
     sporsmalIder.forEach(sporsmalId =>
         sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(svarState[sporsmalId], skjemaConfig)]);
     return sporsmal;
