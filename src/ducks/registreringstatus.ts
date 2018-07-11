@@ -17,6 +17,7 @@ export interface Data {
     underOppfolging?: boolean;
     jobbetSeksAvTolvSisteManeder?: boolean;
     registrertNavSisteToAr?: boolean;
+    kreverReaktivering?: boolean;
 }
 
 interface Action {
