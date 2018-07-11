@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Normaltekst, Systemtittel, Element, Innholdstittel } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
@@ -14,9 +14,9 @@ class DuErNaRegistrert extends React.Component {
 
                 <div className="registrert__avsjekk">
                     <AvsjekkBilde/>
-                    <Innholdstittel tag="h1" className="registrert__tittel">
+                    <Systemtittel tag="h1" className="registrert__tittel">
                         <FormattedMessage id="duernaregistrert-innholdstittel"/>
-                    </Innholdstittel>
+                    </Systemtittel>
                 </div>
 
                 <div className="registrert__aksjonspanel">
@@ -32,10 +32,10 @@ class DuErNaRegistrert extends React.Component {
                             <FormattedMessage id="duernaregistrert-element"/>
                         </Element>
                         <div className="registrert__knapperad">
-                            <a href={VEIENTILARBEID_URL} className="knapp knapp--standard">
+                            <a href={VEIENTILARBEID_URL} className="registrert__lenke knapp knapp--standard">
                                 <FormattedMessage id="knapp-ikke-na"/>
                             </a>
-                            <a href={VEIENTILARBEID_MED_DAGPENGER_URL} className="knapp knapp--hoved">
+                            <a href={VEIENTILARBEID_MED_DAGPENGER_URL} className="registrert__lenke knapp knapp--hoved">
                                 <FormattedMessage id="knapp-ja-vis-meg"/>
                             </a>
                         </div>
