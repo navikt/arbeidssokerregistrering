@@ -2,7 +2,7 @@ import { State as SvarState } from '../../ducks/svar';
 import { DinSituasjonSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
 
-export type SkjemaConfig = any; // tslint:disable-line no-any
+export type SkjemaConfig = Map<Svar, string[]>;
 
 export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
     return `${sporsmalId.toLowerCase()}-svar-${svarSuffiksTilTekstId(svar)}`;
@@ -19,29 +19,18 @@ export function svarSuffiksTilTekstId(svar: Svar) {
         .join('-');
 }
 
-const defaultSkjemaConfig: SkjemaConfig = {
-    'dinSituasjon': {
-        svar: DinSituasjonSvar.ALDRI_HATT_JOBB,
-        skip: ['sisteStilling'],
-    },
-    'utdanning': {
-        svar: UtdanningSvar.INGEN_UTDANNING,
-        skip: ['utdanningBestatt', 'utdanningGodkjent'],
-    }
-};
+const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[]>([
+    // Denne configgen sier noe om hvilke spørsmål man skal hoppe over, gitt brukerens svar.
+    // For eksempel betyr [ALDRI_HATT_JOBB, ['sisteStilling']] at man skal hoppe over spørsmålet om sisteStilling
+    // hvis man svarer ALDRI_HATT_JOBB på spørsmålet om dinSituasjon.
 
-function getSporsmalSomIkkeSkalBesvares(
-    sporsmalId: string,
-    svar: Svar,
-    skjemaConfig?: SkjemaConfig
-): string[] {
-    const config = skjemaConfig === undefined ? defaultSkjemaConfig : skjemaConfig;
+    [DinSituasjonSvar.ALDRI_HATT_JOBB, ['sisteStilling']],
+    [DinSituasjonSvar.VIL_FORTSETTE_I_JOBB, ['utdanning', 'utdanningBestatt', 'utdanningGodkjent']],
+    [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
+]);
 
-    if (config[sporsmalId] === undefined || config[sporsmalId].svar !== svar) {
-        return [];
-    }  else {
-        return config[sporsmalId].skip;
-    }
+export function getSporsmalSomIkkeSkalBesvares(svar: Svar, config: SkjemaConfig): string[] {
+    return config.has(svar) ? config.get(svar)! : [];
 }
 
 export function getAlleSporsmalSomIkkeSkalBesvares(
@@ -50,7 +39,8 @@ export function getAlleSporsmalSomIkkeSkalBesvares(
     config?: SkjemaConfig
 ): string[] {
     let sporsmal: string[] = [];
+    const skjemaConfig = config ? config : defaultConfigForSporsmalsflyt;
     sporsmalIder.forEach(sporsmalId =>
-        sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(sporsmalId, svarState[sporsmalId], config)]);
+        sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(svarState[sporsmalId], skjemaConfig)]);
     return sporsmal;
 }
