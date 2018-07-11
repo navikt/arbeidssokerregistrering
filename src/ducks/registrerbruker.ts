@@ -18,13 +18,18 @@ export enum ErrorTypes {
     BRUKER_MANGLER_ARBEIDSTILLATELSE = 'BRUKER_MANGLER_ARBEIDSTILLATELSE',
 }
 
+export enum EnigIOppsummering {
+    JA = 'JA',
+    NEI = 'NEI',
+}
+
 export interface State {
     data: Data;
     status: string;
 }
 
 export interface RegistreringData {
-    enigIOppsummering?: boolean;
+    enigIOppsummering?: EnigIOppsummering;
     oppsummering?: string;
     sisteStilling?: Stilling;
     besvarelse?: SvarState;

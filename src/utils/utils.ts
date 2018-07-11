@@ -2,7 +2,7 @@
 import { State as SvarState } from '../ducks/svar';
 import { Stilling } from '../ducks/siste-stilling';
 import * as moment from 'moment';
-import { RegistreringData } from '../ducks/registrerbruker';
+import { EnigIOppsummering, RegistreringData } from '../ducks/registrerbruker';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -30,7 +30,7 @@ export function mapAvgitteSvarForBackend(
 ): RegistreringData {
     if (besvarelseErGyldig(svar)) {
         return {
-            enigIOppsummering: true,
+            enigIOppsummering: EnigIOppsummering.JA,
             sisteStilling: sisteStilling,
             besvarelse: svar,
             oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
