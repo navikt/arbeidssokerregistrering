@@ -14,7 +14,7 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import {
     SisteStillingSvar,
     UtdanningBestattSvar,
-    UtdanningGodkjentSvar
+    UtdanningGodkjentSvar, UtdanningSvar
 } from '../../ducks/svar-utils';
 import OppsummeringElement from './oppsummering-element';
 import { erIE } from '../../utils/ie-test';
@@ -63,7 +63,10 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 >
                     Siste stilling:&nbsp;
                 </OppsummeringElement>
-                <OppsummeringElement sporsmalId={'utdanning'}>
+                <OppsummeringElement
+                    sporsmalId={'utdanning'}
+                    skjulHvisSvarErLik={[UtdanningSvar.INGEN_SVAR]}
+                >
                     Høyeste fullførte utdanning:&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
