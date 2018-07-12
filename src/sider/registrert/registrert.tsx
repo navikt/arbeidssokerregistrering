@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Normaltekst, Systemtittel, Element, Innholdstittel } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
 
-const handinfoSvg = require('./handinfo.svg');
+const handinfoSvg = require('./clipboard.svg');
 
 class DuErNaRegistrert extends React.Component {
 
@@ -14,15 +14,13 @@ class DuErNaRegistrert extends React.Component {
 
                 <div className="registrert__avsjekk">
                     <AvsjekkBilde/>
-                    <Innholdstittel tag="h1" className="registrert__tittel">
+                    <Systemtittel tag="h1" className="registrert__tittel">
                         <FormattedMessage id="duernaregistrert-innholdstittel"/>
-                    </Innholdstittel>
+                    </Systemtittel>
                 </div>
 
                 <div className="registrert__aksjonspanel">
-                    <div className="registrert__handinfo-ikon">
-                        <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
-                    </div>
+                    <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon"/>
                     <div className="registrert__tekster">
                         <Systemtittel tag="h2" className="blokk-xs">
                             <FormattedMessage id="duernaregistrert-systemtittel"/>
@@ -34,10 +32,10 @@ class DuErNaRegistrert extends React.Component {
                             <FormattedMessage id="duernaregistrert-element"/>
                         </Element>
                         <div className="registrert__knapperad">
-                            <a href={VEIENTILARBEID_URL} className="knapp knapp--standard">
+                            <a href={VEIENTILARBEID_URL} className="registrert__lenke knapp knapp--standard">
                                 <FormattedMessage id="knapp-ikke-na"/>
                             </a>
-                            <a href={VEIENTILARBEID_MED_DAGPENGER_URL} className="knapp knapp--hoved">
+                            <a href={VEIENTILARBEID_MED_DAGPENGER_URL} className="registrert__lenke knapp knapp--hoved">
                                 <FormattedMessage id="knapp-ja-vis-meg"/>
                             </a>
                         </div>

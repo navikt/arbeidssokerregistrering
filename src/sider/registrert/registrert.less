@@ -11,7 +11,7 @@
     }
     100% {
         left: 108px;
-        top: 30px;
+        top: 40px;
         height: 70px;
     }
 }
@@ -49,7 +49,7 @@
     }
 }
 
-@keyframes panel-plassering {
+@keyframes panel-plassering-mobil {
     0% {
         opacity: 0;
         margin-top: 400px;
@@ -60,15 +60,27 @@
     }
     100% {
         opacity: 1;
-        margin-top: 180px;
+        margin-top: 6rem;
+    }
+}
+
+@keyframes panel-plassering-desktop {
+    0% {
+        opacity: 0;
+        margin-top: 400px;
+    }
+    80% {
+        opacity: 0;
+        margin-top: 400px;
+    }
+    100% {
+        opacity: 1;
+        margin-top: 11rem;
     }
 }
 
 .registrering-banner + .limit {
     padding: 1rem 1.4rem;
-    & > .registrert {
-        margin-top: -12rem;
-    }
 }
 
 .registrert {
@@ -82,22 +94,22 @@
 
     &__tittel {
         position: absolute;
-        left: 88px;
-        top: 7px;
-        width: ~'calc(100vw - 70px)';
+        left: 4rem;
+        top: -7px;
+        width: ~'calc(100vw - 7.4rem)';
         opacity: 0;
         animation: tittel-plassering 6s both;
     }
 
     &__aksjonspanel {
-        top: 8rem;
+        // top: -4rem;
         text-align: left;
         position: relative;
         opacity: 0;
         border: 3px solid @navBlaLighten80;
         border-radius: 8px;
         padding: 2rem;
-        animation: panel-plassering 6.5s both;
+        animation: panel-plassering-mobil 6.5s both;
     }
 
     &__handinfo-ikon {
@@ -118,7 +130,6 @@
     .registrert {
         text-align: left;
         width: 36rem;
-        height: ~'calc(100vh - 180px)';
         margin: 0 auto;
 
         &__avsjekk {
@@ -127,27 +138,35 @@
 
         &__tittel {
             width: ~'calc(36rem - 140px)';
-            top: 0;
+            top: 5px;
         }
 
         &__aksjonspanel {
-            padding: 2rem 3rem 2rem 7rem;
+            padding: 4rem 5.5rem;
+            top: -3rem;
+            animation: panel-plassering-desktop 6.5s both;
         }
 
         &__handinfo-ikon {
+            display: block;
             position: absolute;
-            height: 100%;
-            left: -80px;
-            top: 0;
-            display: flex;
-            align-items: center;
+            top: -53px;
+            left: 0;
+            right: 0;
+            margin: auto;
         }
 
         &__knapperad {
-            display: inline-block;
+            display: flex;
+            flex-direction: row;
             .knapp:first-child {
                 margin-right: 1rem;
             }
+        }
+
+        &__lenke {
+            max-width: ~'calc(50% - 0.5rem)';
+            flex-grow: 1;
         }
     }
 }
