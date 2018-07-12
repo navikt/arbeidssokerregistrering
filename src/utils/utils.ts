@@ -111,5 +111,5 @@ export function scrollToBanner() {
     if (header) {
         scrollHeight = header.getBoundingClientRect().height;
     }
-    setTimeout(() => window.scrollTo(0, scrollHeight), 100);
+    setTimeout(() => window.scrollTo(0, scrollHeight), 0);
 }
