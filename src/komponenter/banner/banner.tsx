@@ -25,8 +25,7 @@ class Banner extends React.Component<Props> {
 
     skalVises(): boolean {
         return !(document.location.pathname.includes(START_PATH)
-            && (this.props.startRegistreringStatus.underOppfolging === false)
-            && (this.props.startRegistreringStatus.kreverReaktivering === false));
+            && (this.props.startRegistreringStatus.underOppfolging === false));
 
     }
 }
