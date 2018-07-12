@@ -13,7 +13,7 @@ class AlleredeRegistrert extends React.Component<Props> {
         const messages = this.props.intl.messages;
         return (
             <div>
-                <Banner intl={this.props.intl}/>
+                <Banner />
                 <Container className="allerede-registrert">
                     <GraaBakgrunn />
                     <Row>
