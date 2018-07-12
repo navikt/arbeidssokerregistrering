@@ -12,8 +12,9 @@ import {
 import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import {setInitialState} from "../../ducks/svar";
 import { SkjemaProps } from './skjema';
-import {DinSituasjonSvar, HelseHinderSvar, UtdanningSvar} from "../../ducks/svar-utils";
+import {DinSituasjonSvar, HelseHinderSvar, Svar, UtdanningSvar} from "../../ducks/svar-utils";
 import {SkjemaProps} from './skjema';
+import {SkjemaConfig} from "./skjema-utils";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -58,16 +59,10 @@ describe('<Skjema />', () => {
             situasjon: DinSituasjonSvar.ER_PERMITTERT,
         };
 
-        const config = {
-            helse: {
-                svar: HelseHinderSvar.NEI,
-                skip: ['oppsummering', 'test']
-            },
-            utdanning: {
-                svar: UtdanningSvar.INGEN_UTDANNING,
-                skip: ['test2'],
-            }
-        };
+        const config: SkjemaConfig = new Map<Svar, string[]>([
+            [HelseHinderSvar.NEI, ['oppsummering', 'test']],
+            [UtdanningSvar.INGEN_UTDANNING, ['test2']],
+        ]);
 
         const props: SkjemaProps = {
             ...dummyPropsTilSkjema,

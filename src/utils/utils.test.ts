@@ -4,7 +4,7 @@ import { State as SvarState } from '../ducks/svar';
 import * as moment from 'moment';
 
 import {
-    getIntlMessage, mapTilNuskode, hentFornavn, mapAvgitteSvarForBackend,
+    getIntlMessage, hentFornavn, mapAvgitteSvarForBackend,
     hentAlder
 } from './utils';
 import {
@@ -76,7 +76,6 @@ describe('utils test', () => {
         };
 
         const expectData = {
-            nusKode: mapTilNuskode(dummySvar.utdanning!),
             sisteStilling: stilling,
             enigIOppsummering: true,
             oppsummering: '',

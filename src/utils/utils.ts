@@ -1,15 +1,7 @@
-import {
-    NUSKODE_0,
-    NUSKODE_2,
-    NUSKODE_3,
-    NUSKODE_4,
-    NUSKODE_6,
-    NUSKODE_7, NUSKODE_9,
-} from './konstanter';
+
 import { State as SvarState } from '../ducks/svar';
 import { Stilling } from '../ducks/siste-stilling';
 import * as moment from 'moment';
-import { UtdanningSvar } from '../ducks/svar-utils';
 import { RegistreringData } from '../ducks/registrerbruker';
 
 export function hentFornavn(name: string | undefined) {
@@ -32,26 +24,12 @@ export function guid() {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }
 
-export const mapTilNuskode = (svar: UtdanningSvar) => {
-    switch (svar) {
-        case (UtdanningSvar.INGEN_UTDANNING): return NUSKODE_0;
-        case (UtdanningSvar.GRUNNSKOLE): return NUSKODE_2;
-        case (UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING): return NUSKODE_3;
-        case (UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV): return NUSKODE_4;
-        case (UtdanningSvar.HOYERE_UTDANNING_1_TIL_4): return NUSKODE_6;
-        case (UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER): return NUSKODE_7;
-        case (UtdanningSvar.INGEN_SVAR): return NUSKODE_9;
-        default: return NUSKODE_9;
-    }
-};
-
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     sisteStilling: Stilling
 ): RegistreringData {
     if (besvarelseErGyldig(svar)) {
         return {
-            nusKode: mapTilNuskode(svar.utdanning!),
             enigIOppsummering: true,
             sisteStilling: sisteStilling,
             besvarelse: svar,
