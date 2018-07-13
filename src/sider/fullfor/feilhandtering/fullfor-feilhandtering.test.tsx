@@ -7,7 +7,7 @@ import {create} from "../../../store";
 import {ActionTypes as FullforActionTypes, ErrorTypes} from '../../../ducks/registrerbruker';
 import FullforFeilhandtering from './fullfor-feilhandtering';
 import FeilmeldingBrukersStatusUgyldig from './feilmelding-brukers-status-ugyldig';
-import FeilmeldingGenerell from '../../../komponenter/feilmelding-generell/feilmelding-generell';
+import FeilmeldingGenerell from '../../../komponenter/feilmelding/feilmelding-generell';
 
 enzyme.configure({adapter: new Adapter()});
 
