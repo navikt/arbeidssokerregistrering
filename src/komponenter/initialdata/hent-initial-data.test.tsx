@@ -10,7 +10,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import { AUTENTISERINGSINFO_URL } from '../../ducks/api';
 import HentInitialData from './hent-initial-data';
 import StepUp from './stepup';
-import Feilmelding from './feilmelding';
+import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -27,7 +27,7 @@ describe('<HentInitialData />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(wrapper.find(Feilmelding)).to.have.length(1);
+                expect(wrapper.find(FeilmeldingGenerell)).to.have.length(1);
             });
     });
     it('skal rendre <StepUp/> dersom bruker ikke har gyldig oidc-token og ikke er på nivå 4', () => {

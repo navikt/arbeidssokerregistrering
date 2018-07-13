@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
@@ -20,11 +19,11 @@ import {
     velgSisteStilling
 } from '../../ducks/siste-stilling';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import Feilmelding from '../../komponenter/initialdata/feilmelding';
 import Loader from '../../komponenter/loader/loader';
 import { hentOversattStillingFraAAReg } from './sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
 import { STATUS } from '../../ducks/api-utils';
 import { selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
+import FeilmeldingGenerell from '../../komponenter/feilmelding/feilmelding-generell';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -40,7 +39,7 @@ interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps;
 interface State {
     stillingErSatt: {status: string};
 }
@@ -84,12 +83,11 @@ class LastInnSisteStilling extends React.Component<Props, State> {
         const {
             sisteStillingFraAAReg,
             oversettelseAvStillingFraAAReg,
-            intl,
         } = this.props;
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
+                feilmeldingKomponent={<FeilmeldingGenerell />}
                 avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, this.state.stillingErSatt]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
@@ -116,4 +114,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(LastInnSisteStilling));
+export default connect(mapStateToProps, mapDispatchToProps)(LastInnSisteStilling);
