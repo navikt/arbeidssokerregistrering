@@ -2,7 +2,6 @@
   "name": "arbeidssokerregistrering",
   "homepage": "/arbeidssokerregistrering",
   "version": "0.1.0",
-  "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
     "@types/query-string": "5.1.0",
