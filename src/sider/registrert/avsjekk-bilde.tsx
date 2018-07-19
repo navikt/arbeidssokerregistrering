@@ -7,7 +7,7 @@ export default class AvsjekkBilde extends React.Component {
         return (
             <svg
                 role="img"
-                className="avsjekk__bilde"
+                className={`avsjekk__bilde ${erIE() && 'erIE'}`}
                 aria-label="Laster innhold"
                 id="Layer_1"
                 data-name="Layer 1"
