@@ -26,6 +26,7 @@ import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { erIE } from '../../utils/ie-test';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -130,7 +131,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
-                <section className="fullfor">
+                <section className={`fullfor ${erIE() && 'erIE'}`}>
                     <Innholdstittel tag="h1" className="fullfor-tittel">
                         <FormattedMessage id="fullfor-header"/>
                     </Innholdstittel>

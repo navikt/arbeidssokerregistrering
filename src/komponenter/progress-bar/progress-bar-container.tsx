@@ -18,8 +18,9 @@ class ProgressBarContainer extends React.Component<Props> {
         if (progressBarConfig.includes(pathname)) {
             return (
                 <ProgressBar
-                    gjeldendeSporsmal={progressBarConfig.indexOf(pathname) + 1}
+                    gjeldendeSporsmal={progressBarConfig.indexOf(pathname)}
                     antallSporsmal={config.length}
+                    offset={3}
                 />
             );
         } else {

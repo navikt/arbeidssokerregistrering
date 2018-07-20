@@ -3,6 +3,7 @@ import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
+import { erIE } from '../../utils/ie-test';
 
 const handinfoSvg = require('./clipboard.svg');
 
@@ -10,7 +11,7 @@ class DuErNaRegistrert extends React.Component {
 
     render() {
         return (
-            <section className="registrert">
+            <section className={`registrert ${erIE() && 'erIE'}`}>
 
                 <div className="registrert__avsjekk">
                     <AvsjekkBilde/>

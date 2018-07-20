@@ -1,13 +1,13 @@
 @keyframes avsjekk-plassering {
     0% {
-        left: ~'calc((100% - 280px) / 2)';
-        top: ~'calc((90% - 280px) / 2)';
-        height: 280px;
+        left: ~'calc((100% - 159px) / 2)';
+        top: ~'calc((55% - 159px) / 2)';
+        height: 159px;
     }
     67% {
-        left: ~'calc((100% - 280px) / 2)';
-        top: ~'calc((90% - 280px) / 2)';
-        height: 280px;
+        left: ~'calc((100% - 159px) / 2)';
+        top: ~'calc((55% - 159px) / 2)';
+        height: 159px;
     }
     100% {
         left: 108px;
@@ -18,14 +18,14 @@
 
 @keyframes avsjekk-plassering-mobil {
     0% {
-        left: ~'calc((100% - 280px) / 2)';
-        top: ~'calc((90% - 280px) / 2)';
-        height: 280px;
+        left: ~'calc((100% - 159px) / 2)';
+        top: ~'calc((47% - 159px) / 2)';
+        height: 159px;
     }
     67% {
-        left: ~'calc((100% - 280px) / 2)';
-        top: ~'calc((90% - 280px) / 2)';
-        height: 280px;
+        left: ~'calc((100% - 159px) / 2)';
+        top: ~'calc((47% - 159px) / 2)';
+        height: 159px;
     }
     100% {
         left: 22px;
@@ -87,8 +87,8 @@
 
     &__avsjekk {
         position: absolute;
-        left: ~'calc((100% - 280px) / 2)';
-        top: ~'calc((90% - 280px) / 2)';
+        left: ~'calc((100% - 159px) / 2)';
+        top: ~'calc((90% - 159px) / 2)';
         animation: avsjekk-plassering-mobil 5s both;
     }
 
@@ -102,7 +102,7 @@
     }
 
     &__aksjonspanel {
-        // top: -4rem;
+        top: -4rem;
         text-align: left;
         position: relative;
         opacity: 0;
@@ -143,7 +143,7 @@
 
         &__aksjonspanel {
             padding: 4rem 5.5rem;
-            top: -3rem;
+            top: -7rem;
             animation: panel-plassering-desktop 6.5s both;
         }
 
@@ -168,5 +168,26 @@
             max-width: ~'calc(50% - 0.5rem)';
             flex-grow: 1;
         }
+    }
+}
+
+.registrert.erIE {
+
+    .registrert__avsjekk {
+        left: 108px;
+        top: 40px;
+        height: 70px;
+        animation: none;
+    }
+
+    .registrert__tittel {
+        opacity: 1;
+        animation: none;
+    }
+
+    .registrert__aksjonspanel {
+        opacity: 1;
+        margin-top: 11rem;
+        animation: none;
     }
 }
