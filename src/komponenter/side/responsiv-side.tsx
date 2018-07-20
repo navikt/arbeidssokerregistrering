@@ -13,10 +13,6 @@ class ResponsivSide extends React.Component<ResponsivSideProps> {
         super(props);
     }
 
-    componentDidMount () {
-        scrollToBanner();
-    }
-
     render() {
         const {children, className} = this.props;
 
