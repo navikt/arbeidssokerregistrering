@@ -36,7 +36,7 @@ export function mapAvgitteSvarForBackend(
             oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
         };
     } else {
-        throw new Error('Besvarelsen er ikke gyldig.');
+        return {};
     }
 }
 
