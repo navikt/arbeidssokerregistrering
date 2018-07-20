@@ -17,7 +17,7 @@ export default class AvsjekkBilde extends React.Component {
                 <polyline
                     className={erIE() ? '' : 'hake'}
                     stroke="#ccdee6"
-                    strokeWidth="9"
+                    strokeWidth="10"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
@@ -26,11 +26,11 @@ export default class AvsjekkBilde extends React.Component {
                 <path
                     className={erIE() ? '' : 'sirkel'}
                     stroke="#ccdee6"
-                    strokeWidth="9"
+                    strokeWidth="10"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     fill="none"
-                    d="M91.88,12.56A58.38,58.38,0,1,0,120.4,48.4"
+                    d="M91.88,12.56A59,59,0,1,0,120.4,48.4"
                 />
             </svg>
         );

@@ -3,6 +3,7 @@ import * as React from 'react';
 interface OwnProps {
     gjeldendeSporsmal: number;
     antallSporsmal: number;
+    offset: number;
 }
 
 export default class ProgressBar extends React.Component<OwnProps> {
@@ -42,8 +43,8 @@ export default class ProgressBar extends React.Component<OwnProps> {
     }
 
     render() {
-        const {gjeldendeSporsmal, antallSporsmal} = this.props;
-        const framdriftBredde = Math.round((gjeldendeSporsmal / antallSporsmal) * 100);
+        const {gjeldendeSporsmal, antallSporsmal, offset} = this.props;
+        const framdriftBredde = Math.round(offset + (gjeldendeSporsmal / (antallSporsmal - 1)) * (100 - 2 * offset));
 
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
