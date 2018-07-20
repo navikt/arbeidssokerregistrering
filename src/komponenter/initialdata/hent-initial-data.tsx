@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { AppState } from '../../reducer';
 import {
     hentBrukersNavn,
@@ -19,13 +18,13 @@ import {
     selectRegistreringstatus,
     State as RegistreringstatusState } from '../../ducks/registreringstatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import Feilmelding from './feilmelding';
 import StepUp from './stepup';
 import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import { hentFeatureToggles, selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
 import { selectAutentiseringsinfo } from '../../ducks/autentiseringsinfo';
 import { VEILARBSTEPUP } from '../../ducks/api';
+import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
@@ -43,7 +42,7 @@ interface DispatchProps {
     hentFeatureToggles: () => Promise<void | {}>;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps;
 
 export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
@@ -60,7 +59,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, autentiseringsinfo, brukersNavn, intl, brukersFnr } = this.props;
+        const { children, registreringstatus, autentiseringsinfo, brukersNavn, brukersFnr } = this.props;
         const { niva } = autentiseringsinfo.data;
         const { harGyldigOidcToken } = autentiseringsinfo.data;
 
@@ -75,7 +74,7 @@ export class HentInitialData extends React.Component<Props> {
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<Feilmelding intl={intl} id="feil-i-systemene-beskrivelse"/>}
+                feilmeldingKomponent={<FeilmeldingGenerell />}
                 avhengigheter={[
                     registreringstatus,
                     brukersNavn,
@@ -107,6 +106,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentFeatureToggles: () => dispatch(hentFeatureToggles()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(HentInitialData)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(HentInitialData);

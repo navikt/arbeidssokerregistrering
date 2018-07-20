@@ -28,7 +28,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const MOCK_BESVARELSE = true; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
@@ -42,11 +42,6 @@ if (MOCK_START_REGISRERING_STATUS) {
 
 if (MOCK_FEATURE_TOGGLES) {
     (mock as any).get(`express:${FEATURE_URL}/?feature(.*)`, respondWith(delayed(DELAY, featureTogglesMock)));
-}
-
-if (MOCK_REGISTRER_BRUKER) {
-    const response = respondWith(delayed(DELAY, registreringRespons));
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_BRUKERS_NAVN) {
@@ -79,6 +74,11 @@ if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
 if(MOCK_STYRK08_PAMJANZZ) {
     (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
         respondWith(delayed(DELAY / 10, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
+}
+
+if (MOCK_REGISTRER_BRUKER) {
+    const response = respondWith(delayed(DELAY, registreringRespons, 500));
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 
 if (MOCK_BESVARELSE) {
