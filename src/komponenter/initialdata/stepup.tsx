@@ -2,12 +2,11 @@ import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { VEILARBSTEPUP } from '../../ducks/api';
-import ResponsivSide from '../side/responsiv-side';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 
 function StepUp() {
     return (
-        <ResponsivSide className="stepup">
+        <section className="stepup">
             <NavAlertStripe type="info">
                 <FormattedHTMLMessage id="stepup-melding"/>
             </NavAlertStripe>
@@ -21,7 +20,7 @@ function StepUp() {
                     </Normaltekst>
                 </button>
             </div>
-        </ResponsivSide>
+        </section>
     );
 }
 
