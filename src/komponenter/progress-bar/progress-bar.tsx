@@ -44,7 +44,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
 
     render() {
         const {gjeldendeSporsmal, antallSporsmal, offset} = this.props;
-        const framdriftBredde = Math.round(offset + (gjeldendeSporsmal / (antallSporsmal - 1)) * (100 - 2 * offset));
+        const framdriftBredde = Math.round(offset + (gjeldendeSporsmal / (antallSporsmal - 1)) * 100);
 
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {

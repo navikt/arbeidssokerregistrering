@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import { scrollToBanner } from '../../utils/utils';
 
 interface ResponsivSideProps {
     children: React.ReactNode;
@@ -11,10 +10,6 @@ class ResponsivSide extends React.Component<ResponsivSideProps> {
 
     constructor(props: ResponsivSideProps) {
         super(props);
-    }
-
-    componentDidMount () {
-        scrollToBanner();
     }
 
     render() {
