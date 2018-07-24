@@ -19,6 +19,7 @@ import {sisteStillingMock} from "./siste-stilling";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
+const MOCK_REAKTIVER_BRUKER = true;
 const MOCK_BRUKERS_FNR = true;
 const MOCK_BRUKERS_NAVN = true;
 const MOCK_AUTENTISERINGS_INFO = true;
@@ -28,7 +29,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = true; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const MOCK_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
@@ -77,8 +78,13 @@ if(MOCK_STYRK08_PAMJANZZ) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    const response = respondWith(delayed(DELAY, registreringRespons, 500));
+    const response = respondWith(delayed(DELAY, registreringRespons, 200));
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
+}
+
+if (MOCK_REAKTIVER_BRUKER) {
+    const response = respondWith(delayed(500, {}, 200));
+    (mock as any).post(`${VEILARBREGISTRERING_URL}/startreaktivering`, response);
 }
 
 if (MOCK_BESVARELSE) {

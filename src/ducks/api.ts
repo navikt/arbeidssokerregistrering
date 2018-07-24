@@ -55,6 +55,16 @@ export function registrerBruker(data: RegistrerBrukerData) {
     });
 }
 
+export function startReaktivering() {
+    return fetchToJson({
+        url: `${VEILARBREGISTRERING_URL}/startreaktivering`,
+        config: { ...MED_CREDENTIALS,
+            headers: getHeaders(),
+            method: 'post',
+            body: JSON.stringify({})}
+    });
+}
+
 const sblOpprettMinIdConfig = {
     method: 'POST',
     credentials: 'same-origin',

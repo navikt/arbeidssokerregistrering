@@ -10,19 +10,29 @@ import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
 import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
+import {Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
+import { selectReaktiveringFeatureToggle } from '../../ducks/feature-toggles';
+import KreverReaktivering from '../../sider/krever-reaktivering/krever-reaktivering';
 
 const personSvg = require('./person-komprimert.svg');
 
 interface StateProps {
+    registreringstatusData: RegistreringstatusData;
     brukersNavn: BrukersNavnState;
+    brukReaktivering: boolean;
 }
 
 type StartProps = StateProps & null;
 
 export class Start extends React.Component<RouteComponentProps<MatchProps> & StartProps> {
     render() {
-        const {brukersNavn, history} = this.props;
+        const {brukReaktivering, registreringstatusData, brukersNavn, history} = this.props;
         const {name} = brukersNavn.data;
+
+        if (registreringstatusData.kreverReaktivering && brukReaktivering) {
+            return <KreverReaktivering />;
+        }
+
         return (
             <section className="startside">
                 <div className="startside__banner">
@@ -61,7 +71,9 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
 }
 
 const mapStateToProps = (state: AppState) => ({
-    brukersNavn: selectBrukersNavn(state)
+    brukersNavn: selectBrukersNavn(state),
+    registreringstatusData: selectRegistreringstatus(state).data,
+    brukReaktivering: selectReaktiveringFeatureToggle(state)
 });
 
 export default connect(mapStateToProps, null)(Start);
