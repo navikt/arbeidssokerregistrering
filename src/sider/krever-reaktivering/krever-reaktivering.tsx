@@ -14,8 +14,6 @@ import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { DUERNAREGISTRERT_PATH } from '../../utils/konstanter';
 
-// tslint:disable
-
 const handinfoSvg = require('./handinfo.svg');
 
 interface StateProps {
