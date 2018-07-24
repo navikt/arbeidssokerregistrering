@@ -7,7 +7,7 @@ import { DITTNAV_URL } from '../../ducks/api';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reaktiverbruker';
-import Loader from '../../komponenter/loader/loader';
+import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import FeilmeldingGenerell from '../../komponenter/feilmelding/feilmelding-generell';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import KnappBase from 'nav-frontend-knapper';
@@ -38,7 +38,6 @@ class KreverReaktivering extends React.Component<Props> {
         onReaktiverBruker()
             .then((res) => {
                 if (!!res) {
-                    console.log('res', res)
                     history.push(DUERNAREGISTRERT_PATH);
                 }
             });
@@ -46,16 +45,6 @@ class KreverReaktivering extends React.Component<Props> {
 
     render() {
         const {reaktiverBrukerData} = this.props;
-        const loaderTittelElement = (
-            <>
-            <Innholdstittel className="blokk-s">
-                Registrering pågår.
-            </Innholdstittel>
-            <Normaltekst>
-                Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
-            </Normaltekst>
-            </>
-        );
 
         return (
             <>

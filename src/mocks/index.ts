@@ -78,7 +78,7 @@ if(MOCK_STYRK08_PAMJANZZ) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    const response = respondWith(delayed(DELAY, registreringRespons, 500));
+    const response = respondWith(delayed(DELAY, registreringRespons, 200));
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
 }
 

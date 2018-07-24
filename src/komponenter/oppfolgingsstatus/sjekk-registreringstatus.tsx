@@ -20,8 +20,6 @@ type Props = StateProps & InjectedIntlProps;
 class SjekkRegistreringstatus extends React.PureComponent<Props> {
 
     render () {
-        // tslint:disable
-        console.log('sjekkstatus')
         const {registreringstatusData, children, brukNyRegistrering} = this.props;
         if (registreringstatusData.underOppfolging) {
             return <AlleredeRegistrert intl={this.props.intl} />;

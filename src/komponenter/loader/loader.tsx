@@ -1,4 +1,16 @@
 import * as React from 'react';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+
+export const loaderTittelElement = (
+    <>
+    <Innholdstittel className="blokk-s">
+        Registrering pågår.
+    </Innholdstittel>
+    <Normaltekst>
+        Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
+    </Normaltekst>
+    </>
+);
 
 interface LoaderProps {
     tittelElement?: React.ReactNode;

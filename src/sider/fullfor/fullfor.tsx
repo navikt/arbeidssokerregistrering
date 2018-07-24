@@ -20,7 +20,7 @@ import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
-import Loader from '../../komponenter/loader/loader';
+import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
@@ -105,17 +105,6 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
 
     render() {
         const {registrerBrukerData, intl} = this.props;
-
-        const loaderTittelElement = (
-            <>
-                <Innholdstittel className="blokk-s">
-                    Registrering pågår.
-                </Innholdstittel>
-                <Normaltekst>
-                    Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
-                </Normaltekst>
-            </>
-        );
 
         const advarselElement = this.state.visAdvarsel && (
             <NavAlertStripe type="advarsel">
