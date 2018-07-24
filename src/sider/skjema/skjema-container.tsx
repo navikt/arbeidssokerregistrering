@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { SKJEMA_PATH, OPPSUMMERING_PATH } from '../../utils/konstanter';
+import { SKJEMA_PATH, OPPSUMMERING_PATH, START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
@@ -115,7 +115,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
     settGjeldendeSporsmalOgResetHvisNaN(sporsmal: string) {
         if (isNaN(Number(sporsmal))) {
-            this.props.history.push(`${SKJEMA_PATH}/0`);
+            this.props.history.push(START_PATH);
             return;
         }
         this.gjeldendeSporsmal = Number(sporsmal);
@@ -128,7 +128,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     gaaTilForsteSporsmalHvisDeForegaendeIkkeErBesvart() {
         const antallBesvarteSporsmal = Object.keys(this.props.svarState).length;
         if (this.gjeldendeSporsmal > antallBesvarteSporsmal) {
-            this.props.history.push(`${SKJEMA_PATH}/0`);
+            this.props.history.push(START_PATH);
         }
     }
 

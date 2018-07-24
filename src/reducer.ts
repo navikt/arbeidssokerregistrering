@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { FieldState } from 'redux-form';
 import svar, { State as SvarState } from './ducks/svar';
+import reaktiverBruker, { State as ReaktiveringState } from './ducks/reaktiverbruker';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruker';
 import brukersNavn, { State as BrukersNavnState } from './ducks/brukers-navn';
@@ -17,6 +18,7 @@ export interface AppState {
     svar: SvarState;
     registreringStatus: RegStatusState;
     registrerBruker: RegistrerBruker;
+    reaktiverBruker: ReaktiveringState;
     brukersNavn: BrukersNavnState;
     autentiseringsInfo: AutentiseringsInfoState;
     brukersFnr: BrukersFnrState;
@@ -31,6 +33,7 @@ export default combineReducers<AppState>({
     svar,
     registreringStatus,
     registrerBruker,
+    reaktiverBruker,
     brukersNavn,
     autentiseringsInfo,
     brukersFnr,
