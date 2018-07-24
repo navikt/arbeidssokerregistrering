@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import ResponsivSide from '../../../komponenter/side/responsiv-side';
-import Feilmelding from './feilmelding/feilmelding';
+import Feilmelding from '../../../komponenter/feilmelding/feilmelding';
 import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
 
 interface IntlPropsWithFeilType extends InjectedIntlProps {
