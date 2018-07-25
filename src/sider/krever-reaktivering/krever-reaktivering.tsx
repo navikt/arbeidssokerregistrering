@@ -8,7 +8,7 @@ import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reaktiverbruker';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
-import FeilmeldingGenerell from '../../komponenter/feilmelding/feilmelding-generell';
+import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
@@ -48,7 +48,7 @@ class KreverReaktivering extends React.Component<Props> {
             <>
             <Banner/>
             <Innholdslaster
-                feilmeldingKomponent={<FeilmeldingGenerell/>}
+                feilmeldingKomponent={<ReaktiveringFeilhandtering/>}
                 avhengigheter={[reaktiverBrukerData]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
