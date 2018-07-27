@@ -20,7 +20,7 @@ describe('<FullforFeilhandtering />', () => {
         });
 
         const wrapper = shallowwithStoreAndIntl(<FullforFeilhandtering />, store);
-        expect(wrapper.find(FeilmeldingBrukersStatusUgyldig)).to.be.have.length(1);
+        expect(wrapper.dive().find(FeilmeldingBrukersStatusUgyldig)).to.be.have.length(1);
     });
 
     it('Skal sende bruker til generisk feilside hvis feilen ikke en av typene til ErrorTypes', () => {
@@ -30,6 +30,6 @@ describe('<FullforFeilhandtering />', () => {
         });
 
         const wrapper = shallowwithStoreAndIntl(<FullforFeilhandtering />, store);
-        expect(wrapper.find(FeilmeldingGenerell)).to.be.have.length(1);
+        expect(wrapper.dive().find(FeilmeldingGenerell)).to.be.have.length(1);
     });
 });
