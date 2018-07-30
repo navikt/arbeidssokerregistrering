@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { AppState } from '../../../reducer';
 import { ErrorData as FullforErrorData } from '../../../ducks/registrerbruker';
-import Feilhandtering from './feilhandtering';
+import Feilhandtering from '../../fullfor/feilhandtering/feilhandtering';
 
 interface StateProps {
     errorData: FullforErrorData;
@@ -11,7 +11,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-class FullforFeilhandtering extends React.Component<Props> {
+class ReaktiveringFeilhandtering extends React.Component<Props> {
     render() {
         const errorData = this.props.errorData;
         const intl = this.props.intl;
@@ -21,8 +21,8 @@ class FullforFeilhandtering extends React.Component<Props> {
 
 function mapStateToProps(state: AppState) {
     return {
-        errorData: (state.registrerBruker.data) as FullforErrorData
+        errorData: (state.reaktiverBruker.data) as FullforErrorData
     };
 }
 
-export default connect(mapStateToProps)(injectIntl(FullforFeilhandtering));
+export default connect(mapStateToProps)(injectIntl(ReaktiveringFeilhandtering));

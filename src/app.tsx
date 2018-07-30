@@ -16,8 +16,7 @@ import {
     OPPSUMMERING_PATH,
     SBLREG_PATH,
     SKJEMA_PATH,
-    START_PATH, STARTREAKTIVERING_PATH
-} from './utils/konstanter';
+    START_PATH } from './utils/konstanter';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
@@ -25,7 +24,6 @@ import StartRegistrering from './sider/start/start';
 import Skjema from './sider/skjema/skjema-container';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import DuErNaRegistrert from './sider/registrert/registrert';
-import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 import Avbryt from './sider/avbryt/avbryt';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Fullfor from './sider/fullfor/fullfor';
@@ -47,7 +45,6 @@ class App extends React.Component {
                                 <Sideanimasjon>
                                     <Switch>
                                         <Route path={START_PATH} component={StartRegistrering}/>
-                                        <Route path={STARTREAKTIVERING_PATH} component={KreverReaktivering}/>
                                         <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
                                         <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
                                         <Route path={SBLREG_PATH} component={SblRegistrering}/>
