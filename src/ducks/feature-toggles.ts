@@ -65,3 +65,7 @@ export function selectFeatureToggles(state: AppState): Data {
 export function selectBrukNyRegistreringFeatureToggle(state: AppState): boolean {
     return state.featureToggles.data['arbeidssokerregistrering.bruk-ny-registrering'];
 }
+
+export function selectGradualRolloutNyRegistreringFeatureToggle(state: AppState): boolean {
+    return state.featureToggles.data['arbeidssokerregistrering.gradual-rollout-ny-registrering'];
+}
