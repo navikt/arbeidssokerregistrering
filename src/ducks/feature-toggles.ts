@@ -10,6 +10,7 @@ export enum ActionTypes {
 
 export interface Data {
     'arbeidssokerregistrering.bruk-ny-registrering': boolean;
+    'arbeidssokerregistrering.gradual-rollout-ny-registrering': boolean;
 }
 
 export interface State {
@@ -24,11 +25,13 @@ interface Action {
 
 export const alleFeatureToggles = [
     'arbeidssokerregistrering.bruk-ny-registrering',
+    'arbeidssokerregistrering.gradual-rollout-ny-registrering',
 ];
 
 const initialState = {
     data : {
         'arbeidssokerregistrering.bruk-ny-registrering': false,
+        'arbeidssokerregistrering.gradual-rollout-ny-registrering': false,
     },
     status: STATUS.NOT_STARTED
 };
@@ -64,4 +67,8 @@ export function selectFeatureToggles(state: AppState): Data {
 
 export function selectBrukNyRegistreringFeatureToggle(state: AppState): boolean {
     return state.featureToggles.data['arbeidssokerregistrering.bruk-ny-registrering'];
+}
+
+export function selectGradualRolloutNyRegistreringFeatureToggle(state: AppState): boolean {
+    return state.featureToggles.data['arbeidssokerregistrering.gradual-rollout-ny-registrering'];
 }
