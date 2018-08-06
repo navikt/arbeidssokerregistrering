@@ -24,13 +24,11 @@ interface Action {
 
 export const alleFeatureToggles = [
     'arbeidssokerregistrering.bruk-ny-registrering',
-    'arbeissokerregistrering.reaktivering',
 ];
 
 const initialState = {
     data : {
         'arbeidssokerregistrering.bruk-ny-registrering': false,
-        'arbeissokerregistrering.reaktivering': false,
     },
     status: STATUS.NOT_STARTED
 };
@@ -66,8 +64,4 @@ export function selectFeatureToggles(state: AppState): Data {
 
 export function selectBrukNyRegistreringFeatureToggle(state: AppState): boolean {
     return state.featureToggles.data['arbeidssokerregistrering.bruk-ny-registrering'];
-}
-
-export function selectReaktiveringFeatureToggle(state: AppState): boolean {
-    return state.featureToggles.data['arbeissokerregistrering.reaktivering'];
 }

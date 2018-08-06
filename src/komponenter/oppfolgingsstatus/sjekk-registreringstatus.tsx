@@ -6,13 +6,11 @@ import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { selectBrukNyRegistreringFeatureToggle, selectReaktiveringFeatureToggle } from '../../ducks/feature-toggles';
-// import { STARTREAKTIVERING_PATH } from '../../utils/konstanter';
+import { selectBrukNyRegistreringFeatureToggle } from '../../ducks/feature-toggles';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
     brukNyRegistrering: boolean;
-    brukReaktivering: boolean;
 }
 
 type Props = StateProps & InjectedIntlProps;
@@ -34,7 +32,6 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
 const mapStateToProps = (state: AppState) => ({
     registreringstatusData: selectRegistreringstatus(state).data,
     brukNyRegistrering: selectBrukNyRegistreringFeatureToggle(state),
-    brukReaktivering: selectReaktiveringFeatureToggle(state),
 });
 
 export default connect(mapStateToProps)(
