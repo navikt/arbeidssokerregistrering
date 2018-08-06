@@ -27,7 +27,8 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til sbl om den ikke oppfyller krav og ikke er under oppfølging', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false}, store);
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': false}, store);
+        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': false,
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': false}, store);
 
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
 
@@ -37,7 +38,9 @@ describe('<SjekkRegistreringstatus />', () => {
 
     it('skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
         const store = create();
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true}, store);
+        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
+
         dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false}, store);
 
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
@@ -58,7 +61,9 @@ describe('<SjekkRegistreringstatus />', () => {
     it('Skal rendre innhold dersom ny registrering er på og bruker ikke er under oppfølging', () => {
         const store = create();
 
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true}, store);
+        dispatchFeaturestatus({'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
+            'arbeidssokerregistrering.bruk-ny-registrering': true}, store);
+
         dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: true}, store);
 
         const component = (
