@@ -32,11 +32,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
 
     beregnBrukAvNyRegistrering(): boolean {
         const {gradualRolloutNyRegistrering, brukNyRegistrering} = this.props;
-        if (!brukNyRegistrering) {
-            return false;
-        }
-
-        return gradualRolloutNyRegistrering;
+        return brukNyRegistrering && gradualRolloutNyRegistrering;
     }
 }
 
