@@ -24,9 +24,9 @@ afterEach(() => {
 });
 
 describe('<SjekkRegistreringstatus />', () => {
-    it('skal sende bruker til sbl om den ikke oppfyller krav og ikke er under oppfølging', () => {
+    it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
         const store = create();
-        dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false}, store);
+        dispatchRegistreringstatus({underOppfolging: false}, store);
         dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': false,
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': false}, store);
 
@@ -41,7 +41,7 @@ describe('<SjekkRegistreringstatus />', () => {
         dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
 
-        dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: false}, store);
+        dispatchRegistreringstatus({underOppfolging: false}, store);
 
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
 
@@ -52,7 +52,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
-        dispatchRegistreringstatus({underOppfolging: true, oppfyllerKrav: false}, store);
+        dispatchRegistreringstatus({underOppfolging: true}, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
@@ -64,7 +64,7 @@ describe('<SjekkRegistreringstatus />', () => {
         dispatchFeaturestatus({'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
             'arbeidssokerregistrering.bruk-ny-registrering': true}, store);
 
-        dispatchRegistreringstatus({underOppfolging: false, oppfyllerKrav: true}, store);
+        dispatchRegistreringstatus({underOppfolging: false}, store);
 
         const component = (
             <SjekkRegistreringstatus >
