@@ -21,7 +21,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
 
     render () {
         const {registreringstatusData, children} = this.props;
-        if (registreringstatusData.underOppfolging) {
+        if (registreringstatusData.underOppfolging && !registreringstatusData.kreverReaktivering) {
             return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!this.beregnBrukAvNyRegistrering()) {
             return <SblRegistrering/>;
