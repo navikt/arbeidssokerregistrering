@@ -44,29 +44,28 @@ class App extends React.Component {
                         <SjekkRegistreringstatus>
                             <Router basename={basename}>
                                 <>
-                                <Route path="/" component={Banner}/>
-                                <Route path={'/:url'} component={ProgressBarContainer}/>
-                                <Sideanimasjon>
-                                    <Switch>
-                                        <Route path={START_PATH} component={StartRedirecter}/>
-                                        <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
-                                        <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
-                                        <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                                        <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                                        <Route path={AVBRYT_PATH} component={Avbryt}/>
-                                        <Route path={FULLFOR_PATH} component={Fullfor}/>
-                                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
-                                        <Redirect exact={true} from="/" to={START_PATH}/>
-                                    </Switch>
-                                </Sideanimasjon>
-                            </>
-                        </Router>
-                    </SjekkRegistreringstatus>
-                </HentInitialData>
-            </IntlProvider>
-    </Provider>
-    )
-        ;
+                                    <Route path="/" component={Banner}/>
+                                    <Route path={'/:url'} component={ProgressBarContainer}/>
+                                    <Sideanimasjon>
+                                        <Switch>
+                                            <Route path={START_PATH} component={StartRedirecter}/>
+                                            <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
+                                            <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
+                                            <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
+                                            <Route path={SBLREG_PATH} component={SblRegistrering}/>
+                                            <Route path={AVBRYT_PATH} component={Avbryt}/>
+                                            <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                            <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
+                                            <Redirect exact={true} from="/" to={START_PATH}/>
+                                        </Switch>
+                                    </Sideanimasjon>
+                                </>
+                            </Router>
+                        </SjekkRegistreringstatus>
+                    </HentInitialData>
+                </IntlProvider>
+            </Provider>
+        );
     }
 }
 
