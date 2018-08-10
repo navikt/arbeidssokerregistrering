@@ -62,13 +62,13 @@ const oppsummeringBesvarelser = (state: AppState) => {
                     tekst={state.sisteStilling.data.stilling.label}
                     skjulHvisSvarErLik={[SisteStillingSvar.INGEN_SVAR, SisteStillingSvar.HAR_IKKE_HATT_JOBB]}
                 >
-                    Siste stilling:&nbsp;
+                    <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
                     sporsmalId={'utdanning'}
                     skjulHvisSvarErLik={[UtdanningSvar.INGEN_SVAR]}
                 >
-                    Høyeste fullførte utdanning:&nbsp;
+                    <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
                     sporsmalId={'utdanningBestatt'}
