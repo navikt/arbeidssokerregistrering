@@ -10,8 +10,7 @@ import { AppState } from '../../reducer';
 import { hentFornavn } from '../../utils/utils';
 import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import {Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
-import KreverReaktivering from '../../sider/krever-reaktivering/krever-reaktivering';
+import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 
 const personSvg = require('./person-komprimert.svg');
 
@@ -20,16 +19,12 @@ interface StateProps {
     brukersNavn: BrukersNavnState;
 }
 
-type StartProps = StateProps & null;
+type StartsideProps = StateProps & RouteComponentProps<MatchProps>;
 
-export class Start extends React.Component<RouteComponentProps<MatchProps> & StartProps> {
+class Startside extends React.Component<StartsideProps> {
     render() {
-        const {registreringstatusData, brukersNavn, history} = this.props;
+        const {brukersNavn, history} = this.props;
         const {name} = brukersNavn.data;
-
-        if (registreringstatusData.kreverReaktivering) {
-            return <KreverReaktivering />;
-        }
 
         return (
             <section className="startside">
@@ -68,9 +63,9 @@ export class Start extends React.Component<RouteComponentProps<MatchProps> & Sta
     }
 }
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: AppState): StateProps => ({
     brukersNavn: selectBrukersNavn(state),
     registreringstatusData: selectRegistreringstatus(state).data
 });
 
-export default connect(mapStateToProps, null)(Start);
+export default connect(mapStateToProps)(Startside);

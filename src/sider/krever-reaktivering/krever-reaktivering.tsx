@@ -2,7 +2,6 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import Banner from '../../komponenter/banner/banner';
 import { DITTNAV_URL } from '../../ducks/api';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
@@ -12,12 +11,14 @@ import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandte
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
-import { DUERNAREGISTRERT_PATH } from '../../utils/konstanter';
+import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
+import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 
 const handinfoSvg = require('./handinfo.svg');
 
 interface StateProps {
     reaktiverBrukerData: ReaktiverBrukerState;
+    registreringstatusData: RegistreringstatusData;
 }
 
 interface DispatchProps {
@@ -29,6 +30,12 @@ class KreverReaktivering extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.reaktiverBrukerOnClick = this.reaktiverBrukerOnClick.bind(this);
+    }
+
+    componentWillMount() {
+        if (!this.props.registreringstatusData.kreverReaktivering) {
+            this.props.history.push(START_PATH);
+        }
     }
 
     reaktiverBrukerOnClick() {
@@ -45,8 +52,6 @@ class KreverReaktivering extends React.Component<Props> {
         const {reaktiverBrukerData} = this.props;
 
         return (
-            <>
-            <Banner/>
             <Innholdslaster
                 feilmeldingKomponent={<ReaktiveringFeilhandtering/>}
                 avhengigheter={[reaktiverBrukerData]}
@@ -84,13 +89,13 @@ class KreverReaktivering extends React.Component<Props> {
                     </div>
                 </section>
             </Innholdslaster>
-            </>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
     reaktiverBrukerData: state.reaktiverBruker,
+    registreringstatusData: selectRegistreringstatus(state).data,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
