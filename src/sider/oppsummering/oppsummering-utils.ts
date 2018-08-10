@@ -22,11 +22,7 @@ export function getTekstIdForOppsummering(sporsmalId: string, svar: Svar) {
 
 export function getTekstIdForArbeidSisteManeder(svarState: SvarState, regStatus: RegStatus): string {
     const infoFraAARegIndikererArbeidSisteManeder = regStatus.jobbetSeksAvTolvSisteManeder;
-    const brukerEnigMedAAReg = brukersSvarSamsvarerMedInfoFraAAReg(
-        brukersSvarIndikererArbeidSisteManeder(svarState),
-        infoFraAARegIndikererArbeidSisteManeder
-    );
-    if (brukerEnigMedAAReg) {
+    if (brukersSvarSamsvarerMedInfoFraAAReg(svarState, infoFraAARegIndikererArbeidSisteManeder)) {
         return '';
     }
     return !!infoFraAARegIndikererArbeidSisteManeder ?
@@ -34,11 +30,11 @@ export function getTekstIdForArbeidSisteManeder(svarState: SvarState, regStatus:
 }
 
 function brukersSvarSamsvarerMedInfoFraAAReg(
-    brukersvarIndikererArbeidSisteManeder: boolean | 'unknown',
+    svarState: SvarState,
     infoFraAARegIndikererArbeidSisteManeder: boolean | undefined
 ): boolean {
     // Tilfellene 'unknown' og 'undefined' forekommer bare dersom noen har tuklet med programmet, så vi ignorerer det.
-    return (brukersvarIndikererArbeidSisteManeder === infoFraAARegIndikererArbeidSisteManeder);
+    return (brukersSvarIndikererArbeidSisteManeder(svarState) === infoFraAARegIndikererArbeidSisteManeder);
 }
 
 function brukersSvarIndikererArbeidSisteManeder(svarState: SvarState): boolean | 'unknown' {
