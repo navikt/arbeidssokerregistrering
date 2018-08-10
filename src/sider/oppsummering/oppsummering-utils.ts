@@ -3,6 +3,9 @@ import { DinSituasjonSvar, SisteStillingSvar, Svar } from '../../ducks/svar-util
 import { svarSuffiksTilTekstId } from '../skjema/skjema-utils';
 import { State as SvarState } from '../../ducks/svar';
 import { Data as RegStatus } from '../../ducks/registreringstatus';
+import oppsummeringConfig from './oppsummering-config';
+
+const {svarSomIndikererArbeidSisteManeder, svarSomIndikererIngenArbeidSisteManeder} = oppsummeringConfig;
 
 export function sendBrukerTilSblArbeid() {
     document.location.href = SBLARBEID_URL;
@@ -42,35 +45,29 @@ function brukersSvarIndikererArbeidSisteManeder(svarState: SvarState): boolean |
     const sisteStillingSvar  = svarState.sisteStilling;
     const dinSituasjonSvar = svarState.dinSituasjon;
 
-    const svarSomIndikererArbeidSisteManeder: (DinSituasjonSvar | undefined)[] = [
-        DinSituasjonSvar.MISTET_JOBBEN,
-        DinSituasjonSvar.HAR_SAGT_OPP,
-        DinSituasjonSvar.ER_PERMITTERT,
-        DinSituasjonSvar.DELTIDSJOBB_VIL_MER,
-        DinSituasjonSvar.VIL_BYTTE_JOBB,
-        DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
-    ];
-    const svarSomIndikererIngenArbeidSisteManeder: (DinSituasjonSvar | undefined)[] = [
-        DinSituasjonSvar.JOBB_OVER_2_AAR,
-        DinSituasjonSvar.ALDRI_HATT_JOBB,
-    ];
-
-    // Folgende booleans er i praksis alltid det motsatte av hverandre, men lagde 2 stk fordi man i teorien kan endre
-    // dinSituasjon til VET_IKKE og sisteStilling til INGEN_SVAR ved å bruke f.eks. reduxDevtools.
-    const brukerSvarerAtDenHarJobbetSisteManeder = svarSomIndikererArbeidSisteManeder.includes(dinSituasjonSvar) ||
-        (sisteStillingSvar === SisteStillingSvar.HAR_HATT_JOBB &&
-            !svarSomIndikererIngenArbeidSisteManeder.includes(dinSituasjonSvar));
-
-    const brukerSvarerAtDenIkkeHarJobbetSisteManeder =
-        svarSomIndikererIngenArbeidSisteManeder.includes(dinSituasjonSvar) ||
-        (sisteStillingSvar === SisteStillingSvar.HAR_IKKE_HATT_JOBB &&
-            !svarSomIndikererArbeidSisteManeder.includes(dinSituasjonSvar));
-
-    if (brukerSvarerAtDenHarJobbetSisteManeder) {
+    if (brukerSvarerAtDenHarJobbetSisteManeder(dinSituasjonSvar, sisteStillingSvar)) {
         return true;
-    } else if (brukerSvarerAtDenIkkeHarJobbetSisteManeder) {
+    } else if (brukerSvarerAtDenIkkeHarJobbetSisteManeder(dinSituasjonSvar, sisteStillingSvar)) {
         return false;
     } else {
         return 'unknown';
     }
+}
+
+function brukerSvarerAtDenHarJobbetSisteManeder(
+    dinSituasjonSvar: DinSituasjonSvar | undefined,
+    sisteStillingSvar: SisteStillingSvar | undefined
+) {
+    return svarSomIndikererArbeidSisteManeder.includes(dinSituasjonSvar) ||
+        (sisteStillingSvar === SisteStillingSvar.HAR_HATT_JOBB &&
+            !svarSomIndikererIngenArbeidSisteManeder.includes(dinSituasjonSvar));
+}
+
+function brukerSvarerAtDenIkkeHarJobbetSisteManeder(
+    dinSituasjonSvar: DinSituasjonSvar | undefined,
+    sisteStillingSvar: SisteStillingSvar | undefined
+) {
+    return svarSomIndikererIngenArbeidSisteManeder.includes(dinSituasjonSvar) ||
+        (sisteStillingSvar === SisteStillingSvar.HAR_IKKE_HATT_JOBB &&
+            !svarSomIndikererArbeidSisteManeder.includes(dinSituasjonSvar));
 }
