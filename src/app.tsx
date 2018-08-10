@@ -12,15 +12,18 @@ import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     AVBRYT_PATH,
     basename,
-    DUERNAREGISTRERT_PATH, FULLFOR_PATH,
+    DUERNAREGISTRERT_PATH,
+    FULLFOR_PATH,
     OPPSUMMERING_PATH,
+    REAKTIVERING_PATH,
     SBLREG_PATH,
     SKJEMA_PATH,
-    START_PATH } from './utils/konstanter';
+    START_PATH
+} from './utils/konstanter';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Banner from './komponenter/banner/banner';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
-import StartRegistrering from './sider/start/start';
+import StartRedirecter from './sider/start-redirecter';
 import Skjema from './sider/skjema/skjema-container';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import DuErNaRegistrert from './sider/registrert/registrert';
@@ -28,6 +31,7 @@ import Avbryt from './sider/avbryt/avbryt';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Fullfor from './sider/fullfor/fullfor';
 import { Redirect, Switch } from 'react-router';
+import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 
 const store = getStore();
 
@@ -44,7 +48,8 @@ class App extends React.Component {
                                     <Route path={'/:url'} component={ProgressBarContainer}/>
                                     <Sideanimasjon>
                                         <Switch>
-                                            <Route path={START_PATH} component={StartRegistrering}/>
+                                            <Route path={START_PATH} component={StartRedirecter}/>
+                                            <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
                                             <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
                                             <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
                                             <Route path={SBLREG_PATH} component={SblRegistrering}/>
@@ -60,8 +65,7 @@ class App extends React.Component {
                     </HentInitialData>
                 </IntlProvider>
             </Provider>
-        )
-        ;
+        );
     }
 }
 
