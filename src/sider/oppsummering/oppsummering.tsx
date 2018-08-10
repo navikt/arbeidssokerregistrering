@@ -19,6 +19,7 @@ import {
 import OppsummeringElement from './oppsummering-element';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
+import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -27,7 +28,7 @@ interface StateProps {
     state: AppState;
 }
 
-type EgenProps = StateProps;
+export type Props = RouteComponentProps<MatchProps> & StateProps;
 
 const oppsummeringBesvarelser = (state: AppState) => {
     const personId = state.brukersFnr.data.id;
@@ -38,11 +39,8 @@ const oppsummeringBesvarelser = (state: AppState) => {
     }
 
     const registreringStatus = state.registreringStatus.data;
-
-    const jobbetSeksAvTolvSisteManederTekstId = registreringStatus.jobbetSeksAvTolvSisteManeder
-        ? 'oppsummering-arbeidserfaring-1'
-        : 'oppsummering-arbeidserfaring-2';
-
+    const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
+    
     return (
         <div className="oppsummering-besvarelser">
             <img
@@ -52,7 +50,10 @@ const oppsummeringBesvarelser = (state: AppState) => {
             />
             <ul className="oppsummering-besvarelser__list">
                 <OppsummeringElement tekstId="oppsummering-alder" values={{alder: personId && hentAlder(personId)}}/>
-                <OppsummeringElement tekstId={jobbetSeksAvTolvSisteManederTekstId}/>
+                <OppsummeringElement
+                    tekstId={jobbetSeksAvTolvSisteManederTekstId}
+                    skjul={jobbetSeksAvTolvSisteManederTekstId === ''}
+                />
                 <OppsummeringElement sporsmalId="dinSituasjon">
                     <FormattedMessage id={`oppsummering-dinsituasjon`}/>&nbsp;
                 </OppsummeringElement>
@@ -84,7 +85,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
     );
 };
 
-class Oppsummering extends React.Component<RouteComponentProps<MatchProps> & EgenProps> {
+class Oppsummering extends React.Component<Props> {
 
     componentWillMount() {
         const {state, history} = this.props;
