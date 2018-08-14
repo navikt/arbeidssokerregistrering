@@ -11,6 +11,7 @@ interface OwnProps {
     sporsmalId?: string;
     tekstId?: string;
     tekst?: string;
+    skjul?: boolean;
     skjulHvisSvarErLik?: Svar | Svar[];
     values?: {[key: string]: MessageValue | JSX.Element};
 }
@@ -56,8 +57,12 @@ class OppsummeringElement extends React.Component<Props> {
             svarState,
             sporsmalId,
             skjulHvisSvarErLik,
+            skjul,
         } = this.props;
 
+        if (skjul) {
+            return false;
+        }
         if (!sporsmalId || !skjulHvisSvarErLik) {
             return true;
         }
