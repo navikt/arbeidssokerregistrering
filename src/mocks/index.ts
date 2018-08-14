@@ -1,26 +1,22 @@
 /*tslint:disable*/
-import { mock, respondWith, delayed, lagPamjanzzRespons } from './utils';
+import {delayed, lagPamjanzzRespons, mock, respondWith} from './utils';
 import startRegistreringStatus from './start-registrering-status';
 import brukersNavn from './brukers-navn';
-import brukersFnr from './brukers-fnr';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
 import {featureTogglesMock} from "./feature-toggles";
-import {
-    FEATURE_URL, VEILARBOPPFOLGINGPROXY_ME_URL, VEILARBREGISTRERING_URL
-} from '../ducks/api';
+import {FEATURE_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
 import autentisert from './autentisert';
 import registreringRespons from "./registrer-bruker";
 import getStore from "../store";
-import { ActionTypes as SvarActionTypes } from '../ducks/svar';
+import {ActionTypes as SvarActionTypes} from '../ducks/svar';
 import svarMock from "./svar";
-import { ActionTypes as SisteStillingActionTypes } from '../ducks/siste-stilling';
+import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_REAKTIVER_BRUKER = true;
-const MOCK_BRUKERS_FNR = true;
 const MOCK_BRUKERS_NAVN = true;
 const MOCK_AUTENTISERINGS_INFO = true;
 const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
@@ -47,10 +43,6 @@ if (MOCK_FEATURE_TOGGLES) {
 
 if (MOCK_BRUKERS_NAVN) {
     (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(DELAY, brukersNavn)));
-}
-
-if (MOCK_BRUKERS_FNR) {
-    (mock as any).get(`${VEILARBOPPFOLGINGPROXY_ME_URL}`, respondWith(delayed(DELAY, brukersFnr)));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {

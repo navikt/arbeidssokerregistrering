@@ -1,16 +1,19 @@
 /*tslint:disable:variable-name*/
 import * as React from 'react';
 import * as sinon from 'sinon';
-import { expect } from 'chai';
+import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import SjekkRegistreringstatus from './sjekk-registreringstatus';
 import {
+    dispatchFeaturestatus,
     dispatchRegistreringstatus,
-    promiseWithSetTimeout, mountWithStoreRouterAndIntl, shallowwithStoreAndIntl, dispatchFeaturestatus
+    mountWithStoreRouterAndIntl,
+    promiseWithSetTimeout,
+    shallowwithStoreAndIntl
 } from '../../test/test-utils';
 import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
-import { create } from '../../store';
+import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 
 enzyme.configure({adapter: new Adapter()});
@@ -28,7 +31,7 @@ describe('<SjekkRegistreringstatus />', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false}, store);
         dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': false,
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': false}, store);
+        'arbeidssokerregistrering.gradual-rollout-ny-registrering': false}, store);
 
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
 
@@ -39,7 +42,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
         const store = create();
         dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
+        'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
 
         dispatchRegistreringstatus({underOppfolging: false}, store);
 

@@ -1,19 +1,15 @@
 /*tslint:disable*/
-import { expect } from 'chai';
-import { State as SvarState } from '../ducks/svar';
-import * as moment from 'moment';
+import {expect} from 'chai';
+import {State as SvarState} from '../ducks/svar';
 
-import {
-    getIntlMessage, hentFornavn, mapAvgitteSvarForBackend,
-    hentAlder
-} from './utils';
-import {
-    YRKESPRAKSIS
-} from './konstanter';
+import {getIntlMessage, hentFornavn, mapAvgitteSvarForBackend,} from './utils';
+import {YRKESPRAKSIS} from './konstanter';
 import {Stilling} from "../ducks/siste-stilling";
 import {
-    AndreForholdSvar, DinSituasjonSvar,
-    HelseHinderSvar, SisteStillingSvar,
+    AndreForholdSvar,
+    DinSituasjonSvar,
+    HelseHinderSvar,
+    SisteStillingSvar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
     UtdanningSvar
@@ -35,22 +31,6 @@ describe('utils test', () => {
         expect(hentFornavn('TEST TESTESEN')).to.equal('Test');
         expect(hentFornavn('test testesen')).to.equal('Test');
         expect(hentFornavn('tEST TESTESEN')).to.equal('Test');
-    });
-
-    it('test av hentAlder 18 år', () => {
-        const fodselsdato = moment().subtract(18, 'years').format('DDMMYY')
-        // parameter er fnr
-        expect(hentAlder(`${fodselsdato}50105`)).to.equal(18);
-        // parameter er d-nummer
-        expect(hentAlder(`4${fodselsdato}56105`)).to.equal(18);
-    });
-
-    it('test av hentAlder 56 år', () => {
-        const fodselsdato = moment().subtract(56, 'years').format('DDMMYY')
-        // parameter er fnr
-        expect(hentAlder(`${fodselsdato}30105`)).to.equal(56);
-        // parameter er d-nummer
-        expect(hentAlder(`4${fodselsdato}36105`)).to.equal(56);
     });
 
     it('test hardkodet yrkespraksis', () => {

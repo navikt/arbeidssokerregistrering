@@ -1,8 +1,6 @@
-
-import { State as SvarState } from '../ducks/svar';
-import { Stilling } from '../ducks/siste-stilling';
-import * as moment from 'moment';
-import { RegistreringData } from '../ducks/registrerbruker';
+import {State as SvarState} from '../ducks/svar';
+import {Stilling} from '../ducks/siste-stilling';
+import {RegistreringData} from '../ducks/registrerbruker';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -54,55 +52,6 @@ export function besvarelseErGyldig(svar: SvarState) {
 
 export interface MatchProps {
     id: string;
-}
-
-/*
-* Regn ut alder basert på fnr som kommer fra `veilarboppfolging/api/me`
-* Senere kan koden under bli erstattes med at backend regner ut alder istenfor
-* */
-
-function erDNummer (personId: string) {
-    const forsteSiffer = Number(personId.substring(0, 1));
-    return forsteSiffer > 3 && forsteSiffer < 8;
-}
-
-function parseDNummer (personId: string) {
-    return !erDNummer(personId) ? personId : personId.substring(1);
-}
-
-function toSifferFodselsAar (personId: string) {
-    return personId.substring(4, 6);
-}
-
-function hentAarhundre (personId: string) {
-    let result;
-    const individNummer = Number(personId.substring(6, 9));
-    const fodselsAar = Number(personId.substring(4, 6));
-
-    if (individNummer <= 499) {
-        result = '19';
-    } else if (individNummer >= 500 && fodselsAar < 40) {
-        result = '20';
-    } else if (individNummer >= 500 && individNummer <= 749 && fodselsAar >= 54) {
-        result = '18';
-    } else if (individNummer >= 900 && fodselsAar > 39) {
-        result = '19';
-    }
-
-    return result;
-}
-
-export function hentAlder(personId: string) {
-
-    const fnr = parseDNummer(personId);
-
-    const aarhundre = hentAarhundre(fnr);
-    const fnrForsteFireSiffer = fnr.substring(0, 4);
-    const toSifferFAar = toSifferFodselsAar(fnr);
-
-    const fodselsdato = moment(`${fnrForsteFireSiffer}${aarhundre}${toSifferFAar}`, 'DDMMYYYY');
-
-    return moment().diff(fodselsdato, 'years');
 }
 
 export function scrollToBanner() {
