@@ -1,7 +1,7 @@
-/*tslint:disable:variable-name*/
-import { expect } from 'chai';
-import {skalAnimereForover, paths} from "./sideanimasjon-utils";
-import { OPPSUMMERING_PATH, SKJEMA_PATH } from "../../utils/konstanter";
+/*tslint:disable*/
+import {expect} from 'chai';
+import {paths, skalAnimereForover} from "./sideanimasjon-utils";
+import {OPPSUMMERING_PATH, SKJEMA_PATH} from "../../utils/konstanter";
 
 const skjemaPath = (n: number) => SKJEMA_PATH + '/' + n;
 

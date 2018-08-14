@@ -1,4 +1,4 @@
-/*tslint:disable:variable-name*/
+/*tslint:disable*/
 import * as React from 'react';
 import * as sinon from 'sinon';
 import {expect} from 'chai';
@@ -30,8 +30,10 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false}, store);
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': false,
-        'arbeidssokerregistrering.gradual-rollout-ny-registrering': false}, store);
+        dispatchFeaturestatus({
+            'arbeidssokerregistrering.bruk-ny-registrering': false,
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': false
+        },                    store);
 
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
 
@@ -42,7 +44,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
         const store = create();
         dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
-        'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
 
         dispatchRegistreringstatus({underOppfolging: false}, store);
 
