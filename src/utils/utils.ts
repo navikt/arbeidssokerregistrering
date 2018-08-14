@@ -1,6 +1,6 @@
-import {State as SvarState} from '../ducks/svar';
-import {Stilling} from '../ducks/siste-stilling';
-import {RegistreringData} from '../ducks/registrerbruker';
+import {State as SvarState } from '../ducks/svar';
+import { Stilling } from '../ducks/siste-stilling';
+import { RegistreringData } from '../ducks/registrerbruker';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';

@@ -1,6 +1,6 @@
-import {fetchToJson, fetchWithTimeout} from './api-utils';
-import {Data as RegistrerBrukerData} from './registrerbruker';
-import {alleFeatureToggles} from './feature-toggles';
+import { fetchToJson, fetchWithTimeout } from './api-utils';
+import {Data as RegistrerBrukerData } from './registrerbruker';
+import { alleFeatureToggles } from './feature-toggles';
 
 export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';

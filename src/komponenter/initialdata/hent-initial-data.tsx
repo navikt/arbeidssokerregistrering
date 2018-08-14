@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {connect, Dispatch} from 'react-redux';
-import {AppState} from '../../reducer';
-import {hentBrukersNavn, selectBrukersNavn, State as BrukersNavnState} from '../../ducks/brukers-navn';
+import { connect, Dispatch } from 'react-redux';
+import { AppState } from '../../reducer';
+import { hentBrukersNavn, selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import {
     Data as AuthData,
     hentAutentiseringsInfo,
@@ -15,10 +15,10 @@ import {
 } from '../../ducks/registreringstatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import StepUp from './stepup';
-import {STATUS} from '../../ducks/api-utils';
+import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
-import {Data as FeatureTogglesData, hentFeatureToggles, selectFeatureToggles} from '../../ducks/feature-toggles';
-import {VEILARBSTEPUP} from '../../ducks/api';
+import {Data as FeatureTogglesData, hentFeatureToggles, selectFeatureToggles } from '../../ducks/feature-toggles';
+import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 
 interface StateProps {
