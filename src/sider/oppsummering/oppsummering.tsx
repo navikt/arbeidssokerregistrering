@@ -12,7 +12,6 @@ import { hentFornavn } from '../../utils/utils';
 import { FULLFOR_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import {
-    SisteStillingSvar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar, UtdanningSvar
 } from '../../ducks/svar-utils';
@@ -20,6 +19,7 @@ import OppsummeringElement from './oppsummering-element';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
+import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -60,7 +60,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
                 <OppsummeringElement
                     sporsmalId="sisteStilling"
                     tekst={state.sisteStilling.data.stilling.label}
-                    skjulHvisSvarErLik={[SisteStillingSvar.INGEN_SVAR, SisteStillingSvar.HAR_IKKE_HATT_JOBB]}
+                    skjul={state.sisteStilling.data.stilling === ingenYrkesbakgrunn}
                 >
                     <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
                 </OppsummeringElement>
