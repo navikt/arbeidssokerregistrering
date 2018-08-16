@@ -40,7 +40,7 @@ describe('<LastInnSisteStilling />', () => {
 
         expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(0);
     });
-
+/*
     it('skal hente siste arbeidsforhold og state', () => {
         const store = create();
         const state = {dummy: 'dummy'};
@@ -57,7 +57,7 @@ describe('<LastInnSisteStilling />', () => {
                 expect(selectSisteStillingFraAAReg(store.getState()).data).to.equal(state);
                 expect(fetchStub.getCallcount('sistearbeidsforhold')).to.equal(1);
             });
-    });
+    });*/
 
     it('skal sette riktig sisteStilling i state etter fetch av oversettelsen', () => {
         const store = create();
