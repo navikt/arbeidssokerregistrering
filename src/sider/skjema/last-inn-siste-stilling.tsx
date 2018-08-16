@@ -4,12 +4,14 @@ import {
     hentStyrkkodeForSisteStillingFraAAReg,
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
+    Data as SisteArbeidsforholdData,
 } from '../../ducks/siste-stilling-fra-aareg';
 import { AppState } from '../../reducer';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
-    State as OversettelseAvStillingFraAARegState
+    State as OversettelseAvStillingFraAARegState,
+    Data as OversettelseAvStillingFraAARegData
 } from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import {
     ingenYrkesbakgrunn,
@@ -63,13 +65,13 @@ class LastInnSisteStilling extends React.Component<Props, State> {
 
         if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg(this.props.featureToggles)
-                .then(() => {
-                    const {styrk} = this.props.sisteStillingFraAAReg.data;
+                .then((responseSisteArbeidsforhold) => {
+                    const {styrk} = responseSisteArbeidsforhold as SisteArbeidsforholdData;
 
-                    this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
+                    this.props.hentStillingFraPamGittStyrkkode(styrk).then((responseOversettelseAvStillingFraAAReg) => {
                         if (styrk !== 'utenstyrkkode') {
                             velgStilling(hentOversattStillingFraAAReg(
-                                this.props.oversettelseAvStillingFraAAReg.data
+                                responseOversettelseAvStillingFraAAReg as OversettelseAvStillingFraAARegData
                             ));
                         } else {
                             velgStilling(ingenYrkesbakgrunn);
