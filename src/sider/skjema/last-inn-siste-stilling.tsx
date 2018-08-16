@@ -9,7 +9,8 @@ import { AppState } from '../../reducer';
 import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
-    State as OversettelseAvStillingFraAARegState
+    State as OversettelseAvStillingFraAARegState,
+    Data as OversettelseAvStillingFraAARegData,
 } from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import {
     ingenYrkesbakgrunn,
@@ -66,10 +67,10 @@ class LastInnSisteStilling extends React.Component<Props, State> {
                 .then((res) => {
                     const {styrk} = res as any; // tslint:disable-line
 
-                    this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
+                    this.props.hentStillingFraPamGittStyrkkode(styrk).then((responsFraPam) => {
                         if (styrk !== 'utenstyrkkode') {
                             velgStilling(hentOversattStillingFraAAReg(
-                                this.props.oversettelseAvStillingFraAAReg.data
+                                responsFraPam as OversettelseAvStillingFraAARegData
                             ));
                         } else {
                             velgStilling(ingenYrkesbakgrunn);
