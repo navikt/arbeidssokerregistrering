@@ -5,8 +5,7 @@ import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import SblRegistrering from './sbl-registrering';
-import { environmentTestData } from '../../SetupTests';
-import { SBLARBEID_OPPRETT_MIN_ID_URL, SBLARBEID_URL } from '../../ducks/api';
+import { SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
 import {
     FetchStub,
     mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch
