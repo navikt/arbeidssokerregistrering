@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
 
@@ -21,7 +21,7 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
-    const getTekst = (kontekst: string) => getIntlTekst(props.sporsmalId, kontekst, props.intl);
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId, kontekst, props.intl);
     return (
         <>
             <div className="spm-hode">

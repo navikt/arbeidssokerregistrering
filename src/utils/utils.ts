@@ -1,8 +1,4 @@
-
-import { State as SvarState } from '../ducks/svar';
-import { Stilling } from '../ducks/siste-stilling';
 import * as moment from 'moment';
-import { RegistreringData } from '../ducks/registrerbruker';
 
 export function hentFornavn(name: string | undefined) {
     return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
@@ -22,34 +18,6 @@ function s4() {
 
 export function guid() {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-}
-
-export function mapAvgitteSvarForBackend(
-    svar: SvarState,
-    sisteStilling: Stilling
-): RegistreringData {
-    if (besvarelseErGyldig(svar)) {
-        return {
-            enigIOppsummering: true,
-            sisteStilling: sisteStilling,
-            besvarelse: svar,
-            oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
-        };
-    } else {
-        return {};
-    }
-}
-
-export function besvarelseErGyldig(svar: SvarState) {
-    return (
-        svar.dinSituasjon &&
-        svar.sisteStilling &&
-        svar.utdanning &&
-        svar.utdanningGodkjent &&
-        svar.utdanningBestatt &&
-        svar.helseHinder &&
-        svar.andreForhold
-    );
 }
 
 export interface MatchProps {

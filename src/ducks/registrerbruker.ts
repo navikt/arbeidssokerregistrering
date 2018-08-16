@@ -1,9 +1,10 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
-import { mapAvgitteSvarForBackend } from '../utils/utils';
+import { mapAvgitteSvarForBackend } from './registrerbruker-utils';
 import { selectSisteStilling, Stilling } from './siste-stilling';
 import { State as SvarState } from './svar';
+import { TeksterForBesvarelse } from '../sider/fullfor/fullfor-utils';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -28,6 +29,7 @@ export interface RegistreringData {
     oppsummering?: string;
     sisteStilling?: Stilling;
     besvarelse?: SvarState;
+    teksterForBesvarelse?: TeksterForBesvarelse;
 }
 
 export interface ErrorData {

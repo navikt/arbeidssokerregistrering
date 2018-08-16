@@ -4,8 +4,7 @@ import { State as SvarState } from '../ducks/svar';
 import * as moment from 'moment';
 
 import {
-    getIntlMessage, hentFornavn, mapAvgitteSvarForBackend,
-    hentAlder
+    getIntlMessage, hentFornavn, hentAlder
 } from './utils';
 import {
     YRKESPRAKSIS
@@ -18,6 +17,7 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from "../ducks/svar-utils";
+import {mapAvgitteSvarForBackend} from "../ducks/registrerbruker-utils";
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
