@@ -48,7 +48,15 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         this.state = {
             visAdvarsel: false
         };
+
+        // MIDLERTIDIG MÅLING
+        const { frontendlogger } = (window as any); // tslint:disable-line
+        if (frontendlogger) {
+            frontendlogger.event('registrering.harkommetinn', {}, {});
+        }
+
         this.settGjeldendeSporsmalOgResetHvisNaN(this.props.match.params.id);
+
     }
 
     toggleAdvarsel(toggle: boolean) {
