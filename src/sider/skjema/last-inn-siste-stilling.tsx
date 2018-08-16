@@ -63,8 +63,8 @@ class LastInnSisteStilling extends React.Component<Props, State> {
 
         if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg(this.props.featureToggles)
-                .then(() => {
-                    const {styrk} = this.props.sisteStillingFraAAReg.data;
+                .then((res) => {
+                    const {styrk} = res as any; // tslint:disable-line
 
                     this.props.hentStillingFraPamGittStyrkkode(styrk).then(() => {
                         if (styrk !== 'utenstyrkkode') {
