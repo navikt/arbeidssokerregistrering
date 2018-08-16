@@ -43,7 +43,7 @@ describe('<LastInnSisteStilling />', () => {
         const state = {dummy: 'dummy'};
         const fetchStub = new FetchStub()
             .addResponse('sistearbeidsforhold', state)
-            .addResponse('kryssklassifiserMedKonsept', {});
+            .addResponse('kryssklassifiserMedKonsept', {'konseptMedStyrk08List': []});
 
         stubFetch(fetchStub);
 
