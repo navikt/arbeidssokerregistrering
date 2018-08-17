@@ -17,6 +17,7 @@ export interface Data {
     underOppfolging?: boolean;
     jobbetSeksAvTolvSisteManeder?: boolean;
     kreverReaktivering?: boolean;
+    erIkkeArbeidssokerUtenOppfolging?: boolean;
 }
 
 interface Action {

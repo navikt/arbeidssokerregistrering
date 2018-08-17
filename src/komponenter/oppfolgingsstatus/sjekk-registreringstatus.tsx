@@ -23,15 +23,18 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
         const {registreringstatusData, children} = this.props;
         if (registreringstatusData.underOppfolging && !registreringstatusData.kreverReaktivering) {
             return <AlleredeRegistrert intl={this.props.intl} />;
-        } else if (!this.beregnBrukAvNyRegistrering()) {
+        } else if (!this.brukNyRegistrering()) {
             return <SblRegistrering/>;
         } else {
             return <>{children}</>;
         }
     }
 
-    beregnBrukAvNyRegistrering(): boolean {
-        const {gradualRolloutNyRegistrering, brukNyRegistrering} = this.props;
+    brukNyRegistrering(): boolean {
+        const {gradualRolloutNyRegistrering, brukNyRegistrering, registreringstatusData} = this.props;
+        if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
+            return false;
+        }
         return brukNyRegistrering && gradualRolloutNyRegistrering;
     }
 }
