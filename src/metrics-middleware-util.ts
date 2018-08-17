@@ -1,3 +1,4 @@
+import {ActionTypes as AutentiseringsinfoActionTypes } from './ducks/autentiseringsinfo';
 import {ActionTypes as RegistreringStatusActionTypes } from './ducks/registreringstatus';
 import {ActionTypes as StillingFraAAregActionTypes } from './ducks/siste-stilling-fra-aareg';
 import {ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
