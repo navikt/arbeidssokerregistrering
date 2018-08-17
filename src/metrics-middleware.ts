@@ -12,7 +12,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         }
     }
 
-    // Logg besvarelser utdanning
     let jobbetSeksAvTolvSisteManeder = store.getState().registreringStatus.data.jobbetSeksAvTolvSisteManeder;
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
         const { besvarelse } = action.data;
