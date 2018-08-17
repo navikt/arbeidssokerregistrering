@@ -1,6 +1,7 @@
 import {ActionTypes as AutentiseringsinfoActionTypes } from './ducks/autentiseringsinfo';
 import {ActionTypes as RegistrerbrukerActionTypes } from './ducks/registrerbruker';
 import { brukersSvarSamsvarerMedInfoFraAAReg } from './sider/oppsummering/oppsummering-utils';
+import { feilTyper } from './metrics-middleware-util';
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => { // tslint:disable-line:no-any
     const { frontendlogger } = (window as any); // tslint:disable-line:no-any
@@ -23,6 +24,16 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
         }
     }
-    
+
+    /* Feil logging */
+    feilTyper.map((feil) => {
+        if (action.type === feil.type) {
+            if (frontendlogger) {
+                frontendlogger.event(feil.eventnavn,
+                                     {'useragent': navigator.userAgent}, {});
+            }
+        }
+    });
+
     next(action);
 };
