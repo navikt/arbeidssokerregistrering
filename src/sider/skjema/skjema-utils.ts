@@ -9,7 +9,7 @@ export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
 }
 
 export type TekstKontekst = 'tittel' | 'info' | 'ingress';
-export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKontekst, intl: InjectedIntl) {
+export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKontekst, intl: InjectedIntl): string {
     return intl.messages[`${sporsmalId.toLowerCase()}-${kontekst}`];
 }
 

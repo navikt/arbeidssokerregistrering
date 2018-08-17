@@ -8,6 +8,7 @@ import { ActionTypes as RegistrerBrukerActionTypes } from './registrerbruker';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './reaktiverbruker';
 import { ActionTypes as BrukersFnrActionTypes } from './brukers-fnr';
 import { ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
+import { ActionTypes as TeksterForBesvarelseActionTypes } from './tekster-for-besvarelse';
 
 type ActionTypes =
     BrukersFnrActionTypes |
@@ -19,6 +20,7 @@ type ActionTypes =
     ReaktiverBrukerActionTypes |
     OversettelseAvStillingFraAARegActionTypes |
     SisteStillingFraAARegActionTypes |
-    FeatureTogglesActionTypes;
+    FeatureTogglesActionTypes |
+    TeksterForBesvarelseActionTypes;
 
 export default ActionTypes;

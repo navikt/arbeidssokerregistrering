@@ -4,7 +4,7 @@ import { AppState } from '../reducer';
 import { mapAvgitteSvarForBackend } from './registrerbruker-utils';
 import { selectSisteStilling, Stilling } from './siste-stilling';
 import { State as SvarState } from './svar';
-import { TeksterForBesvarelse } from '../sider/fullfor/fullfor-utils';
+import { State as TeksterForBesvarelse } from './tekster-for-besvarelse';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -75,7 +75,7 @@ export function utforRegistrering(data: Data) {
 
 export function mapBrukerRegistreringsData(state: AppState): State {
     return {
-        data: mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state)),
+        data: mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), state.teksterForBesvarelse),
         status: state.registrerBruker.status
     };
 }

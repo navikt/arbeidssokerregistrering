@@ -27,7 +27,6 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
-import { genererTeksterForBesvarelse } from './fullfor-utils';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -78,9 +77,7 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
         }
 
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
-        this.props.onRegistrerBruker(
-            genererTeksterForBesvarelse(this.props.registrerBrukerData.data, this.props.intl),
-            this.props.featureToggles)
+        this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
             .then((res) => {
                 if (!!res) {
                     // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker

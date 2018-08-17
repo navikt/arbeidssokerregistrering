@@ -1,10 +1,12 @@
 import { RegistreringData } from './registrerbruker';
 import { State as SvarState } from './svar';
 import { Stilling } from './siste-stilling';
+import { State as TeksterForBesvarelse } from './tekster-for-besvarelse';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
-    sisteStilling: Stilling
+    sisteStilling: Stilling,
+    teksterForBesvarelse: TeksterForBesvarelse
 ): RegistreringData {
     if (besvarelseErGyldig(svar)) {
         return {
@@ -12,6 +14,7 @@ export function mapAvgitteSvarForBackend(
             sisteStilling: sisteStilling,
             besvarelse: svar,
             oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
+            teksterForBesvarelse: teksterForBesvarelse,
         };
     } else {
         return {};
