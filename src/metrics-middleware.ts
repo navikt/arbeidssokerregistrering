@@ -3,11 +3,10 @@ import {ActionTypes as RegistrerbrukerActionTypes } from './ducks/registrerbruke
 import { brukersSvarSamsvarerMedInfoFraAAReg } from './sider/oppsummering/oppsummering-utils';
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => { // tslint:disable-line:no-any
-    const { frontendlogger } = (window as any); // tslint:disable-line
+    const { frontendlogger } = (window as any); // tslint:disable-line:no-any
     
     if (action.type === AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_OK) {
         const { niva } = action.data;
-        const { frontendlogger } = (window as any); // tslint:disable-line
         if (frontendlogger) {
             frontendlogger.event('registrering.security.level', {'niva': niva}, {});
         }
@@ -21,7 +20,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
                                  {'helseHinder': besvarelse.helseHinder}, {});
             frontendlogger.event('registrering.besvarelse.utdanning',
                                  {'utdanning': besvarelse.utdanning}, {});
-            frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line
+            frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
         }
     }
     
