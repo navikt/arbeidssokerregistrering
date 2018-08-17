@@ -21,8 +21,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
                                  {'helseHinder': besvarelse.helseHinder}, {});
             frontendlogger.event('registrering.besvarelse.utdanning',
                                  {'utdanning': besvarelse.utdanning}, {});
-            frontendlogger.event('registrering.besvarelse.stillingskode',
-                                 {'stillingskode': besvarelse.sisteStilling.styrk08}, {});
             frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line
         }
     }
