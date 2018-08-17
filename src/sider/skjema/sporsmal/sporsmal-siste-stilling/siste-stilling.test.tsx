@@ -1,21 +1,19 @@
+/*tslint:disable*/
 import * as React from 'react';
-import { expect } from 'chai';
+import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as sinon from 'sinon';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { create } from '../../../../store';
-import {
-    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout,
-    stubFetch
-} from '../../../../test/test-utils';
+import {create} from '../../../../store';
+import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../../test/test-utils';
 import SisteStilling from './siste-stilling';
-import { ingenYrkesbakgrunn, velgSisteStilling } from '../../../../ducks/siste-stilling';
-import { sisteStillingMock } from '../../../../mocks/siste-stilling';
+import {ingenYrkesbakgrunn, velgSisteStilling} from '../../../../ducks/siste-stilling';
+import {sisteStillingMock} from '../../../../mocks/siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../../../mocks/oversettelse-av-stilling-fra-aareg';
-import { hentOversattStillingFraAAReg } from './siste-stilling-utils';
-import { ActionTypes } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
+import {hentOversattStillingFraAAReg} from './siste-stilling-utils';
+import {ActionTypes} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
-import { ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
+import {ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
 import Alternativ from "../../alternativ";
 
 enzyme.configure({adapter: new Adapter()});

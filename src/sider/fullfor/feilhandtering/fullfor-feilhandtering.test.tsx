@@ -1,3 +1,4 @@
+/*tslint:disable*/
 import * as React from 'react';
 import {expect} from 'chai';
 import * as enzyme from 'enzyme';

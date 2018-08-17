@@ -1,21 +1,18 @@
+/*tslint:disable*/
 import * as React from 'react';
-import { expect } from 'chai';
+import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import { create } from '../../store';
+import {create} from '../../store';
 import {
-    selectSisteStillingFraAAReg,
-    ActionTypes as SisteStillingFraAARegActionTypes
+    ActionTypes as SisteStillingFraAARegActionTypes,
+    selectSisteStillingFraAAReg
 } from '../../ducks/siste-stilling-fra-aareg';
-import {
-    FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout,
-    stubFetch
-} from '../../test/test-utils';
+import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../test/test-utils';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg';
-import { ingenYrkesbakgrunn, velgSisteStilling } from '../../ducks/siste-stilling';
-import { brukerSomIkkeFinnesIAAReg } from '../../mocks/siste-stilling-fra-aareg';
-import {STATUS} from "../../ducks/api-utils";
+import {ingenYrkesbakgrunn} from '../../ducks/siste-stilling';
+import {brukerSomIkkeFinnesIAAReg} from '../../mocks/siste-stilling-fra-aareg';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -46,7 +43,7 @@ describe('<LastInnSisteStilling />', () => {
         const state = {dummy: 'dummy'};
         const fetchStub = new FetchStub()
             .addResponse('sistearbeidsforhold', state)
-            .addResponse('kryssklassifiserMedKonsept', {});
+            .addResponse('kryssklassifiserMedKonsept', {'konseptMedStyrk08List': []});
 
         stubFetch(fetchStub);
 
