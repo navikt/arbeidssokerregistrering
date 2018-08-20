@@ -20,9 +20,6 @@ import HelseHinder from './sporsmal/sporsmal-helse-hinder';
 import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import { State as SvarState } from '../../ducks/svar';
 import { IngenSvar, Svar } from '../../ducks/svar-utils';
-import { oppdaterTeksterAction } from '../../ducks/tekster-for-besvarelse';
-import { genererTeksterForBesvarelse } from '../../ducks/tekster-for-besvarelse-utils';
-import { State as TeksterForBesvarelse } from '../../ducks/tekster-for-besvarelse';
 
 interface StateProps {
     svarState: SvarState;
@@ -30,7 +27,6 @@ interface StateProps {
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
-    oppdaterTeksterForBesvarelse: (tekster: TeksterForBesvarelse) => void;
 }
 
 interface SkjemaProps {
@@ -155,7 +151,6 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         if (this.gjeldendeSporsmalErEndret(nextProps)) {
             this.settGjeldendeSporsmalOgResetHvisNaN(nextProps.match.params.id);
         }
-        this.props.oppdaterTeksterForBesvarelse(genererTeksterForBesvarelse(nextProps.svarState, nextProps.intl));
     }
 
     componentDidMount() {
@@ -187,7 +182,6 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
-    oppdaterTeksterForBesvarelse: (tekster) => dispatch(oppdaterTeksterAction(tekster)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaContainer));

@@ -1,10 +1,7 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
-import { AppState } from '../reducer';
-import { mapAvgitteSvarForBackend } from './registrerbruker-utils';
-import { selectSisteStilling, Stilling } from './siste-stilling';
+import { Stilling } from './siste-stilling';
 import { State as SvarState } from './svar';
-import { State as TeksterForBesvarelse } from './tekster-for-besvarelse';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -23,6 +20,14 @@ export interface State {
     data: Data;
     status: string;
 }
+
+interface TekstForSvar {
+    sporsmalId: string;
+    sporsmal: string;
+    svar: string;
+}
+
+export type TeksterForBesvarelse = TekstForSvar[];
 
 export interface RegistreringData {
     enigIOppsummering?: boolean;
@@ -71,11 +76,4 @@ export function utforRegistrering(data: Data) {
         OK: ActionTypes.REG_BRUKER_STATUS_OK,
         FEILET: ActionTypes.REG_BRUKER_STATUS_FEILET,
     });
-}
-
-export function mapBrukerRegistreringsData(state: AppState): State {
-    return {
-        data: mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), state.teksterForBesvarelse),
-        status: state.registrerBruker.status
-    };
 }
