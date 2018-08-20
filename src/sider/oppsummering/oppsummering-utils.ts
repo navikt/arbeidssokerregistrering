@@ -29,7 +29,7 @@ export function getTekstIdForArbeidSisteManeder(svarState: SvarState, regStatus:
         'oppsummering-arbeidserfaring-1' : 'oppsummering-arbeidserfaring-2';
 }
 
-function brukersSvarSamsvarerMedInfoFraAAReg(
+export function brukersSvarSamsvarerMedInfoFraAAReg(
     svarState: SvarState,
     infoFraAARegIndikererArbeidSisteManeder: boolean | undefined
 ): boolean {
