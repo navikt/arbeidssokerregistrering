@@ -1,5 +1,5 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
-import { Data as RegistrerBrukerData } from './registrerbruker';
+import {Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 
 export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
@@ -14,7 +14,6 @@ export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/feature';
-export const VEILARBOPPFOLGINGPROXY_ME_URL = '/veilarboppfolgingproxy/api/oppfolging/me';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
@@ -90,15 +89,6 @@ export function hentBrukersNavn() {
 export function hentAutentiseringsInfo() {
     return fetchToJson({
         url: `${AUTENTISERINGSINFO_URL}`,
-        config: { ...MED_CREDENTIALS,
-            headers: getHeaders(),
-        }
-    });
-}
-
-export function hentBrukersFnr() {
-    return fetchToJson({
-        url: `${VEILARBOPPFOLGINGPROXY_ME_URL}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
