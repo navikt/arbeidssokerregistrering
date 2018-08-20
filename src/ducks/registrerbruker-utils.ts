@@ -1,9 +1,8 @@
-import { RegistreringData, State, TeksterForBesvarelse } from './registrerbruker';
+import { RegistreringData, TeksterForBesvarelse } from './registrerbruker';
 import { State as SvarState } from './svar';
-import { selectSisteStilling, Stilling } from './siste-stilling';
+import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../sider/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
-import { AppState } from '../reducer';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
@@ -16,7 +15,7 @@ export function mapAvgitteSvarForBackend(
             sisteStilling: sisteStilling,
             besvarelse: svar,
             oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
-            teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl),
+            teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling),
         };
     } else {
         return {};
@@ -37,39 +36,38 @@ export function besvarelseErGyldig(svar: SvarState) {
 
 export function genererTeksterForBesvarelse(
     besvarelse: SvarState,
-    intl: InjectedIntl
+    intl: InjectedIntl,
+    sisteStilling: Stilling,
 ): TeksterForBesvarelse {
     return Object.keys(besvarelse)
         .map(sporsmalId => ({
             sporsmalId: sporsmalId,
-            sporsmal: getTekstForSporsmalDerManHarTattHoydeForStilling(sporsmalId, intl),
-            svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalId, besvarelse, intl),
+            sporsmal: getIntlTekstForSporsmal(sporsmalId, 'tittel', intl),
+            svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalId, besvarelse, intl, sisteStilling),
         }));
 }
 
-function getTekstForSporsmalDerManHarTattHoydeForStilling(
+function getIntlTekstForPotensieltUbesvartSporsmal(
     sporsmalId: string,
-    intl: InjectedIntl
+    besvarelse: SvarState,
+    intl: InjectedIntl,
+    sisteStilling: Stilling,
 ): string {
     if (sporsmalId === 'sisteStilling') {
-        // gjør noe spesielt
+        return hentAvgittSvarForSisteStilling(sisteStilling);
     }
-    return getIntlTekstForSporsmal(sporsmalId, 'tittel', intl);
-}
-
-function getIntlTekstForPotensieltUbesvartSporsmal(sporsmalId: string, besvarelse: SvarState, intl: InjectedIntl) {
     const svar = besvarelse[sporsmalId];
     const tekstId = getTekstIdForSvar(sporsmalId, besvarelse[sporsmalId]);
     return intlHarTekstId(intl, tekstId) ? intl.messages[tekstId] : svar;
 }
 
-function intlHarTekstId(intl: InjectedIntl, tekstId: string): boolean {
-    return Object.keys(intl.messages).includes(tekstId);
+function hentAvgittSvarForSisteStilling(sisteStilling: Stilling): string {
+    if (sisteStilling === ingenYrkesbakgrunn || sisteStilling === tomStilling) {
+        return 'Ingen yrkeserfaring';
+    }
+    return sisteStilling.label;
 }
 
-export function mapBrukerRegistreringsData(state: AppState, intl: InjectedIntl): State {
-    return {
-        data: mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl),
-        status: state.registrerBruker.status
-    };
+function intlHarTekstId(intl: InjectedIntl, tekstId: string): boolean {
+    return Object.keys(intl.messages).includes(tekstId);
 }
