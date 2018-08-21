@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getIntlTekst, getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
@@ -23,7 +23,7 @@ export default function AndreForhold(props: Props) {
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
     };
-    const getTekst = (kontekst: string) => getIntlTekst(sporsmalId, kontekst, intl);
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
 
     return (
         <>

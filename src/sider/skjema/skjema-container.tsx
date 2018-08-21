@@ -49,7 +49,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             visAdvarsel: false
         };
 
-        // MIDLERTIDIG MÅLING
+        // MIDLERTIDIG MÅLING TODO Fjern eller forbedre
         const { frontendlogger } = (window as any); // tslint:disable-line
         if (frontendlogger) {
             frontendlogger.event('registrering.harkommetinn', {}, {});
@@ -74,13 +74,20 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             </NavAlertStripe>
         );
 
+        const {
+            endreSvar,
+            svarState,
+            intl,
+            history,
+        } = this.props;
+
         const fellesProps = {
             endreSvar: (sporsmalId, svar) => {
-                this.props.endreSvar(sporsmalId, svar);
+                endreSvar(sporsmalId, svar);
                 this.toggleAdvarsel(false);
             },
-            intl: this.props.intl,
-            hentAvgittSvar: (sporsmalId: string) => this.props.svarState[sporsmalId],
+            intl: intl,
+            hentAvgittSvar: (sporsmalId: string) => svarState[sporsmalId],
         };
 
         const skjemaProps = {
@@ -92,12 +99,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                     this.toggleAdvarsel(true);
                 }
             },
-            gaaTilbake: () => this.props.history.goBack(),
+            gaaTilbake: () => history.goBack(),
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
             hrefTilFullfor: `${OPPSUMMERING_PATH}`,
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
-            svar: this.props.svarState,
-            settStateForUbesvartSporsmal: (sporsmalId) => this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
+            svar: svarState,
+            settStateForUbesvartSporsmal: (sporsmalId) => endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
             hrefTilSporsmal: (sporsmal) => `${SKJEMA_PATH}/${sporsmal}`,
         };
 
