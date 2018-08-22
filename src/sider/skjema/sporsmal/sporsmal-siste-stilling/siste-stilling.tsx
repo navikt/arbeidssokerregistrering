@@ -20,7 +20,7 @@ import {
     Stilling,
     velgSisteStilling
 } from '../../../../ducks/siste-stilling';
-import { getIntlTekst, getTekstIdForSvar } from '../../skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
 import { hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
 import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
@@ -115,7 +115,7 @@ class SisteStilling extends React.Component<Props> {
             </form>
         );
 
-        const getTekst = (kontekst: string) => getIntlTekst(sporsmalId, kontekst, intl);
+        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
 
         return (
             <>

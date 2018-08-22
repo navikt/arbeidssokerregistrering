@@ -1,19 +1,12 @@
 /*tslint:disable*/
 import {expect} from 'chai';
-import {State as SvarState} from '../ducks/svar';
 
-import {getIntlMessage, hentFornavn, mapAvgitteSvarForBackend,} from './utils';
-import {YRKESPRAKSIS} from './konstanter';
-import {Stilling} from "../ducks/siste-stilling";
 import {
-    AndreForholdSvar,
-    DinSituasjonSvar,
-    HelseHinderSvar,
-    SisteStillingSvar,
-    UtdanningBestattSvar,
-    UtdanningGodkjentSvar,
-    UtdanningSvar
-} from "../ducks/svar-utils";
+    getIntlMessage, hentFornavn
+} from './utils';
+import {
+    YRKESPRAKSIS
+} from './konstanter';
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
@@ -35,33 +28,5 @@ describe('utils test', () => {
 
     it('test hardkodet yrkespraksis', () => {
         expect(YRKESPRAKSIS).to.equal('5120.14');
-    });
-
-    it('test mapAvgitteSvarForBackend', () => {
-
-        const stilling: Stilling = {
-            styrk08: '6236',
-            label: 'stilling :)',
-            konseptId: 62352672,
-        };
-
-        const dummySvar: SvarState = {
-            helseHinder: HelseHinderSvar.JA,
-            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
-            utdanningBestatt: UtdanningBestattSvar.INGEN_SVAR,
-            utdanningGodkjent: UtdanningGodkjentSvar.NEI,
-            andreForhold: AndreForholdSvar.NEI,
-            sisteStilling: SisteStillingSvar.HAR_HATT_JOBB,
-            dinSituasjon: DinSituasjonSvar.ER_PERMITTERT,
-        };
-
-        const expectData = {
-            sisteStilling: stilling,
-            enigIOppsummering: true,
-            oppsummering: '',
-            besvarelse: dummySvar,
-        };
-        const mappet = mapAvgitteSvarForBackend(dummySvar, stilling);
-        expect(mappet).to.deep.equal(expectData);
     });
 });

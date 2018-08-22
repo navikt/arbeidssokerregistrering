@@ -10,7 +10,6 @@ import KnappFullfor from '../skjema/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
     utforRegistrering,
-    mapBrukerRegistreringsData,
     State as RegistrerBrukerState,
     Data as RegistrerBrukerData
 } from '../../ducks/registrerbruker';
@@ -27,6 +26,8 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
+import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
+import { selectSisteStilling } from '../../ducks/siste-stilling';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -37,22 +38,23 @@ const ikonytelserSvg = require('./ikon-ytelser.svg');
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
     featureToggles: FeatureTogglesData;
+    state: AppState;
 }
 
 interface DispatchProps {
     onRegistrerBruker: (data: RegistrerBrukerData, featureToggles: FeatureTogglesData) => Promise<void | {}>;
 }
 
-interface EgenStateProps {
+interface EgenState {
     markert: boolean;
     visAdvarsel: boolean;
     sblArbeidRegistrerBrukerStatus: string;
 }
 
-type EgenProps = RouteComponentProps<MatchProps> & StateProps & DispatchProps & InjectedIntlProps;
+type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps & InjectedIntlProps;
 
-class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
-    constructor(props: EgenProps) {
+class Fullfor extends React.PureComponent<Props, EgenState> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             markert: false,
@@ -64,9 +66,8 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 
     componentWillMount() {
-        const {registrerBrukerData, history} = this.props;
-        if (_.isEmpty(registrerBrukerData.data)) {
-            history.push(START_PATH);
+        if (_.isEmpty(this.getSvarMappetForBackend())) {
+            this.props.history.push(START_PATH);
         }
     }
 
@@ -75,19 +76,26 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
             this.setState({visAdvarsel: true});
             return;
         }
-
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
-        this.props.onRegistrerBruker(this.props.registrerBrukerData.data, this.props.featureToggles)
-            .then((res) => {
-                if (!!res) {
-                    // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
-                    registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
-                        .then(
-                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                            () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                        );
-                }
-            });
+
+        this.props.onRegistrerBruker(
+            this.getSvarMappetForBackend(),
+            this.props.featureToggles
+        ).then((res) => {
+            if (!!res) {
+                // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
+                registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
+                    .then(
+                        () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                        () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                    );
+            }
+        });
+    }
+
+    getSvarMappetForBackend() {
+        const {state, intl} = this.props;
+        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl);
     }
 
     settMarkert() {
@@ -226,9 +234,10 @@ class Fullfor extends React.PureComponent<EgenProps, EgenStateProps> {
     }
 }
 
-const mapStateToProps = (state) => ({
-    registrerBrukerData: mapBrukerRegistreringsData(state),
+const mapStateToProps = (state: AppState) => ({
+    registrerBrukerData: state.registrerBruker,
     featureToggles: selectFeatureToggles(state),
+    state: state,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

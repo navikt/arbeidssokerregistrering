@@ -15,7 +15,7 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling";
 
 const MOCK_START_REGISRERING_STATUS = true;
-const MOCK_REGISTRER_BRUKER = true;
+const MOCK_REGISTRER_BRUKER = false;
 const MOCK_REAKTIVER_BRUKER = true;
 const MOCK_BRUKERS_NAVN = true;
 const MOCK_AUTENTISERINGS_INFO = true;
@@ -25,7 +25,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = true; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const MOCK_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
