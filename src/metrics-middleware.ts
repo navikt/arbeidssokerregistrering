@@ -1,3 +1,4 @@
+// tslint:disable align
 import {ActionTypes as AutentiseringsinfoActionTypes } from './ducks/autentiseringsinfo';
 import {ActionTypes as RegistrerbrukerActionTypes } from './ducks/registrerbruker';
 import { brukersSvarSamsvarerMedInfoFraAAReg } from './sider/oppsummering/oppsummering-utils';
@@ -5,7 +6,7 @@ import { feilTyper } from './metrics-middleware-util';
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => { // tslint:disable-line:no-any
     const { frontendlogger } = (window as any); // tslint:disable-line:no-any
-    
+
     if (action.type === AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_OK) {
         const { niva } = action.data;
         if (frontendlogger) {
@@ -29,8 +30,21 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
     feilTyper.map((feil) => {
         if (action.type === feil.type) {
             if (frontendlogger) {
-                frontendlogger.event(feil.eventnavn,
-                                     {'useragent': navigator.userAgent, 'apikall': feil.apikall}, {});
+                if (!action.data) {
+                    frontendlogger.event(feil.eventnavn, {'statusText': 'Action data er undefined'}, {});
+                } else {
+                    const response = action.data.response || {};
+                    const status = response.status;
+                    const statusText = response.statusText;
+                    const url = response.url;
+                    frontendlogger.event(feil.eventnavn, {
+                        'useragent': navigator.userAgent,
+                        url,
+                        status,
+                        statusText,
+                        data: action.data
+                    }, {});
+                }
             }
         }
     });
