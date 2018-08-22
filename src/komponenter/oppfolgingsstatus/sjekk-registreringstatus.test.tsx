@@ -54,6 +54,20 @@ describe('<SjekkRegistreringstatus />', () => {
 
     });
 
+    it('skal ikke sende bruker til sbl om bruker er IARBS uten oppfølging', () => {
+        const store = create();
+        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
+
+        dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true}, store);
+
+        const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
+
+        expect(wrapper.find(SblRegistrering)).to.have.length(1);
+
+    });
+
+
     it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
