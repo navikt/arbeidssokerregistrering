@@ -28,9 +28,22 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
     /* Feil logging */
     feilTyper.map((feil) => {
         if (action.type === feil.type) {
+
+            const response = action.data.response || {};
+            const status = response.status;
+            const statusText = response.statusText;
+            const url = response.url;
+
+            // tslint:disable align
             if (frontendlogger) {
-                frontendlogger.event(feil.eventnavn,
-                                     {'useragent': navigator.userAgent, 'apikall': feil.apikall}, {});
+                frontendlogger.event(feil.eventnavn, {
+                    'useragent': navigator.userAgent,
+                    'apikall': feil.apikall,
+                    url,
+                    status,
+                    statusText,
+                    data: action.data,
+                }, {});
             }
         }
     });
