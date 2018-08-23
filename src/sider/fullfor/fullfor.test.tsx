@@ -13,7 +13,7 @@ import {
 import {create} from "../../store";
 import {ActionTypes as SvarActionTypes} from "../../ducks/svar";
 import {DUERNAREGISTRERT_PATH} from "../../utils/konstanter";
-import svarMock from "../../mocks/svar";
+import svarMock from "../../mocks/svar-mock";
 
 enzyme.configure({adapter: new Adapter()});
 afterEach(() => {
