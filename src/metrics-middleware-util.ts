@@ -11,41 +11,41 @@ export const feilTyper = [
     {
         type: RegistreringStatusActionTypes.HENT_REG_STATUS_FEILET,
         eventnavn: 'registrering.feil.hentstartregistrering',
-        apikall: '/startregistrering'
+        apikall: 'GET /startregistrering'
     },
     {
         type: RegistrerbrukerActionTypes.REG_BRUKER_STATUS_FEILET,
         eventnavn: 'registrering.feil.startregistrering',
-        apikall: '/startregistrering(post)'
+        apikall: 'POST /startregistrering'
     },
     {
         type: AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_FEILET,
         eventnavn: 'registrering.feil.autentiseringsinfo',
-        apikall: '/veilarbstepup/status'
+        apikall: 'GET /veilarbstepup/status'
     },
     {
         type: StillingFraAAregActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,
         eventnavn: 'registrering.feil.sistearbeidsforhold',
-        apikall: '/sistearbeidsforhold'
+        apikall: 'GET /sistearbeidsforhold'
     },
     {
         type: ReaktiverBrukerActionTypes.REAKTIVER_BRUKER_STATUS_FEILET,
         eventnavn: 'registrering.feil.reaktivering',
-        apikall: '/startreaktivering(post)'
+        apikall: 'POST /startreaktivering'
     },
     {
         type: OversettelseAvStillngFraAAregActionTypes.HENT_SISTE_STILLING_FEILET,
         eventnavn: 'registrering.feil.hentsistestilling',
-        apikall: '/kryssklassifiserMedKonsept?kodeForOversetting'
+        apikall: 'GET /kryssklassifiserMedKonsept?kodeForOversetting'
     },
     {
         type: FeatureToggleActionTypes.FEATURE_TOGGLES_FEILET,
         eventnavn: 'registrering.feil.featuretoggle',
-        apikall: '/feature'
+        apikall: 'GET /feature'
     },
     {
         type: BrukersnavnActionTypes.HENT_BRUKERS_NAVN_FEILET,
         eventnavn: 'registrering.feil.brukersnavn',
-        apikall: '/innloggingslinje/auth'
+        apikall: 'GET /innloggingslinje/auth'
     }
 ];
