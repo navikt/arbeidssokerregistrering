@@ -132,7 +132,6 @@ describe('<SisteStilling />', () => {
             DinSituasjonSvar.MISTET_JOBBEN,
             DinSituasjonSvar.HAR_SAGT_OPP,
             DinSituasjonSvar.ER_PERMITTERT,
-            DinSituasjonSvar.JOBB_OVER_2_AAR,
             DinSituasjonSvar.DELTIDSJOBB_VIL_MER,
             DinSituasjonSvar.VIL_BYTTE_JOBB,
             DinSituasjonSvar.ALDRI_HATT_JOBB,
