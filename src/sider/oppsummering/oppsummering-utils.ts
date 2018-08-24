@@ -11,7 +11,7 @@ export function sendBrukerTilSblArbeid() {
     document.location.href = SBLARBEID_URL;
 }
 
-export function sendBrukerTilSblArbeidOpprettMinIdBruker() {
+export function opprettMinIdBruker() {
     document.location.href = SBLARBEID_OPPRETT_MIN_ID_URL;
 }
 

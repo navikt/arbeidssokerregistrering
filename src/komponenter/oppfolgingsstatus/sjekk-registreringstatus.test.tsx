@@ -7,14 +7,18 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import SjekkRegistreringstatus from './sjekk-registreringstatus';
 import {
     dispatchFeaturestatus,
-    dispatchRegistreringstatus,
+    dispatchRegistreringstatus, FetchStub, mountWithStore,
     mountWithStoreRouterAndIntl,
     promiseWithSetTimeout,
-    shallowwithStoreAndIntl
+    shallowwithStoreAndIntl, stubFetch
 } from '../../test/test-utils';
 import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
+import {
+    sendBrukerTilSblArbeid,
+    opprettMinIdBruker
+} from '../../sider/oppsummering/oppsummering-utils';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -27,6 +31,28 @@ afterEach(() => {
 });
 
 describe('<SjekkRegistreringstatus />', () => {
+    it('skal sende bruker til opprett-min-id-bruker-url dersom bruker er IARBS uten oppfølging', () => {
+        const store = create();
+
+        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
+
+        dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true, kreverReaktivering: false}, store);
+
+
+        const opprettKunMinIdBrukerSpy = sandbox.spy(opprettMinIdBruker);
+        const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
+        const config = {
+            sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
+            opprettKunMinIdBruker: opprettKunMinIdBrukerSpy
+        };
+        mountWithStoreRouterAndIntl(<SblRegistrering opprettKunMinIdBruker={true} config={config} />);
+
+        return promiseWithSetTimeout().then(() => {
+            expect(opprettKunMinIdBrukerSpy.called).to.be.equal(true);
+        });
+    });
+
     it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false}, store);
@@ -51,19 +77,6 @@ describe('<SjekkRegistreringstatus />', () => {
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
 
         expect(wrapper.find(SblRegistrering)).to.have.length(0);
-
-    });
-
-    it('skal ikke sende bruker til sbl om bruker er IARBS uten oppfølging', () => {
-        const store = create();
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
-
-        dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true}, store);
-
-        const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
-
-        expect(wrapper.find(SblRegistrering)).to.have.length(1);
 
     });
 

@@ -4,7 +4,6 @@ import {Data as RegistreringstatusData, selectRegistreringstatus } from '../../d
 import { AppState } from '../../reducer';
 import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
-import { sendBrukerTilSblArbeidOpprettMinIdBruker } from '../../sider/oppsummering/oppsummering-utils';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectBrukNyRegistreringFeatureToggle,
@@ -26,10 +25,9 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
             return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!this.brukNyRegistrering()) {
             if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
-                sendBrukerTilSblArbeidOpprettMinIdBruker();
-                return;
+                return <SblRegistrering opprettKunMinIdBruker={true}/>;
             } else {
-                return <SblRegistrering/>;
+                return <SblRegistrering />;
             }
         } else {
             return <>{children}</>;

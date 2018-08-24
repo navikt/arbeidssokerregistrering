@@ -6,7 +6,7 @@ import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
 import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
+import { sendBrukerTilSblArbeid, opprettMinIdBruker } from '../oppsummering/oppsummering-utils';
 import Loader from '../../komponenter/loader/loader';
 
 interface State {
@@ -15,17 +15,21 @@ interface State {
 
 interface SblRegistreringConfig {
     sendBrukerTilSblArbeid: () => void;
+    opprettKunMinIdBruker: () => void;
 }
 
 interface Props {
     config?: SblRegistreringConfig;
+    opprettKunMinIdBruker?: boolean;
 }
 
 class SblRegistrering extends React.Component<Props, State> {
     static defaultProps: Partial<Props> = {
         config: {
             sendBrukerTilSblArbeid: sendBrukerTilSblArbeid,
-        }
+            opprettKunMinIdBruker: opprettMinIdBruker,
+        },
+        opprettKunMinIdBruker: false
     };
 
     constructor(props: {}) {
@@ -35,9 +39,18 @@ class SblRegistrering extends React.Component<Props, State> {
     }
 
     componentDidMount() {
+        if (this.props.opprettKunMinIdBruker) {
+            this.opprettKunMinIdBruker();
+        }
+
         if (window.innerWidth > 768) {
             this.opprettMinIdISblOgSendBrukerTilSbl();
         }
+    }
+
+    opprettKunMinIdBruker() {
+        const { config } = this.props;
+        config!.opprettKunMinIdBruker();
     }
 
     opprettMinIdISblOgSendBrukerTilSbl() {
