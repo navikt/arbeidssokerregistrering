@@ -1,6 +1,6 @@
 import { UTEN_STYRKKODE } from '../sider/skjema/sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
 
-export const brukerSomIkkeFinnesIAAReg = {
+export const stillingTilBrukerSomIkkeFinnesIAAReg = {
     styrk: UTEN_STYRKKODE
 };
 

@@ -22,7 +22,7 @@ import {
 } from '../../ducks/siste-stilling';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
-import {hentOversattStillingFraAAReg, UTEN_STYRKKODE} from './sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
+import { hentOversattStillingFraAAReg, UTEN_STYRKKODE } from './sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
 import { STATUS } from '../../ducks/api-utils';
 import { selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
 import FeilmeldingGenerell from '../../komponenter/feilmelding/feilmelding-generell';

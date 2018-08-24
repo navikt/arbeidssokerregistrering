@@ -12,7 +12,7 @@ import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg-mock';
 import {ingenYrkesbakgrunn} from '../../ducks/siste-stilling';
-import {brukerSomIkkeFinnesIAAReg} from '../../mocks/siste-stilling-fra-aareg-mock';
+import {stillingTilBrukerSomIkkeFinnesIAAReg} from '../../mocks/siste-stilling-fra-aareg-mock';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -79,7 +79,7 @@ describe('<LastInnSisteStilling />', () => {
     it('Hvis AAreg ikke har informasjon om siste stilling, så skal ingenYrkesbakgrunn settes i state', () => {
         const store = create();
         const fetchStub = new FetchStub()
-            .addResponse('sistearbeidsforhold', brukerSomIkkeFinnesIAAReg);
+            .addResponse('sistearbeidsforhold', stillingTilBrukerSomIkkeFinnesIAAReg);
         stubFetch(fetchStub);
 
         mountWithStoreRouterAndIntl(<LastInnSisteStilling>dummy</LastInnSisteStilling>, store);
