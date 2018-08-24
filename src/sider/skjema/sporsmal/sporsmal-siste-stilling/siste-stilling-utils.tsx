@@ -3,8 +3,10 @@ import { Data as OversettelseAvStillingData } from '../../../../ducks/oversettel
 import { Data as SisteStillingFraAARegData } from '../../../../ducks/siste-stilling-fra-aareg';
 import { DinSituasjonSvar, SisteStillingSvar } from '../../../../ducks/svar-utils';
 
+export const UTEN_STYRKKODE = 'utenstyrkkode';
+
 export function hentOversattStillingFraAAReg(
-    data: OversettelseAvStillingData
+    data: OversettelseAvStillingData,
 ): Stilling {
     const koderFraPam = data.konseptMedStyrk08List;
     let stilling: Stilling = annenStilling;
@@ -25,7 +27,7 @@ export function getDefaultSvar(sisteStillingFraAAReg: SisteStillingFraAARegData)
 }
 
 function ingenStillingFunnetIAAReg(sisteStillingFraAAReg: SisteStillingFraAARegData): boolean {
-    return sisteStillingFraAAReg.styrk === 'utenstyrkkode';
+    return sisteStillingFraAAReg.styrk === UTEN_STYRKKODE;
 }
 
 export function skalSkjuleSvaralternativer(dinSituasjon: DinSituasjonSvar | undefined) {

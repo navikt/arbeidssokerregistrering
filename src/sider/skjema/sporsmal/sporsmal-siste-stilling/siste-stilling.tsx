@@ -55,6 +55,7 @@ class SisteStilling extends React.Component<Props> {
             sisteStillingFraAAReg,
         } = this.props;
 
+        console.log(sisteStillingFraAAReg.data);
         endreSvar(
             sporsmalId,
             getDefaultSvar(sisteStillingFraAAReg.data)

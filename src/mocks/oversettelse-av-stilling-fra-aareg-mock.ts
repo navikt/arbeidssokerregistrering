@@ -20,3 +20,7 @@ const oversettelseAvStillingFraAAReg = {
 };
 
 export default oversettelseAvStillingFraAAReg;
+
+export const tomOversettelseAvStillingFraAAReg = {
+    'konseptMedStyrk08List': [],
+};

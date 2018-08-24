@@ -25,7 +25,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const DISPATCH_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
@@ -79,7 +79,7 @@ if (MOCK_REAKTIVER_BRUKER) {
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startreaktivering`, response);
 }
 
-if (MOCK_BESVARELSE) {
+if (DISPATCH_BESVARELSE) {
     const store = getStore();
     [
         'utdanning',
