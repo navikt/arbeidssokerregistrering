@@ -7,11 +7,12 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import {create} from '../../../../store';
 import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../../test/test-utils';
 import SisteStilling from './siste-stilling';
-import {ingenYrkesbakgrunn, velgSisteStilling} from '../../../../ducks/siste-stilling';
-import {sisteStillingMock} from '../../../../mocks/siste-stilling';
-import oversettelseAvStillingFraAAReg from '../../../../mocks/oversettelse-av-stilling-fra-aareg';
-import {hentOversattStillingFraAAReg} from './siste-stilling-utils';
-import {ActionTypes} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
+import {annenStilling, ingenYrkesbakgrunn, velgSisteStilling} from '../../../../ducks/siste-stilling';
+import {sisteStillingMock} from '../../../../mocks/siste-stilling-mock';
+import oversettelseAvStillingFraAAReg, {tomOversettelseAvStillingFraAAReg} from '../../../../mocks/oversettelse-av-stilling-fra-aareg-mock';
+import {hentOversattStillingFraAAReg, UTEN_STYRKKODE} from './siste-stilling-utils';
+import {ActionTypes as OversettelseAvStillingActionTypes} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
+import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../../ducks/siste-stilling-fra-aareg';
 import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
 import {ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
 import Alternativ from "../../alternativ";
@@ -37,16 +38,18 @@ const dummyProps = {
     hentAvgittSvar: (sporsmalId: string) => IngenSvar.INGEN_SVAR,
 };
 
+function dispatchSisteStillingFraAAReg(store, styrk) {
+    store.dispatch({
+        type: SisteStillingFraAARegActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_OK,
+        data: {styrk},
+    });
+}
+
 describe('<SisteStilling />', () => {
-    it('Hvis bruker ikke er i AAreg (som medfører at sisteStilling er ingenYrkespraksis), ' +
-        'så skal "Har ikke hatt jobb" være default svar.',
+    it('Hvis bruker ikke er i AAreg, så skal "Har ikke hatt jobb" være default svar.',
         () => {
         const store = create();
-        const fetchStub = new FetchStub()
-            .addResponse('sistearbeidsforhold', {});
-        stubFetch(fetchStub);
-
-        store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
+        dispatchSisteStillingFraAAReg(store, UTEN_STYRKKODE);
 
         const endreSvarSpy = sandbox.spy(dummyProps.endreSvar);
         const props = {
@@ -59,15 +62,10 @@ describe('<SisteStilling />', () => {
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(SisteStillingSvar.HAR_IKKE_HATT_JOBB);
     });
 
-    it('Hvis bruker har stilling i AAReg (som medfører at sisteStilling _ikke_ er ingenYrkespraksis),' +
-        'så skal "Har hatt jobb" være default svar.',
+    it('Hvis bruker har stilling i AAReg, så skal "Har hatt jobb" være default svar.',
         () => {
         const store = create();
-        const fetchStub = new FetchStub()
-            .addResponse('sistearbeidsforhold', {});
-        stubFetch(fetchStub);
-
-        store.dispatch(velgSisteStilling(sisteStillingMock));
+        dispatchSisteStillingFraAAReg(store, '1235');
 
         const endreSvarSpy = sandbox.spy(dummyProps.endreSvar);
         const props = {
@@ -79,8 +77,7 @@ describe('<SisteStilling />', () => {
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(SisteStillingSvar.HAR_HATT_JOBB);
     });
 
-    it('Hvis bruker endrer svar til "Har ikke hatt jobb", ' +
-        'så skal state.sisteStilling bli ingenYrkesbakgrunn',
+    it('Hvis bruker endrer svar til "Har ikke hatt jobb", så skal state.sisteStilling bli ingenYrkesbakgrunn',
         () => {
         const store = create();
         const fetchStub = new FetchStub()
@@ -100,32 +97,56 @@ describe('<SisteStilling />', () => {
 
     });
 
-    it('Hvis bruker endrer svar til "Har hatt jobb", ' +
-        'så skal state.sisteStilling endres til det som er hentet fra AAReg',
+    it('Hvis bruker endrer svar til "Har hatt jobb", så skal state.sisteStilling endres til det som er hentet fra AAReg',
         () => {
-        const store = create();
-        const fetchStub = new FetchStub()
-            .addResponse('sistearbeidsforhold', {});
-        stubFetch(fetchStub);
+            const store = create();
+            const fetchStub = new FetchStub()
+                .addResponse('sistearbeidsforhold', {});
+            stubFetch(fetchStub);
 
-        store.dispatch({
-            type: ActionTypes.HENT_SISTE_STILLING_OK,
-            data: oversettelseAvStillingFraAAReg,
-        });
-        store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
-
-        const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
-
-        wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "Har hatt jobb"
-
-        return promiseWithSetTimeout()
-            .then(() => {
-                expect(store.getState().sisteStilling.data.stilling).to.deep.equal(
-                    hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg)
-                );
+            store.dispatch({
+                type: OversettelseAvStillingActionTypes.HENT_SISTE_STILLING_OK,
+                data: oversettelseAvStillingFraAAReg,
             });
+            store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
 
-    });
+            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+
+            wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "Har hatt jobb"
+
+            return promiseWithSetTimeout()
+                .then(() => {
+                    expect(store.getState().sisteStilling.data.stilling).to.deep.equal(
+                        hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg)
+                    );
+                });
+
+        });
+
+    it('Hvis bruker endrer svar til "Har hatt jobb" uten at dette står i AAReg, så skal state.sisteStilling endres til "Annen stilling".',
+        () => {
+            const store = create();
+            const fetchStub = new FetchStub()
+                .addResponse('sistearbeidsforhold', {});
+            stubFetch(fetchStub);
+
+            dispatchSisteStillingFraAAReg(store, UTEN_STYRKKODE);
+            store.dispatch({
+                type: OversettelseAvStillingActionTypes.HENT_SISTE_STILLING_OK,
+                data: tomOversettelseAvStillingFraAAReg,
+            });
+            store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
+
+            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+
+            wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "Har hatt jobb"
+
+            return promiseWithSetTimeout()
+                .then(() => {
+                    expect(store.getState().sisteStilling.data.stilling).to.deep.equal(annenStilling);
+                });
+
+        });
 
     it('Skal skjule alternativene hvis (og bare hvis) man svarer visse alternativer på spm om din situasjon',() => {
         const svarDerAlternativeneSkalSkjules: (DinSituasjonSvar | undefined)[] = [

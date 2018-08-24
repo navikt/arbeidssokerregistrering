@@ -2,7 +2,7 @@
 import * as fetchMock from 'fetch-mock';
 import * as qs from 'query-string';
 import * as pathRegex from 'path-to-regexp';
-import pamJanzzData from './pam-janzz-data';
+import pamJanzzData from './typeahead-mock';
 
 export function lagPamjanzzRespons({q}: { q: string}) {
     const { typeaheadYrkeList } = pamJanzzData;

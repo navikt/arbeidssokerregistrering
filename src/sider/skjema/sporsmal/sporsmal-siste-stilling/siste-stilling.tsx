@@ -22,7 +22,7 @@ import {
 } from '../../../../ducks/siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../skjema-utils';
 import Alternativ from '../../alternativ';
-import { hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
+import { getDefaultSvar, hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
 import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
 import { State as SvarState } from '../../../../ducks/svar';
 
@@ -52,14 +52,12 @@ class SisteStilling extends React.Component<Props> {
         const {
             endreSvar,
             sporsmalId,
-            sisteStilling,
+            sisteStillingFraAAReg,
         } = this.props;
 
         endreSvar(
             sporsmalId,
-            sisteStilling === ingenYrkesbakgrunn
-                ? SisteStillingSvar.HAR_IKKE_HATT_JOBB
-                : SisteStillingSvar.HAR_HATT_JOBB
+            getDefaultSvar(sisteStillingFraAAReg.data)
         );
     }
 

@@ -1,18 +1,18 @@
 /*tslint:disable*/
 import {delayed, lagPamjanzzRespons, mock, respondWith} from './utils';
-import startRegistreringStatus from './start-registrering-status';
-import brukersNavn from './brukers-navn';
-import sisteStillingFraAAReg from './siste-stilling-fra-aareg';
-import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg';
-import {featureTogglesMock} from "./feature-toggles";
+import startRegistreringStatus from './registreringstatus-mock';
+import brukersNavn from './brukers-navn-mock';
+import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
+import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg-mock';
+import {featureTogglesMock} from "./feature-toggles-mock";
 import {FEATURE_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
-import autentisert from './autentisert';
-import registreringRespons from "./registrer-bruker";
+import autentisert from './autentiseringsinfo-mock';
+import registreringRespons from "./registrerbruker-mock";
 import getStore from "../store";
 import {ActionTypes as SvarActionTypes} from '../ducks/svar';
-import svarMock from "./svar";
+import svarMock from "./svar-mock";
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
-import {sisteStillingMock} from "./siste-stilling";
+import {sisteStillingMock} from "./siste-stilling-mock";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = false;
@@ -25,7 +25,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const DISPATCH_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
 if (MOCK_AUTENTISERINGS_INFO) {
@@ -79,7 +79,7 @@ if (MOCK_REAKTIVER_BRUKER) {
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startreaktivering`, response);
 }
 
-if (MOCK_BESVARELSE) {
+if (DISPATCH_BESVARELSE) {
     const store = getStore();
     [
         'utdanning',

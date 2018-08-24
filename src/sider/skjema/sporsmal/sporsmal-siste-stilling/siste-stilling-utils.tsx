@@ -1,9 +1,12 @@
 import { annenStilling, Stilling } from '../../../../ducks/siste-stilling';
-import { Data } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
-import { DinSituasjonSvar } from '../../../../ducks/svar-utils';
+import { Data as OversettelseAvStillingData } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
+import { Data as SisteStillingFraAARegData } from '../../../../ducks/siste-stilling-fra-aareg';
+import { DinSituasjonSvar, SisteStillingSvar } from '../../../../ducks/svar-utils';
+
+export const UTEN_STYRKKODE = 'utenstyrkkode';
 
 export function hentOversattStillingFraAAReg(
-    data: Data
+    data: OversettelseAvStillingData,
 ): Stilling {
     const koderFraPam = data.konseptMedStyrk08List;
     let stilling: Stilling = annenStilling;
@@ -15,6 +18,16 @@ export function hentOversattStillingFraAAReg(
         };
     }
     return stilling;
+}
+
+export function getDefaultSvar(sisteStillingFraAAReg: SisteStillingFraAARegData): SisteStillingSvar {
+    return ingenStillingFunnetIAAReg(sisteStillingFraAAReg)
+        ? SisteStillingSvar.HAR_IKKE_HATT_JOBB
+        : SisteStillingSvar.HAR_HATT_JOBB;
+}
+
+function ingenStillingFunnetIAAReg(sisteStillingFraAAReg: SisteStillingFraAARegData): boolean {
+    return sisteStillingFraAAReg.styrk === UTEN_STYRKKODE;
 }
 
 export function skalSkjuleSvaralternativer(dinSituasjon: DinSituasjonSvar | undefined) {
