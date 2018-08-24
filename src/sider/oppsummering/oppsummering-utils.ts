@@ -1,4 +1,4 @@
-import { SBLARBEID_URL } from '../../ducks/api';
+import { SBLARBEID_OPPRETT_MIN_ID_URL, SBLARBEID_URL } from '../../ducks/api';
 import { DinSituasjonSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
 import { svarSuffiksTilTekstId } from '../skjema/skjema-utils';
 import { State as SvarState } from '../../ducks/svar';
@@ -9,6 +9,10 @@ const {svarSomIndikererArbeidSisteManeder, svarSomIndikererIngenArbeidSisteManed
 
 export function sendBrukerTilSblArbeid() {
     document.location.href = SBLARBEID_URL;
+}
+
+export function sendBrukerTilSblArbeidOpprettMinIdBruker() {
+    document.location.href = SBLARBEID_OPPRETT_MIN_ID_URL;
 }
 
 export function getTekstIdForOppsummering(sporsmalId: string, svar: Svar) {

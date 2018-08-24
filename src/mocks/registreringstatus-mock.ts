@@ -1,6 +1,6 @@
 export default {
-    underOppfolging: false,
+    underOppfolging: true,
     jobbetSeksAvTolvSisteManeder: false,
-    kreverReaktivering: false,
+    kreverReaktivering: true,
     erIkkeArbeidssokerUtenOppfolging: false,
 };
