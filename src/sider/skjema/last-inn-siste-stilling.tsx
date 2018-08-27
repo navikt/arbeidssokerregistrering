@@ -17,7 +17,6 @@ import {
     ingenYrkesbakgrunn,
     selectSisteStilling,
     Stilling,
-    tomStilling,
     velgSisteStilling
 } from '../../ducks/siste-stilling';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
@@ -48,21 +47,10 @@ interface State {
 
 class LastInnSisteStilling extends React.Component<Props, State> {
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            stillingErSatt: {status: this.props.sisteStilling === tomStilling ? STATUS.NOT_STARTED : STATUS.OK}
-        };
-    }
-
     componentWillMount() {
         const velgStilling = (stilling: Stilling) => {
             this.props.velgStilling(stilling);
-            this.setState({
-                stillingErSatt: {status: STATUS.OK}
-            });
         };
-
         if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
             this.props.hentStyrkkodeForSisteStillingFraAAReg(this.props.featureToggles)
                 .then((responseSisteArbeidsforhold) => {
@@ -90,7 +78,7 @@ class LastInnSisteStilling extends React.Component<Props, State> {
         return (
             <Innholdslaster
                 feilmeldingKomponent={<FeilmeldingGenerell />}
-                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg, this.state.stillingErSatt]}
+                avhengigheter={[sisteStillingFraAAReg, oversettelseAvStillingFraAAReg]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >

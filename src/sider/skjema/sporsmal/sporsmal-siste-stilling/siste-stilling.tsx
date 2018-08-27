@@ -61,6 +61,13 @@ class SisteStilling extends React.Component<Props> {
         );
     }
 
+    componentWillUpdate() {
+        const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
+        if (skjulSvaralternativer) {
+            this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
+        }
+    }
+
     skalViseStillingsfelt() {
         return (this.props.hentAvgittSvar(this.props.sporsmalId) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB);
     }
@@ -89,9 +96,6 @@ class SisteStilling extends React.Component<Props> {
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
         const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
-        if (skjulSvaralternativer) {
-            this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
-        }
         const alternativer = skjulSvaralternativer ? (null) : (
             <form className="spm-skjema">
                 <Alternativ
