@@ -25,7 +25,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
             return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!this.brukNyRegistrering()) {
             if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
-                return <SblRegistrering opprettKunMinIdBruker={true}/>;
+                return <SblRegistrering opprettSBLArbeidBruker={true}/>;
             } else {
                 return <SblRegistrering />;
             }

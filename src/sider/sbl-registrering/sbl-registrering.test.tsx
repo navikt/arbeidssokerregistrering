@@ -10,7 +10,7 @@ import {
     FetchStub,
     mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch
 } from '../../test/test-utils';
-import { sendBrukerTilSblArbeid, opprettMinIdBruker } from '../oppsummering/oppsummering-utils';
+import { sendBrukerTilSblArbeid, opprettSBLArbeidBruker } from '../oppsummering/oppsummering-utils';
 
 enzyme.configure({ adapter: new Adapter()});
 
@@ -52,7 +52,7 @@ describe('<SblRegistrering />', () => {
         const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
         const config = {
             sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
-            sendBrukerTilSblArbeidOpprettMinIdBruker: opprettMinIdBruker
+            opprettSBLArbeidBruker: opprettSBLArbeidBruker
         };
 
         mountWithStoreRouterAndIntl(<SblRegistrering config={config} />);

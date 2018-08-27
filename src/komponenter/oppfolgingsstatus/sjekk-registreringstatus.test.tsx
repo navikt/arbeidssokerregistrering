@@ -12,12 +12,11 @@ import {
     promiseWithSetTimeout,
     shallowwithStoreAndIntl, stubFetch
 } from '../../test/test-utils';
-import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
+import SblRegistrering, { opprettSBLArbeidBruker } from '../../sider/sbl-registrering/sbl-registrering';
 import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 import {
-    sendBrukerTilSblArbeid,
-    opprettMinIdBruker
+    sendBrukerTilSblArbeid
 } from '../../sider/oppsummering/oppsummering-utils';
 
 enzyme.configure({adapter: new Adapter()});
@@ -40,16 +39,18 @@ describe('<SjekkRegistreringstatus />', () => {
         dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true, kreverReaktivering: false}, store);
 
 
-        const opprettKunMinIdBrukerSpy = sandbox.spy(opprettMinIdBruker);
+        const opprettSBLArbeidBrukerSpy = sandbox.spy(opprettSBLArbeidBruker);
         const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
         const config = {
             sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
-            opprettKunMinIdBruker: opprettKunMinIdBrukerSpy
+            opprettSBLArbeidBruker: opprettSBLArbeidBrukerSpy
         };
-        mountWithStoreRouterAndIntl(<SblRegistrering opprettKunMinIdBruker={true} config={config} />);
+        mountWithStoreRouterAndIntl(<SblRegistrering opprettSBLArbeidBruker={true} config={config} />);
 
         return promiseWithSetTimeout().then(() => {
-            expect(opprettKunMinIdBrukerSpy.called).to.be.equal(true);
+            expect(opprettSBLArbeidBrukerSpy.called).to.be.equal(true);
+            expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(false);
+
         });
     });
 
