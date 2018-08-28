@@ -55,16 +55,13 @@ class SisteStilling extends React.Component<Props> {
             sisteStillingFraAAReg,
         } = this.props;
 
-        endreSvar(
-            sporsmalId,
-            getDefaultSvar(sisteStillingFraAAReg.data)
-        );
-    }
-
-    componentWillUpdate() {
-        const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
-        if (skjulSvaralternativer) {
+        if (skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon)) {
             this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
+        } else {
+            endreSvar(
+                sporsmalId,
+                getDefaultSvar(sisteStillingFraAAReg.data)
+            );
         }
     }
 
