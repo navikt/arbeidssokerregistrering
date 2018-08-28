@@ -55,10 +55,14 @@ class SisteStilling extends React.Component<Props> {
             sisteStillingFraAAReg,
         } = this.props;
 
-        endreSvar(
-            sporsmalId,
-            getDefaultSvar(sisteStillingFraAAReg.data)
-        );
+        if (skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon)) {
+            this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
+        } else {
+            endreSvar(
+                sporsmalId,
+                getDefaultSvar(sisteStillingFraAAReg.data)
+            );
+        }
     }
 
     skalViseStillingsfelt() {
@@ -89,9 +93,6 @@ class SisteStilling extends React.Component<Props> {
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
         const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
-        if (skjulSvaralternativer) {
-            this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
-        }
         const alternativer = skjulSvaralternativer ? (null) : (
             <form className="spm-skjema">
                 <Alternativ

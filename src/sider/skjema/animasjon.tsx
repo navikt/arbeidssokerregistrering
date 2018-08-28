@@ -26,10 +26,13 @@ class Animasjon extends React.Component<Props, State> {
     }
 
     render() {
+        return this.state.visible ? this.props.children : null;
+    }
+
+    componentDidUpdate() {
         if (!this.state.visible) {
             this.setState({visible: true});
         }
-        return this.state.visible ? this.props.children : null;
     }
 }
 
