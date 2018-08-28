@@ -3,7 +3,7 @@ import { State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../sider/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
-import {IngenSvar} from "./svar-utils";
+import { IngenSvar } from './svar-utils';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
