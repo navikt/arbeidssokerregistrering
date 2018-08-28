@@ -67,7 +67,7 @@ describe('utils test', () => {
             }, {
                 sporsmalId: 'utdanningBestatt',
                 sporsmal: messages['utdanningbestatt-tittel'],
-                svar: 'INGEN_SVAR',
+                svar: 'Ikke aktuelt',
             }, {
                 sporsmalId: 'utdanningGodkjent',
                 sporsmal: messages['utdanninggodkjent-tittel'],
