@@ -41,11 +41,7 @@ interface DispatchProps {
 }
 
 type Props = StateProps & DispatchProps;
-interface State {
-    stillingErSatt: {status: string};
-}
-
-class LastInnSisteStilling extends React.Component<Props, State> {
+class LastInnSisteStilling extends React.Component<Props> {
 
     componentWillMount() {
         const velgStilling = (stilling: Stilling) => {
