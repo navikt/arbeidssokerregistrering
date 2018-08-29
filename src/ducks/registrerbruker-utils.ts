@@ -3,6 +3,7 @@ import { State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../sider/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
+import { IngenSvar } from './svar-utils';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
@@ -57,6 +58,9 @@ function getIntlTekstForPotensieltUbesvartSporsmal(
         return hentAvgittSvarForSisteStilling(sisteStilling);
     }
     const svar = besvarelse[sporsmalId];
+    if (svar === IngenSvar.INGEN_SVAR) {
+        return 'Ikke aktuelt';
+    }
     const tekstId = getTekstIdForSvar(sporsmalId, besvarelse[sporsmalId]);
     return intlHarTekstId(intl, tekstId) ? intl.messages[tekstId] : svar;
 }
