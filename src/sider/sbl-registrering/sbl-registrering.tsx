@@ -41,7 +41,8 @@ class SblRegistrering extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        if (this.props.enforceRedirect) {
+
+        if (this.props.enforceRedirect === true) {
             this.executeRedirect();
             return;
         }

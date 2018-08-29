@@ -27,46 +27,6 @@ afterEach(() => {
 });
 
 describe('<SjekkRegistreringstatus />', () => {
-    it('skal sende bruker til DittNav dersom bruker er IARBS uten oppfølging', () => {
-        const store = create();
-
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
-
-        dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true, kreverReaktivering: false}, store);
-
-
-        const dittNavSpy = sandbox.spy(sendBrukerTilDittNav);
-        const config = {
-            redirect: dittNavSpy()
-        };
-        mountWithStoreRouterAndIntl(<SblRegistrering enforceRedirect={true} config={config} />);
-
-        return promiseWithSetTimeout().then(() => {
-            expect(dittNavSpy.called).to.be.equal(true);
-        });
-    });
-
-    it('skal IKKE sende bruker til DittNav dersom bruker IKKE er IARBS uten oppfølging', () => {
-        const store = create();
-
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
-
-        dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: false, kreverReaktivering: false}, store);
-
-
-        const dittNavSpy = sandbox.spy(sendBrukerTilDittNav);
-        const config = {
-            redirect: dittNavSpy()
-        };
-        mountWithStoreRouterAndIntl(<SblRegistrering enforceRedirect={true} config={config} />);
-
-        return promiseWithSetTimeout().then(() => {
-            expect(dittNavSpy.called).to.be.equal(false);
-        });
-    });
-
     it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false}, store);
