@@ -12,12 +12,9 @@ import {
     promiseWithSetTimeout,
     shallowwithStoreAndIntl, stubFetch
 } from '../../test/test-utils';
-import SblRegistrering, { opprettSBLArbeidBruker } from '../../sider/sbl-registrering/sbl-registrering';
+import SblRegistrering, { sendBrukerTilDittNav } from '../../sider/sbl-registrering/sbl-registrering';
 import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
-import {
-    sendBrukerTilSblArbeid
-} from '../../sider/oppsummering/oppsummering-utils';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -30,7 +27,7 @@ afterEach(() => {
 });
 
 describe('<SjekkRegistreringstatus />', () => {
-    it('skal sende bruker til opprett-min-id-bruker-url dersom bruker er IARBS uten oppfølging', () => {
+    it('skal sende bruker til DittNav dersom bruker er IARBS uten oppfølging', () => {
         const store = create();
 
         dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
@@ -39,18 +36,14 @@ describe('<SjekkRegistreringstatus />', () => {
         dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true, kreverReaktivering: false}, store);
 
 
-        const opprettSBLArbeidBrukerSpy = sandbox.spy(opprettSBLArbeidBruker);
-        const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
+        const dittNavSpy = sandbox.spy(sendBrukerTilDittNav);
         const config = {
-            sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
-            opprettSBLArbeidBruker: opprettSBLArbeidBrukerSpy
+            redirect: dittNavSpy()
         };
-        mountWithStoreRouterAndIntl(<SblRegistrering opprettSBLArbeidBruker={true} config={config} />);
+        mountWithStoreRouterAndIntl(<SblRegistrering enforceRedirect={true} config={config} />);
 
         return promiseWithSetTimeout().then(() => {
-            expect(opprettSBLArbeidBrukerSpy.called).to.be.equal(true);
-            expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(false);
-
+            expect(dittNavSpy.called).to.be.equal(true);
         });
     });
 

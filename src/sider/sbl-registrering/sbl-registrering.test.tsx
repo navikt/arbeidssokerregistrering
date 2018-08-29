@@ -51,8 +51,7 @@ describe('<SblRegistrering />', () => {
 
         const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
         const config = {
-            sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
-            opprettSBLArbeidBruker: opprettSBLArbeidBruker
+            redirect: sendBrukerTilSblArbeidSpy
         };
 
         mountWithStoreRouterAndIntl(<SblRegistrering config={config} />);

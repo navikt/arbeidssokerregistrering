@@ -3,67 +3,59 @@ import { FormattedMessage } from 'react-intl';
 import KnappBase from 'nav-frontend-knapper';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
-import { DITTNAV_URL, registrerBrukerSBLArbeid, SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
+import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
 import Loader from '../../komponenter/loader/loader';
+import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
 
 interface State {
     status: string;
 }
 
 interface SblRegistreringConfig {
-    sendBrukerTilSblArbeid: () => void;
-    opprettSBLArbeidBruker: () => void;
+    redirect: () => void;
 }
 
 interface Props {
     config?: SblRegistreringConfig;
-    opprettSBLArbeidBruker?: boolean;
+    enforceRedirect?: boolean;
 }
 
-export function opprettSBLArbeidBruker() {
-    document.location.href = SBLARBEID_OPPRETT_MIN_ID_URL;
+export function sendBrukerTilDittNav() {
+    document.location.href = DITTNAV_URL;
 }
 
 class SblRegistrering extends React.Component<Props, State> {
     static defaultProps: Partial<Props> = {
         config: {
-            sendBrukerTilSblArbeid: sendBrukerTilSblArbeid,
-            opprettSBLArbeidBruker: opprettSBLArbeidBruker,
+            redirect: sendBrukerTilSblArbeid
         },
-        opprettSBLArbeidBruker: false
+        enforceRedirect: false
     };
 
     constructor(props: {}) {
         super(props);
         this.state = {status: STATUS.OK};
-        this.opprettMinIdISblOgSendBrukerTilSBLCvRegistrering =
-            this.opprettMinIdISblOgSendBrukerTilSBLCvRegistrering.bind(this);
+        this.executeRedirect = this.executeRedirect.bind(this);
     }
 
     componentDidMount() {
-        if (this.props.opprettSBLArbeidBruker) {
-            this.opprettSBLArbeidBruker();
+        if (this.props.enforceRedirect) {
+            this.executeRedirect();
             return;
         }
 
         if (window.innerWidth > 768) {
-            this.opprettMinIdISblOgSendBrukerTilSBLCvRegistrering();
+            this.executeRedirect();
         }
     }
 
-    opprettSBLArbeidBruker() {
-        const { config } = this.props;
-        config!.opprettSBLArbeidBruker();
-    }
-
-    opprettMinIdISblOgSendBrukerTilSBLCvRegistrering() {
+    executeRedirect() {
         const { config } = this.props;
         this.setState({status: STATUS.PENDING},
                       () => registrerBrukerSBLArbeid()
-                        .then(config!.sendBrukerTilSblArbeid, config!.sendBrukerTilSblArbeid));
+                        .then(config!.redirect, config!.redirect));
     }
 
     render() {
@@ -90,7 +82,7 @@ class SblRegistrering extends React.Component<Props, State> {
                                 key="2"
                                 type="hoved"
                                 className="sbl-registrering__knapp"
-                                onClick={this.opprettMinIdISblOgSendBrukerTilSBLCvRegistrering}
+                                onClick={this.executeRedirect}
                             >
                                 <FormattedMessage id="knapp-sbl-registrering-neste"/>
                             </KnappBase>
