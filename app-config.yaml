@@ -27,3 +27,5 @@ fasitResources:
     resourceType: baseUrl
   - alias: appdynamics
     resourceType: applicationproperties
+alertProfiles:
+  - common-java-modules
