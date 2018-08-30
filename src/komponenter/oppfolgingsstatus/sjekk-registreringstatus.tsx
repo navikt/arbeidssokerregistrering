@@ -2,12 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import {Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { AppState } from '../../reducer';
-import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
+import SblRegistrering, { sendBrukerTilDittNav } from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectBrukNyRegistreringFeatureToggle,
     selectGradualRolloutNyRegistreringFeatureToggle } from '../../ducks/feature-toggles';
+import { sendBrukerTilSblArbeid } from '../../sider/oppsummering/oppsummering-utils';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -23,18 +24,20 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
         const {registreringstatusData, children} = this.props;
         if (registreringstatusData.underOppfolging && !registreringstatusData.kreverReaktivering) {
             return <AlleredeRegistrert intl={this.props.intl} />;
-        } else if (!this.brukNyRegistrering()) {
+        } else if (!this.beregnBrukNyRegistrering()) {
             if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
-                return <SblRegistrering opprettSBLArbeidBruker={true}/>;
+                const config = { redirect: sendBrukerTilDittNav };
+                return <SblRegistrering enforceRedirect={true} config={config}/>;
             } else {
-                return <SblRegistrering />;
+                const config = { redirect: sendBrukerTilSblArbeid };
+                return <SblRegistrering config={config} />;
             }
         } else {
             return <>{children}</>;
         }
     }
 
-    brukNyRegistrering(): boolean {
+    beregnBrukNyRegistrering(): boolean {
         const {gradualRolloutNyRegistrering, brukNyRegistrering, registreringstatusData} = this.props;
         if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
             return false;

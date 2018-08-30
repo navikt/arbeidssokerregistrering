@@ -12,12 +12,9 @@ import {
     promiseWithSetTimeout,
     shallowwithStoreAndIntl, stubFetch
 } from '../../test/test-utils';
-import SblRegistrering, { opprettSBLArbeidBruker } from '../../sider/sbl-registrering/sbl-registrering';
+import SblRegistrering, { sendBrukerTilDittNav } from '../../sider/sbl-registrering/sbl-registrering';
 import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
-import {
-    sendBrukerTilSblArbeid
-} from '../../sider/oppsummering/oppsummering-utils';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -30,30 +27,6 @@ afterEach(() => {
 });
 
 describe('<SjekkRegistreringstatus />', () => {
-    it('skal sende bruker til opprett-min-id-bruker-url dersom bruker er IARBS uten oppfølging', () => {
-        const store = create();
-
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
-
-        dispatchRegistreringstatus({underOppfolging: false, erIkkeArbeidssokerUtenOppfolging: true, kreverReaktivering: false}, store);
-
-
-        const opprettSBLArbeidBrukerSpy = sandbox.spy(opprettSBLArbeidBruker);
-        const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
-        const config = {
-            sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
-            opprettSBLArbeidBruker: opprettSBLArbeidBrukerSpy
-        };
-        mountWithStoreRouterAndIntl(<SblRegistrering opprettSBLArbeidBruker={true} config={config} />);
-
-        return promiseWithSetTimeout().then(() => {
-            expect(opprettSBLArbeidBrukerSpy.called).to.be.equal(true);
-            expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(false);
-
-        });
-    });
-
     it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false}, store);
