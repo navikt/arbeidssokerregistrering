@@ -4,8 +4,8 @@ import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import SblRegistrering from './sbl-registrering';
-import { SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
+import SblRegistrering, {sendBrukerTilDittNav} from './sbl-registrering';
+import { DITTNAV_URL, SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
 import {
     FetchStub,
     mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch
@@ -51,14 +51,28 @@ describe('<SblRegistrering />', () => {
 
         const sendBrukerTilSblArbeidSpy = sandbox.spy(sendBrukerTilSblArbeid);
         const config = {
-            sendBrukerTilSblArbeid: sendBrukerTilSblArbeidSpy,
-            opprettSBLArbeidBruker: opprettSBLArbeidBruker
+            redirect: sendBrukerTilSblArbeidSpy
         };
 
         mountWithStoreRouterAndIntl(<SblRegistrering config={config} />);
 
         return promiseWithSetTimeout().then(() => {
             expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(true);
+        });
+    });
+    it('skal sende bruker til DittNav dersom bruker er IARBS uten oppfølging', () => {
+        stubFetch(new FetchStub().addResponse(DITTNAV_URL));
+        window.innerWidth = 500;
+
+        const dittNavSpy = sandbox.spy(sendBrukerTilDittNav);
+        const config = {
+            redirect: dittNavSpy
+        };
+
+        mountWithStoreRouterAndIntl(<SblRegistrering enforceRedirect={true} config={config} />);
+
+        return promiseWithSetTimeout().then(() => {
+            expect(dittNavSpy.called).to.be.equal(true);
         });
     });
 });
