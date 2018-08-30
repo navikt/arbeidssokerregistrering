@@ -4,7 +4,7 @@ import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 export const loaderTittelElement = (
     <>
     <Innholdstittel className="blokk-s">
-        Registrering pågår.
+        Registrering pågår
     </Innholdstittel>
     <Normaltekst>
         Vi setter opp tjenester til deg. Dette kan ta noen sekunder.
