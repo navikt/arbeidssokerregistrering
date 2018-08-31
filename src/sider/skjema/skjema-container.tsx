@@ -99,7 +99,10 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
                     this.toggleAdvarsel(true);
                 }
             },
-            gaaTilbake: () => history.goBack(),
+            gaaTilbake: () => {
+                this.toggleAdvarsel(false);
+                history.goBack();
+            },
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
             hrefTilFullfor: `${OPPSUMMERING_PATH}`,
             advarselElement: this.state.visAdvarsel ? advarselElement : null,
