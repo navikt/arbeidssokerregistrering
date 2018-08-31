@@ -32,7 +32,6 @@ export function getDefaultSisteStilling(
 }
 
 export function getDefaultSvar(
-    sisteStillingFraAAReg: SisteStillingFraAARegData,
     sisteStilling: Stilling
 ): SisteStillingSvar {
     return sisteStilling === ingenYrkesbakgrunn

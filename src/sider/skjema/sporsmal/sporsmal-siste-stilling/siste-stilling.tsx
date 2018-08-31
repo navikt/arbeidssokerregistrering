@@ -52,7 +52,6 @@ class SisteStilling extends React.Component<Props> {
         const {
             endreSvar,
             sporsmalId,
-            sisteStillingFraAAReg,
             sisteStilling,
         } = this.props;
 
@@ -61,7 +60,7 @@ class SisteStilling extends React.Component<Props> {
         } else {
             endreSvar(
                 sporsmalId,
-                getDefaultSvar(sisteStillingFraAAReg.data, sisteStilling)
+                getDefaultSvar(sisteStilling)
             );
         }
     }

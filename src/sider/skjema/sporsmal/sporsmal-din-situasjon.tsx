@@ -43,7 +43,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                 if (svar === DinSituasjonSvar.ALDRI_HATT_JOBB) {
                     velgStilling(ingenYrkesbakgrunn);
                 } else if (sisteStilling.label !== defaultStilling.label) {
-                    velgStilling(defaultStilling);
+                    velgStilling(defaultStilling); // TODO FO-1464 Skriv test for dette.
                 }
             },
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),

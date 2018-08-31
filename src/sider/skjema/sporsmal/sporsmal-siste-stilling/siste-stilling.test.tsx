@@ -7,7 +7,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import {create} from '../../../../store';
 import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../../test/test-utils';
 import SisteStilling from './siste-stilling';
-import {annenStilling, ingenYrkesbakgrunn, velgSisteStilling} from '../../../../ducks/siste-stilling';
+import {annenStilling, ingenYrkesbakgrunn, Stilling, velgSisteStilling, ActionTypes as SisteStillingActionTypes} from '../../../../ducks/siste-stilling';
 import {sisteStillingMock} from '../../../../mocks/siste-stilling-mock';
 import oversettelseAvStillingFraAAReg, {tomOversettelseAvStillingFraAAReg} from '../../../../mocks/oversettelse-av-stilling-fra-aareg-mock';
 import {hentOversattStillingFraAAReg, UTEN_STYRKKODE} from './siste-stilling-utils';
@@ -46,10 +46,10 @@ function dispatchSisteStillingFraAAReg(store, styrk) {
 }
 
 describe('<SisteStilling />', () => {
-    it('Hvis bruker ikke er i AAreg, så skal "Har ikke hatt jobb" være default svar.',
+    it('Hvis siste stilling fra state er ingenYrkesbakgrunn, så skal "Har ikke hatt jobb" være default svar.',
         () => {
         const store = create();
-        dispatchSisteStillingFraAAReg(store, UTEN_STYRKKODE);
+        store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
 
         const endreSvarSpy = sandbox.spy(dummyProps.endreSvar);
         const props = {
@@ -62,10 +62,10 @@ describe('<SisteStilling />', () => {
         expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(SisteStillingSvar.HAR_IKKE_HATT_JOBB);
     });
 
-    it('Hvis bruker har stilling i AAReg, så skal "Har hatt jobb" være default svar.',
+    it('Hvis siste stilling fra state _ikke_ er ingenYrkesbakgrunn, så skal "Har hatt jobb" være default svar.',
         () => {
         const store = create();
-        dispatchSisteStillingFraAAReg(store, '1235');
+        store.dispatch(velgSisteStilling(sisteStillingMock));
 
         const endreSvarSpy = sandbox.spy(dummyProps.endreSvar);
         const props = {
