@@ -1,4 +1,4 @@
-import { annenStilling, Stilling } from '../../../../ducks/siste-stilling';
+import { annenStilling, ingenYrkesbakgrunn, Stilling } from '../../../../ducks/siste-stilling';
 import { Data as OversettelseAvStillingData } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 import { Data as SisteStillingFraAARegData } from '../../../../ducks/siste-stilling-fra-aareg';
 import { DinSituasjonSvar, SisteStillingSvar } from '../../../../ducks/svar-utils';
@@ -20,25 +20,35 @@ export function hentOversattStillingFraAAReg(
     return stilling;
 }
 
-export function getDefaultSvar(sisteStillingFraAAReg: SisteStillingFraAARegData): SisteStillingSvar {
-    return ingenStillingFunnetIAAReg(sisteStillingFraAAReg)
+export function getDefaultSisteStilling(
+    oversettelseAvSisteStilling: OversettelseAvStillingData,
+    sisteStillingFraAAReg: SisteStillingFraAARegData,
+): Stilling {
+    // TODO FO-1464 Forbedre dette. Kanskje ha defaultStilling som egen del av state.
+    if (sisteStillingFraAAReg.styrk === UTEN_STYRKKODE) {
+        return ingenYrkesbakgrunn;
+    }
+    return hentOversattStillingFraAAReg(oversettelseAvSisteStilling);
+}
+
+export function getDefaultSvar(
+    sisteStilling: Stilling
+): SisteStillingSvar {
+    return sisteStilling === ingenYrkesbakgrunn
         ? SisteStillingSvar.HAR_IKKE_HATT_JOBB
         : SisteStillingSvar.HAR_HATT_JOBB;
 }
 
-function ingenStillingFunnetIAAReg(sisteStillingFraAAReg: SisteStillingFraAARegData): boolean {
-    return sisteStillingFraAAReg.styrk === UTEN_STYRKKODE;
-}
+export const situasjonerDerViVetAtBrukerenHarHattJobb: (DinSituasjonSvar | undefined)[] = [
+    DinSituasjonSvar.MISTET_JOBBEN,
+    DinSituasjonSvar.HAR_SAGT_OPP,
+    DinSituasjonSvar.ER_PERMITTERT,
+    DinSituasjonSvar.DELTIDSJOBB_VIL_MER,
+    DinSituasjonSvar.VIL_BYTTE_JOBB,
+    DinSituasjonSvar.ALDRI_HATT_JOBB,
+    DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
+];
 
 export function skalSkjuleSvaralternativer(dinSituasjon: DinSituasjonSvar | undefined) {
-    const situasjonerDerViAlleredeVetAtBrukerenHarHattJobb: (DinSituasjonSvar | undefined)[] = [
-        DinSituasjonSvar.MISTET_JOBBEN,
-        DinSituasjonSvar.HAR_SAGT_OPP,
-        DinSituasjonSvar.ER_PERMITTERT,
-        DinSituasjonSvar.DELTIDSJOBB_VIL_MER,
-        DinSituasjonSvar.VIL_BYTTE_JOBB,
-        DinSituasjonSvar.ALDRI_HATT_JOBB,
-        DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
-    ];
-    return situasjonerDerViAlleredeVetAtBrukerenHarHattJobb.includes(dinSituasjon);
+    return situasjonerDerViVetAtBrukerenHarHattJobb.includes(dinSituasjon);
 }

@@ -5,6 +5,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import {
+    annenStilling,
     ingenYrkesbakgrunn, selectSisteStilling,
     Stilling,
     velgSisteStilling
@@ -13,7 +14,10 @@ import { AppState } from '../../../reducer';
 import {
     selectOversettelseAvStillingFraAAReg,
 } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import { hentOversattStillingFraAAReg } from './sporsmal-siste-stilling/siste-stilling-utils';
+import {
+    getDefaultSisteStilling,
+    situasjonerDerViVetAtBrukerenHarHattJobb
+} from './sporsmal-siste-stilling/siste-stilling-utils';
 import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
 
 interface DispatchProps {
@@ -34,16 +38,30 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps & DispatchProps & StateProps;
 
 class SporsmalDinSituasjon extends React.Component<Props> {
+
+    velgStillingHvisDenIkkeAlleredeErValgt(stilling: Stilling) {
+        const {sisteStilling, velgStilling} = this.props;
+        if (sisteStilling.label !== stilling.label) {
+            velgStilling(stilling);
+        }
+    }
+
     render() {
-        const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling, sisteStilling} = this.props;
+        const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling} = this.props;
         const fellesProps = {
             intl: intl,
-            avgiSvar: (svar: Svar) => {
+            avgiSvar: (svar: DinSituasjonSvar) => {
                 endreSvar(sporsmalId, svar);
                 if (svar === DinSituasjonSvar.ALDRI_HATT_JOBB) {
                     velgStilling(ingenYrkesbakgrunn);
-                } else if (sisteStilling.label !== defaultStilling.label) {
-                    velgStilling(defaultStilling);
+                } else {
+                    // TODO FO-1464 Skriv test for dette.
+                    if ((defaultStilling === ingenYrkesbakgrunn)
+                        && situasjonerDerViVetAtBrukerenHarHattJobb.includes(svar)) {
+                        this.velgStillingHvisDenIkkeAlleredeErValgt(annenStilling);
+                    }  else {
+                        this.velgStillingHvisDenIkkeAlleredeErValgt(defaultStilling);
+                    }
                 }
             },
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
@@ -75,7 +93,10 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    defaultStilling: hentOversattStillingFraAAReg(selectOversettelseAvStillingFraAAReg(state).data),
+    defaultStilling: getDefaultSisteStilling(
+        selectOversettelseAvStillingFraAAReg(state).data,
+        state.sisteStillingFraAAReg.data,
+    ),
     sisteStilling: selectSisteStilling(state),
 });
 

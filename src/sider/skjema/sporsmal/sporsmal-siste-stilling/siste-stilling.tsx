@@ -52,7 +52,7 @@ class SisteStilling extends React.Component<Props> {
         const {
             endreSvar,
             sporsmalId,
-            sisteStillingFraAAReg,
+            sisteStilling,
         } = this.props;
 
         if (skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon)) {
@@ -60,7 +60,7 @@ class SisteStilling extends React.Component<Props> {
         } else {
             endreSvar(
                 sporsmalId,
-                getDefaultSvar(sisteStillingFraAAReg.data)
+                getDefaultSvar(sisteStilling)
             );
         }
     }
