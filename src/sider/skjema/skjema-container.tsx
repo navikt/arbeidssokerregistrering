@@ -172,7 +172,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     }
 
     sporsmalErBesvart(sporsmalId: string): boolean {
-        return !!this.props.svarState[sporsmalId];
+        if (!this.props.svarState[sporsmalId]) {
+            return false;
+        } else if ((sporsmalId !== 'sisteStilling') && (this.props.svarState[sporsmalId] === IngenSvar.INGEN_SVAR)) {
+            return false; // TODO FO-1463 Vi må finne en bedre fiks på dette.
+        }
+        return true;
     }
 }
 
