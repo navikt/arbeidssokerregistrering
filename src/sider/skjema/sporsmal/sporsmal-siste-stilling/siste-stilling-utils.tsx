@@ -1,4 +1,4 @@
-import { annenStilling, Stilling } from '../../../../ducks/siste-stilling';
+import { annenStilling, ingenYrkesbakgrunn, Stilling } from '../../../../ducks/siste-stilling';
 import { Data as OversettelseAvStillingData } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
 import { Data as SisteStillingFraAARegData } from '../../../../ducks/siste-stilling-fra-aareg';
 import { DinSituasjonSvar, SisteStillingSvar } from '../../../../ducks/svar-utils';
@@ -20,14 +20,24 @@ export function hentOversattStillingFraAAReg(
     return stilling;
 }
 
-export function getDefaultSvar(sisteStillingFraAAReg: SisteStillingFraAARegData): SisteStillingSvar {
-    return ingenStillingFunnetIAAReg(sisteStillingFraAAReg)
-        ? SisteStillingSvar.HAR_IKKE_HATT_JOBB
-        : SisteStillingSvar.HAR_HATT_JOBB;
+export function getDefaultSisteStilling(
+    oversettelseAvSisteStilling: OversettelseAvStillingData,
+    sisteStillingFraAAReg: SisteStillingFraAARegData,
+): Stilling {
+    // TODO FO-1464 Forbedre dette. Kanskje ha defaultStilling som egen del av state.
+    if (sisteStillingFraAAReg.styrk === UTEN_STYRKKODE) {
+        return ingenYrkesbakgrunn;
+    }
+    return hentOversattStillingFraAAReg(oversettelseAvSisteStilling);
 }
 
-function ingenStillingFunnetIAAReg(sisteStillingFraAAReg: SisteStillingFraAARegData): boolean {
-    return sisteStillingFraAAReg.styrk === UTEN_STYRKKODE;
+export function getDefaultSvar(
+    sisteStillingFraAAReg: SisteStillingFraAARegData,
+    sisteStilling: Stilling
+): SisteStillingSvar {
+    return sisteStilling === ingenYrkesbakgrunn
+        ? SisteStillingSvar.HAR_IKKE_HATT_JOBB
+        : SisteStillingSvar.HAR_HATT_JOBB;
 }
 
 export function skalSkjuleSvaralternativer(dinSituasjon: DinSituasjonSvar | undefined) {

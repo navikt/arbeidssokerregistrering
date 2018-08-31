@@ -13,7 +13,7 @@ import { AppState } from '../../../reducer';
 import {
     selectOversettelseAvStillingFraAAReg,
 } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import { hentOversattStillingFraAAReg } from './sporsmal-siste-stilling/siste-stilling-utils';
+import { getDefaultSisteStilling } from './sporsmal-siste-stilling/siste-stilling-utils';
 import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
 
 interface DispatchProps {
@@ -75,7 +75,10 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    defaultStilling: hentOversattStillingFraAAReg(selectOversettelseAvStillingFraAAReg(state).data),
+    defaultStilling: getDefaultSisteStilling(
+        selectOversettelseAvStillingFraAAReg(state).data,
+        state.sisteStillingFraAAReg.data,
+    ),
     sisteStilling: selectSisteStilling(state),
 });
 
