@@ -1,7 +1,13 @@
 import * as moment from 'moment';
 
 export function hentFornavn(name: string | undefined) {
-    return name ? forsteTegnStorBokstav(name).split(' ')[0] : '';
+    return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';
+}
+
+function storForbokstavOgEtterBindestrek(name: string) {
+    return name.split('-')
+        .map(str => forsteTegnStorBokstav(str))
+        .join('-');
 }
 
 function forsteTegnStorBokstav(name: string) {

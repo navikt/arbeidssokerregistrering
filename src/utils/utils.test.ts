@@ -24,6 +24,11 @@ describe('utils test', () => {
         expect(hentFornavn('TEST TESTESEN')).to.equal('Test');
         expect(hentFornavn('test testesen')).to.equal('Test');
         expect(hentFornavn('tEST TESTESEN')).to.equal('Test');
+
+        expect(hentFornavn('Test-Test TESTESEN')).to.equal('Test-Test');
+        expect(hentFornavn('TEST-TEST TESTESEN')).to.equal('Test-Test');
+        expect(hentFornavn('tEST-tEST testesen')).to.equal('Test-Test');
+        expect(hentFornavn('tEST-TEST testesen mcTestesen test')).to.equal('Test-Test');
     });
 
     it('test hardkodet yrkespraksis', () => {
