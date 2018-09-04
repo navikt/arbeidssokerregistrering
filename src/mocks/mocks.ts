@@ -26,7 +26,16 @@ const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
 const DISPATCH_BESVARELSE = false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const PRINT_FRONTENDLOGGER = false;
 const DELAY = 1000;
+
+if (PRINT_FRONTENDLOGGER) {
+    (window as any).frontendlogger = {
+        event: (label: string, data: any, data2: any) => {
+            console.log('frontendlogger', {label, data, data2});
+        }
+    }
+}
 
 if (MOCK_AUTENTISERINGS_INFO) {
     (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(DELAY, autentisert)));
