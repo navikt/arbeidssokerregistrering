@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose, Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import reducer, { AppState } from './reducer';
-import { metricsMiddleWare } from './metrics-middleware';
+import { metricsMiddleWare } from './middleware/metrics-middleware';
 
 export function create(): Store<AppState> {
     /* tslint:disable-next-line */
