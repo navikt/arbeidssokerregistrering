@@ -4,7 +4,7 @@ import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import SblRegistrering, {sendBrukerTilDittNav} from './sbl-registrering';
+import SblRegistrering, { sendBrukerTilDittNav } from './sbl-registrering';
 import { DITTNAV_URL, SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
 import {
     FetchStub,
