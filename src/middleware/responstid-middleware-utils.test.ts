@@ -21,6 +21,7 @@ describe('test logging av responstid', () => {
         const args = frontendlogger.event.getCall(0).args;
         expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
         expect(args[1].responstid >= 50).to.equal(true);
+        expect(args[1].responstid < 60).to.equal(true);
     });
 
     it('skal logge responstid for FEILET kall', () => {
@@ -36,5 +37,6 @@ describe('test logging av responstid', () => {
         const args = frontendlogger.event.getCall(0).args;
         expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
         expect(args[1].responstid >= 50).to.equal(true);
+        expect(args[1].responstid < 60).to.equal(true);
     });
 });
