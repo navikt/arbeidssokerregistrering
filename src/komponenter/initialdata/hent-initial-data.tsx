@@ -31,11 +31,25 @@ interface StateProps {
 interface DispatchProps {
     hentBrukersNavn: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
-    hentRegistreringStatus: () => void;
+    hentRegistreringStatus: () => Promise<void | {}>;
     hentFeatureToggles: () => Promise<void | {}>;
 }
 
 type Props = StateProps & DispatchProps;
+
+function timeAndLogAsyncCall(fn: () => Promise<void | {}>) {
+    // MIDLERTIDIG MÅLING TODO Fjern eller forbedre
+    const { frontendlogger } = (window as any); // tslint:disable-line
+
+    const start = Date.now();
+    fn().then(() => {
+            const time = Date.now() - start;
+            if (frontendlogger) {
+                frontendlogger.event('registrering.hentstartregistrering.time', {time: time}, {});
+            }
+        }
+    );
+}
 
 export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
@@ -43,7 +57,7 @@ export class HentInitialData extends React.Component<Props> {
         this.props.hentFeatureToggles().then(() => {
             this.props.hentAutentiseringsInfo().then((res) => {
                 if ((res as AuthData).harGyldigOidcToken) {
-                    this.props.hentRegistreringStatus();
+                    timeAndLogAsyncCall(() => this.props.hentRegistreringStatus());
                     this.props.hentBrukersNavn();
                 }
             });
