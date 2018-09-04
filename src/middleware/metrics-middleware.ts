@@ -7,7 +7,7 @@ import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 
 export interface Frontendlogger {
-    event: (label: string, data: any, data2: any) => void;
+    event: (name: string, fields: any, tags: any) => void;
 }
 
 type Action = any;
