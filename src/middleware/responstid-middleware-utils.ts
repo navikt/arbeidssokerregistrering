@@ -1,3 +1,4 @@
+// tslint:disable align
 import ActionTypes from '../ducks/actions';
 import { Frontendlogger } from './metrics-middleware';
 
@@ -17,9 +18,6 @@ export function loggResponstidForTjenestekall(actionType: ActionTypes, frontendl
                 responstid: Date.now() - starttider[prefix],
             }, {});
         }
-        console.log(getEventString(prefix), {
-            responstid: Date.now() - starttider[prefix],
-        });
     }
 }
 

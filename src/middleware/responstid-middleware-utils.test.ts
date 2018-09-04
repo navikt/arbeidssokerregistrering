@@ -1,9 +1,8 @@
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 import * as chaiAsPromised from 'chai-as-promised';
-import {ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
-
-import {loggResponstidForTjenestekall} from "./responstid-middleware-utils";
+import { ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
+import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -20,12 +19,9 @@ describe('test logging av responstid', () => {
         loggResponstidForTjenestekall(RegStatusActionTypes.HENT_REG_STATUS_OK, frontendlogger);
 
         const args = frontendlogger.event.getCall(0).args;
-        console.log('hello!');
-        console.log(args);
         expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
         expect(args[1].responstid >= 50).to.equal(true);
     });
-
 
     it('skal logge responstid for FEILET kall', () => {
         const frontendlogger = {
@@ -38,8 +34,6 @@ describe('test logging av responstid', () => {
         loggResponstidForTjenestekall(RegStatusActionTypes.HENT_REG_STATUS_FEILET, frontendlogger);
 
         const args = frontendlogger.event.getCall(0).args;
-        console.log('hello!');
-        console.log(args);
         expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
         expect(args[1].responstid >= 50).to.equal(true);
     });

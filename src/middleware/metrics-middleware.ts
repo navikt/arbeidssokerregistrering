@@ -1,4 +1,4 @@
-// tslint:disable align
+// tslint:disable align no-any
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
 
@@ -7,13 +7,13 @@ import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 
 export interface Frontendlogger {
-    event: (label: string, data: any, data2: any) => void; // tslint:disable-line no-any
+    event: (label: string, data: any, data2: any) => void;
 }
 
-type Action = any; // tslint:disable-line no-any
+type Action = any;
 
-export const metricsMiddleWare = (store: any) => (next: any) => (action: Action) => { // tslint:disable-line:no-any
-    const frontendlogger: Frontendlogger = (window as any).frontendlogger; // tslint:disable-line:no-any
+export const metricsMiddleWare = (store: any) => (next: any) => (action: Action) => {
+    const frontendlogger: Frontendlogger = (window as any).frontendlogger;
     if (frontendlogger) {
         loggAutentiseringsinfo(action, frontendlogger);
         loggBesvarelse(store, action, frontendlogger);
