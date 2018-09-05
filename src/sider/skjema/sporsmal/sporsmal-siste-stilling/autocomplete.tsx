@@ -10,8 +10,6 @@ import './autocomplete.less';
 *
 * Testing nettlesere
 * Testing mobil skjermleser
-* Spinner
-*
 * Fixbug: scroll ned og skjermen hakker, når radioknapp ikke vises
 */
 
