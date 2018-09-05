@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Stilling } from '../../../../ducks/siste-stilling';
 import { Input } from 'nav-frontend-skjema';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import { FormattedMessage } from 'react-intl';
 
 import './autocomplete.less';
@@ -78,6 +79,13 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             this.closeResults();
         } else {
             this.openResults();
+        }
+
+        const visSpinner = this.props.visSpinner;
+        if (visSpinner) {
+            this.toggleSpinner(true);
+        } else {
+            this.toggleSpinner(false);
         }
 
         const ariaLive = document.querySelector('.screen-reader-text[aria-live]');
@@ -186,9 +194,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         if (kc === key.up || kc === key.down || kc === key.tab || kc === key.enter || kc === key.esc) {
             return;
         }
-
-        this.toggleSpinner(true);
-        this.toggleResultatListe(false);
     }
 
     onKeyDown (e: any) { //tslint:disable-line
@@ -306,7 +311,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                     På mobile enheter, trykk eller sveip.
                 </span>
                 <div aria-live="assertive" className="screen-reader-text"/>
-                <div id="spinner">Spinner</div>
+
+                <div id="spinner"><NavFrontendSpinner type="XS" ariaLabel="Laster innhold"/></div>
             </form>
             </>
         );
