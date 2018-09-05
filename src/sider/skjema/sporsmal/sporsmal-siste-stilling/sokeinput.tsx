@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../../../ducks/api';
-import { Stilling } from '../../../../ducks/siste-stilling';
+import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
-import { FormattedMessage } from 'react-intl';
+import AutoComplete from './autocomplete';
 
 interface SokeInputComponentProps {
     defaultStilling: Stilling;
@@ -18,31 +17,23 @@ interface Option {
 
 interface SokeInputComponentState {
     value: Option;
+    stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[];
+    sokeStreng: string;
+    visSpinner: boolean;
 }
-
-interface OptionsAsync {
-    new(): Async<Option>;
-}
-
-const OptionsAsync = Async as OptionsAsync;
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
 
-    static clickLabel() {
-        document.getElementById('stilling')!.focus();
-    }
-
     constructor(props: SokeInputComponentProps) {
         super(props);
-        this.onChange = this.onChange.bind(this);
+
+        this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
+        this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
+        this.oppdaterMedTomStillingState = this.oppdaterMedTomStillingState.bind(this);
     }
 
     componentWillMount() {
         this.updateState(this.props);
-    }
-
-    componentWillReceiveProps(nextProps: SokeInputComponentProps) {
-        this.updateState(nextProps);
     }
 
     updateState(props: SokeInputComponentProps) {
@@ -51,59 +42,83 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 stilling: props.defaultStilling,
                 labelKey: props.defaultStilling.label,
                 id: 0
-            }
+            },
+            stillingsAlternativer: [],
+            visSpinner: false
         });
     }
 
-    getOptions(sokestreng: string) {
-        return hentStillingMedStyrk08(encodeURI(sokestreng))
+    hentStillingsAlternativer(v) { // tslint:disable-line
+        const sokeStreng = v.target.value;
+
+        this.setState({
+            value: {
+                stilling: tomStilling,
+                labelKey: sokeStreng,
+                id: 0
+            },
+            sokeStreng
+        });
+
+        const that = this;
+
+        this.setState({
+            visSpinner: true
+        });
+
+        hentStillingMedStyrk08(encodeURI(sokeStreng))
             .then((response: { typeaheadYrkeList: {}[] }) => {
 
                 const {typeaheadYrkeList} = response;
 
-                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokestreng);
+                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
 
-                return {options: stillingsAlternativer};
+                this.setState({
+                    visSpinner: false
+                });
+                that.setState({
+                    stillingsAlternativer
+                });
             });
     }
 
-    onChange(value: Option) {
-        if (value) {
-            this.props.onChange(value.stilling);
-            this.setState({
-                value
-            });
-        }
+    oppdaterStillingState(valgteStillingIndex) { // tslint:disable-line
+        const { stilling, labelKey, id }  = this.state.stillingsAlternativer[valgteStillingIndex];
+
+        this.props.onChange(stilling);
+
+        this.setState({
+            value: {
+                stilling,
+                labelKey,
+                id
+            }
+        });
+    }
+
+    oppdaterMedTomStillingState() {
+        this.props.onChange(tomStilling);
+        const sokeStreng = this.state.sokeStreng;
+
+        this.setState({
+            value: {
+                stilling: tomStilling,
+                labelKey: sokeStreng,
+                id: 0
+            }
+        });
     }
 
     render() {
         return (
-            <>
-                <label
-                    htmlFor="stilling"
-                    className="typo-undertittel sokeinput__label"
-                    onClick={SokeInputComponent.clickLabel}
-                >
-                    <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
-                </label>
-                <div className="blokk-m selectContainer input--fullbredde">
-                    <OptionsAsync
-                        inputProps={{'autoComplete': 'off'}}
-                        arrowRenderer={() => null}
-                        loadingPlaceholder="Laster..."
-                        filterOptions={(options, filter, currentValues) => options}
-                        clearable={false}
-                        autoload={false}
-                        ignoreAccents={false}
-                        onChange={this.onChange}
-                        loadOptions={this.getOptions}
-                        value={this.state.value}
-                        id="stilling"
-                        valueKey="id"
-                        labelKey="labelKey"
-                    />
-                </div>
-            </>
+            <AutoComplete
+                value={this.state.value.labelKey}
+                onChange={this.hentStillingsAlternativer}
+                oppdaterState={this.oppdaterStillingState}
+                oppdaterDefaultState={this.oppdaterMedTomStillingState}
+                resultatListe={this.state.stillingsAlternativer}
+                visSpinner={this.state.visSpinner}
+            />
         );
     }
 }
