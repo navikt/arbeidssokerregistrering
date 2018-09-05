@@ -312,7 +312,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                 </span>
                 <div aria-live="assertive" className="screen-reader-text"/>
 
-                <div id="spinner"><NavFrontendSpinner type="XS" ariaLabel="Laster innhold"/></div>
+                <div id="spinner"><NavFrontendSpinner type="XS" aria-label="Laster innhold"/></div>
             </form>
             </>
         );
