@@ -108,10 +108,18 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             this.closeResults();
         }
     }
+
+    scrollTilMarkertElement(selectionToMark: HTMLElement) {
+        const resultat = document.getElementById('resultat');
+        if (resultat) {
+            resultat.scrollTop = selectionToMark.offsetTop - (resultat.offsetHeight - 40);
+        }
+    }
     markSelected(selectionToMark: HTMLElement) {
         if (selectionToMark) {
             selectionToMark.setAttribute('aria-selected', 'true');
             const selectedStillingIndex = selectionToMark.dataset.stillingIndex;
+            this.scrollTilMarkertElement(selectionToMark);
             this.props.oppdaterState(selectedStillingIndex);
         } else {
             // Sett default state
