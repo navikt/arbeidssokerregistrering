@@ -1,6 +1,6 @@
 .autocomplete-form {
   position: relative;
-  .resultat-list {
+  &__resultat-list {
     margin: 0;
     padding: 0 0 1rem 0;
     position: absolute;
@@ -17,40 +17,45 @@
       background-color: lightblue;
     }
   }
-}
-#spinner {
-  display: none;
-  position: absolute;
-  background-color: white;
-  top: 17px;
-  right: 7px;
-}
+  &__spinner {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: 17px;
+    right: 7px;
+  }
 
-.tekst-laster {
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  z-index: 1000;
-  padding-top: 0.5rem;
-  padding-left: 0.5rem;
-  padding-bottom: 2rem;
+  &__tekst-laster {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    z-index: 1000;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-bottom: 2rem;
+  }
+
+  &__screen-reader-text {
+    position: absolute !important;
+    display: block;
+    visibility: visible;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0px, 0px, 0px, 0px);
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+    white-space: nowrap;
+  }
 }
 
 #initInstr {
   display: none;
 }
 
-.screen-reader-text {
-  position: absolute !important;
-  display: block;
-  visibility: visible;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  clip: rect(0px, 0px, 0px, 0px);
-  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
-  white-space: nowrap;
-}
+
+
+
+

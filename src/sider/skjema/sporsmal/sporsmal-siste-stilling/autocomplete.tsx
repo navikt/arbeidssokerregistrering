@@ -253,12 +253,12 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         };
 
         if (this.props.visSpinner) {
-            return <div className="tekst-laster">Laster innhold</div>;
+            return <div className="autocomplete-form__tekst-laster">Laster innhold</div>;
         }
 
         return (
             <ul
-                className="resultat-list"
+                className="autocomplete-form__resultat-list"
                 id="resultat"
                 onClick={onOptionClick}
                 onMouseOver={onMouseOver}
@@ -308,13 +308,15 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                     onChange={this.props.onChange}
                 />
                 {this.renderResultatListe(this.props.resultatListe)}
+
                 <span id="initInstr">
-                    Når resultatene er tilgjengelig bruk piltastene til å navigere og enter til velge.
+                    Når resultatene er tilgjengelig bruk piltastene til å navigere og enter for å velge.
                     På mobile enheter, trykk eller sveip.
                 </span>
-                <div aria-live="assertive" className="screen-reader-text"/>
-
-                <div id="spinner"><NavFrontendSpinner type="XS" aria-label="Laster innhold"/></div>
+                <div aria-live="assertive" className="autocomplete-form__screen-reader-text"/>
+                <div className="autocomplete-form__spinner" id="spinner">
+                    <NavFrontendSpinner type="XS" aria-label="Laster innhold" />
+                </div>
             </form>
             </>
         );
