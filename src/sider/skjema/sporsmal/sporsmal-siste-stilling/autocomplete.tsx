@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import './autocomplete.less';
 
 /* TODO
-*
+* Tabbing etter man har utført søk
 * Testing nettlesere
 * Testing mobil skjermleser
 * Fixbug: scroll ned og skjermen hakker, når radioknapp ikke vises
@@ -251,6 +251,10 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         const onMouseOver = () => {
             this.clearSelected();
         };
+
+        if (this.props.visSpinner) {
+            return <div className="tekst-laster">Laster innhold</div>;
+        }
 
         return (
             <ul
