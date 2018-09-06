@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { scrollToBanner } from '../../utils/utils';
 
 export const loaderTittelElement = (
     <>
@@ -22,6 +23,10 @@ export default class Loader extends React.Component<LoaderProps> {
         Har flyttet ut spinner komponent i nav-frontend-spinner
         TODO Ta i bruk det i bruk når PR'en er merget
     */
+
+    componentDidMount() {
+        scrollToBanner();
+    }
     render() {
         return (
             <div className="loader">
