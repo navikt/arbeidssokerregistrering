@@ -47,6 +47,7 @@ interface AutoCompleteProps {
     resultatListe: Resultater[];
     oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
     oppdaterDefaultState: () => void;
+    toemResultatListe: () => void;
 }
 
 interface AutoCompleteState {
@@ -89,7 +90,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         const ariaLive = document.querySelector('.autocomplete-form__screen-reader-text[aria-live]');
         if (ariaLive) {
             ariaLive.textContent = numberResults === 0
-                ? 'Ingen resultat' : numberResults + ' resultater er tilgjengelig.';
+                ? 'Ingen resultat' : numberResults + ' resultater er tilgjengelige.';
         }
     }
 
@@ -246,6 +247,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     renderResultatListe (resultater: Resultater[]) {
         const onOptionClick = (e) => {
             this.props.oppdaterState(e.target.dataset.stillingIndex);
+            this.props.toemResultatListe();
             this.closeResults();
         };
         const onMouseOver = () => {
@@ -310,7 +312,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                 {this.renderResultatListe(this.props.resultatListe)}
 
                 <span id="initInstr">
-                    Når resultatene er tilgjengelig bruk piltastene til å navigere og enter for å velge.
+                    Når resultatene er tilgjengelige bruk piltastene til å navigere og enter for å velge.
                     På mobile enheter, trykk eller sveip.
                 </span>
                 <div aria-live="assertive" className="autocomplete-form__screen-reader-text"/>
