@@ -86,7 +86,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             this.toggleSpinner(false);
         }
 
-        const ariaLive = document.querySelector('.screen-reader-text[aria-live]');
+        const ariaLive = document.querySelector('.autocomplete-form__screen-reader-text[aria-live]');
         if (ariaLive) {
             ariaLive.textContent = numberResults === 0
                 ? 'Ingen resultat' : numberResults + ' resultater er tilgjengelig.';
