@@ -75,7 +75,7 @@ if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
 
 if(MOCK_STYRK08_PAMJANZZ) {
     (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
-        respondWith(delayed(DELAY / 10, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
+        respondWith(delayed(1000, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
