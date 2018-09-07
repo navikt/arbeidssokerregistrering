@@ -10,29 +10,13 @@ export function mapAvgitteSvarForBackend(
     sisteStilling: Stilling,
     intl: InjectedIntl,
 ): RegistreringData {
-    if (besvarelseErGyldig(svar)) {
-        return {
-            enigIOppsummering: true,
-            sisteStilling: sisteStilling,
-            besvarelse: svar,
-            oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
-            teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling),
-        };
-    } else {
-        return {};
-    }
-}
-
-export function besvarelseErGyldig(svar: SvarState) {
-    return (
-        svar.dinSituasjon &&
-        svar.sisteStilling &&
-        svar.utdanning &&
-        svar.utdanningGodkjent &&
-        svar.utdanningBestatt &&
-        svar.helseHinder &&
-        svar.andreForhold
-    );
+    return {
+        enigIOppsummering: true,
+        sisteStilling: sisteStilling,
+        besvarelse: svar,
+        oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
+        teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling),
+    };
 }
 
 export function genererTeksterForBesvarelse(
