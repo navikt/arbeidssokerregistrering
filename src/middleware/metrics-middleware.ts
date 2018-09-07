@@ -55,8 +55,7 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
                 const actionData = (typeof data.data === 'string') 
                     ? data.data.replace(';charset=utf-8', '') : action.data.data;
                 data.data = actionData;
-                
-                
+
                 frontendlogger.event(feil.eventnavn, {
                     'useragent': navigator.userAgent,
                     url,
