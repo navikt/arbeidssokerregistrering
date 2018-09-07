@@ -57,7 +57,7 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
                     apikall,
                     status,
                     statusText,
-                    data: action.data
+                    data: JSON.stringify(action.data)
                 }, {});
             }
         }
