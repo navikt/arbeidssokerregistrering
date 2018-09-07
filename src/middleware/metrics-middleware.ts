@@ -57,7 +57,7 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
                     apikall,
                     status,
                     statusText,
-                    data: JSON.stringify(action.data)
+                    data: (typeof action.data === 'string') ? action.data.replace(';charset=utf-8', '') : action.data
                 }, {});
             }
         }
