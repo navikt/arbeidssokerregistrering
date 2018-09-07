@@ -7,7 +7,6 @@ import { FormattedMessage } from 'react-intl';
 import './autocomplete.less';
 
 /* TODO
-* Tabbing etter man har utført søk
 * Testing nettlesere
 * Testing mobil skjermleser
 * Fixbug: scroll ned og skjermen hakker, når radioknapp ikke vises
@@ -33,6 +32,53 @@ const keyboard = {
     del: 46, // fn + delete on mac
     command: 91 // metaKey = true (mac and sun machines)
 };
+
+interface ResultatListeProps {
+    visSpinner: boolean;
+    resultatListe: Resultater[];
+    oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
+    toemResultatListe: () => void;
+    clearSelected: () => void;
+}
+
+class ResultatListe extends React.Component<ResultatListeProps> {
+    onOptionClick (e: any) { // tslint:disable-line
+        this.props.oppdaterState(e.target.dataset.stillingIndex);
+        this.props.toemResultatListe();
+    }
+    onMouseOver () {
+        // this.clearSelected();
+    }
+
+    render () {
+        if (this.props.visSpinner) {
+            return <div className="autocomplete-form__tekst-laster">Laster innhold</div>;
+        }
+        return (
+            <ul
+                className="autocomplete-form__resultat-list"
+                id="resultat"
+                role="listbox"
+                onClick={this.onOptionClick}
+                onMouseOver={this.onMouseOver}
+            >
+                {this.props.resultatListe.map((e, i) => {
+                    return (
+                        <li
+                            aria-selected="false"
+                            data-stilling-index={i}
+                            key={i}
+                            role="option"
+                            tab-index="-1"
+                        >
+                            {e.labelKey}
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    }
+}
 
 interface Resultater {
     stilling: Stilling;
@@ -251,44 +297,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         }
     }
 
-    renderResultatListe (resultater: Resultater[]) {
-        const onOptionClick = (e) => {
-            this.props.oppdaterState(e.target.dataset.stillingIndex);
-            this.props.toemResultatListe();
-        };
-        const onMouseOver = () => {
-            this.clearSelected();
-        };
-
-        if (this.props.visSpinner) {
-            return <div className="autocomplete-form__tekst-laster">Laster innhold</div>;
-        }
-
-        return (
-            <ul
-                className="autocomplete-form__resultat-list"
-                id="resultat"
-                onClick={onOptionClick}
-                onMouseOver={onMouseOver}
-                role="listbox"
-            >
-                {resultater.map((e, i) => {
-                    return (
-                        <li
-                            aria-selected="false"
-                            data-stilling-index={i}
-                            key={i}
-                            role="option"
-                            tab-index="-1"
-                        >
-                            {e.labelKey}
-                        </li>
-                    );
-                })}
-            </ul>
-        );
-    }
-
     render() {
         const numberResults = this.props.resultatListe.length;
         return (
@@ -315,7 +323,14 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                     value={this.props.value}
                     onChange={this.props.onChange}
                 />
-                {this.renderResultatListe(this.props.resultatListe)}
+
+                <ResultatListe
+                    resultatListe={this.props.resultatListe}
+                    oppdaterState={this.props.oppdaterState}
+                    toemResultatListe={this.props.toemResultatListe}
+                    visSpinner={this.props.visSpinner}
+                    clearSelected={this.clearSelected}
+                />
 
                 <span id="initInstr">
                     Når resultatene er tilgjengelige bruk piltastene til å navigere og enter for å velge.
