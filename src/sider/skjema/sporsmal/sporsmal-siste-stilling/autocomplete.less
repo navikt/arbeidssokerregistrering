@@ -1,8 +1,10 @@
 .autocomplete-form {
   position: relative;
 
+
   &__resultat-list,
   &__tekst-laster {
+    color: #3E3832;
     margin: 0;
     position: absolute;
     top: 42px;
@@ -31,7 +33,7 @@
       border-top: 1px solid #C6C2BF;
     }
     li:hover, [aria-selected='true'] {
-      background-color: lightblue;
+      background-color: #ccdee6;
     }
   }
 
@@ -60,6 +62,11 @@
     clip: rect(0px, 0px, 0px, 0px);
     clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
     white-space: nowrap;
+  }
+
+  input[aria-owns='resultat'] {
+    font-style: italic;
+    color: #59514B;
   }
 }
 
