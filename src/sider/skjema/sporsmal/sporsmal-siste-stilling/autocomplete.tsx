@@ -78,6 +78,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             this.closeResults();
         } else {
             this.openResults();
+            this.arrowing(keyboard.down);
         }
 
         const visSpinner = this.props.visSpinner;
@@ -105,7 +106,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     }
     handleClickOutside(event: Event) {
         if (this.formRef && !this.formRef.contains(event.target)) {
-            this.closeResults();
+            this.props.oppdaterDefaultState();
+            this.props.toemResultatListe();
         }
     }
 
@@ -118,13 +120,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     markSelected(selectionToMark: HTMLElement) {
         if (selectionToMark) {
             selectionToMark.setAttribute('aria-selected', 'true');
-            const selectedStillingIndex = selectionToMark.dataset.stillingIndex;
             this.scrollTilMarkertElement(selectionToMark);
-            this.props.oppdaterState(selectedStillingIndex);
         } else {
-            // Sett default state
-            // Og ikke marker noe i resultat lista dersom vi er tilbake på input felt
-            this.props.oppdaterDefaultState();
             return;
         }
         const activeItemId = 'selectedOption';
@@ -204,6 +201,14 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     }
 
     onKeyDown (e: any) { //tslint:disable-line
+        const oppdaterStateOnKeyDown = () => {
+            const resultat = document.getElementById('resultat');
+            const indexElement = this.getIndexValgteElement(resultat);
+            if (indexElement !== undefined) {
+                this.props.oppdaterState(indexElement);
+                this.props.toemResultatListe();
+            }
+        };
         const kc = e.keyCode;
         if (kc === keyboard.up || kc === keyboard.down) {
             e.preventDefault();
@@ -212,19 +217,19 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         }
 
         if (kc === keyboard.tab) {
-            this.closeResults();
+            oppdaterStateOnKeyDown();
             return;
         }
 
         if (kc === keyboard.esc) {
             this.props.oppdaterDefaultState();
-            this.closeResults();
+            this.props.toemResultatListe();
             return;
         }
 
         if (kc === keyboard.enter) {
             e.preventDefault();
-            this.closeResults();
+            oppdaterStateOnKeyDown();
             return;
         }
     }
@@ -256,7 +261,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         const onOptionClick = (e) => {
             this.props.oppdaterState(e.target.dataset.stillingIndex);
             this.props.toemResultatListe();
-            this.closeResults();
         };
         const onMouseOver = () => {
             this.clearSelected();

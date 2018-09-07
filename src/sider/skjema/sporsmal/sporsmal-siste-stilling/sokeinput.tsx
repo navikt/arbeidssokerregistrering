@@ -104,13 +104,14 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     }
 
     oppdaterMedTomStillingState() {
-        this.props.onChange(tomStilling);
-        const sokeStreng = this.state.sokeStreng;
+        const stilling = this.props.defaultStilling;
+        const labelKey = this.props.defaultStilling.label;
+        this.props.onChange(stilling);
 
         this.setState({
             value: {
-                stilling: tomStilling,
-                labelKey: sokeStreng,
+                stilling,
+                labelKey,
                 id: 0
             }
         });
