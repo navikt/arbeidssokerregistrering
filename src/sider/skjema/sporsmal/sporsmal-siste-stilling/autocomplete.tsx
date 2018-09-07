@@ -81,12 +81,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             this.arrowing(keyboard.down);
         }
 
-        const visSpinner = this.props.visSpinner;
-        if (visSpinner) {
-            this.toggleSpinner(true);
-        } else {
-            this.toggleSpinner(false);
-        }
+        this.toggleSpinner(this.props.visSpinner);
 
         const ariaLive = document.querySelector('.autocomplete-form__screen-reader-text[aria-live]');
         if (ariaLive) {
@@ -147,24 +142,21 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         const indexElement = this.getIndexValgteElement(resultat);
 
         let nextMenuItem;
-        // don't do anything if no results
         if (this.props.resultatListe.length === 0) {
             return;
         }
 
         if (resultat) {
             if (kc === keyboard.down) {
-                // find the next list item to be arrowed to
                 nextMenuItem = (indexElement !== undefined)
                         ? resultat.children[indexElement + 1]
-                    : resultat.children[0]; // first item in list
+                    : resultat.children[0];
             }
 
             if (kc === keyboard.up) {
-                // find the previous list to be arrowed to
                 nextMenuItem = (indexElement !== undefined)
                     ? resultat.children[indexElement - 1]
-                    : resultat.children[resultat.children.length - 1]; // last item in list
+                    : resultat.children[resultat.children.length - 1];
             }
         }
 
@@ -236,10 +228,10 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         }
     }
 
-    toggleSpinner(flagSkalVise: boolean) {
+    toggleSpinner(skalVises: boolean) {
         const spinner = document.getElementById('spinner');
         if (spinner) {
-            if (flagSkalVise) {
+            if (skalVises) {
                 spinner.style.display = 'block';
             } else {
                 spinner.style.display = 'none';
@@ -247,10 +239,10 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         }
     }
 
-    toggleResultatListe(flagSkalVise: boolean) {
+    toggleResultatListe(skalVises: boolean) {
         const resultatOptions = document.getElementById('resultat');
         if (resultatOptions) {
-            if (flagSkalVise) {
+            if (skalVises) {
                 resultatOptions.style.display = 'block';
             } else {
                 resultatOptions.style.display = 'none';
