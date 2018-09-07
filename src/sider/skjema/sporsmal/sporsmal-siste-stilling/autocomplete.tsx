@@ -206,8 +206,10 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             const indexElement = this.getIndexValgteElement(resultat);
             if (indexElement !== undefined) {
                 this.props.oppdaterState(indexElement);
-                this.props.toemResultatListe();
+            } else {
+                this.props.oppdaterDefaultState();
             }
+            this.props.toemResultatListe();
         };
         const kc = e.keyCode;
         if (kc === keyboard.up || kc === keyboard.down) {
