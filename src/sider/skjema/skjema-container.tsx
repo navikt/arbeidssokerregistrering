@@ -92,9 +92,9 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
         const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
-            sporsmalErBesvart: (spmId) => this.sporsmalErBesvart(spmId),
+            sporsmalErBesvart: (spmId) => this.kanGaaVidereFraSporsmal(spmId),
             onNesteClick: (spmId: string) => {
-                const spmErBesvart = this.sporsmalErBesvart(spmId);
+                const spmErBesvart = this.kanGaaVidereFraSporsmal(spmId);
                 if (!spmErBesvart) {
                     this.toggleAdvarsel(true);
                 }
@@ -174,13 +174,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         return (spmId !== forrigeSpmId);
     }
 
+    kanGaaVidereFraSporsmal(sporsmalId: string): boolean {
+        return this.sporsmalErBesvart(sporsmalId) || (sporsmalId === 'sisteStilling');
+    }
+
     sporsmalErBesvart(sporsmalId: string): boolean {
-        if (!this.props.svarState[sporsmalId]) {
-            return false;
-        } else if ((sporsmalId !== 'sisteStilling') && (this.props.svarState[sporsmalId] === IngenSvar.INGEN_SVAR)) {
-            return false; // TODO FO-1463 Vi må finne en bedre fiks på dette.
-        }
-        return true;
+        return (!!this.props.svarState[sporsmalId]) && (this.props.svarState[sporsmalId] !== IngenSvar.INGEN_SVAR);
     }
 }
 
