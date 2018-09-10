@@ -6,11 +6,18 @@ import { FormattedMessage } from 'react-intl';
 
 import './autocomplete.less';
 
-/* TODO
-* Testing nettlesere
-* Testing mobil skjermleser
-* Fixbug: scroll ned og skjermen hakker, når radioknapp ikke vises
-*/
+// Hjelpe funksjon
+const getIndexValgteElement = (resultat: any) => { // tslint:disable-line
+    let indexElement;
+    if (resultat) {
+        for (let i = 0; i < resultat.children.length; i++) {
+            if (resultat.children[i].getAttribute('aria-selected') === 'true') {
+                indexElement = i;
+            }
+        }
+    }
+    return indexElement;
+};
 
 const keyboard = {
     back: 8, // delete key on mac
@@ -37,17 +44,18 @@ interface ResultatListeProps {
     visSpinner: boolean;
     resultatListe: Resultater[];
     oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
-    toemResultatListe: () => void;
     clearSelected: () => void;
 }
 
 class ResultatListe extends React.Component<ResultatListeProps> {
+    constructor(props: ResultatListeProps) {
+        super(props);
+
+        this.onOptionClick = this.onOptionClick.bind(this);
+    }
+
     onOptionClick (e: any) { // tslint:disable-line
         this.props.oppdaterState(e.target.dataset.stillingIndex);
-        this.props.toemResultatListe();
-    }
-    onMouseOver () {
-        // this.clearSelected();
     }
 
     render () {
@@ -60,7 +68,7 @@ class ResultatListe extends React.Component<ResultatListeProps> {
                 id="resultat"
                 role="listbox"
                 onClick={this.onOptionClick}
-                onMouseOver={this.onMouseOver}
+                onMouseOver={this.props.clearSelected}
             >
                 {this.props.resultatListe.map((e, i) => {
                     return (
@@ -93,7 +101,6 @@ interface AutoCompleteProps {
     resultatListe: Resultater[];
     oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
     oppdaterDefaultState: () => void;
-    toemResultatListe: () => void;
 }
 
 interface AutoCompleteState {
@@ -148,7 +155,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     handleClickOutside(event: Event) {
         if (this.formRef && !this.formRef.contains(event.target)) {
             this.props.oppdaterDefaultState();
-            this.props.toemResultatListe();
         }
     }
 
@@ -175,7 +181,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     }
     clearSelected() {
         const resultat = document.getElementById('resultat');
-        const indexElement = this.getIndexValgteElement(resultat);
+        const indexElement = getIndexValgteElement(resultat);
 
         if (resultat && indexElement !== undefined) {
             resultat.children[indexElement].setAttribute('aria-selected', 'false');
@@ -185,7 +191,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     }
     arrowing(kc: number) {
         const resultat = document.getElementById('resultat');
-        const indexElement = this.getIndexValgteElement(resultat);
+        const indexElement = getIndexValgteElement(resultat);
 
         let nextMenuItem;
         if (this.props.resultatListe.length === 0) {
@@ -210,18 +216,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
         this.markSelected(nextMenuItem);
     }
 
-    getIndexValgteElement (resultat: any) { // tslint:disable-line
-        let indexElement;
-        if (resultat) {
-            for (let i = 0; i < resultat.children.length; i++) {
-                if (resultat.children[i].getAttribute('aria-selected') === 'true') {
-                    indexElement = i;
-                }
-            }
-        }
-        return indexElement;
-    }
-
     closeResults() {
         this.clearSelected();
         this.toggleResultatListe(false);
@@ -241,13 +235,12 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     onKeyDown (e: any) { //tslint:disable-line
         const oppdaterStateOnKeyDown = () => {
             const resultat = document.getElementById('resultat');
-            const indexElement = this.getIndexValgteElement(resultat);
+            const indexElement = getIndexValgteElement(resultat);
             if (indexElement !== undefined) {
                 this.props.oppdaterState(indexElement);
             } else {
                 this.props.oppdaterDefaultState();
             }
-            this.props.toemResultatListe();
         };
         const kc = e.keyCode;
         if (kc === keyboard.up || kc === keyboard.down) {
@@ -263,7 +256,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
 
         if (kc === keyboard.esc) {
             this.props.oppdaterDefaultState();
-            this.props.toemResultatListe();
             return;
         }
 
@@ -327,7 +319,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                 <ResultatListe
                     resultatListe={this.props.resultatListe}
                     oppdaterState={this.props.oppdaterState}
-                    toemResultatListe={this.props.toemResultatListe}
                     visSpinner={this.props.visSpinner}
                     clearSelected={this.clearSelected}
                 />

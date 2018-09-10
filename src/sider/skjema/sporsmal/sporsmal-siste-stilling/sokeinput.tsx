@@ -29,8 +29,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
         this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
         this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
-        this.oppdaterMedTomStillingState = this.oppdaterMedTomStillingState.bind(this);
-        this.toemStillingsAlternativer = this.toemStillingsAlternativer.bind(this);
+        this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
     }
 
     componentWillMount() {
@@ -83,12 +82,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
             });
     }
 
-    toemStillingsAlternativer() {
-        this.setState({
-            stillingsAlternativer: []
-        });
-    }
-
     oppdaterStillingState(valgteStillingIndex) { // tslint:disable-line
         const { stilling, labelKey, id }  = this.state.stillingsAlternativer[valgteStillingIndex];
 
@@ -99,11 +92,12 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 stilling,
                 labelKey,
                 id
-            }
+            },
+            stillingsAlternativer: []
         });
     }
 
-    oppdaterMedTomStillingState() {
+    oppdaterDefaultState() {
         const stilling = this.props.defaultStilling;
         const labelKey = this.props.defaultStilling.label;
         this.props.onChange(stilling);
@@ -113,7 +107,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 stilling,
                 labelKey,
                 id: 0
-            }
+            },
+            stillingsAlternativer: []
         });
     }
 
@@ -123,9 +118,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 value={this.state.value.labelKey}
                 onChange={this.hentStillingsAlternativer}
                 oppdaterState={this.oppdaterStillingState}
-                oppdaterDefaultState={this.oppdaterMedTomStillingState}
+                oppdaterDefaultState={this.oppdaterDefaultState}
                 resultatListe={this.state.stillingsAlternativer}
-                toemResultatListe={this.toemStillingsAlternativer}
                 visSpinner={this.state.visSpinner}
             />
         );
