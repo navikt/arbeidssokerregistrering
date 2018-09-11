@@ -37,6 +37,6 @@ describe('test logging av responstid', () => {
         const args = frontendlogger.event.getCall(0).args;
         expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
         expect(args[1].responstid >= 50).to.equal(true);
-        expect(args[1].responstid < 500).to.equal(true);
+        expect(args[1].responstid < 5000).to.equal(true);
     });
 });
