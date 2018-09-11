@@ -4,8 +4,6 @@ import { Input } from 'nav-frontend-skjema';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { FormattedMessage } from 'react-intl';
 
-import './autocomplete.less';
-
 // Hjelpe funksjon
 const getIndexValgteElement = (resultat: any) => { // tslint:disable-line
     let indexElement;
@@ -300,7 +298,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             >
                 <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
             </label>
-            <form className="autocomplete-form" ref={this.setFormRef}>
+            <form className="autocomplete-form" ref={this.setFormRef} action="">
                 <Input
                     onKeyDown={this.onKeyDown}
                     onKeyUp={this.onKeyUp}
