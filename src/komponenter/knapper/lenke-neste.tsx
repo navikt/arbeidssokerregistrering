@@ -14,7 +14,7 @@ interface Props {
 function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & InjectedIntlProps) {
     return (
         <Link
-            className={classnames('nestelenke', className, {erAktiv})}
+            className={classnames('nestelenke knapp knapp--hoved', className, {erAktiv})}
             to={href}
             onClick={e => {
                 if (!erAktiv) {
@@ -23,9 +23,7 @@ function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & Injec
                 onClick(e);
             }}
         >
-            <span className="gjemt">
-                <FormattedMessage id="lenke-neste"/>
-            </span>
+            <FormattedMessage id="lenke-neste"/>
         </Link>
     );
 }
