@@ -27,7 +27,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
-import {alleSporsmalErBesvarte, sisteStillingErSatt} from "./fullfor-utils";
+import { alleSporsmalErBesvarte, sisteStillingErSatt } from './fullfor-utils';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');

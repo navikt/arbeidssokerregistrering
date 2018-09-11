@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
-import {FULLFOR_PATH, START_PATH} from '../../utils/konstanter';
+import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import {
     UtdanningBestattSvar,
@@ -18,7 +18,7 @@ import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
 import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
-import {alleSporsmalErBesvarte, sisteStillingErSatt} from "../fullfor/fullfor-utils";
+import { alleSporsmalErBesvarte, sisteStillingErSatt } from '../fullfor/fullfor-utils';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
