@@ -53,7 +53,7 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
                 const apikall = feil.apikall;
 
                 const data = action.data;
-                data.data = (typeof data.data === 'string') ? '' : data.data;
+                data.data = (typeof data.data === 'string') ? escape(data.data) : data.data;
 
                 frontendlogger.event(feil.eventnavn, {
                     'useragent': navigator.userAgent,
