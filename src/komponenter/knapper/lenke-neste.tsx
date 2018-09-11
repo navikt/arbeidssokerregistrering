@@ -13,18 +13,20 @@ interface Props {
 
 function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & InjectedIntlProps) {
     return (
-        <Link
-            className={classnames('nestelenke knapp knapp--hoved', className, {erAktiv})}
-            to={href}
-            onClick={e => {
-                if (!erAktiv) {
-                    e.preventDefault();
-                }
-                onClick(e);
-            }}
-        >
-            <FormattedMessage id="lenke-neste"/>
-        </Link>
+        <div className="nestelenke__wrapper">
+            <Link
+                className={classnames('nestelenke knapp knapp--hoved', className, {erAktiv})}
+                to={href}
+                onClick={e => {
+                    if (!erAktiv) {
+                        e.preventDefault();
+                    }
+                    onClick(e);
+                }}
+            >
+                <FormattedMessage id="lenke-neste"/>
+            </Link>
+        </div>
     );
 }
 
