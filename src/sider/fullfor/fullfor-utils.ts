@@ -18,7 +18,7 @@ export function sisteStillingErSatt(stilling: Stilling | undefined) {
     }
     return !isNullOrUndefined(stilling.styrk08)
         && !isNullOrUndefined(stilling.label)
-        && (stilling.label != '')
+        && (stilling.label !== '')
         && !isNullOrUndefined(stilling.konseptId);
 }
 
