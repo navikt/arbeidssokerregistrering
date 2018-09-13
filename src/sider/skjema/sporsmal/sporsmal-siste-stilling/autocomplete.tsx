@@ -99,6 +99,7 @@ interface AutoCompleteProps {
     resultatListe: Resultater[];
     oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
     oppdaterDefaultState: () => void;
+    resetValue: () => void;
 }
 
 interface AutoCompleteState {
@@ -302,6 +303,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                 <Input
                     onKeyDown={this.onKeyDown}
                     onKeyUp={this.onKeyUp}
+                    onFocus={this.props.resetValue}
                     tab-index="0"
                     aria-owns="resultat"
                     autoComplete="off"

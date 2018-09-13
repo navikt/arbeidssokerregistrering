@@ -18,7 +18,6 @@ interface Option {
 interface SokeInputComponentState {
     value: Option;
     stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[];
-    sokeStreng: string;
     visSpinner: boolean;
 }
 
@@ -27,6 +26,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     constructor(props: SokeInputComponentProps) {
         super(props);
 
+        this.resetValue = this.resetValue.bind(this);
         this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
         this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
         this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
@@ -57,7 +57,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 labelKey: sokeStreng,
                 id: 0
             },
-            sokeStreng
         });
 
         const that = this;
@@ -112,10 +111,21 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         });
     }
 
+    resetValue() {
+        this.setState({
+            value: {
+                stilling: tomStilling,
+                labelKey: '',
+                id: 0
+            },
+        });
+    }
+
     render() {
         return (
             <AutoComplete
                 value={this.state.value.labelKey}
+                resetValue={this.resetValue}
                 onChange={this.hentStillingsAlternativer}
                 oppdaterState={this.oppdaterStillingState}
                 oppdaterDefaultState={this.oppdaterDefaultState}
