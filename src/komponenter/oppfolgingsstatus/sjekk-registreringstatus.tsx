@@ -2,13 +2,15 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import {Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { AppState } from '../../reducer';
-import SblRegistrering, { sendBrukerTilDittNav } from '../../sider/sbl-registrering/sbl-registrering';
+import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { selectBrukNyRegistreringFeatureToggle,
     selectGradualRolloutNyRegistreringFeatureToggle } from '../../ducks/feature-toggles';
 import { sendBrukerTilSblArbeid } from '../../sider/oppsummering/oppsummering-utils';
+import InfoForIkkeArbeidssokerUtenOppfolging
+    from '../../sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -26,8 +28,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
             return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!this.beregnBrukNyRegistrering()) {
             if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
-                const config = { redirect: sendBrukerTilDittNav };
-                return <SblRegistrering enforceRedirect={true} config={config}/>;
+                return <InfoForIkkeArbeidssokerUtenOppfolging />;
             } else {
                 const config = { redirect: sendBrukerTilSblArbeid };
                 return <SblRegistrering config={config} />;

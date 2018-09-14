@@ -15,6 +15,7 @@ import {
 import SblRegistrering, { sendBrukerTilDittNav } from '../../sider/sbl-registrering/sbl-registrering';
 import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
+import InfoForIkkeArbeidssokerUtenOppfolging from "../../sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -63,6 +64,16 @@ describe('<SjekkRegistreringstatus />', () => {
         const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
         expect(wrapper.find(AlleredeRegistrert)).to.have.length(1);
+    });
+
+    it('skal sende bruker til InfoForIkkeArbeidssokerUtenOppfolging om status er erIkkeArbeidssokerUtenOppfolging', () => {
+        const store = create();
+
+        dispatchRegistreringstatus({erIkkeArbeidssokerUtenOppfolging: true}, store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
+
+        expect(wrapper.find(InfoForIkkeArbeidssokerUtenOppfolging)).to.have.length(1);
     });
     it('Skal rendre innhold dersom ny registrering er på og bruker ikke er under oppfølging', () => {
         const store = create();

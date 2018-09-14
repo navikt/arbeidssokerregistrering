@@ -60,19 +60,4 @@ describe('<SblRegistrering />', () => {
             expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(true);
         });
     });
-    it('skal sende bruker til DittNav dersom bruker er IARBS uten oppfølging', () => {
-        stubFetch(new FetchStub().addResponse(DITTNAV_URL));
-        window.innerWidth = 500;
-
-        const dittNavSpy = sandbox.spy(sendBrukerTilDittNav);
-        const config = {
-            redirect: dittNavSpy
-        };
-
-        mountWithStoreRouterAndIntl(<SblRegistrering enforceRedirect={true} config={config} />);
-
-        return promiseWithSetTimeout().then(() => {
-            expect(dittNavSpy.called).to.be.equal(true);
-        });
-    });
 });
