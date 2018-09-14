@@ -53,7 +53,7 @@ class ResultatListe extends React.Component<ResultatListeProps> {
     }
 
     onOptionClick (e: any) { // tslint:disable-line
-        this.props.oppdaterState(e.target.dataset.stillingIndex);
+        this.props.oppdaterState(e.target.getAttribute('data-stilling-index'));
     }
 
     render () {
