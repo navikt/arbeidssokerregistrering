@@ -54,7 +54,7 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
 
                 const data = action.data;
 
-                if (typeof data !== 'string') {
+                if (typeof data === 'object') {
                     data.data = (typeof data.data === 'string') ? encodeURI(data.data) : data.data;
                 }
 
