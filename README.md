@@ -4,7 +4,7 @@ Arbeidssøkerregistrering
 Registrering av arbeidssøker
 
 # Komme i gang
- 
+* `npm i` 
 * `npm start`
 
 ## Utvikling med backend
@@ -12,6 +12,10 @@ Registrering av arbeidssøker
 * Clone og start (StartJetty normal) `dev-proxy`  https://github.com/navikt/dev-proxy
 * Clone og start `veilarbregistrering` https://github.com/navikt/veilarbregistrering
 * Åpne appen i `localhost:8080`
+
+# Kjøre integrasjonstester lokalt
+* `npm i` 
+* `npm run integrationtest`
 
 # Henvendelser
 
