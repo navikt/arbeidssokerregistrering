@@ -1,6 +1,5 @@
 import { annenStilling, ingenYrkesbakgrunn, Stilling } from '../../../../ducks/siste-stilling';
 import { Data as OversettelseAvStillingData } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
-import { Data as SisteStillingFraAARegData } from '../../../../ducks/siste-stilling-fra-aareg';
 import { DinSituasjonSvar, SisteStillingSvar } from '../../../../ducks/svar-utils';
 
 export const UTEN_STYRKKODE = 'utenstyrkkode';
@@ -18,17 +17,6 @@ export function hentOversattStillingFraAAReg(
         };
     }
     return stilling;
-}
-
-export function getDefaultSisteStilling(
-    oversettelseAvSisteStilling: OversettelseAvStillingData,
-    sisteStillingFraAAReg: SisteStillingFraAARegData,
-): Stilling {
-    // TODO FO-1464 Forbedre dette. Kanskje ha defaultStilling som egen del av state.
-    if (sisteStillingFraAAReg.styrk === UTEN_STYRKKODE) {
-        return ingenYrkesbakgrunn;
-    }
-    return hentOversattStillingFraAAReg(oversettelseAvSisteStilling);
 }
 
 export function getDefaultSvar(
