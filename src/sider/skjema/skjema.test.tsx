@@ -86,7 +86,7 @@ describe('<Skjema />', () => {
         ));
 
         expect(wrapper.find(LenkeNeste).find({href: 'skjema/5'})).to.not.have.length(0);
-        wrapper.find(LenkeNeste).simulate('click');
+        wrapper.find('a.nestelenke').simulate('click');
         expect(settStateForUbesvartSporsmal).to.have.property('callCount', 2);
         expect(settStateForUbesvartSporsmal.getCall(0).args[0]).to.be.equal('oppsummering');
         expect(settStateForUbesvartSporsmal.getCall(1).args[0]).to.be.equal('test');
@@ -101,6 +101,7 @@ describe('<Skjema />', () => {
         };
 
         const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
+        expect(wrapper.find(LenkeNeste)).to.not.have.length(0);
         wrapper.find(LenkeNeste).simulate('click');
         expect(settStateForUbesvartSporsmal).to.have.property('callCount', 0);
     });

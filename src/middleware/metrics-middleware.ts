@@ -51,13 +51,20 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
                 const statusText = response.statusText;
                 const url = response.url;
                 const apikall = feil.apikall;
+
+                const data = action.data;
+
+                if (typeof data === 'object') {
+                    data.data = (typeof data.data === 'string') ? encodeURI(data.data) : data.data;
+                }
+
                 frontendlogger.event(feil.eventnavn, {
                     'useragent': navigator.userAgent,
                     url,
                     apikall,
                     status,
                     statusText,
-                    data: action.data
+                    data
                 }, {});
             }
         }

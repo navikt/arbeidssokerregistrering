@@ -19,7 +19,6 @@ interface SblRegistreringConfig {
 
 interface Props {
     config?: SblRegistreringConfig;
-    enforceRedirect?: boolean;
 }
 
 export function sendBrukerTilDittNav() {
@@ -31,7 +30,6 @@ class SblRegistrering extends React.Component<Props, State> {
         config: {
             redirect: sendBrukerTilSblArbeid
         },
-        enforceRedirect: false
     };
 
     constructor(props: {}) {
@@ -41,12 +39,6 @@ class SblRegistrering extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-
-        if (this.props.enforceRedirect === true) {
-            this.executeRedirect();
-            return;
-        }
-
         if (window.innerWidth > 768) {
             this.executeRedirect();
         }
