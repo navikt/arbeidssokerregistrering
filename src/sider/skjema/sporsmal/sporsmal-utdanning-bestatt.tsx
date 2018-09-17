@@ -14,12 +14,14 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps;
 
 export default function UtdanningBestattSporsmal(props: Props) {
+    const ariaLabelledBy = 'spm-skjema-form';
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
-        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
+        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
+        ariaLabelledBy
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId, kontekst, props.intl);
 
@@ -30,7 +32,7 @@ export default function UtdanningBestattSporsmal(props: Props) {
                     {getTekst('tittel')}
                 </Innholdstittel>
             </div>
-            <form className="spm-skjema">
+            <form className="spm-skjema" id={ariaLabelledBy}>
                 <Alternativ svar={UtdanningBestattSvar.JA} {...fellesProps}/>
                 <Alternativ svar={UtdanningBestattSvar.NEI} {...fellesProps}/>
             </form>
