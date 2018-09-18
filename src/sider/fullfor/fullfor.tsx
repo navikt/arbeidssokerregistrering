@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
@@ -28,6 +27,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
+import { alleSporsmalErBesvarte, sisteStillingErSatt } from './fullfor-utils';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -66,7 +66,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-        if (_.isEmpty(this.getSvarMappetForBackend())) {
+        const svar = this.props.state.svar;
+        const sisteStilling = this.props.state.sisteStilling.data.stilling;
+        if (!alleSporsmalErBesvarte(svar) || !sisteStillingErSatt(sisteStilling)) {
             this.props.history.push(START_PATH);
         }
     }
