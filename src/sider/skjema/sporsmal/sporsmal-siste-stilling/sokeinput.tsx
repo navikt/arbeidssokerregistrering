@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../../../ducks/api';
 import { Stilling } from '../../../../ducks/siste-stilling';
@@ -96,7 +97,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         autoload={false}
                         ignoreAccents={false}
                         onChange={this.onChange}
-                        loadOptions={this.getOptions}
+                        loadOptions={_.throttle(this.getOptions, 500)}
                         value={this.state.value}
                         id="stilling"
                         valueKey="id"
