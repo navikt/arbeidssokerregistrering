@@ -21,7 +21,7 @@ prometheus:
 resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
   limits:
     cpu: 3
-    memory: 512Mi
+    memory: 768Mi
   requests:
     memory: 768Mi
 fasitResources:
