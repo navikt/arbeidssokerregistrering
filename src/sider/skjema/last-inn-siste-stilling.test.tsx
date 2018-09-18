@@ -11,8 +11,11 @@ import {
 import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../test/test-utils';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import oversettelseAvStillingFraAAReg from '../../mocks/oversettelse-av-stilling-fra-aareg-mock';
-import {ingenYrkesbakgrunn} from '../../ducks/siste-stilling';
-import {stillingTilBrukerSomIkkeFinnesIAAReg} from '../../mocks/siste-stilling-fra-aareg-mock';
+import {ingenYrkesbakgrunn, Stilling} from '../../ducks/siste-stilling';
+import {
+    default as sisteStillingFraAARegMock,
+    stillingTilBrukerSomIkkeFinnesIAAReg
+} from '../../mocks/siste-stilling-fra-aareg-mock';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -21,6 +24,12 @@ afterEach(() => {
         fetch.restore();
     }
 });
+
+const stilling: Stilling = {
+    label: 'Daglig leder',
+    styrk08: '1120',
+    konseptId: 313808,
+};
 
 describe('<LastInnSisteStilling />', () => {
     it('skal ikke hente siste arbeidsforhold dersom sisteStillingFraAAReg.status ikke er STATUS.NOT_STARTED', () => {
@@ -56,10 +65,10 @@ describe('<LastInnSisteStilling />', () => {
             });
     });
 
-    it('skal sette riktig sisteStilling i state etter fetch av oversettelsen', () => {
+    it('skal sette riktig sisteStilling og defaultStilling i state etter fetch av oversettelsen', () => {
         const store = create();
         const fetchStub = new FetchStub()
-            .addResponse('sistearbeidsforhold', {})
+            .addResponse('sistearbeidsforhold', sisteStillingFraAARegMock)
             .addResponse('kryssklassifiserMedKonsept', oversettelseAvStillingFraAAReg);
 
         stubFetch(fetchStub);
@@ -68,11 +77,8 @@ describe('<LastInnSisteStilling />', () => {
 
         return promiseWithSetTimeout()
             .then(() => {
-                expect(store.getState().sisteStilling.data.stilling).to.deep.equal({
-                    label: 'Daglig leder',
-                    styrk08: '1120',
-                    konseptId: 313808,
-                });
+                expect(store.getState().defaultStilling.stilling).to.deep.equal(stilling);
+                expect(store.getState().sisteStilling.data.stilling).to.deep.equal(stilling);
             });
     });
 

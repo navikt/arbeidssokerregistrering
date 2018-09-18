@@ -4,6 +4,8 @@ export const stillingTilBrukerSomIkkeFinnesIAAReg = {
     styrk: UTEN_STYRKKODE
 };
 
-export default {
+const sisteStillingFraAARegMock = {
     styrk: '3415123'
 };
+
+export default sisteStillingFraAARegMock;
