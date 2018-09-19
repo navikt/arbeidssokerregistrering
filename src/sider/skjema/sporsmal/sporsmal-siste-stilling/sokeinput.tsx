@@ -89,6 +89,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 </label>
                 <div className="blokk-m selectContainer input--fullbredde">
                     <OptionsAsync
+                        cache={false}
                         inputProps={{'autoComplete': 'off'}}
                         arrowRenderer={() => null}
                         loadingPlaceholder="Laster..."
