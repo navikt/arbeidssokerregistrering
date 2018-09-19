@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import { Async } from 'react-select';
 import { hentStillingMedStyrk08 } from '../../../../ducks/api';
 import { Stilling } from '../../../../ducks/siste-stilling';
@@ -89,7 +88,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 </label>
                 <div className="blokk-m selectContainer input--fullbredde">
                     <OptionsAsync
-                        cache={false}
                         inputProps={{'autoComplete': 'off'}}
                         arrowRenderer={() => null}
                         loadingPlaceholder="Laster..."
@@ -98,7 +96,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                         autoload={false}
                         ignoreAccents={false}
                         onChange={this.onChange}
-                        loadOptions={_.throttle(this.getOptions, 500)}
+                        loadOptions={this.getOptions}
                         value={this.state.value}
                         id="stilling"
                         valueKey="id"
