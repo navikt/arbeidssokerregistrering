@@ -3,7 +3,6 @@ const config = {
     src_folders: ["integration/tests"],
     page_objects_path: ["integration/pages"],
     output_folder: "integration/reports",
-    custom_commands_path: "integration/commands",
     custom_assertions_path: "",
     globals_path: "./integration/globals.js",
 

@@ -15,6 +15,6 @@ module.exports = {
    'gaa til startsiden': (client) => {
 
        startsiden.navigate();
-       startsiden.expect.section('@start').to.be.visible;
+       startsiden.expect.element('@start').to.be.visible;
     }
 };
