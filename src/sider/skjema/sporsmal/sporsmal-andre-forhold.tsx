@@ -15,13 +15,15 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps;
 
 export default function AndreForhold(props: Props) {
+    const ariaLabelledBy = 'spm-skjema-form';
     const { intl, sporsmalId } = props;
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
-        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId)
+        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
+        ariaLabelledBy
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
 
@@ -35,7 +37,7 @@ export default function AndreForhold(props: Props) {
                     {getTekst('ingress')}
                 </Normaltekst>
             </div>
-            <form className="spm-skjema">
+            <form className="spm-skjema" id={ariaLabelledBy}>
                 <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
                 <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
             </form>
