@@ -32,11 +32,17 @@ function loggAutentiseringsinfo(action: Action, frontendlogger: Frontendlogger) 
 
 function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogger) {
     let jobbetSeksAvTolvSisteManeder = store.getState().registreringStatus.data.jobbetSeksAvTolvSisteManeder;
+    let sisteStillingFraAaregStyrk08 = store.getState().oversettelseAvStillingFraAAReg.data;
+
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
         const { besvarelse } = action.data;
         frontendlogger.event('registrering.besvarelse.helseHinder', {'helseHinder': besvarelse.helseHinder}, {});
         frontendlogger.event('registrering.besvarelse.utdanning', {'utdanning': besvarelse.utdanning}, {});
         frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
+
+        if (sisteStillingFraAaregStyrk08.stilling.styrk08 !== besvarelse.stilling.styrk08) {
+            frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': sisteStillingFraAaregStyrk08.stilling, 'brukerbesvarelse': besvarelse.stilling}, {}); // tslint:disable-line:max-line-length
+        }
     }
 }
 
