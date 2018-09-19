@@ -130,7 +130,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
             this.closeResults();
         } else {
             this.openResults();
-            this.arrowing(keyboard.down);
         }
 
         this.toggleSpinner(this.props.visSpinner);
