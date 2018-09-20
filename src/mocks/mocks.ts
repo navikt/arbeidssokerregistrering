@@ -15,7 +15,7 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling-mock";
 
 const MOCK_START_REGISRERING_STATUS = true;
-const MOCK_REGISTRER_BRUKER = true;
+const MOCK_REGISTRER_BRUKER = false;
 const MOCK_REAKTIVER_BRUKER = true;
 const MOCK_BRUKERS_NAVN = true;
 const MOCK_AUTENTISERINGS_INFO = true;
@@ -75,7 +75,7 @@ if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
 
 if(MOCK_STYRK08_PAMJANZZ) {
     (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
-        respondWith(delayed(1000, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
+        respondWith(delayed(DELAY / 10, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
 }
 
 if (MOCK_REGISTRER_BRUKER) {
