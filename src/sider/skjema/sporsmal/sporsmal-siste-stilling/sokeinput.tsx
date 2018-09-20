@@ -57,11 +57,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 labelKey: sokeStreng,
                 id: 0
             },
-        });
-
-        const that = this;
-
-        this.setState({
             visSpinner: true
         });
 
@@ -73,10 +68,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
 
                 this.setState({
+                    stillingsAlternativer,
                     visSpinner: false
-                });
-                that.setState({
-                    stillingsAlternativer
                 });
             });
     }
