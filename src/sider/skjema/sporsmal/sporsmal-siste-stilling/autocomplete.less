@@ -1,0 +1,80 @@
+.autocomplete-form {
+  position: relative;
+
+
+  &__resultat-list,
+  &__tekst-laster {
+    color: #3E3832;
+    margin: 0;
+    position: absolute;
+    top: 42px;
+    background-color: white;
+    z-index: 1000;
+    width: 100%;
+
+    border-left: 1px solid #C6C2BF; // todo Bor bruke nav-frontend farge, klarte ikke å hente
+    border-bottom: 1px solid #C6C2BF;
+    border-right: 1px solid #C6C2BF;
+    border-radius: 0 0 5px 5px;
+  }
+
+  &__resultat-list {
+    padding: 0;
+    display: none;
+    max-height: 235px;
+    overflow-y: auto;
+
+    li {
+      list-style: none;
+      padding: 0.5rem 1rem;
+    }
+
+    li:last-child {
+      border-top: 1px solid #C6C2BF;
+    }
+    li:hover, [aria-selected='true'] {
+      background-color: #ccdee6;
+    }
+  }
+
+  &__tekst-laster {
+    padding: 1rem;
+  }
+
+  &__spinner {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: 16px;
+    right: 7px;
+  }
+
+  &__screen-reader-text {
+    position: absolute !important;
+    display: block;
+    visibility: visible;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0px, 0px, 0px, 0px);
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+    white-space: nowrap;
+  }
+
+  input[aria-owns='resultat'] {
+    font-style: italic;
+    color: #59514B;
+  }
+}
+
+#initInstr {
+  display: none;
+}
+
+
+
+
+
