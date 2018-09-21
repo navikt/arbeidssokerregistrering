@@ -92,41 +92,49 @@ class SisteStilling extends React.Component<Props> {
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
+
         const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
         const alternativer = skjulSvaralternativer ? (null) : (
-            <form className="spm-skjema">
-                <Alternativ
-                    svar={SisteStillingSvar.HAR_HATT_JOBB}
-                    {...alternativProps}
-                    avgiSvar={(svar: Svar) => {
-                        endreSvar(sporsmalId, svar);
-                        velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
-                    }}
-                />
-                <Alternativ
-                    svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
-                    {...alternativProps}
-                    avgiSvar={(svar: Svar) => {
-                        endreSvar(sporsmalId, svar);
-                        velgStilling(ingenYrkesbakgrunn);
-                    }}
-                />
-            </form>
+                    <>
+                        <Alternativ
+                            svar={SisteStillingSvar.HAR_HATT_JOBB}
+                            {...alternativProps}
+                            avgiSvar={(svar: Svar) => {
+                                endreSvar(sporsmalId, svar);
+                                velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
+                            }}
+                        />
+                        <Alternativ
+                            svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
+                            {...alternativProps}
+                            avgiSvar={(svar: Svar) => {
+                                endreSvar(sporsmalId, svar);
+                                velgStilling(ingenYrkesbakgrunn);
+                            }}
+                        />
+                    </>
         );
 
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
-
         return (
             <>
-                <div className="spm-hode">
-                    <Innholdstittel tag="h1" className="spm-tittel">
-                        {getTekst('tittel')}
-                    </Innholdstittel>
-                    <Normaltekst className="spm-beskrivelse">
-                        <span dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}/>
-                    </Normaltekst>
-                </div>
-                {alternativer}
+                <form className="spm-skjema">
+                    <fieldset className="skjema__fieldset">
+                        <legend className="skjema__legend spm-hode">
+                            <Innholdstittel tag="h1" className="spm-tittel">
+                                {getTekst('tittel')}
+                            </Innholdstittel>
+                            <Normaltekst className="spm-beskrivelse">
+                                <span
+                                    dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}
+                                />
+                            </Normaltekst>
+                        </legend>
+                        <div className="spm-body">
+                            {alternativer}
+                        </div>
+                    </fieldset>
+                </form>
                 <div className="spm-valg">
                     {this.skalViseStillingsfelt() &&
                         <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>

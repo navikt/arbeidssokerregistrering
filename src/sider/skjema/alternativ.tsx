@@ -10,7 +10,6 @@ interface AlternativProps {
     avgiSvar: (svar: Svar) => void;
     getTekstId: (svar: Svar) => string;
     className?: string;
-    ariaLabelledBy?: string;
 }
 
 function Alternativ(props: AlternativProps & InjectedIntlProps) {
@@ -19,7 +18,7 @@ function Alternativ(props: AlternativProps & InjectedIntlProps) {
         <div className={classNames('alternativ-wrapper', props.className)}>
             <RadioPanel
                 onChange={() => props.avgiSvar(props.svar)}
-                inputProps={{className: 'blokk-xs', 'aria-labelledby': props.ariaLabelledBy}}
+                inputProps={{className: 'blokk-xs'}}
                 name={'alternativ'}
                 label={tekst}
                 value={tekst}
