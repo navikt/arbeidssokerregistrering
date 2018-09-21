@@ -15,7 +15,6 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps;
 
 export default function AndreForhold(props: Props) {
-    const ariaLabelledBy = 'spm-skjema-form';
     const { intl, sporsmalId } = props;
     const fellesProps = {
         endreSvar: props.endreSvar,
@@ -23,23 +22,26 @@ export default function AndreForhold(props: Props) {
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
-        ariaLabelledBy
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
 
     return (
         <>
-            <div className="spm-hode">
-                <Innholdstittel tag="h1" className="spm-tittel">
-                    {getTekst('tittel')}
-                </Innholdstittel>
-                <Normaltekst className="spm-ingress">
-                    {getTekst('ingress')}
-                </Normaltekst>
-            </div>
-            <form className="spm-skjema" id={ariaLabelledBy}>
-                <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
-                <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
+            <form className="spm-skjema">
+                <fieldset className="skjema__fieldset">
+                    <legend className="skjema__legend spm-hode">
+                        <Innholdstittel tag="h1" className="spm-tittel">
+                            {getTekst('tittel')}
+                        </Innholdstittel>
+                        <Normaltekst className="spm-ingress">
+                            {getTekst('ingress')}
+                        </Normaltekst>
+                    </legend>
+                    <div className="spm-body">
+                        <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
+                        <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
+                    </div>
+                </fieldset>
             </form>
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">

@@ -14,28 +14,28 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps;
 
 export default function UtdanningGodkjentSporsmal(props: Props) {
-    const ariaLabelledBy = 'spm-skjema-form';
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
-        ariaLabelledBy
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId, kontekst, props.intl);
     return (
-        <>
-            <div className="spm-hode">
+        <form className="spm-skjema">
+            <fieldset className="skjema__fieldset">
+            <legend className="skjema__legend spm-hode">
                 <Innholdstittel tag="h1" className="spm-tittel">
                     {getTekst('tittel')}
                 </Innholdstittel>
-            </div>
-            <form className="spm-skjema" id={ariaLabelledBy}>
+            </legend>
+            <div className="spm-body">
                 <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps}/>
                 <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps}/>
                 <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps}/>
-            </form>
-        </>
+            </div>
+            </fieldset>
+        </form>
     );
 }
