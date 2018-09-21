@@ -290,14 +290,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     render() {
         const numberResults = this.props.resultatListe.length;
         return (
-            <>
-            <label
-                htmlFor="stilling"
-                className="typo-undertittel sokeinput__label"
-                onClick={AutoComplete.clickLabel}
-            >
-                <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
-            </label>
             <form className="autocomplete-form" ref={this.setFormRef} action="">
                 <Input
                     onKeyDown={this.onKeyDown}
@@ -306,7 +298,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                     tab-index="0"
                     aria-owns="resultat"
                     autoComplete="off"
-                    label=""
+                    label={<FormattedMessage id="siste-arbeidsforhold.undertittel"/>}
                     id="stilling"
                     aria-expanded={numberResults !== 0}
                     aria-autocomplete="both"
@@ -331,7 +323,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                     <NavFrontendSpinner type="XS" aria-label="Laster innhold" />
                 </div>
             </form>
-            </>
         );
     }
 }
