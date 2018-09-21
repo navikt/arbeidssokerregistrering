@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Stilling } from '../../../../ducks/siste-stilling';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Input } from 'nav-frontend-skjema';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { FormattedMessage } from 'react-intl';
 
 // Hjelpe funksjon
 const getIndexValgteElement = (resultat: any) => { // tslint:disable-line
@@ -106,14 +106,15 @@ interface AutoCompleteState {
     inputValue: string;
 }
 
-class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState> {
+type Props = AutoCompleteProps & InjectedIntlProps;
+class AutoComplete extends React.Component<Props, AutoCompleteState> {
 
     formRef;
     static clickLabel() {
         document.getElementById('stilling')!.focus();
     }
 
-    constructor(props: AutoCompleteProps) {
+    constructor(props: Props) {
         super(props);
 
         this.onKeyDown = this.onKeyDown.bind(this);
@@ -288,37 +289,29 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
     }
 
     render() {
-        const numberResults = this.props.resultatListe.length;
+        const { resultatListe, oppdaterState, visSpinner, value, onChange, resetValue, intl} = this.props;
         return (
-            <>
-            <label
-                htmlFor="stilling"
-                className="typo-undertittel sokeinput__label"
-                onClick={AutoComplete.clickLabel}
-            >
-                <FormattedMessage id="siste-arbeidsforhold.undertittel"/>
-            </label>
             <form className="autocomplete-form" ref={this.setFormRef} action="">
                 <Input
                     onKeyDown={this.onKeyDown}
                     onKeyUp={this.onKeyUp}
-                    onFocus={this.props.resetValue}
+                    onFocus={resetValue}
                     tab-index="0"
                     aria-owns="resultat"
                     autoComplete="off"
-                    label=""
+                    label={intl.messages['siste-arbeidsforhold.undertittel']}
                     id="stilling"
-                    aria-expanded={numberResults !== 0}
+                    aria-expanded={resultatListe.length !== 0}
                     aria-autocomplete="both"
                     aria-describedby="initInstr"
-                    value={this.props.value}
-                    onChange={this.props.onChange}
+                    value={value}
+                    onChange={onChange}
                 />
 
                 <ResultatListe
-                    resultatListe={this.props.resultatListe}
-                    oppdaterState={this.props.oppdaterState}
-                    visSpinner={this.props.visSpinner}
+                    resultatListe={resultatListe}
+                    oppdaterState={oppdaterState}
+                    visSpinner={visSpinner}
                     clearSelected={this.clearSelected}
                 />
 
@@ -331,9 +324,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, AutoCompleteState>
                     <NavFrontendSpinner type="XS" aria-label="Laster innhold" />
                 </div>
             </form>
-            </>
         );
     }
 }
 
-export default AutoComplete;
+export default injectIntl(AutoComplete);

@@ -1,7 +1,9 @@
 .sporsmal {
-    display: flex;
-    flex-direction: column;
     padding: 1rem 1.4rem;
+
+    .spm-hode {
+        margin: 0 auto;
+    }
 
     .spm-tittel {
         margin-bottom: 2.5rem;
@@ -58,20 +60,22 @@
         }
 
         .spm-skjema {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            .spm-body {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
 
-            .alternativ-wrapper {
-                width: 48.2%;
-                margin: 0.3rem;
+                .alternativ-wrapper {
+                    width: 48.2%;
+                    margin: 0.3rem;
 
-                &--small {
-                    width: 25%;
-                }
+                    &--small {
+                        width: 25%;
+                    }
 
-                > .inputPanel {
-                    height: 100%;
+                    > .inputPanel {
+                        height: 100%;
+                    }
                 }
             }
         }

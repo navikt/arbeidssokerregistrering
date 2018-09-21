@@ -14,31 +14,31 @@ interface SporsmalProps {
 type Props = SporsmalProps & InjectedIntlProps;
 
 export default function Utdanningsporsmal(props: Props) {
-    const ariaLabelledBy = 'spm-skjema-form';
     const fellesProps = {
         intl: props.intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
-        ariaLabelledBy
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId, kontekst, props.intl);
 
     return (
-        <>
-            <div className="spm-hode">
-                <Innholdstittel tag="h1" className="spm-tittel">
-                    {getTekst('tittel')}
-                </Innholdstittel>
-            </div>
-            <form className="spm-skjema" id={ariaLabelledBy}>
-                <Alternativ svar={UtdanningSvar.INGEN_UTDANNING} {...fellesProps}/>
-                <Alternativ svar={UtdanningSvar.GRUNNSKOLE} {...fellesProps}/>
-                <Alternativ svar={UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING} {...fellesProps}/>
-                <Alternativ svar={UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV} {...fellesProps}/>
-                <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_1_TIL_4} {...fellesProps}/>
-                <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER} {...fellesProps}/>
-            </form>
-        </>
+        <form className="spm-skjema">
+            <fieldset className="skjema__fieldset">
+                <legend className="skjema__legend spm-hode">
+                    <Innholdstittel tag="h1" className="spm-tittel">
+                        {getTekst('tittel')}
+                    </Innholdstittel>
+                </legend>
+                <div className="spm-body">
+                    <Alternativ svar={UtdanningSvar.INGEN_UTDANNING} {...fellesProps}/>
+                    <Alternativ svar={UtdanningSvar.GRUNNSKOLE} {...fellesProps}/>
+                    <Alternativ svar={UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING} {...fellesProps}/>
+                    <Alternativ svar={UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV} {...fellesProps}/>
+                    <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_1_TIL_4} {...fellesProps}/>
+                    <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER} {...fellesProps}/>
+                </div>
+            </fieldset>
+        </form>
     );
 }
