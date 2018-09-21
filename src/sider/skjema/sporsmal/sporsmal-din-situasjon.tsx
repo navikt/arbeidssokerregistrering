@@ -44,6 +44,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 
     render() {
         const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling} = this.props;
+        const ariaLabelledBy = 'spm-skjema-form';
         const fellesProps = {
             intl: intl,
             avgiSvar: (svar: DinSituasjonSvar) => {
@@ -61,7 +62,8 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                 }
             },
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
-            hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
+            hentAvgittSvar: () => hentAvgittSvar(sporsmalId),
+            ariaLabelledBy
         };
 
         return (
@@ -71,7 +73,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                         {getIntlTekstForSporsmal(sporsmalId, 'tittel', intl)}
                     </Innholdstittel>
                 </div>
-                <form className="spm-skjema">
+                <form className="spm-skjema" id={ariaLabelledBy}>
                     <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.DELTIDSJOBB_VIL_MER} {...fellesProps}/>
