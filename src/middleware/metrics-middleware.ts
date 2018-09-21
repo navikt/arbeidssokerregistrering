@@ -32,7 +32,7 @@ function loggAutentiseringsinfo(action: Action, frontendlogger: Frontendlogger) 
 
 function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogger) {
     let jobbetSeksAvTolvSisteManeder = store.getState().registreringStatus.data.jobbetSeksAvTolvSisteManeder;
-    let sisteStillingFraAaregStyrk08 = store.getState().oversettelseAvStillingFraAAReg.data;
+    let stillingForslagFraAareg = store.getState().defaultStilling;
     let valgteStilling = store.getState().sisteStilling.data;
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
@@ -41,8 +41,8 @@ function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogg
         frontendlogger.event('registrering.besvarelse.utdanning', {'utdanning': besvarelse.utdanning}, {});
         frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
 
-        if (sisteStillingFraAaregStyrk08.konseptMedStyrk08List[0].konseptId !== valgteStilling.stilling.konseptId) {
-            frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': sisteStillingFraAaregStyrk08.konseptMedStyrk08List[0], 'brukerbesvarelse': valgteStilling.stilling}, {}); // tslint:disable-line:max-line-length
+        if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {
+            frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {}); // tslint:disable-line:max-line-length
         }
     }
 }
