@@ -11,7 +11,7 @@ import {
     hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
     selectOversettelseAvStillingFraAAReg,
     State as OversettelseAvStillingFraAARegState,
-    Data as OversettelseAvStillingFraAARegData
+    Data as OversettelseAvStillingFraAARegData, Data as OversettelseAvStillingData
 } from '../../ducks/oversettelse-av-stilling-fra-aareg';
 import {
     ingenYrkesbakgrunn,
@@ -25,6 +25,7 @@ import { hentOversattStillingFraAAReg, UTEN_STYRKKODE } from './sporsmal/sporsma
 import { STATUS } from '../../ducks/api-utils';
 import { selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
 import FeilmeldingGenerell from '../../komponenter/feilmelding/feilmelding-generell';
+import { settDefaultStilling } from '../../ducks/default-stilling';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -38,6 +39,7 @@ interface DispatchProps {
     hentStyrkkodeForSisteStillingFraAAReg: (featureToggles: FeatureTogglesData) => Promise<void | {}>;
     hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
     velgStilling: (stilling: Stilling) => void;
+    settDefaultStilling: (stilling: Stilling) => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -53,16 +55,28 @@ class LastInnSisteStilling extends React.Component<Props> {
                     const {styrk} = responseSisteArbeidsforhold as SisteArbeidsforholdData;
 
                     this.props.hentStillingFraPamGittStyrkkode(styrk).then((responseOversettelseAvStillingFraAAReg) => {
-                        if (styrk !== UTEN_STYRKKODE) {
-                            velgStilling(hentOversattStillingFraAAReg(
-                                responseOversettelseAvStillingFraAAReg as OversettelseAvStillingFraAARegData
-                            ));
-                        } else {
-                            velgStilling(ingenYrkesbakgrunn);
-                        }
+                        const stilling: Stilling = this.getDefaultSisteStilling(
+                            responseOversettelseAvStillingFraAAReg as OversettelseAvStillingFraAARegData,
+                            styrk
+                        );
+                        velgStilling(stilling);
+                        this.props.settDefaultStilling(stilling);
+
                     });
                 });
         }
+    }
+
+    getDefaultSisteStilling(
+        oversettelseAvSisteStilling: OversettelseAvStillingData,
+        styrk: string | undefined,
+    ): Stilling {
+
+        if (styrk === undefined || styrk === UTEN_STYRKKODE) {
+            return ingenYrkesbakgrunn;
+        }
+
+        return hentOversattStillingFraAAReg(oversettelseAvSisteStilling);
     }
 
     render() {
@@ -98,6 +112,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     ),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
+    settDefaultStilling: (stilling: Stilling) => dispatch(settDefaultStilling(stilling))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LastInnSisteStilling);

@@ -12,10 +12,6 @@ import {
 } from '../../../ducks/siste-stilling';
 import { AppState } from '../../../reducer';
 import {
-    selectOversettelseAvStillingFraAAReg,
-} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import {
-    getDefaultSisteStilling,
     situasjonerDerViVetAtBrukerenHarHattJobb
 } from './sporsmal-siste-stilling/siste-stilling-utils';
 import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
@@ -48,6 +44,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 
     render() {
         const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling} = this.props;
+        const ariaLabelledBy = 'spm-skjema-form';
         const fellesProps = {
             intl: intl,
             avgiSvar: (svar: DinSituasjonSvar) => {
@@ -65,7 +62,8 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                 }
             },
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
-            hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
+            hentAvgittSvar: () => hentAvgittSvar(sporsmalId),
+            ariaLabelledBy
         };
 
         return (
@@ -75,7 +73,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                         {getIntlTekstForSporsmal(sporsmalId, 'tittel', intl)}
                     </Innholdstittel>
                 </div>
-                <form className="spm-skjema">
+                <form className="spm-skjema" id={ariaLabelledBy}>
                     <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps}/>
                     <Alternativ svar={DinSituasjonSvar.DELTIDSJOBB_VIL_MER} {...fellesProps}/>
@@ -93,10 +91,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    defaultStilling: getDefaultSisteStilling(
-        selectOversettelseAvStillingFraAAReg(state).data,
-        state.sisteStillingFraAAReg.data,
-    ),
+    defaultStilling: state.defaultStilling.stilling,
     sisteStilling: selectSisteStilling(state),
 });
 
