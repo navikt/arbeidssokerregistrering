@@ -12,10 +12,6 @@ import {
 } from '../../../ducks/siste-stilling';
 import { AppState } from '../../../reducer';
 import {
-    selectOversettelseAvStillingFraAAReg,
-} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import {
-    getDefaultSisteStilling,
     situasjonerDerViVetAtBrukerenHarHattJobb
 } from './sporsmal-siste-stilling/siste-stilling-utils';
 import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
@@ -95,10 +91,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    defaultStilling: getDefaultSisteStilling(
-        selectOversettelseAvStillingFraAAReg(state).data,
-        state.sisteStillingFraAAReg.data,
-    ),
+    defaultStilling: state.defaultStilling.stilling,
     sisteStilling: selectSisteStilling(state),
 });
 
