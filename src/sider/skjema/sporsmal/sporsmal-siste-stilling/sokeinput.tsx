@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import { hentStillingMedStyrk08 } from '../../../../ducks/api';
 import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
@@ -24,7 +23,6 @@ interface SokeInputComponentState {
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
 
-    private autocompleteSearchThrottled;
     constructor(props: SokeInputComponentProps) {
         super(props);
 
@@ -32,8 +30,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
         this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
         this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
-
-        this.autocompleteSearchThrottled = _.throttle(this.autocompleteSearch, 500);
     }
 
     componentWillMount() {
@@ -52,21 +48,6 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         });
     }
 
-    autocompleteSearch (sokeStreng: string) {
-        hentStillingMedStyrk08(encodeURI(sokeStreng))
-            .then((response: { typeaheadYrkeList: {}[] }) => {
-
-                const {typeaheadYrkeList} = response;
-
-                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
-
-                this.setState({
-                    stillingsAlternativer,
-                    visSpinner: false
-                });
-            });
-    }
-
     hentStillingsAlternativer(v) { // tslint:disable-line
         const sokeStreng = v.target.value;
 
@@ -79,7 +60,18 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
             visSpinner: true
         });
 
-        this.autocompleteSearchThrottled(sokeStreng);
+        hentStillingMedStyrk08(encodeURI(sokeStreng))
+            .then((response: { typeaheadYrkeList: {}[] }) => {
+
+                const {typeaheadYrkeList} = response;
+
+                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
+
+                this.setState({
+                    stillingsAlternativer,
+                    visSpinner: false
+                });
+            });
     }
 
     oppdaterStillingState(valgteStillingIndex) { // tslint:disable-line
