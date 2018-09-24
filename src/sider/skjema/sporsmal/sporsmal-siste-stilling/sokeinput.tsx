@@ -34,7 +34,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
         this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
 
-        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 500);
+        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300);
 
     }
 
@@ -80,7 +80,14 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 stilling: tomStilling,
                 labelKey: sokeStreng,
                 id: 0
-            },
+            }
+        });
+
+        if (sokeStreng.length < 2) {
+            return;
+        }
+
+        this.setState({
             visSpinner: true
         });
 
