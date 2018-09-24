@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import { hentStillingMedStyrk08 } from '../../../../ducks/api';
 import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
@@ -23,6 +24,8 @@ interface SokeInputComponentState {
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
 
+    private waitingFor;
+    private autocompleteSearchDebounced;
     constructor(props: SokeInputComponentProps) {
         super(props);
 
@@ -30,6 +33,9 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
         this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
         this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
+
+        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300);
+
     }
 
     componentWillMount() {
@@ -48,6 +54,24 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         });
     }
 
+    autocompleteSearch (sokeStreng: string) {
+        this.waitingFor = sokeStreng;
+        hentStillingMedStyrk08(encodeURI(sokeStreng))
+            .then((response: { typeaheadYrkeList: {}[] }) => {
+
+                const {typeaheadYrkeList} = response;
+
+                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
+
+                if (sokeStreng === this.waitingFor) {
+                    this.setState({
+                        stillingsAlternativer,
+                        visSpinner: false
+                    });
+                }
+            });
+    }
+
     hentStillingsAlternativer(v) { // tslint:disable-line
         const sokeStreng = v.target.value;
 
@@ -56,22 +80,19 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 stilling: tomStilling,
                 labelKey: sokeStreng,
                 id: 0
-            },
+            }
+        });
+
+        if (sokeStreng.length < 2) {
+            return;
+        }
+
+        this.setState({
             visSpinner: true
         });
 
-        hentStillingMedStyrk08(encodeURI(sokeStreng))
-            .then((response: { typeaheadYrkeList: {}[] }) => {
+        this.autocompleteSearchDebounced(sokeStreng);
 
-                const {typeaheadYrkeList} = response;
-
-                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
-
-                this.setState({
-                    stillingsAlternativer,
-                    visSpinner: false
-                });
-            });
     }
 
     oppdaterStillingState(valgteStillingIndex) { // tslint:disable-line
