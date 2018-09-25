@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Stilling } from '../../../../ducks/siste-stilling';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Input } from 'nav-frontend-skjema';
+import {Stilling} from '../../../../ducks/siste-stilling';
+import {InjectedIntlProps, injectIntl} from 'react-intl';
+import {Input} from 'nav-frontend-skjema';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 
 // Hjelpe funksjon
@@ -138,7 +138,7 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
         const ariaLive = document.querySelector('.autocomplete-form__screen-reader-text[aria-live]');
         if (ariaLive) {
             ariaLive.textContent = numberResults === 0
-                ? 'Ingen resultat' : numberResults + ' resultater er tilgjengelige.';
+                ? '' : numberResults + ' resultater er tilgjengelige.';
         }
     }
 
