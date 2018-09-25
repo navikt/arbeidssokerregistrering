@@ -61,7 +61,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         if (cached) {
             Promise.resolve(cached).then((stillingsAlternativer: any) => { // tslint:disable-line
                 this.setState({
-                    stillingsAlternativer
+                    stillingsAlternativer,
+                    visSpinner: false
                 });
             });
         } else {
