@@ -11,6 +11,16 @@ export enum ActionTypes {
     AVGI_SVAR_RESET = 'AVGI_SVAR_RESET'
 }
 
+export enum SporsmalId {
+    utdanning = 'utdanning',
+    utdanningBestatt = 'utdanningBestatt',
+    utdanningGodkjent = 'utdanningGodkjent',
+    helseHinder = 'helseHinder',
+    andreForhold = 'andreForhold',
+    sisteStilling = 'sisteStilling',
+    dinSituasjon = 'dinSituasjon',
+}
+
 export type State = {
     utdanning?: UtdanningSvar;
     utdanningBestatt?: UtdanningBestattSvar;
