@@ -6,15 +6,13 @@ import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { selectBrukNyRegistreringFeatureToggle,
-    selectGradualRolloutNyRegistreringFeatureToggle } from '../../ducks/feature-toggles';
+import { selectGradualRolloutNyRegistreringFeatureToggle } from '../../ducks/feature-toggles';
 import { sendBrukerTilSblArbeid } from '../../sider/oppsummering/oppsummering-utils';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from '../../sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
-    brukNyRegistrering: boolean;
     gradualRolloutNyRegistrering: boolean;
 }
 
@@ -39,17 +37,16 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
     }
 
     beregnBrukNyRegistrering(): boolean {
-        const {gradualRolloutNyRegistrering, brukNyRegistrering, registreringstatusData} = this.props;
+        const {gradualRolloutNyRegistrering, registreringstatusData} = this.props;
         if (registreringstatusData.erIkkeArbeidssokerUtenOppfolging) {
             return false;
         }
-        return brukNyRegistrering && gradualRolloutNyRegistrering;
+        return gradualRolloutNyRegistrering;
     }
 }
 
 const mapStateToProps = (state: AppState) => ({
     registreringstatusData: selectRegistreringstatus(state).data,
-    brukNyRegistrering: selectBrukNyRegistreringFeatureToggle(state),
     gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
 });
 
