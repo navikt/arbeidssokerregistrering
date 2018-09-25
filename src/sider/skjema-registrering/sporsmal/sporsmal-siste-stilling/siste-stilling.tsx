@@ -20,8 +20,8 @@ import {
     Stilling,
     velgSisteStilling
 } from '../../../../ducks/siste-stilling';
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../skjema-utils';
-import Alternativ from '../../alternativ';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../../komponenter/skjema/skjema-utils';
+import Alternativ from '../../../../komponenter/skjema/alternativ';
 import { getDefaultSvar, hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
 import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
 import { State as SvarState } from '../../../../ducks/svar';

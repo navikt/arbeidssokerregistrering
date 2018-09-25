@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Alternativ from '../alternativ';
+import Alternativ from '../../../komponenter/skjema/alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { HelseHinderSvar, Svar } from '../../../ducks/svar-utils';

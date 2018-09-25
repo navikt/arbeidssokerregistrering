@@ -1,7 +1,7 @@
 import { RegistreringData, TeksterForBesvarelse } from './registrerbruker';
 import { State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
-import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../sider/skjema/skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
 import { IngenSvar } from './svar-utils';
 

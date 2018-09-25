@@ -1,11 +1,11 @@
 import * as React from 'react';
-import LenkeNeste from '../../komponenter/knapper/lenke-neste';
-import ResponsivSide from '../../komponenter/side/responsiv-side';
-import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
+import LenkeNeste from '../knapper/lenke-neste';
+import ResponsivSide from '../side/responsiv-side';
+import LenkeAvbryt from '../knapper/lenke-avbryt';
 import { State as SvarState } from '../../ducks/svar';
 import { getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
-import Animasjon from './animasjon';
-import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
+import Animasjon from '../../sider/skjema-registrering/animasjon';
+import LenkeTilbake from '../knapper/lenke-tilbake';
 import { erIE } from '../../utils/ie-test';
 
 export interface SkjemaProps {

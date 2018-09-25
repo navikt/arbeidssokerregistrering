@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Alternativ from '../alternativ';
+import Alternativ from '../../../komponenter/skjema/alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { Svar, UtdanningBestattSvar } from '../../../ducks/svar-utils';
+import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
 
 interface SporsmalProps {
     sporsmalId: string;
@@ -13,7 +13,7 @@ interface SporsmalProps {
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function UtdanningBestattSporsmal(props: Props) {
+export default function UtdanningGodkjentSporsmal(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
@@ -22,19 +22,19 @@ export default function UtdanningBestattSporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId, kontekst, props.intl);
-
     return (
         <form className="spm-skjema">
             <fieldset className="skjema__fieldset">
-                <legend className="skjema__legend spm-hode">
-                    <Innholdstittel tag="h1" className="spm-tittel">
-                        {getTekst('tittel')}
-                    </Innholdstittel>
-                </legend>
-                <div className="spm-body">
-                    <Alternativ svar={UtdanningBestattSvar.JA} {...fellesProps}/>
-                    <Alternativ svar={UtdanningBestattSvar.NEI} {...fellesProps}/>
-                </div>
+            <legend className="skjema__legend spm-hode">
+                <Innholdstittel tag="h1" className="spm-tittel">
+                    {getTekst('tittel')}
+                </Innholdstittel>
+            </legend>
+            <div className="spm-body">
+                <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps}/>
+                <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps}/>
+                <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps}/>
+            </div>
             </fieldset>
         </form>
     );

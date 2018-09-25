@@ -1,6 +1,6 @@
 import { SBLARBEID_URL } from '../../ducks/api';
 import { DinSituasjonSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
-import { svarSuffiksTilTekstId } from '../skjema/skjema-utils';
+import { svarSuffiksTilTekstId } from '../../komponenter/skjema/skjema-utils';
 import { State as SvarState } from '../../ducks/svar';
 import { Data as RegStatus } from '../../ducks/registreringstatus';
 import oppsummeringConfig from './oppsummering-config';

@@ -5,7 +5,7 @@ import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Fullfor from './fullfor';
-import KnappFullfor from '../skjema/knapp-fullfor';
+import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import {
     FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch

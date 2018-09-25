@@ -9,7 +9,7 @@ import {
     mountWithStoreRouterAndIntl,
     store
 } from '../../test/test-utils';
-import LenkeNeste from '../../komponenter/knapper/lenke-neste';
+import LenkeNeste from '../knapper/lenke-neste';
 import {setInitialState} from "../../ducks/svar";
 import { SkjemaProps } from './skjema';
 import {DinSituasjonSvar, HelseHinderSvar, Svar, UtdanningSvar} from "../../ducks/svar-utils";

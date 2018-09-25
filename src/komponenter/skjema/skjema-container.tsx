@@ -7,17 +7,9 @@ import { connect, Dispatch } from 'react-redux';
 import { endreSvarAction } from '../../ducks/svar';
 import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
-import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
-import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
-import LastInnSisteStilling from './last-inn-siste-stilling';
-import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
-import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import AndreForhold from './sporsmal/sporsmal-andre-forhold';
-import HelseHinder from './sporsmal/sporsmal-helse-hinder';
-import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import { State as SvarState } from '../../ducks/svar';
 import { IngenSvar, Svar } from '../../ducks/svar-utils';
 
@@ -77,18 +69,8 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         const {
             endreSvar,
             svarState,
-            intl,
             history,
         } = this.props;
-
-        const fellesProps = {
-            endreSvar: (sporsmalId, svar) => {
-                endreSvar(sporsmalId, svar);
-                this.toggleAdvarsel(false);
-            },
-            intl: intl,
-            hentAvgittSvar: (sporsmalId: string) => svarState[sporsmalId],
-        };
 
         const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
@@ -112,17 +94,9 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         };
 
         return (
-            <LastInnSisteStilling>
-                <Skjema {...skjemaProps}>
-                    <SporsmalDinSituasjon sporsmalId="dinSituasjon" {...fellesProps}/>
-                    <SisteStilling sporsmalId="sisteStilling" {...fellesProps}/>
-                    <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                    <UtdanningGodkjentSporsmal sporsmalId="utdanningGodkjent" {...fellesProps}/>
-                    <UtdanningBestattSporsmal sporsmalId="utdanningBestatt" {...fellesProps}/>
-                    <HelseHinder sporsmalId="helseHinder" {...fellesProps}/>
-                    <AndreForhold sporsmalId="andreForhold" {...fellesProps}/>
-                </Skjema>
-            </LastInnSisteStilling>
+            <Skjema {...skjemaProps}>
+                {this.props.children}
+            </Skjema>
         );
     }
 

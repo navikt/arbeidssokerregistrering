@@ -24,7 +24,7 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Banner from './komponenter/banner/banner';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import StartRedirecter from './sider/start-redirecter';
-import Skjema from './sider/skjema/skjema-container';
+import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import Avbryt from './sider/avbryt/avbryt';
@@ -50,7 +50,7 @@ class App extends React.Component {
                                         <Switch>
                                             <Route path={START_PATH} component={StartRedirecter}/>
                                             <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
-                                            <Route path={`${SKJEMA_PATH}/:id`} component={Skjema}/>
+                                            <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaRegistrering}/>
                                             <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
                                             <Route path={SBLREG_PATH} component={SblRegistrering}/>
                                             <Route path={AVBRYT_PATH} component={Avbryt}/>

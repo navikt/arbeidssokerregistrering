@@ -5,7 +5,7 @@ import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import KnappFullfor from '../skjema/knapp-fullfor';
+import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
     utforRegistrering,
