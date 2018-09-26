@@ -2,6 +2,6 @@
   "root": "build/",
   "routes": {
     "/arbeidssokerregistrering/static/*": "../static/",
-    "/*": "index1.html"
+    "/*": "index.html"
   }
 }
