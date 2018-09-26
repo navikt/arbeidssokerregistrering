@@ -1,6 +1,6 @@
 {
   "name": "arbeidssokerregistrering",
-  "homepage": "/arbeidssokerregistrering",
+  "homepage": "/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -74,8 +74,7 @@
     "start:tekster": "npm run build:tekster",
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
-    "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "heroku-postbuild": "node scripts/preHeroku.js && npm run build && node scripts/postHeroku.js"
+    "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js"
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
