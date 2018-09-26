@@ -1,7 +1,4 @@
 {
   "root": "build/",
-  "routes": {
-    "/*/static/**": "/static/**"
-  },
   "error_page": "errors/error.html"
 }
