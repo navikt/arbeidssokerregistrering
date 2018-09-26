@@ -1,7 +1,7 @@
 import { SBLARBEID_URL } from '../../ducks/api';
-import { DinSituasjonSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
+import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
 import { svarSuffiksTilTekstId } from '../../komponenter/skjema/skjema-utils';
-import { State as SvarState } from '../../ducks/svar';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { Data as RegStatus } from '../../ducks/registreringstatus';
 import oppsummeringConfig from './oppsummering-config';
 
@@ -38,8 +38,8 @@ export function brukersSvarSamsvarerMedInfoFraAAReg(
 }
 
 function brukersSvarIndikererArbeidSisteManeder(svarState: SvarState): boolean | 'unknown' {
-    const sisteStillingSvar  = svarState.sisteStilling;
-    const dinSituasjonSvar = svarState.dinSituasjon;
+    const sisteStillingSvar = hentSvar(svarState, SporsmalId.sisteStilling) as SisteStillingSvar;
+    const dinSituasjonSvar = hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar;
 
     if (brukerSvarerAtDenHarJobbetSisteManeder(dinSituasjonSvar, sisteStillingSvar)) {
         return true;

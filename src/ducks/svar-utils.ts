@@ -1,3 +1,5 @@
+import { SporsmalId, State } from './svar';
+
 export type Svar = UtdanningSvar
     | UtdanningBestattSvar
     | UtdanningGodkjentSvar
@@ -65,3 +67,17 @@ export enum AndreForholdSvar {
     NEI = 'NEI',
     INGEN_SVAR = 'INGEN_SVAR',
 }
+
+export const hentSvar = (svarState: State, sporsmalId: SporsmalId): Svar | undefined => {
+    const sporsmalsindeks = svarState.findIndex(data => data.sporsmalId === sporsmalId);
+    return (sporsmalsindeks >= 0) ? svarState[sporsmalsindeks].svar : undefined;
+};
+
+export const erSporsmalBesvarte = (svarState: State, sporsmalIder: SporsmalId[]): boolean => {
+    for (let i = 0; i < sporsmalIder.length; i++) {
+        if (hentSvar(svarState, sporsmalIder[i]) === undefined) {
+            return false;
+        }
+    }
+    return true;
+};

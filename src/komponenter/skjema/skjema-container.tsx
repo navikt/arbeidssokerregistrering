@@ -4,21 +4,21 @@ import { SKJEMA_PATH, OPPSUMMERING_PATH, START_PATH } from '../../utils/konstant
 import { AppState } from '../../reducer';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { endreSvarAction } from '../../ducks/svar';
+import { endreSvarAction, SporsmalId } from '../../ducks/svar';
 import Skjema from './skjema';
 import { MatchProps } from '../../utils/utils';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { State as SvarState } from '../../ducks/svar';
-import { IngenSvar, Svar } from '../../ducks/svar-utils';
+import { erSporsmalBesvarte, hentSvar, IngenSvar, Svar } from '../../ducks/svar-utils';
 
 interface StateProps {
     svarState: SvarState;
 }
 
 interface DispatchProps {
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
+    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
 }
 
 interface SkjemaProps {
@@ -75,7 +75,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         const skjemaProps = {
             gjeldendeSporsmal: this.gjeldendeSporsmal,
             sporsmalErBesvart: (spmId) => this.kanGaaVidereFraSporsmal(spmId),
-            onNesteClick: (spmId: string) => {
+            onNesteClick: (spmId: SporsmalId) => {
                 const spmErBesvart = this.kanGaaVidereFraSporsmal(spmId);
                 if (!spmErBesvart) {
                     this.toggleAdvarsel(true);
@@ -148,12 +148,13 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         return (spmId !== forrigeSpmId);
     }
 
-    kanGaaVidereFraSporsmal(sporsmalId: string): boolean {
+    kanGaaVidereFraSporsmal(sporsmalId: SporsmalId): boolean {
         return this.sporsmalErBesvart(sporsmalId) || (sporsmalId === 'sisteStilling');
     }
 
-    sporsmalErBesvart(sporsmalId: string): boolean {
-        return (!!this.props.svarState[sporsmalId]) && (this.props.svarState[sporsmalId] !== IngenSvar.INGEN_SVAR);
+    sporsmalErBesvart(sporsmalId: SporsmalId): boolean {
+        const svarState = this.props.svarState;
+        return erSporsmalBesvarte(svarState, [sporsmalId]) && hentSvar(svarState, sporsmalId) !== IngenSvar.INGEN_SVAR;
     }
 }
 

@@ -23,8 +23,8 @@ import {
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../../komponenter/skjema/skjema-utils';
 import Alternativ from '../../../../komponenter/skjema/alternativ';
 import { getDefaultSvar, hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
-import { SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
-import { State as SvarState } from '../../../../ducks/svar';
+import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
+import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
 
 interface SkjemaProps {
     sporsmalId: string;
@@ -53,9 +53,10 @@ class SisteStilling extends React.Component<Props> {
             endreSvar,
             sporsmalId,
             sisteStilling,
+            svarState
         } = this.props;
 
-        if (skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon)) {
+        if (skalSkjuleSvaralternativer(hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar)) {
             this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
         } else {
             endreSvar(
@@ -71,7 +72,7 @@ class SisteStilling extends React.Component<Props> {
 
     angiSvarPaaDetteSporsmaletSomIkkeBesvart() {
         const {svarState, endreSvar, sporsmalId} = this.props;
-        if (svarState.sisteStilling !== SisteStillingSvar.INGEN_SVAR) {
+        if (hentSvar(svarState, SporsmalId.sisteStilling) !== SisteStillingSvar.INGEN_SVAR) {
             endreSvar(sporsmalId, SisteStillingSvar.INGEN_SVAR);
         }
     }
@@ -84,7 +85,8 @@ class SisteStilling extends React.Component<Props> {
             sporsmalId,
             hentAvgittSvar,
             velgStilling,
-            oversettelseAvStillingFraAAReg
+            oversettelseAvStillingFraAAReg,
+            svarState
         } = this.props;
 
         const alternativProps = {
@@ -93,7 +95,9 @@ class SisteStilling extends React.Component<Props> {
             hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
         };
 
-        const skjulSvaralternativer = skalSkjuleSvaralternativer(this.props.svarState.dinSituasjon);
+        const skjulSvaralternativer = skalSkjuleSvaralternativer(
+            hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar
+        );
         const alternativer = skjulSvaralternativer ? (null) : (
                     <>
                         <Alternativ

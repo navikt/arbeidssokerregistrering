@@ -1,10 +1,4 @@
-import {
-    AndreForholdSvar, DinSituasjonSvar,
-    HelseHinderSvar, SisteStillingSvar, Svar,
-    UtdanningBestattSvar,
-    UtdanningGodkjentSvar,
-    UtdanningSvar
-} from './svar-utils';
+import { Svar } from './svar-utils';
 
 export enum ActionTypes {
     AVGI_SVAR = 'AVGI_SVAR',
@@ -21,19 +15,11 @@ export enum SporsmalId {
     dinSituasjon = 'dinSituasjon',
 }
 
-export type State = {
-    utdanning?: UtdanningSvar;
-    utdanningBestatt?: UtdanningBestattSvar;
-    utdanningGodkjent?: UtdanningGodkjentSvar;
-    helseHinder?: HelseHinderSvar;
-    andreForhold?: AndreForholdSvar;
-    sisteStilling?: SisteStillingSvar;
-    dinSituasjon?: DinSituasjonSvar;
-};
+export type State = Data[];
 
 export interface Data {
     svar: Svar;
-    sporsmalId: string;
+    sporsmalId: SporsmalId;
 }
 
 interface Action {
@@ -41,14 +27,19 @@ interface Action {
     data: Data;
 }
 
-const initialState = {};
+const initialState = [];
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
         case ActionTypes.AVGI_SVAR: {
-            let stateWithAddedProperty = {...state};
-            stateWithAddedProperty[action.data.sporsmalId] = action.data.svar;
-            return stateWithAddedProperty;
+            const sporsmalsindeks = state.findIndex(data => data.sporsmalId === action.data.sporsmalId);
+            if (sporsmalsindeks === -1) {
+                return [...state, action.data];
+            } else {
+                const newState = [...state];
+                newState[sporsmalsindeks] = action.data;
+                return newState;
+            }
         }
         case ActionTypes.AVGI_SVAR_RESET: {
             return initialState;

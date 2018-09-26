@@ -1,10 +1,10 @@
 /*tslint:disable*/
 import * as React from 'react';
 import { expect } from 'chai';
-import {State as SvarState} from '../../ducks/svar';
-import {Data as RegStatus} from '../../ducks/registreringstatus';
-import {DinSituasjonSvar} from "../../ducks/svar-utils";
-import {getTekstIdForArbeidSisteManeder} from "./oppsummering-utils";
+import { State as SvarState } from '../../ducks/svar';
+import { Data as RegStatus } from '../../ducks/registreringstatus';
+import { DinSituasjonSvar } from '../../ducks/svar-utils';
+import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
 
 describe('oppsummering-utils', () => {
     it('Hvis bruker og AAReg er enige om at bruker har vært i jobb, så skal getTekstIdForArbeidSisteManeder returnere tom string', () => {

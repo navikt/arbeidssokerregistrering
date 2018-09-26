@@ -8,8 +8,8 @@ import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
 import SkjemaContainer from '../../komponenter/skjema/skjema-container';
-import { endreSvarAction, State as SvarState } from '../../ducks/svar';
-import { Svar } from '../../ducks/svar-utils';
+import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -35,7 +35,7 @@ class SkjemaRegistrering extends React.Component<Props> {
                 endreSvar(sporsmalId, svar);
             },
             intl: intl,
-            hentAvgittSvar: (sporsmalId: string) => svarState[sporsmalId],
+            hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
         return (
