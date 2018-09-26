@@ -32,7 +32,6 @@ describe('<SjekkRegistreringstatus />', () => {
         const store = create();
         dispatchRegistreringstatus({underOppfolging: false}, store);
         dispatchFeaturestatus({
-            'arbeidssokerregistrering.bruk-ny-registrering': false,
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': false
         },                    store);
 
@@ -44,7 +43,7 @@ describe('<SjekkRegistreringstatus />', () => {
 
     it('skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
         const store = create();
-        dispatchFeaturestatus({'arbeidssokerregistrering.bruk-ny-registrering': true,
+        dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
 
         dispatchRegistreringstatus({underOppfolging: false}, store);
@@ -78,8 +77,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('Skal rendre innhold dersom ny registrering er på og bruker ikke er under oppfølging', () => {
         const store = create();
 
-        dispatchFeaturestatus({'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.bruk-ny-registrering': true}, store);
+        dispatchFeaturestatus({'arbeidssokerregistrering.gradual-rollout-ny-registrering': true}, store);
 
         dispatchRegistreringstatus({underOppfolging: false}, store);
 
