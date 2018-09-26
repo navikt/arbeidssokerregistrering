@@ -34,8 +34,8 @@ class SkjemaRegistrering extends React.Component<Props> {
 
         return (
             <SkjemaContainer {...{location, match, history}}>
-                <SporsmalTest1 sporsmalId="sporsmalTest1" {...fellesProps}/>
-                <SporsmalTest2 sporsmalId="sporsmalTest2" {...fellesProps}/>
+                <SporsmalTest1 sporsmalId={SporsmalId.sporsmalTest1} {...fellesProps}/>
+                <SporsmalTest2 sporsmalId={SporsmalId.sporsmalTest2} {...fellesProps}/>
             </SkjemaContainer>
         );
     }

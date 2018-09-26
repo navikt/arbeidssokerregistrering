@@ -18,7 +18,7 @@ import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
 
 interface DispatchProps {
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
+    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
 }
 
 interface StateProps {
@@ -30,7 +30,7 @@ type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProp
 class SkjemaRegistrering extends React.Component<Props> {
     render() {
         const {endreSvar, intl, svarState, location, match, history} = this.props;
-        const fellesProps = {
+        const sporsmalProps = {
             endreSvar: (sporsmalId, svar) => {
                 endreSvar(sporsmalId, svar);
             },
@@ -41,13 +41,13 @@ class SkjemaRegistrering extends React.Component<Props> {
         return (
             <LastInnSisteStilling>
                 <SkjemaContainer {...{location, match, history}}>
-                    <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...fellesProps}/>
-                    <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...fellesProps}/>
-                    <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...fellesProps}/>
-                    <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} {...fellesProps}/>
-                    <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...fellesProps}/>
-                    <HelseHinder sporsmalId={SporsmalId.helseHinder} {...fellesProps}/>
-                    <AndreForhold sporsmalId={SporsmalId.andreForhold} {...fellesProps}/>
+                    <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...sporsmalProps}/>
+                    <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...sporsmalProps}/>
+                    <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...sporsmalProps}/>
+                    <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} {...sporsmalProps}/>
+                    <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...sporsmalProps}/>
+                    <HelseHinder sporsmalId={SporsmalId.helseHinder} {...sporsmalProps}/>
+                    <AndreForhold sporsmalId={SporsmalId.andreForhold} {...sporsmalProps}/>
                 </SkjemaContainer>
             </LastInnSisteStilling>
         );

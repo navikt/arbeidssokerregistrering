@@ -51,9 +51,9 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
 
     }
 
-    toggleAdvarsel(toggle: boolean) {
+    visAdvarsel(visAdvarsel: boolean) {
         this.setState({
-            visAdvarsel: toggle
+            visAdvarsel: visAdvarsel
         });
     }
 
@@ -78,11 +78,11 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             onNesteClick: (spmId: SporsmalId) => {
                 const spmErBesvart = this.kanGaaVidereFraSporsmal(spmId);
                 if (!spmErBesvart) {
-                    this.toggleAdvarsel(true);
+                    this.visAdvarsel(true);
                 }
             },
             gaaTilbake: () => {
-                this.toggleAdvarsel(false);
+                this.visAdvarsel(false);
                 history.goBack();
             },
             gaaTilSporsmal: (sporsmal: number) => this.gaaTilSporsmal(sporsmal),
@@ -91,6 +91,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
             svar: svarState,
             settStateForUbesvartSporsmal: (sporsmalId) => endreSvar(sporsmalId, IngenSvar.INGEN_SVAR),
             hrefTilSporsmal: (sporsmal) => `${SKJEMA_PATH}/${sporsmal}`,
+            visAdvarsel: (visAdvarsel: boolean) => this.visAdvarsel(visAdvarsel),
         };
 
         return (
@@ -140,6 +141,10 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         if (this.gjeldendeSporsmalErEndret(prevProps) && this.divRef) {
             this.divRef.focus();
         }
+        const svarOgSporsmal = this.props.svarState[this.gjeldendeSporsmal];
+        if (svarOgSporsmal && this.kanGaaVidereFraSporsmal(svarOgSporsmal.sporsmalId)) {
+            this.visAdvarsel(false);
+        }
     }
 
     gjeldendeSporsmalErEndret(otherProps: Props): boolean {
@@ -149,7 +154,7 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
     }
 
     kanGaaVidereFraSporsmal(sporsmalId: SporsmalId): boolean {
-        return this.sporsmalErBesvart(sporsmalId) || (sporsmalId === 'sisteStilling');
+        return this.sporsmalErBesvart(sporsmalId) || (sporsmalId === SporsmalId.sisteStilling);
     }
 
     sporsmalErBesvart(sporsmalId: SporsmalId): boolean {

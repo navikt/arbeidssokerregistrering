@@ -13,6 +13,10 @@ export enum SporsmalId {
     andreForhold = 'andreForhold',
     sisteStilling = 'sisteStilling',
     dinSituasjon = 'dinSituasjon',
+
+    // TODO FO-1547 FJERN DETTE!!!
+    sporsmalTest1 = 'sporsmalTest1',
+    sporsmalTest2 = 'sporsmalTest2',
 }
 
 export type State = Data[];

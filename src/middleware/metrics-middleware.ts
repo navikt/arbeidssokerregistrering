@@ -5,6 +5,7 @@ import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbru
 import { brukersSvarSamsvarerMedInfoFraAAReg } from '../sider/oppsummering/oppsummering-utils';
 import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
+import { mapTilSvarState } from '../ducks/registrerbruker-utils';
 
 export interface Frontendlogger {
     event: (name: string, fields: any, tags: any) => void;
@@ -39,7 +40,8 @@ function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogg
         const { besvarelse } = action.data;
         frontendlogger.event('registrering.besvarelse.helseHinder', {'helseHinder': besvarelse.helseHinder}, {});
         frontendlogger.event('registrering.besvarelse.utdanning', {'utdanning': besvarelse.utdanning}, {});
-        frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
+        frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg',
+            {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(mapTilSvarState(besvarelse), jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
 
         if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {
             frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {});

@@ -7,7 +7,7 @@ import {
     HelseHinderSvar,
     SisteStillingSvar, UtdanningBestattSvar,
     UtdanningGodkjentSvar, UtdanningSvar
-} from "./svar-utils";
+} from './svar-utils';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',

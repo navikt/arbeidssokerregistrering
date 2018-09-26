@@ -1,9 +1,9 @@
-import {RegistreringBesvarelse, RegistreringData, TeksterForBesvarelse} from './registrerbruker';
-import {SporsmalId, State as SvarState} from './svar';
+import { RegistreringBesvarelse, RegistreringData, TeksterForBesvarelse } from './registrerbruker';
+import { SporsmalId, State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
-import {hentSvar, IngenSvar} from './svar-utils';
+import { hentSvar, IngenSvar } from './svar-utils';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
@@ -26,6 +26,13 @@ export function mapTilBesvarelse(svarState: SvarState): RegistreringBesvarelse {
         besvarelse[sporsmalOgSvar.sporsmalId] = sporsmalOgSvar.svar;
     }
     return besvarelse as RegistreringBesvarelse;
+}
+
+export function mapTilSvarState(besvarelse: RegistreringBesvarelse): SvarState {
+    return Object.keys(besvarelse).map((sporsmalId) => ({
+        sporsmalId: sporsmalId,
+        svar: besvarelse[sporsmalId]
+    })) as SvarState;
 }
 
 export function genererTeksterForBesvarelse(

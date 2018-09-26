@@ -6,7 +6,7 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../ducks/svar-utils';
-import {SporsmalId} from "../ducks/svar";
+import { SporsmalId } from '../ducks/svar';
 
 const svarMock = [
     {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
