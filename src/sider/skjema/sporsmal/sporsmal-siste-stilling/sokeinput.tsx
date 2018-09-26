@@ -26,6 +26,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     private waitingFor;
     private autocompleteSearchDebounced;
+    private _autocompleteCache = {};
     constructor(props: SokeInputComponentProps) {
         super(props);
 
@@ -56,20 +57,32 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     autocompleteSearch (sokeStreng: string) {
         this.waitingFor = sokeStreng;
-        hentStillingMedStyrk08(encodeURI(sokeStreng))
-            .then((response: { typeaheadYrkeList: {}[] }) => {
-
-                const {typeaheadYrkeList} = response;
-
-                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
-
-                if (sokeStreng === this.waitingFor) {
-                    this.setState({
-                        stillingsAlternativer,
-                        visSpinner: false
-                    });
-                }
+        const cached = this._autocompleteCache[sokeStreng];
+        if (cached) {
+            Promise.resolve(cached).then(
+                (stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[]) => {
+                this.setState({
+                    stillingsAlternativer,
+                    visSpinner: false
+                });
             });
+        } else {
+            hentStillingMedStyrk08(encodeURI(sokeStreng))
+                .then((response: { typeaheadYrkeList: {}[] }) => {
+
+                    const {typeaheadYrkeList} = response;
+
+                    const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
+
+                    if (sokeStreng === this.waitingFor) {
+                        this._autocompleteCache[sokeStreng] = stillingsAlternativer;
+                        this.setState({
+                            stillingsAlternativer,
+                            visSpinner: false
+                        });
+                    }
+                });
+        }
     }
 
     hentStillingsAlternativer(v) { // tslint:disable-line
