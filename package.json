@@ -75,7 +75,7 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "heroku-postbuild": "node _scripts/preHeroku.js && npm run build && node _scripts/postHeroku.js",
+    "heroku-postbuild": "node scripts/preHeroku.js && npm run build && node scripts/postHeroku.js",
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
