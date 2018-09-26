@@ -59,7 +59,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         this.waitingFor = sokeStreng;
         const cached = this._autocompleteCache[sokeStreng];
         if (cached) {
-            Promise.resolve(cached).then((stillingsAlternativer: any) => { // tslint:disable-line
+            Promise.resolve(cached).then(
+                (stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[]) => {
                 this.setState({
                     stillingsAlternativer,
                     visSpinner: false
