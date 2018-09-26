@@ -1,6 +1,6 @@
 {
   "root": "build/",
   "routes": {
-    "/**/main.*?h=*": "index.html"
+    "/*/static/**": "/static/**"
   }
 }
