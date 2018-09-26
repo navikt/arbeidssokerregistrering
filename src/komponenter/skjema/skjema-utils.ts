@@ -1,10 +1,10 @@
-import { State as SvarState } from '../../ducks/svar';
-import { DinSituasjonSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
+import { DinSituasjonSvar, hentSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
 
 export type SkjemaConfig = Map<Svar, string[]>;
 
-export function getTekstIdForSvar(sporsmalId: string, svar: Svar) {
+export function getTekstIdForSvar(sporsmalId: SporsmalId, svar: Svar) {
     return `${sporsmalId.toLowerCase()}-svar-${svarSuffiksTilTekstId(svar)}`;
 }
 
@@ -30,18 +30,22 @@ const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[]>([
     [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
 ]);
 
-export function getSporsmalSomIkkeSkalBesvares(svar: Svar, config: SkjemaConfig): string[] {
-    return config.has(svar) ? config.get(svar)! : [];
+function getSporsmalSomIkkeSkalBesvares(svar: Svar | undefined, config: SkjemaConfig): string[] {
+    if (!svar || !config.has(svar)) {
+        return [];
+    } else {
+        return config.get(svar)!;
+    }
 }
 
 export function getAlleSporsmalSomIkkeSkalBesvares(
-    sporsmalIder: string[],
+    sporsmalIder: SporsmalId[],
     svarState: SvarState,
     config?: SkjemaConfig
 ): string[] {
     let sporsmal: string[] = [];
     const skjemaConfig = config ? config : defaultConfigForSporsmalsflyt;
     sporsmalIder.forEach(sporsmalId =>
-        sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(svarState[sporsmalId], skjemaConfig)]);
+        sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(hentSvar(svarState, sporsmalId), skjemaConfig)]);
     return sporsmal;
 }

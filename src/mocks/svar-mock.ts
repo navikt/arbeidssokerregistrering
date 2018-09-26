@@ -6,15 +6,16 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../ducks/svar-utils';
+import {SporsmalId} from "../ducks/svar";
 
-const svarMock = {
-    'dinSituasjon': DinSituasjonSvar.ER_PERMITTERT,
-    'sisteStilling': SisteStillingSvar.HAR_HATT_JOBB,
-    'utdanning': UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
-    'utdanningGodkjent': UtdanningGodkjentSvar.NEI,
-    'utdanningBestatt': UtdanningBestattSvar.JA,
-    'helseHinder': HelseHinderSvar.NEI,
-    'andreForhold': AndreForholdSvar.NEI,
-};
+const svarMock = [
+    {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
+    {sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB},
+    {sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
+    {sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI},
+    {sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.JA},
+    {sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.NEI},
+    {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
+];
 
 export default svarMock;

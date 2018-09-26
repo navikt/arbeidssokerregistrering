@@ -11,11 +11,10 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from "../ducks/svar-utils";
-import {mapAvgitteSvarForBackend} from "../ducks/registrerbruker-utils";
+import {mapAvgitteSvarForBackend, mapTilBesvarelse} from "../ducks/registrerbruker-utils";
 import { InjectedIntl } from 'react-intl';
-import {TeksterForBesvarelse} from "./registrerbruker";
-
-const dummyIntl = { messages:{} } as InjectedIntl;
+import {RegistreringBesvarelse, TeksterForBesvarelse} from "./registrerbruker";
+import {SporsmalId} from "./svar";
 
 describe('utils test', () => {
     it('test mapAvgitteSvarForBackend', () => {
@@ -26,15 +25,15 @@ describe('utils test', () => {
             konseptId: 62352672,
         };
 
-        const dummySvar: SvarState = {
-            helseHinder: HelseHinderSvar.JA,
-            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
-            utdanningBestatt: UtdanningBestattSvar.INGEN_SVAR,
-            utdanningGodkjent: UtdanningGodkjentSvar.NEI,
-            andreForhold: AndreForholdSvar.NEI,
-            sisteStilling: SisteStillingSvar.HAR_HATT_JOBB,
-            dinSituasjon: DinSituasjonSvar.ER_PERMITTERT,
-        };
+        const dummySvar: SvarState = [
+            {sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.JA},
+            {sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
+            {sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.INGEN_SVAR},
+            {sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI},
+            {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
+            {sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB},
+            {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
+        ];
         const messages = {
             'helsehinder-svar-ja': 'JA :)',
             'utdanning-svar-hoyere-utdanning-5-eller-mer': 'Mye utdanning',
@@ -91,10 +90,34 @@ describe('utils test', () => {
             sisteStilling: stilling,
             enigIOppsummering: true,
             oppsummering: '',
-            besvarelse: dummySvar,
+            besvarelse: mapTilBesvarelse(dummySvar),
             teksterForBesvarelse: expectedTekster,
         };
         const mappet = mapAvgitteSvarForBackend(dummySvar, stilling, dummyIntl);
+        console.log('mappet', mappet);
+        console.log('onsket', expectData);
         expect(mappet).to.deep.equal(expectData);
+    });
+
+    it('test mapTilBesvarelse', () => {
+        const svarState = [
+            {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
+            {sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB},
+            {sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
+            {sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI},
+            {sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.JA},
+            {sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.NEI},
+            {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
+        ];
+        const onsketBesvarelse: RegistreringBesvarelse = {
+            dinSituasjon: DinSituasjonSvar.ER_PERMITTERT,
+            sisteStilling: SisteStillingSvar.HAR_HATT_JOBB,
+            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
+            utdanningGodkjent: UtdanningGodkjentSvar.NEI,
+            utdanningBestatt: UtdanningBestattSvar.JA,
+            helseHinder: HelseHinderSvar.NEI,
+            andreForhold: AndreForholdSvar.NEI,
+        };
+        expect(mapTilBesvarelse(svarState)).to.deep.equal(onsketBesvarelse);
     });
 });

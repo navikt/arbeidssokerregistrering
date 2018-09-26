@@ -11,7 +11,10 @@ export function sendBrukerTilSblArbeid() {
     document.location.href = SBLARBEID_URL;
 }
 
-export function getTekstIdForOppsummering(sporsmalId: string, svar: Svar) {
+export function getTekstIdForOppsummering(sporsmalId: SporsmalId, svar: Svar | undefined) {
+    if (!svar) {
+        return '';
+    }
     const sporsmalIderDerOppsummeringenSkalTasFraSporsmalstekstene = [
         'utdanning',
     ];

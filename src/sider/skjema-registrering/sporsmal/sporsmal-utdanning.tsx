@@ -4,12 +4,7 @@ import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, UtdanningSvar } from '../../../ducks/svar-utils';
-
-interface SporsmalProps {
-    sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
-}
+import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 type Props = SporsmalProps & InjectedIntlProps;
 

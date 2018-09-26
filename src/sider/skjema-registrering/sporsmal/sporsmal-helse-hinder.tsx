@@ -5,12 +5,7 @@ import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../..
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { HelseHinderSvar, Svar } from '../../../ducks/svar-utils';
-
-interface SporsmalProps {
-    sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
-}
+import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 type Props = SporsmalProps & InjectedIntlProps;
 

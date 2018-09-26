@@ -41,13 +41,13 @@ class SkjemaRegistrering extends React.Component<Props> {
         return (
             <LastInnSisteStilling>
                 <SkjemaContainer {...{location, match, history}}>
-                    <SporsmalDinSituasjon sporsmalId="dinSituasjon" {...fellesProps}/>
-                    <SisteStilling sporsmalId="sisteStilling" {...fellesProps}/>
-                    <Utdanningsporsmal sporsmalId="utdanning" {...fellesProps}/>
-                    <UtdanningGodkjentSporsmal sporsmalId="utdanningGodkjent" {...fellesProps}/>
-                    <UtdanningBestattSporsmal sporsmalId="utdanningBestatt" {...fellesProps}/>
-                    <HelseHinder sporsmalId="helseHinder" {...fellesProps}/>
-                    <AndreForhold sporsmalId="andreForhold" {...fellesProps}/>
+                    <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...fellesProps}/>
+                    <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...fellesProps}/>
+                    <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...fellesProps}/>
+                    <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} {...fellesProps}/>
+                    <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...fellesProps}/>
+                    <HelseHinder sporsmalId={SporsmalId.helseHinder} {...fellesProps}/>
+                    <AndreForhold sporsmalId={SporsmalId.andreForhold} {...fellesProps}/>
                 </SkjemaContainer>
             </LastInnSisteStilling>
         );

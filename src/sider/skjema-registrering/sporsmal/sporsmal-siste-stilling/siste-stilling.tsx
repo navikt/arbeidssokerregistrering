@@ -25,12 +25,7 @@ import Alternativ from '../../../../komponenter/skjema/alternativ';
 import { getDefaultSvar, hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
 import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
 import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
-
-interface SkjemaProps {
-    sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
-}
+import { SporsmalProps } from '../../../../komponenter/skjema/sporsmal-utils';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -45,7 +40,7 @@ interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
 }
 
-type Props = SkjemaProps & StateProps & DispatchProps & InjectedIntlProps;
+type Props = SporsmalProps & StateProps & DispatchProps & InjectedIntlProps;
 
 class SisteStilling extends React.Component<Props> {
     componentWillMount() {

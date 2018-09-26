@@ -2,7 +2,7 @@ import * as React from 'react';
 import LenkeNeste from '../knapper/lenke-neste';
 import ResponsivSide from '../side/responsiv-side';
 import LenkeAvbryt from '../knapper/lenke-avbryt';
-import { State as SvarState } from '../../ducks/svar';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { getAlleSporsmalSomIkkeSkalBesvares, SkjemaConfig } from './skjema-utils';
 import Animasjon from '../../sider/skjema-registrering/animasjon';
 import LenkeTilbake from '../knapper/lenke-tilbake';
@@ -31,7 +31,7 @@ type Props = SkjemaProps;
 
 export default class Skjema extends React.Component<Props, State> {
     private antallSporsmal: number;
-    private sporsmalIder: string[];
+    private sporsmalIder: SporsmalId[];
 
     constructor(props: Props) {
         super(props);
@@ -154,12 +154,12 @@ export default class Skjema extends React.Component<Props, State> {
         return this.sporsmalIder[sporsmal];
     }
 
-    getSporsmal(sporsmalId: string) {
+    getSporsmal(sporsmalId: SporsmalId) {
         return this.sporsmalIder.indexOf(sporsmalId);
     }
 
-    getSporsmalIder(): string[] {
-        let sporsmalIder: string[] = [];
+    getSporsmalIder(): SporsmalId[] {
+        let sporsmalIder: SporsmalId[] = [];
         for (let i = 0; i < this.antallSporsmal; i += 1) {
             sporsmalIder.push(this.props.children[i].props.sporsmalId);
             // TODO: Se om dette kan gjøres bedre.

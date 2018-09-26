@@ -13,7 +13,6 @@ import LenkeNeste from '../knapper/lenke-neste';
 import {setInitialState} from "../../ducks/svar";
 import { SkjemaProps } from './skjema';
 import {DinSituasjonSvar, HelseHinderSvar, Svar, UtdanningSvar} from "../../ducks/svar-utils";
-import {SkjemaProps} from './skjema';
 import {SkjemaConfig} from "./skjema-utils";
 
 enzyme.configure({adapter: new Adapter()});
@@ -53,11 +52,11 @@ describe('<Skjema />', () => {
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
         const settStateForUbesvartSporsmal = sinon.spy();
 
-        const svar = {
-            helse: HelseHinderSvar.NEI,
-            utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
-            situasjon: DinSituasjonSvar.ER_PERMITTERT,
-        };
+        const svar = [
+            {sporsmalId: 'helse', svar: HelseHinderSvar.NEI},
+            {sporsmalId: 'utdanning', svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
+            {sporsmalId: 'situasjon', svar: DinSituasjonSvar.ER_PERMITTERT},
+        ];
 
         const config: SkjemaConfig = new Map<Svar, string[]>([
             [HelseHinderSvar.NEI, ['oppsummering', 'test']],
@@ -125,12 +124,12 @@ function DummySporsmal({sporsmalId: string}) {
 const dummyPropsTilSkjema: SkjemaProps = {
     gjeldendeSporsmal: 1,
     sporsmalErBesvart: (sporsmalId: string) => true,
-    svar: {
-        helse: 1,
-        utdanning: 2,
-        test: 3,
-        test2: 4,
-    },
+    svar: [
+        {sporsmalId: 'helse', svar: 1},
+        {sporsmalId: 'utdanning', svar: 2},
+        {sporsmalId: 'test', svar: 3},
+        {sporsmalId: 'test2', svar: 4},
+    ],
     gaaTilbake: () => {},
     hrefTilSporsmal: (hei: number) => 'test',
     hrefTilFullfor: '/fullfor',

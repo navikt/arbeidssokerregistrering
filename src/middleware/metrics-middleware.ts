@@ -1,4 +1,4 @@
-// tslint:disable align no-any
+// tslint:disable align no-any max-line-length
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
 
@@ -42,7 +42,7 @@ function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogg
         frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg', {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(besvarelse, jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
 
         if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {
-            frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {}); // tslint:disable-line:max-line-length
+            frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {});
         }
     }
 }
