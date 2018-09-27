@@ -24,7 +24,9 @@ interface SokeInputComponentState {
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
 
-    private autocompleteSearchThrottled;
+    private waitingFor;
+    private autocompleteSearchDebounced;
+    private _autocompleteCache = {};
     constructor(props: SokeInputComponentProps) {
         super(props);
 
@@ -33,7 +35,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
         this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
 
-        this.autocompleteSearchThrottled = _.throttle(this.autocompleteSearch, 500);
+        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300);
+
     }
 
     componentWillMount() {
@@ -53,18 +56,33 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     }
 
     autocompleteSearch (sokeStreng: string) {
-        hentStillingMedStyrk08(encodeURI(sokeStreng))
-            .then((response: { typeaheadYrkeList: {}[] }) => {
-
-                const {typeaheadYrkeList} = response;
-
-                const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
-
+        this.waitingFor = sokeStreng;
+        const cached = this._autocompleteCache[sokeStreng];
+        if (cached) {
+            Promise.resolve(cached).then(
+                (stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[]) => {
                 this.setState({
                     stillingsAlternativer,
                     visSpinner: false
                 });
             });
+        } else {
+            hentStillingMedStyrk08(encodeURI(sokeStreng))
+                .then((response: { typeaheadYrkeList: {}[] }) => {
+
+                    const {typeaheadYrkeList} = response;
+
+                    const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
+
+                    if (sokeStreng === this.waitingFor) {
+                        this._autocompleteCache[sokeStreng] = stillingsAlternativer;
+                        this.setState({
+                            stillingsAlternativer,
+                            visSpinner: false
+                        });
+                    }
+                });
+        }
     }
 
     hentStillingsAlternativer(v) { // tslint:disable-line
@@ -75,11 +93,19 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
                 stilling: tomStilling,
                 labelKey: sokeStreng,
                 id: 0
-            },
+            }
+        });
+
+        if (sokeStreng.length < 2) {
+            return;
+        }
+
+        this.setState({
             visSpinner: true
         });
 
-        this.autocompleteSearchThrottled(sokeStreng);
+        this.autocompleteSearchDebounced(sokeStreng);
+
     }
 
     oppdaterStillingState(valgteStillingIndex) { // tslint:disable-line

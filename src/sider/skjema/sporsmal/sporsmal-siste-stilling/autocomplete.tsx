@@ -139,7 +139,7 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
         const ariaLive = document.querySelector('.autocomplete-form__screen-reader-text[aria-live]');
         if (ariaLive) {
             ariaLive.textContent = numberResults === 0
-                ? 'Ingen resultat' : numberResults + ' resultater er tilgjengelige.';
+                ? '' : numberResults + ' resultater er tilgjengelige.';
         }
     }
 
