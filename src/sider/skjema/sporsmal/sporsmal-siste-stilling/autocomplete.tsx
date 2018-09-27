@@ -67,6 +67,7 @@ class ResultatListe extends React.Component<ResultatListeProps> {
                 role="listbox"
                 onClick={this.onOptionClick}
                 onMouseOver={this.props.clearSelected}
+                aria-expanded={this.props.resultatListe.length !== 0}
             >
                 {this.props.resultatListe.map((e, i) => {
                     return (
@@ -301,7 +302,6 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
                     autoComplete="off"
                     label={intl.messages['siste-arbeidsforhold.undertittel']}
                     id="stilling"
-                    aria-expanded={resultatListe.length !== 0}
                     aria-autocomplete="both"
                     aria-describedby="initInstr"
                     value={value}
