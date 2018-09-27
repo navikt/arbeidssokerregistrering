@@ -62,7 +62,7 @@
   "scripts": {
     "delete-static": "node scripts/deletestatic.js",
     "start:ts": "react-scripts start",
-    "build:ts": "react-scripts build",
+    "build:ts": "cross-env REACT_APP_MOCK=true react-scripts build",
     "deploy": "npm run build && gh-pages -d build",
     "test": "npm run build:tekster && react-scripts test --env=jsdom",
     "lint": "tslint ./src/**/*.ts*",
