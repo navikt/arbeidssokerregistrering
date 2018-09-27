@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Stilling} from '../../../../ducks/siste-stilling';
-import {InjectedIntlProps, injectIntl} from 'react-intl';
-import {Input} from 'nav-frontend-skjema';
+import { Stilling } from '../../../../ducks/siste-stilling';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Input } from 'nav-frontend-skjema';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 
 // Hjelpe funksjon
