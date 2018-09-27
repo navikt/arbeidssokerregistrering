@@ -62,7 +62,7 @@
   "scripts": {
     "delete-static": "node scripts/deletestatic.js",
     "start:ts": "react-scripts start",
-    "build:ts": "cross-env REACT_APP_MOCK=true react-scripts build",
+    "build:ts": "react-scripts build",
     "deploy": "npm run build && gh-pages -d build",
     "test": "npm run build:tekster && react-scripts test --env=jsdom",
     "lint": "tslint ./src/**/*.ts*",
@@ -74,8 +74,7 @@
     "start:tekster": "npm run build:tekster",
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
-    "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build"
+    "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js"
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
