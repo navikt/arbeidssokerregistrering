@@ -30,9 +30,9 @@ class Startside extends React.Component<StartsideProps> {
             <section className="startside">
                 <div className="startside__banner">
                     <div className="startside__intro">
-                        <p className="typo-undertittel">
+                        <h1 className="typo-undertittel">
                             <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
-                        </p>
+                        </h1>
                         <p className="typo-normal">
                             <FormattedMessage id="beskrivelse-start-dialog"/>
                         </p>
