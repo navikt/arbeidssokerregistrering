@@ -1,6 +1,6 @@
 {
   "root": "build/",
   "routes": {
-    "*/static/**": "/static/**"
+    "/*/static/**": "/static/**"
   }
 }
