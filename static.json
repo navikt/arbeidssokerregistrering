@@ -2,8 +2,5 @@
   "root": "build/",
   "routes": {
     "/*": "index.html"
-  },
-  "redirects": {
-    "/*/static/**": "/static/**"
   }
 }
