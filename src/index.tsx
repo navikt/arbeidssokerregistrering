@@ -10,6 +10,7 @@ if (process.env.REACT_APP_MOCK === 'true') {
     console.log('=========================='); /*tslint:disable-line:no-console*/
     console.log('======== MED MOCK ========'); /*tslint:disable-line:no-console*/
     console.log('=========================='); /*tslint:disable-line:no-console*/
+    process.env.PUBLIC_URL = '/';
     require('./mocks/mocks');
 }
 
