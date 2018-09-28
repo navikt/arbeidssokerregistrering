@@ -75,7 +75,7 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "preinstall": "git submodule init && git submodule update --remote"
+    "heroku-prebuild": "PUBLIC_URL=/ npm run build:tekster && npm run build:ts"
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
