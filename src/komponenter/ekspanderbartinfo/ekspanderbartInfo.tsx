@@ -3,6 +3,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { getIntlMessage } from '../../utils/utils';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface Props {
     tittelId: string;
@@ -38,6 +39,9 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
 
     render() {
         const {className} = this.props;
+        if (this.state.apen) {
+            frontendLogger(this.props.tittelId + '.ekspandert');
+        }
         return (
             <div className={className}>
                 <button
