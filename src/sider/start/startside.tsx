@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
@@ -30,9 +30,9 @@ class Startside extends React.Component<StartsideProps> {
             <section className="startside">
                 <div className="startside__banner">
                     <div className="startside__intro">
-                        <h1 className="typo-undertittel">
+                        <Undertittel tag="h1">
                             <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
-                        </h1>
+                        </Undertittel>
                         <p className="typo-normal">
                             <FormattedMessage id="beskrivelse-start-dialog"/>
                         </p>
