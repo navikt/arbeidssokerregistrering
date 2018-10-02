@@ -1,18 +1,18 @@
-const driver = require('./driver');
+const chromedriver = require('chromedriver');
 const mock = require('./mock');
 module.exports = {
 
     before: function(done) {
         mock.startMock();
-        driver.start();
+        chromedriver.start();
         setTimeout(function() {
             done();
-        }, 5000);
+        }, 10000);
     },
 
     after: function(done) {
         mock.stopMock();
-        driver.stop();
+        chromedriver.stop();
         setTimeout(function() {
             done();
         }, 200);

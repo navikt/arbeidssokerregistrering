@@ -74,8 +74,7 @@
     "start:tekster": "npm run build:tekster",
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
-    "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "preinstall": "git submodule init && git submodule update --remote"
+    "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js"
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
@@ -94,16 +93,17 @@
     "chai": "4.1.2",
     "chai-as-promised": "7.1.1",
     "chai-spies": "^1.0.0",
+    "chromedriver": "^2.42.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-react-intl": "2.0.0",
     "fetch-mock": "5.13.1",
     "less": "3.0.2",
+    "nightwatch": "^0.9.21",
     "npm-run-all": "4.1.2",
     "path-to-regexp": "2.2.1",
     "sinon": "5.0.3",
-    "typescript": "^2.8.3",
-    "nightwatch": "^0.9.21",
-    "tree-kill": "^1.2.0"
+    "tree-kill": "^1.2.0",
+    "typescript": "^2.8.3"
   }
 }
