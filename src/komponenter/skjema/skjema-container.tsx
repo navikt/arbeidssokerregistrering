@@ -141,8 +141,12 @@ class SkjemaContainer extends React.Component<Props, EgenStateProps> {
         if (this.gjeldendeSporsmalErEndret(prevProps) && this.divRef) {
             this.divRef.focus();
         }
+        this.skjulAdvarselHvisManKanGaaVidere();
+    }
+
+    skjulAdvarselHvisManKanGaaVidere() {
         const svarOgSporsmal = this.props.svarState[this.gjeldendeSporsmal];
-        if (svarOgSporsmal && this.kanGaaVidereFraSporsmal(svarOgSporsmal.sporsmalId)) {
+        if (svarOgSporsmal && this.kanGaaVidereFraSporsmal(svarOgSporsmal.sporsmalId) && this.state.visAdvarsel) {
             this.visAdvarsel(false);
         }
     }
