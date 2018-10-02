@@ -52,6 +52,7 @@ class Startside extends React.Component<StartsideProps> {
                         <KnappBase
                             type="hoved"
                             onClick={() => history.push(`${SKJEMA_PATH}/0`)}
+                            data-testid="start-registrering"
                         >
                             <FormattedMessage id="knapp-start"/>
                         </KnappBase>

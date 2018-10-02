@@ -23,6 +23,7 @@ function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & Injec
                     }
                     onClick(e);
                 }}
+                data-testid="neste-spm"
             >
                 <FormattedMessage id="lenke-neste"/>
             </Link>

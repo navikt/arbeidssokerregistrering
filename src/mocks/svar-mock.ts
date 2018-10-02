@@ -8,7 +8,7 @@ import {
 } from '../ducks/svar-utils';
 
 const svarMock = {
-    'dinSituasjon': DinSituasjonSvar.ER_PERMITTERT,
+    'dinSituasjon': DinSituasjonSvar.AKKURAT_FULLFORT_UTDANNING,
     'sisteStilling': SisteStillingSvar.HAR_HATT_JOBB,
     'utdanning': UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
     'utdanningGodkjent': UtdanningGodkjentSvar.NEI,
