@@ -3,7 +3,7 @@ import Alternativ from '../../../komponenter/skjema/alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
+import { Svar, TestSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 type Props = SporsmalProps & InjectedIntlProps;
@@ -26,9 +26,10 @@ export default function SporsmalTest2(props: Props) {
                 </Innholdstittel>
             </legend>
             <div className="spm-body blokk-xxxl">
-                <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps}/>
-                <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps}/>
-                <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps}/>
+                <Alternativ svar={TestSvar.JA} {...fellesProps}/>
+                <Alternativ svar={TestSvar.NEI} {...fellesProps}/>
+                <Alternativ svar={TestSvar.VET_IKKE} {...fellesProps}/>
+                <Alternativ svar={TestSvar.VET_DEFINITIVT_IKKE} {...fellesProps}/>
             </div>
             </fieldset>
         </form>

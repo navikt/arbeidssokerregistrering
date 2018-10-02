@@ -32,6 +32,17 @@ class SkjemaRegistrering extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
+        const config = {
+            velgNesteSporsmal: {
+                sporsmalsId: forsteSpoorsmal,
+                nesteSporsmal: {
+                    svar1: "helse, sport&blanding, sporsmal6,",
+                    svar2: Sporsmal7,
+                    svar3: Sporsmal20,
+                }
+            }
+        };
+
         return (
             <SkjemaContainer {...{location, match, history}}>
                 <SporsmalTest1 sporsmalId={SporsmalId.sporsmalTest1} {...fellesProps}/>

@@ -7,7 +7,8 @@ export type Svar = UtdanningSvar
     | AndreForholdSvar
     | SisteStillingSvar
     | DinSituasjonSvar
-    | IngenSvar;
+    | IngenSvar
+    | TestSvar;
 
 export enum IngenSvar {
     INGEN_SVAR = 'INGEN_SVAR',
@@ -65,6 +66,14 @@ export enum HelseHinderSvar {
 export enum AndreForholdSvar {
     JA = 'JA',
     NEI = 'NEI',
+    INGEN_SVAR = 'INGEN_SVAR',
+}
+
+export enum TestSvar {
+    JA = 'JA',
+    NEI = 'NEI',
+    VET_IKKE = 'VET_IKKE',
+    VET_DEFINITIVT_IKKE = 'VET_DEFINITIVT_IKKE',
     INGEN_SVAR = 'INGEN_SVAR',
 }
 
