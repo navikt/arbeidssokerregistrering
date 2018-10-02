@@ -3,6 +3,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { getIntlMessage } from '../../utils/utils';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface Props {
     tittelId: string;
@@ -33,6 +34,10 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
         }
         this.setState({
             apen: !this.state.apen
+        },() => { // tslint:disable-line
+            if (this.state.apen) {
+                frontendLogger(this.props.tittelId + '.ekspandert');
+            }
         });
     }
 
