@@ -58,7 +58,8 @@ export class HentInitialData extends React.Component<Props> {
             if (niva === 4 && nivaOidc !== 4) {
                 // er innlogget med OpenAM nivå 4, men mangler innlogging med AzureAD på nivå4.
                 window.location.href = VEILARBSTEPUP;
-            } else if (nivaOidc !== 4) {
+            } else if (niva !== 4 || nivaOidc !== 4) {
+                // bruker må være innlogget med både oidc og openam på nivå 4 til appen får app-spesifikt domene.
                 return <StepUp/>;
             }
         }
