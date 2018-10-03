@@ -56,10 +56,12 @@ export class HentInitialData extends React.Component<Props> {
 
         if (autentiseringsinfo.status === STATUS.OK) {
             if (niva === 4 && nivaOidc !== 4) {
-                // er innlogget med OpenAM nivå 4, men mangler innlogging med AzureAD på nivå4.
+                // Bruker er allerede innlogget og har OpenAM-token på nivå 4, men mangler Oidc-token med nivå 4.
+                // Redirecter til Veilarbstepup som automatisk gir bruker Oidc-token på nivå 4.
                 window.location.href = VEILARBSTEPUP;
             } else if (niva !== 4 || nivaOidc !== 4) {
-                // bruker må være innlogget med både oidc og openam på nivå 4 til appen får app-spesifikt domene.
+                // Bruker er ikke innlogget med både OpenAm- og Oidc-token på nivå 4, eller er innlogget med
+                // lavere sikkerhetsnivå enn 4. Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
                 return <StepUp/>;
             }
         }
