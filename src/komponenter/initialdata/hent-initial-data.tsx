@@ -60,8 +60,8 @@ export class HentInitialData extends React.Component<Props> {
                 // Redirecter til Veilarbstepup som automatisk gir bruker Oidc-token på nivå 4.
                 window.location.href = VEILARBSTEPUP;
             } else if (niva !== 4 || nivaOidc !== 4) {
-                // Bruker er ikke innlogget med både OpenAm- og Oidc-token på nivå 4, eller er innlogget med
-                // lavere sikkerhetsnivå enn 4. Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
+                // Bruker mangler enten OpenAm- eller Oidc-token på nivå 4.
+                // Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
                 return <StepUp/>;
             }
         }
