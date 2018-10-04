@@ -57,7 +57,9 @@
     "react-router-dom": "4.2.2",
     "react-test-renderer": "16.3.2",
     "redux-form": "7.3.0",
-    "redux-thunk": "2.2.0"
+    "redux-thunk": "2.2.0",
+    "express": "^4.16.3",
+    "npm-run-all": "4.1.2"
   },
   "scripts": {
     "delete-static": "node scripts/deletestatic.js",
@@ -100,7 +102,6 @@
     "enzyme-react-intl": "2.0.0",
     "fetch-mock": "5.13.1",
     "less": "3.0.2",
-    "npm-run-all": "4.1.2",
     "path-to-regexp": "2.2.1",
     "sinon": "5.0.3",
     "typescript": "^2.8.3",
