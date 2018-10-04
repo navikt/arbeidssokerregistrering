@@ -77,8 +77,8 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "heroku-serve": "node index.js && npm run build:tekster && cross-env REACT_APP_MOCK='true' react-scripts start",
-    "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
+    "heroku-serve": "node heroku/index.js && npm run build:tekster && cross-env REACT_APP_MOCK='true' react-scripts start",
+    "heroku-postbuild": "node heroku/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node heroku/postHeroku.js"
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
