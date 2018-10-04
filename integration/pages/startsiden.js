@@ -3,6 +3,9 @@ module.exports = {
         return this.api.globals.launch_url;
     },
     elements: {
-        start: '.startside'
+        start: '.startside',
+        startRegistrering: {
+            selector: "*[data-testid='start-registrering']"
+        },
     },
 };
