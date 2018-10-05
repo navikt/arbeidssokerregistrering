@@ -1,13 +1,7 @@
 module.exports = {
-    validerSpmSidenHarMinst2Checkbokser(){
-        const WAIT_TIME = this.api.globals.wait;
-        this.expect.element('@tittelSporsmal').to.be.visible.after(WAIT_TIME);
-        this.validerMinst2Checkbokser();
-
-    },
     validerMinst2Checkbokser(){
         this.api.elements('css selector', this.elements.radioAlternativ.selector, cb => {
-            console.log('cb', cb.value.length);
+            this.assert.equal(cb.status, 0);
             this.assert.equal(cb.value.length >= 2, true, 'Validerer antall checkbokser høyere eller lik enn 2');
         });
     },

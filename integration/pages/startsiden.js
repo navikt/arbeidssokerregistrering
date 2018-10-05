@@ -4,8 +4,6 @@ module.exports = {
     },
     elements: {
         start: '.startside',
-        startRegistrering: {
-            selector: "*[data-testid='start-registrering']"
-        },
+        startRegistrering: "*[data-testid='start-registrering']",
     },
 };
