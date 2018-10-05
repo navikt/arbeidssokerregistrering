@@ -1,0 +1,10 @@
+language: node_js
+node_js: "8"
+
+script:
+    - "npm run heroku-postbuild"
+    - "npm-run-all -p -r heroku-serve test:browserstack"
+
+
+  npm run heroku-postbuild && npm run heroku-serve
+  BROWSERSTACK_USER=joselito14 BROWSERSTACK_KEY=Cp2mGxeypjqiBFgxsEpz npm run test:browserstack
