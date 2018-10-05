@@ -42,7 +42,7 @@ export class HentInitialData extends React.Component<Props> {
 
         this.props.hentFeatureToggles().then(() => {
             this.props.hentAutentiseringsInfo().then((res) => {
-                if ((res as AuthData).harGyldigOidcToken) {
+                if ((res as AuthData).nivaOidc === 4) {
                     this.props.hentRegistreringStatus();
                     this.props.hentBrukersNavn();
                 }
@@ -52,15 +52,17 @@ export class HentInitialData extends React.Component<Props> {
 
     render() {
         const { children, registreringstatus, autentiseringsinfo, brukersNavn } = this.props;
-        const { niva } = autentiseringsinfo.data;
-        const { harGyldigOidcToken } = autentiseringsinfo.data;
+        const { niva, nivaOidc } = autentiseringsinfo.data;
 
         if (autentiseringsinfo.status === STATUS.OK) {
-            if (niva !== 4) {
-                return <StepUp/>;
-            } else if (!harGyldigOidcToken) {
-                // er innlogget med OpenAM nivå 4, men mangler innlogging med AzureAD.
+            if (niva === 4 && nivaOidc !== 4) {
+                // Bruker er allerede innlogget og har OpenAM-token på nivå 4, men mangler Oidc-token med nivå 4.
+                // Redirecter til Veilarbstepup som automatisk gir bruker Oidc-token på nivå 4.
                 window.location.href = VEILARBSTEPUP;
+            } else if (niva !== 4 || nivaOidc !== 4) {
+                // Bruker mangler enten OpenAm- eller Oidc-token på nivå 4.
+                // Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
+                return <StepUp/>;
             }
         }
 
