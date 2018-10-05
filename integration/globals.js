@@ -13,8 +13,22 @@ module.exports = {
             }, 5000);
         } else {
             done();
+
         }
     },
+
+   /* beforeEach: function(client, done){
+        if(!this.isLocal) {
+            utils.getNetworkIp()
+                .then(ip => {
+                    client.baseUrl = `http://${ip}:5000/arbeidssokerregistrering`;
+                    done();
+                }).catch(error => {
+                    done(error);
+                });
+        }
+        else done();
+    },*/
 
     after: function(done) {
         if (this.isLocal) {
