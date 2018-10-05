@@ -24,8 +24,7 @@ let nightwatch_config = {
     test_settings: {
         default: {
             globals: {
-                baseUrl: 'http://localhost:8080',
-                launch_url: '',
+                launch_url: 'http://localhost:5000/arbeidssokerregistrering',
                 timeout: 20000,
                 browserstack: true,
             },
