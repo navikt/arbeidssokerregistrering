@@ -11,6 +11,8 @@ module.exports = {
             setTimeout(function() {
                 done();
             }, 5000);
+        } else {
+            done();
         }
     },
 
@@ -21,6 +23,8 @@ module.exports = {
             setTimeout(function () {
                 done();
             }, 200);
+        } else {
+            done();
         }
     },
 };
