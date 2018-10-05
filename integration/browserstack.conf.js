@@ -1,4 +1,5 @@
 require('babel-core/register');
+
 let nightwatch_config = {
     src_folders: ['integration/tests'],
     output_folder: 'integration/reports',
@@ -7,16 +8,19 @@ let nightwatch_config = {
     custom_assertions_path: '',
     globals_path: 'integration/globals.js',
     page_objects_path: ['integration/pages'],
+
     selenium: {
         start_process: false,
         host: 'hub-cloud.browserstack.com',
         port: 80,
     },
+
     common_capabilities: {
         'browserstack.debug': true,
         'browserstack.local': true,
         project: 'arbeidssokerregistrering',
     },
+
     test_settings: {
         default: {
             launch_url: 'http://localhost:5000/arbeidssokerregistrering',
@@ -73,25 +77,30 @@ let nightwatch_config = {
         },
     },
 };
+
 // Code to support common capabilites
 nightwatch_config.common_capabilities['browserstack.user'] =
     process.env.BROWSERSTACK_USER;
 nightwatch_config.common_capabilities['browserstack.key'] =
     process.env.BROWSERSTACK_KEY;
+
 const pullRequest = process.env.TRAVIS_PULL_REQUEST || false;
 const branch = pullRequest
     ? process.env.TRAVIS_PULL_REQUEST_BRANCH
     : process.env.TRAVIS_BRANCH || 'Local';
 nightwatch_config.common_capabilities['build'] = branch;
+
 for (var i in nightwatch_config.test_settings) {
     var config = nightwatch_config.test_settings[i];
     config['selenium_host'] = nightwatch_config.selenium.host;
     config['selenium_port'] = nightwatch_config.selenium.port;
     config['desiredCapabilities'] = config['desiredCapabilities'] || {};
+
     for (var j in nightwatch_config.common_capabilities) {
         config['desiredCapabilities'][j] =
             config['desiredCapabilities'][j] ||
             nightwatch_config.common_capabilities[j];
     }
 }
+
 module.exports = nightwatch_config;

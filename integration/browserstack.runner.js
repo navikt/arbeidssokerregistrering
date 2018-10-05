@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 require('babel-register')();
+
 var Nightwatch = require('nightwatch');
 var browserstack = require('browserstack-local');
 var bs_local;
+
 try {
     console.log('RUNNER');
     process.mainModule.filename = './node_modules/nightwatch/bin/nightwatch';
@@ -11,6 +13,7 @@ try {
     Nightwatch.bs_local = bs_local = new browserstack.Local();
     bs_local.start({ key: process.env.BROWSERSTACK_KEY }, function(error) {
         if (error) throw error;
+
         console.log('Connected. Now testing...');
         Nightwatch.cli(function(argv) {
             Nightwatch.CliRunner(argv)
