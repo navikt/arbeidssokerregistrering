@@ -14,6 +14,8 @@ export enum SporsmalId {
     sisteStilling = 'sisteStilling',
     dinSituasjon = 'dinSituasjon',
 
+    fremtidigSituasjon = 'fremtidigSituasjon',
+    hvorLangTid = 'hvorLangTid',
     // TODO FO-1547 FJERN DETTE!!!
     sporsmalTest1 = 'sporsmalTest1',
     sporsmalTest2 = 'sporsmalTest2',

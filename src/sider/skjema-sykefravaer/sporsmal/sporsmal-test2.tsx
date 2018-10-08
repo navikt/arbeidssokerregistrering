@@ -3,12 +3,12 @@ import Alternativ from '../../../komponenter/skjema/alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
+import { Svar, HvorLangTidSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function SporsmalTest1(props: Props) {
+export default function SporsmalTest2(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
@@ -25,10 +25,9 @@ export default function SporsmalTest1(props: Props) {
                     {getTekst('tittel')}
                 </Innholdstittel>
             </legend>
-            <div className="spm-body">
-                <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps}/>
-                <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps}/>
-                <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps}/>
+            <div className="spm-body blokk-xxxl">
+                <Alternativ svar={HvorLangTidSvar.KORT_SIKT} {...fellesProps}/>
+                <Alternativ svar={HvorLangTidSvar.LANG_SIKT} {...fellesProps}/>
             </div>
             </fieldset>
         </form>

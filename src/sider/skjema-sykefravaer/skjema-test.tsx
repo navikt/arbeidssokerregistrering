@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
-import SporsmalTest1 from './sporsmal/sporsmal-test1';
+import SporsmalHvorLangTid from './sporsmal/sporsmal-hvor-lang-tid';
 import SporsmalTest2 from './sporsmal/sporsmal-test2';
 
 interface DispatchProps {
@@ -21,7 +21,7 @@ interface StateProps {
 
 type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class SkjemaRegistrering extends React.Component<Props> {
+class SkjemaSykefravaerBeholdeJobb extends React.Component<Props> {
     render() {
         const {endreSvar, intl, svarState, location, match, history} = this.props;
         const fellesProps = {
@@ -32,20 +32,9 @@ class SkjemaRegistrering extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
-        const config = {
-            velgNesteSporsmal: {
-                sporsmalsId: forsteSpoorsmal,
-                nesteSporsmal: {
-                    svar1: "helse, sport&blanding, sporsmal6,",
-                    svar2: Sporsmal7,
-                    svar3: Sporsmal20,
-                }
-            }
-        };
-
         return (
             <SkjemaContainer {...{location, match, history}}>
-                <SporsmalTest1 sporsmalId={SporsmalId.sporsmalTest1} {...fellesProps}/>
+                <SporsmalHvorLangTid sporsmalId={SporsmalId.hvorLangTid} {...fellesProps}/>
                 <SporsmalTest2 sporsmalId={SporsmalId.sporsmalTest2} {...fellesProps}/>
             </SkjemaContainer>
         );
@@ -60,4 +49,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaRegistrering));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaSykefravaerBeholdeJobb));

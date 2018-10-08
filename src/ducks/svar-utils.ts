@@ -8,7 +8,8 @@ export type Svar = UtdanningSvar
     | SisteStillingSvar
     | DinSituasjonSvar
     | IngenSvar
-    | TestSvar;
+    | FremtidigSituasjonSvar
+    | HvorLangTidSvar;
 
 export enum IngenSvar {
     INGEN_SVAR = 'INGEN_SVAR',
@@ -69,11 +70,17 @@ export enum AndreForholdSvar {
     INGEN_SVAR = 'INGEN_SVAR',
 }
 
-export enum TestSvar {
-    JA = 'JA',
-    NEI = 'NEI',
-    VET_IKKE = 'VET_IKKE',
-    VET_DEFINITIVT_IKKE = 'VET_DEFINITIVT_IKKE',
+export enum FremtidigSituasjonSvar {
+    BEHOLDE_JOBB = 'BEHOLDE_JOBB',
+    FOR_SYK = 'FOR_SYK',
+    NY_JOBB = 'NY_JOBB',
+    USIKKER = 'USIKKER',
+    INGEN_SVAR = 'INGEN_SVAR',
+}
+
+export enum HvorLangTidSvar {
+    KORT_SIKT = 'KORT_SIKT',
+    LANG_SIKT = 'LANG_SIKT',
     INGEN_SVAR = 'INGEN_SVAR',
 }
 
