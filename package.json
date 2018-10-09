@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@navikt/create-react-app-typescript-less": "^1.0.0-beta.14",
     "@types/query-string": "5.1.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
@@ -81,6 +80,7 @@
     "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
   },
   "devDependencies": {
+    "@navikt/create-react-app-typescript-less": "^1.0.0-beta.14",
     "@types/classnames": "2.2.3",
     "@types/fetch-mock": "5.12.2",
     "@types/jest": "22.2.3",
