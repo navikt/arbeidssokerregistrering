@@ -57,11 +57,13 @@
     "react-router-dom": "4.2.2",
     "react-test-renderer": "16.3.2",
     "redux-form": "7.3.0",
-    "redux-thunk": "2.2.0"
+    "redux-thunk": "2.2.0",
+    "express": "^4.16.3",
+    "npm-run-all": "4.1.2"
   },
   "scripts": {
     "delete-static": "node scripts/deletestatic.js",
-    "start:ts": "react-scripts start",
+    "start:ts": "cross-env REACT_APP_MOCK='true' react-scripts start",
     "build:ts": "react-scripts build",
     "deploy": "npm run build && gh-pages -d build",
     "test": "npm run build:tekster && react-scripts test --env=jsdom",
@@ -75,7 +77,8 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "preinstall": "git submodule init && git submodule update --remote"
+    "heroku-serve": "node index.js",
+    "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
   },
   "devDependencies": {
     "@nutgaard/react-scripts": "0.0.8-beta.4",
@@ -99,11 +102,11 @@
     "enzyme-react-intl": "2.0.0",
     "fetch-mock": "5.13.1",
     "less": "3.0.2",
-    "npm-run-all": "4.1.2",
     "path-to-regexp": "2.2.1",
     "sinon": "5.0.3",
     "typescript": "^2.8.3",
     "nightwatch": "^0.9.21",
-    "tree-kill": "^1.2.0"
+    "tree-kill": "^1.2.0",
+    "cross-env": "^5.2.0"
   }
 }
