@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SkjemaContainer from '../../komponenter/skjema/skjema-container';
+import NySkjema from '../../komponenter/skjema/ny-skjema';
 import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
@@ -9,7 +9,8 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
 import SporsmalHvorLangTid from './sporsmal/sporsmal-hvor-lang-tid';
-import SporsmalTest2 from './sporsmal/sporsmal-test2';
+import { SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
+import SporsmalStillingsprosent from './sporsmal/sporsmal-stillingsprosent';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -32,11 +33,13 @@ class SkjemaSykefravaerBeholdeJobb extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
+        const config = new Map<Svar, string[]>();
+
         return (
-            <SkjemaContainer {...{location, match, history}}>
+            <NySkjema config={config} baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/2`} {...{location, match, history}}>
                 <SporsmalHvorLangTid sporsmalId={SporsmalId.hvorLangTid} {...fellesProps}/>
-                <SporsmalTest2 sporsmalId={SporsmalId.sporsmalTest2} {...fellesProps}/>
-            </SkjemaContainer>
+                <SporsmalStillingsprosent sporsmalId={SporsmalId.stillingsprosent} {...fellesProps}/>
+            </NySkjema>
         );
     }
 }

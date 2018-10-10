@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Alternativ from '../../../komponenter/skjema/alternativ';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import { InjectedIntlProps } from 'react-intl';
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { Svar, HvorLangTidSvar } from '../../../ducks/svar-utils';
+import { Svar, StillingsprosentSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function SporsmalTest2(props: Props) {
+export default function SporsmalStillingsprosent(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: props.intl,
@@ -26,8 +26,8 @@ export default function SporsmalTest2(props: Props) {
                 </Innholdstittel>
             </legend>
             <div className="spm-body blokk-xxxl">
-                <Alternativ svar={HvorLangTidSvar.KORT_SIKT} {...fellesProps}/>
-                <Alternativ svar={HvorLangTidSvar.LANG_SIKT} {...fellesProps}/>
+                <Alternativ svar={StillingsprosentSvar.HELT} {...fellesProps}/>
+                <Alternativ svar={StillingsprosentSvar.REDUSERT} {...fellesProps}/>
             </div>
             </fieldset>
         </form>

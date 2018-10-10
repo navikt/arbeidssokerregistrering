@@ -16,9 +16,7 @@ export enum SporsmalId {
 
     fremtidigSituasjon = 'fremtidigSituasjon',
     hvorLangTid = 'hvorLangTid',
-    // TODO FO-1547 FJERN DETTE!!!
-    sporsmalTest1 = 'sporsmalTest1',
-    sporsmalTest2 = 'sporsmalTest2',
+    stillingsprosent = 'stillingsprosent',
 }
 
 export type State = Data[];
