@@ -24,7 +24,7 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Banner from './komponenter/banner/banner';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import StartRedirecter from './sider/start-redirecter';
-import SkjemaSykefravaerBeholdeJobb from './sider/skjema-sykefravaer/skjema-test';
+import SkjemaSykefravaerBeholdeJobb from './sider/skjema-sykefravaer/skjema-sykefravaer-beholde-jobb';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
 import Oppsummering from './sider/oppsummering/oppsummering';
