@@ -57,28 +57,30 @@
     "react-router-dom": "4.2.2",
     "react-test-renderer": "16.3.2",
     "redux-form": "7.3.0",
-    "redux-thunk": "2.2.0"
+    "redux-thunk": "2.2.0",
+    "express": "^4.16.3"
   },
   "scripts": {
     "delete-static": "node scripts/deletestatic.js",
-    "start:ts": "react-scripts start",
-    "build:ts": "react-scripts build",
+    "start:ts": "cross-env REACT_APP_MOCK='true' react-scripts-ts start",
+    "build:ts": "react-scripts-ts build",
     "deploy": "npm run build && gh-pages -d build",
-    "test": "npm run build:tekster && react-scripts test --env=jsdom",
+    "test": "npm run build:tekster && react-scripts-ts test --env=jsdom",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix",
     "test:coverage": "npm test -- --coverage",
     "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts-ts eject",
     "build:tekster": "node ./src/utils/build-tekster.js",
     "start:tekster": "npm run build:tekster",
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
-    "preinstall": "git submodule init && git submodule update --remote"
+    "heroku-serve": "node index.js",
+    "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
   },
   "devDependencies": {
-    "@nutgaard/react-scripts": "0.0.8-beta.4",
+    "@navikt/create-react-app-typescript-less": "^1.0.0-beta.14",
     "@types/classnames": "2.2.3",
     "@types/fetch-mock": "5.12.2",
     "@types/jest": "22.2.3",
@@ -104,6 +106,7 @@
     "sinon": "5.0.3",
     "typescript": "^2.8.3",
     "nightwatch": "^0.9.21",
-    "tree-kill": "^1.2.0"
+    "tree-kill": "^1.2.0",
+    "cross-env": "^5.2.0"
   }
 }
