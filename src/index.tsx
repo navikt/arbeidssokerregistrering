@@ -6,6 +6,8 @@ import App from './app';
 
 import './index.less';
 
+console.log('process.env', process.env); // tslint:disable-line
+
 if (process.env.REACT_APP_MOCK === 'true') {
     console.log('=========================='); /*tslint:disable-line:no-console*/
     console.log('======== MED MOCK ========'); /*tslint:disable-line:no-console*/
