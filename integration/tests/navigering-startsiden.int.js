@@ -13,8 +13,8 @@ module.exports = {
         client.end();
     },
    'gaa til startsiden': (client) => {
-
-       startsiden.navigate();
-       startsiden.expect.element('@start').to.be.visible;
+       const url = client.launch_url;
+       client.url(url);
+       startsiden.expect.element('@start').to.be.visible.after(1000);
     }
 };
