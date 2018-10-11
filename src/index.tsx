@@ -11,6 +11,9 @@ if (process.env.REACT_APP_MOCK === 'true') {
     console.log('======== MED MOCK ========'); /*tslint:disable-line:no-console*/
     console.log('=========================='); /*tslint:disable-line:no-console*/
 
+    /* ************************************************************************************** */
+    /* Hotjar script som bruke i herokuapp for brukertesting */
+    /* Dataen er tilgjengelig under organisasjon navlab.no i NAV hotjar */
     const s = document.createElement('script');
     const code = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n" +
         "new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n" +
@@ -20,6 +23,7 @@ if (process.env.REACT_APP_MOCK === 'true') {
     s.async = true;
     s.appendChild(document.createTextNode(code));
     document.body.appendChild(s);
+    /* ************************************************************************************** */
 
     require('./mocks/mocks');
 }
