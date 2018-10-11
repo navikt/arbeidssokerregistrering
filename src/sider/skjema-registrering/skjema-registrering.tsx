@@ -7,7 +7,6 @@ import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
 import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
-import SkjemaContainer from '../../komponenter/skjema/skjema-container';
 import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
@@ -16,6 +15,9 @@ import { injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
+import NySkjema from '../../komponenter/skjema/ny-skjema';
+import { SKJEMA_PATH } from '../../utils/konstanter';
+import { defaultConfigForSporsmalsflyt } from '../../komponenter/skjema/skjema-utils';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
@@ -40,7 +42,11 @@ class SkjemaRegistrering extends React.Component<Props> {
 
         return (
             <LastInnSisteStilling>
-                <SkjemaContainer {...{location, match, history}}>
+                <NySkjema
+                    config={defaultConfigForSporsmalsflyt}
+                    baseUrl={`${SKJEMA_PATH}`}
+                    {...{location, match, history}}
+                >
                     <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...sporsmalProps}/>
                     <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...sporsmalProps}/>
                     <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...sporsmalProps}/>
@@ -48,7 +54,7 @@ class SkjemaRegistrering extends React.Component<Props> {
                     <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...sporsmalProps}/>
                     <HelseHinder sporsmalId={SporsmalId.helseHinder} {...sporsmalProps}/>
                     <AndreForhold sporsmalId={SporsmalId.andreForhold} {...sporsmalProps}/>
-                </SkjemaContainer>
+                </NySkjema>
             </LastInnSisteStilling>
         );
     }

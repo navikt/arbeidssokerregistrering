@@ -1,19 +1,19 @@
 //tslint:disable
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import { AppState } from '../../reducer';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import {connect, Dispatch} from 'react-redux';
+import {AppState} from '../../reducer';
+import {endreSvarAction, SporsmalId, State as SvarState} from '../../ducks/svar';
 import LenkeAvbryt from '../knapper/lenke-avbryt';
 import LenkeTilbake from '../knapper/lenke-tilbake';
 import LenkeNeste from '../knapper/lenke-neste';
 import Animasjon from '../../sider/skjema-registrering/animasjon';
 import ResponsivSide from '../side/responsiv-side';
-import { InjectedIntlProps, injectIntl, FormattedMessage } from 'react-intl';
+import {FormattedMessage, InjectedIntlProps, injectIntl} from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import { RouteComponentProps } from 'react-router';
-import { MatchProps } from '../../utils/utils';
-import { getAlleSporsmalSomIkkeSkalBesvares, isNumber, SkjemaConfig } from './skjema-utils';
-import { Svar } from '../../ducks/svar-utils';
+import {RouteComponentProps} from 'react-router';
+import {MatchProps} from '../../utils/utils';
+import {getAlleSporsmalSomIkkeSkalBesvares, isNumber, SkjemaConfig} from './skjema-utils';
+import {hentSvar, IngenSvar, Svar} from '../../ducks/svar-utils';
 
 interface StateProps {
     svarState: SvarState;
@@ -81,6 +81,23 @@ class NySkjema extends React.Component<Props> {
         return this.props.children.map(child => child.props.sporsmalId);
     };
 
+    hentGjeldendeSporsmalId = (): SporsmalId => {
+        const sporsmalIder = this.getSporsmalIder();
+        const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering();
+        return sporsmalIder[gjeldendeSporsmalPlassering];
+    };
+
+    erSporsmalBesvart = (): boolean => {
+        const svar = hentSvar(this.props.svarState, this.hentGjeldendeSporsmalId());
+        return !!svar && svar.toString() !== IngenSvar.INGEN_SVAR.toString();
+    };
+
+    kanGaaTilNeste = (): boolean => {
+        const gjeldendeSporsmalId = this.hentGjeldendeSporsmalId();
+        const erSporsmalBesvart = this.erSporsmalBesvart();
+        return (gjeldendeSporsmalId === SporsmalId.sisteStilling) || erSporsmalBesvart;
+    };
+
     render() {
         const advarselElement = false ? (null) : (
             <NavAlertStripe type="advarsel" className="spm-advarsel">
@@ -92,6 +109,8 @@ class NySkjema extends React.Component<Props> {
 
         const gjeldendeSporsmal = this.finnGjeldendeSporsmal();
 
+        const kanGaaTilNeste = this.kanGaaTilNeste();
+
         return (
             <ResponsivSide> {/* TODO FO-1547 Sleng på IE-classnames? */}
                 {gjeldendeSporsmal}
@@ -100,7 +119,7 @@ class NySkjema extends React.Component<Props> {
                     <LenkeNeste
                         onClick={this.handleNesteBtnClick}
                         href={nesteHref}
-                        erAktiv={true}
+                        erAktiv={kanGaaTilNeste}
                     />
                     {/*this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))*/}
                     <LenkeTilbake
