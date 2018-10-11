@@ -1,5 +1,5 @@
 import * as React from 'react';
-import NySkjema from '../../komponenter/skjema/ny-skjema';
+import NySkjema from '../../komponenter/skjema/skjema';
 import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';

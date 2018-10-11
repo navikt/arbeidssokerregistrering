@@ -15,7 +15,7 @@ import { injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
-import NySkjema from '../../komponenter/skjema/ny-skjema';
+import Skjema from '../../komponenter/skjema/skjema';
 import { OPPSUMMERING_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import { defaultConfigForSporsmalsflyt } from '../../komponenter/skjema/skjema-utils';
 
@@ -42,7 +42,7 @@ class SkjemaRegistrering extends React.Component<Props> {
 
         return (
             <LastInnSisteStilling>
-                <NySkjema
+                <Skjema
                     config={defaultConfigForSporsmalsflyt}
                     baseUrl={SKJEMA_PATH}
                     endUrl={OPPSUMMERING_PATH}
@@ -55,7 +55,7 @@ class SkjemaRegistrering extends React.Component<Props> {
                     <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...sporsmalProps}/>
                     <HelseHinder sporsmalId={SporsmalId.helseHinder} {...sporsmalProps}/>
                     <AndreForhold sporsmalId={SporsmalId.andreForhold} {...sporsmalProps}/>
-                </NySkjema>
+                </Skjema>
             </LastInnSisteStilling>
         );
     }
