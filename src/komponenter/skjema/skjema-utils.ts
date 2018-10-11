@@ -1,6 +1,9 @@
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { DinSituasjonSvar, hentSvar, IngenSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
+import { Props as SkjemaProps } from './skjema';
+
+export const INGEN_NESTE_SPORSMAL = -1;
 
 export type SkjemaConfig = Map<Svar, string[]>;
 
@@ -54,14 +57,6 @@ export function getAlleSporsmalSomIkkeSkalBesvares(
     return sporsmal;
 }
 
-/*
-export const hentGjeldendeSporsmalId = (sporsmalIder: SporsmalId[], gjeldendeSpo): SporsmalId => {
-    const sporsmalIder = this.getSporsmalIder();
-    const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering();
-    return sporsmalIder[gjeldendeSporsmalPlassering];
-};
-*/
-
 export function erSporsmalBesvart(svarState: SvarState, gjeldendeSporsmalId: SporsmalId): boolean {
     const svar = hentSvar(svarState, gjeldendeSporsmalId);
     return !!svar && svar.toString() !== IngenSvar.INGEN_SVAR.toString();
@@ -70,4 +65,55 @@ export function erSporsmalBesvart(svarState: SvarState, gjeldendeSporsmalId: Spo
 export function kanGaaTilNeste(svarState: SvarState, gjeldendeSporsmalId: SporsmalId): boolean {
     const sporsmalBesvart = erSporsmalBesvart(svarState, gjeldendeSporsmalId);
     return (gjeldendeSporsmalId === SporsmalId.sisteStilling) || sporsmalBesvart;
+}
+
+export function getSporsmalIder(props: SkjemaProps): SporsmalId[] {
+    return props.children.map(child => child.props.sporsmalId);
+}
+
+export function hentGjeldendeSporsmalId(props: SkjemaProps): SporsmalId {
+    const sporsmalIder = getSporsmalIder(props);
+    const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(props);
+    return sporsmalIder[gjeldendeSporsmalPlassering];
+}
+
+export function finnGjeldendeSporsmalPlassering(props: SkjemaProps): number {
+    const plassering = Number.parseInt(props.match.params.id, 10);
+    return isNumber(plassering) ? plassering : -1;
+}
+
+export function finnNesteSporsmalPlassering(props: SkjemaProps): number {
+
+    const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(props);
+
+    const foregaendeSporsmalIder =
+        getSporsmalIder(props).filter((sporsmalId, indeks) => indeks <= gjeldendeSporsmalPlassering);
+
+    const sporsmalIderSomIkkeSkalBesvares =
+        getAlleSporsmalSomIkkeSkalBesvares(foregaendeSporsmalIder, props.svarState, props.config);
+
+    const sporsmalIder = getSporsmalIder(props);
+
+    for (let i = gjeldendeSporsmalPlassering + 1; i < sporsmalIder.length; i++) {
+
+        if (!sporsmalIderSomIkkeSkalBesvares.includes(sporsmalIder[i])) {
+            return i;
+        }
+
+    }
+
+    return INGEN_NESTE_SPORSMAL;
+
+}
+
+export function finnNesteHref(props: SkjemaProps): string {
+
+    const nesteSporsmalPlassering = finnNesteSporsmalPlassering(props);
+
+    if (nesteSporsmalPlassering === INGEN_NESTE_SPORSMAL) {
+        return props.endUrl;
+    }
+
+    return props.baseUrl + '/' + nesteSporsmalPlassering;
+
 }
