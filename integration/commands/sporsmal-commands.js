@@ -25,8 +25,7 @@ module.exports = {
         this.expect.element('@tittelFullforTittel').to.be.visible.after(WAIT_TIME);
         this.expect.element('@divFullforSjekkliste').to.be.visible.after(WAIT_TIME);
     },
-    validerSiden(tittel, body){
-        const WAIT_TIME = this.api.globals.wait;
+    validerSiden(tittel, body, WAIT_TIME = this.api.globals.wait){
         this.expect.element(tittel).to.be.visible.after(WAIT_TIME);
         this.expect.element(body).to.be.visible.after(WAIT_TIME);
     }

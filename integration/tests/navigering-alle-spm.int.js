@@ -52,8 +52,7 @@ module.exports = {
     },
     'duernaregistert-siden skal besta av tittel og infoboks': (client) => {
         client.saveScreenshot(`integration/reports/duernaregistrert.png`);
-        client.waitForElementPresent('.registrert__tittel', WAIT_TIME);
-        sporsmal.validerSiden('@tittelDuErRegTittel', '@divDuErReg');
+        sporsmal.validerSiden('@tittelDuErRegTittel', '@divDuErReg', WAIT_TIME + 20000);
     }
 
 };
