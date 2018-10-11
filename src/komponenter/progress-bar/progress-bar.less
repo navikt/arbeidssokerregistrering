@@ -2,7 +2,8 @@
     background-color: @navLysGra;
     position: relative;
     z-index: 10000;
-    width: 100%;
+    margin: 2rem 2rem 0 2rem;
+    border-radius: 3rem;
 
     &:focus {
         outline: none;
@@ -10,9 +11,8 @@
 
     .andel {
         height: 10px;
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-        background-color: @navGra60;
+        border-radius: 3rem;
+        background-color: @navDypBlaLighten60;
         transition: width ease-in-out 2s;
     }
 
@@ -21,5 +21,12 @@
         top: 0;
         left: 0;
         right: 0;
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .framdrift {
+        margin: 2rem auto 0 auto;
+        width: 680px;
     }
 }
