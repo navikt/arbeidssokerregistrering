@@ -13,7 +13,8 @@ import NavAlertStripe from 'nav-frontend-alertstriper';
 import {RouteComponentProps} from 'react-router';
 import {MatchProps} from '../../utils/utils';
 import {getAlleSporsmalSomIkkeSkalBesvares, isNumber, kanGaaTilNeste, SkjemaConfig} from './skjema-utils';
-import { Svar} from '../../ducks/svar-utils';
+import {IngenSvar, Svar} from '../../ducks/svar-utils';
+import {START_PATH} from "../../utils/konstanter";
 
 interface StateProps {
     svarState: SvarState;
@@ -31,7 +32,10 @@ interface OwnProps {
     children: React.ReactElement<{sporsmalId: SporsmalId}>[];
     config: SkjemaConfig;
     baseUrl: string;
+    endUrl: string;
 }
+
+const INGEN_NESTE_SPORSMAL = -1;
 
 type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
@@ -42,18 +46,41 @@ class NySkjema extends React.Component<Props, OwnState> {
 
         this.state = {
             visAdvarsel: false
-        }
+        };
+
+        this.gaaTilStartHvisIdErUgyldig(this.props.match.params.id);
     }
 
     handleNesteBtnClick = (): void => {
-        this.setState({ visAdvarsel: !kanGaaTilNeste(this.props.svarState, this.hentGjeldendeSporsmalId(this.props))});
+        
+        const gaaTilNeste = kanGaaTilNeste(this.props.svarState, this.hentGjeldendeSporsmalId(this.props));
+
+        if(gaaTilNeste){
+            this.settIngenSvarForUbesvarteSporsmal(this.props);
+        }
+
+        this.setState({ visAdvarsel: !gaaTilNeste });
+
     };
 
     handleTilbakeBtnClick = (): void => {
         this.setState({ visAdvarsel: false });
         this.props.history.goBack();
     };
+    
+    settIngenSvarForUbesvarteSporsmal = (props: Props) => {
 
+        const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering(props);
+        const nesteSporsmalPlassering = this.finnNesteSporsmalPlassering(props);
+        const sporsmalIder = this.getSporsmalIder(props);
+
+        for(let i = gjeldendeSporsmalPlassering + 1; i < nesteSporsmalPlassering; i++){
+            const sporsmalId = sporsmalIder[i];
+            props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR);
+        }
+        
+    };
+    
     finnGjeldendeSporsmal = (): React.ReactElement<any> => {
 
         const plassering = this.finnGjeldendeSporsmalPlassering(this.props);
@@ -70,9 +97,7 @@ class NySkjema extends React.Component<Props, OwnState> {
         return isNumber(plassering) ? plassering : -1;
     };
 
-    finnNesteHref = (): string => {
-
-        const props = this.props;
+    finnNesteSporsmalPlassering = (props: Props): number => {
 
         const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering(props);
 
@@ -87,12 +112,24 @@ class NySkjema extends React.Component<Props, OwnState> {
         for (let i = gjeldendeSporsmalPlassering + 1; i < sporsmalIder.length; i++) {
 
             if (!sporsmalIderSomIkkeSkalBesvares.includes(sporsmalIder[i])) {
-                return props.baseUrl + '/' + i;
+                return i;
             }
 
         }
 
-        return props.baseUrl + '/oppsummering';
+        return INGEN_NESTE_SPORSMAL;
+
+    };
+
+    finnNesteHref = (): string => {
+
+        const nesteSporsmalPlassering = this.finnNesteSporsmalPlassering(this.props);
+
+        if(nesteSporsmalPlassering === INGEN_NESTE_SPORSMAL){
+            return this.props.endUrl;
+        }
+
+        return this.props.baseUrl + '/' + nesteSporsmalPlassering;
 
     };
 
@@ -105,6 +142,17 @@ class NySkjema extends React.Component<Props, OwnState> {
     getSporsmalIder = (props: Props): SporsmalId[] => {
         return props.children.map(child => child.props.sporsmalId);
     };
+
+    gaaTilStartHvisIdErUgyldig(idStr: string) {
+
+        const id = parseInt(idStr, 10);
+        const antallSporsmal = this.getSporsmalIder(this.props).length;
+
+        if (!isNumber(id) || id < 0 || id >= antallSporsmal){
+            this.props.history.push(START_PATH);
+        }
+
+    }
 
     shouldComponentUpdate(nextProps: Props): boolean {
 

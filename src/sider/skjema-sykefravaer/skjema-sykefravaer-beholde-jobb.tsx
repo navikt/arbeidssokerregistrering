@@ -9,7 +9,7 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
 import SporsmalHvorLangTid from './sporsmal/sporsmal-hvor-lang-tid';
-import { SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
+import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import SporsmalStillingsprosent from './sporsmal/sporsmal-stillingsprosent';
 
 interface DispatchProps {
@@ -36,7 +36,12 @@ class SkjemaSykefravaerBeholdeJobb extends React.Component<Props> {
         const config = new Map<Svar, string[]>();
 
         return (
-            <NySkjema config={config} baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/2`} {...{location, match, history}}>
+            <NySkjema
+                config={config}
+                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/2`}
+                endUrl={OPPSUMMERING_PATH}
+                {...{location, match, history}}
+            >
                 <SporsmalHvorLangTid sporsmalId={SporsmalId.hvorLangTid} {...fellesProps}/>
                 <SporsmalStillingsprosent sporsmalId={SporsmalId.stillingsprosent} {...fellesProps}/>
             </NySkjema>

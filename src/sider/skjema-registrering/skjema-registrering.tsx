@@ -16,7 +16,7 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
 import NySkjema from '../../komponenter/skjema/ny-skjema';
-import { SKJEMA_PATH } from '../../utils/konstanter';
+import { OPPSUMMERING_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import { defaultConfigForSporsmalsflyt } from '../../komponenter/skjema/skjema-utils';
 
 interface DispatchProps {
@@ -44,7 +44,8 @@ class SkjemaRegistrering extends React.Component<Props> {
             <LastInnSisteStilling>
                 <NySkjema
                     config={defaultConfigForSporsmalsflyt}
-                    baseUrl={`${SKJEMA_PATH}`}
+                    baseUrl={SKJEMA_PATH}
+                    endUrl={OPPSUMMERING_PATH}
                     {...{location, match, history}}
                 >
                     <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...sporsmalProps}/>
