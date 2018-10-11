@@ -1,5 +1,5 @@
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
-import { DinSituasjonSvar, hentSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
+import { DinSituasjonSvar, hentSvar, IngenSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
 
 export type SkjemaConfig = Map<Svar, string[]>;
@@ -52,4 +52,22 @@ export function getAlleSporsmalSomIkkeSkalBesvares(
     sporsmalIder.forEach(sporsmalId =>
         sporsmal = [...sporsmal, ...getSporsmalSomIkkeSkalBesvares(hentSvar(svarState, sporsmalId), skjemaConfig)]);
     return sporsmal;
+}
+
+/*
+export const hentGjeldendeSporsmalId = (sporsmalIder: SporsmalId[], gjeldendeSpo): SporsmalId => {
+    const sporsmalIder = this.getSporsmalIder();
+    const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering();
+    return sporsmalIder[gjeldendeSporsmalPlassering];
+};
+*/
+
+export function erSporsmalBesvart(svarState: SvarState, gjeldendeSporsmalId: SporsmalId): boolean {
+    const svar = hentSvar(svarState, gjeldendeSporsmalId);
+    return !!svar && svar.toString() !== IngenSvar.INGEN_SVAR.toString();
+}
+
+export function kanGaaTilNeste(svarState: SvarState, gjeldendeSporsmalId: SporsmalId): boolean {
+    const sporsmalBesvart = erSporsmalBesvart(svarState, gjeldendeSporsmalId);
+    return (gjeldendeSporsmalId === SporsmalId.sisteStilling) || sporsmalBesvart;
 }

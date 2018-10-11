@@ -12,8 +12,8 @@ import {FormattedMessage, InjectedIntlProps, injectIntl} from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import {RouteComponentProps} from 'react-router';
 import {MatchProps} from '../../utils/utils';
-import {getAlleSporsmalSomIkkeSkalBesvares, isNumber, SkjemaConfig} from './skjema-utils';
-import {hentSvar, IngenSvar, Svar} from '../../ducks/svar-utils';
+import {getAlleSporsmalSomIkkeSkalBesvares, isNumber, kanGaaTilNeste, SkjemaConfig} from './skjema-utils';
+import { Svar} from '../../ducks/svar-utils';
 
 interface StateProps {
     svarState: SvarState;
@@ -21,6 +21,10 @@ interface StateProps {
 
 interface DispatchProps {
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
+}
+
+interface OwnState {
+    visAdvarsel: boolean;
 }
 
 interface OwnProps {
@@ -31,15 +35,28 @@ interface OwnProps {
 
 type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class NySkjema extends React.Component<Props> {
+class NySkjema extends React.Component<Props, OwnState> {
+
+    constructor(props: Props){
+        super(props);
+
+        this.state = {
+            visAdvarsel: false
+        }
+    }
 
     handleNesteBtnClick = (): void => {
+        this.setState({ visAdvarsel: !kanGaaTilNeste(this.props.svarState, this.hentGjeldendeSporsmalId(this.props))});
+    };
 
+    handleTilbakeBtnClick = (): void => {
+        this.setState({ visAdvarsel: false });
+        this.props.history.goBack();
     };
 
     finnGjeldendeSporsmal = (): React.ReactElement<any> => {
 
-        const plassering = this.finnGjeldendeSporsmalPlassering();
+        const plassering = this.finnGjeldendeSporsmalPlassering(this.props);
 
         if (!this.props.children || plassering < 0 || plassering > this.props.children.length) {
             return (<p>Spørsmålet finnes ikke</p>);
@@ -48,68 +65,72 @@ class NySkjema extends React.Component<Props> {
         return this.props.children[plassering];
     };
 
-    finnGjeldendeSporsmalPlassering = (): number => {
-        const plassering = Number.parseInt(this.props.match.params.id, 10);
+    finnGjeldendeSporsmalPlassering = (props: Props): number => {
+        const plassering = Number.parseInt(props.match.params.id, 10);
         return isNumber(plassering) ? plassering : -1;
     };
 
     finnNesteHref = (): string => {
 
-        const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering();
+        const props = this.props;
+
+        const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering(props);
 
         const foregaendeSporsmalIder =
-            this.getSporsmalIder().filter((sporsmalId, indeks) => indeks <= gjeldendeSporsmalPlassering);
+            this.getSporsmalIder(props).filter((sporsmalId, indeks) => indeks <= gjeldendeSporsmalPlassering);
 
         const sporsmalIderSomIkkeSkalBesvares =
-            getAlleSporsmalSomIkkeSkalBesvares(foregaendeSporsmalIder, this.props.svarState, this.props.config);
+            getAlleSporsmalSomIkkeSkalBesvares(foregaendeSporsmalIder, props.svarState, props.config);
 
-        const sporsmalIder = this.getSporsmalIder();
+        const sporsmalIder = this.getSporsmalIder(props);
 
         for (let i = gjeldendeSporsmalPlassering + 1; i < sporsmalIder.length; i++) {
 
             if (!sporsmalIderSomIkkeSkalBesvares.includes(sporsmalIder[i])) {
-                return this.props.baseUrl + '/' + i;
+                return props.baseUrl + '/' + i;
             }
 
         }
 
-        return this.props.baseUrl + '/oppsummering';
+        return props.baseUrl + '/oppsummering';
 
     };
 
-    getSporsmalIder = (): SporsmalId[] => {
-        return this.props.children.map(child => child.props.sporsmalId);
-    };
-
-    hentGjeldendeSporsmalId = (): SporsmalId => {
-        const sporsmalIder = this.getSporsmalIder();
-        const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering();
+    hentGjeldendeSporsmalId = (props: Props): SporsmalId => {
+        const sporsmalIder = this.getSporsmalIder(props);
+        const gjeldendeSporsmalPlassering = this.finnGjeldendeSporsmalPlassering(props);
         return sporsmalIder[gjeldendeSporsmalPlassering];
     };
 
-    erSporsmalBesvart = (): boolean => {
-        const svar = hentSvar(this.props.svarState, this.hentGjeldendeSporsmalId());
-        return !!svar && svar.toString() !== IngenSvar.INGEN_SVAR.toString();
+    getSporsmalIder = (props: Props): SporsmalId[] => {
+        return props.children.map(child => child.props.sporsmalId);
     };
 
-    kanGaaTilNeste = (): boolean => {
-        const gjeldendeSporsmalId = this.hentGjeldendeSporsmalId();
-        const erSporsmalBesvart = this.erSporsmalBesvart();
-        return (gjeldendeSporsmalId === SporsmalId.sisteStilling) || erSporsmalBesvart;
-    };
+    shouldComponentUpdate(nextProps: Props): boolean {
+
+        if(this.state.visAdvarsel){
+            const visAdvarsel: boolean = !kanGaaTilNeste(nextProps.svarState, this.hentGjeldendeSporsmalId(nextProps));
+            if (!visAdvarsel) {
+                this.setState({ visAdvarsel: false });
+                return false;
+            }
+        }
+
+        return true;
+
+    }
 
     render() {
-        const advarselElement = false ? (null) : (
+        const advarselElement = this.state.visAdvarsel ? (
             <NavAlertStripe type="advarsel" className="spm-advarsel">
                 <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
-            </NavAlertStripe>
-        );
+            </NavAlertStripe>) : null;
 
         const nesteHref = this.finnNesteHref();
 
         const gjeldendeSporsmal = this.finnGjeldendeSporsmal();
 
-        const kanGaaTilNeste = this.kanGaaTilNeste();
+        const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, this.hentGjeldendeSporsmalId(this.props));
 
         return (
             <ResponsivSide> {/* TODO FO-1547 Sleng på IE-classnames? */}
@@ -119,11 +140,10 @@ class NySkjema extends React.Component<Props> {
                     <LenkeNeste
                         onClick={this.handleNesteBtnClick}
                         href={nesteHref}
-                        erAktiv={kanGaaTilNeste}
+                        erAktiv={kanGaaTilNesteTmp}
                     />
-                    {/*this.props.sporsmalErBesvart(this.getSporsmalId(gjeldendeSporsmal))*/}
                     <LenkeTilbake
-                        onClick={() => this.props.history.goBack()}
+                        onClick={this.handleTilbakeBtnClick}
                     />
                     <LenkeAvbryt/>
                 </Animasjon>
