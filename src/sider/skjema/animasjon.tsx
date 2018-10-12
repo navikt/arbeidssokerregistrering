@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { disableVerikalScrollingVedAnimasjon } from '../../utils/utils';
 
 interface Props {
     flag: number | string;
@@ -31,6 +32,7 @@ class Animasjon extends React.Component<Props, State> {
 
     componentDidUpdate() {
         if (!this.state.visible) {
+            disableVerikalScrollingVedAnimasjon();
             this.setState({visible: true});
         }
     }
