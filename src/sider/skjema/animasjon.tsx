@@ -18,6 +18,7 @@ class Animasjon extends React.Component<Props, State> {
         this.state = {
             visible: true
         };
+        disableVerikalScrollingVedAnimasjon();
     }
 
     componentWillReceiveProps(nextProps: Props) {
