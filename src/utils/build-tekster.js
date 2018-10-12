@@ -27,6 +27,3 @@ try{
 }catch (e){
     console.log("Kunne ikke skrive fil ", e);
 }
-
-console.log(read('./src/tekster/hjelpetekster'));
-

@@ -52,10 +52,10 @@ class Inngangssporsmal extends React.Component<Props> {
                             </Normaltekst>
                         </legend>
                         <div className="spm-body">
-                            <Alternativ svar={FremtidigSituasjonSvar.NY_JOBB} {...alternativProps}/>
-                            <Alternativ svar={FremtidigSituasjonSvar.BEHOLDE_JOBB} {...alternativProps}/>
-                            <Alternativ svar={FremtidigSituasjonSvar.FOR_SYK} {...alternativProps}/>
+                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
+                            <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
+                            <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
                         </div>
                     </fieldset>
                 </form>
@@ -74,9 +74,9 @@ class Inngangssporsmal extends React.Component<Props> {
 
     finnLop(svar: FremtidigSituasjonSvar): number {
         switch (svar) {
-            case FremtidigSituasjonSvar.NY_JOBB: return 1;
-            case FremtidigSituasjonSvar.BEHOLDE_JOBB: return 2;
-            case FremtidigSituasjonSvar.FOR_SYK: return 3;
+            case FremtidigSituasjonSvar.NY_ARBEIDSGIVER: return 1;
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER: return 2;
+            case FremtidigSituasjonSvar.INGEN_PASSER: return 3;
             case FremtidigSituasjonSvar.USIKKER: return 4;
             default: return 0;
         }

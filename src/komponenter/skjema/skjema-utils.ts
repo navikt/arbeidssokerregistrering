@@ -27,6 +27,7 @@ export function isNumber(n: number): boolean {
     return !(n === null || n === undefined || isNaN(n));
 }
 
+// TODO Flytte dette inn i skjemaet hvor det brukes?
 export const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[]>([
     // Denne configgen sier noe om hvilke spørsmål man skal hoppe over, gitt brukerens svar.
     // For eksempel betyr [ALDRI_HATT_JOBB, ['sisteStilling']] at man skal hoppe over spørsmålet om sisteStilling
@@ -36,6 +37,8 @@ export const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[
     [DinSituasjonSvar.VIL_FORTSETTE_I_JOBB, ['utdanning', 'utdanningBestatt', 'utdanningGodkjent']],
     [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
 ]);
+
+export const vanligFlyt: SkjemaConfig = new Map<Svar, string[]>();
 
 function getSporsmalSomIkkeSkalBesvares(svar: Svar | undefined, config: SkjemaConfig): string[] {
     if (!svar || !config.has(svar)) {

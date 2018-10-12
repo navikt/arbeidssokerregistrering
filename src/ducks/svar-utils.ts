@@ -72,10 +72,10 @@ export enum AndreForholdSvar {
 }
 
 export enum FremtidigSituasjonSvar {
-    BEHOLDE_JOBB = 'BEHOLDE_JOBB',
-    FOR_SYK = 'FOR_SYK',
-    NY_JOBB = 'NY_JOBB',
+    SAMME_ARBEIDSGIVER = 'SAMME_ARBEIDSGIVER',
     USIKKER = 'USIKKER',
+    NY_ARBEIDSGIVER = 'NY_ARBEIDSGIVER',
+    INGEN_PASSER = 'INGEN_PASSER',
     INGEN_SVAR = 'INGEN_SVAR',
 }
 

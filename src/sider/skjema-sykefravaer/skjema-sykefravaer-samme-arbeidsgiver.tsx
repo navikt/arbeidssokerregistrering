@@ -1,5 +1,5 @@
 import * as React from 'react';
-import NySkjema from '../../komponenter/skjema/skjema';
+import Skjema from '../../komponenter/skjema/skjema';
 import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
@@ -11,6 +11,7 @@ import { InjectedIntlProps } from 'react-intl';
 import SporsmalHvorLangTid from './sporsmal/sporsmal-hvor-lang-tid';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import SporsmalStillingsprosent from './sporsmal/sporsmal-stillingsprosent';
+import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -22,7 +23,7 @@ interface StateProps {
 
 type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class SkjemaSykefravaerBeholdeJobb extends React.Component<Props> {
+class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
     render() {
         const {endreSvar, intl, svarState, location, match, history} = this.props;
         const fellesProps = {
@@ -33,18 +34,16 @@ class SkjemaSykefravaerBeholdeJobb extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
-        const config = new Map<Svar, string[]>();
-
         return (
-            <NySkjema
-                config={config}
+            <Skjema
+                config={vanligFlyt}
                 baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/2`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
                 <SporsmalHvorLangTid sporsmalId={SporsmalId.hvorLangTid} {...fellesProps}/>
                 <SporsmalStillingsprosent sporsmalId={SporsmalId.stillingsprosent} {...fellesProps}/>
-            </NySkjema>
+            </Skjema>
         );
     }
 }
@@ -57,4 +56,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaSykefravaerBeholdeJobb));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaSykefravaerSammeArbeidsgiver));
