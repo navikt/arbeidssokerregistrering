@@ -8,6 +8,7 @@ interface OwnProps {
 
 export default class ProgressBar extends React.Component<OwnProps> {
     private framdriftContainer: HTMLDivElement;
+    private framdriftWrapper: HTMLDivElement;
     private framdriftIndikator: HTMLDivElement;
 
     scrolling() {
@@ -25,9 +26,15 @@ export default class ProgressBar extends React.Component<OwnProps> {
             if (this.framdriftContainer) {
                 this.framdriftContainer.classList.add('framdrift-fixed');
             }
+            if (this.framdriftWrapper) {
+                this.framdriftWrapper.classList.add('framdrift-wrapper');
+            }
         } else {
             if (this.framdriftContainer) {
                 this.framdriftContainer.classList.remove('framdrift-fixed');
+            }
+            if (this.framdriftWrapper) {
+                this.framdriftWrapper.classList.remove('framdrift-wrapper');
             }
         }
     }
@@ -55,7 +62,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
         };
 
         return (
-            <>
+            <div ref={(div: HTMLDivElement) => this.framdriftWrapper = div}>
                 <div
                     ref={(div: HTMLDivElement) => this.framdriftContainer = div}
                     className="framdrift"
@@ -72,7 +79,7 @@ export default class ProgressBar extends React.Component<OwnProps> {
                     />
                     {this.scrolling()}
                 </div>
-            </>
+            </div>
         );
     }
 }
