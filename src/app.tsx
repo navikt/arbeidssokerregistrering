@@ -26,6 +26,7 @@ import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import StartRedirecter from './sider/start-redirecter';
 import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver';
 import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver';
+import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
 import Oppsummering from './sider/oppsummering/oppsummering';
@@ -65,7 +66,7 @@ class App extends React.Component {
                                             />
                                             <Route
                                                 path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
-                                                component={SkjemaSykefravaerSammeArbeidsgiver}
+                                                component={SkjemaSykefravaerUsikker}
                                             />
                                             <Route
                                                 path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
