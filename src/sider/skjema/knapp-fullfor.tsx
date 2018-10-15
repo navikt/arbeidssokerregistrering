@@ -17,6 +17,7 @@ function KnappFullfor({ disabled, onClick, intl}: Props) {
             className="knapp-neste"
             disabled={disabled}
             onClick={onClick}
+            data-testid="neste"
         >
             <Normaltekst>{getIntlMessage(intl.messages, 'knapp-fullfor')}</Normaltekst>
         </KnappBase>
