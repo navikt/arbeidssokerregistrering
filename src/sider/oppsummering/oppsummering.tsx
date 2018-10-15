@@ -110,7 +110,7 @@ class Oppsummering extends React.Component<Props> {
                 {oppsummeringBesvarelser(state)}
 
                 <div className="knapper-vertikalt">
-                    <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)}>
+                    <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)} data-testid="neste">
                         <FormattedMessage id="knapp-riktig"/>
                     </KnappBase>
                     <LenkeTilbake onClick={() => this.props.history.goBack()}/>
