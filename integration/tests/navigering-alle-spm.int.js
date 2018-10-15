@@ -40,19 +40,25 @@ module.exports = {
         });
     },
     'oppsummering-siden skal besta av tittel og oppsummering infoboks': (client) => {
+        client.waitForElementPresent('.oppsummering-tittel', WAIT_TIME);
+
         client.saveScreenshot(`integration/reports/oppsummering.png`);
-        sporsmal.validerSiden('@tittelOppsummeringTittel', '@divOppsummeringBesvarelser', 40000);
+        sporsmal.validerSiden('@tittelOppsummeringTittel', '@divOppsummeringBesvarelser');
         sporsmal.klikkNeste();
     },
     'fullfor-siden skal besta av tittel og sjekkliste infoboks': (client) => {
+        client.waitForElementPresent('.fullfor-tittel', WAIT_TIME);
+
         client.saveScreenshot(`integration/reports/fullfor.png`);
         sporsmal.validerSiden('@tittelFullforTittel', '@divFullforSjekkliste');
         sporsmal.klikkSjekkboksFullfor();
         sporsmal.klikkNeste();
     },
     'duernaregistert-siden skal besta av tittel og infoboks': (client) => {
+        client.waitForElementPresent('.registrert__tittel', WAIT_TIME);
+
         client.saveScreenshot(`integration/reports/duernaregistrert.png`);
-        sporsmal.validerSiden('@tittelDuErRegTittel', '@divDuErReg', 40000);
+        sporsmal.validerSiden('@tittelDuErRegTittel', '@divDuErReg');
     }
 
 };
