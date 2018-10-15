@@ -8,7 +8,6 @@ interface OwnProps {
 
 export default class ProgressBar extends React.Component<OwnProps> {
     private framdriftContainer: HTMLDivElement;
-    private framdriftWrapper: HTMLDivElement;
     private framdriftIndikator: HTMLDivElement;
 
     scrolling() {
@@ -26,15 +25,9 @@ export default class ProgressBar extends React.Component<OwnProps> {
             if (this.framdriftContainer) {
                 this.framdriftContainer.classList.add('framdrift-fixed');
             }
-            if (this.framdriftWrapper) {
-                this.framdriftWrapper.classList.add('framdrift-wrapper');
-            }
         } else {
             if (this.framdriftContainer) {
                 this.framdriftContainer.classList.remove('framdrift-fixed');
-            }
-            if (this.framdriftWrapper) {
-                this.framdriftWrapper.classList.remove('framdrift-wrapper');
             }
         }
     }
@@ -62,23 +55,21 @@ export default class ProgressBar extends React.Component<OwnProps> {
         };
 
         return (
-            <div ref={(div: HTMLDivElement) => this.framdriftWrapper = div}>
+            <div
+                ref={(div: HTMLDivElement) => this.framdriftContainer = div}
+                className="framdrift"
+                role="progressbar"
+                aria-valuenow={Math.round(framdriftBredde)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                tabIndex={-1}
+            >
                 <div
-                    ref={(div: HTMLDivElement) => this.framdriftContainer = div}
-                    className="framdrift"
-                    role="progressbar"
-                    aria-valuenow={Math.round(framdriftBredde)}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    tabIndex={-1}
-                >
-                    <div
-                        ref={(div: HTMLDivElement) => this.framdriftIndikator = div}
-                        className="andel"
-                        style={framdriftStyle}
-                    />
-                    {this.scrolling()}
-                </div>
+                    ref={(div: HTMLDivElement) => this.framdriftIndikator = div}
+                    className="andel"
+                    style={framdriftStyle}
+                />
+                {this.scrolling()}
             </div>
         );
     }
