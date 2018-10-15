@@ -41,7 +41,7 @@ module.exports = {
     },
     'oppsummering-siden skal besta av tittel og oppsummering infoboks': (client) => {
         client.saveScreenshot(`integration/reports/oppsummering.png`);
-        sporsmal.validerSiden('@tittelOppsummeringTittel', '@divOppsummeringBesvarelser');
+        sporsmal.validerSiden('@tittelOppsummeringTittel', '@divOppsummeringBesvarelser', 40000);
         sporsmal.klikkNeste();
     },
     'fullfor-siden skal besta av tittel og sjekkliste infoboks': (client) => {
