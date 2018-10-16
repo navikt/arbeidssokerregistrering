@@ -37,6 +37,8 @@ if (PRINT_FRONTENDLOGGER) {
     }
 }
 
+console.log('process.env.REACT_APP_MOCK', process.env.REACT_APP_MOCK_bes)
+
 if (MOCK_AUTENTISERINGS_INFO) {
     (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(DELAY, autentisert)));
 }
