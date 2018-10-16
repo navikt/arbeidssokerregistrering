@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { MatchProps } from '../../utils/utils';
+import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
@@ -89,6 +89,8 @@ class Oppsummering extends React.Component<Props> {
         if (!alleSporsmalErBesvarte(svar) || !sisteStillingErSatt(sisteStilling)) {
             this.props.history.push(START_PATH);
         }
+
+        disableVerikalScrollingVedAnimasjon();
     }
 
     render() {
