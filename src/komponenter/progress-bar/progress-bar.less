@@ -20,20 +20,10 @@
 
     &.framdrift-fixed {
         position: fixed;
-        top: 0;
+        top: 18px;
         left: 0;
         margin-top: 0;
-        &:before, &:after {
-            content: '';
-            display: block;
-            background-color: @white;
-        }
-        &:before{
-            padding-top: 2rem;
-        }
-        &:after {
-            padding-top: 2rem;
-        }
+        box-shadow: 0px -99px 0 120px @white;
     }
 }
 
