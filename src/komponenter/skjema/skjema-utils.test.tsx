@@ -1,5 +1,5 @@
 /*tslint:disable*/
-import { expect } from 'chai';
+import {expect} from 'chai';
 import {getAlleSporsmalSomIkkeSkalBesvares, getTekstIdForSvar, SkjemaConfig} from "./skjema-utils";
 import {SporsmalId, State as SvarState} from '../../ducks/svar';
 import {
@@ -42,6 +42,6 @@ describe('skjema-utils', () => {
     });
 
     it('test getTekstIdForSvar', () => {
-        expect(getTekstIdForSvar('dinSituasjon', DinSituasjonSvar.ALDRI_HATT_JOBB)).to.equal('dinsituasjon-svar-aldri-hatt-jobb');
+        expect(getTekstIdForSvar(SporsmalId.dinSituasjon, DinSituasjonSvar.ALDRI_HATT_JOBB)).to.equal('dinsituasjon-svar-aldri-hatt-jobb');
     });
 });

@@ -1,6 +1,6 @@
 /*tslint:disable*/
 import * as React from 'react';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
@@ -8,9 +8,12 @@ import {
     mountWithStoreRouterAndIntl,
     store
 } from '../../test/test-utils';
-import {setInitialState} from "../../ducks/svar";
-import { SkjemaProps } from './skjema';
-import {defaultConfigForSporsmalsflyt} from "./skjema-utils";
+import {setInitialState, SporsmalId, State as SvarState} from '../../ducks/svar';
+import { Props as SkjemaProps } from './skjema';
+import {defaultConfigForSporsmalsflyt, SkjemaConfig} from './skjema-utils';
+import sinon from 'sinon';
+import LenkeNeste from "../knapper/lenke-neste";
+import {Svar} from "../../ducks/svar-utils";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -18,12 +21,12 @@ beforeEach(() => store.dispatch(setInitialState()));
 
 describe('<Skjema />', () => {
     it('Mount Skjema', () => {
-        const props = dummyPropsTilSkjema;
+        const props = dummyPropsTilSkjema();
         mountWithStoreRouterAndIntl(<SkjemaMedChildren {...props} />);
     });
 
     /*
-    TODO FO-1619 Skriv enhetstester tilsvarende dette
+    // TODO FO-1619 Skriv enhetstester tilsvarende dette
     it('Skal vise advarsel dersom spørsmål ikke er besvart', () => {
         const gaaTilSporsmal = sinon.spy();
 
@@ -41,6 +44,7 @@ describe('<Skjema />', () => {
         expect(wrapper.find('.dummy-advarsel-element')).to.have.length(1);
     });
 
+    /*
     it('Neste-lenke skal ha riktig href', () => {
         const props: SkjemaProps = {
             ...dummyPropsTilSkjema,
@@ -110,6 +114,7 @@ describe('<Skjema />', () => {
     */
 });
 
+
 function SkjemaMedChildren(props) {
     return (
         <Skjema {...props}>
@@ -125,9 +130,40 @@ function DummySporsmal({sporsmalId: string}) {
     return (null);
 }
 
-const dummyPropsTilSkjema: SkjemaProps = {
-    config: defaultConfigForSporsmalsflyt,
-    baseUrl: 'baseurl',
-    endUrl: 'endurl',
-    match: {params: {id: '0'}}
+
+const dummyPropsTilSkjema = (): SkjemaProps => {
+
+    /*
+    const skjemaChildren = (
+        <>
+        <DummySporsmal sporsmalId="helse"/>
+        <DummySporsmal sporsmalId="utdanning"/>
+        <DummySporsmal sporsmalId="test"/>
+        <DummySporsmal sporsmalId="test2"/>
+        </>
+    );
+    */
+
+    const skjemaProps = {
+        svarState: {},
+        endreSvar: (sporsmalId: SporsmalId, svar: Svar) => {},
+        config: defaultConfigForSporsmalsflyt,
+        baseUrl: "",
+        endUrl: "",
+    };
+
+    return skjemaProps as any;
+
 };
+
+/*
+const dummyPropsTilSkjema: SkjemaProps = {
+    svarState: {},
+    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => {},
+    children: SkjemaMedChildren(),
+    config: defaultConfigForSporsmalsflyt,
+    baseUrl: "",
+    endUrl: "",
+};
+*/
+

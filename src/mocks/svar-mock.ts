@@ -7,8 +7,9 @@ import {
     UtdanningSvar
 } from '../ducks/svar-utils';
 import { SporsmalId } from '../ducks/svar';
+import { State as SvarState } from '../ducks/svar';
 
-const svarMock = [
+const svarMock: SvarState = [
     {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
     {sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB},
     {sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
