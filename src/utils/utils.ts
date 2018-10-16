@@ -87,3 +87,10 @@ export function scrollToBanner() {
     }
     setTimeout(() => window.scrollTo(0, scrollHeight), 0);
 }
+
+export function disableVerikalScrollingVedAnimasjon() {
+    document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+    setTimeout(() => {
+        document.getElementsByTagName('body')[0].style.overflowY = 'auto';
+    },         600);
+}

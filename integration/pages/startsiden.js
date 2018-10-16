@@ -3,6 +3,7 @@ module.exports = {
         return this.api.globals.launch_url;
     },
     elements: {
-        start: '.startside'
+        start: '.startside',
+        startRegistrering: "*[data-testid='start-registrering']",
     },
 };

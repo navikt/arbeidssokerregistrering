@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { getIntlMessage, MatchProps } from '../../utils/utils';
+import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
@@ -71,6 +71,8 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
         if (!alleSporsmalErBesvarte(svar) || !sisteStillingErSatt(sisteStilling)) {
             this.props.history.push(START_PATH);
         }
+
+        disableVerikalScrollingVedAnimasjon();
     }
 
     registrerBrukerOnClick() {
