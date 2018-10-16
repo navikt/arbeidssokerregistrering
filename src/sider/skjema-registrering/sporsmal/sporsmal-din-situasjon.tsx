@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import Alternativ from '../alternativ';
+import Alternativ from '../../../komponenter/skjema/alternativ';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import {
     annenStilling,
@@ -15,6 +15,7 @@ import {
     situasjonerDerViVetAtBrukerenHarHattJobb
 } from './sporsmal-siste-stilling/siste-stilling-utils';
 import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
+import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
@@ -23,12 +24,6 @@ interface DispatchProps {
 interface StateProps {
     defaultStilling: Stilling;
     sisteStilling: Stilling;
-}
-
-interface SporsmalProps {
-    sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
 }
 
 type Props = SporsmalProps & InjectedIntlProps & DispatchProps & StateProps;

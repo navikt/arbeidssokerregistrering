@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { State as SvarState } from '../../ducks/svar';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { AppState } from '../../reducer';
 import { FormattedMessage } from 'react-intl';
 import { getTekstIdForOppsummering } from './oppsummering-utils';
-import { Svar } from '../../ducks/svar-utils';
+import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { MessageValue } from 'react-intl';
 
 interface OwnProps {
-    sporsmalId?: string;
+    sporsmalId?: SporsmalId;
     tekstId?: string;
     tekst?: string;
     skjul?: boolean;
@@ -43,10 +43,10 @@ class OppsummeringElement extends React.Component<Props> {
     }
 
     getIntlTekstId(): string {
-        const { sporsmalId, tekstId, } = this.props;
+        const { sporsmalId, tekstId, svarState } = this.props;
 
         if (sporsmalId) {
-            return getTekstIdForOppsummering(sporsmalId, this.props.svarState[sporsmalId]);
+            return getTekstIdForOppsummering(sporsmalId, hentSvar(svarState, sporsmalId));
         } else {
             return tekstId || '';
         }
@@ -66,10 +66,14 @@ class OppsummeringElement extends React.Component<Props> {
         if (!sporsmalId || !skjulHvisSvarErLik) {
             return true;
         }
-        if (Array.isArray(skjulHvisSvarErLik) && skjulHvisSvarErLik.includes(svarState[sporsmalId])) {
+        const svar: Svar | undefined = hentSvar(svarState, sporsmalId);
+        if (!svar) {
+            return true;
+        }
+        if (Array.isArray(skjulHvisSvarErLik) && skjulHvisSvarErLik.includes(svar)) {
             return false;
         }
-        return skjulHvisSvarErLik !== svarState[sporsmalId];
+        return skjulHvisSvarErLik !== svar;
     }
 }
 

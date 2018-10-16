@@ -1,28 +1,24 @@
 import * as React from 'react';
-import Alternativ from '../alternativ';
+import Alternativ from '../../../komponenter/skjema/alternativ';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../skjema-utils';
-import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
-import { HelseHinderSvar, Svar } from '../../../ducks/svar-utils';
-
-interface SporsmalProps {
-    sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
-}
+import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
+import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function HelseHinder(props: Props) {
+export default function AndreForhold(props: Props) {
+    const { intl, sporsmalId } = props;
     const fellesProps = {
         endreSvar: props.endreSvar,
-        intl: props.intl,
+        intl: intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
-    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId, kontekst, props.intl);
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
 
     return (
         <>
@@ -32,10 +28,13 @@ export default function HelseHinder(props: Props) {
                         <Innholdstittel tag="h1" className="spm-tittel">
                             {getTekst('tittel')}
                         </Innholdstittel>
+                        <Normaltekst className="spm-ingress">
+                            {getTekst('ingress')}
+                        </Normaltekst>
                     </legend>
                     <div className="spm-body">
-                        <Alternativ svar={HelseHinderSvar.JA} {...fellesProps}/>
-                        <Alternativ svar={HelseHinderSvar.NEI} {...fellesProps}/>
+                        <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
+                        <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
                     </div>
                 </fieldset>
             </form>

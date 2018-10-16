@@ -1,7 +1,13 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { Stilling } from './siste-stilling';
-import { State as SvarState } from './svar';
+import {
+    AndreForholdSvar,
+    DinSituasjonSvar,
+    HelseHinderSvar,
+    SisteStillingSvar, UtdanningBestattSvar,
+    UtdanningGodkjentSvar, UtdanningSvar
+} from './svar-utils';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -29,11 +35,21 @@ interface TekstForSvar {
 
 export type TeksterForBesvarelse = TekstForSvar[];
 
+export interface RegistreringBesvarelse {
+    utdanning: UtdanningSvar;
+    utdanningBestatt: UtdanningBestattSvar;
+    utdanningGodkjent: UtdanningGodkjentSvar;
+    helseHinder: HelseHinderSvar;
+    andreForhold: AndreForholdSvar;
+    sisteStilling: SisteStillingSvar;
+    dinSituasjon: DinSituasjonSvar;
+}
+
 export interface RegistreringData {
     enigIOppsummering?: boolean;
     oppsummering?: string;
     sisteStilling?: Stilling;
-    besvarelse?: SvarState;
+    besvarelse?: RegistreringBesvarelse;
     teksterForBesvarelse?: TeksterForBesvarelse;
 }
 
