@@ -5,7 +5,7 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import {
-    AVBRYT_PATH, DUERNAREGISTRERT_PATH, FULLFOR_PATH,
+    AVBRYT_PATH, DUERNAREGISTRERT_PATH, FULLFOR_PATH, INNGANGSSPORSMAL,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH, SBLREG_PATH,
     SKJEMA_PATH,
@@ -34,7 +34,7 @@ class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const isOn = this.props.visSykefravaerSkjema;
+        const visSykefravaerSkjema = this.props.visSykefravaerSkjema;
 
         return (
             <>
@@ -43,33 +43,33 @@ class Routes extends React.Component<StateProps> {
                 <Sideanimasjon>
                     <Switch>
                         <ToggleRoute
-                            path={'/bla'}
+                            path={INNGANGSSPORSMAL}
                             component={Inngangssporsmal}
-                            isOn={isOn}
+                            isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
                             component={SkjemaSykefravaerBeholdeJobb}
-                            isOn={isOn}
+                            isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
                             component={SkjemaSykefravaerBeholdeJobb}
-                            isOn={isOn}
+                            isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
                             component={SkjemaSykefravaerBeholdeJobb}
-                            isOn={isOn}
+                            isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
                             component={SkjemaSykefravaerBeholdeJobb}
-                            isOn={isOn}
+                            isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <Route path={START_PATH} component={StartRedirecter}/>
@@ -80,7 +80,7 @@ class Routes extends React.Component<StateProps> {
                         <Route path={AVBRYT_PATH} component={Avbryt}/>
                         <Route path={FULLFOR_PATH} component={Fullfor}/>
                         <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
-                        <Redirect exact={true} from="*" to={START_PATH}/>
+                        <Redirect from="*" to={START_PATH}/>
                     </Switch>
                 </Sideanimasjon>
             </>);
@@ -92,4 +92,4 @@ const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
 });
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, null, null, { pure: false })(Routes);
