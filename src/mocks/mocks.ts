@@ -25,7 +25,7 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const DISPATCH_BESVARELSE = true; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BESVARELSER || false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const PRINT_FRONTENDLOGGER = true;
 const DELAY = 0;
 
@@ -36,8 +36,6 @@ if (PRINT_FRONTENDLOGGER) {
         }
     }
 }
-
-console.log('process.env.REACT_APP_MOCK', process.env.REACT_APP_MOCK_bes)
 
 if (MOCK_AUTENTISERINGS_INFO) {
     (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(DELAY, autentisert)));

@@ -77,6 +77,7 @@
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "node integration/nightwatch.js -c integration/default.conf.js",
     "test:browserstack": "node integration/browserstack.runner.js -c integration/browserstack.conf.js -e win_chrome,android_chrome,win_ie,win_edge",
+    "browserstack-build": "cross-env REACT_APP_MOCK_BESVARELSER='true' npm run heroku-postbuild",
     "heroku-serve": "node index.js",
     "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
   },
