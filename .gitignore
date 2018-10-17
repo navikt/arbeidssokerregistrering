@@ -7,7 +7,7 @@
 /coverage
 
 # Nightwatch reports
-**/integration/reports
+integration/reports/
 
 # production
 **/build
