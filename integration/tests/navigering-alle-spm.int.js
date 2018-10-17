@@ -2,6 +2,9 @@
 let startsiden, sporsmal;
 let WAIT_TIME;
 
+// TODO vurdere bruke testCafe, istedenfor nightwatch
+// https://github.com/navikt/arbeidssokerregistrering/tree/testcafe
+
 module.exports = {
     before: (client) => {
         WAIT_TIME = client.globals.wait;
@@ -22,9 +25,11 @@ module.exports = {
         // Ga til spm 1
         client.click(elements.startRegistrering.selector).pause(500);
 
-        // todo legg til validering av urlen
+        // TODO legg til validering av urlen
         sporsmal.validerSiden('@tittelSporsmal', '@spmBody');
         sporsmal.validerMinst2Checkbokser();
+
+        // TODO legg til klikk av radio-knapper, istedenfor mock-data
         client.saveScreenshot('integration/reports/spm1.png');
 
         sporsmal.klikkNeste();
