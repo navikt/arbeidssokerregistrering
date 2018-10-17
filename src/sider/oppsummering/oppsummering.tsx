@@ -19,6 +19,7 @@ import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
 import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
 import { alleSporsmalErBesvarte, sisteStillingErSatt } from '../fullfor/fullfor-utils';
+import { SporsmalId } from '../../ducks/svar';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -50,32 +51,32 @@ const oppsummeringBesvarelser = (state: AppState) => {
                     tekstId={jobbetSeksAvTolvSisteManederTekstId}
                     skjul={jobbetSeksAvTolvSisteManederTekstId === ''}
                 />
-                <OppsummeringElement sporsmalId="dinSituasjon">
+                <OppsummeringElement sporsmalId={SporsmalId.dinSituasjon}>
                     <FormattedMessage id={`oppsummering-dinsituasjon`}/>&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
-                    sporsmalId="sisteStilling"
+                    sporsmalId={SporsmalId.sisteStilling}
                     tekst={state.sisteStilling.data.stilling.label}
                     skjul={state.sisteStilling.data.stilling === ingenYrkesbakgrunn}
                 >
                     <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
-                    sporsmalId={'utdanning'}
+                    sporsmalId={SporsmalId.utdanning}
                     skjulHvisSvarErLik={[UtdanningSvar.INGEN_SVAR]}
                 >
                     <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
                 </OppsummeringElement>
                 <OppsummeringElement
-                    sporsmalId={'utdanningBestatt'}
+                    sporsmalId={SporsmalId.utdanningBestatt}
                     skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
                 />
                 <OppsummeringElement
-                    sporsmalId={'utdanningGodkjent'}
+                    sporsmalId={SporsmalId.utdanningGodkjent}
                     skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
                 />
-                <OppsummeringElement sporsmalId={'helseHinder'}/>
-                <OppsummeringElement sporsmalId={'andreForhold'}/>
+                <OppsummeringElement sporsmalId={SporsmalId.helseHinder}/>
+                <OppsummeringElement sporsmalId={SporsmalId.andreForhold}/>
             </ul>
         </div>
     );

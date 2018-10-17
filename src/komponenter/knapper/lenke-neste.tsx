@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import * as classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ interface Props {
     href: string;
 }
 
-function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & InjectedIntlProps) {
+function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props) {
     return (
         <div className="nestelenke__wrapper">
             <Link
@@ -31,4 +31,4 @@ function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props & Injec
     );
 }
 
-export default injectIntl(LenkeNeste);
+export default LenkeNeste;

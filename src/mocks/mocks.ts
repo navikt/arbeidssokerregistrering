@@ -9,10 +9,11 @@ import {FEATURE_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
 import autentisert from './autentiseringsinfo-mock';
 import registreringRespons from "./registrerbruker-mock";
 import getStore from "../store";
-import {ActionTypes as SvarActionTypes} from '../ducks/svar';
+import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
 import svarMock from "./svar-mock";
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling-mock";
+import {hentSvar} from "../ducks/svar-utils";
 
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
@@ -91,18 +92,18 @@ if (MOCK_REAKTIVER_BRUKER) {
 if (DISPATCH_BESVARELSE) {
     const store = getStore();
     [
-        'utdanning',
-        'utdanningBestatt',
-        'utdanningGodkjent',
-        'helseHinder',
-        'andreForhold',
-        'sisteStilling',
-        'dinSituasjon',
+       SporsmalId.utdanning,
+       SporsmalId.utdanningBestatt,
+       SporsmalId.utdanningGodkjent,
+       SporsmalId.helseHinder,
+       SporsmalId.andreForhold,
+       SporsmalId.sisteStilling,
+       SporsmalId.dinSituasjon,
     ].forEach(sporsmalId => store.dispatch({
         type: SvarActionTypes.AVGI_SVAR,
         data: {
             sporsmalId,
-            svar: svarMock[sporsmalId],
+            svar: hentSvar(svarMock, sporsmalId),
         }
     }));
     store.dispatch({

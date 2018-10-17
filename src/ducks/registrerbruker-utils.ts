@@ -1,9 +1,9 @@
-import { RegistreringData, TeksterForBesvarelse } from './registrerbruker';
-import { State as SvarState } from './svar';
+import { RegistreringBesvarelse, RegistreringData, TeksterForBesvarelse } from './registrerbruker';
+import { SporsmalId, State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
-import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../sider/skjema/skjema-utils';
+import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
-import { IngenSvar } from './svar-utils';
+import { hentSvar, IngenSvar } from './svar-utils';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
@@ -13,40 +13,55 @@ export function mapAvgitteSvarForBackend(
     return {
         enigIOppsummering: true,
         sisteStilling: sisteStilling,
-        besvarelse: svar,
+        besvarelse: mapTilBesvarelse(svar),
         oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
         teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling),
     };
 }
 
+export function mapTilBesvarelse(svarState: SvarState): RegistreringBesvarelse {
+    const besvarelse = {};
+    for (let i = 0; i < svarState.length; i++) {
+        const sporsmalOgSvar = svarState[i];
+        besvarelse[sporsmalOgSvar.sporsmalId] = sporsmalOgSvar.svar;
+    }
+    return besvarelse as RegistreringBesvarelse;
+}
+
+export function mapTilSvarState(besvarelse: RegistreringBesvarelse): SvarState {
+    return Object.keys(besvarelse).map((sporsmalId) => ({
+        sporsmalId: sporsmalId,
+        svar: besvarelse[sporsmalId]
+    })) as SvarState;
+}
+
 export function genererTeksterForBesvarelse(
-    besvarelse: SvarState,
+    svarState: SvarState,
     intl: InjectedIntl,
     sisteStilling: Stilling,
 ): TeksterForBesvarelse {
-    return Object.keys(besvarelse)
-        .map(sporsmalId => ({
-            sporsmalId: sporsmalId,
-            sporsmal: getIntlTekstForSporsmal(sporsmalId, 'tittel', intl),
-            svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalId, besvarelse, intl, sisteStilling),
-        }));
+    return svarState.map(sporsmalOgSvar => ({
+        sporsmalId: sporsmalOgSvar.sporsmalId,
+        sporsmal: getIntlTekstForSporsmal(sporsmalOgSvar.sporsmalId, 'tittel', intl),
+        svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalOgSvar.sporsmalId, svarState, intl, sisteStilling),
+    }));
 }
 
 function getIntlTekstForPotensieltUbesvartSporsmal(
-    sporsmalId: string,
-    besvarelse: SvarState,
+    sporsmalId: SporsmalId,
+    svarState: SvarState,
     intl: InjectedIntl,
     sisteStilling: Stilling,
 ): string {
     if (sporsmalId === 'sisteStilling') {
         return hentAvgittSvarForSisteStilling(sisteStilling);
     }
-    const svar = besvarelse[sporsmalId];
-    if (svar === IngenSvar.INGEN_SVAR) {
+    const svar = hentSvar(svarState, sporsmalId);
+    if (svar === IngenSvar.INGEN_SVAR || !svar) {
         return 'Ikke aktuelt';
     }
-    const tekstId = getTekstIdForSvar(sporsmalId, besvarelse[sporsmalId]);
-    return intlHarTekstId(intl, tekstId) ? intl.messages[tekstId] : svar;
+    const tekstId = getTekstIdForSvar(sporsmalId, svar);
+    return intlHarTekstId(intl, tekstId) ? intl.messages[tekstId] : svar.toString();
 }
 
 function hentAvgittSvarForSisteStilling(sisteStilling: Stilling): string {
