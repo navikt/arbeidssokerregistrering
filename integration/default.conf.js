@@ -25,7 +25,7 @@ const config = {
                 acceptSslCerts: true,
                 keepAlive: false,
                 chromeOptions: {
-                    args: ['--no-sandbox', '--disable-gpu', '--log-level=3'],
+                    args: ['--headless', '--no-sandbox', '--disable-gpu', '--log-level=3'],
                 },
             }
         },
