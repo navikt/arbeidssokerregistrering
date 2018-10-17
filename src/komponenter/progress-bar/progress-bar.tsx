@@ -55,24 +55,22 @@ export default class ProgressBar extends React.Component<OwnProps> {
         };
 
         return (
-            <>
+            <div
+                ref={(div: HTMLDivElement) => this.framdriftContainer = div}
+                className="framdrift"
+                role="progressbar"
+                aria-valuenow={Math.round(framdriftBredde)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                tabIndex={-1}
+            >
                 <div
-                    ref={(div: HTMLDivElement) => this.framdriftContainer = div}
-                    className="framdrift"
-                    role="progressbar"
-                    aria-valuenow={Math.round(framdriftBredde)}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    tabIndex={-1}
-                >
-                    <div
-                        ref={(div: HTMLDivElement) => this.framdriftIndikator = div}
-                        className="andel"
-                        style={framdriftStyle}
-                    />
-                    {this.scrolling()}
-                </div>
-            </>
+                    ref={(div: HTMLDivElement) => this.framdriftIndikator = div}
+                    className="andel"
+                    style={framdriftStyle}
+                />
+                {this.scrolling()}
+            </div>
         );
     }
 }

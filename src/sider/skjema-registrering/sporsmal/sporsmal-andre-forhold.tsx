@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Alternativ from '../../../komponenter/skjema/alternativ';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function AndreForhold(props: Props) {
+function AndreForhold(props: Props) {
     const { intl, sporsmalId } = props;
     const fellesProps = {
         endreSvar: props.endreSvar,
@@ -49,3 +49,5 @@ export default function AndreForhold(props: Props) {
         </>
     );
 }
+
+export default injectIntl(AndreForhold);

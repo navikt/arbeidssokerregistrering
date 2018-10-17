@@ -1,25 +1,25 @@
-const driver = require('./driver');
+const chromedriver = require('chromedriver');
 const mock = require('./mock');
 module.exports = {
     default: {
         isLocal: true,
     },
-    before: function(done) {
+    before: function (done) {
         if (this.isLocal) {
             mock.startMock();
-            driver.start();
-            setTimeout(function() {
+            chromedriver.start();
+            setTimeout(function () {
                 done();
-            }, 5000);
+            }, 10000);
         } else {
             done();
 
         }
     },
-    after: function(done) {
+    after: function (done) {
         if (this.isLocal) {
             mock.stopMock();
-            driver.stop();
+            chromedriver.stop();
             setTimeout(function () {
                 done();
             }, 200);

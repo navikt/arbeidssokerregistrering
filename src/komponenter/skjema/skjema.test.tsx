@@ -1,6 +1,6 @@
 /*tslint:disable*/
 import * as React from 'react';
-import {expect} from 'chai';
+import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import Skjema from './skjema';
@@ -8,126 +8,104 @@ import {
     mountWithStoreRouterAndIntl,
     store
 } from '../../test/test-utils';
-import {setInitialState} from "../../ducks/svar";
-import { SkjemaProps } from './skjema';
+import {setInitialState, SporsmalId} from "../../ducks/svar";
 import {defaultConfigForSporsmalsflyt} from "./skjema-utils";
+import {
+    DinSituasjonSvar,
+    Svar,
+    UtdanningSvar
+} from "../../ducks/svar-utils";
+import {OPPSUMMERING_PATH, SKJEMA_PATH} from "../../utils/konstanter";
+import SporsmalDinSituasjon from "../../sider/skjema-registrering/sporsmal/sporsmal-din-situasjon";
+import SisteStilling from "../../sider/skjema-registrering/sporsmal/sporsmal-siste-stilling/siste-stilling";
+import Utdanningsporsmal from "../../sider/skjema-registrering/sporsmal/sporsmal-utdanning";
+import UtdanningGodkjentSporsmal from "../../sider/skjema-registrering/sporsmal/sporsmal-utdanning-godkjent";
+import UtdanningBestattSporsmal from "../../sider/skjema-registrering/sporsmal/sporsmal-utdanning-bestatt";
+import HelseHinder from "../../sider/skjema-registrering/sporsmal/sporsmal-helse-hinder";
+import AndreForhold from "../../sider/skjema-registrering/sporsmal/sporsmal-andre-forhold";
+import {RouteComponentProps} from "react-router";
+import {MatchProps} from "../../utils/utils";
+import {AppState} from "../../reducer";
+import getStore from "../../store";
+import {Store} from "redux";
 
 enzyme.configure({adapter: new Adapter()});
 
 beforeEach(() => store.dispatch(setInitialState()));
 
 describe('<Skjema />', () => {
-    it('Mount Skjema', () => {
-        const props = dummyPropsTilSkjema;
-        mountWithStoreRouterAndIntl(<SkjemaMedChildren {...props} />);
-    });
 
-    /*
-    TODO FO-1619 Skriv enhetstester tilsvarende dette
     it('Skal vise advarsel dersom spørsmål ikke er besvart', () => {
-        const gaaTilSporsmal = sinon.spy();
 
-        const props = {
-            ...dummyPropsTilSkjema,
-            sporsmalErBesvart: (sporsmalId) => false,
-            gaaTilSporsmal: gaaTilSporsmal,
-            advarselElement: <div className="dummy-advarsel-element"/>
-        };
+        const wrapper = mountSkjema(defaultConfigForSporsmalsflyt, "0", undefined);
 
-        const wrapper = mountWithStoreRouterAndIntl(<SkjemaMedChildren {...props} />);
-        wrapper.find(LenkeNeste).simulate('click');
-
-        expect(gaaTilSporsmal).to.have.property('callCount', 0);
-        expect(wrapper.find('.dummy-advarsel-element')).to.have.length(1);
+        wrapper.find("a.nestelenke").simulate('click');
+        expect(wrapper.find('div.spm-advarsel')).to.have.length(1);
     });
+
 
     it('Neste-lenke skal ha riktig href', () => {
-        const props: SkjemaProps = {
-            ...dummyPropsTilSkjema,
-            sporsmalErBesvart: (sporsmalId) => true,
-            gjeldendeSporsmal: 2,
-            hrefTilSporsmal: (n: number) => `skjema/${n}`,
-        };
-        const wrapper = mountWithStoreRouterAndIntl((<SkjemaMedChildren {...props} />));
-        expect(wrapper.find(LenkeNeste).find({href: 'skjema/3'})).to.not.have.length(0);
+
+        const wrapper = mountSkjema(defaultConfigForSporsmalsflyt, "0", undefined);
+
+        expect(wrapper.find("a.nestelenke").find({href: SKJEMA_PATH + '/1'})).to.have.length(1);
+
     });
+
 
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
-        const settStateForUbesvartSporsmal = sinon.spy();
 
-        const svar = [
-            {sporsmalId: 'helse', svar: HelseHinderSvar.NEI},
-            {sporsmalId: 'utdanning', svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
-            {sporsmalId: 'situasjon', svar: DinSituasjonSvar.ER_PERMITTERT},
-        ];
+        const store: Store<AppState> = getStore();
+        store.getState().svar = [{ sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ALDRI_HATT_JOBB }];
 
-        const config: SkjemaConfig = new Map<Svar, string[]>([
-            [HelseHinderSvar.NEI, ['oppsummering', 'test']],
-            [UtdanningSvar.INGEN_UTDANNING, ['test2']],
-        ]);
+        const wrapper = mountSkjema(defaultConfigForSporsmalsflyt, "0", store);
 
-        const props: SkjemaProps = {
-            ...dummyPropsTilSkjema,
-            sporsmalErBesvart: (sporsmalId) => true,
-            settStateForUbesvartSporsmal: settStateForUbesvartSporsmal,
-            gjeldendeSporsmal: 2,
-            hrefTilSporsmal: (n: number) => `skjema/${n}`,
-            svar: svar,
-            config: config,
-        };
+        wrapper.find("a.nestelenke").simulate('click');
+        expect(wrapper.find("a.nestelenke").find({href: SKJEMA_PATH + '/2'})).to.have.length(1);
 
-        const wrapper = mountWithStoreRouterAndIntl((
-            <Skjema {...props}>
-                <DummySporsmal sporsmalId="helse"/>
-                <DummySporsmal sporsmalId="utdanning"/>
-                <DummySporsmal sporsmalId="situasjon"/>
-                <DummySporsmal sporsmalId="oppsummering"/>
-                <DummySporsmal sporsmalId="test"/>
-                <DummySporsmal sporsmalId="test2"/>
-            </Skjema>
-        ));
-
-        expect(wrapper.find(LenkeNeste).find({href: 'skjema/5'})).to.not.have.length(0);
-        wrapper.find('a.nestelenke').simulate('click');
-        expect(settStateForUbesvartSporsmal).to.have.property('callCount', 2);
-        expect(settStateForUbesvartSporsmal.getCall(0).args[0]).to.be.equal('oppsummering');
-        expect(settStateForUbesvartSporsmal.getCall(1).args[0]).to.be.equal('test');
     });
+
 
     it('Skal ikke hoppe over spørsmål hvis det ikke er konfigurert', () => {
-        const settStateForUbesvartSporsmal = sinon.spy();
 
-        const props = {
-            ...dummyPropsTilSkjema,
-            settStateForUbesvartSporsmal: settStateForUbesvartSporsmal,
-        };
+        const store: Store<AppState> = getStore();
+        store.getState().svar = [{ sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.INGEN_UTDANNING }];
 
-        const wrapper = enzyme.shallow((<SkjemaMedChildren {...props} />)).dive();
-        expect(wrapper.find(LenkeNeste)).to.not.have.length(0);
-        wrapper.find(LenkeNeste).simulate('click');
-        expect(settStateForUbesvartSporsmal).to.have.property('callCount', 0);
+        const config = new Map<Svar, string[]>([]);
+        const wrapper = mountSkjema(config, "0", store);
+
+        wrapper.find("a.nestelenke").simulate('click');
+        expect(wrapper.find("a.nestelenke").find({href: SKJEMA_PATH + '/1'})).to.have.length(1);
+
     });
-    */
+
 });
 
-function SkjemaMedChildren(props) {
-    return (
-        <Skjema {...props}>
-            <DummySporsmal sporsmalId="helse"/>
-            <DummySporsmal sporsmalId="utdanning"/>
-            <DummySporsmal sporsmalId="test"/>
-            <DummySporsmal sporsmalId="test2"/>
+const mountSkjema = (config, startId: string, store: Store<AppState> | undefined) => {
+
+    const sporsmalProps = {
+        endreSvar: (sporsmalId, svar) => {},
+        hentAvgittSvar: (sporsmalId: SporsmalId) => undefined,
+    };
+
+    const cfg = config ? config : defaultConfigForSporsmalsflyt;
+    const id = startId ? startId : "0";
+
+    return mountWithStoreRouterAndIntl(
+        <Skjema
+            config={cfg}
+            baseUrl={SKJEMA_PATH}
+            endUrl={OPPSUMMERING_PATH}
+            {... { match: { params: { id: id } }} as RouteComponentProps<MatchProps>}
+        >
+            <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...sporsmalProps}/>
+            <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...sporsmalProps}/>
+            <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...sporsmalProps}/>
+            <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} {...sporsmalProps}/>
+            <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...sporsmalProps}/>
+            <HelseHinder sporsmalId={SporsmalId.helseHinder} {...sporsmalProps}/>
+            <AndreForhold sporsmalId={SporsmalId.andreForhold} {...sporsmalProps}/>
         </Skjema>
-    );
-}
+    , store);
 
-function DummySporsmal({sporsmalId: string}) {
-    return (null);
-}
-
-const dummyPropsTilSkjema: SkjemaProps = {
-    config: defaultConfigForSporsmalsflyt,
-    baseUrl: 'baseurl',
-    endUrl: 'endurl',
-    match: {params: {id: '0'}}
 };

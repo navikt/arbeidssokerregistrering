@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# Nightwatch reports
+integration/reports/
+
 # production
 **/build
 **/target

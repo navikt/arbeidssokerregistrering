@@ -6,7 +6,7 @@ import pamJanzzData from './typeahead-mock';
 
 export function lagPamjanzzRespons({q}: { q: string}) {
     const { typeaheadYrkeList } = pamJanzzData;
-    const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q));
+    const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q.toLowerCase()));
     return {
         typeaheadYrkeList: filtrertListe
     }

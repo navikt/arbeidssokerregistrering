@@ -5,13 +5,13 @@ import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../..
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, UtdanningGodkjentSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
+import { injectIntl } from 'react-intl';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function UtdanningGodkjentSporsmal(props: Props) {
+function UtdanningGodkjentSporsmal(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
-        intl: props.intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
@@ -34,3 +34,5 @@ export default function UtdanningGodkjentSporsmal(props: Props) {
         </form>
     );
 }
+
+export default injectIntl(UtdanningGodkjentSporsmal);

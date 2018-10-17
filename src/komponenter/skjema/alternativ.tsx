@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RadioPanel } from 'nav-frontend-skjema';
 import * as classNames from 'classnames';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Svar } from '../../ducks/svar-utils';
 
 interface AlternativProps {
@@ -28,4 +28,4 @@ function Alternativ(props: AlternativProps & InjectedIntlProps) {
     );
 }
 
-export default Alternativ;
+export default injectIntl(Alternativ);
