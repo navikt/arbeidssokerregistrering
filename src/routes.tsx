@@ -15,7 +15,10 @@ import {
 import StartRedirecter from './sider/start-redirecter';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
-import SkjemaSykefravaerBeholdeJobb from './sider/skjema-sykefravaer/skjema-sykefravaer-beholde-jobb';
+import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver';
+import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver';
+import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
+import SkjemaSykefravaerIngenPasser from './sider/skjema-sykefravaer/skjema-sykefravaer-ingen-passer';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Avbryt from './sider/avbryt/avbryt';
@@ -50,25 +53,25 @@ class Routes extends React.Component<StateProps> {
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                            component={SkjemaSykefravaerBeholdeJobb}
+                            component={SkjemaSykefravaerNyArbeidsgiver}
                             isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
-                            component={SkjemaSykefravaerBeholdeJobb}
+                            component={SkjemaSykefravaerSammeArbeidsgiver}
                             isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
-                            component={SkjemaSykefravaerBeholdeJobb}
+                            component={SkjemaSykefravaerUsikker}
                             isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
                         <ToggleRoute
                             path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
-                            component={SkjemaSykefravaerBeholdeJobb}
+                            component={SkjemaSykefravaerIngenPasser}
                             isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
