@@ -1,7 +1,6 @@
 import {
     FULLFOR_PATH,
     SKJEMA_PATH,
-    basename,
     OPPSUMMERING_PATH,
     DUERNAREGISTRERT_PATH,
     SKJEMA_SYKEFRAVAER_PATH, INNGANGSSPORSMAL
@@ -13,7 +12,7 @@ const etterSporsmalConfig: string[] = [
     DUERNAREGISTRERT_PATH
 ];
 
-const progressBarConfig: string[] = [
+const registreringConfig: string[] = [
     `${SKJEMA_PATH}/0`,
     `${SKJEMA_PATH}/1`,
     `${SKJEMA_PATH}/2`,
@@ -22,7 +21,7 @@ const progressBarConfig: string[] = [
     `${SKJEMA_PATH}/5`,
     `${SKJEMA_PATH}/6`,
     ...etterSporsmalConfig
-].map(path => `${basename}${path}`);
+];
 
 const nyArbeidsgiverConfig: string[] = lagConfigForSykefravaerLop(1, 5);
 
@@ -48,8 +47,8 @@ function lagConfigForSykefravaerLop(lop: number, sporsmal: number): string[] {
 
 export function finnRiktigConfig(pathName: string): string[] {
 
-    if (progressBarConfig.includes(pathName)) {
-        return progressBarConfig;
+    if (registreringConfig.includes(pathName)) {
+        return registreringConfig;
     }
 
     if (nyArbeidsgiverConfig.includes(pathName)) {
