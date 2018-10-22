@@ -32,7 +32,7 @@ import ToggleRoute from './komponenter/toggle-route';
 import { AppState } from './reducer';
 import { selectSykefravaerFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
-import { SporsmalLop } from './ducks/sporsmal-lop';
+import { selectSporsmalLop, SporsmalLop } from './ducks/sporsmal-lop';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
@@ -107,7 +107,7 @@ class Routes extends React.Component<StateProps> {
 
 const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
-    sporsmalLop: state.sporsmalLop.sporsmalLop
+    sporsmalLop: selectSporsmalLop(state)
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);

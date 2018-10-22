@@ -13,6 +13,8 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import { SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
+import { RouteComponentProps } from 'react-router';
+import { MatchProps } from '../../utils/utils';
 
 interface StateProps {
     svarState: SvarState;
@@ -22,9 +24,15 @@ interface DispatchProps {
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
 }
 
-type Props = SporsmalProps & InjectedIntlProps & StateProps & DispatchProps;
+type Props = SporsmalProps & InjectedIntlProps & StateProps & DispatchProps & RouteComponentProps<MatchProps>;
 
 class Inngangssporsmal extends React.Component<Props> {
+
+    handleTilbakeBtnClick = (): void => {
+        this.setState({ visAdvarsel: false });
+        this.props.history.goBack();
+    }
+
     render() {
         const sporsmalId = SporsmalId.fremtidigSituasjon;
         
@@ -65,7 +73,7 @@ class Inngangssporsmal extends React.Component<Props> {
                     erAktiv={true}
                 />
                 <LenkeTilbake
-                    onClick={() => {return; }}
+                    onClick={this.handleTilbakeBtnClick}
                 />
                 <LenkeAvbryt/>
             </ResponsivSide>

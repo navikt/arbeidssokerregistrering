@@ -1,3 +1,4 @@
+import { AppState } from '../reducer';
 
 export enum ActionTypes {
     OPPDATER_SPORSMAL_LOP = 'OPPDATER_SPORSMAL_LOP'
@@ -37,4 +38,8 @@ export function oppdaterSporsmalLop(sporsmalLop: SporsmalLop): Action {
        type: ActionTypes.OPPDATER_SPORSMAL_LOP,
        data: { sporsmalLop }
    };
+}
+
+export function selectSporsmalLop(state: AppState): SporsmalLop {
+    return state.sporsmalLop.sporsmalLop;
 }

@@ -28,7 +28,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
     render () {
         const { registreringstatusData, children } = this.props;
 
-        //TODO: Kan dette flyttes til routes.tsx?
+        // TODO: Kan dette flyttes til routes.tsx?
 
         if (registreringstatusData.underOppfolging && !registreringstatusData.kreverReaktivering) {
             return <AlleredeRegistrert intl={this.props.intl} />;
@@ -41,7 +41,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
             }
         } else {
             // TODO: Legg til logikk for å sette riktig løp
-            this.props.oppdaterSporsmalLop(SporsmalLop.ORDINAER_REGISTRERING);
+            this.props.oppdaterSporsmalLop(SporsmalLop.SYKEFRAVAER_REGISTRERING);
             return <>{children}</>;
         }
     }
