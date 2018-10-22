@@ -12,7 +12,10 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
-import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
+import {
+    Data as RegistreringstatusData, Registreringstatus,
+    selectRegistreringstatus
+} from '../../ducks/registreringstatus';
 
 const handinfoSvg = require('./handinfo.svg');
 
@@ -33,7 +36,7 @@ class KreverReaktivering extends React.Component<Props> {
     }
 
     componentWillMount() {
-        if (!this.props.registreringstatusData.kreverReaktivering) {
+        if (this.props.registreringstatusData.registreringStatus !== Registreringstatus.REAKTIVERING) {
             this.props.history.push(START_PATH);
         }
     }
