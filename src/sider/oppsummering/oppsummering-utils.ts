@@ -1,7 +1,7 @@
 import { SBLARBEID_URL } from '../../ducks/api';
-import { DinSituasjonSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
-import { svarSuffiksTilTekstId } from '../skjema/skjema-utils';
-import { State as SvarState } from '../../ducks/svar';
+import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
+import { svarSuffiksTilTekstId } from '../../komponenter/skjema/skjema-utils';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { Data as RegStatus } from '../../ducks/registreringstatus';
 import oppsummeringConfig from './oppsummering-config';
 
@@ -11,7 +11,10 @@ export function sendBrukerTilSblArbeid() {
     document.location.href = SBLARBEID_URL;
 }
 
-export function getTekstIdForOppsummering(sporsmalId: string, svar: Svar) {
+export function getTekstIdForOppsummering(sporsmalId: SporsmalId, svar: Svar | undefined) {
+    if (!svar) {
+        return '';
+    }
     const sporsmalIderDerOppsummeringenSkalTasFraSporsmalstekstene = [
         'utdanning',
     ];
@@ -38,8 +41,8 @@ export function brukersSvarSamsvarerMedInfoFraAAReg(
 }
 
 function brukersSvarIndikererArbeidSisteManeder(svarState: SvarState): boolean | 'unknown' {
-    const sisteStillingSvar  = svarState.sisteStilling;
-    const dinSituasjonSvar = svarState.dinSituasjon;
+    const sisteStillingSvar = hentSvar(svarState, SporsmalId.sisteStilling) as SisteStillingSvar;
+    const dinSituasjonSvar = hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar;
 
     if (brukerSvarerAtDenHarJobbetSisteManeder(dinSituasjonSvar, sisteStillingSvar)) {
         return true;

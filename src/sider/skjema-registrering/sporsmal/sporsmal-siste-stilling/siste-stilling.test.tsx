@@ -15,7 +15,7 @@ import {ActionTypes as OversettelseAvStillingActionTypes} from '../../../../duck
 import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../../ducks/siste-stilling-fra-aareg';
 import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
 import {ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
-import Alternativ from "../../alternativ";
+import Alternativ from "../../../../komponenter/skjema/alternativ";
 
 enzyme.configure({adapter: new Adapter()});
 

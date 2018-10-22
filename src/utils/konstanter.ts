@@ -1,6 +1,8 @@
 export const basename = '/arbeidssokerregistrering';
+export const INNGANGSSPORSMAL = '/inngangssporsmal';
 export const START_PATH = '/start';
 export const SKJEMA_PATH = '/skjema';
+export const SKJEMA_SYKEFRAVAER_PATH = '/skjema-sykefravaer';
 export const OPPSUMMERING_PATH = '/oppsummering';
 export const SBLREG_PATH = '/sblregistrering';
 export const AVBRYT_PATH = '/avbryt';

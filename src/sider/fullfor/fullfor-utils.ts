@@ -1,15 +1,17 @@
-import { State as SvarState } from '../../ducks/svar';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { Stilling } from '../../ducks/siste-stilling';
+import { erSporsmalBesvarte } from '../../ducks/svar-utils';
 
 export function alleSporsmalErBesvarte(svar: SvarState) {
-    return !!svar
-        && svar.dinSituasjon
-        && svar.sisteStilling
-        && svar.utdanning
-        && svar.utdanningGodkjent
-        && svar.utdanningBestatt
-        && svar.helseHinder
-        && svar.andreForhold;
+    return !!svar && erSporsmalBesvarte(svar, [
+        SporsmalId.dinSituasjon,
+        SporsmalId.sisteStilling,
+        SporsmalId.utdanning,
+        SporsmalId.utdanningGodkjent,
+        SporsmalId.utdanningBestatt,
+        SporsmalId.helseHinder,
+        SporsmalId.andreForhold,
+    ]);
 }
 
 export function sisteStillingErSatt(stilling: Stilling | undefined) {

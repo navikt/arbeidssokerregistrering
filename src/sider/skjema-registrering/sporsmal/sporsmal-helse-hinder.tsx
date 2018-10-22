@@ -1,23 +1,17 @@
 import * as React from 'react';
-import Alternativ from '../alternativ';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../skjema-utils';
+import Alternativ from '../../../komponenter/skjema/alternativ';
+import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { HelseHinderSvar, Svar } from '../../../ducks/svar-utils';
-
-interface SporsmalProps {
-    sporsmalId: string;
-    endreSvar: (sporsmalId: string, svar: Svar) => void;
-    hentAvgittSvar: (sporsmalId: string) => Svar | undefined;
-}
+import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
-export default function HelseHinder(props: Props) {
+function HelseHinder(props: Props) {
     const fellesProps = {
         endreSvar: props.endreSvar,
-        intl: props.intl,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
@@ -50,3 +44,5 @@ export default function HelseHinder(props: Props) {
         </>
     );
 }
+
+export default injectIntl(HelseHinder);
