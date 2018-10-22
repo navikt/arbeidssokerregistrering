@@ -5,9 +5,13 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import {
-    AVBRYT_PATH, DUERNAREGISTRERT_PATH, FULLFOR_PATH, INNGANGSSPORSMAL,
+    AVBRYT_PATH,
+    DUERNAREGISTRERT_PATH,
+    FULLFOR_PATH,
+    INNGANGSSPORSMAL,
     OPPSUMMERING_PATH,
-    REAKTIVERING_PATH, SBLREG_PATH,
+    REAKTIVERING_PATH,
+    SBLREG_PATH,
     SKJEMA_PATH,
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
@@ -28,16 +32,21 @@ import ToggleRoute from './komponenter/toggle-route';
 import { AppState } from './reducer';
 import { selectSykefravaerFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
+import { SporsmalLop } from './ducks/sporsmal-lop';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
+    sporsmalLop: SporsmalLop;
 }
 
 class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const visSykefravaerSkjema = this.props.visSykefravaerSkjema;
+        const visSykefravaerSkjema = this.props.sporsmalLop === SporsmalLop.SYKEFRAVAER_REGISTRERING
+            && this.props.visSykefravaerSkjema;
+
+        const visOrdinaerSkjema = !visSykefravaerSkjema;
 
         return (
             <>
@@ -77,7 +86,12 @@ class Routes extends React.Component<StateProps> {
                         />
                         <Route path={START_PATH} component={StartRedirecter}/>
                         <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
-                        <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaRegistrering}/>
+                        <ToggleRoute
+                            path={`${SKJEMA_PATH}/:id`}
+                            component={SkjemaRegistrering}
+                            isOn={visOrdinaerSkjema}
+                            redirectTo={START_PATH}
+                        />
                         <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
                         <Route path={SBLREG_PATH} component={SblRegistrering}/>
                         <Route path={AVBRYT_PATH} component={Avbryt}/>
@@ -93,6 +107,7 @@ class Routes extends React.Component<StateProps> {
 
 const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
+    sporsmalLop: state.sporsmalLop.sporsmalLop
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);
