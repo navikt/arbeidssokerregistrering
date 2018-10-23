@@ -12,17 +12,23 @@ import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RouteComponentProps } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import {
-    finnGjeldendeSporsmalPlassering, finnNesteHref, finnNesteSporsmalPlassering,
-    getSporsmalIder, hentGjeldendeSporsmalId,
+    erSporsmalBesvart,
+    finnGjeldendeSporsmalPlassering,
+    finnNesteHref,
+    finnNesteSporsmalPlassering,
+    getSporsmalIder,
+    hentGjeldendeSporsmalId,
     isNumber,
     kanGaaTilNeste,
     SkjemaConfig
 } from './skjema-utils';
 import { hentSvar, IngenSvar, Svar } from '../../ducks/svar-utils';
 import { START_PATH } from '../../utils/konstanter';
+import { selectSporsmalLop, SporsmalLop } from '../../ducks/sporsmal-lop';
 
 interface StateProps {
     svarState: SvarState;
+    sporsmalLop: SporsmalLop;
 }
 
 interface DispatchProps {
@@ -111,6 +117,18 @@ class Skjema extends React.Component<Props, OwnState> {
 
         const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(this.props);
         const sporsmalIder = getSporsmalIder(this.props);
+        const horerTilSykefravaerLop = this.props.sporsmalLop === SporsmalLop.SYKEFRAVAER_REGISTRERING;
+
+        /*
+        Sykefraværløpet har et inngangsspørsmål som ikke er en del av skjemaet.
+        Dette vil sende brukere til riktig sted hvis de refresher siden på det
+        første spørsmålet etter inngangsspørsmålet.
+        */
+        if (horerTilSykefravaerLop &&
+            !erSporsmalBesvart(this.props.svarState, SporsmalId.fremtidigSituasjon)) {
+            this.props.history.push(START_PATH);
+            return;
+        }
 
         for (let i = 0; i < gjeldendeSporsmalPlassering; i++) {
 
@@ -170,6 +188,7 @@ class Skjema extends React.Component<Props, OwnState> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     svarState: state.svar,
+    sporsmalLop: selectSporsmalLop(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
