@@ -40,11 +40,11 @@ class SkjemaSykefravaerIngenPasser extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
-        // Disse spørsmålene er kun en placeholder!
+        // TODO: Disse spørsmålene er kun en placeholder!
         return (
             <Skjema
                 config={skjemaFlytIngenPasser}
-                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/3`}
+                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/4`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >

@@ -36,7 +36,6 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
     }
 
     handleNesteBtnClick = (): void => {
-        console.log("neste btn click"); // tslint:disable-line
         const gaaTilNeste = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
         this.setState({ visAdvarsel: !gaaTilNeste });
     }
