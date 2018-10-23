@@ -6,10 +6,26 @@ module.exports = {
         });
     },
     klikkSjekkboksFullfor(){
+        const WAIT_TIME = this.api.globals.wait;
+        this.expect.element(this.elements.sjekkboksFullfor.selector).to.be.visible.after(WAIT_TIME);
+        this.moveToElement(this.elements.sjekkboksFullfor.selector, 10, 10);
         this.api.click(this.elements.sjekkboksFullfor.selector).pause(500)
     },
     klikkNeste(){
-        this.api.click(this.elements.knappNesteSpm.selector).pause(500)
+        const WAIT_TIME = this.api.globals.wait;
+        const browser = this.api;
+        let forrigeUrl;
+
+        this.api.url(function(result) {
+            forrigeUrl = result.value;
+        }).perform(() => {
+            this.expect.element(this.elements.knappNesteSpm.selector).to.be.visible.after(WAIT_TIME);
+            this.api.click(this.elements.knappNesteSpm.selector).pause(500);
+            this.api.url(function(result) {
+                browser.expect(forrigeUrl).to.not.equal(result.value);
+            })
+        });
+
     },
     validerStillingSpm(){
         const WAIT_TIME = this.api.globals.wait;
