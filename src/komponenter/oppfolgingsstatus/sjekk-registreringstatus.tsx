@@ -41,7 +41,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
             }
         } else {
             // TODO: Legg til logikk for å sette riktig løp
-            this.props.oppdaterSporsmalLop(SporsmalLop.SYKEFRAVAER_REGISTRERING);
+            this.props.oppdaterSporsmalLop(SporsmalLop.ORDINAER_REGISTRERING);
             return <>{children}</>;
         }
     }

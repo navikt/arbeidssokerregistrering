@@ -84,7 +84,12 @@ class Routes extends React.Component<StateProps> {
                             isOn={visSykefravaerSkjema}
                             redirectTo={START_PATH}
                         />
-                        <Route path={START_PATH} component={StartRedirecter}/>
+                        <ToggleRoute
+                            path={START_PATH}
+                            component={StartRedirecter}
+                            isOn={visOrdinaerSkjema}
+                            redirectTo={INNGANGSSPORSMAL}
+                        />
                         <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
                         <ToggleRoute
                             path={`${SKJEMA_PATH}/:id`}
