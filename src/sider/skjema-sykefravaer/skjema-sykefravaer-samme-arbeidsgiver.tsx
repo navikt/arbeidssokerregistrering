@@ -4,14 +4,12 @@ import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/sva
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import { InjectedIntlProps } from 'react-intl';
-import SporsmalHvorLangTid from './sporsmal/sporsmal-hvor-lang-tid';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
-import SporsmalStillingsprosent from './sporsmal/sporsmal-stillingsprosent';
 import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
+import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -34,6 +32,16 @@ class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
+        const sporsmal = [
+            (
+                <SporsmalTilbakeIArbeid
+                    key={SporsmalId.tilbakeIArbeid}
+                    sporsmalId={SporsmalId.tilbakeIArbeid}
+                    {...fellesProps}
+                />
+            )
+        ];
+
         return (
             <Skjema
                 config={vanligFlyt}
@@ -41,8 +49,7 @@ class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
-                <SporsmalHvorLangTid sporsmalId={SporsmalId.hvorLangTid} {...fellesProps}/>
-                <SporsmalStillingsprosent sporsmalId={SporsmalId.stillingsprosent} {...fellesProps}/>
+                {sporsmal}
             </Skjema>
         );
     }

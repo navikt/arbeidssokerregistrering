@@ -14,6 +14,7 @@ interface AlternativProps {
 
 function Alternativ(props: AlternativProps & InjectedIntlProps) {
     const tekst = props.intl.messages[props.getTekstId(props.svar)];
+    console.log(props.getTekstId(props.svar)); // tslint:disable-line
     return (
         <div className={classNames('alternativ-wrapper', props.className)}>
             <RadioPanel

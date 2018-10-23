@@ -10,7 +10,8 @@ export type Svar = UtdanningSvar
     | IngenSvar
     | FremtidigSituasjonSvar
     | HvorLangTidSvar
-    | StillingsprosentSvar;
+    | StillingsprosentSvar
+    | TilbakeIArbeidSvar;
 
 export enum IngenSvar {
     INGEN_SVAR = 'INGEN_SVAR',
@@ -89,6 +90,13 @@ export enum StillingsprosentSvar {
     HELT = 'HELT',
     REDUSERT = 'REDUSERT',
     INGEN_SVAR = 'INGEN_SVAR',
+}
+
+export enum TilbakeIArbeidSvar {
+   JA_HELT = 'JA_HELT',
+   JA_DELIVS = 'JA_DELVIS',
+   NEI = 'NEI',
+   USIKKER = 'USIKKER'
 }
 
 export const hentSvar = (svarState: State, sporsmalId: SporsmalId): Svar | undefined => {

@@ -17,6 +17,7 @@ export enum SporsmalId {
     fremtidigSituasjon = 'fremtidigSituasjon',
     hvorLangTid = 'hvorLangTid',
     stillingsprosent = 'stillingsprosent',
+    tilbakeIArbeid = 'tilbakeIArbeid',
 }
 
 export type State = Data[];
