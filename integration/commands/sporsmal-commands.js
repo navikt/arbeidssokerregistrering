@@ -6,10 +6,24 @@ module.exports = {
         });
     },
     klikkSjekkboksFullfor(){
+        const WAIT_TIME = this.api.globals.wait;
+        this.expect.element(this.elements.sjekkboksFullfor.selector).to.be.visible.after(WAIT_TIME);
+        this.moveToElement(this.elements.sjekkboksFullfor.selector, 10, 10);
         this.api.click(this.elements.sjekkboksFullfor.selector).pause(500)
     },
     klikkNeste(){
-        this.api.click(this.elements.knappNesteSpm.selector).pause(500)
+        const WAIT_TIME = this.api.globals.wait;
+
+        this.api.url((result) => {
+            const forrigeUrl = result.value;
+            this.expect.element(this.elements.knappNesteSpm.selector).to.be.visible.after(WAIT_TIME);
+            this.moveToElement(this.elements.knappNesteSpm.selector, 10, 10);
+            this.api.click(this.elements.knappNesteSpm.selector).pause(500);
+            this.api.url((result) => {
+                this.api.expect(forrigeUrl).to.not.equal(result.value);
+            })
+        });
+
     },
     validerStillingSpm(){
         const WAIT_TIME = this.api.globals.wait;
@@ -26,6 +40,7 @@ module.exports = {
         this.expect.element('@divFullforSjekkliste').to.be.visible.after(WAIT_TIME);
     },
     validerSiden(tittel, body, WAIT_TIME = this.api.globals.wait){
+        this.expect.element(tittel).to.be.present.after(WAIT_TIME);
         this.expect.element(tittel).to.be.visible.after(WAIT_TIME);
         this.expect.element(body).to.be.visible.after(WAIT_TIME);
     }
