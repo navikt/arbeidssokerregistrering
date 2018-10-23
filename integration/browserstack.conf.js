@@ -18,14 +18,14 @@ let nightwatch_config = {
     common_capabilities: {
         'browserstack.debug': true,
         'browserstack.local': true,
-        project: 'arbeidssokerregistrering',
+        project: 'arbeidssokerregistrering'
     },
 
     test_settings: {
         default: {
             launch_url: 'http://localhost:5000/arbeidssokerregistrering',
             globals: {
-                timeout: 20000,
+                wait: 20000,
                 browserstack: true,
             },
             screenshots: {

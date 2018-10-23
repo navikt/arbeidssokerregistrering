@@ -59,8 +59,9 @@ module.exports = {
     },
     'duernaregistert-siden skal besta av tittel og infoboks': (client) => {
 
-        client.saveScreenshot(`integration/reports/duernaregistrert.png`);
         sporsmal.validerSiden('@tittelDuErRegTittel', '@divDuErReg', 10000);
+        client.saveScreenshot(`integration/reports/duernaregistrert.png`);
+
     }
 
 };
