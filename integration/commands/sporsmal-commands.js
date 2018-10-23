@@ -13,16 +13,16 @@ module.exports = {
     },
     klikkNeste(){
         const WAIT_TIME = this.api.globals.wait;
-        const browser = this.api;
         let forrigeUrl;
 
-        this.api.url(function(result) {
+        this.api.url((result) => {
             forrigeUrl = result.value;
         }).perform(() => {
             this.expect.element(this.elements.knappNesteSpm.selector).to.be.visible.after(WAIT_TIME);
+            this.moveToElement(this.elements.knappNesteSpm.selector, 10, 10);
             this.api.click(this.elements.knappNesteSpm.selector).pause(500);
-            this.api.url(function(result) {
-                browser.expect(forrigeUrl).to.not.equal(result.value);
+            this.api.url((result) => {
+                this.api.expect(forrigeUrl).to.not.equal(result.value);
             })
         });
 
