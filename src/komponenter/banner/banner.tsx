@@ -4,20 +4,28 @@ import { START_PATH } from '../../utils/konstanter';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
-import { Data as StartRegistreringData } from '../../ducks/registreringstatus';
+import {Data as StartRegistreringData } from '../../ducks/registreringstatus';
+import { selectSporsmalLop, SporsmalLop } from '../../ducks/sporsmal-lop';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
+    sporsmalLop: SporsmalLop;
 }
 
 type Props = InjectedIntlProps & StateProps;
 
 class Banner extends React.Component<Props> {
+
     render() {
+
+        const brukerSykefravaerLop = this.props.sporsmalLop === SporsmalLop.SYKEFRAVAER_REGISTRERING;
+        const bannerOverskriftId = brukerSykefravaerLop ?
+            'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
+
         return (!this.skalVises()) ? (null) : (
             <div className="registrering-banner">
                 <Systemtittel tag="h1">
-                    {this.props.intl.messages['banner-overskrift']}
+                    {this.props.intl.messages[bannerOverskriftId]}
                 </Systemtittel>
             </div>
         );
@@ -31,7 +39,8 @@ class Banner extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    startRegistreringStatus: state.registreringStatus.data
+    startRegistreringStatus: state.registreringStatus.data,
+    sporsmalLop: selectSporsmalLop(state)
 });
 
 export default connect(mapStateToProps)(injectIntl(Banner));
