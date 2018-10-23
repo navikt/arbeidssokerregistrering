@@ -13,11 +13,9 @@ module.exports = {
     },
     klikkNeste(){
         const WAIT_TIME = this.api.globals.wait;
-        let forrigeUrl;
 
         this.api.url((result) => {
-            forrigeUrl = result.value;
-        }).perform(() => {
+            const forrigeUrl = result.value;
             this.expect.element(this.elements.knappNesteSpm.selector).to.be.visible.after(WAIT_TIME);
             this.moveToElement(this.elements.knappNesteSpm.selector, 10, 10);
             this.api.click(this.elements.knappNesteSpm.selector).pause(500);
