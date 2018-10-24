@@ -13,7 +13,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import {
-    Data as RegistreringstatusData, Registreringstatus,
+    Data as RegistreringstatusData, RegistreringType,
     selectRegistreringstatus
 } from '../../ducks/registreringstatus';
 
@@ -36,7 +36,7 @@ class KreverReaktivering extends React.Component<Props> {
     }
 
     componentWillMount() {
-        if (this.props.registreringstatusData.registreringStatus !== Registreringstatus.REAKTIVERING) {
+        if (this.props.registreringstatusData.registreringType !== RegistreringType.REAKTIVERING) {
             this.props.history.push(START_PATH);
         }
     }

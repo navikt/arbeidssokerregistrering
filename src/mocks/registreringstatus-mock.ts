@@ -1,9 +1,9 @@
-import { Registreringstatus } from '../ducks/registreringstatus';
+import { RegistreringType } from '../ducks/registreringstatus';
 
 export default {
     underOppfolging: false,
     jobbetSeksAvTolvSisteManeder: false,
     kreverReaktivering: false,
     erIkkeArbeidssokerUtenOppfolging: false,
-    registreringStatus: Registreringstatus.ORDINAER_REGISTRERING
+    registreringType: RegistreringType.ORDINAER_REGISTRERING
 };

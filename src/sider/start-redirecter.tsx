@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { MatchProps } from '../utils/utils';
 import { AppState } from '../reducer';
 import {
-    Data as RegistreringstatusData, Registreringstatus,
+    Data as RegistreringstatusData, RegistreringType,
     selectRegistreringstatus
 } from '../ducks/registreringstatus';
 import Startside from './start/startside';
@@ -20,7 +20,7 @@ export class StartRedirecter extends React.Component<StartRedirecterProps> {
     render() {
         const {registreringstatusData, history, match, location} = this.props;
 
-        if (registreringstatusData.registreringStatus === Registreringstatus.REAKTIVERING) {
+        if (registreringstatusData.registreringType === RegistreringType.REAKTIVERING) {
             history.push(REAKTIVERING_PATH);
         }
 

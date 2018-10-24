@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import {
-    Data as RegistreringstatusData, Registreringstatus,
+    Data as RegistreringstatusData, RegistreringType,
     selectRegistreringstatus
 } from '../../ducks/registreringstatus';
 import { AppState } from '../../reducer';
@@ -26,10 +26,10 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
     render () {
         const {registreringstatusData, children} = this.props;
 
-        if (registreringstatusData.registreringStatus === Registreringstatus.ALLEREDE_REGISTRERT) {
+        if (registreringstatusData.registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!this.beregnBrukNyRegistrering()) {
-            if (registreringstatusData.registreringStatus === Registreringstatus.SPERRET) {
+            if (registreringstatusData.registreringType === RegistreringType.SPERRET) {
                 return <InfoForIkkeArbeidssokerUtenOppfolging />;
             } else {
                 const config = { redirect: sendBrukerTilSblArbeid };
@@ -43,7 +43,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
 
     beregnBrukNyRegistrering(): boolean {
         const {gradualRolloutNyRegistrering, registreringstatusData} = this.props;
-        if (registreringstatusData.registreringStatus === Registreringstatus.SPERRET) {
+        if (registreringstatusData.registreringType === RegistreringType.SPERRET) {
             return false;
         }
         return gradualRolloutNyRegistrering;
