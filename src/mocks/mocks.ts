@@ -15,7 +15,7 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from "./siste-stilling-mock";
 import {hentSvar} from "../ducks/svar-utils";
 
-const MOCK_START_REGISRERING_STATUS = false;
+const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_REAKTIVER_BRUKER = true;
 const MOCK_BRUKERS_NAVN = true;
