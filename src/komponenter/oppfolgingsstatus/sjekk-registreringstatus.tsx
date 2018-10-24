@@ -25,6 +25,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
 
     render () {
         const {registreringstatusData, children} = this.props;
+
         if (registreringstatusData.registreringStatus === Registreringstatus.ALLEREDE_REGISTRERT) {
             return <AlleredeRegistrert intl={this.props.intl} />;
         } else if (!this.beregnBrukNyRegistrering()) {
@@ -37,6 +38,7 @@ class SjekkRegistreringstatus extends React.PureComponent<Props> {
         } else {
             return <>{children}</>;
         }
+
     }
 
     beregnBrukNyRegistrering(): boolean {
