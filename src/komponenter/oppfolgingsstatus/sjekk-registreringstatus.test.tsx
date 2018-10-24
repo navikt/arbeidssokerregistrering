@@ -16,7 +16,7 @@ import SblRegistrering from '../../sider/sbl-registrering/sbl-registrering';
 import {create} from '../../store';
 import AlleredeRegistrert from '../../sider/allerede-registrert/allerede-registrert';
 import InfoForIkkeArbeidssokerUtenOppfolging from "../../sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging";
-import {Registreringstatus} from "../../ducks/registreringstatus";
+import {Registreringstatus, RegistreringType} from "../../ducks/registreringstatus";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -62,7 +62,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
-        dispatchRegistreringstatus({underOppfolging: true, registreringStatus: Registreringstatus.ALLEREDE_REGISTRERT}, store);
+        dispatchRegistreringstatus({underOppfolging: true, registreringType: RegistreringType.ALLEREDE_REGISTRERT}, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
@@ -72,7 +72,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til InfoForIkkeArbeidssokerUtenOppfolging om status er erIkkeArbeidssokerUtenOppfolging', () => {
         const store = create();
 
-        dispatchRegistreringstatus({erIkkeArbeidssokerUtenOppfolging: true, registreringStatus: Registreringstatus.SPERRET}, store);
+        dispatchRegistreringstatus({erIkkeArbeidssokerUtenOppfolging: true, registreringType: RegistreringType.SPERRET}, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
