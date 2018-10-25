@@ -24,11 +24,15 @@ import {
 } from './skjema-utils';
 import { hentSvar, IngenSvar, Svar } from '../../ducks/svar-utils';
 import { START_PATH } from '../../utils/konstanter';
-import { selectSporsmalLop, SporsmalLop } from '../../ducks/sporsmal-lop';
+import {
+    Data as RegistreringstatusData,
+    RegistreringType,
+    selectRegistreringstatus
+} from '../../ducks/registreringstatus';
 
 interface StateProps {
     svarState: SvarState;
-    sporsmalLop: SporsmalLop;
+    registreringstatusData: RegistreringstatusData;
 }
 
 interface DispatchProps {
@@ -115,9 +119,10 @@ class Skjema extends React.Component<Props, OwnState> {
 
     gaaTilStartHvisForegaendeSporsmalIkkeBesvart = (): void => {
 
+        const registreringType = this.props.registreringstatusData.registreringType;
         const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(this.props);
         const sporsmalIder = getSporsmalIder(this.props);
-        const horerTilSykefravaerLop = this.props.sporsmalLop === SporsmalLop.SYKEFRAVAER_REGISTRERING;
+        const horerTilSykefravaerLop = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
         /*
         Sykefraværløpet har et inngangsspørsmål som ikke er en del av skjemaet.
@@ -188,7 +193,7 @@ class Skjema extends React.Component<Props, OwnState> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     svarState: state.svar,
-    sporsmalLop: selectSporsmalLop(state)
+    registreringstatusData: selectRegistreringstatus(state).data,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
