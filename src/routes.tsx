@@ -32,18 +32,20 @@ import ToggleRoute from './komponenter/toggle-route';
 import { AppState } from './reducer';
 import { selectSykefravaerFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
-import { selectSporsmalLop, SporsmalLop } from './ducks/sporsmal-lop';
+import {Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
-    sporsmalLop: SporsmalLop;
+    registreringstatusData: RegistreringstatusData;
 }
 
 class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const visSykefravaerSkjema = this.props.sporsmalLop === SporsmalLop.SYKEFRAVAER_REGISTRERING
+        const registreringType = this.props.registreringstatusData.registreringType;
+
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING
             && this.props.visSykefravaerSkjema;
 
         const visOrdinaerSkjema = !visSykefravaerSkjema;
@@ -112,7 +114,7 @@ class Routes extends React.Component<StateProps> {
 
 const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
-    sporsmalLop: selectSporsmalLop(state)
+    registreringstatusData: selectRegistreringstatus(state).data,
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);

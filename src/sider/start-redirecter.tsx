@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { MatchProps } from '../utils/utils';
 import { AppState } from '../reducer';
-import { Data as RegistreringstatusData, selectRegistreringstatus } from '../ducks/registreringstatus';
+import {
+    Data as RegistreringstatusData, RegistreringType,
+    selectRegistreringstatus
+} from '../ducks/registreringstatus';
 import Startside from './start/startside';
 import { REAKTIVERING_PATH } from '../utils/konstanter';
 
@@ -17,7 +20,7 @@ export class StartRedirecter extends React.Component<StartRedirecterProps> {
     render() {
         const {registreringstatusData, history, match, location} = this.props;
 
-        if (registreringstatusData.kreverReaktivering) {
+        if (registreringstatusData.registreringType === RegistreringType.REAKTIVERING) {
             history.push(REAKTIVERING_PATH);
         }
 
