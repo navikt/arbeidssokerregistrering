@@ -34,3 +34,5 @@ function SporsmalStillingsprosent(props: Props) {
 }
 
 export default injectIntl(SporsmalStillingsprosent);
+
+// TODO: Fjern dette sporsmalet hvis det ikke lenger er i bruk

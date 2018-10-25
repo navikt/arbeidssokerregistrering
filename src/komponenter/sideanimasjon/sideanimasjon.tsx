@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { MatchProps, scrollToBanner } from '../../utils/utils';
-import { skalAnimereForover } from './sideanimasjon-utils';
 
 interface State {
     forover: boolean;
@@ -20,11 +19,13 @@ class Sideanimasjon extends React.Component<Props, State> {
 
     componentWillReceiveProps(nextProps: Props) {
         const currentLocation = this.props.location;
-        if (nextProps.location !== currentLocation) {
+        const nextLocation = nextProps.location;
+        if (nextLocation !== currentLocation) {
             scrollToBanner();
             this.setState({
                 ...this.state,
-                forover: skalAnimereForover(currentLocation.pathname, nextProps.location.pathname),
+                forover: nextProps.history.action !== 'POP'
+                // skalAnimereForover(currentLocation.pathname, nextLocation.pathname),
             });
         }
     }

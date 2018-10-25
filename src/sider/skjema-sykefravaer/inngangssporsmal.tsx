@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Alternativ from '../../komponenter/skjema/alternativ';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../komponenter/skjema/skjema-utils';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import {
+    getIntlTekstForSporsmal,
+    getTekstIdForSvar,
+    kanGaaTilNeste,
+    TekstKontekst
+} from '../../komponenter/skjema/skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { SporsmalProps } from '../../komponenter/skjema/sporsmal-utils';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { endreSvarAction, SporsmalId } from '../../ducks/svar';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
 import { FremtidigSituasjonSvar, hentSvar, Svar } from '../../ducks/svar-utils';
@@ -13,22 +17,42 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import { SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
+import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 
-interface StateProps {
-    svarState: SvarState;
+interface OwnState {
+    visAdvarsel: boolean;
 }
 
-interface DispatchProps {
-    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
-}
+class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
 
-type Props = SporsmalProps & InjectedIntlProps & StateProps & DispatchProps;
+    constructor(props: SkjemaProps) {
+        super(props);
 
-class Inngangssporsmal extends React.Component<Props> {
+        this.state = {
+            visAdvarsel: false
+        };
+
+    }
+
+    handleNesteBtnClick = (): void => {
+        const gaaTilNeste = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
+        this.setState({ visAdvarsel: !gaaTilNeste });
+    }
+
+    handleTilbakeBtnClick = (): void => {
+        this.setState({ visAdvarsel: false });
+        this.props.history.goBack();
+    }
+
     render() {
         const sporsmalId = SporsmalId.fremtidigSituasjon;
-        
-        const {intl, endreSvar, svarState} = this.props;
+        const { intl, endreSvar, svarState } = this.props;
+        const advarselElement = this.state.visAdvarsel ? (
+            <NavAlertStripe type="advarsel" className="spm-advarsel">
+                <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
+            </NavAlertStripe>) : null;
+
         const alternativProps = {
             endreSvar: endreSvar,
             intl: intl,
@@ -36,8 +60,10 @@ class Inngangssporsmal extends React.Component<Props> {
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentSvar(svarState, sporsmalId),
         };
+
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
         const nesteUrl = `${SKJEMA_SYKEFRAVAER_PATH}/${this.finnLop(hentSvar(svarState, sporsmalId) as FremtidigSituasjonSvar)}/0`; // tslint:disable-line
+        const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
 
         return (
             <ResponsivSide>
@@ -57,15 +83,16 @@ class Inngangssporsmal extends React.Component<Props> {
                             <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
                         </div>
+                        {advarselElement}
                     </fieldset>
                 </form>
                 <LenkeNeste
-                    onClick={() => {return; }}
+                    onClick={this.handleNesteBtnClick}
                     href={nesteUrl}
-                    erAktiv={true}
+                    erAktiv={kanGaaTilNesteTmp}
                 />
                 <LenkeTilbake
-                    onClick={() => {return; }}
+                    onClick={this.handleTilbakeBtnClick}
                 />
                 <LenkeAvbryt/>
             </ResponsivSide>
@@ -83,12 +110,12 @@ class Inngangssporsmal extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
+const mapStateToProps = (state: AppState) => ({
     svarState: state.svar,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<AppState>) => ({
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal) as any); // tslint:disable-line

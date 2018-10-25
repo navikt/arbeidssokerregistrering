@@ -14,6 +14,8 @@ export const paths = [
     DUERNAREGISTRERT_PATH
 ];
 
+// TODO: Fjern denne filen hvis den ikke lenger brukes av sideanimasjon.tsx
+
 export function skalAnimereForover(currentPathname: string, nextPathname: string): boolean {
     const currentTrimmedPath = trimPath(currentPathname);
     const nextTrimmedPath = trimPath(nextPathname);

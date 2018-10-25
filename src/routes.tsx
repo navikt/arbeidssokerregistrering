@@ -5,9 +5,13 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import {
-    AVBRYT_PATH, DUERNAREGISTRERT_PATH, FULLFOR_PATH, INNGANGSSPORSMAL,
+    AVBRYT_PATH,
+    DUERNAREGISTRERT_PATH,
+    FULLFOR_PATH,
+    INNGANGSSPORSMAL,
     OPPSUMMERING_PATH,
-    REAKTIVERING_PATH, SBLREG_PATH,
+    REAKTIVERING_PATH,
+    SBLREG_PATH,
     SKJEMA_PATH,
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
@@ -24,67 +28,91 @@ import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Avbryt from './sider/avbryt/avbryt';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
-import ToggleRoute from './komponenter/toggle-route';
 import { AppState } from './reducer';
 import { selectSykefravaerFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
+import { Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
+    registreringstatusData: RegistreringstatusData;
 }
 
 class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const visSykefravaerSkjema = this.props.visSykefravaerSkjema;
+        const registreringType = this.props.registreringstatusData.registreringType;
+
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING
+            && this.props.visSykefravaerSkjema;
+
+        const visOrdinaerSkjema = !visSykefravaerSkjema;
 
         return (
             <>
                 <Route path="/" component={Banner}/>
                 <Route path={'/:url'} component={ProgressBarContainer}/>
+
                 <Sideanimasjon>
+
                     <Switch>
-                        <ToggleRoute
-                            path={INNGANGSSPORSMAL}
-                            component={Inngangssporsmal}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                            component={SkjemaSykefravaerNyArbeidsgiver}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
-                            component={SkjemaSykefravaerSammeArbeidsgiver}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
-                            component={SkjemaSykefravaerUsikker}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
-                            component={SkjemaSykefravaerIngenPasser}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <Route path={START_PATH} component={StartRedirecter}/>
-                        <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
-                        <Route path={`${SKJEMA_PATH}/:id`} component={SkjemaRegistrering}/>
-                        <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                        <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                        <Route path={AVBRYT_PATH} component={Avbryt}/>
-                        <Route path={FULLFOR_PATH} component={Fullfor}/>
-                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
-                        <Redirect from="*" to={START_PATH}/>
+
+                        <Route path={REAKTIVERING_PATH} component={KreverReaktivering} />
+                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
+                        <Route path={SBLREG_PATH} component={SblRegistrering} />
+                        <Route path={AVBRYT_PATH} component={Avbryt} />
+                        <Route path={FULLFOR_PATH} component={Fullfor} />
+                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
+
+                        { visOrdinaerSkjema ? (
+                            <Switch>
+                                <Route
+                                    path={START_PATH}
+                                    component={StartRedirecter}
+                                />
+                                <Route
+                                    path={`${SKJEMA_PATH}/:id`}
+                                    component={SkjemaRegistrering}
+                                />
+                                <Redirect
+                                    from="*"
+                                    to={START_PATH}
+                                />
+                            </Switch>
+                        ) : null }
+
+                        { visSykefravaerSkjema ? (
+                            <Switch>
+                                <Route
+                                    path={INNGANGSSPORSMAL}
+                                    component={Inngangssporsmal}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
+                                    component={SkjemaSykefravaerNyArbeidsgiver}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
+                                    component={SkjemaSykefravaerSammeArbeidsgiver}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
+                                    component={SkjemaSykefravaerUsikker}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
+                                    component={SkjemaSykefravaerIngenPasser}
+                                />
+                                <Redirect
+                                    from="*"
+                                    to={INNGANGSSPORSMAL}
+                                />
+                            </Switch>
+                        ) : null }
+
                     </Switch>
+
                 </Sideanimasjon>
             </>);
     }
@@ -93,6 +121,7 @@ class Routes extends React.Component<StateProps> {
 
 const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
+    registreringstatusData: selectRegistreringstatus(state).data,
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);

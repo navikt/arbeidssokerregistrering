@@ -9,14 +9,14 @@ import {ActionTypes as ReaktiverBrukerActionTypes } from './reaktiverbruker';
 import {ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
 
 type ActionTypes =
-    RegStatusActionTypes |
-    BrukersNavnActionTypes |
-    AutentiseringsinfoActionTypes |
-    SvarActionTypes |
-    RegistrerBrukerActionTypes |
-    ReaktiverBrukerActionTypes |
-    OversettelseAvStillingFraAARegActionTypes |
-    SisteStillingFraAARegActionTypes |
-    FeatureTogglesActionTypes;
+   | RegStatusActionTypes
+   | BrukersNavnActionTypes
+   | AutentiseringsinfoActionTypes
+   | SvarActionTypes
+   | RegistrerBrukerActionTypes
+   | ReaktiverBrukerActionTypes
+   | OversettelseAvStillingFraAARegActionTypes
+   | SisteStillingFraAARegActionTypes
+   | FeatureTogglesActionTypes;
 
 export default ActionTypes;
