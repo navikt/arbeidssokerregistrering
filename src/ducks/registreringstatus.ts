@@ -8,6 +8,14 @@ export enum ActionTypes {
     HENT_REG_STATUS_PENDING = 'HENT_REG_STATUS_PENDING'
 }
 
+export enum RegistreringType {
+    REAKTIVERING = 'REAKTIVERING',
+    SPERRET = 'SPERRET',
+    ALLEREDE_REGISTRERT = 'ALLEREDE_REGISTRERT',
+    SYKMELDT_REGISTRERING = 'SYKMELDT_REGISTRERING',
+    ORDINAER_REGISTRERING = 'ORDINAER_REGISTRERING'
+}
+
 export interface State {
     data: Data;
     status: string;
@@ -18,6 +26,7 @@ export interface Data {
     jobbetSeksAvTolvSisteManeder?: boolean;
     kreverReaktivering?: boolean;
     erIkkeArbeidssokerUtenOppfolging?: boolean;
+    registreringType?: RegistreringType;
 }
 
 interface Action {
