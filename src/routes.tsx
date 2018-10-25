@@ -28,11 +28,10 @@ import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Avbryt from './sider/avbryt/avbryt';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
-import ToggleRoute from './komponenter/toggle-route';
 import { AppState } from './reducer';
 import { selectSykefravaerFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
-import {Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
+import { Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
@@ -54,58 +53,66 @@ class Routes extends React.Component<StateProps> {
             <>
                 <Route path="/" component={Banner}/>
                 <Route path={'/:url'} component={ProgressBarContainer}/>
+
                 <Sideanimasjon>
+
                     <Switch>
-                        <ToggleRoute
-                            path={INNGANGSSPORSMAL}
-                            component={Inngangssporsmal}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                            component={SkjemaSykefravaerNyArbeidsgiver}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
-                            component={SkjemaSykefravaerSammeArbeidsgiver}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
-                            component={SkjemaSykefravaerUsikker}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
-                            component={SkjemaSykefravaerIngenPasser}
-                            isOn={visSykefravaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <ToggleRoute
-                            path={START_PATH}
-                            component={StartRedirecter}
-                            isOn={visOrdinaerSkjema}
-                            redirectTo={INNGANGSSPORSMAL}
-                        />
-                        <Route path={REAKTIVERING_PATH} component={KreverReaktivering}/>
-                        <ToggleRoute
-                            path={`${SKJEMA_PATH}/:id`}
-                            component={SkjemaRegistrering}
-                            isOn={visOrdinaerSkjema}
-                            redirectTo={START_PATH}
-                        />
-                        <Route path={OPPSUMMERING_PATH} component={Oppsummering}/>
-                        <Route path={SBLREG_PATH} component={SblRegistrering}/>
-                        <Route path={AVBRYT_PATH} component={Avbryt}/>
-                        <Route path={FULLFOR_PATH} component={Fullfor}/>
-                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert}/>
-                        <Redirect from="*" to={START_PATH}/>
+
+                        <Route path={REAKTIVERING_PATH} component={KreverReaktivering} />
+                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
+                        <Route path={SBLREG_PATH} component={SblRegistrering} />
+                        <Route path={AVBRYT_PATH} component={Avbryt} />
+                        <Route path={FULLFOR_PATH} component={Fullfor} />
+                        <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
+
+                        { visOrdinaerSkjema ? (
+                            <Switch>
+                                <Route
+                                    path={START_PATH}
+                                    component={StartRedirecter}
+                                />
+                                <Route
+                                    path={`${SKJEMA_PATH}/:id`}
+                                    component={SkjemaRegistrering}
+                                />
+                                <Redirect
+                                    from="*"
+                                    to={START_PATH}
+                                />
+                            </Switch>
+                        ) : null }
+
+                        { visSykefravaerSkjema ? (
+                            <Switch>
+                                <Route
+                                    path={INNGANGSSPORSMAL}
+                                    component={Inngangssporsmal}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
+                                    component={SkjemaSykefravaerNyArbeidsgiver}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
+                                    component={SkjemaSykefravaerSammeArbeidsgiver}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
+                                    component={SkjemaSykefravaerUsikker}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
+                                    component={SkjemaSykefravaerIngenPasser}
+                                />
+                                <Redirect
+                                    from="*"
+                                    to={INNGANGSSPORSMAL}
+                                />
+                            </Switch>
+                        ) : null }
+
                     </Switch>
+
                 </Sideanimasjon>
             </>);
     }
