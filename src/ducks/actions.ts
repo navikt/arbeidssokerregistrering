@@ -7,7 +7,6 @@ import {ActionTypes as OversettelseAvStillingFraAARegActionTypes } from './overs
 import {ActionTypes as RegistrerBrukerActionTypes } from './registrerbruker';
 import {ActionTypes as ReaktiverBrukerActionTypes } from './reaktiverbruker';
 import {ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
-import {ActionTypes as SporsmalLopActionTypes } from './sporsmal-lop';
 
 type ActionTypes =
    | RegStatusActionTypes
@@ -18,7 +17,6 @@ type ActionTypes =
    | ReaktiverBrukerActionTypes
    | OversettelseAvStillingFraAARegActionTypes
    | SisteStillingFraAARegActionTypes
-   | FeatureTogglesActionTypes
-   | SporsmalLopActionTypes;
+   | FeatureTogglesActionTypes;
 
 export default ActionTypes;
