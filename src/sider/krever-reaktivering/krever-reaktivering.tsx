@@ -11,7 +11,7 @@ import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandte
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
-import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import {
     Data as RegistreringstatusData, RegistreringType,
     selectRegistreringstatus
@@ -46,7 +46,7 @@ class KreverReaktivering extends React.Component<Props> {
         onReaktiverBruker()
             .then((res) => {
                 if (!!res) {
-                    history.push(DUERNAREGISTRERT_PATH);
+                    history.push(DU_ER_NA_REGISTRERT_PATH);
                 }
             });
     }

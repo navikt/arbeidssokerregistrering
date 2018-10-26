@@ -12,7 +12,7 @@ import {
 } from "../../test/test-utils";
 import {create} from "../../store";
 import {ActionTypes as SvarActionTypes} from "../../ducks/svar";
-import {DUERNAREGISTRERT_PATH, START_PATH} from "../../utils/konstanter";
+import {DU_ER_NA_REGISTRERT_PATH, START_PATH} from "../../utils/konstanter";
 import svarMock from "../../mocks/svar-mock";
 
 enzyme.configure({adapter: new Adapter()});
@@ -109,7 +109,7 @@ describe('<Fullfor />', () => {
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(pushedPath.includes(DUERNAREGISTRERT_PATH)).to.equal(true);
+                expect(pushedPath.includes(DU_ER_NA_REGISTRERT_PATH)).to.equal(true);
             });
     });
 
