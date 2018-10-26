@@ -32,6 +32,13 @@
 
 @media (min-width: @screen-sm-min) {
     .tilbakelenke {
-        top: 4rem;
+        top: 2rem;
+        left: 44px;
+
+        &:before {
+            .pil-mixin(@navMorkGra, 135deg);
+            margin-top: 7px;
+            left: -13px;
+        }
     }
 }
