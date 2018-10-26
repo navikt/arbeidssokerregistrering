@@ -1,6 +1,7 @@
 // tslint:disable align no-any max-line-length
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
+import { ActionTypes as RegistreringStatusActionTypes, RegistreringType } from '../ducks/registreringstatus';
 
 import { brukersSvarSamsvarerMedInfoFraAAReg } from '../sider/oppsummering/oppsummering-utils';
 import { feilTyper } from './metrics-middleware-util';
@@ -18,6 +19,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
     if (frontendlogger) {
         loggAutentiseringsinfo(action, frontendlogger);
         loggBesvarelse(store, action, frontendlogger);
+        loggSykmeldt(store, action, frontendlogger);
         loggResponstidForTjenestekall(action.type, frontendlogger);
         loggFeil(action, frontendlogger);
     }
@@ -28,6 +30,14 @@ function loggAutentiseringsinfo(action: Action, frontendlogger: Frontendlogger) 
     if (action.type === AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_OK) {
         const { niva } = action.data;
         frontendlogger.event('registrering.security.level', {'niva': niva}, {});
+    }
+}
+
+function loggSykmeldt(store: any, action: Action, frontendlogger: Frontendlogger) {
+    if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
+        if (action.data.registreringType === RegistreringType.SPERRET) {
+            frontendlogger.event('registrering.type.sykmeldt', {}, {});
+        }
     }
 }
 
