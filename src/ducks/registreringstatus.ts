@@ -22,10 +22,7 @@ export interface State {
 }
 
 export interface Data {
-    underOppfolging?: boolean;
     jobbetSeksAvTolvSisteManeder?: boolean;
-    kreverReaktivering?: boolean;
-    erIkkeArbeidssokerUtenOppfolging?: boolean;
     registreringType?: RegistreringType;
 }
 
