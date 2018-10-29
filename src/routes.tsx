@@ -42,12 +42,17 @@ import InfoForIkkeArbeidssokerUtenOppfolging
 import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
+import { alleSporsmalErBesvarte, sisteStillingErSatt } from './sider/fullfor/fullfor-utils';
+import { State as SvarState } from './ducks/svar';
+import { Stilling } from './ducks/siste-stilling';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
     registreringstatusData: RegistreringstatusData;
     gradualRolloutNyRegistrering: boolean;
     reaktivertStatus: string;
+    svar: SvarState;
+    sisteStilling: Stilling;
 }
 
 class Routes extends React.Component<StateProps> {
@@ -64,8 +69,8 @@ class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const registreringType = this.props.registreringstatusData.registreringType;
-        const reaktiveringStatus = this.props.reaktivertStatus;
+        const { svar, sisteStilling, registreringstatusData, reaktivertStatus } = this.props;
+        const registreringType = registreringstatusData.registreringType;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
@@ -83,7 +88,7 @@ class Routes extends React.Component<StateProps> {
             }
 
         } else if (registreringType === RegistreringType.REAKTIVERING &&
-                    reaktiveringStatus !== STATUS.OK) {
+                reaktivertStatus !== STATUS.OK) {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         }
 
@@ -91,6 +96,8 @@ class Routes extends React.Component<StateProps> {
             && this.props.visSykefravaerSkjema;
 
         const visOrdinaerSkjema = !visSykefravaerSkjema;
+
+        const alleSporsmalBesvart = alleSporsmalErBesvarte(svar) && sisteStillingErSatt(sisteStilling);
 
         return (
             <>
@@ -102,9 +109,10 @@ class Routes extends React.Component<StateProps> {
                     <Switch>
 
                         <Route path={AVBRYT_PATH} component={Avbryt} />
-                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
-                        <Route path={FULLFOR_PATH} component={Fullfor} />
-                        <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} />
+
+                        {alleSporsmalBesvart ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
+                        {alleSporsmalBesvart ? <Route path={FULLFOR_PATH} component={Fullfor} /> : null}
+                        {alleSporsmalBesvart ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
 
                         { visOrdinaerSkjema ? (
                             <Switch>
@@ -162,7 +170,9 @@ const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
     registreringstatusData: selectRegistreringstatus(state).data,
     gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
-    reaktivertStatus: selectReaktiveringStatus(state)
+    reaktivertStatus: selectReaktiveringStatus(state),
+    svar: state.svar,
+    sisteStilling: state.sisteStilling.data.stilling
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);
