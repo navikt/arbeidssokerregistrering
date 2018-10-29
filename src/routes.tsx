@@ -112,7 +112,7 @@ class Routes extends React.Component<StateProps> {
 
                         {alleSporsmalBesvart ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
                         {alleSporsmalBesvart ? <Route path={FULLFOR_PATH} component={Fullfor} /> : null}
-                        {alleSporsmalBesvart ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
+                        {(alleSporsmalBesvart || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
 
                         { visOrdinaerSkjema ? (
                             <Switch>
