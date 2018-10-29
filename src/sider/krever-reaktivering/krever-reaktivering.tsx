@@ -76,37 +76,39 @@ class KreverReaktivering extends React.Component<Props, State> {
         }
 
         return (
-            <section className="krever-reaktivering">
-                <Innholdstittel className="krever-reaktivering__tittel">
-                    <FormattedMessage id="krever-reaktivering-tittel"/>
-                </Innholdstittel>
-                <div className="krever-reaktivering__infopanel">
-                    <div className="krever-reaktivering__handinfo-ikon">
-                        <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
+            <div className="limit">
+                <section className="krever-reaktivering">
+                    <Innholdstittel className="krever-reaktivering__tittel">
+                        <FormattedMessage id="krever-reaktivering-tittel"/>
+                    </Innholdstittel>
+                    <div className="krever-reaktivering__infopanel">
+                        <div className="krever-reaktivering__handinfo-ikon">
+                            <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
+                        </div>
+                        <div className="krever-reaktivering__tekster">
+                            <Normaltekst>
+                                <FormattedMessage id="krever-reaktivering-boks-tekst"/>
+                            </Normaltekst>
+                        </div>
                     </div>
-                    <div className="krever-reaktivering__tekster">
+                    <div className="krever-reaktivering__aksjonspanel">
                         <Normaltekst>
-                            <FormattedMessage id="krever-reaktivering-boks-tekst"/>
+                            <FormattedMessage id="krever-reaktivering-undertittel"/>
                         </Normaltekst>
+                        <div className={'knapper-vertikalt'}>
+                            <KnappBase
+                                type="hoved"
+                                onClick={this.reaktiverBrukerOnClick}
+                            >
+                                <FormattedMessage id="ja"/>
+                            </KnappBase>
+                            <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
+                                <FormattedMessage id="avbryt-lenke"/>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div className="krever-reaktivering__aksjonspanel">
-                    <Normaltekst>
-                        <FormattedMessage id="krever-reaktivering-undertittel"/>
-                    </Normaltekst>
-                    <div className={'knapper-vertikalt'}>
-                        <KnappBase
-                            type="hoved"
-                            onClick={this.reaktiverBrukerOnClick}
-                        >
-                            <FormattedMessage id="ja"/>
-                        </KnappBase>
-                        <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
-                            <FormattedMessage id="avbryt-lenke"/>
-                        </a>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         );
     }
 }

@@ -5,5 +5,5 @@ export default {
     jobbetSeksAvTolvSisteManeder: false,
     kreverReaktivering: false,
     erIkkeArbeidssokerUtenOppfolging: false,
-    registreringType: RegistreringType.ORDINAER_REGISTRERING
+    registreringType: RegistreringType.REAKTIVERING
 };
