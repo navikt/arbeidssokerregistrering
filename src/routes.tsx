@@ -47,7 +47,7 @@ import { State as SvarState } from './ducks/svar';
 import { Stilling } from './ducks/siste-stilling';
 
 interface StateProps {
-    visSykefravaerSkjema: boolean;
+    visSykefravaerSkjemaToggle: boolean;
     registreringstatusData: RegistreringstatusData;
     gradualRolloutNyRegistrering: boolean;
     reaktivertStatus: string;
@@ -93,7 +93,7 @@ class Routes extends React.Component<StateProps> {
         }
 
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING
-            && this.props.visSykefravaerSkjema;
+            && this.props.visSykefravaerSkjemaToggle;
 
         const visOrdinaerSkjema = !visSykefravaerSkjema;
 
@@ -167,7 +167,7 @@ class Routes extends React.Component<StateProps> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
+    visSykefravaerSkjemaToggle: selectSykefravaerFeatureToggle(state),
     registreringstatusData: selectRegistreringstatus(state).data,
     gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
     reaktivertStatus: selectReaktiveringStatus(state),

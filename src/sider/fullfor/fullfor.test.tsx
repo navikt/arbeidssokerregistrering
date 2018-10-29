@@ -23,6 +23,7 @@ afterEach(() => {
 });
 
 describe('<Fullfor />', () => {
+
     it('Skal ha fullfor knapp som er aktiv', () => {
         const store = create();
         dispatchTilfeldigeSvar(store);
@@ -111,38 +112,6 @@ describe('<Fullfor />', () => {
                 wrapper.update();
                 expect(pushedPath.includes(DU_ER_NA_REGISTRERT_PATH)).to.equal(true);
             });
-    });
-
-    it('Skal gå til første side hvis spørsmål ikke er besvart', () => {
-        const store = create();
-
-        let pushedPath = '';
-        const props = {
-            history: {
-                push: (path) => pushedPath = path
-            },
-        };
-
-        [
-            'utdanningBestatt',
-            'utdanningGodkjent',
-            'helseHinder',
-            'andreForhold',
-            'sisteStilling',
-            'dinSituasjon',
-        ].forEach(sporsmalId => store.dispatch({
-            type: SvarActionTypes.AVGI_SVAR,
-            data: {
-                sporsmalId,
-                svar: svarMock[sporsmalId],
-            }
-        }));
-
-        stubFetch(new FetchStub().addResponse('/startregistrering', {}));
-
-        mountWithStoreRouterAndIntl(<Fullfor {...props} />, store);
-
-        expect(pushedPath.includes(START_PATH)).to.equal(true);
     });
 
     function dispatchTilfeldigeSvar(store) {
