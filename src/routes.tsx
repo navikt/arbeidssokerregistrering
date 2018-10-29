@@ -40,11 +40,14 @@ import {
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import RedirectAll from './komponenter/redirect-all';
+import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
+import { STATUS } from './ducks/api-utils';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
     registreringstatusData: RegistreringstatusData;
     gradualRolloutNyRegistrering: boolean;
+    reaktivertStatus: string;
 }
 
 class Routes extends React.Component<StateProps> {
@@ -62,6 +65,7 @@ class Routes extends React.Component<StateProps> {
     render() {
 
         const registreringType = this.props.registreringstatusData.registreringType;
+        const reaktiveringStatus = this.props.reaktivertStatus;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
@@ -78,8 +82,8 @@ class Routes extends React.Component<StateProps> {
                 return <RedirectAll to={SBLREG_PATH} component={SblRegistrering} />;
             }
 
-            // TODO: dette vil forhindre folk som trykker "ja" til å gå til duernaregistrert
-        } else if (registreringType === RegistreringType.REAKTIVERING) {
+        } else if (registreringType === RegistreringType.REAKTIVERING &&
+                    reaktiveringStatus !== STATUS.OK) {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         }
 
@@ -97,8 +101,8 @@ class Routes extends React.Component<StateProps> {
 
                     <Switch>
 
-                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
                         <Route path={AVBRYT_PATH} component={Avbryt} />
+                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
                         <Route path={FULLFOR_PATH} component={Fullfor} />
                         <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} />
 
@@ -158,6 +162,7 @@ const mapStateToProps = (state: AppState) => ({
     visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
     registreringstatusData: selectRegistreringstatus(state).data,
     gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
+    reaktivertStatus: selectReaktiveringStatus(state)
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);

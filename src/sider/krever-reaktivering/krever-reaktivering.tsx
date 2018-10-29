@@ -11,13 +11,17 @@ import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandte
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
-import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
 import {
-    Data as RegistreringstatusData, RegistreringType,
+    Data as RegistreringstatusData,
     selectRegistreringstatus
 } from '../../ducks/registreringstatus';
 
 const handinfoSvg = require('./handinfo.svg');
+
+interface State {
+    reaktivererBruker: boolean;
+}
 
 interface StateProps {
     reaktiverBrukerData: ReaktiverBrukerState;
@@ -27,22 +31,26 @@ interface StateProps {
 interface DispatchProps {
     onReaktiverBruker: () => Promise<void | {}>;
 }
+
 type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps;
 
-class KreverReaktivering extends React.Component<Props> {
+class KreverReaktivering extends React.Component<Props, State> {
+
     constructor(props: Props) {
         super(props);
+
+        this.state = {
+            reaktivererBruker: false
+        };
+
         this.reaktiverBrukerOnClick = this.reaktiverBrukerOnClick.bind(this);
     }
 
-    componentWillMount() {
-        if (this.props.registreringstatusData.registreringType !== RegistreringType.REAKTIVERING) {
-            this.props.history.push(START_PATH);
-        }
-    }
-
     reaktiverBrukerOnClick() {
-        const {onReaktiverBruker, history} = this.props;
+        const { onReaktiverBruker, history } = this.props;
+
+        this.setState({ reaktivererBruker: true });
+
         onReaktiverBruker()
             .then((res) => {
                 if (!!res) {
@@ -52,46 +60,53 @@ class KreverReaktivering extends React.Component<Props> {
     }
 
     render() {
-        const {reaktiverBrukerData} = this.props;
+
+        if (this.state.reaktivererBruker) {
+
+            const { reaktiverBrukerData } = this.props;
+
+            return (
+                <Innholdslaster
+                    feilmeldingKomponent={<ReaktiveringFeilhandtering/>}
+                    avhengigheter={[reaktiverBrukerData]}
+                    loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
+                />
+            );
+
+        }
 
         return (
-            <Innholdslaster
-                feilmeldingKomponent={<ReaktiveringFeilhandtering/>}
-                avhengigheter={[reaktiverBrukerData]}
-                loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
-            >
-                <section className="krever-reaktivering">
-                    <Innholdstittel className="krever-reaktivering__tittel">
-                        <FormattedMessage id="krever-reaktivering-tittel"/>
-                    </Innholdstittel>
-                    <div className="krever-reaktivering__infopanel">
-                        <div className="krever-reaktivering__handinfo-ikon">
-                            <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
-                        </div>
-                        <div className="krever-reaktivering__tekster">
-                            <Normaltekst>
-                                <FormattedMessage id="krever-reaktivering-boks-tekst"/>
-                            </Normaltekst>
-                        </div>
+            <section className="krever-reaktivering">
+                <Innholdstittel className="krever-reaktivering__tittel">
+                    <FormattedMessage id="krever-reaktivering-tittel"/>
+                </Innholdstittel>
+                <div className="krever-reaktivering__infopanel">
+                    <div className="krever-reaktivering__handinfo-ikon">
+                        <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
                     </div>
-                    <div className="krever-reaktivering__aksjonspanel">
+                    <div className="krever-reaktivering__tekster">
                         <Normaltekst>
-                            <FormattedMessage id="krever-reaktivering-undertittel"/>
+                            <FormattedMessage id="krever-reaktivering-boks-tekst"/>
                         </Normaltekst>
-                        <div className={'knapper-vertikalt'}>
-                            <KnappBase
-                                type="hoved"
-                                onClick={this.reaktiverBrukerOnClick}
-                            >
-                                <FormattedMessage id="ja"/>
-                            </KnappBase>
-                            <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
-                                <FormattedMessage id="avbryt-lenke"/>
-                            </a>
-                        </div>
                     </div>
-                </section>
-            </Innholdslaster>
+                </div>
+                <div className="krever-reaktivering__aksjonspanel">
+                    <Normaltekst>
+                        <FormattedMessage id="krever-reaktivering-undertittel"/>
+                    </Normaltekst>
+                    <div className={'knapper-vertikalt'}>
+                        <KnappBase
+                            type="hoved"
+                            onClick={this.reaktiverBrukerOnClick}
+                        >
+                            <FormattedMessage id="ja"/>
+                        </KnappBase>
+                        <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
+                            <FormattedMessage id="avbryt-lenke"/>
+                        </a>
+                    </div>
+                </div>
+            </section>
         );
     }
 }
