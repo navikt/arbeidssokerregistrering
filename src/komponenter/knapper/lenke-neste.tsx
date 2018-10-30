@@ -14,11 +14,19 @@ interface Props {
 function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props) {
 
     function animateProgressbar() {
-        let framdrift = document.querySelector('.framdrift');
-        framdrift!.classList.add('framover');
-        setTimeout(() => {
-            framdrift!.classList.remove('framover');
-        }, 600);
+
+        const framdrift = document.querySelector('.framdrift');
+
+        if (framdrift != null) {
+
+            framdrift.classList.add('framover');
+
+            setTimeout(() => {
+                framdrift.classList.remove('framover');
+            }, 600);
+
+        }
+
     }
 
     return (
