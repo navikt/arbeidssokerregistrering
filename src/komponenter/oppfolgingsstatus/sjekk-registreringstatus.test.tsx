@@ -31,7 +31,7 @@ afterEach(() => {
 describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
         const store = create();
-        dispatchRegistreringstatus({underOppfolging: false}, store);
+        dispatchRegistreringstatus({underOppfolging: false, registreringType: RegistreringType.ORDINAER_REGISTRERING}, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': false,
             'arbeidssokerregistrering.sykefravaer': false
@@ -50,7 +50,7 @@ describe('<SjekkRegistreringstatus />', () => {
             'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
-        dispatchRegistreringstatus({underOppfolging: false}, store);
+        dispatchRegistreringstatus({underOppfolging: false, registreringType: RegistreringType.ORDINAER_REGISTRERING}, store);
 
         const wrapper = shallowwithStoreAndIntl(<SjekkRegistreringstatus />, store);
 
@@ -62,7 +62,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
-        dispatchRegistreringstatus({underOppfolging: true, registreringType: RegistreringType.ALLEREDE_REGISTRERT}, store);
+        dispatchRegistreringstatus({underOppfolging: false, registreringType: RegistreringType.ALLEREDE_REGISTRERT}, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
@@ -72,7 +72,7 @@ describe('<SjekkRegistreringstatus />', () => {
     it('skal sende bruker til InfoForIkkeArbeidssokerUtenOppfolging om status er erIkkeArbeidssokerUtenOppfolging', () => {
         const store = create();
 
-        dispatchRegistreringstatus({erIkkeArbeidssokerUtenOppfolging: true, registreringType: RegistreringType.SPERRET}, store);
+        dispatchRegistreringstatus({underOppfolging: false, registreringType: RegistreringType.SPERRET}, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<SjekkRegistreringstatus/>, store);
 
@@ -87,7 +87,7 @@ describe('<SjekkRegistreringstatus />', () => {
             'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
-        dispatchRegistreringstatus({underOppfolging: false}, store);
+        dispatchRegistreringstatus({underOppfolging: false, registreringType: RegistreringType.ORDINAER_REGISTRERING}, store);
 
         const component = (
             <SjekkRegistreringstatus >
