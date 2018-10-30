@@ -27,7 +27,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
-import { alleSporsmalErBesvarte, sisteStillingErSatt } from './fullfor-utils';
+import { erKlarForFullforing } from './fullfor-utils';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -66,13 +66,13 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-        const svar = this.props.state.svar;
-        const sisteStilling = this.props.state.sisteStilling.data.stilling;
-        if (!alleSporsmalErBesvarte(svar) || !sisteStillingErSatt(sisteStilling)) {
+
+        if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
 
         disableVerikalScrollingVedAnimasjon();
+
     }
 
     registrerBrukerOnClick() {
