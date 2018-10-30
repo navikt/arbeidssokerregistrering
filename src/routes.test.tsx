@@ -26,7 +26,7 @@ enzyme.configure({adapter: new Adapter()});
 
 describe('Routes', () => {
 
-    it('Skal gå til første side hvis spørsmål ikke er besvart', () => {
+    it('Skal gå til fullfør side hvis spørsmål besvart', () => {
 
         const store = create();
 
@@ -60,6 +60,42 @@ describe('Routes', () => {
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [FULLFOR_PATH]);
 
         expect(wrapper.find(Fullfor)).to.have.length(1);
+
+    });
+
+
+    it('Skal gå til første side hvis spørsmål ikke er besvart', () => {
+
+        const store = create();
+
+        dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
+        dispatchFeaturestatus({
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
+            'arbeidssokerregistrering.sykefravaer': true
+        }, store);
+
+        store.dispatch({
+            type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+            data: { stilling: annenStilling }
+        });
+
+        [
+            SporsmalId.utdanning,
+            SporsmalId.utdanningGodkjent,
+            SporsmalId.utdanningBestatt,
+            SporsmalId.helseHinder,
+            SporsmalId.andreForhold,
+        ].forEach(sporsmalId => store.dispatch({
+            type: SvarActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId,
+                svar: IngenSvar.INGEN_SVAR,
+            }
+        }));
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [FULLFOR_PATH]);
+
+        expect(wrapper.find({ to: START_PATH })).to.have.length(1);
 
     });
 
@@ -98,7 +134,7 @@ describe('Routes', () => {
     it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
-        dispatchRegistreringstatus({underOppfolging: true, registreringType: RegistreringType.ALLEREDE_REGISTRERT}, store);
+        dispatchRegistreringstatus({ registreringType: RegistreringType.ALLEREDE_REGISTRERT }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes/>, store);
 
