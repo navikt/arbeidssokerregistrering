@@ -52,7 +52,7 @@ class OrdinaerOppsummeringBesvarelser extends React.Component<StateProps> {
                     </OppsummeringElement>
                     <OppsummeringElement
                         sporsmalId={SporsmalId.utdanning}
-                        skjulHvisSvarErLik={[UtdanningSvar.INGEN_SVAR]}
+                        skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
                     >
                         <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
                     </OppsummeringElement>
