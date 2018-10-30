@@ -7,6 +7,7 @@ import { SporsmalId } from '../../ducks/svar';
 import { ingenYrkesbakgrunn, tomStilling } from '../../ducks/siste-stilling';
 import { FormattedMessage } from 'react-intl';
 import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../../ducks/svar-utils';
+import * as moment from 'moment';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -24,11 +25,8 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
             return null;
         }
 
-        // const registreringStatus = state.registreringStatus.data;
-        // const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
-
-        // TODO: Hent dette fra digisyfo
-        const sykemeldtSidenDato = '01.01.70';
+        const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
+                                          'YYYY-MM-DD').format('DD.MM.YY').toString();
 
         const skjulSisteStilling = state.sisteStilling.data.stilling === ingenYrkesbakgrunn ||
             state.sisteStilling.data.stilling === tomStilling;
