@@ -1,6 +1,6 @@
 .limit.forover {
     .tilbakelenke {
-        animation: slideAhead 400ms;
+        animation: slideAhead 500ms;
     }
     .spm-hode {
         animation: slideAhead 500ms;
@@ -39,7 +39,7 @@
 
 .limit.bakover {
     .tilbakelenke {
-        animation: slideBack 600ms;
+        animation: slideBack 500ms;
     }
     .spm-hode {
         animation: slideBack 550ms;
@@ -48,7 +48,7 @@
         animation: slideBack 500ms;
     }
     .nestelenke, .lenke-avbryt-wrapper {
-        animation: slideBack 400ms;
+        animation: slideBack 500ms;
     }
 
     .startside .lenke-avbryt-wrapper {
@@ -99,5 +99,12 @@
 
 .framdrift.bakover {
     z-index: 0;
-    animation: slideBack 600ms;
+    animation: slideBack 500ms;
+}
+
+@media (min-width: @screen-sm-min) {
+    .framdrift.framover {
+        z-index: 0;
+        animation: slideAhead 500ms;
+    }
 }
