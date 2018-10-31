@@ -25,7 +25,7 @@ const registreringConfig: string[] = [
 
 const nyArbeidsgiverConfig: string[] = lagConfigForSykefravaerLop(1, 5);
 
-const sammeArbeidsgiverConfig: string[] = lagConfigForSykefravaerLop(2, 5);
+const sammeArbeidsgiverConfig: string[] = lagConfigForSykefravaerLop(2, 2);
 
 const usikkerConfig: string[] = lagConfigForSykefravaerLop(3, 5);
 

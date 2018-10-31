@@ -24,6 +24,7 @@ export interface State {
 export interface Data {
     underOppfolging?: boolean;
     jobbetSeksAvTolvSisteManeder?: boolean;
+    sykmeldtFraDato?: string;
     registreringType?: RegistreringType;
 }
 
