@@ -12,6 +12,23 @@ interface Props {
 }
 
 function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props) {
+
+    function animateProgressbar() {
+
+        const framdrift = document.querySelector('.framdrift');
+
+        if (framdrift != null) {
+
+            framdrift.classList.add('framover');
+
+            setTimeout(() => {
+                framdrift.classList.remove('framover');
+            }, 600);
+
+        }
+
+    }
+
     return (
         <div className="nestelenke__wrapper">
             <Link
@@ -20,6 +37,8 @@ function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props) {
                 onClick={e => {
                     if (!erAktiv) {
                         e.preventDefault();
+                    } else {
+                        animateProgressbar();
                     }
                     onClick(e);
                 }}
