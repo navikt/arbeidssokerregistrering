@@ -11,15 +11,23 @@ import {
     basename,
 } from './utils/konstanter';
 import Routes from './routes';
+import HerokuappEndreMockRegistreringLoep from
+    './mocks/HerokuappEndreMockRegistreringLoep/HerokuappEndreMockRegistreringLoep';
 
 const store = getStore();
 
 class App extends React.Component {
+
     render() {
+        const BrukesIHerokuappEndreRegistreringTypeMock =
+            process.env.REACT_APP_MOCK === 'true'
+            ? <HerokuappEndreMockRegistreringLoep/>
+            : null;
         return (
             <Provider store={store}>
                 <IntlProvider>
                     <HentInitialData>
+                        {BrukesIHerokuappEndreRegistreringTypeMock}
                         <Router basename={basename}>
                             <Routes/>
                         </Router>
