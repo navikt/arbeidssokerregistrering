@@ -1,1 +1,1 @@
-Er du sikker på at du vil avbryte registreringen?
+Er du sikker på at du vil avbryte \r\nregistreringen?

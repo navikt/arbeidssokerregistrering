@@ -12,8 +12,11 @@ import {
     basename,
 } from './utils/konstanter';
 import Routes from './routes';
+import Modal from 'react-modal';
 
 const store = getStore();
+
+Modal.setAppElement('#root');
 
 class App extends React.Component {
     render() {

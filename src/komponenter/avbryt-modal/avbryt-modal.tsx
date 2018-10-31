@@ -8,7 +8,7 @@ import './avbryt-modal.less';
 import { Knapp } from 'nav-frontend-knapper';
 import { DITTNAV_URL } from '../../ducks/api';
 
-const utropstegnSvg = require('../../sider/fullfor/utropstegn.svg');
+const avbrytSvg = require('./avbryt.svg');
 
 interface OwnProps {
     isOpen: boolean;
@@ -30,7 +30,7 @@ class AvbrytModal extends React.Component<OwnProps> {
                     type="plakat"
                     kompakt={true}
                     svg={<img
-                        src={utropstegnSvg}
+                        src={avbrytSvg}
                         alt="Informasjon"
                         className="avbryt-modal__illustrasjon"
                     />}
@@ -43,11 +43,10 @@ class AvbrytModal extends React.Component<OwnProps> {
                         <Knapp className="avbryt-modal__knapp" onClick={() => document.location.href = DITTNAV_URL}>
                             <FormattedMessage id="knapp-ja-avbryt"/>
                         </Knapp>
-                        <Knapp onClick={this.props.onRequestClose}>
+                        <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
                             <FormattedMessage id="knapp-nei"/>
                         </Knapp>
                     </div>
-
                 </Veilederpanel>
             </NavFrontendModal>
         );
