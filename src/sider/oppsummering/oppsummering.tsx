@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
-import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
+import { FULLFOR_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import {
     UtdanningBestattSvar,
@@ -18,7 +18,6 @@ import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
 import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
-import { alleSporsmalErBesvarte, sisteStillingErSatt } from '../fullfor/fullfor-utils';
 import { SporsmalId } from '../../ducks/svar';
 
 const oppsummeringSvg = require('./oppsummering.svg');
@@ -85,12 +84,6 @@ const oppsummeringBesvarelser = (state: AppState) => {
 class Oppsummering extends React.Component<Props> {
 
     componentWillMount() {
-        const svar = this.props.state.svar;
-        const sisteStilling = this.props.state.sisteStilling.data.stilling;
-        if (!alleSporsmalErBesvarte(svar) || !sisteStillingErSatt(sisteStilling)) {
-            this.props.history.push(START_PATH);
-        }
-
         disableVerikalScrollingVedAnimasjon();
     }
 
