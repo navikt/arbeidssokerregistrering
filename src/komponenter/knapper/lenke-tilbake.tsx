@@ -5,8 +5,26 @@ interface Props {
 }
 
 function LenkeTilbake({onClick}: Props) {
+
+    function hideProgressbar() {
+        let framdrift = document.querySelector('.framdrift');
+        framdrift!.classList.add('bakover');
+        setTimeout(() => {
+            framdrift!.classList.remove('bakover');
+        }, 600);
+    }
+
     return (
-        <a href="javascript:void(0);" className="tilbakelenke typo-element" onClick={onClick}>Tilbake</a>
+        <a
+            href="javascript:void(0);"
+            className="tilbakelenke typo-element"
+            onClick={() => {
+                onClick();
+                hideProgressbar();
+            }}
+        >
+            Tilbake
+        </a>
     );
 }
 
