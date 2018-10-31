@@ -17,7 +17,7 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';

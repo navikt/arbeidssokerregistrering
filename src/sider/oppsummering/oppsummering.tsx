@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
-import { FULLFOR_PATH } from '../../utils/konstanter';
+import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
