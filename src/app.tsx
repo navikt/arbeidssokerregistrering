@@ -6,7 +6,6 @@ import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 import './decorator/decorator-mock';
-import SjekkRegistreringstatus from './komponenter/oppfolgingsstatus/sjekk-registreringstatus';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import {
     basename,
@@ -21,11 +20,9 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <HentInitialData>
-                        <SjekkRegistreringstatus>
-                            <Router basename={basename}>
-                                <Routes/>
-                            </Router>
-                        </SjekkRegistreringstatus>
+                        <Router basename={basename}>
+                            <Routes/>
+                        </Router>
                     </HentInitialData>
                 </IntlProvider>
             </Provider>
