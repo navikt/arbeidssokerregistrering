@@ -11,7 +11,7 @@ import { RadioPanel } from 'nav-frontend-skjema';
 import getStore from '../../store';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { AppState } from '../../reducer';
-import './HerokuappEndreMockRegistreringLoep.less';
+import './herokuapp-endre-mock-registrering-loep.less';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;

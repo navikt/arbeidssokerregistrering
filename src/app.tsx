@@ -12,7 +12,7 @@ import {
 } from './utils/konstanter';
 import Routes from './routes';
 import HerokuappEndreMockRegistreringLoep from
-    './mocks/HerokuappEndreMockRegistreringLoep/HerokuappEndreMockRegistreringLoep';
+    './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 
 const store = getStore();
 
