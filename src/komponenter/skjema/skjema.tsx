@@ -58,7 +58,7 @@ class Skjema extends React.Component<Props, OwnState> {
         super(props);
 
         this.state = {
-            visAdvarsel: false
+            visAdvarsel: false,
         };
 
         this.gaaTilStartHvisIdErUgyldig(this.props.match.params.id);
@@ -184,7 +184,7 @@ class Skjema extends React.Component<Props, OwnState> {
                     <LenkeTilbake
                         onClick={this.handleTilbakeBtnClick}
                     />
-                    <LenkeAvbryt/>
+                    <LenkeAvbryt tekstId="avbryt-lenke-registrering" />
                 </Animasjon>
             </ResponsivSide>
         );

@@ -5,7 +5,6 @@ import ProgressBarContainer from './komponenter/progress-bar/progress-bar-contai
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import {
-    AVBRYT_PATH,
     DUERNAREGISTRERT_PATH,
     FULLFOR_PATH,
     INNGANGSSPORSMAL,
@@ -25,7 +24,6 @@ import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefrav
 import SkjemaSykefravaerIngenPasser from './sider/skjema-sykefravaer/skjema-sykefravaer-ingen-passer';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
-import Avbryt from './sider/avbryt/avbryt';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
@@ -61,7 +59,6 @@ class Routes extends React.Component<StateProps> {
                         <Route path={REAKTIVERING_PATH} component={KreverReaktivering} />
                         <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
                         <Route path={SBLREG_PATH} component={SblRegistrering} />
-                        <Route path={AVBRYT_PATH} component={Avbryt} />
                         <Route path={FULLFOR_PATH} component={Fullfor} />
                         <Route path={DUERNAREGISTRERT_PATH} component={DuErNaRegistrert} />
 

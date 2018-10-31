@@ -5,7 +5,6 @@ export const SKJEMA_PATH = '/skjema';
 export const SKJEMA_SYKEFRAVAER_PATH = '/skjema-sykefravaer';
 export const OPPSUMMERING_PATH = '/oppsummering';
 export const SBLREG_PATH = '/sblregistrering';
-export const AVBRYT_PATH = '/avbryt';
 export const FULLFOR_PATH = '/fullfor';
 export const DUERNAREGISTRERT_PATH = '/duernaregistrert';
 export const ALLEREDEREGISTRERT_PATH = '/allerederegistrert';
