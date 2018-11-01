@@ -60,7 +60,7 @@
   },
   "scripts": {
     "delete-static": "node scripts/deletestatic.js",
-    "start:ts": "cross-env REACT_APP_MOCK='true' react-scripts-ts start",
+    "start:ts": "cross-env REACT_APP_MOCK='true' REACT_APP_MOCK_ENDRE_REG_LOP='true' react-scripts-ts start",
     "build:ts": "react-scripts-ts build",
     "deploy": "npm run build && gh-pages -d build",
     "test": "npm run build:tekster && react-scripts-ts test --env=jsdom",
@@ -74,10 +74,10 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run delete-static && npm run build:tekster && npm run build:ts",
     "integrationtest": "cross-env REACT_APP_MOCK_BES=true node integration/nightwatch.js -c integration/default.conf.js",
-    "integrationtest-build": "cross-env REACT_APP_MOCK_BES=true npm run heroku-postbuild",
+    "integrationtest-build": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK_BES=true cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js",
     "test:browserstack": "node integration/browserstack.runner.js -c integration/browserstack.conf.js -e win_chrome,android_chrome,win_ie,win_edge",
     "heroku-serve": "node index.js",
-    "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
+    "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK_ENDRE_REG_LOP='true' cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
   },
   "devDependencies": {
     "@navikt/create-react-app-typescript-less": "^1.0.0-beta.14",
