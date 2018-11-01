@@ -97,7 +97,8 @@ class Routes extends React.Component<StateProps> {
 
         const visOrdinaerSkjema = !visSykefravaerSkjema;
 
-        const alleSporsmalBesvart = alleSporsmalErBesvarte(svar) && sisteStillingErSatt(sisteStilling);
+        const alleSporsmalBesvart = alleSporsmalErBesvarte(svar) && sisteStillingErSatt(sisteStilling)
+            || (registreringType === RegistreringType.SYKMELDT_REGISTRERING); // TODO: midlertidig
 
         return (
             <>
