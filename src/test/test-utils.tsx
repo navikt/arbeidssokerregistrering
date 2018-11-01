@@ -10,6 +10,7 @@ import {Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../du
 import {Data as FeatureStatusData, ActionTypes as FeatureStatusActionTypes } from '../ducks/feature-toggles';
 import IntlProvider from '../Intl-provider';
 import { MemoryRouter } from 'react-router';
+import * as H from 'history';
 
 export const store = getStore();
 
@@ -41,11 +42,12 @@ export function mountWithStore(children: React.ReactElement<ElementWithStore>, w
 
 export function mountWithStoreRouterAndIntl(
     children: React.ReactElement<ElementWithStore>,
-    withStore?: Store<AppState>
+    withStore?: Store<AppState>,
+    initialEntries?: H.LocationDescriptor[]
 ) {
     return mount(
         <Provider store={withStore || store}>
-            <MemoryRouter>
+            <MemoryRouter initialEntries={initialEntries}>
                 <IntlProvider >
                     {children}
                 </IntlProvider>

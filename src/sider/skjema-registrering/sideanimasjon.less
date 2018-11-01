@@ -1,15 +1,15 @@
 .limit.forover {
     .tilbakelenke {
-        animation: slideUp 400ms;
+        animation: slideAhead 500ms;
     }
     .spm-hode {
-        animation: slideUp 500ms;
+        animation: slideAhead 500ms;
     }
     .spm-body, .spm-valg, .spm-info {
-        animation: slideUp 550ms;
+        animation: slideAhead 550ms;
     }
     .nestelenke, .lenke-avbryt-wrapper {
-        animation: slideUp 600ms;
+        animation: slideAhead 600ms;
     }
 
     .startside .lenke-avbryt-wrapper {
@@ -17,38 +17,38 @@
     }
 
     .oppsummering-tittel, .oppsummering-ingress {
-        animation: slideUp 500ms;
+        animation: slideAhead 500ms;
     }
     .oppsummering-besvarelser {
-        animation: slideUp 550ms;
+        animation: slideAhead 550ms;
     }
     .oppsummering .knapper-vertikalt {
-        animation: slideUp 600ms;
+        animation: slideAhead 600ms;
     }
 
     .fullfor-tittel, .fullfor-ingress {
-        animation: slideUp 500ms;
+        animation: slideAhead 500ms;
     }
     .fullfor-liste-heading, .fullfor-liste, .fullfor-bekreft, .fullfor-info, .fullfor-sjekkliste {
-        animation: slideUp 550ms;
+        animation: slideAhead 550ms;
     }
     .fullfor .knapper-vertikalt {
-        animation: slideUp 600ms;
+        animation: slideAhead 600ms;
     }
 }
 
 .limit.bakover {
     .tilbakelenke {
-        animation: slideDown 600ms;
+        animation: slideBack 500ms;
     }
     .spm-hode {
-        animation: slideDown 550ms;
+        animation: slideBack 550ms;
     }
     .spm-body, .spm-valg, .spm-info {
-        animation: slideDown 500ms;
+        animation: slideBack 500ms;
     }
     .nestelenke, .lenke-avbryt-wrapper {
-        animation: slideDown 400ms;
+        animation: slideBack 500ms;
     }
 
     .startside .lenke-avbryt-wrapper {
@@ -56,23 +56,23 @@
     }
 
     .oppsummering-tittel, .oppsummering-ingress {
-        animation: slideDown 500ms;
+        animation: slideBack 500ms;
     }
     .oppsummering-besvarelser {
-        animation: slideDown 550ms;
+        animation: slideBack 550ms;
     }
     .oppsummering .knapper-vertikalt {
-        animation: slideDown 600ms;
+        animation: slideBack 600ms;
     }
 
     .fullfor-tittel, .fullfor-ingress {
-        animation: slideDown 500ms;
+        animation: slideBack 500ms;
     }
     .fullfor-liste-heading, .fullfor-liste, .fullfor-bekreft, .fullfor-info, .fullfor-sjekkliste {
-        animation: slideDown 550ms;
+        animation: slideBack 550ms;
     }
     .fullfor .knapper-vertikalt {
-        animation: slideDown 600ms;
+        animation: slideBack 600ms;
     }
 }
 
@@ -94,5 +94,17 @@
         .tilbakelenke, .oppsummering-tittel, .oppsummering-ingress, .oppsummering-besvarelser, .lenke-avbryt-wrapper, .knapper-vertikalt {
             animation: none;
         }
+    }
+}
+
+.framdrift.bakover {
+    z-index: 0;
+    animation: slideBack 500ms;
+}
+
+@media (min-width: @screen-sm-min) {
+    .framdrift.framover {
+        z-index: 0;
+        animation: slideAhead 500ms;
     }
 }

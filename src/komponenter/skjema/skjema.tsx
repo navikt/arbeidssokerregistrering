@@ -67,7 +67,6 @@ class Skjema extends React.Component<Props, OwnState> {
     }
 
     handleNesteBtnClick = (): void => {
-
         const gaaTilNeste = kanGaaTilNeste(this.props.svarState, hentGjeldendeSporsmalId(this.props));
 
         if (gaaTilNeste) {

@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { getTekstIdForOppsummering } from './oppsummering-utils';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { MessageValue } from 'react-intl';
+import { erSporsmalBesvart } from '../../komponenter/skjema/skjema-utils';
 
 interface OwnProps {
     sporsmalId?: SporsmalId;
@@ -27,6 +28,10 @@ class OppsummeringElement extends React.Component<Props> {
         const { tekst, values, } = this.props;
 
         if (!this.skalViseElement()) {
+            return null;
+        }
+
+        if (this.props.sporsmalId && !erSporsmalBesvart(this.props.svarState, this.props.sporsmalId)) {
             return null;
         }
 

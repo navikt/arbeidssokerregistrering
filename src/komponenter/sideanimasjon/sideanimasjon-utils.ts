@@ -1,5 +1,5 @@
 import {
-    DUERNAREGISTRERT_PATH,
+    DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
     OPPSUMMERING_PATH, 
     SKJEMA_PATH,
@@ -11,7 +11,7 @@ export const paths = [
     SKJEMA_PATH,
     OPPSUMMERING_PATH,
     FULLFOR_PATH,
-    DUERNAREGISTRERT_PATH
+    DU_ER_NA_REGISTRERT_PATH
 ];
 
 // TODO: Fjern denne filen hvis den ikke lenger brukes av sideanimasjon.tsx
