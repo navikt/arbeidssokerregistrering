@@ -20,7 +20,7 @@ class App extends React.Component {
 
     render() {
         const BrukesIHerokuappEndreRegistreringTypeMock =
-            !process.env.REACT_APP_MOCK_BES
+            process.env.REACT_APP_MOCK_ENDRE_REG_LOP
             ? <HerokuappEndreMockRegistreringLoep/>
             : null;
         return (
