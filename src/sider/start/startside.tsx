@@ -11,7 +11,8 @@ import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 
-const personSvg = require('./person-komprimert.svg');
+import personSvg from './person-komprimert.svg';
+import './startside.less';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;

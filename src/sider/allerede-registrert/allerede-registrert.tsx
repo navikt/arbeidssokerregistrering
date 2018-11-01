@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Column, Container, Row } from 'nav-frontend-grid';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
-import { Normaltekst } from 'nav-frontend-typografi';
-import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
+
+import './allerede-registrert.less';
 
 type Props = InjectedIntlProps;
 
