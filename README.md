@@ -14,8 +14,14 @@ Registrering av arbeidssøker
 * Åpne appen i `localhost:8080`
 
 # Kjøre integrasjonstester lokalt
-* `npm i` 
-* `npm run integrationtest`
+* `npm run integrationtest-build`
+* `npm run heroku-serve`
+* `npm run test:integration`
+
+# Kjøre browsertester lokalt
+* `npm run integrationtest-build`
+* `npm run heroku-serve`
+* `BROWSERSTACK_USERNAME=<> BROWSERSTACK_ACCESS_KEY=<> npm run test:browsers`
 
 # Henvendelser
 
