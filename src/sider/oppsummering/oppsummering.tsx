@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { RouteComponentProps } from 'react-router';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
-import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
@@ -14,6 +14,8 @@ import { RegistreringType } from '../../ducks/registreringstatus';
 import OrdinaerOppsummeringBesvarelser from './ordinaer-oppsummering-besvarelser';
 import SykmeldtOppsummeringBesvarelser from './sykmeldt-oppsummering-besvarelser';
 import { erKlarForFullforing } from '../fullfor/fullfor-utils';
+
+import './oppsummering.less';
 
 interface StateProps {
     state: AppState;
@@ -28,7 +30,7 @@ class Oppsummering extends React.Component<Props> {
         if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
-      
+
         disableVerikalScrollingVedAnimasjon();
     }
 

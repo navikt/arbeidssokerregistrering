@@ -1,24 +1,25 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
+import { connect, Dispatch } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router';
+import KnappBase from 'nav-frontend-knapper';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { DITTNAV_URL } from '../../ducks/api';
 import { AppState } from '../../reducer';
-import { connect, Dispatch } from 'react-redux';
 import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reaktiverbruker';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import KnappBase from 'nav-frontend-knapper';
 import { MatchProps } from '../../utils/utils';
 import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
+import Banner from '../../komponenter/banner/banner';
 import {
     Data as RegistreringstatusData,
     selectRegistreringstatus
 } from '../../ducks/registreringstatus';
 
-const handinfoSvg = require('./handinfo.svg');
-import Banner from '../../komponenter/banner/banner';
+import handinfoSvg from './handinfo.svg';
+import './krever-reaktivering.less';
 
 interface State {
     reaktivererBruker: boolean;
@@ -43,14 +44,12 @@ class KreverReaktivering extends React.Component<Props, State> {
         this.state = {
             reaktivererBruker: false
         };
-
         this.reaktiverBrukerOnClick = this.reaktiverBrukerOnClick.bind(this);
     }
 
     reaktiverBrukerOnClick() {
-        const { onReaktiverBruker, history } = this.props;
-
-        this.setState({ reaktivererBruker: true });
+        const {onReaktiverBruker, history} = this.props;
+        this.setState({reaktivererBruker: true});
 
         onReaktiverBruker()
             .then((res) => {
@@ -63,8 +62,7 @@ class KreverReaktivering extends React.Component<Props, State> {
     render() {
 
         if (this.state.reaktivererBruker) {
-
-            const { reaktiverBrukerData } = this.props;
+            const {reaktiverBrukerData} = this.props;
 
             return (
                 <Innholdslaster
@@ -73,7 +71,6 @@ class KreverReaktivering extends React.Component<Props, State> {
                     loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
                 />
             );
-
         }
 
         return (
