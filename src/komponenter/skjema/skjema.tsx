@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 import { AppState } from '../../reducer';
 import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import LenkeAvbryt from '../knapper/lenke-avbryt';
@@ -7,9 +10,6 @@ import LenkeTilbake from '../knapper/lenke-tilbake';
 import LenkeNeste from '../knapper/lenke-neste';
 import Animasjon from '../../sider/skjema-registrering/animasjon';
 import ResponsivSide from '../side/responsiv-side';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import NavAlertStripe from 'nav-frontend-alertstriper';
-import { RouteComponentProps } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import {
     erSporsmalBesvart,
@@ -29,6 +29,8 @@ import {
     RegistreringType,
     selectRegistreringstatus
 } from '../../ducks/registreringstatus';
+
+import './skjema.less';
 
 interface StateProps {
     svarState: SvarState;
@@ -53,7 +55,6 @@ interface OwnProps {
 export type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
 class Skjema extends React.Component<Props, OwnState> {
-
     constructor(props: Props) {
         super(props);
 
@@ -72,18 +73,15 @@ class Skjema extends React.Component<Props, OwnState> {
         if (gaaTilNeste) {
             this.settIngenSvarForUbesvarteSporsmal();
         }
-
         this.setState({ visAdvarsel: !gaaTilNeste });
-
     }
 
     handleTilbakeBtnClick = (): void => {
         this.setState({ visAdvarsel: false });
         this.props.history.goBack();
     }
-    
-    settIngenSvarForUbesvarteSporsmal = () => {
 
+    settIngenSvarForUbesvarteSporsmal = () => {
         const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(this.props);
         const nesteSporsmalPlassering = finnNesteSporsmalPlassering(this.props);
         const sporsmalIder = getSporsmalIder(this.props);
@@ -92,33 +90,27 @@ class Skjema extends React.Component<Props, OwnState> {
             const sporsmalId = sporsmalIder[i];
             this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR);
         }
-        
     }
-    
-    finnGjeldendeSporsmal = (): React.ReactChild => {
 
+    finnGjeldendeSporsmal = (): React.ReactChild => {
         const plassering = finnGjeldendeSporsmalPlassering(this.props);
 
         if (!this.props.children || plassering < 0 || plassering > this.props.children.length) {
             return (<p>Spørsmålet finnes ikke</p>);
         }
-
         return this.props.children[plassering];
     }
 
     gaaTilStartHvisIdErUgyldig = (idStr: string): void => {
-
         const id = parseInt(idStr, 10);
         const antallSporsmal = getSporsmalIder(this.props).length;
 
         if (!isNumber(id) || id < 0 || id >= antallSporsmal) {
             this.props.history.push(START_PATH);
         }
-
     }
 
     gaaTilStartHvisForegaendeSporsmalIkkeBesvart = (): void => {
-
         const registreringType = this.props.registreringstatusData.registreringType;
         const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(this.props);
         const sporsmalIder = getSporsmalIder(this.props);
@@ -142,11 +134,9 @@ class Skjema extends React.Component<Props, OwnState> {
                 return;
             }
         }
-
     }
 
     shouldComponentUpdate(nextProps: Props): boolean {
-
         if (this.state.visAdvarsel) {
             const visAdvarsel: boolean = !kanGaaTilNeste(nextProps.svarState, hentGjeldendeSporsmalId(nextProps));
             if (!visAdvarsel) {
@@ -154,9 +144,7 @@ class Skjema extends React.Component<Props, OwnState> {
                 return false;
             }
         }
-
         return true;
-
     }
 
     render() {
@@ -166,9 +154,7 @@ class Skjema extends React.Component<Props, OwnState> {
             </NavAlertStripe>) : null;
 
         const nesteHref = finnNesteHref(this.props);
-
         const gjeldendeSporsmal = this.finnGjeldendeSporsmal();
-
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, hentGjeldendeSporsmalId(this.props));
 
         return (

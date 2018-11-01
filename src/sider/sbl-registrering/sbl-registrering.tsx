@@ -9,6 +9,8 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
 import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
 
+import './sbl-registrering.less';
+
 interface State {
     status: string;
 }

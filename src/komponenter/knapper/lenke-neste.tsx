@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import * as classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
+import './lenke-neste.less';
+
 interface Props {
     disabled?: boolean;
     onClick: (e: React.SyntheticEvent<HTMLAnchorElement>) => void;

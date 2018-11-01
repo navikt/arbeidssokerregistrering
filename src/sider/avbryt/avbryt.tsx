@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import KnappBase from 'nav-frontend-knapper';
-import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
+import KnappBase from 'nav-frontend-knapper';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { DITTNAV_URL } from '../../ducks/api';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { Container, Column, Row } from 'nav-frontend-grid';
+import { MatchProps } from '../../utils/utils';
+import { DITTNAV_URL } from '../../ducks/api';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 
-type Props = RouteComponentProps<MatchProps>;
+import avbrytSvg from './avbryt.svg';
+import './avbryt.less';
 
-const avbrytSvg = require('./avbryt.svg');
+type Props = RouteComponentProps<MatchProps>;
 
 function Avbryt({history}: Props) {
     return (

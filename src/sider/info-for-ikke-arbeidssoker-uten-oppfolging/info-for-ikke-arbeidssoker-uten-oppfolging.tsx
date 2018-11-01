@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { FormattedMessage } from 'react-intl';
 
-const utropstegnSvg = require('../fullfor/utropstegn.svg');
+import utropstegnSvg from '../fullfor/utropstegn.svg';
+import './info-for-ikke-arbeidssoker-uten-oppfolging.less';
 
 class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component {
-
     render() {
         return (
             <Veilederpanel

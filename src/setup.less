@@ -1,1 +1,23 @@
 @desktopLimitWidth: 740px;
+
+.pil-mixin(@color, @rotation) {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-top: 14px;
+    border-right: 2px solid @color;
+    border-bottom: 2px solid @color;
+    transform: rotate(@rotation);
+}
+
+.gjemt-mixin() {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}

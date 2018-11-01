@@ -2,6 +2,8 @@ import * as React from 'react';
 import NavAlertStripe, { AlertstripeTypes } from 'nav-frontend-alertstriper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
+import './alertstripe.less';
+
 interface Props {
     type: AlertstripeTypes;
     tekst: string;

@@ -1,8 +1,6 @@
 @nodeModulesPath: './../../';
 @coreModulePath: './../../';
 
-@desktopLimitWidth: 740px;
-
 @import '../node_modules/nav-frontend-core/less/core';
 @import '../node_modules/nav-frontend-knapper-style/src/index';
 @import '../node_modules/nav-frontend-skjema-style/src/index';
@@ -13,8 +11,9 @@
 @import '../node_modules/nav-frontend-chevron-style/src/index';
 @import '../node_modules/nav-frontend-grid-style/src/index';
 @import '../node_modules/nav-frontend-ekspanderbartpanel-style/src/index';
-@import '../node_modules/nav-frontend-veilederpanel-style/src/index';
 
+@import './setup';
+@import './sider/skjema-registrering/sideanimasjon';
 
 *::-webkit-scrollbar {
     width: 10px;
@@ -34,41 +33,6 @@ body {
 .arbsokreg_app:focus {
     outline: none;
     box-shadow: none;
-}
-
-.arbsokreg_app {
-    @import './mixins';
-    @import 'komponenter/alertstripe';
-    @import 'komponenter/innholdslaster/innholdslaster';
-    @import 'komponenter/knapper/knapperad';
-    @import 'komponenter/knapper/lenke-neste';
-    @import 'komponenter/knapper/lenke-tilbake';
-    @import 'komponenter/knapper/lenke-avbryt';
-    @import 'komponenter/side/responsiv-side';
-    @import 'komponenter/liste/avhuket-li';
-    @import 'komponenter/loader/loader';
-    @import 'komponenter/progress-bar/progress-bar';
-    @import 'komponenter/banner/banner';
-    @import 'komponenter/graa-bakgrunn/graa-bakgrunn';
-    @import 'komponenter/ekspanderbartinfo/ekspanderbartinfo';
-    @import 'komponenter/initialdata/stepup';
-
-    @import 'sider/fullfor/feilhandtering/feilmelding-brukers-status-ugyldig';
-    @import 'komponenter/feilmelding/feilmelding';
-
-    @import 'komponenter/skjema/skjema';
-    @import 'sider/skjema-registrering/sideanimasjon';
-    @import 'sider/skjema-registrering/sporsmal/sporsmal-siste-stilling/autocomplete';
-    @import 'sider/krever-reaktivering/krever-reaktivering';
-    @import 'sider/registrert/registrert';
-    @import 'sider/registrert/avsjekk-bilde';
-    @import 'sider/oppsummering/oppsummering';
-
-    @import 'sider/fullfor/fullfor';
-    @import 'sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
-    @import 'sider/avbryt/avbryt';
-    @import 'sider/sbl-registrering/sbl-registrering';
-
 }
 
 .limit {

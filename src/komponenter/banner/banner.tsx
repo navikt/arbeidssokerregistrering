@@ -1,11 +1,13 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { START_PATH } from '../../utils/konstanter';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { AppState } from '../../reducer';
-import { connect } from 'react-redux';
 import {Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
 import { selectSykefravaerFeatureToggle } from '../../ducks/feature-toggles';
+
+import './banner.less';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;

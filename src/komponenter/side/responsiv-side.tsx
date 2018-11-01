@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 
+import './responsiv-side.less';
+
 interface ResponsivSideProps {
     children: React.ReactNode;
     className?: string;

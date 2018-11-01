@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import { RouteComponentProps } from 'react-router';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
-import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
@@ -21,7 +21,8 @@ import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
 import { alleSporsmalErBesvarte, sisteStillingErSatt } from '../fullfor/fullfor-utils';
 import { SporsmalId } from '../../ducks/svar';
 
-const oppsummeringSvg = require('./oppsummering.svg');
+import oppsummeringSvg from './oppsummering.svg';
+import './oppsummering.less';
 
 interface StateProps {
     state: AppState;
@@ -38,7 +39,7 @@ const oppsummeringBesvarelser = (state: AppState) => {
 
     const registreringStatus = state.registreringStatus.data;
     const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
-    
+
     return (
         <div className="oppsummering-besvarelser">
             <img

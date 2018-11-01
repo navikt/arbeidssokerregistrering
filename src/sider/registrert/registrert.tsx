@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
+import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
 import { erIE } from '../../utils/ie-test';
 
-const handinfoSvg = require('./clipboard.svg');
+import handinfoSvg from './clipboard.svg';
+import './registrert.less';
 
 class DuErNaRegistrert extends React.Component {
 
