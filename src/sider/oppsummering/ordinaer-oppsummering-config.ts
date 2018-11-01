@@ -1,11 +1,11 @@
 import { DinSituasjonSvar } from '../../ducks/svar-utils';
 
-interface OppsummeringConfig {
+interface OrdinaerOppsummeringConfig {
     svarSomIndikererArbeidSisteManeder: (DinSituasjonSvar | undefined) [];
     svarSomIndikererIngenArbeidSisteManeder: (DinSituasjonSvar | undefined) [];
 }
 
-const oppsummeringConfig: OppsummeringConfig = {
+const oppsummeringConfig: OrdinaerOppsummeringConfig = {
     svarSomIndikererArbeidSisteManeder: [
         DinSituasjonSvar.MISTET_JOBBEN,
         DinSituasjonSvar.HAR_SAGT_OPP,

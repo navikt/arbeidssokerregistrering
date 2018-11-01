@@ -3,7 +3,7 @@ import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../ducks
 import { svarSuffiksTilTekstId } from '../../komponenter/skjema/skjema-utils';
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { Data as RegStatus } from '../../ducks/registreringstatus';
-import oppsummeringConfig from './oppsummering-config';
+import oppsummeringConfig from './ordinaer-oppsummering-config';
 
 const {svarSomIndikererArbeidSisteManeder, svarSomIndikererIngenArbeidSisteManeder} = oppsummeringConfig;
 
