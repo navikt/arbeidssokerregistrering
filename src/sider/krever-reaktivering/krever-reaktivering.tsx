@@ -95,17 +95,17 @@ class KreverReaktivering extends React.Component<Props, State> {
                             <Normaltekst>
                                 <FormattedMessage id="krever-reaktivering-undertittel"/>
                             </Normaltekst>
-                            <div className={'knapper-vertikalt'}>
+                            <div className="lenke-avbryt-wrapper">
                                 <KnappBase
                                     type="hoved"
                                     onClick={this.reaktiverBrukerOnClick}
                                 >
                                     <FormattedMessage id="ja"/>
                                 </KnappBase>
-                                <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
-                                    <FormattedMessage id="avbryt-lenke"/>
-                                </a>
                             </div>
+                            <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
+                                <FormattedMessage id="avbryt-lenke"/>
+                            </a>
                         </div>
                     </section>
                 </div>

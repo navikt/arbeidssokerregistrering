@@ -35,7 +35,7 @@ class Oppsummering extends React.Component<Props> {
     }
 
     render() {
-        const { history, state } = this.props;
+        const {history, state} = this.props;
         let classnames = 'oppsummering ';
         classnames += erIE() ? 'erIE' : '';
 
@@ -51,21 +51,19 @@ class Oppsummering extends React.Component<Props> {
         return (
             <section className={classnames}>
                 <Innholdstittel tag="h1" className="oppsummering-tittel">
-                    <FormattedMessage id={`${tekstPrefix}-tittel`} />
+                    <FormattedMessage id={`${tekstPrefix}-tittel`}/>
                 </Innholdstittel>
                 <Normaltekst className="oppsummering-ingress">
                     <FormattedMessage id={`${tekstPrefix}-ingress`}/>
                 </Normaltekst>
-
                 {oppsummeringBesvarelser}
-
-                <div className="knapper-vertikalt">
+                <div className="lenke-avbryt-wrapper">
                     <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)} data-testid="neste">
                         <FormattedMessage id="knapp-riktig"/>
                     </KnappBase>
-                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                    <LenkeAvbryt wrapperClassname="no-anim"/>
                 </div>
+                <LenkeTilbake onClick={() => this.props.history.goBack()}/>
+                <LenkeAvbryt wrapperClassname="no-anim"/>
             </section>
         );
     }

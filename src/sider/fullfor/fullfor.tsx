@@ -65,7 +65,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-      
+
         if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
@@ -223,14 +223,14 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                         className="fullfor-bekreft"
                     />
                     {advarselElement}
-                    <div className={'knapper-vertikalt'}>
+                    <div className="lenke-avbryt-wrapper">
                         <KnappFullfor
                             intl={intl}
                             onClick={this.registrerBrukerOnClick}
                         />
-                        <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt wrapperClassname="no-anim"/>
                     </div>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
+                    <LenkeAvbryt wrapperClassname="no-anim"/>
                 </section>
             </Innholdslaster>
         );
