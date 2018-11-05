@@ -4,18 +4,20 @@ import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
 import { hentSvar, IngenSvar } from './svar-utils';
+import { RegistreringType } from './registreringstatus';
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     sisteStilling: Stilling,
     intl: InjectedIntl,
+    registreringType: RegistreringType
 ): RegistreringData {
     return {
         enigIOppsummering: true,
         sisteStilling: sisteStilling,
         besvarelse: mapTilBesvarelse(svar),
         oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
-        teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling),
+        teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling, registreringType),
     };
 }
 
@@ -39,10 +41,11 @@ export function genererTeksterForBesvarelse(
     svarState: SvarState,
     intl: InjectedIntl,
     sisteStilling: Stilling,
+    registreringType: RegistreringType
 ): TeksterForBesvarelse {
     return svarState.map(sporsmalOgSvar => ({
         sporsmalId: sporsmalOgSvar.sporsmalId,
-        sporsmal: getIntlTekstForSporsmal(sporsmalOgSvar.sporsmalId, 'tittel', intl),
+        sporsmal: getIntlTekstForSporsmal(sporsmalOgSvar.sporsmalId, 'tittel', intl, registreringType),
         svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalOgSvar.sporsmalId, svarState, intl, sisteStilling),
     }));
 }
