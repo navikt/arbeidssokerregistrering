@@ -29,10 +29,10 @@ function SporsmalTilbakeIArbeid(props: Props) {
                     </Innholdstittel>
                 </legend>
                 <div className="spm-body">
-                    <Alternativ svar={TilbakeIArbeidSvar.JA_HELT} {...fellesProps}/>
-                    <Alternativ svar={TilbakeIArbeidSvar.JA_DELIVS} {...fellesProps}/>
-                    <Alternativ svar={TilbakeIArbeidSvar.NEI} {...fellesProps}/>
+                    <Alternativ svar={TilbakeIArbeidSvar.JA_FULL_STILLING} {...fellesProps}/>
+                    <Alternativ svar={TilbakeIArbeidSvar.JA_REDUSERT_STILLING} {...fellesProps}/>
                     <Alternativ svar={TilbakeIArbeidSvar.USIKKER} {...fellesProps}/>
+                    <Alternativ svar={TilbakeIArbeidSvar.NEI} {...fellesProps}/>
                 </div>
             </fieldset>
         </form>

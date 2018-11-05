@@ -80,8 +80,8 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
                             </Normaltekst>
                         </legend>
                         <div className="spm-body">
-                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
+                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
                         </div>

@@ -93,8 +93,8 @@ export enum StillingsprosentSvar {
 }
 
 export enum TilbakeIArbeidSvar {
-   JA_HELT = 'JA_HELT',
-   JA_DELIVS = 'JA_DELVIS',
+   JA_FULL_STILLING = 'JA_FULL_STILLING',
+   JA_REDUSERT_STILLING = 'JA_REDUSERT_STILLING',
    NEI = 'NEI',
    USIKKER = 'USIKKER'
 }
