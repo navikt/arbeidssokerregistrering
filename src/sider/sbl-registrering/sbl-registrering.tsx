@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import KnappBase from 'nav-frontend-knapper';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
-import { DITTNAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
+import { DITT_NAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export function sendBrukerTilDittNav() {
-    document.location.href = DITTNAV_URL;
+    document.location.href = DITT_NAV_URL;
 }
 
 class SblRegistrering extends React.Component<Props, State> {
@@ -66,7 +66,7 @@ class SblRegistrering extends React.Component<Props, State> {
                             <KnappBase
                                 key="1"
                                 type="standard"
-                                onClick={() => document.location.href = DITTNAV_URL}
+                                onClick={() => document.location.href = DITT_NAV_URL}
                                 className="sbl-registrering__knapp"
                             >
                                 <FormattedMessage id="knapp-sbl-registrering-avbryt"/>

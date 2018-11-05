@@ -9,7 +9,7 @@ import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
-    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
     INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
@@ -80,7 +80,7 @@ class Routes extends React.Component<StateProps> {
             if (registreringType === RegistreringType.SPERRET) {
                 return (
                     <RedirectAll
-                        to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING}
+                        to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH}
                         component={InfoForIkkeArbeidssokerUtenOppfolging}
                     />
                 );
