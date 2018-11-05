@@ -7,6 +7,8 @@ import NavFrontendModal from 'nav-frontend-modal';
 import './avbryt-modal.less';
 import { Knapp } from 'nav-frontend-knapper';
 import { DITTNAV_URL } from '../../ducks/api';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { MatchProps } from '../../utils/utils';
 
 const avbrytSvg = require('./avbryt.svg');
 
@@ -15,7 +17,13 @@ interface OwnProps {
     onRequestClose: () => void;
 }
 
-class AvbrytModal extends React.Component<OwnProps> {
+type AllProps = RouteComponentProps<MatchProps> & OwnProps;
+
+class AvbrytModal extends React.Component<AllProps> {
+
+    handleAvbrytKnappClicked = () => {
+        this.props.history.push(DITTNAV_URL);
+    }
 
     render() {
         return (
@@ -40,7 +48,7 @@ class AvbrytModal extends React.Component<OwnProps> {
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
-                        <Knapp className="avbryt-modal__knapp" onClick={() => document.location.href = DITTNAV_URL}>
+                        <Knapp className="avbryt-modal__knapp" onClick={this.handleAvbrytKnappClicked}>
                             <FormattedMessage id="knapp-ja-avbryt"/>
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
@@ -54,4 +62,4 @@ class AvbrytModal extends React.Component<OwnProps> {
 
 }
 
-export default AvbrytModal;
+export default withRouter(AvbrytModal);
