@@ -7,8 +7,10 @@ import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
 import {
     ALLEREDE_REGISTRERT_PATH,
-    AVBRYT_PATH, DU_ER_NA_REGISTRERT_PATH,
-    FULLFOR_PATH, IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING, INNGANGSSPORSMAL_PATH,
+    DU_ER_NA_REGISTRERT_PATH,
+    FULLFOR_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING,
+    INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SBLREG_PATH,
@@ -107,7 +109,6 @@ class Routes extends React.Component<StateProps> {
                 <Sideanimasjon>
 
                     <Switch>
-                        <Route path={AVBRYT_PATH} component={Avbryt} />
 
                         {alleSporsmalBesvart ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
                         {alleSporsmalBesvart ? <Route path={FULLFOR_PATH} component={Fullfor} /> : null}

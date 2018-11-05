@@ -52,6 +52,15 @@ describe('<Skjema />', () => {
 
     });
 
+    it('Avbryt-knapp skal vise dialog', () => {
+
+        const wrapper = mountSkjema(defaultConfigForSporsmalsflyt, "0", undefined);
+
+        wrapper.find("a.lenke-avbryt").simulate('click');
+
+        expect(wrapper.find("avbryt-modal")).to.have.length(1);
+
+    });
 
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
 
