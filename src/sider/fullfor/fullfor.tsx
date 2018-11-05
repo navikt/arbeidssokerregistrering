@@ -232,7 +232,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                             onClick={this.registrerBrukerOnClick}
                         />
                         <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt wrapperClassname="no-anim"/>
+                        <LenkeAvbryt tekstId="avbryt-lenke-registrering" wrapperClassname="no-anim"/>
                     </div>
                 </section>
             </Innholdslaster>
