@@ -17,7 +17,7 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { DUERNAREGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';
@@ -27,7 +27,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
-import { alleSporsmalErBesvarte, sisteStillingErSatt } from './fullfor-utils';
+import { erKlarForFullforing } from './fullfor-utils';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -66,13 +66,13 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-        const svar = this.props.state.svar;
-        const sisteStilling = this.props.state.sisteStilling.data.stilling;
-        if (!alleSporsmalErBesvarte(svar) || !sisteStillingErSatt(sisteStilling)) {
+      
+        if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
 
         disableVerikalScrollingVedAnimasjon();
+
     }
 
     registrerBrukerOnClick() {
@@ -90,8 +90,8 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                 // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
                 registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
                     .then(
-                        () => this.props.history.push(DUERNAREGISTRERT_PATH),
-                        () => this.props.history.push(DUERNAREGISTRERT_PATH),
+                        () => this.props.history.push(DU_ER_NA_REGISTRERT_PATH),
+                        () => this.props.history.push(DU_ER_NA_REGISTRERT_PATH),
                     );
             }
         });

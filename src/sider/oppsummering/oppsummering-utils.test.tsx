@@ -1,5 +1,4 @@
 /*tslint:disable*/
-import * as React from 'react';
 import { expect } from 'chai';
 import {SporsmalId, State as SvarState} from '../../ducks/svar';
 import { Data as RegStatus } from '../../ducks/registreringstatus';
