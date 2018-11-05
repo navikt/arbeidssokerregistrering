@@ -3,10 +3,8 @@ import { FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { VEILARBSTEPUP } from '../../ducks/api';
 import NavAlertStripe from 'nav-frontend-alertstriper';
-import { RouteComponentProps, withRouter } from 'react-router';
-import { MatchProps } from '../../utils/utils';
 
-function StepUp(props: RouteComponentProps<MatchProps>) {
+function StepUp() {
     return (
         <section className="stepup">
             <NavAlertStripe type="info">
@@ -15,7 +13,7 @@ function StepUp(props: RouteComponentProps<MatchProps>) {
             <div className="knapperad">
                 <button
                     className="knapp knapp--hoved stepup__knapp"
-                    onClick={() => props.history.push(VEILARBSTEPUP)}
+                    onClick={() => window.location.href = VEILARBSTEPUP}
                 >
                     <Normaltekst>
                         <FormattedHTMLMessage id="knapp-logg-inn"/>
@@ -26,4 +24,4 @@ function StepUp(props: RouteComponentProps<MatchProps>) {
     );
 }
 
-export default withRouter(StepUp);
+export default StepUp;

@@ -3,15 +3,13 @@ import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
-
-import './avbryt-modal.less';
 import { Knapp } from 'nav-frontend-knapper';
-import { RouteComponentProps, withRouter } from 'react-router';
-import { MatchProps } from '../../utils/utils';
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../ducks/api';
+
+import './avbryt-modal.less';
 
 const avbrytSvg = require('./avbryt.svg');
 
@@ -24,12 +22,12 @@ interface StateProps {
     registreringType?: RegistreringType;
 }
 
-type AllProps = RouteComponentProps<MatchProps> & OwnProps & StateProps;
+type AllProps = OwnProps & StateProps;
 
 class AvbrytModal extends React.Component<AllProps> {
 
     handleAvbrytKnappClicked = (url: string) => {
-        this.props.history.push(url);
+        window.location.href = url;
     }
 
     render() {
@@ -86,4 +84,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     registreringType: selectRegistreringstatus(state).data.registreringType
 });
 
-export default connect(mapStateToProps)(withRouter(AvbrytModal));
+export default connect(mapStateToProps)(AvbrytModal);
