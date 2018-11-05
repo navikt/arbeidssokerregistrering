@@ -12,6 +12,7 @@ import getStore from '../../store';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { AppState } from '../../reducer';
 import './herokuapp-endre-mock-registrering-loep.less';
+import startRegistreringStatus from '../registreringstatus-mock';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
@@ -37,7 +38,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props> {
                 type: registringActionType.HENT_REG_STATUS_OK,
                 data: {
                     registreringType: type,
-                    underOppfolging: false
+                    underOppfolging: startRegistreringStatus.underOppfolging,
+                    sykmeldtFraDato: startRegistreringStatus.sykmeldtFraDato,
                 }
             });
             reset();
