@@ -2,20 +2,29 @@ import * as React from 'react';
 import * as classnames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import AvbrytModal from '../avbryt-modal/avbryt-modal';
+import { AppState } from '../../reducer';
+import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
+import { connect } from 'react-redux';
 
 interface LenkeAvbrytProps {
     classname?: string;
     wrapperClassname?: string;
-    tekstId: string;
+    tekstId?: string;
 }
 
 interface LenkeAvbrytState {
     visAvbrytModal: boolean;
 }
 
-class LenkeAvbryt extends React.Component<LenkeAvbrytProps, LenkeAvbrytState> {
+interface StateProps {
+    registreringType?: RegistreringType;
+}
 
-    constructor(props: LenkeAvbrytProps) {
+type AllProps = StateProps & LenkeAvbrytProps;
+
+class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
+
+    constructor(props: AllProps) {
         super(props);
 
         this.state = {
@@ -33,13 +42,24 @@ class LenkeAvbryt extends React.Component<LenkeAvbrytProps, LenkeAvbrytState> {
     }
 
     render() {
-        const { tekstId, wrapperClassname } = this.props;
+        const { tekstId, wrapperClassname, registreringType } = this.props;
+
+        let id;
+
+        if (tekstId) {
+            id = tekstId;
+        } else {
+
+            id = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
+                ? 'avbryt-lenke-sykmeldt' : 'avbryt-lenke-registrering';
+
+        }
 
         return (
             <>
                 <div className={classnames('lenke-avbryt-wrapper', wrapperClassname)}>
                     <a className="lenke lenke-avbryt typo-element" onClick={this.handleAvbrytClick}>
-                        <FormattedMessage id={tekstId}/>
+                        <FormattedMessage id={id}/>
                     </a>
                 </div>
                 <AvbrytModal
@@ -52,4 +72,8 @@ class LenkeAvbryt extends React.Component<LenkeAvbrytProps, LenkeAvbrytState> {
 
 }
 
-export default LenkeAvbryt;
+const mapStateToProps = (state: AppState): StateProps => ({
+    registreringType: selectRegistreringstatus(state).data.registreringType
+});
+
+export default connect(mapStateToProps)(LenkeAvbryt);

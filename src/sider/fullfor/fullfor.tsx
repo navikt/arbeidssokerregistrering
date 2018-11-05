@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
-    utforRegistrering,
+    Data as RegistrerBrukerData,
     State as RegistrerBrukerState,
-    Data as RegistrerBrukerData
+    utforRegistrering
 } from '../../ducks/registrerbruker';
 import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
@@ -19,7 +18,7 @@ import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
-import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
+import {Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
@@ -28,6 +27,7 @@ import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
 import { erKlarForFullforing } from './fullfor-utils';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
 const utropstegnSvg = require('./utropstegn.svg');
 const kalenderSvg = require('./kalender.svg');
@@ -99,7 +99,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
     getSvarMappetForBackend() {
         const {state, intl} = this.props;
-        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl);
+        const { registreringType } = this.props.state.registreringStatus.data;
+        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
+        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl, regType);
     }
 
     settMarkert() {
@@ -230,7 +232,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                             onClick={this.registrerBrukerOnClick}
                         />
                         <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt tekstId="avbryt-lenke-registrering" wrapperClassname="no-anim"/>
+                        <LenkeAvbryt wrapperClassname="no-anim"/>
                     </div>
                 </section>
             </Innholdslaster>

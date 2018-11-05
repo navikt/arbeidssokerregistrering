@@ -10,6 +10,7 @@ import { RouteComponentProps } from 'react-router';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
 import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -32,12 +33,15 @@ class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
+        const regType = RegistreringType.SYKMELDT_REGISTRERING;
+
         const sporsmal = [
             (
                 <SporsmalTilbakeIArbeid
                     key={SporsmalId.tilbakeIArbeid}
                     sporsmalId={SporsmalId.tilbakeIArbeid}
                     {...fellesProps}
+                    registeringType={regType}
                 />
             )
         ];

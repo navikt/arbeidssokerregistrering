@@ -168,7 +168,7 @@ class Skjema extends React.Component<Props, OwnState> {
                     <LenkeTilbake
                         onClick={this.handleTilbakeBtnClick}
                     />
-                    <LenkeAvbryt tekstId="avbryt-lenke-registrering" />
+                    <LenkeAvbryt />
                 </Animasjon>
             </ResponsivSide>
         );

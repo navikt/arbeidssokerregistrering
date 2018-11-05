@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import KnappBase from 'nav-frontend-knapper';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
-import { DITTNAV_URL, registrerBrukerSBLArbeid, SBLARBEID_URL } from '../../ducks/api';
+import { DITT_NAV_URL, registrerBrukerSBLArbeid, SBLARBEID_URL } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
@@ -26,7 +26,7 @@ interface SblRegistreringProps {
 type AllProps = SblRegistreringProps & RouteComponentProps<MatchProps>;
 
 export function sendBrukerTilDittNav(history: History) {
-    history.push(DITTNAV_URL);
+    history.push(DITT_NAV_URL);
 }
 
 export function sendBrukerTilSblArbeid(history: History) {

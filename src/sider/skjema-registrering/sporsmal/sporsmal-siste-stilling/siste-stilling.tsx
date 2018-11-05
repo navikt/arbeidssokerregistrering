@@ -26,6 +26,7 @@ import { getDefaultSvar, hentOversattStillingFraAAReg, skalSkjuleSvaralternative
 import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
 import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
 import { SporsmalProps } from '../../../../komponenter/skjema/sporsmal-utils';
+import { RegistreringType, selectRegistreringstatus } from '../../../../ducks/registreringstatus';
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -33,6 +34,7 @@ interface StateProps {
     labelTilStillingFraAAReg: string;
     sisteStilling: Stilling;
     svarState: SvarState;
+    registreringType: RegistreringType;
 }
 
 interface DispatchProps {
@@ -114,7 +116,9 @@ class SisteStilling extends React.Component<Props> {
                     </>
         );
 
-        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
+        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
+            kontekst, intl, this.props.registreringType);
+
         return (
             <>
                 <form className="spm-skjema">
@@ -155,6 +159,7 @@ const mapStateToProps = (state) => ({
     labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),
     sisteStilling: selectSisteStilling(state),
     svarState: state.svar,
+    registreringType: selectRegistreringstatus(state).data.registreringType
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

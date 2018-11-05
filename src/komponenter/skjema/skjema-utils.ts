@@ -1,7 +1,8 @@
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { DinSituasjonSvar, hentSvar, IngenSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
-import { Props as SkjemaProps } from './skjema';
+import {Props as SkjemaProps } from './skjema';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
 export const INGEN_NESTE_SPORSMAL = -1;
 
@@ -12,8 +13,20 @@ export function getTekstIdForSvar(sporsmalId: SporsmalId, svar: Svar) {
 }
 
 export type TekstKontekst = 'tittel' | 'info' | 'ingress';
-export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKontekst, intl: InjectedIntl): string {
-    return intl.messages[`${sporsmalId.toLowerCase()}-${kontekst}`];
+export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKontekst,
+                                        intl: InjectedIntl, registreringType: RegistreringType): string {
+    const registreringTypeId = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
+        ? 'sykmeldt' : 'registrering';
+
+    const idMedRegType = `${sporsmalId.toLowerCase()}-${kontekst}-${registreringTypeId}`;
+    const idUtenRegType = `${sporsmalId.toLowerCase()}-${kontekst}`;
+
+    if (intl.messages[idMedRegType]) {
+        return intl.messages[idMedRegType];
+    } else {
+        return intl.messages[idUtenRegType];
+    }
+
 }
 
 export function svarSuffiksTilTekstId(svar: Svar) {

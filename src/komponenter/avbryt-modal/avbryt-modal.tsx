@@ -6,9 +6,12 @@ import NavFrontendModal from 'nav-frontend-modal';
 
 import './avbryt-modal.less';
 import { Knapp } from 'nav-frontend-knapper';
-import { DITTNAV_URL } from '../../ducks/api';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { MatchProps } from '../../utils/utils';
+import { connect } from 'react-redux';
+import { AppState } from '../../reducer';
+import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
+import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../ducks/api';
 
 const avbrytSvg = require('./avbryt.svg');
 
@@ -17,15 +20,32 @@ interface OwnProps {
     onRequestClose: () => void;
 }
 
-type AllProps = RouteComponentProps<MatchProps> & OwnProps;
+interface StateProps {
+    registreringType?: RegistreringType;
+}
+
+type AllProps = RouteComponentProps<MatchProps> & OwnProps & StateProps;
 
 class AvbrytModal extends React.Component<AllProps> {
 
-    handleAvbrytKnappClicked = () => {
-        this.props.history.push(DITTNAV_URL);
+    handleAvbrytKnappClicked = (url: string) => {
+        this.props.history.push(url);
     }
 
     render() {
+
+        const { registreringType } = this.props;
+        let beskrivelseId;
+        let url;
+
+        if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
+            beskrivelseId = 'avbryt-beskrivelse-sykmeldt';
+            url = DITT_SYKEFRAVAER_URL;
+        } else {
+            beskrivelseId = 'avbryt-beskrivelse-registrering';
+            url = DITT_NAV_URL;
+        }
+
         return (
             <NavFrontendModal
                 isOpen={this.props.isOpen}
@@ -44,11 +64,11 @@ class AvbrytModal extends React.Component<AllProps> {
                     />}
                 >
                     <Systemtittel className="avbryt-modal__beskrivelse">
-                        <FormattedMessage id="avbryt-beskrivelse"/>
+                        <FormattedMessage id={beskrivelseId}/>
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
-                        <Knapp className="avbryt-modal__knapp" onClick={this.handleAvbrytKnappClicked}>
+                        <Knapp className="avbryt-modal__knapp" onClick={() => this.handleAvbrytKnappClicked(url)}>
                             <FormattedMessage id="knapp-ja-avbryt"/>
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
@@ -62,4 +82,8 @@ class AvbrytModal extends React.Component<AllProps> {
 
 }
 
-export default withRouter(AvbrytModal);
+const mapStateToProps = (state: AppState): StateProps => ({
+    registreringType: selectRegistreringstatus(state).data.registreringType
+});
+
+export default connect(mapStateToProps)(withRouter(AvbrytModal));

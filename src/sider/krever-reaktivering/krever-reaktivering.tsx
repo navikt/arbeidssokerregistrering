@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { DITTNAV_URL } from '../../ducks/api';
+import { DITT_NAV_URL } from '../../ducks/api';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reaktiverbruker';
@@ -105,7 +105,7 @@ class KreverReaktivering extends React.Component<Props, State> {
                                 >
                                     <FormattedMessage id="ja"/>
                                 </KnappBase>
-                                <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
+                                <a href={DITT_NAV_URL} className="lenke-avbryt typo-element">
                                     <FormattedMessage id="avbryt-lenke"/>
                                 </a>
                             </div>
