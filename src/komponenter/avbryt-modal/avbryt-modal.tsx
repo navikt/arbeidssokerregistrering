@@ -7,6 +7,9 @@ import NavFrontendModal from 'nav-frontend-modal';
 import './avbryt-modal.less';
 import { Knapp } from 'nav-frontend-knapper';
 import { DITTNAV_URL } from '../../ducks/api';
+import { connect } from 'react-redux';
+import { AppState } from '../../reducer';
+import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 
 const avbrytSvg = require('./avbryt.svg');
 
@@ -15,9 +18,21 @@ interface OwnProps {
     onRequestClose: () => void;
 }
 
-class AvbrytModal extends React.Component<OwnProps> {
+interface StateProps {
+    registreringType?: RegistreringType;
+}
+
+type AllProps = StateProps & OwnProps;
+
+class AvbrytModal extends React.Component<AllProps> {
 
     render() {
+
+        const { registreringType } = this.props;
+
+        const beskrivelseId = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
+            ? 'avbryt-beskrivelse-sykmeldt' : 'avbryt-beskrivelse-registrering';
+
         return (
             <NavFrontendModal
                 isOpen={this.props.isOpen}
@@ -36,7 +51,7 @@ class AvbrytModal extends React.Component<OwnProps> {
                     />}
                 >
                     <Systemtittel className="avbryt-modal__beskrivelse">
-                        <FormattedMessage id="avbryt-beskrivelse"/>
+                        <FormattedMessage id={beskrivelseId}/>
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
@@ -54,4 +69,8 @@ class AvbrytModal extends React.Component<OwnProps> {
 
 }
 
-export default AvbrytModal;
+const mapStateToProps = (state: AppState): StateProps => ({
+    registreringType: selectRegistreringstatus(state).data.registreringType
+});
+
+export default connect(mapStateToProps)(AvbrytModal);
