@@ -80,7 +80,7 @@
     "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK_ENDRE_REG_LOP=true cross-env REACT_APP_MOCK='true' npm run build && node scripts/postHeroku.js"
   },
   "devDependencies": {
-    "@navikt/create-react-app-typescript-less": "^1.0.0-beta.14",
+    "@navikt/create-react-app-typescript-less": "^1.0.0-beta.16",
     "@types/query-string": "5.1.0",
     "@types/classnames": "2.2.3",
     "@types/fetch-mock": "5.12.2",
@@ -106,7 +106,7 @@
     "npm-run-all": "4.1.2",
     "path-to-regexp": "2.2.1",
     "sinon": "5.0.3",
-    "typescript": "^2.8.3",
+    "typescript": "^3.0.3",
     "nightwatch": "^0.9.21",
     "tree-kill": "^1.2.0",
     "cross-env": "^5.2.0",
