@@ -11,10 +11,13 @@ import {
     basename,
 } from './utils/konstanter';
 import Routes from './routes';
+import Modal from 'react-modal';
 import HerokuappEndreMockRegistreringLoep from
     './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 
 const store = getStore();
+
+Modal.setAppElement('#root');
 
 class App extends React.Component {
 
