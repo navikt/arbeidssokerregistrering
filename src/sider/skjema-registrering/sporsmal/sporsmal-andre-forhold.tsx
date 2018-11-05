@@ -18,7 +18,8 @@ function AndreForhold(props: Props) {
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
-    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
+        kontekst, intl, props.registeringType);
 
     return (
         <>

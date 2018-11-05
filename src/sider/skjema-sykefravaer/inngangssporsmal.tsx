@@ -19,6 +19,7 @@ import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import { SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
 interface OwnState {
     visAdvarsel: boolean;
@@ -61,7 +62,8 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
             hentAvgittSvar: () => hentSvar(svarState, sporsmalId),
         };
 
-        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId, kontekst, intl);
+        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
+            kontekst, intl, RegistreringType.SYKMELDT_REGISTRERING);
         const nesteUrl = `${SKJEMA_SYKEFRAVAER_PATH}/${this.finnLop(hentSvar(svarState, sporsmalId) as FremtidigSituasjonSvar)}/0`; // tslint:disable-line
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
 
@@ -78,8 +80,8 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
                             </Normaltekst>
                         </legend>
                         <div className="spm-body">
-                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
+                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
                         </div>
