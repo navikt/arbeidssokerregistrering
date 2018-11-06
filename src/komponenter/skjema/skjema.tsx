@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { endreSvarAction, setInitialState, SporsmalId, State as SvarState } from '../../ducks/svar';
 import LenkeAvbryt from '../knapper/lenke-avbryt';
 import LenkeTilbake from '../knapper/lenke-tilbake';
 import LenkeNeste from '../knapper/lenke-neste';
@@ -37,6 +37,7 @@ interface StateProps {
 
 interface DispatchProps {
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
+    resetSvar: () => void;
 }
 
 interface OwnState {
@@ -182,6 +183,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
+    resetSvar: () => dispatch(setInitialState())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Skjema));
