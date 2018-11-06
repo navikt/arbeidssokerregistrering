@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
 import { erIE } from '../../utils/ie-test';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 const handinfoSvg = require('./clipboard.svg');
 
@@ -33,10 +34,22 @@ class DuErNaRegistrert extends React.Component {
                             <FormattedMessage id="duernaregistrert-element"/>
                         </Element>
                         <div className="registrert__knapperad">
-                            <a href={VEIENTILARBEID_URL} className="registrert__lenke knapp knapp--standard">
+                            <a
+                                href={VEIENTILARBEID_URL}
+                                className="registrert__lenke knapp knapp--standard"
+                                onClick={() => {
+                                    frontendLogger('registrering.ikke.vis.dagpenger.info');
+                                }}
+                            >
                                 <FormattedMessage id="knapp-ikke-na"/>
                             </a>
-                            <a href={VEIENTILARBEID_MED_DAGPENGER_URL} className="registrert__lenke knapp knapp--hoved">
+                            <a
+                                href={VEIENTILARBEID_MED_DAGPENGER_URL}
+                                className="registrert__lenke knapp knapp--hoved"
+                                onClick={() => {
+                                   frontendLogger('registrering.vis.dagpenger.info');
+                                }}
+                            >
                                 <FormattedMessage id="knapp-ja-vis-meg"/>
                             </a>
                         </div>
