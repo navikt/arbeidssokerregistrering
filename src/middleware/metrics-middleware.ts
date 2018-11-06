@@ -2,11 +2,13 @@
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
 import { ActionTypes as RegistreringStatusActionTypes, RegistreringType } from '../ducks/registreringstatus';
+import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 
 import { brukersSvarSamsvarerMedInfoFraAAReg } from '../sider/oppsummering/oppsummering-utils';
 import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 import { mapTilSvarState } from '../ducks/registrerbruker-utils';
+import * as _ from 'lodash';
 
 export interface Frontendlogger {
     event: (name: string, fields: any, tags: any) => void;
@@ -22,9 +24,25 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
         loggSykmeldt(store, action, frontendlogger);
         loggResponstidForTjenestekall(action.type, frontendlogger);
         loggFeil(action, frontendlogger);
+        loggHarStartetRegistrering(action);
     }
     next(action);
 };
+
+const loggHarStartetRegistreringKunEngang = _.once(() => {
+    const frontendlogger: Frontendlogger = (window as any).frontendlogger;
+    if (frontendlogger) {
+        frontendlogger.event('registrering.harstartetregistrering', {}, {});
+    }
+});
+function loggHarStartetRegistrering(action: Action) {
+    if (action.type === SvarActionTypes.AVGI_SVAR) {
+        const { sporsmalId } = action.data;
+        if (sporsmalId === SporsmalId.dinSituasjon) {
+            loggHarStartetRegistreringKunEngang();
+        }
+    }
+}
 
 function loggAutentiseringsinfo(action: Action, frontendlogger: Frontendlogger) {
     if (action.type === AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_OK) {
