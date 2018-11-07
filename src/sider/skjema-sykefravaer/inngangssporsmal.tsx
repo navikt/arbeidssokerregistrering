@@ -96,7 +96,7 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
                 <LenkeTilbake
                     onClick={this.handleTilbakeBtnClick}
                 />
-                <LenkeAvbryt tekstId="avbryt-lenke-registrering"/>
+                <LenkeAvbryt />
             </ResponsivSide>
         );
     }

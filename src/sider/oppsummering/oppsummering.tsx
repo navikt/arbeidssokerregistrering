@@ -62,7 +62,7 @@ class Oppsummering extends React.Component<Props> {
                         <FormattedMessage id="knapp-riktig"/>
                     </KnappBase>
                     <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                    <LenkeAvbryt tekstId="avbryt-lenke-registrering" wrapperClassname="no-anim"/>
+                    <LenkeAvbryt wrapperClassname="no-anim"/>
                 </div>
             </section>
         );

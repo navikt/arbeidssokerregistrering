@@ -9,7 +9,7 @@ export const FULLFOR_PATH = '/fullfor';
 export const DU_ER_NA_REGISTRERT_PATH = '/duernaregistrert';
 export const ALLEREDE_REGISTRERT_PATH = '/allerederegistrert';
 export const REAKTIVERING_PATH = '/reaktivering';
-export const IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING = '/ikke-arbeidssoker-utenfor-oppfolging';
+export const IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH = '/ikke-arbeidssoker-utenfor-oppfolging';
 
 /* Besvarelser */
 
