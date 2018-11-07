@@ -3,11 +3,12 @@ import { doThenDispatch, STATUS } from './api-utils';
 import { Stilling } from './siste-stilling';
 import {
     AndreForholdSvar,
-    DinSituasjonSvar,
+    DinSituasjonSvar, FremtidigSituasjonSvar,
     HelseHinderSvar,
-    SisteStillingSvar, UtdanningBestattSvar,
+    SisteStillingSvar, TilbakeIArbeidSvar, UtdanningBestattSvar,
     UtdanningGodkjentSvar, UtdanningSvar
 } from './svar-utils';
+import { RegistreringType } from './registreringstatus';
 
 export enum ActionTypes {
     REG_BRUKER_STATUS_OK = 'REG_BRUKER_STATUS_OK',
@@ -35,7 +36,7 @@ interface TekstForSvar {
 
 export type TeksterForBesvarelse = TekstForSvar[];
 
-export interface RegistreringBesvarelse {
+export interface OrdinaerBesvarelse {
     utdanning: UtdanningSvar;
     utdanningBestatt: UtdanningBestattSvar;
     utdanningGodkjent: UtdanningGodkjentSvar;
@@ -45,11 +46,25 @@ export interface RegistreringBesvarelse {
     dinSituasjon: DinSituasjonSvar;
 }
 
-export interface RegistreringData {
+export interface SykmeldtBesvarelse {
+    utdanning?: UtdanningSvar;
+    utdanningBestatt?: UtdanningBestattSvar;
+    utdanningGodkjent?: UtdanningGodkjentSvar;
+    andreForhold?: AndreForholdSvar;
+    fremtidigSituason?: FremtidigSituasjonSvar;
+    tilbakeIArbeid?: TilbakeIArbeidSvar;
+}
+
+export interface OrdinaerRegistreringData {
     enigIOppsummering?: boolean;
     oppsummering?: string;
     sisteStilling?: Stilling;
-    besvarelse?: RegistreringBesvarelse;
+    besvarelse?: OrdinaerBesvarelse;
+    teksterForBesvarelse?: TeksterForBesvarelse;
+}
+
+export interface SykmeldtRegistreringData {
+    besvarelse?: SykmeldtBesvarelse;
     teksterForBesvarelse?: TeksterForBesvarelse;
 }
 
@@ -57,7 +72,7 @@ export interface ErrorData {
     data: {type: ErrorTypes | string};
 }
 
-export type Data = RegistreringData | ErrorData;
+export type Data = OrdinaerRegistreringData | SykmeldtRegistreringData | ErrorData;
 
 interface Action {
     type: ActionTypes;
@@ -86,8 +101,8 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
-export function utforRegistrering(data: Data) {
-    return doThenDispatch(() => Api.registrerBruker(data), {
+export function utforRegistrering(data: Data, registreringType: RegistreringType) {
+    return doThenDispatch(() => Api.registrerBruker(data, registreringType), {
         PENDING: ActionTypes.REG_BRUKER_STATUS_PENDING,
         OK: ActionTypes.REG_BRUKER_STATUS_OK,
         FEILET: ActionTypes.REG_BRUKER_STATUS_FEILET,
