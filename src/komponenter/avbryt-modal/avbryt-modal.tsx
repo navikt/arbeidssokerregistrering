@@ -3,13 +3,13 @@ import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
-
-import './avbryt-modal.less';
 import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../ducks/api';
+
+import './avbryt-modal.less';
 
 const avbrytSvg = require('./avbryt.svg');
 
@@ -22,9 +22,13 @@ interface StateProps {
     registreringType?: RegistreringType;
 }
 
-type AllProps = StateProps & OwnProps;
+type AllProps = OwnProps & StateProps;
 
 class AvbrytModal extends React.Component<AllProps> {
+
+    handleAvbrytKnappClicked = (url: string) => {
+        window.location.href = url;
+    }
 
     render() {
 
@@ -62,7 +66,7 @@ class AvbrytModal extends React.Component<AllProps> {
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
-                        <Knapp className="avbryt-modal__knapp" onClick={() => document.location.href = url}>
+                        <Knapp className="avbryt-modal__knapp" onClick={() => this.handleAvbrytKnappClicked(url)}>
                             <FormattedMessage id="knapp-ja-avbryt"/>
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
