@@ -13,7 +13,7 @@ function StepUp() {
             <div className="knapperad">
                 <button
                     className="knapp knapp--hoved stepup__knapp"
-                    onClick={() => document.location.href = VEILARBSTEPUP}
+                    onClick={() => window.location.href = VEILARBSTEPUP}
                 >
                     <Normaltekst>
                         <FormattedHTMLMessage id="knapp-logg-inn"/>

@@ -6,13 +6,15 @@ import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import {Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
 import { selectSykefravaerFeatureToggle } from '../../ducks/feature-toggles';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { MatchProps } from '../../utils/utils';
 
 interface StateProps {
     visSykefravaerSkjema: boolean;
     startRegistreringStatus: StartRegistreringData;
 }
 
-type Props = InjectedIntlProps & StateProps;
+type Props = RouteComponentProps<MatchProps> & InjectedIntlProps & StateProps;
 
 class Banner extends React.Component<Props> {
 
@@ -36,7 +38,8 @@ class Banner extends React.Component<Props> {
     }
 
     skalVises(): boolean {
-        return !(document.location.pathname.includes(START_PATH)
+        const pathname = this.props.location.pathname.toString();
+        return !(pathname.includes(START_PATH)
             && (this.props.startRegistreringStatus.underOppfolging === false));
     }
 }
@@ -46,4 +49,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     startRegistreringStatus: state.registreringStatus.data,
 });
 
-export default connect(mapStateToProps)(injectIntl(Banner));
+export default connect(mapStateToProps)(withRouter(injectIntl(Banner)));
