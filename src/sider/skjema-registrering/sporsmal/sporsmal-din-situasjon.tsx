@@ -64,7 +64,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend spm-hode">
                         <Innholdstittel tag="h1" className="spm-tittel">
-                            {getIntlTekstForSporsmal(sporsmalId, 'tittel', intl)}
+                            {getIntlTekstForSporsmal(sporsmalId, 'tittel', intl, this.props.registeringType)}
                         </Innholdstittel>
                     </legend>
                     <div className="spm-body">

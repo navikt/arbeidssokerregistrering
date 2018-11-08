@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import './knapperad.less';
 
 interface KnapperadProps {
     children: Array<React.ReactElement<Element>>;

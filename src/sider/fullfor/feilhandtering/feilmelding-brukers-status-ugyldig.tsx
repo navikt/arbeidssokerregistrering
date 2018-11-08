@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
 import ResponsivSide from '../../../komponenter/side/responsiv-side';
 import Feilmelding from '../../../komponenter/feilmelding/feilmelding';
 import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
+
+import './feilmelding-brukers-status-ugyldig.less';
 
 interface IntlPropsWithFeilType extends InjectedIntlProps {
     feilType: string;

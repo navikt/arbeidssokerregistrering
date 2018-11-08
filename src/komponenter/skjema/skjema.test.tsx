@@ -28,6 +28,7 @@ import {MatchProps} from "../../utils/utils";
 import {AppState} from "../../reducer";
 import getStore from "../../store";
 import {Store} from "redux";
+import AvbrytModal from "../avbryt-modal/avbryt-modal";
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -52,6 +53,16 @@ describe('<Skjema />', () => {
 
     });
 
+    it('Avbryt-knapp skal vise dialog', () => {
+
+        const wrapper = mountSkjema(defaultConfigForSporsmalsflyt, "0", undefined);
+
+        expect( wrapper.find("a.lenke-avbryt")).to.have.length(1);
+        wrapper.find("a.lenke-avbryt").simulate('click');
+
+        expect(wrapper.find(AvbrytModal)).to.have.length(1);
+
+    });
 
     it('Skal hoppe over gitte spørsmål, både når man viser neste spørsmål og i staten.', () => {
 

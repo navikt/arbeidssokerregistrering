@@ -1,16 +1,19 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
+import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import NavAlertStripe from 'nav-frontend-alertstriper';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
-    utforRegistrering,
+    Data as RegistrerBrukerData,
     State as RegistrerBrukerState,
-    Data as RegistrerBrukerData
+    utforRegistrering
 } from '../../ducks/registrerbruker';
 import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
@@ -20,20 +23,20 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
-import NavAlertStripe from 'nav-frontend-alertstriper';
-import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
 import { erKlarForFullforing } from './fullfor-utils';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
-const utropstegnSvg = require('./utropstegn.svg');
-const kalenderSvg = require('./kalender.svg');
-const filnySvg = require('./fil-ny.svg');
-const epostSvg = require('./epost.svg');
-const ikonytelserSvg = require('./ikon-ytelser.svg');
+import utropstegnSvg from './utropstegn.svg';
+import kalenderSvg from './kalender.svg';
+import filnySvg from './fil-ny.svg';
+import epostSvg from './epost.svg';
+import ikonytelserSvg from './ikon-ytelser.svg';
+
+import './fullfor.less';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -66,7 +69,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-      
+
         if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
@@ -99,7 +102,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
     getSvarMappetForBackend() {
         const {state, intl} = this.props;
-        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl);
+        const { registreringType } = this.props.state.registreringStatus.data;
+        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
+        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl, regType);
     }
 
     settMarkert() {
@@ -224,14 +229,14 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                         className="fullfor-bekreft"
                     />
                     {advarselElement}
-                    <div className={'knapper-vertikalt'}>
+                    <div className="lenke-avbryt-wrapper">
                         <KnappFullfor
                             intl={intl}
                             onClick={this.registrerBrukerOnClick}
                         />
-                        <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt wrapperClassname="no-anim"/>
                     </div>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
+                    <LenkeAvbryt wrapperClassname="wrapper-too"/>
                 </section>
             </Innholdslaster>
         );
