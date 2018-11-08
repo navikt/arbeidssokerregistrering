@@ -236,7 +236,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                         />
                     </div>
                     <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                    <LenkeAvbryt wrapperClassname="no-anim"/>
+                    <LenkeAvbryt wrapperClassname="wrapper-too"/>
                 </section>
             </Innholdslaster>
         );

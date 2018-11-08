@@ -26,11 +26,9 @@ type Props = StateProps & RouteComponentProps<MatchProps>;
 class Oppsummering extends React.Component<Props> {
 
     componentWillMount() {
-
         if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
-
         disableVerikalScrollingVedAnimasjon();
     }
 
@@ -63,7 +61,7 @@ class Oppsummering extends React.Component<Props> {
                     </KnappBase>
                 </div>
                 <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                <LenkeAvbryt wrapperClassname="no-anim"/>
+                <LenkeAvbryt wrapperClassname="wrapper-too"/>
             </section>
         );
     }

@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { DITTNAV_URL } from '../../ducks/api';
+import { DITT_NAV_URL } from '../../ducks/api';
 import { AppState } from '../../reducer';
 import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reaktiverbruker';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
@@ -103,7 +103,7 @@ class KreverReaktivering extends React.Component<Props, State> {
                                     <FormattedMessage id="ja"/>
                                 </KnappBase>
                             </div>
-                            <a href={DITTNAV_URL} className="lenke-avbryt typo-element">
+                            <a href={DITT_NAV_URL} className="lenke-avbryt typo-element">
                                 <FormattedMessage id="avbryt-lenke"/>
                             </a>
                         </div>
