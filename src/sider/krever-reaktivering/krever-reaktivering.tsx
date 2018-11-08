@@ -103,7 +103,7 @@ class KreverReaktivering extends React.Component<Props, State> {
                                     <FormattedMessage id="ja"/>
                                 </KnappBase>
                             </div>
-                            <a href={DITT_NAV_URL} className="lenke-avbryt typo-element">
+                            <a href={DITT_NAV_URL} className="lenke lenke-avbryt typo-element">
                                 <FormattedMessage id="avbryt-lenke"/>
                             </a>
                         </div>
