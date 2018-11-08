@@ -9,7 +9,7 @@ import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
-    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH, INFOSIDE_PATH,
     INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
@@ -28,6 +28,7 @@ import SkjemaSykefravaerIngenPasser from './sider/skjema-sykefravaer/skjema-syke
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Fullfor from './sider/fullfor/fullfor';
+import Infoside from './sider/infoside/infoside';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
 import { selectGradualRolloutNyRegistreringFeatureToggle,
@@ -113,6 +114,8 @@ class Routes extends React.Component<StateProps> {
                         {alleSporsmalBesvart ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
                         {alleSporsmalBesvart ? <Route path={FULLFOR_PATH} component={Fullfor} /> : null}
                         {(alleSporsmalBesvart || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
+
+                        <Route path={INFOSIDE_PATH} component={Infoside}/>
 
                         { visOrdinaerSkjema ? (
                             <Switch>
