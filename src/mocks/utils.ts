@@ -41,7 +41,6 @@ export function respondWith(handler: any) {
             console.groupCollapsed('config');
             console.log('url', url);
             console.log('config', config);
-            console.log('queryParams', queryParams);
             console.log('bodyParams', bodyParams);
             console.log('extra', extra);
             console.groupEnd();
