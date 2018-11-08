@@ -9,19 +9,21 @@ import './info-for-ikke-arbeidssoker-uten-oppfolging.less';
 class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component {
     render() {
         return (
-            <Veilederpanel
-                type="plakat"
-                svg={<img
-                    src={utropstegnSvg}
-                    alt="Informasjon"
-                    className="nav-veilederpanel__illustrasjon"
-                />}
-                kompakt={true}
-            >
-                <Normaltekst>
-                    <FormattedMessage id="info-for-ikke-arbeidssoker-uten-oppfolging-innhold"/>
-                </Normaltekst>
-            </Veilederpanel>
+            <div className="info-for-ikke-arbeidssoker">
+                <Veilederpanel
+                    type="plakat"
+                    svg={<img
+                        src={utropstegnSvg}
+                        alt="Informasjon"
+                        className="nav-veilederpanel__illustrasjon"
+                    />}
+                    kompakt={true}
+                >
+                    <Normaltekst>
+                        <FormattedMessage id="info-for-ikke-arbeidssoker-uten-oppfolging-innhold"/>
+                    </Normaltekst>
+                </Veilederpanel>
+            </div>
         );
     }
 }
