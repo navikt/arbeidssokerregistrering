@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Stilling } from '../../../../ducks/siste-stilling';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Input } from 'nav-frontend-skjema';
 import NavFrontendSpinner from 'nav-frontend-spinner';
+import { Stilling } from '../../../../ducks/siste-stilling';
+
+import './autocomplete.less';
 
 // Hjelpe funksjon
 const getIndexValgteElement = (resultat: any) => { // tslint:disable-line
@@ -76,7 +78,7 @@ class ResultatListe extends React.Component<ResultatListeProps> {
                             data-stilling-index={i}
                             key={i}
                             role="option"
-                            tab-index="-1"
+                            tabIndex={-1}
                         >
                             {e.labelKey}
                         </li>

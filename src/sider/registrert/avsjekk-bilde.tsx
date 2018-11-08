@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { erIE } from '../../utils/ie-test';
 
+import './avsjekk-bilde.less';
+
 export default class AvsjekkBilde extends React.Component {
 
     render() {

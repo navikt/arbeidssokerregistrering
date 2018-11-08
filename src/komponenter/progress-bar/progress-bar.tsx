@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './progress-bar.less';
 
 interface OwnProps {
     gjeldendeSporsmal: number;
@@ -31,7 +32,6 @@ export default class ProgressBar extends React.Component<OwnProps> {
                 this.framdriftContainer.classList.remove('framdrift-fixed');
             }
         }
-
     }
 
     componentDidMount() {
