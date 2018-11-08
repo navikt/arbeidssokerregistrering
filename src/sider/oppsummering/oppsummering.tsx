@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
+import { disableVertikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { AppState } from '../../reducer';
 import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
@@ -28,14 +28,15 @@ class Oppsummering extends React.Component<Props> {
         if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
-      
-        disableVerikalScrollingVedAnimasjon();
+
+        disableVertikalScrollingVedAnimasjon();
     }
 
     render() {
         const { history, state } = this.props;
         let classnames = 'oppsummering ';
         classnames += erIE() ? 'erIE' : '';
+        classnames += ' limit';
 
         const visOrdinaerBesvarelser = state.registreringStatus.data.registreringType
             === RegistreringType.ORDINAER_REGISTRERING;

@@ -68,7 +68,7 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
 
         return (
-            <ResponsivSide>
+            <ResponsivSide className="limit">
                 <form className="spm-skjema">
                     <fieldset className="skjema__fieldset">
                         <legend className="skjema__legend spm-hode">

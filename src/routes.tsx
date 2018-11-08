@@ -115,8 +115,6 @@ class Routes extends React.Component<StateProps> {
                         {alleSporsmalBesvart ? <Route path={FULLFOR_PATH} component={Fullfor} /> : null}
                         {(alleSporsmalBesvart || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
 
-                        <Route path={INFOSIDE_PATH} component={Infoside}/>
-
                         { visOrdinaerSkjema ? (
                             <Switch>
                                 <Route
@@ -138,6 +136,10 @@ class Routes extends React.Component<StateProps> {
                                 <Route
                                     path={INNGANGSSPORSMAL_PATH}
                                     component={Inngangssporsmal}
+                                />
+                                <Route
+                                    path={INFOSIDE_PATH}
+                                    component={Infoside}
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}

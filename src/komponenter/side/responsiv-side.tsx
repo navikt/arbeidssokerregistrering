@@ -14,7 +14,6 @@ class ResponsivSide extends React.Component<ResponsivSideProps> {
 
     render() {
         const {children, className} = this.props;
-
         return (
             <section className={classnames('sporsmal', className)}>
                 {children}

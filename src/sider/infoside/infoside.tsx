@@ -72,26 +72,27 @@ class Infoside extends React.Component<Props> {
                         <hr className="infoside-tilbake-full-stilling-container--divider"/>
                         <InfoViser tekstId="infoside-tilbake-full-stilling-info"/>
                     </div>
+                </div>
 
-                    <div>
-                        <Systemtittel>
-                            <FormattedMessage id="infoside-trenger-plan-tittel"/>
-                        </Systemtittel>
+                <div className="infoside--tredje-rad">
 
-                        <Normaltekst>
-                            <FormattedMessage id="infoside-trenger-plan-tekst"/>
-                        </Normaltekst>
+                    <Systemtittel>
+                        <FormattedMessage id="infoside-trenger-plan-tittel"/>
+                    </Systemtittel>
 
-                        <div className="infoside--knapper">
-                            <a className="knapp knapp--hoved" href={DITT_SYKEFRAVAER_URL}>
-                                <FormattedMessage id="infoside-knapp-tilbake-til-sykefravaer"/>
-                            </a>
-                            <Link to={OPPSUMMERING_PATH} className="knapp">
-                                <FormattedMessage id="infoside-knapp-lag-plan"/>
-                            </Link>
-                        </div>
+                    <Normaltekst>
+                        <FormattedMessage id="infoside-trenger-plan-tekst"/>
+                    </Normaltekst>
 
+                    <div className="infoside--knapper">
+                        <a className="knapp knapp--hoved" href={DITT_SYKEFRAVAER_URL}>
+                            <FormattedMessage id="infoside-knapp-tilbake-til-sykefravaer"/>
+                        </a>
+                        <Link to={OPPSUMMERING_PATH} className="knapp">
+                            <FormattedMessage id="infoside-knapp-lag-plan"/>
+                        </Link>
                     </div>
+
                 </div>
 
             </>

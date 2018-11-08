@@ -19,8 +19,8 @@ class Sideanimasjon extends React.Component<Props, State> {
 
     componentWillReceiveProps(nextProps: Props) {
         const currentLocation = this.props.location;
-        const nextLocation = nextProps.location;
-        if (nextLocation !== currentLocation) {
+
+        if (nextProps.location !== currentLocation) {
             scrollToBanner();
             this.setState({
                 ...this.state,
@@ -28,11 +28,12 @@ class Sideanimasjon extends React.Component<Props, State> {
                 // skalAnimereForover(currentLocation.pathname, nextLocation.pathname),
             });
         }
+
     }
 
     render() {
         return (
-            <div className={'limit ' + (this.state.forover ? 'forover' : 'bakover')}>
+            <div className={(this.state.forover ? 'forover' : 'bakover')}>
                 {this.props.children}
             </div>
         );

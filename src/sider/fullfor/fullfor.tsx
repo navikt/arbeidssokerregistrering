@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
+import { disableVertikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
@@ -71,7 +71,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
             this.props.history.push(START_PATH);
         }
 
-        disableVerikalScrollingVedAnimasjon();
+        disableVertikalScrollingVedAnimasjon();
 
     }
 
@@ -134,7 +134,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                 avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
-                <section className={`fullfor ${erIE() && 'erIE'}`}>
+                <section className={`fullfor limit ${erIE() && 'erIE'}`}>
                     <Innholdstittel tag="h1" className="fullfor-tittel">
                         <FormattedMessage id="fullfor-header"/>
                     </Innholdstittel>

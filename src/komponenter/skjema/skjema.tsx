@@ -156,7 +156,7 @@ class Skjema extends React.Component<Props, OwnState> {
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, hentGjeldendeSporsmalId(this.props));
 
         return (
-            <ResponsivSide> {/* TODO FO-1547 Sleng på IE-classnames? */}
+            <ResponsivSide className="limit">
                 {gjeldendeSporsmal}
                 {advarselElement}
                 <Animasjon flag={this.props.match.params.id}>
