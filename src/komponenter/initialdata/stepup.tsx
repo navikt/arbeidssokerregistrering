@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { VEILARBSTEPUP } from '../../ducks/api';
 import NavAlertStripe from 'nav-frontend-alertstriper';
+import { VEILARBSTEPUP } from '../../ducks/api';
+
+import './stepup.less';
 
 function StepUp() {
     return (
