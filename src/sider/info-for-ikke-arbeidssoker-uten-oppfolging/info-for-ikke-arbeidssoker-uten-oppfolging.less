@@ -2,24 +2,26 @@
 
 .info-for-ikke-arbeidssoker {
     padding-top: 3rem;
-}
 
-.nav-veilederpanel {
-    margin: 5rem 1rem !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    border: 3px solid @navOransjeLighten60;
+    .nav-veilederpanel {
+        margin: 5rem 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border: 3px solid @navOransjeLighten60;
 
-    .nav-veileder__frame img, .nav-veileder__frame svg {
-        height: 100%;
+        .nav-veileder__frame img, .nav-veileder__frame svg {
+            height: 100%;
+        }
     }
 }
 
 @media (min-width: @screen-sm-min) {
+.info-for-ikke-arbeidssoker {
     .nav-veilederpanel {
-        width: 630px;
-        margin: 6rem auto 0 auto !important;
-        padding: 5rem 8rem 3rem !important;
+            max-width: 630px;
+            margin: 6rem auto 0 auto;
+            padding: 5rem 8rem 3rem;
+        }
     }
 }
 
