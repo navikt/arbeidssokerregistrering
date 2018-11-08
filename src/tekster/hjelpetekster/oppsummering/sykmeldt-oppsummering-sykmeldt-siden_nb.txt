@@ -1,1 +1,1 @@
-Du har vært sykemeldt siden {dato}
+Du har vært sykmeldt siden {dato}
