@@ -11,13 +11,13 @@ import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/sva
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import { InjectedIntlProps } from 'react-intl';
 import Skjema from '../../komponenter/skjema/skjema';
 import { OPPSUMMERING_PATH, SKJEMA_PATH } from '../../utils/konstanter';
 import { defaultConfigForSporsmalsflyt } from '../../komponenter/skjema/skjema-utils';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
@@ -31,7 +31,7 @@ type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProp
 
 class SkjemaRegistrering extends React.Component<Props> {
     render() {
-        const {endreSvar, intl, svarState, location, match, history} = this.props;
+        const {endreSvar, intl, svarState, location, match, history } = this.props;
         const sporsmalProps = {
             endreSvar: (sporsmalId, svar) => {
                 endreSvar(sporsmalId, svar);
@@ -39,6 +39,8 @@ class SkjemaRegistrering extends React.Component<Props> {
             intl: intl,
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
+
+        const regType = RegistreringType.ORDINAER_REGISTRERING;
 
         return (
             <LastInnSisteStilling>
@@ -48,13 +50,41 @@ class SkjemaRegistrering extends React.Component<Props> {
                     endUrl={OPPSUMMERING_PATH}
                     {...{location, match, history}}
                 >
-                    <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...sporsmalProps}/>
-                    <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...sporsmalProps}/>
-                    <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...sporsmalProps}/>
-                    <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} {...sporsmalProps}/>
-                    <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...sporsmalProps}/>
-                    <HelseHinder sporsmalId={SporsmalId.helseHinder} {...sporsmalProps}/>
-                    <AndreForhold sporsmalId={SporsmalId.andreForhold} {...sporsmalProps}/>
+                    <SporsmalDinSituasjon
+                        sporsmalId={SporsmalId.dinSituasjon}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
+                    <SisteStilling
+                        sporsmalId={SporsmalId.sisteStilling}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
+                    <Utdanningsporsmal
+                        sporsmalId={SporsmalId.utdanning}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
+                    <UtdanningGodkjentSporsmal
+                        sporsmalId={SporsmalId.utdanningGodkjent}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
+                    <UtdanningBestattSporsmal
+                        sporsmalId={SporsmalId.utdanningBestatt}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
+                    <HelseHinder
+                        sporsmalId={SporsmalId.helseHinder}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
+                    <AndreForhold
+                        sporsmalId={SporsmalId.andreForhold}
+                        {...sporsmalProps}
+                        registeringType={regType}
+                    />
                 </Skjema>
             </LastInnSisteStilling>
         );

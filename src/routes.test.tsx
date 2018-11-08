@@ -15,7 +15,6 @@ import Routes from './routes';
 import { RegistreringType } from './ducks/registreringstatus';
 import Fullfor from './sider/fullfor/fullfor';
 import {
-    AVBRYT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
     OPPSUMMERING_PATH,
@@ -33,7 +32,6 @@ import {Store} from 'redux';
 import {AppState} from './reducer';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
-import Avbryt from './sider/avbryt/avbryt';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 
 enzyme.configure({adapter: new Adapter()});
@@ -232,24 +230,6 @@ describe('Routes', () => {
         expect(wrapper.find({ to: START_PATH })).to.have.length(1);
 
     });
-
-
-    it('Skal gå til avbryt side', () => {
-
-        const store = create();
-
-        dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
-        dispatchFeaturestatus({
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
-        }, store);
-
-        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [AVBRYT_PATH]);
-
-        expect(wrapper.find(Avbryt)).to.have.length(1);
-
-    });
-
 
     it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
 

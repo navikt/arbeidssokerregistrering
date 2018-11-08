@@ -10,8 +10,11 @@ import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
-import { utforRegistrering, State as RegistrerBrukerState, Data as RegistrerBrukerData }
-    from '../../ducks/registrerbruker';
+import {
+    Data as RegistrerBrukerData,
+    State as RegistrerBrukerState,
+    utforRegistrering
+} from '../../ducks/registrerbruker';
 import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
@@ -25,6 +28,7 @@ import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
 import { erKlarForFullforing } from './fullfor-utils';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
 import utropstegnSvg from './utropstegn.svg';
 import kalenderSvg from './kalender.svg';
@@ -98,7 +102,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
     getSvarMappetForBackend() {
         const {state, intl} = this.props;
-        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl);
+        const { registreringType } = this.props.state.registreringStatus.data;
+        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
+        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl, regType);
     }
 
     settMarkert() {

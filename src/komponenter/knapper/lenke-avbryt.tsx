@@ -1,25 +1,76 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
 import * as classnames from 'classnames';
-import { AVBRYT_PATH } from '../../utils/konstanter';
+import { FormattedMessage } from 'react-intl';
+import AvbrytModal from '../avbryt-modal/avbryt-modal';
+import { AppState } from '../../reducer';
+import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
+import { connect } from 'react-redux';
 
 import './lenke-avbryt.less';
 
 interface LenkeAvbrytProps {
     classname?: string;
-    tekstId?: string;
     wrapperClassname?: string;
+    tekstId?: string;
 }
 
-function LenkeAvbryt({classname, tekstId = 'avbryt-lenke-registrering', wrapperClassname}: LenkeAvbrytProps) {
-    return (
-        <div className={classnames('lenke-avbryt-wrapper', wrapperClassname)}>
-            <Link className={classnames('lenke lenke-avbryt typo-element', classname)} to={AVBRYT_PATH}>
-                <FormattedMessage id={tekstId}/>
-            </Link>
-        </div>
-    );
+interface LenkeAvbrytState {
+    visAvbrytModal: boolean;
 }
 
-export default LenkeAvbryt;
+interface StateProps {
+    registreringType?: RegistreringType;
+}
+
+type AllProps = StateProps & LenkeAvbrytProps;
+
+class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
+
+    constructor(props: AllProps) {
+        super(props);
+
+        this.state = {
+            visAvbrytModal: false
+        };
+    }
+
+    handleAvbrytClick = (): void => {
+        this.setState({ visAvbrytModal: true });
+    }
+
+    handleAvbrytModalRequestClose = (): void => {
+        this.setState({ visAvbrytModal: false });
+    }
+
+    render() {
+        const { tekstId, wrapperClassname, registreringType } = this.props;
+        let id;
+
+        if (tekstId) {
+            id = tekstId;
+        } else {
+            id = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
+                ? 'avbryt-lenke-sykmeldt' : 'avbryt-lenke-registrering';
+        }
+
+        return (
+            <>
+                <div className={classnames('lenke-avbryt-wrapper', wrapperClassname)}>
+                    <a className="lenke lenke-avbryt typo-element" onClick={this.handleAvbrytClick}>
+                        <FormattedMessage id={id}/>
+                    </a>
+                </div>
+                <AvbrytModal
+                    isOpen={this.state.visAvbrytModal}
+                    onRequestClose={this.handleAvbrytModalRequestClose}
+                />
+            </>
+        );
+    }
+}
+
+const mapStateToProps = (state: AppState): StateProps => ({
+    registreringType: selectRegistreringstatus(state).data.registreringType
+});
+
+export default connect(mapStateToProps)(LenkeAvbryt);

@@ -7,8 +7,10 @@ import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
 import {
     ALLEREDE_REGISTRERT_PATH,
-    AVBRYT_PATH, DU_ER_NA_REGISTRERT_PATH,
-    FULLFOR_PATH, IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING, INNGANGSSPORSMAL_PATH,
+    DU_ER_NA_REGISTRERT_PATH,
+    FULLFOR_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
+    INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SBLREG_PATH,
@@ -25,7 +27,6 @@ import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefrav
 import SkjemaSykefravaerIngenPasser from './sider/skjema-sykefravaer/skjema-sykefravaer-ingen-passer';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
-import Avbryt from './sider/avbryt/avbryt';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
@@ -79,7 +80,7 @@ class Routes extends React.Component<StateProps> {
             if (registreringType === RegistreringType.SPERRET) {
                 return (
                     <RedirectAll
-                        to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING}
+                        to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH}
                         component={InfoForIkkeArbeidssokerUtenOppfolging}
                     />
                 );
@@ -108,8 +109,6 @@ class Routes extends React.Component<StateProps> {
                 <Sideanimasjon>
 
                     <Switch>
-
-                        <Route path={AVBRYT_PATH} component={Avbryt} />
 
                         {alleSporsmalBesvart ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
                         {alleSporsmalBesvart ? <Route path={FULLFOR_PATH} component={Fullfor} /> : null}
