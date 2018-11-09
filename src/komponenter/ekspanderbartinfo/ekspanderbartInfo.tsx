@@ -5,6 +5,8 @@ import Ikon from 'nav-frontend-ikoner-assets';
 import { getIntlMessage } from '../../utils/utils';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 
+import './ekspanderbartinfo.less';
+
 interface Props {
     tittelId: string;
     children?: Array<React.ReactElement<Element>> | React.ReactElement<Element>;

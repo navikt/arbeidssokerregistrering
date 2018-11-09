@@ -10,7 +10,6 @@ export type Svar = UtdanningSvar
     | IngenSvar
     | FremtidigSituasjonSvar
     | HvorLangTidSvar
-    | StillingsprosentSvar
     | TilbakeIArbeidSvar;
 
 export enum IngenSvar {
@@ -83,12 +82,6 @@ export enum FremtidigSituasjonSvar {
 export enum HvorLangTidSvar {
     KORT_SIKT = 'KORT_SIKT',
     LANG_SIKT = 'LANG_SIKT',
-    INGEN_SVAR = 'INGEN_SVAR',
-}
-
-export enum StillingsprosentSvar {
-    HELT = 'HELT',
-    REDUSERT = 'REDUSERT',
     INGEN_SVAR = 'INGEN_SVAR',
 }
 

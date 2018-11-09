@@ -1,4 +1,10 @@
-import { RegistreringBesvarelse, RegistreringData, TeksterForBesvarelse } from './registrerbruker';
+import {
+    OrdinaerBesvarelse,
+    OrdinaerRegistreringData,
+    SykmeldtBesvarelse,
+    SykmeldtRegistreringData,
+    TeksterForBesvarelse
+} from './registrerbruker';
 import { SporsmalId, State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
@@ -11,26 +17,45 @@ export function mapAvgitteSvarForBackend(
     sisteStilling: Stilling,
     intl: InjectedIntl,
     registreringType: RegistreringType
-): RegistreringData {
-    return {
-        enigIOppsummering: true,
-        sisteStilling: sisteStilling,
-        besvarelse: mapTilBesvarelse(svar),
-        oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
-        teksterForBesvarelse: genererTeksterForBesvarelse(svar, intl, sisteStilling, registreringType),
-    };
+): OrdinaerRegistreringData | SykmeldtRegistreringData {
+
+    const besvarelse = mapTilBesvarelse(svar);
+    const teksterForBesvarelse = genererTeksterForBesvarelse(svar, intl, sisteStilling, registreringType);
+
+    if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
+
+        return {
+            besvarelse,
+            teksterForBesvarelse
+        };
+
+    } else {
+
+        return {
+            enigIOppsummering: true,
+            sisteStilling: sisteStilling,
+            oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
+            besvarelse,
+            teksterForBesvarelse
+        };
+
+    }
 }
 
-export function mapTilBesvarelse(svarState: SvarState): RegistreringBesvarelse {
+export function mapTilBesvarelse(svarState: SvarState): OrdinaerBesvarelse | SykmeldtBesvarelse {
+
     const besvarelse = {};
+
     for (let i = 0; i < svarState.length; i++) {
         const sporsmalOgSvar = svarState[i];
         besvarelse[sporsmalOgSvar.sporsmalId] = sporsmalOgSvar.svar;
     }
-    return besvarelse as RegistreringBesvarelse;
+
+    return besvarelse;
+
 }
 
-export function mapTilSvarState(besvarelse: RegistreringBesvarelse): SvarState {
+export function mapTilSvarState(besvarelse: OrdinaerBesvarelse | SykmeldtBesvarelse): SvarState {
     return Object.keys(besvarelse).map((sporsmalId) => ({
         sporsmalId: sporsmalId,
         svar: besvarelse[sporsmalId]

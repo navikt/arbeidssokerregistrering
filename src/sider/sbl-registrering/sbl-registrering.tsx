@@ -8,6 +8,8 @@ import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
 
+import './sbl-registrering.less';
+
 interface State {
     status: string;
 }

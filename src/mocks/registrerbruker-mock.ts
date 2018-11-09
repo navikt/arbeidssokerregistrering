@@ -1,4 +1,5 @@
-const registreringRespons = {
+
+export const ordinaerRegistreringRespons = {
     'id' : 55,
     'yrkesPraksis' : '5223',
     'opprettetDato' : '2018-06-06T00:00:00+02:00',
@@ -20,7 +21,10 @@ const registreringRespons = {
     }
 
 };
-export default registreringRespons;
+
+export const sykmeldtRegistreringRespons = {
+
+};
 
 export const registreringFeilrespons = {
     'id': 'fa5ec8e51366d8b9722bb564f2534e7e',

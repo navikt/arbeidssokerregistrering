@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Column, Container, Row } from 'nav-frontend-grid';
-import Innholdstittel from 'nav-frontend-typografi/lib/innholdstittel';
-import { Normaltekst } from 'nav-frontend-typografi';
-import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
+import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
+
+import './allerede-registrert.less';
 
 type Props = InjectedIntlProps;
 
@@ -14,7 +15,7 @@ class AlleredeRegistrert extends React.Component<Props> {
         return (
             <div>
                 <Banner />
-                <Container className="allerede-registrert">
+                <div className="allerede-registrert">
                     <GraaBakgrunn />
                     <Row>
                         <Column xs="12">
@@ -71,7 +72,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </div>
                         </Column>
                     </Row>
-                </Container>
+                </div>
             </div>
         );
     }

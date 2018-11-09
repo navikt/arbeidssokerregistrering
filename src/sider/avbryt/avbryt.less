@@ -1,0 +1,64 @@
+@import '../../../node_modules/nav-frontend-core/less/core';
+
+.avbryt-panel-wrapper {
+    background-color: @white;
+    margin: 4rem auto;
+    max-width: 468px;
+
+    .avbryt-panel {
+        border-top: 2px solid @navGra20;
+        padding: 1.5rem 1rem;
+
+        &__illustrasjon {
+            display: none;
+        }
+
+        &__tittel {
+            .blokk-s();
+            padding-left: 0.5rem;
+            text-align: center;
+        }
+    }
+
+    .avbryt-panel__lukkknapperad {
+        text-align: right;
+        padding: 1rem;
+    }
+
+    .avbryt-panel__knapperad {
+        text-align: center;
+        .knapp {
+            margin: 0.5rem;
+            padding-left: 0;
+            padding-right: 0;
+            width: 151px;
+        }
+    }
+
+}
+
+@media (min-width: @screen-sm-min) {
+    .avbryt-panel-wrapper {
+        max-width: 780px;
+
+        .avbryt-panel {
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+
+            &__illustrasjon {
+                display: block;
+                margin: 0 auto;
+            }
+
+            &__tittel {
+                max-width: 400px;
+                text-align: inherit;
+            }
+        }
+
+        .avbryt-panel__knapperad {
+            text-align: inherit;
+        }
+    }
+}

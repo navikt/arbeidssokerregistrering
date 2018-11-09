@@ -1,16 +1,16 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { START_PATH } from '../../utils/konstanter';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { AppState } from '../../reducer';
-import { connect } from 'react-redux';
 import {Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
-import { selectSykefravaerFeatureToggle } from '../../ducks/feature-toggles';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 
+import './banner.less';
+
 interface StateProps {
-    visSykefravaerSkjema: boolean;
     startRegistreringStatus: StartRegistreringData;
 }
 
@@ -22,8 +22,7 @@ class Banner extends React.Component<Props> {
 
         const registreringType = this.props.startRegistreringStatus.registreringType;
 
-        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING
-            && this.props.visSykefravaerSkjema;
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
         const bannerOverskriftId = visSykefravaerSkjema ?
             'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
@@ -45,7 +44,6 @@ class Banner extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    visSykefravaerSkjema: selectSykefravaerFeatureToggle(state),
     startRegistreringStatus: state.registreringStatus.data,
 });
 

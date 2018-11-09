@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './lenke-tilbake.less';
 
 interface Props {
     onClick: () => void;
