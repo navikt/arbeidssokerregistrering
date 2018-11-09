@@ -30,8 +30,7 @@ import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
-import { selectGradualRolloutNyRegistreringFeatureToggle,
-    selectSykefravaerFeatureToggle } from './ducks/feature-toggles';
+import { selectGradualRolloutNyRegistreringFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
 import {
     Data as RegistreringstatusData,
@@ -48,7 +47,6 @@ import { State as SvarState } from './ducks/svar';
 import { Stilling } from './ducks/siste-stilling';
 
 interface StateProps {
-    visSykefravaerSkjemaToggle: boolean;
     registreringstatusData: RegistreringstatusData;
     gradualRolloutNyRegistrering: boolean;
     reaktivertStatus: string;
@@ -93,8 +91,7 @@ class Routes extends React.Component<StateProps> {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         }
 
-        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING
-            && this.props.visSykefravaerSkjemaToggle;
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
         const visOrdinaerSkjema = !visSykefravaerSkjema;
 
@@ -167,7 +164,6 @@ class Routes extends React.Component<StateProps> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    visSykefravaerSkjemaToggle: selectSykefravaerFeatureToggle(state),
     registreringstatusData: selectRegistreringstatus(state).data,
     gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
     reaktivertStatus: selectReaktiveringStatus(state),
