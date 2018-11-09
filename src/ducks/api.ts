@@ -1,6 +1,7 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
+import { RegistreringType } from './registreringstatus';
 
 export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
@@ -45,16 +46,20 @@ export function hentRegistreringStatus() {
     });
 }
 
-export function registrerBruker(data: RegistrerBrukerData) {
+export function registrerBruker(data: RegistrerBrukerData, registreringType: RegistreringType) {
+
+    const endepunkt = registreringType === RegistreringType.SYKMELDT_REGISTRERING ?
+        'startregistrersykmeldt' : 'startregistrering';
+
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/startregistrering`,
-        config: {
-            ...MED_CREDENTIALS,
+        url: `${VEILARBREGISTRERING_URL}/${endepunkt}`,
+        config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
             body: JSON.stringify(data)
         }
     });
+
 }
 
 export function startReaktivering() {
