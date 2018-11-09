@@ -31,6 +31,16 @@ class Infoside extends React.Component<Props> {
     render() {
 
         const fornavn = hentFornavn(this.props.brukersNavn.data.name);
+        let veilederpanelType;
+        let veilederpanelKompakt;
+
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            veilederpanelType = 'normal';
+            veilederpanelKompakt = true;
+        } else {
+            veilederpanelType = 'plakat';
+            veilederpanelKompakt = false;
+        }
 
         return (
             <>
@@ -39,60 +49,77 @@ class Infoside extends React.Component<Props> {
                 />
                 <div className="infoside--forste-rad">
 
-                    <Veilederpanel
-                        type="normal"
-                        svg={<img
-                            src={veilederSvg}
-                            alt="Informasjon"
-                            className="nav-veilederpanel__illustrasjon"
-                        />}
-                        kompakt={true}
-                    >
-                        <Undertittel>
-                            <FormattedMessage id={'infoside-veilederpanel-tittel'} values={{ fornavn }}/>
-                        </Undertittel>
+                    <div className="limit">
 
-                        <Normaltekst>
-                            <FormattedMessage id="infoside-veilederpanel-tekst"/>
+                        <Veilederpanel
+                            type={veilederpanelType}
+                            svg={<img
+                                src={veilederSvg}
+                                alt="Informasjon"
+                                className="nav-veilederpanel__illustrasjon"
+                            />}
+                            kompakt={veilederpanelKompakt}
+                        >
+                            <Undertittel>
+                                <FormattedMessage id={'infoside-veilederpanel-tittel'} values={{ fornavn }}/>
+                            </Undertittel>
+
+                            <Normaltekst>
+                                <FormattedMessage id="infoside-veilederpanel-tekst"/>
+                            </Normaltekst>
+
+                        </Veilederpanel>
+
+                    </div>
+
+                </div>
+
+                <div className="limit">
+                    <div className="infoside--andre-rad">
+
+                        <div className="infoside--andre-rad__container">
+                            <Systemtittel className="infoside--andre-rad__tittel">
+                                <FormattedMessage id="infoside-tilbake-full-stilling-tittel"/>
+                            </Systemtittel>
+                            <ul>
+                                <li className="blokk-xs">
+                                    <FormattedMessage id="infoside-tilbake-full-stilling-tekst-1"/>
+                                </li>
+                                <li className="blokk-xs">
+                                    <FormattedMessage id="infoside-tilbake-full-stilling-tekst-2"/>
+                                </li>
+                            </ul>
+                        </div>
+                        <hr className="infoside--andre-rad__divider"/>
+                        <InfoViser
+                            tekstId="infoside-tilbake-full-stilling-info"
+                            className="infoside--andre-rad__info-viser"
+                        />
+
+                    </div>
+                </div>
+
+                <div className="limit">
+                    <div className="infoside--tredje-rad">
+
+                        <Systemtittel className="blokk-s">
+                            <FormattedMessage id="infoside-trenger-plan-tittel"/>
+                        </Systemtittel>
+
+                        <Normaltekst className="blokk-m">
+                            <FormattedMessage id="infoside-trenger-plan-tekst"/>
                         </Normaltekst>
 
-                    </Veilederpanel>
+                        <div className="infoside--tredje-rad__knapper">
+                            <a className="knapp knapp--hoved" href={DITT_SYKEFRAVAER_URL}>
+                                <FormattedMessage id="infoside-knapp-tilbake-til-sykefravaer"/>
+                            </a>
+                            <Link to={OPPSUMMERING_PATH} className="knapp">
+                                <FormattedMessage id="infoside-knapp-lag-plan"/>
+                            </Link>
+                        </div>
 
-                </div>
-
-                <div className="infoside--andre-rad">
-                    <div className="infoside-tilbake-full-stilling-container">
-                        <Systemtittel>
-                            <FormattedMessage id="infoside-tilbake-full-stilling-tittel"/>
-                        </Systemtittel>
-                        <ul>
-                            <li><FormattedMessage id="infoside-tilbake-full-stilling-tekst-1"/></li>
-                            <li><FormattedMessage id="infoside-tilbake-full-stilling-tekst-2"/></li>
-                        </ul>
-                        <hr className="infoside-tilbake-full-stilling-container--divider"/>
-                        <InfoViser tekstId="infoside-tilbake-full-stilling-info"/>
                     </div>
-                </div>
-
-                <div className="infoside--tredje-rad">
-
-                    <Systemtittel>
-                        <FormattedMessage id="infoside-trenger-plan-tittel"/>
-                    </Systemtittel>
-
-                    <Normaltekst>
-                        <FormattedMessage id="infoside-trenger-plan-tekst"/>
-                    </Normaltekst>
-
-                    <div className="infoside--knapper">
-                        <a className="knapp knapp--hoved" href={DITT_SYKEFRAVAER_URL}>
-                            <FormattedMessage id="infoside-knapp-tilbake-til-sykefravaer"/>
-                        </a>
-                        <Link to={OPPSUMMERING_PATH} className="knapp">
-                            <FormattedMessage id="infoside-knapp-lag-plan"/>
-                        </Link>
-                    </div>
-
                 </div>
 
             </>
