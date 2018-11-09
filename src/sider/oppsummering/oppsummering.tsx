@@ -6,7 +6,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
-import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
@@ -40,11 +40,22 @@ class Oppsummering extends React.Component<Props> {
         const visOrdinaerBesvarelser = state.registreringStatus.data.registreringType
             === RegistreringType.ORDINAER_REGISTRERING;
 
-        const oppsummeringBesvarelser = visOrdinaerBesvarelser ?
-            (<OrdinaerOppsummeringBesvarelser/>) :
-            (<SykmeldtOppsummeringBesvarelser/>);
+        let oppsummeringBesvarelser;
+        let tekstPrefix;
+        let knappTekstId;
+        let nesteSidePath;
 
-        const tekstPrefix = (visOrdinaerBesvarelser ? 'ordinaer' : 'sykmeldt') + '-oppsummering';
+        if (visOrdinaerBesvarelser) {
+           oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
+           tekstPrefix = 'ordinaer-oppsummering';
+           knappTekstId = 'knapp-riktig';
+           nesteSidePath = FULLFOR_PATH;
+        } else {
+            oppsummeringBesvarelser = <SykmeldtOppsummeringBesvarelser/>;
+            tekstPrefix = 'sykmeldt-oppsummering';
+            knappTekstId = 'knapp-fullfor';
+            nesteSidePath = DU_ER_NA_REGISTRERT_PATH;
+        }
 
         return (
             <section className={classnames}>
@@ -56,8 +67,8 @@ class Oppsummering extends React.Component<Props> {
                 </Normaltekst>
                 {oppsummeringBesvarelser}
                 <div className="lenke-avbryt-wrapper">
-                    <KnappBase type="hoved" onClick={() => history.push(FULLFOR_PATH)} data-testid="neste">
-                        <FormattedMessage id="knapp-riktig"/>
+                    <KnappBase type="hoved" onClick={() => history.push(nesteSidePath)} data-testid="neste">
+                        <FormattedMessage id={knappTekstId}/>
                     </KnappBase>
                 </div>
                 <LenkeTilbake onClick={() => this.props.history.goBack()}/>
