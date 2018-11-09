@@ -22,8 +22,6 @@ import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
-import NavAlertStripe from 'nav-frontend-alertstriper';
-import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
