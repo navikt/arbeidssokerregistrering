@@ -1,4 +1,3 @@
-import { SBLARBEID_URL } from '../../ducks/api';
 import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../ducks/svar-utils';
 import { svarSuffiksTilTekstId } from '../../komponenter/skjema/skjema-utils';
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
@@ -6,10 +5,6 @@ import { Data as RegStatus } from '../../ducks/registreringstatus';
 import oppsummeringConfig from './ordinaer-oppsummering-config';
 
 const {svarSomIndikererArbeidSisteManeder, svarSomIndikererIngenArbeidSisteManeder} = oppsummeringConfig;
-
-export function sendBrukerTilSblArbeid() {
-    document.location.href = SBLARBEID_URL;
-}
 
 export function getTekstIdForOppsummering(sporsmalId: SporsmalId, svar: Svar | undefined) {
     if (!svar) {

@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import NavAlertStripe from 'nav-frontend-alertstriper';
 import { AppState } from '../../reducer';
 import { endreSvarAction, setInitialState, SporsmalId, State as SvarState } from '../../ducks/svar';
 import LenkeAvbryt from '../knapper/lenke-avbryt';
@@ -7,9 +10,6 @@ import LenkeTilbake from '../knapper/lenke-tilbake';
 import LenkeNeste from '../knapper/lenke-neste';
 import Animasjon from '../../sider/skjema-registrering/animasjon';
 import ResponsivSide from '../side/responsiv-side';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import NavAlertStripe from 'nav-frontend-alertstriper';
-import { RouteComponentProps } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import {
     erSporsmalBesvart,
@@ -29,6 +29,8 @@ import {
     RegistreringType,
     selectRegistreringstatus
 } from '../../ducks/registreringstatus';
+
+import './skjema.less';
 
 interface StateProps {
     svarState: SvarState;
@@ -54,7 +56,6 @@ interface OwnProps {
 export type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
 class Skjema extends React.Component<Props, OwnState> {
-
     constructor(props: Props) {
         super(props);
 

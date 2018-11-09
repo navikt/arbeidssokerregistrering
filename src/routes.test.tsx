@@ -16,7 +16,7 @@ import { RegistreringType } from './ducks/registreringstatus';
 import Fullfor from './sider/fullfor/fullfor';
 import {
     DU_ER_NA_REGISTRERT_PATH,
-    FULLFOR_PATH,
+    FULLFOR_PATH, INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     START_PATH
@@ -33,6 +33,7 @@ import {AppState} from './reducer';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
+import Startside from './sider/start/startside';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -93,7 +94,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.REAKTIVERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         store.dispatch({ type: ReaktiverBrukerActionTypes.REAKTIVER_BRUKER_STATUS_PENDING, data: {} });
@@ -111,7 +111,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchAlleSporsmal(store);
@@ -122,7 +121,6 @@ describe('Routes', () => {
 
     });
 
-
     it('Skal gå til første side istedenfor fullfør hvis spørsmål ikke er besvart', () => {
 
         const store = create();
@@ -130,7 +128,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchNoenSporsmal(store);
@@ -141,7 +138,6 @@ describe('Routes', () => {
 
     });
 
-
     it('Skal gå til oppsummering side hvis alle spørsmål er besvart', () => {
 
         const store = create();
@@ -149,7 +145,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchAlleSporsmal(store);
@@ -160,7 +155,6 @@ describe('Routes', () => {
 
     });
 
-
     it('Skal gå til første side istedenfor oppsummering hvis spørsmål ikke er besvart', () => {
 
         const store = create();
@@ -168,13 +162,11 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchNoenSporsmal(store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [OPPSUMMERING_PATH]);
-
         expect(wrapper.find({ to: START_PATH })).to.have.length(1);
 
     });
@@ -186,7 +178,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchAlleSporsmal(store);
@@ -204,7 +195,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         store.dispatch({ type: ReaktiverBrukerActionTypes.REAKTIVER_BRUKER_STATUS_OK, data: {} });
@@ -222,7 +212,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [DU_ER_NA_REGISTRERT_PATH]);
@@ -231,26 +220,24 @@ describe('Routes', () => {
 
     });
 
-    it('skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
+    it('Skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
 
         const store = create();
+        dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
 
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': false,
-            'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
-
         expect(wrapper.find(SblRegistrering)).to.have.length(1);
 
     });
 
-    it('skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
+    it('Skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
         const store = create();
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
@@ -259,8 +246,7 @@ describe('Routes', () => {
 
     });
 
-
-    it('skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
+    it('Skal sende bruker til AlleredeRegistrert om den er under oppfølging', () => {
         const store = create();
 
         dispatchRegistreringstatus({ registreringType: RegistreringType.ALLEREDE_REGISTRERT }, store);
@@ -270,7 +256,7 @@ describe('Routes', () => {
         expect(wrapper.find(AlleredeRegistrert)).to.have.length(1);
     });
 
-    it('skal sende bruker til InfoForIkkeArbeidssokerUtenOppfolging om status er erIkkeArbeidssokerUtenOppfolging', () => {
+    it('Skal sende bruker til InfoForIkkeArbeidssokerUtenOppfolging når status er sperret', () => {
         const store = create();
 
         dispatchRegistreringstatus({ registreringType: RegistreringType.SPERRET }, store);
@@ -285,7 +271,6 @@ describe('Routes', () => {
 
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
@@ -293,6 +278,35 @@ describe('Routes', () => {
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
 
         expect(wrapper.find({ to: START_PATH })).to.have.length(1);
+
+    });
+
+    it('Skal redirecte til KreverReaktivering hvis registreringstype er REAKTIVERING', () => {
+
+        const store = create();
+
+        dispatchRegistreringstatus({ registreringType: RegistreringType.REAKTIVERING }, store);
+        dispatchFeaturestatus({
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
+        }, store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
+
+        expect(wrapper.find(KreverReaktivering)).to.have.length(1);
+
+    });
+
+    it('Skal redirecte til Inngangssporsmal dersom ny registrering er på', () => {
+
+        const store = create();
+
+        dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING, sykmeldtFraDato: "2018-10-21"}, store);
+        dispatchFeaturestatus({
+            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
+        }, store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
+        expect(wrapper.find({ to: INNGANGSSPORSMAL_PATH })).to.have.length(1);
 
     });
 

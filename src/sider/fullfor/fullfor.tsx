@@ -1,9 +1,13 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { RouteComponentProps } from 'react-router';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import NavAlertStripe from 'nav-frontend-alertstriper';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
-import { RouteComponentProps } from 'react-router';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
@@ -18,31 +22,28 @@ import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
-import {Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
-import NavAlertStripe from 'nav-frontend-alertstriper';
-import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
 import { erKlarForFullforing } from './fullfor-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 
-const utropstegnSvg = require('./utropstegn.svg');
-const kalenderSvg = require('./kalender.svg');
-const filnySvg = require('./fil-ny.svg');
-const epostSvg = require('./epost.svg');
-const ikonytelserSvg = require('./ikon-ytelser.svg');
+import utropstegnSvg from './utropstegn.svg';
+import kalenderSvg from './kalender.svg';
+import filnySvg from './fil-ny.svg';
+import epostSvg from './epost.svg';
+import ikonytelserSvg from './ikon-ytelser.svg';
+
+import './fullfor.less';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
-    featureToggles: FeatureTogglesData;
     state: AppState;
 }
 
 interface DispatchProps {
-    onRegistrerBruker: (data: RegistrerBrukerData, featureToggles: FeatureTogglesData) => Promise<void | {}>;
+    onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | {}>;
 }
 
 interface EgenState {
@@ -66,7 +67,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-      
+
         if (!erKlarForFullforing(this.props.state)) {
             this.props.history.push(START_PATH);
         }
@@ -76,15 +77,20 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     registrerBrukerOnClick() {
+
         if (!this.state.markert) {
             this.setState({visAdvarsel: true});
             return;
         }
+
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
+
+        const { registreringType } = this.props.state.registreringStatus.data;
+        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
 
         this.props.onRegistrerBruker(
             this.getSvarMappetForBackend(),
-            this.props.featureToggles
+            regType
         ).then((res) => {
             if (!!res) {
                 // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
@@ -226,14 +232,14 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                         className="fullfor-bekreft"
                     />
                     {advarselElement}
-                    <div className={'knapper-vertikalt'}>
+                    <div className="lenke-avbryt-wrapper">
                         <KnappFullfor
                             intl={intl}
                             onClick={this.registrerBrukerOnClick}
                         />
-                        <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                        <LenkeAvbryt wrapperClassname="no-anim"/>
                     </div>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
+                    <LenkeAvbryt wrapperClassname="wrapper-too"/>
                 </section>
             </Innholdslaster>
         );
@@ -242,12 +248,12 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
 const mapStateToProps = (state: AppState) => ({
     registrerBrukerData: state.registrerBruker,
-    featureToggles: selectFeatureToggles(state),
     state: state,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    onRegistrerBruker: (data) => dispatch(utforRegistrering(data)),
+    onRegistrerBruker: (data, registreringType: RegistreringType) =>
+        dispatch(utforRegistrering(data, registreringType)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

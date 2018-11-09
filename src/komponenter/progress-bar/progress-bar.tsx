@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './progress-bar.less';
 
 interface OwnProps {
     gjeldendeSporsmal: number;
@@ -8,7 +9,6 @@ interface OwnProps {
 
 export default class ProgressBar extends React.Component<OwnProps> {
     private framdriftContainer: HTMLDivElement;
-    private framdriftIndikator: HTMLDivElement;
 
     scrolling() {
         let scrollHeight = 0;
@@ -32,7 +32,6 @@ export default class ProgressBar extends React.Component<OwnProps> {
                 this.framdriftContainer.classList.remove('framdrift-fixed');
             }
         }
-
     }
 
     componentDidMount() {
@@ -68,7 +67,6 @@ export default class ProgressBar extends React.Component<OwnProps> {
                 tabIndex={-1}
             >
                 <div
-                    ref={(div: HTMLDivElement) => this.framdriftIndikator = div}
                     className="andel"
                     style={framdriftStyle}
                 />

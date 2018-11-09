@@ -6,6 +6,8 @@ import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { connect } from 'react-redux';
 
+import './lenke-avbryt.less';
+
 interface LenkeAvbrytProps {
     classname?: string;
     wrapperClassname?: string;
@@ -30,7 +32,6 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
         this.state = {
             visAvbrytModal: false
         };
-
     }
 
     handleAvbrytClick = (): void => {
@@ -43,16 +44,13 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
 
     render() {
         const { tekstId, wrapperClassname, registreringType } = this.props;
-
         let id;
 
         if (tekstId) {
             id = tekstId;
         } else {
-
             id = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
                 ? 'avbryt-lenke-sykmeldt' : 'avbryt-lenke-registrering';
-
         }
 
         return (
@@ -69,7 +67,6 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
             </>
         );
     }
-
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({

@@ -3,11 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import KnappBase from 'nav-frontend-knapper';
 import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import PanelBlokkGruppe from '../../komponenter/panel-blokk/panel-blokk-gruppe';
-import { DITT_NAV_URL, registrerBrukerSBLArbeid } from '../../ducks/api';
+import { DITT_NAV_URL, registrerBrukerSBLArbeid, SBLARBEID_URL } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
-import { sendBrukerTilSblArbeid } from '../oppsummering/oppsummering-utils';
+
+import './sbl-registrering.less';
 
 interface State {
     status: string;
@@ -17,38 +18,47 @@ interface SblRegistreringConfig {
     redirect: () => void;
 }
 
-interface Props {
+interface SblRegistreringProps {
     config?: SblRegistreringConfig;
 }
 
 export function sendBrukerTilDittNav() {
-    document.location.href = DITT_NAV_URL;
+    window.location.href = DITT_NAV_URL;
 }
 
-class SblRegistrering extends React.Component<Props, State> {
-    static defaultProps: Partial<Props> = {
+export function sendBrukerTilSblArbeid() {
+    window.location.href = SBLARBEID_URL;
+}
+
+class SblRegistrering extends React.Component<SblRegistreringProps, State> {
+
+    static defaultProps: Partial<SblRegistreringProps> = {
         config: {
             redirect: sendBrukerTilSblArbeid
         },
     };
 
-    constructor(props: {}) {
+    constructor(props: SblRegistreringProps) {
         super(props);
         this.state = {status: STATUS.OK};
-        this.executeRedirect = this.executeRedirect.bind(this);
+    }
+
+    executeRedirect = () => {
+        const { config } = this.props;
+
+        this.setState({
+                status: STATUS.PENDING},
+            () => registrerBrukerSBLArbeid()
+                .then(() => config!.redirect())
+                .catch(() => config!.redirect())
+        );
+
     }
 
     componentDidMount() {
         if (window.innerWidth > 768) {
             this.executeRedirect();
         }
-    }
-
-    executeRedirect() {
-        const { config } = this.props;
-        this.setState({status: STATUS.PENDING},
-                      () => registrerBrukerSBLArbeid()
-                        .then(config!.redirect, config!.redirect));
     }
 
     render() {
@@ -66,7 +76,7 @@ class SblRegistrering extends React.Component<Props, State> {
                             <KnappBase
                                 key="1"
                                 type="standard"
-                                onClick={() => document.location.href = DITT_NAV_URL}
+                                onClick={sendBrukerTilDittNav}
                                 className="sbl-registrering__knapp"
                             >
                                 <FormattedMessage id="knapp-sbl-registrering-avbryt"/>

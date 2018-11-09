@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Alternativ from '../../../komponenter/skjema/alternativ';
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import Ikon from 'nav-frontend-ikoner-assets';
 import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
@@ -26,9 +26,10 @@ function AndreForhold(props: Props) {
             <form className="spm-skjema">
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend spm-hode">
-                        <Innholdstittel tag="h1" className="spm-tittel">
-                            {getTekst('tittel')}
-                        </Innholdstittel>
+                        <h1
+                            className="typo-innholdstittel spm-tittel"
+                            dangerouslySetInnerHTML={{ __html: getTekst('tittel') }}
+                        />
                         <Normaltekst className="spm-ingress">
                             {getTekst('ingress')}
                         </Normaltekst>

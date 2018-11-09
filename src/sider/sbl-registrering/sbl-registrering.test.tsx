@@ -4,13 +4,12 @@ import PanelBlokk from '../../komponenter/panel-blokk/panel-blokk';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import SblRegistrering, { sendBrukerTilDittNav } from './sbl-registrering';
-import { DITTNAV_URL, SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
+import SblRegistrering, { sendBrukerTilSblArbeid } from './sbl-registrering';
+import { SBLARBEID_OPPRETT_MIN_ID_URL } from '../../ducks/api';
 import {
     FetchStub,
     mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch
 } from '../../test/test-utils';
-import { sendBrukerTilSblArbeid, opprettSBLArbeidBruker } from '../oppsummering/oppsummering-utils';
 
 enzyme.configure({ adapter: new Adapter()});
 
@@ -27,11 +26,13 @@ afterEach(() => {
 });
 
 describe('<SblRegistrering />', () => {
+
     it('skal vise informasjon om window.innerWidth < 768px', () => {
         window.innerWidth = 700;
         const wrapper = mountWithStoreRouterAndIntl(<SblRegistrering />);
         expect(wrapper.find(PanelBlokk)).to.have.length(1);
     });
+
     it('skal ikke vise informasjon om window.innerWidth > 768px', () => {
         stubFetch(new FetchStub().addResponse(SBLARBEID_OPPRETT_MIN_ID_URL));
 
@@ -44,6 +45,7 @@ describe('<SblRegistrering />', () => {
                 expect(wrapper.find(PanelBlokk)).to.have.length(0);
             });
     });
+
     it('skal registrere bruker i sbl-arbeid og sende bruker dit om window.innerWidth > 768px', () => {
         stubFetch(new FetchStub().addResponse(SBLARBEID_OPPRETT_MIN_ID_URL));
 
@@ -60,4 +62,5 @@ describe('<SblRegistrering />', () => {
             expect(sendBrukerTilSblArbeidSpy.called).to.be.equal(true);
         });
     });
+
 });

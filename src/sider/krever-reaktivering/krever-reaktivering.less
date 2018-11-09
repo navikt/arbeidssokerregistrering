@@ -1,63 +1,69 @@
+@import '../../../node_modules/nav-frontend-core/less/core';
+
 .krever-reaktivering {
-  margin-top: 1.5rem;
-
-  &__tittel {
-    text-align: center;
-    .blokk();
-  }
-
-  &__infopanel {
-    display: flex;
-    text-align: left;
-    position: relative;
-    justify-content: center;
-    border: 3px solid @navBlaLighten80;
-    border-radius: 8px;
-    padding: 1rem;
-    .blokk-s();
-  }
-
-  &__tekster {
-    width: 90%;
-  }
-
-  &__handinfo-ikon {
-    position: absolute;
-    height: 100%;
-    left: -44px;
-    top: 0;
-    display: flex;
-    align-items: center;
-
-    > img {
-      display: none;
-      width: 80px;
-    }
-  }
-
-  &__aksjonspanel {
-    text-align: center;
-  }
-}
-
-@media (min-width: @screen-sm-min) {
-  .krever-reaktivering {
+    margin-top: 1.5rem;
     margin-left: 1rem;
     margin-right: 1rem;
 
+    &__tittel {
+        text-align: center;
+        .blokk();
+    }
+
     &__infopanel {
-      margin: 2rem 5rem;
-      padding: 2rem 1rem;
+        display: flex;
+        text-align: left;
+        position: relative;
+        justify-content: center;
+        border: 3px solid @navBlaLighten80;
+        border-radius: 8px;
+        padding: 1rem;
+        .blokk-s();
     }
 
     &__tekster {
-      width: 80%;
+        width: 90%;
     }
 
     &__handinfo-ikon {
-      > img {
-        display: block;
-      }
+        position: absolute;
+        height: 100%;
+        left: -44px;
+        top: 0;
+        display: flex;
+        align-items: center;
+
+        > img {
+            display: none;
+            width: 80px;
+        }
     }
-  }
+
+    &__aksjonspanel {
+        text-align: center;
+
+        .lenke-avbryt-wrapper {
+            margin: 2rem 0;
+        }
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .krever-reaktivering {
+
+        &__infopanel {
+            margin: 2rem 5rem;
+            padding: 2rem 1rem;
+        }
+
+        &__tekster {
+            width: 80%;
+        }
+
+        &__handinfo-ikon {
+            > img {
+                display: block;
+            }
+        }
+    }
 }
