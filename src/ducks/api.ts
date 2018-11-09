@@ -1,12 +1,11 @@
 import { fetchToJson, fetchWithTimeout } from './api-utils';
-import {Data as RegistrerBrukerData } from './registrerbruker';
+import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
 
 export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
-export const FORSIDENAV_URL = 'https://www.nav.no/';
 export const VEIENTILARBEID_URL = '/veientilarbeid/';
 export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjonsmodul=true&visdagpenger=true';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
@@ -40,7 +39,8 @@ const MED_CREDENTIALS = {
 export function hentRegistreringStatus() {
     return fetchToJson({
         url: `${VEILARBREGISTRERING_URL}/startregistrering`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
     });
@@ -56,7 +56,8 @@ export function registrerBruker(data: RegistrerBrukerData, registreringType: Reg
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify(data)}
+            body: JSON.stringify(data)
+        }
     });
 
 }
@@ -64,10 +65,12 @@ export function registrerBruker(data: RegistrerBrukerData, registreringType: Reg
 export function startReaktivering() {
     return fetchToJson({
         url: `${VEILARBREGISTRERING_URL}/startreaktivering`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify({})}
+            body: JSON.stringify({})
+        }
     });
 }
 
@@ -87,7 +90,8 @@ export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
 export function hentBrukersNavn() {
     return fetchToJson({
         url: `${INNLOGGINGSLINJE_URL}?randomness=${Math.random()}`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
     });
@@ -96,7 +100,8 @@ export function hentBrukersNavn() {
 export function hentAutentiseringsInfo() {
     return fetchToJson({
         url: `${AUTENTISERINGSINFO_URL}`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
         }
     });
@@ -105,7 +110,8 @@ export function hentAutentiseringsInfo() {
 export function hentStyrkkodeForSisteStillingFraAAReg() {
     return fetchToJson({
         url: `${VEILARBREGISTRERING_URL}/sistearbeidsforhold`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
         recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
@@ -115,7 +121,8 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
 export function hentStillingFraPamGittStyrkkode(styrk: string) {
     return fetchToJson({
         url: `${PAM_JANZZ_URL}/kryssklassifiserMedKonsept?kodeForOversetting=${styrk}`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
         recoverWith: () => ({konseptMedStyrk08List: []})
@@ -125,7 +132,8 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
 export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${sokestreng}`,
-        config: {...{redirect: 'manual'},
+        config: {
+            ...{redirect: 'manual'},
             headers: getHeaders()
         },
         recoverWith: () => ({'typeaheadYrkeList': []})
@@ -136,7 +144,8 @@ export function hentFeatureToggles() {
     const parameters = alleFeatureToggles.map(element => 'feature=' + element).join('&');
     return fetchToJson({
         url: `${FEATURE_URL}/?${parameters}`,
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
         recoverWith: () => ({})

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-const navAnsattSvg = require('./nav-ansatt.svg');
+import navAnsattSvg from './nav-ansatt.svg';
+import './feilmelding.less';
 
 class Feilmelding extends React.Component {
     render() {
