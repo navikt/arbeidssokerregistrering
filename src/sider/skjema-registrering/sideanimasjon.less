@@ -1,4 +1,4 @@
-.limit.forover {
+div.forover {
     .tilbakelenke {
         animation: slideAhead 500ms;
     }
@@ -37,7 +37,7 @@
     }
 }
 
-.limit.bakover {
+div.bakover {
     .tilbakelenke {
         animation: slideBack 500ms;
     }
@@ -76,7 +76,7 @@
     }
 }
 
-.limit.forover, .limit.bakover {
+div.forover, div.bakover {
     .sporsmal.erIE, .sporsmal.tilbake.erIE {
         .tilbakelenke, .spm-hode, .spm-body, .spm-valg, .spm-info, .nestelenke, .lenke-avbryt-wrapper {
             animation: none;
@@ -97,13 +97,13 @@
     }
 }
 
-.framdrift.bakover {
+div.bakover {
     z-index: 0;
     animation: slideBack 500ms;
 }
 
 @media (min-width: @screen-sm-min) {
-    .framdrift.framover {
+    div.framover {
         z-index: 0;
         animation: slideAhead 500ms;
     }
