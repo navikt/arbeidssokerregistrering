@@ -103,8 +103,8 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
 
     finnLop(svar: FremtidigSituasjonSvar): number {
         switch (svar) {
-            case FremtidigSituasjonSvar.NY_ARBEIDSGIVER: return 1;
-            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER: return 2;
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER: return 1;
+            case FremtidigSituasjonSvar.NY_ARBEIDSGIVER: return 2;
             case FremtidigSituasjonSvar.USIKKER: return 3;
             case FremtidigSituasjonSvar.INGEN_PASSER: return 4;
             default: return 0;

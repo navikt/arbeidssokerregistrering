@@ -143,11 +143,11 @@ class Routes extends React.Component<StateProps> {
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                                    component={SkjemaSykefravaerNyArbeidsgiver}
+                                    component={SkjemaSykefravaerSammeArbeidsgiver}
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
-                                    component={SkjemaSykefravaerSammeArbeidsgiver}
+                                    component={SkjemaSykefravaerNyArbeidsgiver}
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
