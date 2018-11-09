@@ -94,7 +94,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.REAKTIVERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         store.dispatch({ type: ReaktiverBrukerActionTypes.REAKTIVER_BRUKER_STATUS_PENDING, data: {} });
@@ -112,7 +111,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchAlleSporsmal(store);
@@ -130,7 +128,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchNoenSporsmal(store);
@@ -148,7 +145,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchAlleSporsmal(store);
@@ -166,7 +162,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchNoenSporsmal(store);
@@ -183,7 +178,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         dispatchAlleSporsmal(store);
@@ -201,7 +195,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         store.dispatch({ type: ReaktiverBrukerActionTypes.REAKTIVER_BRUKER_STATUS_OK, data: {} });
@@ -219,7 +212,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [DU_ER_NA_REGISTRERT_PATH]);
@@ -235,7 +227,6 @@ describe('Routes', () => {
 
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': false,
-            'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
@@ -247,7 +238,6 @@ describe('Routes', () => {
         const store = create();
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
@@ -281,7 +271,6 @@ describe('Routes', () => {
 
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': false
         }, store);
 
         dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
@@ -299,7 +288,6 @@ describe('Routes', () => {
         dispatchRegistreringstatus({ registreringType: RegistreringType.REAKTIVERING }, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
@@ -315,28 +303,11 @@ describe('Routes', () => {
         dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING, sykmeldtFraDato: "2018-10-21"}, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': true
         }, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
         expect(wrapper.find({ to: INNGANGSSPORSMAL_PATH })).to.have.length(1);
 
     });
-
-    it('Skal gå til start dersom ny registrering ikke er på', () => {
-
-        const store = create();
-
-        dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING}, store);
-        dispatchFeaturestatus({
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-            'arbeidssokerregistrering.sykefravaer': false
-        }, store);
-
-        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
-        expect(wrapper.find(Startside)).to.have.length(1);
-
-    });
-
 
 });
