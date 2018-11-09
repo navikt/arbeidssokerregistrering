@@ -22,7 +22,6 @@ import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
-import { Data as FeatureTogglesData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
@@ -40,12 +39,11 @@ import './fullfor.less';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
-    featureToggles: FeatureTogglesData;
     state: AppState;
 }
 
 interface DispatchProps {
-    onRegistrerBruker: (data: RegistrerBrukerData, featureToggles: FeatureTogglesData) => Promise<void | {}>;
+    onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | {}>;
 }
 
 interface EgenState {
@@ -79,15 +77,20 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     registrerBrukerOnClick() {
+
         if (!this.state.markert) {
             this.setState({visAdvarsel: true});
             return;
         }
+
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
+
+        const { registreringType } = this.props.state.registreringStatus.data;
+        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
 
         this.props.onRegistrerBruker(
             this.getSvarMappetForBackend(),
-            this.props.featureToggles
+            regType
         ).then((res) => {
             if (!!res) {
                 // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
@@ -245,12 +248,12 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
 const mapStateToProps = (state: AppState) => ({
     registrerBrukerData: state.registrerBruker,
-    featureToggles: selectFeatureToggles(state),
     state: state,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    onRegistrerBruker: (data) => dispatch(utforRegistrering(data)),
+    onRegistrerBruker: (data, registreringType: RegistreringType) =>
+        dispatch(utforRegistrering(data, registreringType)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
