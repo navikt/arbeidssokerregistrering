@@ -19,7 +19,7 @@ export default class Oppsummering {
         this.btnNeste = Selector('[data-testid="neste"]');
         this.tittelOppsummering = Selector('.oppsummering-tittel');
         this.besvarelserOppsummering = Selector('.oppsummering-besvarelser');
-        this.checkboxKrav = Selector('.inputPanel__label');
+        this.checkboxKrav = Selector('.bekreftCheckboksPanel > label');
 
     }
 
