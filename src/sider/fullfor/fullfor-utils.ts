@@ -1,6 +1,6 @@
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { Stilling } from '../../ducks/siste-stilling';
-import { erSporsmalBesvarte } from '../../ducks/svar-utils';
+import { erSporsmalBesvarte, FremtidigSituasjonSvar, hentSvar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { RegistreringType } from '../../ducks/registreringstatus';
 
@@ -11,25 +11,54 @@ export function erKlarForFullforing(state: AppState): boolean {
     const registreringType = state.registreringStatus.data.registreringType;
 
     if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
-        // TODO: Sjekk at spørsmål pr løp er besvart
-        // TODO: Kan bruke alleSporsmalErBesvarte og sende inn reg type
-        return true;
+        return alleSporsmalErBesvarte(svar, RegistreringType.SYKMELDT_REGISTRERING);
     } else {
-        return alleSporsmalErBesvarte(svar) && sisteStillingErSatt(sisteStilling);
+        return alleSporsmalErBesvarte(svar, RegistreringType.ORDINAER_REGISTRERING)
+            && sisteStillingErSatt(sisteStilling);
     }
 
 }
 
-export function alleSporsmalErBesvarte(svar: SvarState) {
-    return !!svar && erSporsmalBesvarte(svar, [
-        SporsmalId.dinSituasjon,
-        SporsmalId.sisteStilling,
-        SporsmalId.utdanning,
-        SporsmalId.utdanningGodkjent,
-        SporsmalId.utdanningBestatt,
-        SporsmalId.helseHinder,
-        SporsmalId.andreForhold,
-    ]);
+export function alleSporsmalErBesvarte(svar: SvarState, registreringType: RegistreringType) {
+
+    if (registreringType === RegistreringType.ORDINAER_REGISTRERING) {
+        return !!svar && erSporsmalBesvarte(svar, [
+            SporsmalId.dinSituasjon,
+            SporsmalId.sisteStilling,
+            SporsmalId.utdanning,
+            SporsmalId.utdanningGodkjent,
+            SporsmalId.utdanningBestatt,
+            SporsmalId.helseHinder,
+            SporsmalId.andreForhold,
+        ]);
+    }
+
+    if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
+
+        const fremtidigSituasjonSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
+
+        if (!fremtidigSituasjonSvar) {
+            return false;
+        }
+
+        switch (fremtidigSituasjonSvar) {
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER:
+                return erSporsmalBesvarte(svar, [SporsmalId.tilbakeIArbeid]);
+            case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
+                return erSporsmalBesvarte(svar, [SporsmalId.utdanning,
+                    SporsmalId.utdanningGodkjent, SporsmalId.utdanningBestatt]);
+            case FremtidigSituasjonSvar.USIKKER:
+                return erSporsmalBesvarte(svar, [SporsmalId.utdanning,
+                    SporsmalId.utdanningGodkjent, SporsmalId.utdanningBestatt]);
+            case FremtidigSituasjonSvar.INGEN_PASSER:
+                return true; // Har ingen flere spørsmål
+            default:
+                return false;
+        }
+
+    }
+
+    return false;
 }
 
 export function sisteStillingErSatt(stilling: Stilling | undefined) {
