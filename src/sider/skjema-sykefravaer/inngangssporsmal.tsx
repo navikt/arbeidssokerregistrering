@@ -8,7 +8,7 @@ import {
     TekstKontekst
 } from '../../komponenter/skjema/skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { endreSvarAction, setInitialState, SporsmalId } from '../../ducks/svar';
+import { setInitialState, SporsmalId } from '../../ducks/svar';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
 import { FremtidigSituasjonSvar, hentSvar, Svar } from '../../ducks/svar-utils';
@@ -25,9 +25,15 @@ interface OwnState {
     visAdvarsel: boolean;
 }
 
-class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
+interface DispatchProps {
+    resetSvar: () => void;
+}
 
-    constructor(props: SkjemaProps) {
+type AllProps = DispatchProps & SkjemaProps;
+
+class Inngangssporsmal extends React.Component<AllProps, OwnState> {
+
+    constructor(props: AllProps) {
         super(props);
 
         this.state = {
@@ -157,9 +163,8 @@ const mapStateToProps = (state: AppState) => ({
     svarState: state.svar,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>) => ({
-    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     resetSvar: () => dispatch(setInitialState())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal) as any); // tslint:disable-line
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal));
