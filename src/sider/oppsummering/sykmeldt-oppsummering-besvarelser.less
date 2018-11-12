@@ -1,0 +1,70 @@
+@import '../../../node_modules/nav-frontend-core/less/core';
+
+.sykmeldt-oppsummering-besvarelser {
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    border: 3px solid @navBlaLighten80;
+    position: relative;
+
+    &__list-container {
+        padding: 3rem 1rem 1rem;
+    }
+
+    &__illustrasjon {
+        position: absolute;
+        top: -53px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    &__list {
+        padding-left: 1rem;
+
+        li {
+            padding: 0.2rem 0;
+        }
+    }
+
+    &__divider {
+        border: 1px solid @navBlaLighten80;
+    }
+
+    &__egress {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+
+    .spm-info {
+        display: flex;
+        margin: 1rem;
+
+        &__ikon {
+            border-right: 1px solid @navGra40;
+            margin-right: 0.75rem;
+            padding-right: 0.75rem;
+            width: 2.5rem;
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+        }
+    }
+
+}
+
+@media (min-width: @screen-sm-min) {
+    .sykmeldt-oppsummering-besvarelser {
+        margin: 6rem 5rem 3rem;
+
+        .spm-info {
+            margin: 1rem 3rem;
+        }
+
+        &__list-container {
+            padding: 4rem 5rem 3rem;
+        }
+
+    }
+}
+
