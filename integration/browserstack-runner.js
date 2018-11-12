@@ -25,6 +25,13 @@ utils.getNetworkIp().then(ip => {
         .then(failedCount => {
             console.log('Tests failed: ' + failedCount);
             testcafe.close();
+            if(failedCount > 0) process.exit(1);
+        })
+        .catch(e => {
+            console.log("Runner error: " + e);
+            testcafe.close();
+            process.exit(1);
+
         });
 
 });
