@@ -4,10 +4,8 @@ import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbru
 import { ActionTypes as RegistreringStatusActionTypes, RegistreringType } from '../ducks/registreringstatus';
 import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 
-import { brukersSvarSamsvarerMedInfoFraAAReg } from '../sider/oppsummering/oppsummering-utils';
 import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
-import { mapTilSvarState } from '../ducks/registrerbruker-utils';
 import * as _ from 'lodash';
 
 export interface Frontendlogger {
@@ -60,17 +58,10 @@ function loggSykmeldt(store: any, action: Action, frontendlogger: Frontendlogger
 }
 
 function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogger) {
-    let jobbetSeksAvTolvSisteManeder = store.getState().registreringStatus.data.jobbetSeksAvTolvSisteManeder;
     let stillingForslagFraAareg = store.getState().defaultStilling;
     let valgteStilling = store.getState().sisteStilling.data;
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
-        const { besvarelse } = action.data;
-        frontendlogger.event('registrering.besvarelse.helseHinder', {'helseHinder': besvarelse.helseHinder}, {});
-        frontendlogger.event('registrering.besvarelse.utdanning', {'utdanning': besvarelse.utdanning}, {});
-        frontendlogger.event('registrering.besvarelse.sistestilling.samsvarermedinfofraaareg',
-            {'samsvarermedinfofraareg': brukersSvarSamsvarerMedInfoFraAAReg(mapTilSvarState(besvarelse), jobbetSeksAvTolvSisteManeder)}, {}); // tslint:disable-line:max-line-length
-
         if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {
             frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {});
         }
