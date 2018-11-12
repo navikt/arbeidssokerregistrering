@@ -4,5 +4,5 @@ export default {
     underOppfolging: false,
     jobbetSeksAvTolvSisteManeder: false,
     sykmeldtFraDato: '2018-10-21',
-    registreringType: RegistreringType.SYKMELDT_REGISTRERING
+    registreringType: RegistreringType.ORDINAER_REGISTRERING
 };
