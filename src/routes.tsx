@@ -42,15 +42,13 @@ import InfoForIkkeArbeidssokerUtenOppfolging
 import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
-import { State as SvarState } from './ducks/svar';
-import { Stilling } from './ducks/siste-stilling';
+import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
     gradualRolloutNyRegistrering: boolean;
     reaktivertStatus: string;
-    svar: SvarState;
-    sisteStilling: Stilling;
+    state: AppState;
 }
 
 class Routes extends React.Component<StateProps> {
@@ -86,12 +84,13 @@ class Routes extends React.Component<StateProps> {
             }
 
         } else if (registreringType === RegistreringType.REAKTIVERING &&
-                reaktivertStatus !== STATUS.OK) {
+            reaktivertStatus !== STATUS.OK) {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         }
 
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
+        const klarForFullforing = erKlarForFullforing(this.props.state);
 
         return (
             <>
@@ -102,8 +101,8 @@ class Routes extends React.Component<StateProps> {
 
                     <Switch>
 
-                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
-                        <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} />
+                        {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
+                        {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
 
                         { visOrdinaerSkjema ? (
                             <Switch>
@@ -115,7 +114,11 @@ class Routes extends React.Component<StateProps> {
                                     path={`${SKJEMA_PATH}/:id`}
                                     component={SkjemaRegistrering}
                                 />
-                                <Route path={FULLFOR_PATH} component={Fullfor} />
+                                {klarForFullforing ?
+                                    <Route path={FULLFOR_PATH} component={Fullfor} />
+                                    :
+                                    null
+                                }
                                 <Redirect
                                     to={START_PATH}
                                 />
@@ -162,8 +165,7 @@ const mapStateToProps = (state: AppState) => ({
     registreringstatusData: selectRegistreringstatus(state).data,
     gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
     reaktivertStatus: selectReaktiveringStatus(state),
-    svar: state.svar,
-    sisteStilling: state.sisteStilling.data.stilling
+    state: state,
 });
 
 export default connect(mapStateToProps, null, null, { pure: false })(Routes);

@@ -6,15 +6,13 @@ import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
-import { DU_ER_NA_REGISTRERT_PATH, FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, FULLFOR_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import OrdinaerOppsummeringBesvarelser from './ordinaer-oppsummering-besvarelser';
 import SykmeldtOppsummeringBesvarelser from './sykmeldt-oppsummering-besvarelser';
-import { erKlarForFullforing } from '../fullfor/fullfor-utils';
-
 import './oppsummering.less';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
@@ -46,11 +44,6 @@ class Oppsummering extends React.Component<Props> {
     }
 
     componentWillMount() {
-
-        if (!erKlarForFullforing(this.props.state)) {
-            this.props.history.push(START_PATH);
-        }
-
         disableVerikalScrollingVedAnimasjon();
     }
 

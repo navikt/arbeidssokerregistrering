@@ -8,8 +8,6 @@ import { frontendLogger } from '../../metrikker/metrics-utils';
 
 import handinfoSvg from './clipboard.svg';
 import './registrert.less';
-import { erKlarForFullforing } from '../fullfor/fullfor-utils';
-import { START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
@@ -22,16 +20,6 @@ interface StateProps {
 type AllProps = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
 class DuErNaRegistrert extends React.Component<AllProps> {
-
-    componentWillMount() {
-
-        if (!erKlarForFullforing(this.props.state)) {
-            this.props.history.push(START_PATH);
-        }
-
-        // Legge til || reaktivertStatus === STATUS.OK ?
-
-    }
 
     render() {
         return (
