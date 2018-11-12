@@ -1,4 +1,4 @@
-import { Selector, t} from 'testcafe';
+import { Selector, t, ClientFunction} from 'testcafe';
 
 export default class Sporsmal {
     side: Selector;
@@ -17,9 +17,13 @@ export default class Sporsmal {
     }
 
     async klikkNeste(){
+        const getLocation  = ClientFunction(() => document!.location!.href.toString());
+        const currentLocation = await getLocation();
+
         await t
             .expect(this.side.exists).ok()
-            .click(this.btnNeste);
+            .click(this.btnNeste)
+            .expect(getLocation()).notEql(currentLocation);
     }
 
     async validerSide(){
