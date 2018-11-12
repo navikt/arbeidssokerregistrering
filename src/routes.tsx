@@ -42,7 +42,6 @@ import InfoForIkkeArbeidssokerUtenOppfolging
 import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
-import { alleSporsmalErBesvarte, sisteStillingErSatt } from './sider/fullfor/fullfor-utils';
 import { State as SvarState } from './ducks/svar';
 import { Stilling } from './ducks/siste-stilling';
 
@@ -68,7 +67,7 @@ class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const { svar, sisteStilling, registreringstatusData, reaktivertStatus } = this.props;
+        const { registreringstatusData, reaktivertStatus } = this.props;
         const registreringType = registreringstatusData.registreringType;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
@@ -92,11 +91,7 @@ class Routes extends React.Component<StateProps> {
         }
 
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
-
         const visOrdinaerSkjema = !visSykefravaerSkjema;
-
-        const alleSporsmalBesvart = alleSporsmalErBesvarte(svar) && sisteStillingErSatt(sisteStilling)
-            || (registreringType === RegistreringType.SYKMELDT_REGISTRERING); // TODO: midlertidig
 
         return (
             <>
@@ -107,8 +102,8 @@ class Routes extends React.Component<StateProps> {
 
                     <Switch>
 
-                        {alleSporsmalBesvart ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
-                        {(alleSporsmalBesvart || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
+                        <Route path={OPPSUMMERING_PATH} component={Oppsummering} />
+                        <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} />
 
                         { visOrdinaerSkjema ? (
                             <Switch>
@@ -120,11 +115,7 @@ class Routes extends React.Component<StateProps> {
                                     path={`${SKJEMA_PATH}/:id`}
                                     component={SkjemaRegistrering}
                                 />
-                                {alleSporsmalBesvart ?
-                                    <Route path={FULLFOR_PATH} component={Fullfor} />
-                                    :
-                                    null
-                                }
+                                <Route path={FULLFOR_PATH} component={Fullfor} />
                                 <Redirect
                                     to={START_PATH}
                                 />

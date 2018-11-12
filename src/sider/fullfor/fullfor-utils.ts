@@ -11,6 +11,8 @@ export function erKlarForFullforing(state: AppState): boolean {
     const registreringType = state.registreringStatus.data.registreringType;
 
     if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
+        // TODO: Sjekk at spørsmål pr løp er besvart
+        // TODO: Kan bruke alleSporsmalErBesvarte og sende inn reg type
         return true;
     } else {
         return alleSporsmalErBesvarte(svar) && sisteStillingErSatt(sisteStilling);

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
@@ -85,12 +84,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
-        const { registreringType } = this.props.state.registreringStatus.data;
-        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
-
         this.props.onRegistrerBruker(
             this.getSvarMappetForBackend(),
-            regType
+            RegistreringType.ORDINAER_REGISTRERING
         ).then((res) => {
             if (!!res) {
                 // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
@@ -105,9 +101,8 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
     getSvarMappetForBackend() {
         const {state, intl} = this.props;
-        const { registreringType } = this.props.state.registreringStatus.data;
-        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
-        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl, regType);
+        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state),
+            intl, RegistreringType.ORDINAER_REGISTRERING);
     }
 
     settMarkert() {
