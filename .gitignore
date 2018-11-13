@@ -7,7 +7,10 @@
 /coverage
 
 # Nightwatch reports
-integration/reports/
+integration/reports
+
+# TestCafe screenshots
+integration/screenshots
 
 # production
 **/build
