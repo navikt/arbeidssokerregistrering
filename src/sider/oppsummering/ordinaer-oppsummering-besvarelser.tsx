@@ -8,6 +8,7 @@ import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../.
 import OppsummeringElement from './oppsummering-element';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
+import './ordinaer-oppsummering-besvarelser.less';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -29,13 +30,13 @@ class OrdinaerOppsummeringBesvarelser extends React.Component<StateProps> {
         const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
 
         return (
-            <div className="oppsummering-besvarelser">
+            <div className="ordinaer-oppsummering-besvarelser">
                 <img
                     src={oppsummeringSvg}
                     alt="Oppsummering sjekkliste"
-                    className="oppsummering-besvarelser__illustrasjon"
+                    className="ordinaer-oppsummering-besvarelser__illustrasjon"
                 />
-                <ul className="oppsummering-besvarelser__list">
+                <ul className="ordinaer-oppsummering-besvarelser__list">
                     <OppsummeringElement
                         tekstId={jobbetSeksAvTolvSisteManederTekstId}
                         skjul={jobbetSeksAvTolvSisteManederTekstId === ''}
