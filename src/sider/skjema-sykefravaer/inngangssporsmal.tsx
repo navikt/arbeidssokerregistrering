@@ -71,6 +71,19 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
         this.props.history.goBack();
     }
 
+    shouldComponentUpdate(nextProps: SkjemaProps): boolean {
+
+        if (this.state.visAdvarsel) {
+            const visAdvarsel: boolean = hentSvar(nextProps.svarState, SporsmalId.fremtidigSituasjon) === undefined;
+            if (!visAdvarsel) {
+                this.setState({ visAdvarsel: false });
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     render() {
         const sporsmalId = SporsmalId.fremtidigSituasjon;
         const { intl, endreSvar, svarState } = this.props;

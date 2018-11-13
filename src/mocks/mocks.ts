@@ -88,7 +88,7 @@ if (MOCK_REGISTRER_BRUKER) {
 }
 
 if (MOCK_REAKTIVER_BRUKER) {
-    const response = respondWith(delayed(1000, {}, 200));
+    const response = respondWith(delayed(DELAY, {}, 200));
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startreaktivering`, response);
 }
 
