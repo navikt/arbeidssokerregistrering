@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
@@ -20,13 +19,12 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { erIE } from '../../utils/ie-test';
 import { mapAvgitteSvarForBackend } from '../../ducks/registrerbruker-utils';
 import { selectSisteStilling } from '../../ducks/siste-stilling';
-import { erKlarForFullforing } from './fullfor-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 
 import utropstegnSvg from './utropstegn.svg';
@@ -67,13 +65,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentWillMount() {
-
-        if (!erKlarForFullforing(this.props.state)) {
-            this.props.history.push(START_PATH);
-        }
-
         disableVerikalScrollingVedAnimasjon();
-
     }
 
     registrerBrukerOnClick() {
@@ -85,12 +77,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
         this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
 
-        const { registreringType } = this.props.state.registreringStatus.data;
-        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
-
         this.props.onRegistrerBruker(
             this.getSvarMappetForBackend(),
-            regType
+            RegistreringType.ORDINAER_REGISTRERING
         ).then((res) => {
             if (!!res) {
                 // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
@@ -105,9 +94,8 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
     getSvarMappetForBackend() {
         const {state, intl} = this.props;
-        const { registreringType } = this.props.state.registreringStatus.data;
-        const regType = registreringType ? registreringType : RegistreringType.ORDINAER_REGISTRERING;
-        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state), intl, regType);
+        return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state),
+            intl, RegistreringType.ORDINAER_REGISTRERING);
     }
 
     settMarkert() {
