@@ -8,7 +8,7 @@ import {
     TekstKontekst
 } from '../../komponenter/skjema/skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { endreSvarAction, SporsmalId } from '../../ducks/svar';
+import { setInitialState, SporsmalId } from '../../ducks/svar';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
 import { FremtidigSituasjonSvar, hentSvar, Svar } from '../../ducks/svar-utils';
@@ -16,7 +16,7 @@ import ResponsivSide from '../../komponenter/side/responsiv-side';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import LenkeNeste from '../../komponenter/knapper/lenke-neste';
-import { SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
+import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RegistreringType } from '../../ducks/registreringstatus';
@@ -25,14 +25,39 @@ interface OwnState {
     visAdvarsel: boolean;
 }
 
-class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
+interface DispatchProps {
+    resetSvar: () => void;
+}
 
-    constructor(props: SkjemaProps) {
+type AllProps = DispatchProps & SkjemaProps;
+
+class Inngangssporsmal extends React.Component<AllProps, OwnState> {
+
+    constructor(props: AllProps) {
         super(props);
 
         this.state = {
             visAdvarsel: false
         };
+
+    }
+
+    componentWillMount() {
+
+        const { svarState } = this.props;
+
+        // Ikke reset svar hvis ingen eller kun dette spørsmålet er besvart
+        if (svarState.length <= 1) {
+            return;
+        }
+
+        const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon);
+
+        // Reset alle svar bortsett fra det første spørsmålet
+        if (svar) {
+            this.props.resetSvar();
+            this.props.endreSvar(SporsmalId.fremtidigSituasjon, svar);
+        }
 
     }
 
@@ -77,7 +102,7 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
 
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
             kontekst, intl, RegistreringType.SYKMELDT_REGISTRERING);
-        const nesteUrl = `${SKJEMA_SYKEFRAVAER_PATH}/${this.finnLop(hentSvar(svarState, sporsmalId) as FremtidigSituasjonSvar)}/0`; // tslint:disable-line
+
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
 
         return (
@@ -103,7 +128,7 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
                 </form>
                 <LenkeNeste
                     onClick={this.handleNesteBtnClick}
-                    href={nesteUrl}
+                    href={this.hentNesteUrl()}
                     erAktiv={kanGaaTilNesteTmp}
                 />
                 <LenkeTilbake
@@ -114,23 +139,45 @@ class Inngangssporsmal extends React.Component<SkjemaProps, OwnState> {
         );
     }
 
-    finnLop(svar: FremtidigSituasjonSvar): number {
-        switch (svar) {
-            case FremtidigSituasjonSvar.NY_ARBEIDSGIVER: return 1;
-            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER: return 2;
-            case FremtidigSituasjonSvar.USIKKER: return 3;
-            case FremtidigSituasjonSvar.INGEN_PASSER: return 4;
-            default: return 0;
+    hentNesteUrl = (): string => {
+
+        const svar: FremtidigSituasjonSvar = hentSvar(this.props.svarState,
+            SporsmalId.fremtidigSituasjon) as FremtidigSituasjonSvar;
+
+        if (svar === FremtidigSituasjonSvar.INGEN_PASSER) {
+            return OPPSUMMERING_PATH;
+        } else {
+
+            let lop;
+
+            switch (svar) {
+                case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
+                    lop = 1;
+                    break;
+                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER:
+                    lop = 2;
+                    break;
+                case FremtidigSituasjonSvar.USIKKER:
+                    lop = 3;
+                    break;
+                default:
+                    lop = 0;
+            }
+
+            return `${SKJEMA_SYKEFRAVAER_PATH}/${lop}/0`;
+
         }
+
     }
+
 }
 
 const mapStateToProps = (state: AppState) => ({
     svarState: state.svar,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>) => ({
-    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    resetSvar: () => dispatch(setInitialState())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal) as any); // tslint:disable-line
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal));
