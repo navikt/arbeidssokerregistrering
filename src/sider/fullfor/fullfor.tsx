@@ -115,7 +115,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
         const {registrerBrukerData, intl} = this.props;
 
         const advarselElement = this.state.visAdvarsel && (
-            <NavAlertStripe type="advarsel">
+            <NavAlertStripe type="advarsel" className="fullfor-advarsel-stripe">
                 <Normaltekst>
                     <FormattedMessage id="fullfor-advarsel"/>
                 </Normaltekst>
