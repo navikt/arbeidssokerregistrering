@@ -18,7 +18,7 @@ export default class Oppsummering {
         this.tittelRegistrert = Selector('.registrert__tittel');
         this.btnNeste = Selector('[data-testid="neste"]');
         this.tittelOppsummering = Selector('.oppsummering-tittel');
-        this.besvarelserOppsummering = Selector('.oppsummering-besvarelser');
+        this.besvarelserOppsummering = Selector('.ordinaer-oppsummering-besvarelser');
         this.checkboxKrav = Selector('.bekreftCheckboksPanel > label');
 
     }
