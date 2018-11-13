@@ -4,13 +4,12 @@ import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import {
-    dispatchFeaturestatus,
+    dispatchAlleSporsmal,
+    dispatchFeaturestatus, dispatchNoenSporsmal,
     dispatchRegistreringstatus,
     mountWithStoreRouterAndIntl,
 } from './test/test-utils';
 import {create} from './store';
-import {ActionTypes as SvarActionTypes} from './ducks/svar';
-import {SporsmalId} from './ducks/svar';
 import Routes from './routes';
 import { RegistreringType } from './ducks/registreringstatus';
 import Fullfor from './sider/fullfor/fullfor';
@@ -21,69 +20,17 @@ import {
     REAKTIVERING_PATH,
     START_PATH
 } from './utils/konstanter';
-import {ActionTypes as SisteStillingActionTypes, annenStilling} from './ducks/siste-stilling';
-import {IngenSvar} from './ducks/svar-utils';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
 import Oppsummering from './sider/oppsummering/oppsummering';
-import {Store} from 'redux';
-import {AppState} from './reducer';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
-import Startside from './sider/start/startside';
+
 
 enzyme.configure({adapter: new Adapter()});
-
-function dispatchAlleSporsmal(store: Store<AppState>) {
-
-    store.dispatch({
-        type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
-        data: { stilling: annenStilling }
-    });
-
-    [
-        SporsmalId.dinSituasjon,
-        SporsmalId.sisteStilling,
-        SporsmalId.utdanning,
-        SporsmalId.utdanningGodkjent,
-        SporsmalId.utdanningBestatt,
-        SporsmalId.helseHinder,
-        SporsmalId.andreForhold,
-    ].forEach(sporsmalId => store.dispatch({
-        type: SvarActionTypes.AVGI_SVAR,
-        data: {
-            sporsmalId,
-            svar: IngenSvar.INGEN_SVAR,
-        }
-    }));
-
-}
-
-function dispatchNoenSporsmal(store: Store<AppState>) {
-
-    store.dispatch({
-        type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
-        data: { stilling: annenStilling }
-    });
-
-    [
-        SporsmalId.utdanning,
-        SporsmalId.utdanningGodkjent,
-        SporsmalId.utdanningBestatt,
-        SporsmalId.helseHinder,
-        SporsmalId.andreForhold,
-    ].forEach(sporsmalId => store.dispatch({
-        type: SvarActionTypes.AVGI_SVAR,
-        data: {
-            sporsmalId,
-            svar: IngenSvar.INGEN_SVAR,
-        }
-    }));
-
-}
 
 describe('Routes', () => {
 

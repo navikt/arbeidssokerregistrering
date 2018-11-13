@@ -11,6 +11,9 @@ import {Data as FeatureStatusData, ActionTypes as FeatureStatusActionTypes } fro
 import IntlProvider from '../Intl-provider';
 import { MemoryRouter } from 'react-router';
 import * as H from 'history';
+import {ActionTypes as SisteStillingActionTypes, annenStilling } from '../ducks/siste-stilling';
+import {ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
+import { IngenSvar } from '../ducks/svar-utils';
 
 export const store = getStore();
 
@@ -142,4 +145,52 @@ export function withResponse(response: {}) {
 
 export function withError(status: number) {
     return new FetchStub().addErrorResponse('_', status);
+}
+
+export function dispatchAlleSporsmal(appStore: Store<AppState>) {
+
+    appStore.dispatch({
+        type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+        data: { stilling: annenStilling }
+    });
+
+    [
+        SporsmalId.dinSituasjon,
+        SporsmalId.sisteStilling,
+        SporsmalId.utdanning,
+        SporsmalId.utdanningGodkjent,
+        SporsmalId.utdanningBestatt,
+        SporsmalId.helseHinder,
+        SporsmalId.andreForhold,
+    ].forEach(sporsmalId => appStore.dispatch({
+        type: SvarActionTypes.AVGI_SVAR,
+        data: {
+            sporsmalId,
+            svar: IngenSvar.INGEN_SVAR,
+        }
+    }));
+
+}
+
+export function dispatchNoenSporsmal(appStore: Store<AppState>) {
+
+    appStore.dispatch({
+        type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+        data: { stilling: annenStilling }
+    });
+
+    [
+        SporsmalId.utdanning,
+        SporsmalId.utdanningGodkjent,
+        SporsmalId.utdanningBestatt,
+        SporsmalId.helseHinder,
+        SporsmalId.andreForhold,
+    ].forEach(sporsmalId => appStore.dispatch({
+        type: SvarActionTypes.AVGI_SVAR,
+        data: {
+            sporsmalId,
+            svar: IngenSvar.INGEN_SVAR,
+        }
+    }));
+
 }
