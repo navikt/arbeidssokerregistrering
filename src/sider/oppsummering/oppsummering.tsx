@@ -67,10 +67,7 @@ class Oppsummering extends React.Component<Props> {
                     === STATUS.OK;
 
                 if (erRegistrert) {
-                    // TODO: Midlertidig fix for å unngå feilmelding fra Innholdslaster
-                    setTimeout(() => {
-                        history.push(DU_ER_NA_REGISTRERT_PATH);
-                    }, 250);
+                    history.push(DU_ER_NA_REGISTRERT_PATH);
                 }
 
             });
