@@ -8,7 +8,7 @@ import {
     TekstKontekst
 } from '../../komponenter/skjema/skjema-utils';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { setInitialState, SporsmalId } from '../../ducks/svar';
+import { endreSvarAction, setInitialState, SporsmalId } from '../../ducks/svar';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
 import { FremtidigSituasjonSvar, hentSvar, Svar } from '../../ducks/svar-utils';
@@ -20,6 +20,7 @@ import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstant
 import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RegistreringType } from '../../ducks/registreringstatus';
+import './inngangssporsmal.less';
 
 interface OwnState {
     visAdvarsel: boolean;
@@ -27,6 +28,7 @@ interface OwnState {
 
 interface DispatchProps {
     resetSvar: () => void;
+    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
 }
 
 type AllProps = DispatchProps & SkjemaProps;
@@ -88,7 +90,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
         const sporsmalId = SporsmalId.fremtidigSituasjon;
         const { intl, endreSvar, svarState } = this.props;
         const advarselElement = this.state.visAdvarsel ? (
-            <NavAlertStripe type="advarsel" className="spm-advarsel">
+            <NavAlertStripe type="advarsel" className="spm-advarsel inngangssporsmal-advarsel">
                 <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
             </NavAlertStripe>) : null;
 
@@ -177,7 +179,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    resetSvar: () => dispatch(setInitialState())
+    resetSvar: () => dispatch(setInitialState()),
+    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Inngangssporsmal));

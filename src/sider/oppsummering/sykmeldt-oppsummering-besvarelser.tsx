@@ -40,11 +40,11 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                     <img
                         src={oppsummeringSvg}
                         alt="Oppsummering sjekkliste"
-                        className="sykmeldt-oppsummering-besvarelser__illustrasjon"
+                        className="sykmeldt-oppsummering-besvarelser--illustrasjon"
                     />
 
-                    <div className="sykmeldt-oppsummering-besvarelser__list-container">
-                        <ul className="sykmeldt-oppsummering-besvarelser__list">
+                    <div className="sykmeldt-oppsummering-besvarelser--list-container">
+                        <ul className="sykmeldt-oppsummering-besvarelser--list">
 
                             <OppsummeringElement
                                 tekstId="sykmeldt-oppsummering-sykmeldt-siden"
@@ -86,10 +86,10 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                         </ul>
                     </div>
 
-                    <hr className="sykmeldt-oppsummering-besvarelser__divider"/>
+                    <hr className="sykmeldt-oppsummering-besvarelser--divider"/>
 
-                    <div className="spm-info">
-                        <span className="spm-info__ikon" aria-label="info">
+                    <div className="sykmeldt-oppsummering-besvarelser--info">
+                        <span className="sykmeldt-oppsummering-besvarelser--info__ikon" aria-label="info">
                             <Ikon kind="info-sirkel" size="1.5em"/>
                         </span>
                             <Normaltekst>
@@ -98,7 +98,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                     </div>
 
                 </div>
-                <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser__egress">
+                <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
                     <FormattedMessage id="sykmeldt-oppsummering-egress"/>
                 </Normaltekst>
             </>
