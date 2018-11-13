@@ -24,7 +24,6 @@ import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering'
 import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver';
 import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver';
 import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
-import SkjemaSykefravaerIngenPasser from './sider/skjema-sykefravaer/skjema-sykefravaer-ingen-passer';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Fullfor from './sider/fullfor/fullfor';
@@ -142,10 +141,6 @@ class Routes extends React.Component<StateProps> {
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
                                     component={SkjemaSykefravaerUsikker}
-                                />
-                                <Route
-                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
-                                    component={SkjemaSykefravaerIngenPasser}
                                 />
                                 <Redirect
                                     to={INNGANGSSPORSMAL_PATH}
