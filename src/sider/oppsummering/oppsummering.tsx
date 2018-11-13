@@ -24,6 +24,7 @@ import {
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import FullforFeilhandtering from '../fullfor/feilhandtering/fullfor-feilhandtering';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
+import { STATUS } from '../../ducks/api-utils';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -61,7 +62,17 @@ class Oppsummering extends React.Component<Props> {
                 svarTilBackend,
                 RegistreringType.SYKMELDT_REGISTRERING
             ).then(() => {
-                history.push(DU_ER_NA_REGISTRERT_PATH);
+
+                const erRegistrert = this.props.state.registrerBruker.status
+                    === STATUS.OK;
+
+                if (erRegistrert) {
+                    // TODO: Midlertidig fix for å unngå feilmelding fra Innholdslaster
+                    setTimeout(() => {
+                        history.push(DU_ER_NA_REGISTRERT_PATH);
+                    }, 250);
+                }
+
             });
 
         } else {
