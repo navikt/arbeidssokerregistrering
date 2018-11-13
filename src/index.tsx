@@ -6,7 +6,7 @@ import App from './app';
 
 import './index.less';
 
-if (process.env.REACT_APP_MOCK === 'true') {
+if (process.env.REACT_APP_MOCK) {
     console.log('=========================='); /*tslint:disable-line:no-console*/
     console.log('======== MED MOCK ========'); /*tslint:disable-line:no-console*/
     console.log('=========================='); /*tslint:disable-line:no-console*/
