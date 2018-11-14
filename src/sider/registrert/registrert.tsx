@@ -1,17 +1,17 @@
 import * as React from 'react';
+import * as classnames from 'classnames';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
 import { erIE } from '../../utils/ie-test';
 import { frontendLogger } from '../../metrikker/metrics-utils';
-
 import handinfoSvg from './clipboard.svg';
-import './registrert.less';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { MatchProps } from '../../utils/utils';
+import './registrert.less';
 
 interface StateProps {
     state: AppState;
@@ -22,8 +22,9 @@ type AllProps = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>
 class DuErNaRegistrert extends React.Component<AllProps> {
 
     render() {
+
         return (
-            <section className={`registrert ${erIE() && 'erIE'}`}>
+            <section className={classnames('registrert', erIE() ? 'erIE' : null)}>
 
                 <div className="registrert__avsjekk">
                     <AvsjekkBilde/>

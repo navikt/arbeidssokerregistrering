@@ -1,7 +1,7 @@
 @import "../../../node_modules/nav-frontend-core/less/_variabler";
 
 .infoside--forste-rad {
-    margin-top: 4rem;
+    margin-top: 5rem;
     padding: 1rem 0;
     background-color: @navLysGra;
 
@@ -12,6 +12,10 @@
     .nav-veilederpanel.nav-veilederpanel--plakat {
         border-color: @navBlaLighten80 !important;
         margin: 2rem 1rem;
+    }
+
+    .nav-veilederpanel__illustrasjon {
+        height: 100%;
     }
 
 }
@@ -48,7 +52,15 @@
 
 }
 
+.infoside--tilbake-lenke {
+    top: -89rem;
+}
+
 @media (min-width: @screen-sm-min) {
+
+    .infoside--tilbake-lenke {
+        top: -58rem;
+    }
 
     .infoside--forste-rad {
         padding: 2rem;

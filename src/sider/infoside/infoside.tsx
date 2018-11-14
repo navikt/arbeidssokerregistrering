@@ -44,9 +44,6 @@ class Infoside extends React.Component<Props> {
 
         return (
             <>
-                <LenkeTilbake
-                    onClick={this.handleTilbakeBtnClick}
-                />
                 <div className="infoside--forste-rad">
 
                     <div className="limit">
@@ -121,7 +118,12 @@ class Infoside extends React.Component<Props> {
 
                     </div>
                 </div>
-
+                <div className="limit">
+                    <LenkeTilbake
+                        className="infoside--tilbake-lenke"
+                        onClick={this.handleTilbakeBtnClick}
+                    />
+                </div>
             </>
 
         );

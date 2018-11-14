@@ -131,10 +131,11 @@ class Routes extends React.Component<StateProps> {
                                     path={INNGANGSSPORSMAL_PATH}
                                     component={Inngangssporsmal}
                                 />
-                                <Route
-                                    path={INFOSIDE_PATH}
-                                    component={Infoside}
-                                />
+                                {klarForFullforing ?
+                                    <Route path={INFOSIDE_PATH} component={Infoside} />
+                                    :
+                                    null
+                                }
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
                                     component={SkjemaSykefravaerSammeArbeidsgiver}
