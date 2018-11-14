@@ -1,9 +1,17 @@
 @import "../../../node_modules/nav-frontend-core/less/_variabler";
 
 .infoside--forste-rad {
-    margin-top: 5rem;
     padding: 1rem 0;
-    background-color: @navLysGra;
+
+    &__bakgrunn {
+        position: absolute;
+        width: 99.6vw;
+        height: 23rem;
+        z-index: -1;
+        background-color: @navLysGra;
+        margin-left: calc(50% - 50vw);
+        margin-top: 1rem;
+    }
 
     .nav-veilederpanel.nav-veilederpanel--kompakt {
         border-color: @navBlaLighten80 !important;
@@ -52,18 +60,27 @@
 
 }
 
-.infoside--tilbake-lenke {
-    top: -89rem;
+@media (min-width: 375px) {
+    .infoside--forste-rad__bakgrunn {
+        height: 21.5rem;
+    }
+}
+
+@media (min-width: 425px) {
+    .infoside--forste-rad__bakgrunn {
+        height: 20rem;
+    }
 }
 
 @media (min-width: @screen-sm-min) {
 
-    .infoside--tilbake-lenke {
-        top: -58rem;
-    }
-
     .infoside--forste-rad {
         padding: 2rem;
+
+        &__bakgrunn {
+            height: 14rem;
+            margin-top: -1rem;
+        }
 
         .nav-veilederpanel.nav-veilederpanel--kompakt {
             margin: 0 auto !important;

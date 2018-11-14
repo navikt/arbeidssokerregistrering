@@ -44,6 +44,7 @@ class Infoside extends React.Component<Props> {
 
         return (
             <>
+                <div className="infoside--forste-rad__bakgrunn"/>
                 <div className="infoside--forste-rad">
                     <Veilederpanel
                         type={veilederpanelType}
