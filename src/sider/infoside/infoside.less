@@ -1,0 +1,121 @@
+@import "../../../node_modules/nav-frontend-core/less/_variabler";
+
+.infoside--forste-rad {
+    margin-top: 5rem;
+    padding: 1rem 0;
+    background-color: @navLysGra;
+
+    .nav-veilederpanel.nav-veilederpanel--kompakt {
+        border-color: @navBlaLighten80 !important;
+    }
+
+    .nav-veilederpanel.nav-veilederpanel--plakat {
+        border-color: @navBlaLighten80 !important;
+        margin: 2rem 1rem;
+    }
+
+    .nav-veilederpanel__illustrasjon {
+        height: 100%;
+    }
+
+}
+
+.infoside--andre-rad {
+    border-radius: 5px;
+    border: 3px solid @navBlaLighten80;
+    margin: 4rem 1rem 5rem 1rem;
+
+    &__container {
+        padding: 2rem;
+    }
+
+    &__divider {
+        border: 2px solid @navBlaLighten80;
+    }
+
+}
+
+.infoside--tredje-rad {
+    margin: 0 1rem;
+
+    &__knapper {
+        display: flex;
+        flex-direction: column;
+
+        .knapp {
+            padding: 0.75rem 0.25rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+    }
+
+}
+
+.infoside--tilbake-lenke {
+    top: -89rem;
+}
+
+@media (min-width: @screen-sm-min) {
+
+    .infoside--tilbake-lenke {
+        top: -58rem;
+    }
+
+    .infoside--forste-rad {
+        padding: 2rem;
+
+        .nav-veilederpanel.nav-veilederpanel--kompakt {
+            margin: 0 auto !important;
+            padding: 2rem 4rem 2rem !important;
+        }
+
+        .nav-veileder.nav-veileder--flytende {
+            top: 1.5rem !important;
+        }
+
+    }
+
+    .infoside--andre-rad {
+        margin: 4rem auto 5rem auto;
+        width: 630px;
+
+        &__container {
+            padding: 3rem 5rem 2rem 5rem;
+        }
+
+        &__tittel {
+            margin-left: 2rem;
+        }
+
+        &__info-viser {
+            margin: 0 3rem;
+        }
+    }
+
+    .infoside--tredje-rad {
+        margin: 0 6rem;
+
+
+        &__knapper {
+            flex-direction: row;
+
+            .knapp {
+                padding: 0.5rem 1rem;
+            }
+
+            :nth-child(odd) {
+                margin-right: 0.5rem;
+                flex-grow: 1;
+            }
+
+            :nth-child(even) {
+                margin-left: 0.5rem;
+                flex-grow: 1;
+            }
+
+        }
+
+    }
+
+}
