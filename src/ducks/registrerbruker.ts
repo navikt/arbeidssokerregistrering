@@ -56,8 +56,6 @@ export interface SykmeldtBesvarelse {
 }
 
 export interface OrdinaerRegistreringData {
-    enigIOppsummering?: boolean;
-    oppsummering?: string;
     sisteStilling?: Stilling;
     besvarelse?: OrdinaerBesvarelse;
     teksterForBesvarelse?: TeksterForBesvarelse;
