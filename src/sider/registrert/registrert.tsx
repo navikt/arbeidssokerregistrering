@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import { VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
 import AvsjekkBilde from './avsjekk-bilde';
@@ -8,8 +8,18 @@ import { frontendLogger } from '../../metrikker/metrics-utils';
 
 import handinfoSvg from './clipboard.svg';
 import './registrert.less';
+import { AppState } from '../../reducer';
+import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
+import { MatchProps } from '../../utils/utils';
 
-class DuErNaRegistrert extends React.Component {
+interface StateProps {
+    state: AppState;
+}
+
+type AllProps = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+
+class DuErNaRegistrert extends React.Component<AllProps> {
 
     render() {
         return (
@@ -61,4 +71,8 @@ class DuErNaRegistrert extends React.Component {
     }
 }
 
-export default DuErNaRegistrert;
+const mapStateToProps = (state: AppState) => ({
+    state: state,
+});
+
+export default connect(mapStateToProps)(injectIntl(DuErNaRegistrert));

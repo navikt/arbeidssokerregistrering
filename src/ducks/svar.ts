@@ -2,7 +2,7 @@ import { Svar } from './svar-utils';
 
 export enum ActionTypes {
     AVGI_SVAR = 'AVGI_SVAR',
-    AVGI_SVAR_RESET = 'AVGI_SVAR_RESET'
+    AVGI_SVAR_RESET = 'AVGI_SVAR_RESET',
 }
 
 export enum SporsmalId {

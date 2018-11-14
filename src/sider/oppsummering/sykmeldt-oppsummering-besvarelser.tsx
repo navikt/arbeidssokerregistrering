@@ -8,6 +8,9 @@ import { ingenYrkesbakgrunn, tomStilling } from '../../ducks/siste-stilling';
 import { FormattedMessage } from 'react-intl';
 import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../../ducks/svar-utils';
 import * as moment from 'moment';
+import Ikon from 'nav-frontend-ikoner-assets';
+import { Normaltekst } from 'nav-frontend-typografi';
+import './sykmeldt-oppsummering-besvarelser.less';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -32,53 +35,74 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
             state.sisteStilling.data.stilling === tomStilling;
 
         return (
-            <div className="oppsummering-besvarelser">
-                <img
-                    src={oppsummeringSvg}
-                    alt="Oppsummering sjekkliste"
-                    className="oppsummering-besvarelser__illustrasjon"
-                />
-                <ul className="oppsummering-besvarelser__list">
-
-                    <OppsummeringElement
-                        tekstId="sykmeldt-oppsummering-sykmeldt-siden"
-                        values={{ dato: sykemeldtSidenDato }}
+            <>
+                <div className="sykmeldt-oppsummering-besvarelser">
+                    <img
+                        src={oppsummeringSvg}
+                        alt="Oppsummering sjekkliste"
+                        className="sykmeldt-oppsummering-besvarelser--illustrasjon"
                     />
 
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.sisteStilling}
-                        tekst={state.sisteStilling.data.stilling.label}
-                        skjul={skjulSisteStilling}
-                    >
-                        <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
-                    </OppsummeringElement>
+                    <div className="sykmeldt-oppsummering-besvarelser--list-container">
+                        <ul className="sykmeldt-oppsummering-besvarelser--list">
 
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.fremtidigSituasjon}
-                    />
+                            <OppsummeringElement
+                                tekstId="sykmeldt-oppsummering-sykmeldt-siden"
+                                values={{ dato: sykemeldtSidenDato }}
+                            />
 
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanning}
-                        skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
-                    >
-                        <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
-                    </OppsummeringElement>
+                            <OppsummeringElement
+                                sporsmalId={SporsmalId.sisteStilling}
+                                tekst={state.sisteStilling.data.stilling.label}
+                                skjul={skjulSisteStilling}
+                            >
+                                <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
+                            </OppsummeringElement>
 
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanningBestatt}
-                        skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
-                    />
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanningGodkjent}
-                        skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
-                    />
+                            <OppsummeringElement
+                                sporsmalId={SporsmalId.fremtidigSituasjon}
+                            />
 
-                    <OppsummeringElement sporsmalId={SporsmalId.helseHinder}/>
+                            <OppsummeringElement
+                                sporsmalId={SporsmalId.utdanning}
+                                skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
+                            >
+                                <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
+                            </OppsummeringElement>
 
-                    <OppsummeringElement sporsmalId={SporsmalId.andreForhold}/>
+                            <OppsummeringElement
+                                sporsmalId={SporsmalId.utdanningBestatt}
+                                skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
+                            />
+                            <OppsummeringElement
+                                sporsmalId={SporsmalId.utdanningGodkjent}
+                                skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
+                            />
 
-                </ul>
-            </div>
+                            <OppsummeringElement sporsmalId={SporsmalId.helseHinder}/>
+
+                            <OppsummeringElement sporsmalId={SporsmalId.andreForhold}/>
+
+                        </ul>
+                    </div>
+
+                    <hr className="sykmeldt-oppsummering-besvarelser--divider"/>
+
+                    <div className="sykmeldt-oppsummering-besvarelser--info">
+                        <span className="sykmeldt-oppsummering-besvarelser--info__ikon" aria-label="info">
+                            <Ikon kind="info-sirkel" size="1.5em"/>
+                        </span>
+                            <Normaltekst>
+                                <FormattedMessage id="sykmeldt-oppsummering-besvarelser-info"/>
+                            </Normaltekst>
+                    </div>
+
+                </div>
+                <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
+                    <FormattedMessage id="sykmeldt-oppsummering-egress"/>
+                </Normaltekst>
+            </>
+
         );
     }
 
