@@ -46,7 +46,7 @@ class SkjemaSykefravaerNyArbeidsgiver extends React.Component<Props> {
         return (
             <Skjema
                 config={skjemaFlytNyArbeidsgiver}
-                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/1`}
+                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/2`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
