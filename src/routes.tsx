@@ -9,7 +9,7 @@ import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
-    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH, INFOSIDE_PATH,
     INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
@@ -19,6 +19,7 @@ import {
     START_PATH
 } from './utils/konstanter';
 import Startside from './sider/start/startside';
+import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
 import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver';
@@ -130,13 +131,18 @@ class Routes extends React.Component<StateProps> {
                                     path={INNGANGSSPORSMAL_PATH}
                                     component={Inngangssporsmal}
                                 />
+                                {klarForFullforing ?
+                                    <Route path={INFOSIDE_PATH} component={Infoside} />
+                                    :
+                                    null
+                                }
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                                    component={SkjemaSykefravaerNyArbeidsgiver}
+                                    component={SkjemaSykefravaerSammeArbeidsgiver}
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
-                                    component={SkjemaSykefravaerSammeArbeidsgiver}
+                                    component={SkjemaSykefravaerNyArbeidsgiver}
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
