@@ -1,16 +1,15 @@
 import {
-    FULLFOR_PATH,
-    SKJEMA_PATH,
-    OPPSUMMERING_PATH,
     DU_ER_NA_REGISTRERT_PATH,
-    SKJEMA_SYKEFRAVAER_PATH, INNGANGSSPORSMAL_PATH
-} from '../../utils/konstanter';
-
-const etterSporsmalConfig: string[] = [
-    OPPSUMMERING_PATH,
     FULLFOR_PATH,
-    DU_ER_NA_REGISTRERT_PATH
-];
+    INFOSIDE_PATH,
+    INNGANGSSPORSMAL_PATH,
+    OPPSUMMERING_PATH,
+    SKJEMA_PATH,
+    SKJEMA_SYKEFRAVAER_PATH
+} from '../../utils/konstanter';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
+import { RegistreringType } from '../../ducks/registreringstatus';
+import { FremtidigSituasjonSvar, hentSvar } from '../../ducks/svar-utils';
 
 const registreringConfig: string[] = [
     `${SKJEMA_PATH}/0`,
@@ -20,52 +19,81 @@ const registreringConfig: string[] = [
     `${SKJEMA_PATH}/4`,
     `${SKJEMA_PATH}/5`,
     `${SKJEMA_PATH}/6`,
-    ...etterSporsmalConfig
+    OPPSUMMERING_PATH,
+    FULLFOR_PATH,
+    DU_ER_NA_REGISTRERT_PATH
 ];
 
-const nyArbeidsgiverConfig: string[] = lagConfigForSykefravaerLop(1, 5);
+const tilbakeTilSammeJobbConfig: string[] = [
+    INNGANGSSPORSMAL_PATH,
+    `${SKJEMA_SYKEFRAVAER_PATH}/1/0`,
+    INFOSIDE_PATH,
+    OPPSUMMERING_PATH,
+    DU_ER_NA_REGISTRERT_PATH
+];
 
-const sammeArbeidsgiverConfig: string[] = lagConfigForSykefravaerLop(2, 2);
+const trengerNyJobbConfig: string[] = [
+    INNGANGSSPORSMAL_PATH,
+    `${SKJEMA_SYKEFRAVAER_PATH}/2/0`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/2/1`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/2/2`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/2/3`,
+    OPPSUMMERING_PATH,
+    DU_ER_NA_REGISTRERT_PATH
+];
 
-const usikkerConfig: string[] = lagConfigForSykefravaerLop(3, 5);
+const usikkerConfig: string[] = [
+    INNGANGSSPORSMAL_PATH,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/0`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/1`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/2`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/3`,
+    OPPSUMMERING_PATH,
+    DU_ER_NA_REGISTRERT_PATH
+];
 
-const ingenPasserConfig: string[] = lagConfigForSykefravaerLop(4, 5);
+const ingenPasserConfig: string[] = [
+    INNGANGSSPORSMAL_PATH,
+    OPPSUMMERING_PATH,
+    DU_ER_NA_REGISTRERT_PATH
+];
 
-function lagConfigForSykefravaerLop(lop: number, sporsmal: number): string[] {
-    const config: string[] = [];
+export function finnRiktigConfig(pathname: string, svar: SvarState, registreringType?: RegistreringType):
+    string[] | null {
 
-    config.push(INNGANGSSPORSMAL_PATH);
+    const fremtidigSituasjonSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
+    let config;
 
-    for (let i = 0; i <= sporsmal; i++) {
-        config.push(`${SKJEMA_SYKEFRAVAER_PATH}/${lop}/${i}`);
+    if (!registreringType || registreringType === RegistreringType.ORDINAER_REGISTRERING) {
+        config = registreringConfig;
+    } else if (!fremtidigSituasjonSvar && pathname === INNGANGSSPORSMAL_PATH) {
+        // Har ikke så mye å si hvilken config som blir brukt siden brukeren ikke har valgt et løp enda
+        config = tilbakeTilSammeJobbConfig;
     }
 
-    config.push(...etterSporsmalConfig);
-
-    return config;
-}
-
-export function finnRiktigConfig(pathName: string): string[] {
-
-    if (registreringConfig.includes(pathName)) {
-        return registreringConfig;
+    if (!config) {
+        switch (fremtidigSituasjonSvar) {
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER:
+                config = tilbakeTilSammeJobbConfig;
+                break;
+            case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
+                config = trengerNyJobbConfig;
+                break;
+            case FremtidigSituasjonSvar.USIKKER:
+                config = usikkerConfig;
+                break;
+            case FremtidigSituasjonSvar.INGEN_PASSER:
+                config = ingenPasserConfig;
+                break;
+            default:
+                config = [];
+        }
     }
 
-    if (nyArbeidsgiverConfig.includes(pathName)) {
-        return nyArbeidsgiverConfig;
+    if (config.includes(pathname)) {
+        return config;
+    } else {
+        return null;
     }
 
-    if (sammeArbeidsgiverConfig.includes(pathName)) {
-        return sammeArbeidsgiverConfig;
-    }
-
-    if (usikkerConfig.includes(pathName)) {
-        return usikkerConfig;
-    }
-
-    if (ingenPasserConfig.includes(pathName)) {
-        return ingenPasserConfig;
-    }
-
-    return [];
 }

@@ -1,8 +1,9 @@
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
-import { DinSituasjonSvar, hentSvar, IngenSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
+import { DinSituasjonSvar, hentSvar, IngenSvar, Svar, TilbakeIArbeidSvar, UtdanningSvar } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
 import {Props as SkjemaProps } from './skjema';
 import { RegistreringType } from '../../ducks/registreringstatus';
+import { INFOSIDE_PATH } from '../../utils/konstanter';
 
 export const INGEN_NESTE_SPORSMAL = -1;
 
@@ -127,6 +128,13 @@ export function finnNesteHref(props: SkjemaProps): string {
     const nesteSporsmalPlassering = finnNesteSporsmalPlassering(props);
 
     if (nesteSporsmalPlassering === INGEN_NESTE_SPORSMAL) {
+
+        const tilbakeIArbeidSvar = hentSvar(props.svarState, SporsmalId.tilbakeIArbeid);
+
+        if (tilbakeIArbeidSvar && tilbakeIArbeidSvar === TilbakeIArbeidSvar.JA_FULL_STILLING) {
+            return INFOSIDE_PATH;
+        }
+
         return props.endUrl;
     }
 
