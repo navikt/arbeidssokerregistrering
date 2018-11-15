@@ -12,9 +12,10 @@ import {
     UtdanningSvar
 } from "../ducks/svar-utils";
 import {mapAvgitteSvarForBackend, mapTilBesvarelse, mapTilSvarState} from "../ducks/registrerbruker-utils";
-import { InjectedIntl } from 'react-intl';
-import {RegistreringBesvarelse, TeksterForBesvarelse} from "./registrerbruker";
+import {InjectedIntl} from 'react-intl';
+import {OrdinaerBesvarelse, TeksterForBesvarelse} from "./registrerbruker";
 import {SporsmalId} from "./svar";
+import {RegistreringType} from "./registreringstatus";
 
 const svarState: SvarState = [
     {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
@@ -26,7 +27,7 @@ const svarState: SvarState = [
     {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
 ];
 
-const besvarelse: RegistreringBesvarelse = {
+const besvarelse: OrdinaerBesvarelse = {
     dinSituasjon: DinSituasjonSvar.ER_PERMITTERT,
     sisteStilling: SisteStillingSvar.HAR_HATT_JOBB,
     utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
@@ -108,12 +109,10 @@ describe('utils test', () => {
 
         const expectData = {
             sisteStilling: stilling,
-            enigIOppsummering: true,
-            oppsummering: '',
             besvarelse: mapTilBesvarelse(dummySvar),
             teksterForBesvarelse: expectedTekster,
         };
-        const mappet = mapAvgitteSvarForBackend(dummySvar, stilling, dummyIntl);
+        const mappet = mapAvgitteSvarForBackend(dummySvar, stilling, dummyIntl, RegistreringType.ORDINAER_REGISTRERING);
         expect(mappet).to.deep.equal(expectData);
     });
 

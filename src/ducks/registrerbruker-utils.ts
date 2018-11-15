@@ -32,9 +32,7 @@ export function mapAvgitteSvarForBackend(
     } else {
 
         return {
-            enigIOppsummering: true,
             sisteStilling: sisteStilling,
-            oppsummering: '', // TODO Dette tas i senere oppgave. Trenger kanskje oppklaring.
             besvarelse,
             teksterForBesvarelse
         };
