@@ -15,10 +15,10 @@ class InfoViser extends React.Component<InfoViserProps> {
     render() {
         return (
             <div className={classnames('info-viser', this.props.className)}>
-                <span className="info-viser__ikon" aria-label="info">
+                <span className="info-viser--ikon" aria-label="info">
                     <Ikon kind="info-sirkel" size="1.5em"/>
                 </span>
-                <Normaltekst>
+                <Normaltekst className="info-viser--kursiv">
                     <FormattedMessage id={this.props.tekstId}/>
                 </Normaltekst>
             </div>
