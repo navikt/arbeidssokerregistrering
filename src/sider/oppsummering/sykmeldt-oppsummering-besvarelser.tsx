@@ -8,9 +8,9 @@ import { ingenYrkesbakgrunn, tomStilling } from '../../ducks/siste-stilling';
 import { FormattedMessage } from 'react-intl';
 import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../../ducks/svar-utils';
 import * as moment from 'moment';
-import Ikon from 'nav-frontend-ikoner-assets';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
+import InfoViser from '../../komponenter/info-viser/info-viser';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -87,16 +87,10 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                     </div>
 
                     <hr className="sykmeldt-oppsummering-besvarelser--divider"/>
-
-                    <div className="sykmeldt-oppsummering-besvarelser--info">
-                        <span className="sykmeldt-oppsummering-besvarelser--info__ikon" aria-label="info">
-                            <Ikon kind="info-sirkel" size="1.5em"/>
-                        </span>
-                            <Normaltekst>
-                                <FormattedMessage id="sykmeldt-oppsummering-besvarelser-info"/>
-                            </Normaltekst>
-                    </div>
-
+                    <InfoViser
+                        tekstId="sykmeldt-oppsummering-besvarelser-info"
+                        className="sykmeldt-oppsummering-besvarelser--info-viser"
+                    />
                 </div>
                 <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
                     <FormattedMessage id="sykmeldt-oppsummering-egress"/>
