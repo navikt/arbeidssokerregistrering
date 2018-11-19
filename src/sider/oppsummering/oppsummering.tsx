@@ -6,7 +6,7 @@ import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
-import { DU_ER_NA_REGISTRERT_PATH, FULLFOR_PATH } from '../../utils/konstanter';
+import { FULLFOR_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
@@ -25,6 +25,7 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import FullforFeilhandtering from '../fullfor/feilhandtering/fullfor-feilhandtering';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import { STATUS } from '../../ducks/api-utils';
+import { VEIENTILARBEID_URL } from '../../ducks/api';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -67,7 +68,7 @@ class Oppsummering extends React.Component<Props> {
                     === STATUS.OK;
 
                 if (erRegistrert) {
-                    history.push(DU_ER_NA_REGISTRERT_PATH);
+                    window.location.href = VEIENTILARBEID_URL;
                 }
 
             });
