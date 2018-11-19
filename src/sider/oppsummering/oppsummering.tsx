@@ -25,7 +25,7 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import FullforFeilhandtering from '../fullfor/feilhandtering/fullfor-feilhandtering';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import { STATUS } from '../../ducks/api-utils';
-import { VEIENTILARBEID_URL } from '../../ducks/api';
+import { VEIENTILARBEID_SYKMELDT_REGISTRERT_URL } from '../../ducks/api';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -68,7 +68,7 @@ class Oppsummering extends React.Component<Props> {
                     === STATUS.OK;
 
                 if (erRegistrert) {
-                    window.location.href = VEIENTILARBEID_URL;
+                    window.location.href = VEIENTILARBEID_SYKMELDT_REGISTRERT_URL;
                 }
 
             });
