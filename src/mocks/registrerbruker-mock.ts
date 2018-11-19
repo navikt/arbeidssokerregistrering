@@ -20,9 +20,12 @@ export const ordinaerRegistreringRespons = {
 
 };
 
-export const sykmeldtRegistreringRespons = {
-
+export const ordinaerRegistreringFeilrespons = {
+    'id': 'fa5ec8e51366d8b9722bb564f2534e7e',
+    'type': 'BRUKER_MANGLER_ARBEIDSTILLATELSE',
 };
+
+export const sykmeldtRegistreringRespons = {};
 
 export const registreringFeilrespons = {
     'id': 'fa5ec8e51366d8b9722bb564f2534e7e',

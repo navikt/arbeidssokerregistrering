@@ -1,47 +1,26 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
 
 .info-for-ikke-arbeidssoker {
-    margin-top: 3rem;
+    padding-top: 3rem;
 
-    .info-boks {
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
-
+    .nav-veilederpanel {
         margin: 5rem 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         border: 3px solid @navOransjeLighten60;
-        border-radius: 5px;
 
-        &--bilde {
-            width: 80px;
-            margin: 0 auto 2rem auto;
+        .nav-veileder__frame img, .nav-veileder__frame svg {
+            height: 100%;
         }
-
     }
-
 }
 
 @media (min-width: @screen-sm-min) {
     .info-for-ikke-arbeidssoker {
-
-         .info-boks {
-             flex-direction: row;
-             max-width: 680px;
-             margin: 6rem auto 0 auto;
-             padding: 2rem;
-
-             &--bilde {
-                 width: initial;
-                 margin: 0;
-             }
-
-             &--innhold {
-                 border-left: 1px solid @navGra40;
-                 margin-left: 2rem;
-                 padding-left: 2rem;
-             }
-
-         }
+        .nav-veilederpanel {
+            max-width: 630px;
+            margin: 6rem auto 0 auto;
+            padding: 5rem 8rem 3rem;
+        }
     }
 }
-

@@ -16,19 +16,17 @@ export default function Feilhandtering(props: Props & InjectedIntlProps) {
                 return (
                     <FeilmeldingBrukersStatusUgyldig
                         feilType={FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE}
-                        intl={props.intl}
                     />);
             }
             case (FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET): {
                 return (
                     <FeilmeldingBrukersStatusUgyldig
                         feilType={FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET}
-                        intl={props.intl}
                     />);
             }
             case (FullforErrorTypes.BRUKER_ER_UKJENT):
             case (FullforErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES): {
-                return (<FeilmeldingBrukersStatusUgyldig feilType={''} intl={props.intl}/>);
+                return (<FeilmeldingBrukersStatusUgyldig feilType={errorData.data.type} />);
             }
             default: {
                 return (<FeilmeldingGenerell />);

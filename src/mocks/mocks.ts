@@ -7,7 +7,10 @@ import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg
 import {featureTogglesMock} from "./feature-toggles-mock";
 import {FEATURE_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
 import autentisert from './autentiseringsinfo-mock';
-import { ordinaerRegistreringRespons, sykmeldtRegistreringRespons } from "./registrerbruker-mock";
+import {
+    ordinaerRegistreringRespons,
+    sykmeldtRegistreringRespons
+} from "./registrerbruker-mock";
 import getStore from "../store";
 import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
 import svarMock from "./svar-mock";
@@ -80,7 +83,7 @@ if(MOCK_STYRK08_PAMJANZZ) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    const ordinaerRespons = respondWith(delayed(DELAY, ordinaerRegistreringRespons, 200));
+    const ordinaerRespons = respondWith(delayed(DELAY, ordinaerRegistreringRespons, 403));
     const sykmeldtRespons = respondWith(delayed(DELAY, sykmeldtRegistreringRespons, 200));
 
     (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, ordinaerRespons);
