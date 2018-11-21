@@ -20,7 +20,6 @@ import {
     REAKTIVERING_PATH,
     START_PATH
 } from './utils/konstanter';
-import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
@@ -164,32 +163,6 @@ describe('Routes', () => {
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [DU_ER_NA_REGISTRERT_PATH]);
 
         expect(wrapper.find({ to: START_PATH })).to.have.length(1);
-
-    });
-
-    it('Skal sende bruker til sbl om den ikke er under oppfølging og ny-registrering er avskrudd', () => {
-
-        const store = create();
-        dispatchRegistreringstatus({ registreringType: RegistreringType.ORDINAER_REGISTRERING }, store);
-
-        dispatchFeaturestatus({
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': false,
-        }, store);
-
-        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
-        expect(wrapper.find(SblRegistrering)).to.have.length(1);
-
-    });
-
-    it('Skal ikke sende bruker til sbl om feature for ny-registrering er påskrudd', () => {
-        const store = create();
-        dispatchFeaturestatus({
-            'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
-        }, store);
-
-        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store);
-
-        expect(wrapper.find(SblRegistrering)).to.have.length(0);
 
     });
 
