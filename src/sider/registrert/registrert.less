@@ -82,12 +82,14 @@
 }
 
 .registrert {
+    margin: 0 1rem;
 
     &__avsjekk {
         position: absolute;
         left: ~'calc((100% - 159px) / 2)';
         top: ~'calc((90% - 159px) / 2)';
         animation: avsjekk-plassering-mobil 5s both;
+        margin: 1rem 0 0 1rem;
     }
 
     &__tittel {
@@ -132,6 +134,11 @@
 
         &__avsjekk {
             animation: avsjekk-plassering 5s both;
+
+            &-sykmeldt {
+                margin-left: 5rem;
+            }
+
         }
 
         &__tittel {
