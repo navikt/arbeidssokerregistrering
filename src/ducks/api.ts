@@ -8,6 +8,7 @@ export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const SBLARBEID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/endreCv';
 export const VEIENTILARBEID_URL = '/veientilarbeid/';
 export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjonsmodul=true&visdagpenger=true';
+export const VEIENTILARBEID_MED_AAP_URL = '/veientilarbeid/?visAap=true';
 export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
