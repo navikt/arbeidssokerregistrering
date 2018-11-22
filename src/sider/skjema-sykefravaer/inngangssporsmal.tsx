@@ -122,6 +122,10 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                         <div className="spm-body">
                             <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
+                            <Alternativ
+                                svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
+                                {...alternativProps}
+                            />
                             <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
                         </div>
@@ -161,6 +165,9 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                     break;
                 case FremtidigSituasjonSvar.USIKKER:
                     lop = 3;
+                    break;
+                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
+                    lop = 1;
                     break;
                 default:
                     lop = 0;
