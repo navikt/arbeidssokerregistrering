@@ -13,7 +13,6 @@ import {
     INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
-    SBLREG_PATH,
     SKJEMA_PATH,
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
@@ -26,11 +25,9 @@ import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-s
 import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver';
 import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
 import Oppsummering from './sider/oppsummering/oppsummering';
-import SblRegistrering from './sider/sbl-registrering/sbl-registrering';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
-import { selectGradualRolloutNyRegistreringFeatureToggle } from './ducks/feature-toggles';
 import { connect } from 'react-redux';
 import {
     Data as RegistreringstatusData,
@@ -46,22 +43,11 @@ import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
-    gradualRolloutNyRegistrering: boolean;
     reaktivertStatus: string;
     state: AppState;
 }
 
 class Routes extends React.Component<StateProps> {
-
-    beregnBrukNyRegistrering(): boolean {
-        const { gradualRolloutNyRegistrering, registreringstatusData } = this.props;
-
-        if (registreringstatusData.registreringType === RegistreringType.SPERRET) {
-            return false;
-        }
-
-        return gradualRolloutNyRegistrering;
-    }
 
     render() {
 
@@ -70,19 +56,13 @@ class Routes extends React.Component<StateProps> {
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
-        } else if (!this.beregnBrukNyRegistrering()) {
-
-            if (registreringType === RegistreringType.SPERRET) {
-                return (
-                    <RedirectAll
-                        to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH}
-                        component={InfoForIkkeArbeidssokerUtenOppfolging}
-                    />
-                );
-            } else {
-                return <RedirectAll to={SBLREG_PATH} component={SblRegistrering} />;
-            }
-
+        } else if (registreringType === RegistreringType.SPERRET) {
+            return (
+                <RedirectAll
+                    to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH}
+                    component={InfoForIkkeArbeidssokerUtenOppfolging}
+                />
+            );
         } else if (registreringType === RegistreringType.REAKTIVERING &&
             reaktivertStatus !== STATUS.OK) {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
@@ -164,7 +144,6 @@ class Routes extends React.Component<StateProps> {
 
 const mapStateToProps = (state: AppState) => ({
     registreringstatusData: selectRegistreringstatus(state).data,
-    gradualRolloutNyRegistrering: selectGradualRolloutNyRegistreringFeatureToggle(state),
     reaktivertStatus: selectReaktiveringStatus(state),
     state: state,
 });
