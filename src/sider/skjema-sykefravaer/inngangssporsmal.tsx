@@ -163,11 +163,11 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                 case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
                     lop = 2;
                     break;
-                case FremtidigSituasjonSvar.USIKKER:
+                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
                     lop = 3;
                     break;
-                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
-                    lop = 1;
+                case FremtidigSituasjonSvar.USIKKER:
+                    lop = 4;
                     break;
                 default:
                     lop = 0;
