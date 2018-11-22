@@ -34,7 +34,7 @@ const tilbakeTilSammeJobbConfig: string[] = [
 
 const tilbakeTilSammeJobbNyStillingConfig: string[] = [
     INNGANGSSPORSMAL_PATH,
-    `${SKJEMA_SYKEFRAVAER_PATH}/4/0`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/0`,
     INFOSIDE_PATH,
     OPPSUMMERING_PATH,
     DU_ER_NA_REGISTRERT_PATH
