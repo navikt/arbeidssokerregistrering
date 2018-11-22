@@ -17,7 +17,6 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import StepUp from './stepup';
 import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
-import {Data as FeatureTogglesData, hentFeatureToggles, selectFeatureToggles } from '../../ducks/feature-toggles';
 import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 
@@ -25,14 +24,12 @@ interface StateProps {
     brukersNavn: BrukersNavnState;
     autentiseringsinfo: AuthState;
     registreringstatus: RegistreringstatusState;
-    featureToggles: FeatureTogglesData;
 }
 
 interface DispatchProps {
     hentBrukersNavn: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
     hentRegistreringStatus: () => void;
-    hentFeatureToggles: () => Promise<void | {}>;
 }
 
 type Props = StateProps & DispatchProps;
@@ -40,19 +37,17 @@ type Props = StateProps & DispatchProps;
 export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
 
-        this.props.hentFeatureToggles().then(() => {
-            this.props.hentAutentiseringsInfo().then((res) => {
-                if ((res as AuthData).nivaOidc === 4) {
-                    this.props.hentRegistreringStatus();
-                    this.props.hentBrukersNavn();
-                }
-            });
+        this.props.hentAutentiseringsInfo().then((res) => {
+            if ((res as AuthData).nivaOidc === 4) {
+                this.props.hentRegistreringStatus();
+                this.props.hentBrukersNavn();
+            }
         });
     }
 
     render() {
-        const { children, registreringstatus, autentiseringsinfo, brukersNavn } = this.props;
-        const { niva, nivaOidc } = autentiseringsinfo.data;
+        const {children, registreringstatus, autentiseringsinfo, brukersNavn} = this.props;
+        const {niva, nivaOidc} = autentiseringsinfo.data;
 
         if (autentiseringsinfo.status === STATUS.OK) {
             if (niva === 4 && nivaOidc !== 4) {
@@ -68,7 +63,7 @@ export class HentInitialData extends React.Component<Props> {
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<FeilmeldingGenerell />}
+                feilmeldingKomponent={<FeilmeldingGenerell/>}
                 avhengigheter={[
                     registreringstatus,
                     brukersNavn,
@@ -79,22 +74,20 @@ export class HentInitialData extends React.Component<Props> {
             >
                 {children}
             </Innholdslaster>
-    );
+        );
     }
 }
 
 const mapStateToProps = (state) => ({
     autentiseringsinfo: selectAutentiseringsinfo(state),
-    brukersNavn:  selectBrukersNavn(state),
+    brukersNavn: selectBrukersNavn(state),
     registreringstatus: selectRegistreringstatus(state),
-    featureToggles: selectFeatureToggles(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentBrukersNavn: () => dispatch(hentBrukersNavn()),
-    hentAutentiseringsInfo:  () => dispatch(hentAutentiseringsInfo()),
+    hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
     hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
-    hentFeatureToggles: () => dispatch(hentFeatureToggles()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HentInitialData);
