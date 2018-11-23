@@ -12,7 +12,7 @@ export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
-export const FEATURE_URL = '/feature';
+export const FEATURE_URL = '/arbeidssokerregistrering/api/feature';
 export const DITT_NAV_URL = '/dittnav';
 export const DITT_SYKEFRAVAER_URL = '/sykefravaer';
 
