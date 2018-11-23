@@ -8,7 +8,7 @@ createTestCafe('localhost', 1337, 1338)
 
         return runner
             .startApp("cross-env PORT=4001 REACT_APP_MOCK_BES=true REACT_APP_MOCK=true npm start", 10000)
-            .src(['integration/registrering.test.ts'])
+            .src(['integration/registrering.test.ts', 'integration/uu.test.ts'])
             .browsers(['chrome:headless'])
             .screenshots('./integration/screenshots/', true, '${BROWSER}_${TEST}.png')
             .run();
