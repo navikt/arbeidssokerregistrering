@@ -30,5 +30,7 @@ fasitResources:
     resourceType: baseUrl
   - alias: appdynamics
     resourceType: applicationproperties
+  - alias: loadbalancer:arbeidssokerregistrering
+    resourceType: loadbalancerconfig
 alertProfiles:
   - common-java-modules
