@@ -10,10 +10,8 @@ healthcheck:
   liveness:
     path: arbeidssokerregistrering/internal/isAlive
   readiness:
-    path: arbeidssokerregistrering/internal/selftest
-  readiness:
-    path: arbeidssokerregistrering/index.html
-    initialDelay: 20
+    path: arbeidssokerregistrering/internal/isReady
+    initialDelay: 15
 prometheus:
   # NB: pus-decorator sine metrikker
   enabled: true
