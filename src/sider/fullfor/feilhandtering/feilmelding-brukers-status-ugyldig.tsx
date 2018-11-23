@@ -1,56 +1,66 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, InjectedIntl, injectIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import ResponsivSide from '../../../komponenter/side/responsiv-side';
 import Feilmelding from '../../../komponenter/feilmelding/feilmelding';
 import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
-
 import './feilmelding-brukers-status-ugyldig.less';
+import FeilmeldingManglerArbeidstillatelse
+    from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
 
-interface IntlPropsWithFeilType extends InjectedIntlProps {
-    feilType: string;
+interface FeilmeldingBrukersStatusUgyldigProps {
+    feilType: FullforErrorTypes;
 }
 
-class FeilmeldingBrukersStatusUgyldig extends React.Component<IntlPropsWithFeilType> {
-    intl: ReactIntl.InjectedIntl;
-    feilType: string;
-    private messageKey: string;
-    constructor(props: IntlPropsWithFeilType) {
-        super (props);
-        this.feilType = props.feilType;
+type AllProps = InjectedIntlProps & FeilmeldingBrukersStatusUgyldigProps;
+
+class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
+
+    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl) {
+
+        const { messages } = intl;
+        let feilmelding;
+
+        if (feilType === FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE) {
+            feilmelding = <FeilmeldingManglerArbeidstillatelse intl={this.props.intl} />;
+        } else {
+
+            let messageKey;
+
+            if (feilType === FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET) {
+                messageKey = 'feilhandtering-utvandret-overtekst';
+            } else {
+                messageKey = 'feilhandtering-overtekst';
+            }
+
+            feilmelding = (
+                <Feilmelding>
+                    <div>
+                        <Normaltekst className="blokk-s">
+                            {messages[messageKey]}
+                        </Normaltekst>
+                        <Normaltekst>
+                            <span dangerouslySetInnerHTML={{__html: messages['feilhandtering-undertekst']}}/>
+                        </Normaltekst>
+                    </div>
+                </Feilmelding>
+            );
+
+        }
+
+        return feilmelding;
     }
 
     render() {
-        const messages = this.props.intl.messages;
-        switch (this.feilType) {
-            case (FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE): {
-                this.messageKey = 'feilhandtering-mangler-arb-tillatelse-overtekst';
-                break;
-            }
-            case (FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET): {
-                this.messageKey = 'feilhandtering-utvandret-overtekst';
-                break;
-            }
-            default: {
-                this.messageKey = 'feilhandtering-overtekst';
-            }
-        }
+
+        const { feilType, intl } = this.props;
+        const feilmelding = this.lagFeilmelding(feilType, intl);
+
         return (
-            <ResponsivSide>
-                <div className="feilhandtering">
-                    <Feilmelding>
-                        <div>
-                            <Normaltekst className="blokk-s">
-                                {messages[this.messageKey]}
-                            </Normaltekst>
-                            <Normaltekst>
-                                <span dangerouslySetInnerHTML={{__html: messages['feilhandtering-undertekst']}}/>
-                            </Normaltekst>
-                        </div>
-                    </Feilmelding>
-                </div>
-            </ResponsivSide>
+            <div className="feilhandtering">
+                {feilmelding}
+            </div>
         );
+
     }
 }
 
