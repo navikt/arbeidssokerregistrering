@@ -23,6 +23,8 @@ import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering'
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
 import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver';
 import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver';
+import SkjemaSykefravaerSammeArbeidsgiverNyStilling
+    from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver-ny-stilling';
 import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import Fullfor from './sider/fullfor/fullfor';
@@ -126,6 +128,10 @@ class Routes extends React.Component<StateProps> {
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
+                                    component={SkjemaSykefravaerSammeArbeidsgiverNyStilling}
+                                />
+                                <Route
+                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
                                     component={SkjemaSykefravaerUsikker}
                                 />
                                 <Redirect

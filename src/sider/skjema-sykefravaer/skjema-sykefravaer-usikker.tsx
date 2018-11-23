@@ -46,7 +46,7 @@ class SkjemaSykefravaerUsikker extends React.Component<Props> {
         return (
             <Skjema
                 config={skjemaFlytUsikker}
-                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/3`}
+                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/4`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
