@@ -7,7 +7,7 @@ import {
     kanGaaTilNeste,
     TekstKontekst
 } from '../../komponenter/skjema/skjema-utils';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { endreSvarAction, setInitialState, SporsmalId } from '../../ducks/svar';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
@@ -115,9 +115,6 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                             <Innholdstittel tag="h1" className="spm-tittel">
                                 {getTekst('tittel')}
                             </Innholdstittel>
-                            <Normaltekst className="spm-ingress">
-                                {getTekst('ingress')}
-                            </Normaltekst>
                         </legend>
                         <div className="spm-body">
                             <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
