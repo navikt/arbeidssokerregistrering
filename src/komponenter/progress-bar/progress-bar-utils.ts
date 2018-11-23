@@ -32,6 +32,14 @@ const tilbakeTilSammeJobbConfig: string[] = [
     DU_ER_NA_REGISTRERT_PATH
 ];
 
+const tilbakeTilSammeJobbNyStillingConfig: string[] = [
+    INNGANGSSPORSMAL_PATH,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/0`,
+    INFOSIDE_PATH,
+    OPPSUMMERING_PATH,
+    DU_ER_NA_REGISTRERT_PATH
+];
+
 const trengerNyJobbConfig: string[] = [
     INNGANGSSPORSMAL_PATH,
     `${SKJEMA_SYKEFRAVAER_PATH}/2/0`,
@@ -81,6 +89,9 @@ export function finnRiktigConfig(pathname: string, svar: SvarState, registrering
                 break;
             case FremtidigSituasjonSvar.USIKKER:
                 config = usikkerConfig;
+                break;
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
+                config = tilbakeTilSammeJobbNyStillingConfig;
                 break;
             case FremtidigSituasjonSvar.INGEN_PASSER:
                 config = ingenPasserConfig;
