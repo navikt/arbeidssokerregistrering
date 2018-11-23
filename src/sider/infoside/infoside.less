@@ -46,6 +46,10 @@
 .infoside--tredje-rad {
     margin: 0 1rem 2rem 1rem;
 
+    &__tittel {
+        text-align: center;
+    }
+
     &__knapper {
         display: flex;
         flex-direction: column;
@@ -111,7 +115,7 @@
     }
 
     .infoside--tredje-rad {
-        margin: 0 6rem 3rem 6rem;
+        margin: 0 4rem 3rem 4rem;
 
         &__knapper {
             flex-direction: row;
@@ -120,12 +124,11 @@
                 padding: 0.5rem 1rem;
             }
 
-            :nth-child(odd) {
+            & > :nth-child(odd) {
                 margin-right: 0.5rem;
-                flex-grow: 1;
             }
 
-            :nth-child(even) {
+            & > :nth-child(even) {
                 margin-left: 0.5rem;
                 flex-grow: 1;
             }

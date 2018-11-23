@@ -1,18 +1,28 @@
 import * as React from 'react';
-
+import * as classnames from 'classnames';
 import navAnsattSvg from './nav-ansatt.svg';
 import './feilmelding.less';
 
-class Feilmelding extends React.Component {
+interface FeilmeldingProps {
+    bilde?: any; // tslint:disable-line
+    className?: string;
+}
+
+class Feilmelding extends React.Component<FeilmeldingProps> {
     render() {
+
+        const { className, bilde } = this.props;
+        const feilmeldingBilde = bilde ? bilde : navAnsattSvg;
+
         return (
-            <div className="feilmelding">
-                <img src={navAnsattSvg} className="feilmelding__ikon" alt="NAV-ansatt"/>
+            <div className={classnames('feilmelding', className)}>
+                <img src={feilmeldingBilde} className="feilmelding__ikon" alt={!bilde ? 'NAV-ansatt' : ''}/>
                 <div className="feilmelding__innhold">
                     {this.props.children}
                 </div>
             </div>
         );
+
     }
 }
 

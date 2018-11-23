@@ -1,0 +1,34 @@
+@import '../../../node_modules/nav-frontend-core/less/_variabler';
+
+.feilmelding-mangler-arbeidstillatelse {
+    border: 3px solid @navOransjeLighten60;
+    border-radius: 5px;
+
+    .feilmelding__ikon {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto;
+    }
+
+    .feilmelding__innhold {
+        display: flex;
+        flex-direction: column;
+
+        .nav-frontend-lenker {
+            margin-right: auto;
+        }
+
+    }
+}
+
+
+@media (min-width: @screen-sm-min) {
+    .feilmelding-mangler-arbeidstillatelse {
+
+        .feilmelding__ikon {
+            margin: auto 2rem auto 0;
+        }
+
+    }
+}
+
