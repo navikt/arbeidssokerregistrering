@@ -40,6 +40,12 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
         this.clearTimer = this.clearTimer.bind(this);
     }
 
+    componentWillUnmount() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+    }
+
     setTimer() {
         if (!this.timer) {
             this.timer = window.setTimeout(() => {
