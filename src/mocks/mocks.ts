@@ -7,7 +7,10 @@ import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg
 import {featureTogglesMock} from "./feature-toggles-mock";
 import {FEATURE_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
 import autentisert from './autentiseringsinfo-mock';
-import { ordinaerRegistreringRespons, sykmeldtRegistreringRespons } from "./registrerbruker-mock";
+import {
+    ordinaerRegistreringRespons,
+    sykmeldtRegistreringRespons
+} from "./registrerbruker-mock";
 import getStore from "../store";
 import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
 import svarMock from "./svar-mock";
