@@ -1,0 +1,10 @@
+[
+	{
+		"contextPath": "/veilarbregistrering",
+		"baseUrl": "http://veilarbproxy"
+	},
+	{
+		"contextPath": "/veilarbstepup",
+		"baseUrl": "http://veilarbstepup"
+	}
+]
