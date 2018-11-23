@@ -88,20 +88,16 @@ class Infoside extends React.Component<Props> {
                 </div>
 
                 <div className="infoside--tredje-rad">
-                    <Systemtittel className="blokk-s">
+                    <Systemtittel className="blokk-m infoside--tredje-rad__tittel">
                         <FormattedMessage id="infoside-trenger-plan-tittel"/>
                     </Systemtittel>
 
-                    <Normaltekst className="blokk-m">
-                        <FormattedMessage id="infoside-trenger-plan-tekst"/>
-                    </Normaltekst>
-
                     <div className="infoside--tredje-rad__knapper">
-                        <a className="knapp knapp--hoved" href={DITT_SYKEFRAVAER_URL}>
-                            <FormattedMessage id="infoside-knapp-tilbake-til-sykefravaer"/>
+                        <a className="knapp" href={DITT_SYKEFRAVAER_URL}>
+                            <FormattedMessage id="infoside-knapp-uenig"/>
                         </a>
-                        <Link to={OPPSUMMERING_PATH} className="knapp">
-                            <FormattedMessage id="infoside-knapp-lag-plan"/>
+                        <Link to={OPPSUMMERING_PATH} className="knapp knapp--hoved">
+                            <FormattedMessage id="infoside-knapp-enig"/>
                         </Link>
                     </div>
                 </div>
