@@ -42,7 +42,9 @@ export function alleSporsmalErBesvarte(svar: SvarState, registreringType: Regist
         }
 
         switch (fremtidigSituasjonSvar) {
-            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER:
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER  :
+                return erSporsmalBesvarte(svar, [SporsmalId.tilbakeIArbeid]);
+            case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING  :
                 return erSporsmalBesvarte(svar, [SporsmalId.tilbakeIArbeid]);
             case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
                 return erSporsmalBesvarte(svar, [SporsmalId.utdanning,
