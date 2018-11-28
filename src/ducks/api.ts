@@ -2,19 +2,14 @@ import { fetchToJson, fetchWithTimeout } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
+import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
 
 export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
-export const VEIENTILARBEID_URL = '/veientilarbeid/';
-export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjonsmodul=true&visdagpenger=true';
-export const VEIENTILARBEID_MED_AAP_URL = '/veientilarbeid/?visAap=true';
-export const ARBEIDSSOKERREGISTRERING_START = '/arbeidssokerregistrering/start';
-export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START}`;
+export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
 export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/arbeidssokerregistrering/api/feature';
-export const DITT_NAV_URL = '/dittnav';
-export const DITT_SYKEFRAVAER_URL = '/sykefravaer';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;

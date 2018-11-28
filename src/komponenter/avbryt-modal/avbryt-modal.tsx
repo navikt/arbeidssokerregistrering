@@ -7,7 +7,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
-import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../ducks/api';
+import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
 
 import './avbryt-modal.less';
 
