@@ -34,7 +34,8 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
         };
     }
 
-    handleAvbrytClick = (): void => {
+    handleAvbrytClick = (e): void => {
+        e.preventDefault();
         this.setState({ visAvbrytModal: true });
     }
 
@@ -56,7 +57,7 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
         return (
             <>
                 <div className={classnames('lenke-avbryt-wrapper', wrapperClassname)}>
-                    <a className="lenke lenke-avbryt typo-element" onClick={this.handleAvbrytClick}>
+                    <a href="" className="lenke lenke-avbryt typo-element" onClick={this.handleAvbrytClick}>
                         <FormattedMessage id={id}/>
                     </a>
                 </div>
