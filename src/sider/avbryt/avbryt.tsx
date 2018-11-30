@@ -6,7 +6,7 @@ import Lukknapp from 'nav-frontend-lukknapp';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Container, Column, Row } from 'nav-frontend-grid';
 import { MatchProps } from '../../utils/utils';
-import { DITT_NAV_URL } from '../../ducks/api';
+import { DITT_NAV_URL } from '../../utils/konstanter';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 
 import avbrytSvg from './avbryt.svg';

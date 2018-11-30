@@ -2,7 +2,10 @@ import * as React from 'react';
 import * as classnames from 'classnames';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
-import { VEIENTILARBEID_MED_AAP_URL, VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL } from '../../ducks/api';
+import {
+    VEIENTILARBEID_MED_AAP_URL,
+    VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL,
+} from '../../utils/konstanter';
 import AvsjekkBilde from './avsjekk-bilde';
 import { erIE } from '../../utils/ie-test';
 import { frontendLogger } from '../../metrikker/metrics-utils';
@@ -39,7 +42,10 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         return (
             <section className={`registrert ${erIE() && 'erIE'}`}>
 
-                <div className={classnames('registrert__avsjekk', erSykmeldt ? 'registrert__avsjekk-sykmeldt' : null)}>
+                <div
+                    className={classnames('registrert__avsjekk', erSykmeldt ?
+                        'registrert__avsjekk-sykmeldt' : null)}
+                >
                     <AvsjekkBilde/>
                     <Systemtittel tag="h1" className="registrert__tittel">
                         <FormattedMessage id={hentTekstId('innholdstittel')}/>

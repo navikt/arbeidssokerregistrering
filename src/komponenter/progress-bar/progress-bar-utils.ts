@@ -34,7 +34,7 @@ const tilbakeTilSammeJobbConfig: string[] = [
 
 const tilbakeTilSammeJobbNyStillingConfig: string[] = [
     INNGANGSSPORSMAL_PATH,
-    `${SKJEMA_SYKEFRAVAER_PATH}/3/0`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/2/0`,
     INFOSIDE_PATH,
     OPPSUMMERING_PATH,
     DU_ER_NA_REGISTRERT_PATH
@@ -42,10 +42,10 @@ const tilbakeTilSammeJobbNyStillingConfig: string[] = [
 
 const trengerNyJobbConfig: string[] = [
     INNGANGSSPORSMAL_PATH,
-    `${SKJEMA_SYKEFRAVAER_PATH}/2/0`,
-    `${SKJEMA_SYKEFRAVAER_PATH}/2/1`,
-    `${SKJEMA_SYKEFRAVAER_PATH}/2/2`,
-    `${SKJEMA_SYKEFRAVAER_PATH}/2/3`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/0`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/1`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/2`,
+    `${SKJEMA_SYKEFRAVAER_PATH}/3/3`,
     OPPSUMMERING_PATH,
     DU_ER_NA_REGISTRERT_PATH
 ];
