@@ -91,12 +91,12 @@ class Routes extends React.Component<StateProps> {
 
                     <Switch>
 
+                        {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
                         {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
                         {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
 
                         { visOrdinaerSkjema ? (
                             <Switch>
-                                {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
                                 <Route
                                     path={START_PATH}
                                     component={Startside}
