@@ -5,10 +5,10 @@
   "private": true,
   "scripts": {
     "start": "npm-run-all -p start:*",
-    "start:tekster": "npm run build:tekster",
+    "start:tekster": "node ./scripts/watch-tekster.js",
     "start:ts": "cross-env REACT_APP_MOCK=true react-scripts-ts start",
     "build": "npm-run-all -s build:tekster build:ts",
-    "build:tekster": "node ./src/utils/build-tekster.js",
+    "build:tekster": "react-intl-bundler --no-lookup src/tekster src/tekster",
     "build:ts": "react-scripts-ts build",
     "test": "npm run build:tekster && react-scripts-ts test --env=jsdom",
     "test:e2e": "node integration/runner.js --debug-mode",
@@ -82,6 +82,7 @@
   },
   "devDependencies": {
     "@navikt/create-react-app-typescript-less": "^1.0.0-beta.16",
+    "@navikt/react-intl-bundler": "^1.0.4",
     "@types/classnames": "2.2.3",
     "@types/fetch-mock": "5.12.2",
     "@types/jest": "22.2.3",
@@ -102,6 +103,7 @@
     "chai-spies": "^1.0.0",
     "chromedriver": "^2.42.0",
     "cross-env": "^5.2.0",
+    "cross-spawn": "^6.0.5",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-react-intl": "2.0.0",
@@ -113,7 +115,8 @@
     "sinon": "5.0.3",
     "testcafe": "^0.23.0",
     "testcafe-browser-provider-browserstack": "^1.5.0",
-    "tree-kill": "^1.2.0",
-    "typescript": "^3.0.3"
+    "tree-kill": "^1.2.1",
+    "typescript": "^3.0.3",
+    "watch": "^1.0.2"
   }
 }
