@@ -118,11 +118,11 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                         </legend>
                         <div className="spm-body">
                             <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
-                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ
                                 svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
                                 {...alternativProps}
                             />
+                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
                             <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
                         </div>
@@ -157,10 +157,10 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                 case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER:
                     lop = 1;
                     break;
-                case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
+                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
                     lop = 2;
                     break;
-                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
+                case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
                     lop = 3;
                     break;
                 case FremtidigSituasjonSvar.USIKKER:
