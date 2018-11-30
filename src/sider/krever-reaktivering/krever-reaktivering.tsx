@@ -4,14 +4,13 @@ import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { DITT_NAV_URL } from '../../ducks/api';
 import { AppState } from '../../reducer';
 import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reaktiverbruker';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { MatchProps } from '../../utils/utils';
-import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, DITT_NAV_URL } from '../../utils/konstanter';
 import Banner from '../../komponenter/banner/banner';
 import {
     Data as RegistreringstatusData,

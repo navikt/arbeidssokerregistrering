@@ -42,10 +42,13 @@ import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
+import { selectFeatureToggles, Data as FeatureToggleData } from './ducks/feature-toggles';
+import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
     reaktivertStatus: string;
+    featureToggles: FeatureToggleData;
     state: AppState;
 }
 
@@ -53,7 +56,9 @@ class Routes extends React.Component<StateProps> {
 
     render() {
 
-        const { registreringstatusData, reaktivertStatus } = this.props;
+        const { registreringstatusData, reaktivertStatus, featureToggles } = this.props;
+        const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
+
         const registreringType = registreringstatusData.registreringType;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
@@ -67,6 +72,9 @@ class Routes extends React.Component<StateProps> {
             );
         } else if (registreringType === RegistreringType.REAKTIVERING &&
             reaktivertStatus !== STATUS.OK) {
+            if (erNede) {
+                return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
+            }
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         }
 
@@ -88,6 +96,7 @@ class Routes extends React.Component<StateProps> {
 
                         { visOrdinaerSkjema ? (
                             <Switch>
+                                {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
                                 <Route
                                     path={START_PATH}
                                     component={Startside}
@@ -151,6 +160,7 @@ class Routes extends React.Component<StateProps> {
 const mapStateToProps = (state: AppState) => ({
     registreringstatusData: selectRegistreringstatus(state).data,
     reaktivertStatus: selectReaktiveringStatus(state),
+    featureToggles: selectFeatureToggles(state),
     state: state,
 });
 
