@@ -1,0 +1,41 @@
+@import '../../node_modules/nav-frontend-core/less/_variabler';
+
+.tjeneste-oppdateres {
+	margin: 0 1rem;
+
+	.tjeneste-oppdateres__info {
+		display: flex;
+		flex-direction: column;
+		padding: 2rem;
+
+		border: 3px solid @navOransjeLighten60;
+		border-radius: 5px;
+
+		&--illustrasjon {
+			width: 90px;
+			height: 90px;
+			margin: 0 auto 1rem auto;
+		}
+
+	}
+
+}
+
+@media (min-width: @screen-sm-min) {
+	.tjeneste-oppdateres {
+		.tjeneste-oppdateres__info {
+			flex-direction: row;
+
+			&--tekst {
+				border-left: 1px solid @navGra40;
+				padding: 0.5rem 0.5rem 0.5rem 1rem;
+				margin: auto 2rem auto 2rem;
+			}
+
+			&--illustrasjon {
+				margin: 0;
+			}
+
+		}
+	}
+}

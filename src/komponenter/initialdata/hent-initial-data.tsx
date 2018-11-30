@@ -19,6 +19,7 @@ import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
+import { hentFeatureToggles } from '../../ducks/feature-toggles';
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
@@ -30,6 +31,7 @@ interface DispatchProps {
     hentBrukersNavn: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
     hentRegistreringStatus: () => void;
+    hentFeatureToggle: () => Promise<void | {}>;
 }
 
 type Props = StateProps & DispatchProps;
@@ -37,12 +39,17 @@ type Props = StateProps & DispatchProps;
 export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
 
-        this.props.hentAutentiseringsInfo().then((res) => {
-            if ((res as AuthData).nivaOidc === 4) {
-                this.props.hentRegistreringStatus();
-                this.props.hentBrukersNavn();
-            }
+        this.props.hentFeatureToggle().then(() => {
+
+            this.props.hentAutentiseringsInfo().then((res) => {
+                if ((res as AuthData).nivaOidc === 4) {
+                    this.props.hentRegistreringStatus();
+                    this.props.hentBrukersNavn();
+                }
+            });
+
         });
+
     }
 
     render() {
@@ -88,6 +95,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentBrukersNavn: () => dispatch(hentBrukersNavn()),
     hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
     hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
+    hentFeatureToggle: () => dispatch(hentFeatureToggles())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HentInitialData);
