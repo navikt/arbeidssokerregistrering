@@ -40,6 +40,7 @@ yarn-error.log*
 /public/index.css
 /public/index.css.map
 /src/tekster/alle-tekster.ts
+/src/tekster/bundle.js
 
 /SERVICE_CALLS_HOME_IS_UNDEFINED
 /APP_LOG_HOME_IS_UNDEFINED
