@@ -42,31 +42,39 @@ class OrdinaerOppsummeringBesvarelser extends React.Component<StateProps> {
                         skjul={jobbetSeksAvTolvSisteManederTekstId === ''}
                     />
                     <OppsummeringElement sporsmalId={SporsmalId.dinSituasjon}>
-                        <FormattedMessage id={`oppsummering-dinsituasjon`}/>&nbsp;
+                        <strong>Din Situasjon: &nbsp;</strong>
                     </OppsummeringElement>
                     <OppsummeringElement
                         sporsmalId={SporsmalId.sisteStilling}
                         tekst={state.sisteStilling.data.stilling.label}
                         skjul={state.sisteStilling.data.stilling === ingenYrkesbakgrunn}
                     >
-                        <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
+                        <strong><FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;</strong>
                     </OppsummeringElement>
                     <OppsummeringElement
                         sporsmalId={SporsmalId.utdanning}
                         skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
                     >
-                        <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
+                        <strong>Utdannelse: &nbsp;</strong>
+                    </OppsummeringElement>
+                    <OppsummeringElement
+                        sporsmalId={SporsmalId.utdanningGodkjent}
+                        skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
+                    >
+                        <strong>Utdannelse godkjent: &nbsp;</strong>
                     </OppsummeringElement>
                     <OppsummeringElement
                         sporsmalId={SporsmalId.utdanningBestatt}
                         skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
-                    />
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanningGodkjent}
-                        skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
-                    />
-                    <OppsummeringElement sporsmalId={SporsmalId.helseHinder}/>
-                    <OppsummeringElement sporsmalId={SporsmalId.andreForhold}/>
+                    >
+                        <strong>Utdanning bestått: &nbsp;</strong>
+                    </OppsummeringElement>
+                    <OppsummeringElement sporsmalId={SporsmalId.helseHinder}>
+                        <strong>Helse hinder: &nbsp;</strong>
+                    </OppsummeringElement>
+                    <OppsummeringElement sporsmalId={SporsmalId.andreForhold}>
+                        <strong>Andre forhold: &nbsp;</strong>
+                    </OppsummeringElement>
                 </ul>
             </div>
         );

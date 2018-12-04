@@ -19,14 +19,27 @@
         padding-left: 1rem;
 
         li {
-            padding: 0.2rem 0;
+            padding: 0.8rem 0;
+            list-style: none;
+            border-bottom: 1px solid @navGra20;
+            .lenke {
+                margin-left: 10px;
+            }
         }
     }
 }
 
 @media (min-width: @screen-sm-min) {
     .ordinaer-oppsummering-besvarelser {
-        margin: 6rem 5rem 3rem;
-        padding: 4rem 5rem 3rem;
+        margin: 6rem -3rem 3rem;
+        padding: 4rem 3rem 3rem;
+
+        &__list {
+            li {
+                .lenke {
+                    float: right;
+                }
+            }
+        }
     }
 }

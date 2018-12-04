@@ -29,72 +29,83 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
         }
 
         const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
-                                          'YYYY-MM-DD').format('DD.MM.YY').toString();
+            'YYYY-MM-DD').format('DD.MM.YY').toString();
 
         const skjulSisteStilling = state.sisteStilling.data.stilling === ingenYrkesbakgrunn ||
             state.sisteStilling.data.stilling === tomStilling;
 
         return (
             <>
-                <div className="sykmeldt-oppsummering-besvarelser">
-                    <img
-                        src={oppsummeringSvg}
-                        alt="Oppsummering sjekkliste"
-                        className="sykmeldt-oppsummering-besvarelser--illustrasjon"
-                    />
+            <div className="sykmeldt-oppsummering-besvarelser">
+                <img
+                    src={oppsummeringSvg}
+                    alt="Oppsummering sjekkliste"
+                    className="sykmeldt-oppsummering-besvarelser--illustrasjon"
+                />
 
-                    <div className="sykmeldt-oppsummering-besvarelser--list-container">
-                        <ul className="sykmeldt-oppsummering-besvarelser--list">
+                <div className="sykmeldt-oppsummering-besvarelser--list-container">
+                    <ul className="sykmeldt-oppsummering-besvarelser--list">
 
-                            <OppsummeringElement
-                                tekstId="sykmeldt-oppsummering-sykmeldt-siden"
-                                values={{ dato: sykemeldtSidenDato }}
-                            />
+                        <OppsummeringElement
+                            tekstId="sykmeldt-oppsummering-sykmeldt-siden"
+                            values={{ dato: sykemeldtSidenDato }}
+                        />
 
-                            <OppsummeringElement
-                                sporsmalId={SporsmalId.sisteStilling}
-                                tekst={state.sisteStilling.data.stilling.label}
-                                skjul={skjulSisteStilling}
-                            >
-                                <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
-                            </OppsummeringElement>
+                        <OppsummeringElement
+                            sporsmalId={SporsmalId.sisteStilling}
+                            tekst={state.sisteStilling.data.stilling.label}
+                            skjul={skjulSisteStilling}
+                        >
+                            <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
+                        </OppsummeringElement>
 
-                            <OppsummeringElement
-                                sporsmalId={SporsmalId.fremtidigSituasjon}
-                            />
+                        <OppsummeringElement
+                            sporsmalId={SporsmalId.fremtidigSituasjon}
+                        >
+                            <strong>Fremtidig situasjon: &nbsp;</strong>
+                        </OppsummeringElement>
 
-                            <OppsummeringElement
-                                sporsmalId={SporsmalId.utdanning}
-                                skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
-                            >
-                                <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
-                            </OppsummeringElement>
+                        <OppsummeringElement
+                            sporsmalId={SporsmalId.utdanning}
+                            skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
+                        >
+                            <strong><FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;</strong>
+                        </OppsummeringElement>
 
-                            <OppsummeringElement
-                                sporsmalId={SporsmalId.utdanningBestatt}
-                                skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
-                            />
-                            <OppsummeringElement
-                                sporsmalId={SporsmalId.utdanningGodkjent}
-                                skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
-                            />
+                        <OppsummeringElement
+                            sporsmalId={SporsmalId.utdanningGodkjent}
+                            skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
+                        >
+                            <strong>Utdanning godkjent: &nbsp;</strong>
+                        </OppsummeringElement>
 
-                            <OppsummeringElement sporsmalId={SporsmalId.helseHinder}/>
+                        <OppsummeringElement
+                            sporsmalId={SporsmalId.utdanningBestatt}
+                            skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
+                        >
+                            <strong>Utdanning bestått: &nbsp;</strong>
+                        </OppsummeringElement>
 
-                            <OppsummeringElement sporsmalId={SporsmalId.andreForhold}/>
+                        <OppsummeringElement sporsmalId={SporsmalId.helseHinder}>
+                            <strong>Helse hinder: &nbsp;</strong>
+                        </OppsummeringElement>
 
-                        </ul>
-                    </div>
+                        <OppsummeringElement sporsmalId={SporsmalId.andreForhold}>
+                            <strong>Andre forhold: &nbsp;</strong>
+                        </OppsummeringElement>
 
-                    <hr className="sykmeldt-oppsummering-besvarelser--divider"/>
-                    <InfoViser
-                        tekstId="sykmeldt-oppsummering-besvarelser-info"
-                        className="sykmeldt-oppsummering-besvarelser--info-viser"
-                    />
+                    </ul>
                 </div>
-                <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
-                    <FormattedMessage id="sykmeldt-oppsummering-egress"/>
-                </Normaltekst>
+
+                <hr className="sykmeldt-oppsummering-besvarelser--divider"/>
+                <InfoViser
+                    tekstId="sykmeldt-oppsummering-besvarelser-info"
+                    className="sykmeldt-oppsummering-besvarelser--info-viser"
+                />
+            </div>
+            <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
+                <FormattedMessage id="sykmeldt-oppsummering-egress"/>
+            </Normaltekst>
             </>
 
         );

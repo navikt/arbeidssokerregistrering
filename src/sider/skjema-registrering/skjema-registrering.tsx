@@ -1,13 +1,6 @@
 import * as React from 'react';
-import AndreForhold from './sporsmal/sporsmal-andre-forhold';
-import HelseHinder from './sporsmal/sporsmal-helse-hinder';
-import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
-import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
-import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
-import SporsmalDinSituasjon from './sporsmal/sporsmal-din-situasjon';
 import LastInnSisteStilling from './last-inn-siste-stilling';
-import SisteStilling from './sporsmal/sporsmal-siste-stilling/siste-stilling';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { endreSvarAction, resetSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
@@ -16,10 +9,15 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import Skjema from '../../komponenter/skjema/skjema';
 import { OPPSUMMERING_PATH, SKJEMA_PATH } from '../../utils/konstanter';
-import { defaultConfigForSporsmalsflyt } from '../../komponenter/skjema/skjema-utils';
+import {
+    defaultConfigForSporsmalsflyt,
+    nullStillSporsmalSomIkkeSkalBesvares
+} from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
+import hentRegistreringSporsmalene from './skjema-sporsmalene';
 
 interface DispatchProps {
+    resetSvar: (sporsmalId: SporsmalId) => void;
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
 }
 
@@ -31,9 +29,12 @@ type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProp
 
 class SkjemaRegistrering extends React.Component<Props> {
     render() {
-        const {endreSvar, intl, svarState, location, match, history } = this.props;
+        const {endreSvar, resetSvar, intl, svarState, location, match, history } = this.props;
         const sporsmalProps = {
             endreSvar: (sporsmalId, svar) => {
+
+                nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
+
                 endreSvar(sporsmalId, svar);
             },
             intl: intl,
@@ -41,6 +42,7 @@ class SkjemaRegistrering extends React.Component<Props> {
         };
 
         const regType = RegistreringType.ORDINAER_REGISTRERING;
+        const registreringSporsmalElementene = hentRegistreringSporsmalene(sporsmalProps, regType);
 
         return (
             <LastInnSisteStilling>
@@ -50,41 +52,9 @@ class SkjemaRegistrering extends React.Component<Props> {
                     endUrl={OPPSUMMERING_PATH}
                     {...{location, match, history}}
                 >
-                    <SporsmalDinSituasjon
-                        sporsmalId={SporsmalId.dinSituasjon}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
-                    <SisteStilling
-                        sporsmalId={SporsmalId.sisteStilling}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
-                    <Utdanningsporsmal
-                        sporsmalId={SporsmalId.utdanning}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
-                    <UtdanningGodkjentSporsmal
-                        sporsmalId={SporsmalId.utdanningGodkjent}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
-                    <UtdanningBestattSporsmal
-                        sporsmalId={SporsmalId.utdanningBestatt}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
-                    <HelseHinder
-                        sporsmalId={SporsmalId.helseHinder}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
-                    <AndreForhold
-                        sporsmalId={SporsmalId.andreForhold}
-                        {...sporsmalProps}
-                        registeringType={regType}
-                    />
+                    {
+                        registreringSporsmalElementene
+                    }
                 </Skjema>
             </LastInnSisteStilling>
         );
@@ -96,6 +66,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    resetSvar: (sporsmalId) => dispatch(resetSvarAction(sporsmalId)),
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 

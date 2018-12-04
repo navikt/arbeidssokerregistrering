@@ -10,11 +10,10 @@ import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import { SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
-import Utdanningsporsmal from '../skjema-registrering/sporsmal/sporsmal-utdanning';
-import UtdanningGodkjentSporsmal from '../skjema-registrering/sporsmal/sporsmal-utdanning-godkjent';
-import UtdanningBestattSporsmal from '../skjema-registrering/sporsmal/sporsmal-utdanning-bestatt';
-import AndreForhold from '../skjema-registrering/sporsmal/sporsmal-andre-forhold';
 import { RegistreringType } from '../../ducks/registreringstatus';
+import {
+    usikkerSporsmaleneConfig
+} from './skjema-sykefravaer-sporsmalene';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -42,6 +41,8 @@ class SkjemaSykefravaerUsikker extends React.Component<Props> {
         };
 
         const regType = RegistreringType.SYKMELDT_REGISTRERING;
+        const sporsmal = usikkerSporsmaleneConfig(fellesProps, regType)
+            .map(spmElement => spmElement.element);
 
         return (
             <Skjema
@@ -50,26 +51,7 @@ class SkjemaSykefravaerUsikker extends React.Component<Props> {
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
-                <Utdanningsporsmal
-                    sporsmalId={SporsmalId.utdanning}
-                    {...fellesProps}
-                    registeringType={regType}
-                />
-                <UtdanningGodkjentSporsmal
-                    sporsmalId={SporsmalId.utdanningGodkjent}
-                    {...fellesProps}
-                    registeringType={regType}
-                />
-                <UtdanningBestattSporsmal
-                    sporsmalId={SporsmalId.utdanningBestatt}
-                    {...fellesProps}
-                    registeringType={regType}
-                />
-                <AndreForhold
-                    sporsmalId={SporsmalId.andreForhold}
-                    {...fellesProps}
-                    registeringType={regType}
-                />
+                {sporsmal}
             </Skjema>
         );
     }

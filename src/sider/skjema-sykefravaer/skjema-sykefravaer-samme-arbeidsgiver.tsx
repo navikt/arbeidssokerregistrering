@@ -9,8 +9,10 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
-import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
 import { RegistreringType } from '../../ducks/registreringstatus';
+import {
+    sammeArbeidsgiverSporsmaleneConfig
+} from './skjema-sykefravaer-sporsmalene';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -35,16 +37,8 @@ class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
 
         const regType = RegistreringType.SYKMELDT_REGISTRERING;
 
-        const sporsmal = [
-            (
-                <SporsmalTilbakeIArbeid
-                    key={SporsmalId.tilbakeIArbeid}
-                    sporsmalId={SporsmalId.tilbakeIArbeid}
-                    {...fellesProps}
-                    registeringType={regType}
-                />
-            )
-        ];
+        const sporsmal = sammeArbeidsgiverSporsmaleneConfig(fellesProps, regType)
+            .map(spmElement => spmElement.element);
 
         return (
             <Skjema
