@@ -13,7 +13,7 @@ export const INFOSIDE_PATH = '/infoside';
 export const ARBEIDSSOKERREGISTRERING_START_PATH = '/arbeidssokerregistrering/start';
 
 // URLer til andre applikasjoner
-const herokuUrl = 'https://veientilarbeid.herokuapp.com';
+const herokuUrl = 'https://veientilarbeid.herokuapp.com/veientilarbeid';
 const vanligUrl = '/veientilarbeid';
 
 export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
