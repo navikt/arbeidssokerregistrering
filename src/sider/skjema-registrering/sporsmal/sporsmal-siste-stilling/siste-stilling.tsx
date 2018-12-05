@@ -27,6 +27,11 @@ import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../../..
 import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
 import { SporsmalProps } from '../../../../komponenter/skjema/sporsmal-utils';
 import { RegistreringType, selectRegistreringstatus } from '../../../../ducks/registreringstatus';
+import InaktivSokeInput from './inaktiv-soke-input';
+
+interface SisteStillingState {
+    erInputAktiv: boolean;
+}
 
 interface StateProps {
     sisteStillingFraAAReg: SisteArbeidsforholdState;
@@ -44,7 +49,19 @@ interface DispatchProps {
 
 type Props = SporsmalProps & StateProps & DispatchProps & InjectedIntlProps;
 
-class SisteStilling extends React.Component<Props> {
+class SisteStilling extends React.Component<Props, SisteStillingState> {
+
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            erInputAktiv: false
+        };
+
+        this.onInputAktivert = this.onInputAktivert.bind(this);
+        this.onStillingEndret = this.onStillingEndret.bind(this);
+    }
+
     componentWillMount() {
         const {
             endreSvar,
@@ -74,6 +91,19 @@ class SisteStilling extends React.Component<Props> {
         }
     }
 
+    onInputAktivert() {
+        this.setState({
+            erInputAktiv: true
+        });
+    }
+
+    onStillingEndret(stilling: Stilling) {
+        this.props.velgStilling(stilling);
+        this.setState({
+            erInputAktiv: false
+        });
+    }
+
     render() {
         const {
             sisteStilling,
@@ -83,7 +113,8 @@ class SisteStilling extends React.Component<Props> {
             hentAvgittSvar,
             velgStilling,
             oversettelseAvStillingFraAAReg,
-            svarState
+            svarState,
+            registreringType
         } = this.props;
 
         const alternativProps = {
@@ -95,6 +126,7 @@ class SisteStilling extends React.Component<Props> {
         const skjulSvaralternativer = skalSkjuleSvaralternativer(
             hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar
         );
+
         const alternativer = skjulSvaralternativer ? (null) : (
                     <>
                         <Alternativ
@@ -117,7 +149,15 @@ class SisteStilling extends React.Component<Props> {
         );
 
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
-            kontekst, intl, this.props.registreringType);
+            kontekst, intl, registreringType);
+
+        const sokeInput = this.skalViseStillingsfelt() ?
+            (this.state.erInputAktiv ?
+                <SokeInput defaultStilling={sisteStilling} onChange={this.onStillingEndret}/>
+                :
+                <InaktivSokeInput stilling={sisteStilling} onInputAktivert={this.onInputAktivert} />
+            )
+            : null;
 
         return (
             <>
@@ -139,9 +179,7 @@ class SisteStilling extends React.Component<Props> {
                     </fieldset>
                 </form>
                 <div className="spm-valg">
-                    {this.skalViseStillingsfelt() &&
-                        <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
-                    }
+                    {sokeInput}
                     <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
                         <Normaltekst>
                             <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
@@ -152,6 +190,8 @@ class SisteStilling extends React.Component<Props> {
         );
     }
 }
+
+//  <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
 
 const mapStateToProps = (state) => ({
     sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
