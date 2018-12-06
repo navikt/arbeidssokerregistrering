@@ -7,7 +7,6 @@ import { SporsmalId } from '../../ducks/svar';
 import { ingenYrkesbakgrunn, tomStilling } from '../../ducks/siste-stilling';
 import { FormattedMessage } from 'react-intl';
 import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../../ducks/svar-utils';
-import * as moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
 import InfoViser from '../../komponenter/info-viser/info-viser';
