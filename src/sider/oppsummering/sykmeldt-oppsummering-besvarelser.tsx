@@ -28,8 +28,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
             return null;
         }
 
-        const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
-                                          'YYYY-MM-DD').format('DD.MM.YY').toString();
+        const sykemeldtSidenDato = state.registreringStatus.data.maksDato;
 
         const skjulSisteStilling = state.sisteStilling.data.stilling === ingenYrkesbakgrunn ||
             state.sisteStilling.data.stilling === tomStilling;
