@@ -70,7 +70,7 @@ class Infoside extends React.Component<Props> {
                         <Systemtittel className="infoside--andre-rad__tittel">
                             <FormattedMessage id="infoside-tilbake-full-stilling-tittel"/>
                         </Systemtittel>
-                        <ul>
+                        <ul className="infoside--andre-rad__liste">
                             <li className="blokk-xs">
                                 <FormattedMessage id="infoside-tilbake-full-stilling-tekst-1"/>
                             </li>
@@ -95,7 +95,7 @@ class Infoside extends React.Component<Props> {
                         <a className="knapp" href={DITT_SYKEFRAVAER_URL}>
                             <FormattedMessage id="infoside-knapp-uenig"/>
                         </a>
-                        <Link to={OPPSUMMERING_PATH} className="knapp knapp--hoved">
+                        <Link to={OPPSUMMERING_PATH} className="knapp">
                             <FormattedMessage id="infoside-knapp-enig"/>
                         </Link>
                     </div>
