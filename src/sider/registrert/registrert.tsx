@@ -3,6 +3,8 @@ import * as classnames from 'classnames';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst, Systemtittel, Element } from 'nav-frontend-typografi';
 import {
+    HEROKU_VEIENTILARBEID_MED_AAP_URL, HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL,
+    HEROKU_VEIENTILARBEID_URL,
     VEIENTILARBEID_MED_AAP_URL,
     VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL,
 } from '../../utils/konstanter';
@@ -36,8 +38,24 @@ class DuErNaRegistrert extends React.Component<AllProps> {
 
         const registreringType = this.props.state.registreringStatus.data.registreringType;
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+        const brukHerokuUrl = !!process.env.REACT_APP_HEROKU_OVERGANG;
         const hentTekstId = this.hentTekstId(erSykmeldt);
-        const veilenTilArbeidMedUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL : VEIENTILARBEID_MED_DAGPENGER_URL;
+
+        let veienTilArbeidUrl;
+        let veienTilArbeidMedVisInfoUrl;
+
+        if (brukHerokuUrl) {
+            const brukerStatusQueryParam = 'brukerStatus=' + (erSykmeldt ? 'sykmeldt' : 'ordinaer');
+
+            veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + '?' + brukerStatusQueryParam;
+            veienTilArbeidMedVisInfoUrl = (erSykmeldt ? HEROKU_VEIENTILARBEID_MED_AAP_URL
+                : HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL) + '&' + brukerStatusQueryParam;
+
+        } else {
+            veienTilArbeidUrl = VEIENTILARBEID_URL;
+            veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL
+                : VEIENTILARBEID_MED_DAGPENGER_URL;
+        }
 
         return (
             <section className={`registrert ${erIE() && 'erIE'}`}>
@@ -66,7 +84,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
                         </Element>
                         <div className="registrert__knapperad">
                             <a
-                                href={VEIENTILARBEID_URL}
+                                href={veienTilArbeidUrl}
                                 className="registrert__lenke knapp knapp--standard"
                                 onClick={() => {
                                     frontendLogger('registrering.ikke.vis.dagpenger.info');
@@ -75,7 +93,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
                                 <FormattedMessage id="knapp-ikke-na"/>
                             </a>
                             <a
-                                href={veilenTilArbeidMedUrl}
+                                href={veienTilArbeidMedVisInfoUrl}
                                 className="registrert__lenke knapp knapp--hoved"
                                 onClick={() => {
                                     frontendLogger('registrering.vis.dagpenger.info');

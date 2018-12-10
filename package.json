@@ -16,8 +16,8 @@
     "test:coverage": "npm test -- --coverage",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix",
-    "heroku-serve": "node index.js",
-    "heroku-postbuild": "node scripts/preHeroku.js && npm install && cross-env REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build && node scripts/postHeroku.js",
+    "heroku-serve": "node heroku-server.js",
+    "heroku-postbuild": "cross-env REACT_APP_HEROKU_OVERGANG=true REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build",
     "eject": "react-scripts-ts eject",
     "deploy": "npm run build && gh-pages -d build",
     "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less"

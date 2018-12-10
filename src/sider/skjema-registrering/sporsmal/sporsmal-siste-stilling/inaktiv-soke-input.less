@@ -1,0 +1,36 @@
+@import '../../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.inaktiv-soke-input {
+	margin-bottom: 1rem;
+
+	&__input-felt {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		background-color: @navLysGra;
+		height: 39px;
+		padding: 0.25rem 1rem;
+		margin-top: 0.25rem;
+
+		&--stilling-tekst {
+			margin: auto 0;
+		}
+
+		&--endre {
+			color: @navBla;
+			margin: auto 0;
+			font-size: 1rem;
+		}
+
+		&:hover {
+			cursor: pointer;
+
+			.inaktiv-soke-input__input-felt--endre {
+				color: @navDypBlaDarken40;
+			}
+
+		}
+
+	}
+
+}

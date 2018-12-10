@@ -13,9 +13,17 @@ export const INFOSIDE_PATH = '/infoside';
 export const ARBEIDSSOKERREGISTRERING_START_PATH = '/arbeidssokerregistrering/start';
 
 // URLer til andre applikasjoner
-export const VEIENTILARBEID_URL = '/veientilarbeid/';
-export const VEIENTILARBEID_MED_DAGPENGER_URL = '/veientilarbeid/?visInformasjonsmodul=true&visdagpenger=true';
-export const VEIENTILARBEID_MED_AAP_URL = '/veientilarbeid/?visAap=true';
+const herokuUrl = 'https://veientilarbeid.herokuapp.com/veientilarbeid';
+const vanligUrl = '/veientilarbeid';
+
+export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
+export const HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL = `${herokuUrl}/?visInformasjonsmodul=true&visdagpenger=true`;
+export const HEROKU_VEIENTILARBEID_MED_AAP_URL = `${herokuUrl}/?visAap=true`;
+
+export const VEIENTILARBEID_URL = vanligUrl;
+export const VEIENTILARBEID_MED_DAGPENGER_URL = `${vanligUrl}?visInformasjonsmodul=true&visdagpenger=true`;
+export const VEIENTILARBEID_MED_AAP_URL = `${vanligUrl}/?visAap=true`;
+
 export const DITT_NAV_URL = '/dittnav';
 export const DITT_SYKEFRAVAER_URL = '/sykefravaer';
 
