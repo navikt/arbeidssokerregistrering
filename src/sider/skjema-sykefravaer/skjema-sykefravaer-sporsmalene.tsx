@@ -29,7 +29,7 @@ const tilbakeIArbeid = (fellesProps, regType) => {
             <OppsummeringElement
                 sporsmalId={SporsmalId.tilbakeIArbeid}
             >
-                <strong><FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;</strong>
+                <strong>Tilbake i jobb: &nbsp;</strong>
             </OppsummeringElement>
         )
     };
