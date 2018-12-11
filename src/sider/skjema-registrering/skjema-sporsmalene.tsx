@@ -158,20 +158,22 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
     }
 ];
 
-export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsmalId) =>
-    sporsmaleneConfig(sporsmalProps, regType, {}).map((spmElement, index) => {
-        if (spmElement.id === sporsmalId) {
-            return (
-                <Link
-                    className="lenke"
-                    to={`/skjema/${index}`}
-                >
-                    Endre
-                </Link>
-            );
-        }
+export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsmalId) => {
+    const index = sporsmaleneConfig(sporsmalProps, regType, {})
+        .findIndex(data => data.id === sporsmalId);
+    if (index >= 0) {
+        return (
+            <Link
+                className="lenke"
+                to={`/skjema/${index}`}
+            >
+                Endre
+            </Link>
+        );
+    } else {
         return null;
-    });
+    }
+};
 
 export const hentElementOppsummering = (state) =>
     sporsmaleneConfig({}, '', state).map((spmElement) => {
