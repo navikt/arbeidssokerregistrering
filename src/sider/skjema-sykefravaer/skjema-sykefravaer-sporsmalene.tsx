@@ -7,6 +7,13 @@ import AndreForhold from '../skjema-registrering/sporsmal/sporsmal-andre-forhold
 import { Link } from 'react-router-dom';
 import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
 import { hentLoepConfig } from './inngangssporsmal-svar-alternativene';
+import {
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar,
+    UtdanningSvar
+} from '../../ducks/svar-utils';
+import { FormattedMessage } from 'react-intl';
+import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
 const tilbakeIArbeid = (fellesProps, regType) => {
     return {
         id: SporsmalId.tilbakeIArbeid,
@@ -17,6 +24,13 @@ const tilbakeIArbeid = (fellesProps, regType) => {
                 {...fellesProps}
                 registeringType={regType}
             />
+        ),
+        elementOppsummering: (
+            <OppsummeringElement
+                sporsmalId={SporsmalId.tilbakeIArbeid}
+            >
+                <strong><FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;</strong>
+            </OppsummeringElement>
         )
     };
 };
@@ -30,6 +44,14 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 {...fellesProps}
                 registeringType={regType}
             />
+        ),
+        elementOppsummering: (
+            <OppsummeringElement
+                sporsmalId={SporsmalId.utdanning}
+                skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
+            >
+                <strong><FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;</strong>
+            </OppsummeringElement>
         )
     },
     {
@@ -41,6 +63,14 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 {...fellesProps}
                 registeringType={regType}
             />
+        ),
+        elementOppsummering: (
+            <OppsummeringElement
+                sporsmalId={SporsmalId.utdanningGodkjent}
+                skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
+            >
+                <strong>Utdanning godkjent: &nbsp;</strong>
+            </OppsummeringElement>
         )
     },
     {
@@ -52,6 +82,15 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 {...fellesProps}
                 registeringType={regType}
             />
+        ),
+        elementOppsummering: (
+            <OppsummeringElement
+                sporsmalId={SporsmalId.utdanningBestatt}
+                skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
+            >
+                <strong>Utdanning bestått: &nbsp;</strong>
+            </OppsummeringElement>
+
         )
     },
     {
@@ -63,6 +102,11 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 {...fellesProps}
                 registeringType={regType}
             />
+        ),
+        elementOppsummering: (
+            <OppsummeringElement sporsmalId={SporsmalId.andreForhold}>
+                <strong>Andre forhold: &nbsp;</strong>
+            </OppsummeringElement>
         )
     }
 ];

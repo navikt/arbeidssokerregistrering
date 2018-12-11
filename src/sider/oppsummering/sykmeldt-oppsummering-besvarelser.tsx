@@ -4,13 +4,13 @@ import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import OppsummeringElement from './oppsummering-element';
 import { SporsmalId } from '../../ducks/svar';
-import { ingenYrkesbakgrunn, tomStilling } from '../../ducks/siste-stilling';
 import { FormattedMessage } from 'react-intl';
-import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../../ducks/svar-utils';
 import * as moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
 import InfoViser from '../../komponenter/info-viser/info-viser';
+import { hentSvar } from '../../ducks/svar-utils';
+import { hentLoepConfig } from '../skjema-sykefravaer/inngangssporsmal-svar-alternativene';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -31,8 +31,13 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
         const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
             'YYYY-MM-DD').format('DD.MM.YY').toString();
 
-        const skjulSisteStilling = state.sisteStilling.data.stilling === ingenYrkesbakgrunn ||
-            state.sisteStilling.data.stilling === tomStilling;
+        const inngangsLopSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
+
+        const lopConfig = hentLoepConfig({}, inngangsLopSvar);
+
+        const element = lopConfig && lopConfig({}, '').map((config) => {
+            return config.elementOppsummering;
+        });
 
         return (
             <>
@@ -52,47 +57,12 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                         />
 
                         <OppsummeringElement
-                            sporsmalId={SporsmalId.sisteStilling}
-                            tekst={state.sisteStilling.data.stilling.label}
-                            skjul={skjulSisteStilling}
-                        >
-                            <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
-                        </OppsummeringElement>
-
-                        <OppsummeringElement
                             sporsmalId={SporsmalId.fremtidigSituasjon}
                         >
                             <strong>Fremtidig situasjon: &nbsp;</strong>
                         </OppsummeringElement>
 
-                        <OppsummeringElement
-                            sporsmalId={SporsmalId.utdanning}
-                            skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
-                        >
-                            <strong><FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;</strong>
-                        </OppsummeringElement>
-
-                        <OppsummeringElement
-                            sporsmalId={SporsmalId.utdanningGodkjent}
-                            skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
-                        >
-                            <strong>Utdanning godkjent: &nbsp;</strong>
-                        </OppsummeringElement>
-
-                        <OppsummeringElement
-                            sporsmalId={SporsmalId.utdanningBestatt}
-                            skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
-                        >
-                            <strong>Utdanning bestått: &nbsp;</strong>
-                        </OppsummeringElement>
-
-                        <OppsummeringElement sporsmalId={SporsmalId.helseHinder}>
-                            <strong>Helse hinder: &nbsp;</strong>
-                        </OppsummeringElement>
-
-                        <OppsummeringElement sporsmalId={SporsmalId.andreForhold}>
-                            <strong>Andre forhold: &nbsp;</strong>
-                        </OppsummeringElement>
+                        {element}
 
                     </ul>
                 </div>
