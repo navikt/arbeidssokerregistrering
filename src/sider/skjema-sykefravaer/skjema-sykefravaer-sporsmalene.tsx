@@ -47,6 +47,7 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
         ),
         elementOppsummering: (
             <OppsummeringElement
+                key={SporsmalId.utdanning}
                 sporsmalId={SporsmalId.utdanning}
                 skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
             >
@@ -66,6 +67,7 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
         ),
         elementOppsummering: (
             <OppsummeringElement
+                key={SporsmalId.utdanningGodkjent}
                 sporsmalId={SporsmalId.utdanningGodkjent}
                 skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
             >
@@ -85,6 +87,7 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
         ),
         elementOppsummering: (
             <OppsummeringElement
+                key={SporsmalId.utdanningBestatt}
                 sporsmalId={SporsmalId.utdanningBestatt}
                 skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
             >
@@ -104,7 +107,10 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
             />
         ),
         elementOppsummering: (
-            <OppsummeringElement sporsmalId={SporsmalId.andreForhold}>
+            <OppsummeringElement
+                key={SporsmalId.andreForhold}
+                sporsmalId={SporsmalId.andreForhold}
+            >
                 <strong>Andre forhold: &nbsp;</strong>
             </OppsummeringElement>
         )
@@ -136,18 +142,20 @@ export const hentLenkeEndre = (sporsmalId, svar, lop) => {
             </Link>
         );
     }
+    const index = config
+        ? config({}, '').findIndex(data => data.id === sporsmalId)
+        : -1;
 
-    return config && config({}, '').map((spmElement, index) => {
-            if (spmElement.id === sporsmalId) {
-                return (
-                    <Link
-                        className="lenke"
-                        to={`/skjema-sykefravaer/${lop}/${index}`}
-                    >
-                        Endre
-                    </Link>
-                );
-            }
-            return null;
-        });
+    if (index >= 0) {
+        return (
+            <Link
+                className="lenke"
+                to={`/skjema-sykefravaer/${lop}/${index}`}
+            >
+                Endre
+            </Link>
+        );
+    } else {
+        return null;
+    }
 };
