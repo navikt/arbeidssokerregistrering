@@ -92,10 +92,10 @@ class Infoside extends React.Component<Props> {
                     </Systemtittel>
 
                     <div className="infoside--tredje-rad__knapper">
-                        <a className="knapp" href={DITT_SYKEFRAVAER_URL}>
+                        <a className="knapp" href={OPPSUMMERING_PATH}>
                             <FormattedMessage id="infoside-knapp-uenig"/>
                         </a>
-                        <Link to={OPPSUMMERING_PATH} className="knapp">
+                        <Link to={DITT_SYKEFRAVAER_URL} className="knapp">
                             <FormattedMessage id="infoside-knapp-enig"/>
                         </Link>
                     </div>
