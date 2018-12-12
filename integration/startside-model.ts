@@ -5,7 +5,7 @@ export default class Startside {
     btnStartRegistrering: Selector;
 
     constructor () {
-        this.side = Selector('.startside');
+        this.side = Selector('.startside-ordinaer');
         this.btnStartRegistrering = Selector('[data-testid="start-registrering"]');
     }
 }
