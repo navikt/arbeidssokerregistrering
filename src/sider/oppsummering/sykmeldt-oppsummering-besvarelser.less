@@ -19,10 +19,15 @@
     }
 
     &--list {
-        padding-left: 1rem;
+        padding-left: 0;
 
         li {
-            padding: 0.2rem 0;
+            padding: 0.8rem 0;
+            list-style: none;
+            border-bottom: 1px solid @navGra20;
+            .lenke {
+                margin-left: 10px;
+            }
         }
     }
 
@@ -39,10 +44,18 @@
 
 @media (min-width: @screen-sm-min) {
     .sykmeldt-oppsummering-besvarelser {
-        margin: 6rem 5rem 3rem;
+        margin: 6rem -3em 3rem;
 
         &--list-container {
-            padding: 4rem 5rem 1rem;
+            padding: 4rem 2rem 1rem;
+        }
+
+        &--list {
+            li {
+                .lenke {
+                    float: right;
+                }
+            }
         }
 
         &--info-viser {

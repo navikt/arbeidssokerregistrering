@@ -3,10 +3,21 @@ import { connect } from 'react-redux';
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { AppState } from '../../reducer';
 import { FormattedMessage } from 'react-intl';
-import { getTekstIdForOppsummering } from './oppsummering-utils';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { MessageValue } from 'react-intl';
-import { erSporsmalBesvart } from '../../komponenter/skjema/skjema-utils';
+import { erSporsmalBesvart, getTekstIdForSvar } from '../../komponenter/skjema/skjema-utils';
+import {
+    Data as RegistreringstatusData,
+    RegistreringType,
+    selectRegistreringstatus
+} from '../../ducks/registreringstatus';
+import {
+    finnLenkeEndreElementForOrdinaer
+} from '../skjema-registrering/skjema-sporsmalene';
+import {
+    hentLenkeEndre,
+} from '../skjema-sykefravaer/skjema-sykefravaer-sporsmalene';
+import { hentInngangsLoep } from '../skjema-sykefravaer/inngangssporsmal-svar-alternativene';
 
 interface OwnProps {
     sporsmalId?: SporsmalId;
@@ -19,13 +30,14 @@ interface OwnProps {
 
 interface StateProps {
     svarState: SvarState;
+    registreringstatusData: RegistreringstatusData;
 }
 
 type Props = OwnProps & StateProps;
 
 class OppsummeringElement extends React.Component<Props> {
     render() {
-        const { tekst, values, } = this.props;
+        const { tekst, values, registreringstatusData } = this.props;
 
         if (!this.skalViseElement()) {
             return null;
@@ -39,10 +51,24 @@ class OppsummeringElement extends React.Component<Props> {
             <FormattedMessage id={this.getIntlTekstId()} values={values}/>
         );
 
+        const finnSykmeldtlopStien = (sporsmalId) => {
+            const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon);
+            const lop = hentInngangsLoep(svar);
+
+            return hentLenkeEndre(sporsmalId, svar, lop);
+        };
+
+        const { registreringType } = registreringstatusData;
+
+        const endreLenke = RegistreringType.ORDINAER_REGISTRERING === registreringType
+            ? finnLenkeEndreElementForOrdinaer({}, '', this.props.sporsmalId)
+            : finnSykmeldtlopStien(this.props.sporsmalId);
+
         return (
             <li className="typo-normal">
                 {this.props.children}
                 {tekstTilRendring}
+                {endreLenke}
             </li>
         );
     }
@@ -51,7 +77,7 @@ class OppsummeringElement extends React.Component<Props> {
         const { sporsmalId, tekstId, svarState } = this.props;
 
         if (sporsmalId) {
-            return getTekstIdForOppsummering(sporsmalId, hentSvar(svarState, sporsmalId));
+            return getTekstIdForSvar(sporsmalId, hentSvar(svarState, sporsmalId));
         } else {
             return tekstId || '';
         }
@@ -83,7 +109,8 @@ class OppsummeringElement extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    svarState: state.svar
+    svarState: state.svar,
+    registreringstatusData: selectRegistreringstatus(state).data,
 });
 
 export default connect(mapStateToProps)(OppsummeringElement);

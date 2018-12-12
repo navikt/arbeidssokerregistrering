@@ -2,6 +2,7 @@ import { Svar } from './svar-utils';
 
 export enum ActionTypes {
     AVGI_SVAR = 'AVGI_SVAR',
+    AVGI_SVAR_INIT = 'AVGI_SVAR_INIT',
     AVGI_SVAR_RESET = 'AVGI_SVAR_RESET',
 }
 
@@ -23,7 +24,7 @@ export enum SporsmalId {
 export type State = Data[];
 
 export interface Data {
-    svar: Svar;
+    svar: Svar | undefined;
     sporsmalId: SporsmalId;
 }
 
@@ -46,7 +47,7 @@ export default function (state: State = initialState, action: Action): State {
                 return newState;
             }
         }
-        case ActionTypes.AVGI_SVAR_RESET: {
+        case ActionTypes.AVGI_SVAR_INIT: {
             return initialState;
         }
         default : {
@@ -65,8 +66,18 @@ export function endreSvarAction(sporsmalId: string, svar: Svar) {
     };
 }
 
+export function resetSvarAction(sporsmalId: string) {
+    return {
+        type: ActionTypes.AVGI_SVAR,
+        data: {
+            sporsmalId,
+            undefined
+        }
+    };
+}
+
 export function setInitialState() {
     return {
-        type: ActionTypes.AVGI_SVAR_RESET
+        type: ActionTypes.AVGI_SVAR_INIT
     };
 }

@@ -98,13 +98,13 @@ if (MOCK_REAKTIVER_BRUKER) {
 if (DISPATCH_BESVARELSE) {
     const store = getStore();
     [
-       SporsmalId.utdanning,
-       SporsmalId.utdanningBestatt,
-       SporsmalId.utdanningGodkjent,
-       SporsmalId.helseHinder,
-       SporsmalId.andreForhold,
-       SporsmalId.sisteStilling,
-       SporsmalId.dinSituasjon,
+        SporsmalId.dinSituasjon,
+        SporsmalId.sisteStilling,
+        SporsmalId.utdanning,
+        SporsmalId.utdanningGodkjent,
+        SporsmalId.utdanningBestatt,
+        SporsmalId.helseHinder,
+        SporsmalId.andreForhold,
     ].forEach(sporsmalId => store.dispatch({
         type: SvarActionTypes.AVGI_SVAR,
         data: {
