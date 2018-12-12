@@ -1,7 +1,6 @@
 /*tslint:disable*/
 import {delayed, lagPamjanzzRespons, mock, respondWith} from './utils';
 import startRegistreringStatus from './registreringstatus-mock';
-import sykmeldtInfo from './sykmeldt-info-mock';
 import brukersNavn from './brukers-navn-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg-mock';
@@ -30,7 +29,6 @@ const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
 const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
-const MOCK_SYKMELDT_INFO = true;
 const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const PRINT_FRONTENDLOGGER = true;
 const DELAY = 0;
@@ -50,11 +48,6 @@ if (MOCK_AUTENTISERINGS_INFO) {
 if (MOCK_START_REGISRERING_STATUS) {
     const response = respondWith(delayed(DELAY, startRegistreringStatus));
     (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
-}
-
-if (MOCK_SYKMELDT_INFO) {
-    const response = respondWith(delayed(DELAY, sykmeldtInfo));
-    (mock as any).get(`${VEILARBREGISTRERING_URL}/sykmeldtinfodata`, response);
 }
 
 if (MOCK_FEATURE_TOGGLES) {

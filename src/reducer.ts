@@ -8,7 +8,6 @@ import brukersNavn, {State as BrukersNavnState } from './ducks/brukers-navn';
 import autentiseringsInfo, {State as AutentiseringsInfoState } from './ducks/autentiseringsinfo';
 import sisteStillingFraAAReg, {State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import featureToggles, {State as FeatureTogglesState } from './ducks/feature-toggles';
-import sykmeldtInfo, {State as SykmeldtInfoState } from './ducks/sykmeldt-info';
 import oversettelseAvStillingFraAAReg, {
     State as OversettelseAvStillingFraAARegState
 } from './ducks/oversettelse-av-stilling-fra-aareg';
@@ -28,7 +27,6 @@ export interface AppState {
     sisteStilling: SisteStillingState;
     form: FieldState;
     featureToggles: FeatureTogglesState;
-    sykmeldtInfo: SykmeldtInfoState;
 }
 
 export default combineReducers<AppState>({
@@ -43,5 +41,4 @@ export default combineReducers<AppState>({
     defaultStilling,
     sisteStilling,
     featureToggles,
-    sykmeldtInfo,
 });

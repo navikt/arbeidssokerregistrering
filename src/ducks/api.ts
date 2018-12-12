@@ -41,16 +41,6 @@ export function hentRegistreringStatus() {
     });
 }
 
-export function hentSykmeldtInfo() {
-    return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/sykmeldtinfodata`,
-        config: {
-            ...MED_CREDENTIALS,
-            headers: getHeaders(),
-        }
-    });
-}
-
 export function registrerBruker(data: RegistrerBrukerData, registreringType: RegistreringType) {
 
     const endepunkt = registreringType === RegistreringType.SYKMELDT_REGISTRERING ?

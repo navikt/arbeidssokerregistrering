@@ -10,13 +10,12 @@ import { INNGANGSSPORSMAL_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { formaterDato, hentFornavn, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
-
+import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
 import veilederSvg from './veileder.svg';
 import './startside.less';
-import { selectSykmeldtInfo, State as SykmeldtInfoState } from '../../ducks/sykmeldt-info';
 
 interface StateProps {
-    sykmeldtInfo: SykmeldtInfoState;
+    registreringStatus: RegistreringStatusState;
     brukersNavn: BrukersNavnState;
 }
 
@@ -36,10 +35,9 @@ class StartsideSykmeldt extends React.Component<StartsideProps> {
     }
 
     render() {
-        const { brukersNavn, history, sykmeldtInfo } = this.props;
+        const { brukersNavn, history, registreringStatus } = this.props;
         const { name } = brukersNavn.data;
-        console.log(sykmeldtInfo.data.maksDato); // tslint:disable-line
-        const dato = formaterDato(sykmeldtInfo.data.maksDato);
+        const dato = formaterDato(registreringStatus.data.sykmeldtFraDato);
 
         return (
             <section className="startside">
@@ -83,7 +81,7 @@ class StartsideSykmeldt extends React.Component<StartsideProps> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    sykmeldtInfo: selectSykmeldtInfo(state),
+    registreringStatus: selectRegistreringstatus(state),
     brukersNavn: selectBrukersNavn(state),
 });
 
