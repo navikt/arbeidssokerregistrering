@@ -29,7 +29,7 @@ const tilbakeIArbeid = (fellesProps, regType) => {
             <OppsummeringElement
                 sporsmalId={SporsmalId.tilbakeIArbeid}
             >
-                <strong>Tilbake i jobb: &nbsp;</strong>
+                <strong><FormattedMessage id="sykmeldt-oppsummering-tilbake-i-jobb-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     };
@@ -71,7 +71,9 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 sporsmalId={SporsmalId.utdanningGodkjent}
                 skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
             >
-                <strong>Utdanning godkjent: &nbsp;</strong>
+                <strong>
+                    <FormattedMessage id="oppsummering-utdanning-godkjent-fortekst"/>&nbsp;
+                </strong>
             </OppsummeringElement>
         )
     },
@@ -91,7 +93,9 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 sporsmalId={SporsmalId.utdanningBestatt}
                 skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
             >
-                <strong>Utdanning bestått: &nbsp;</strong>
+                <strong>
+                    <FormattedMessage id="oppsummering-utdanning-bestatt-fortekst"/>&nbsp;
+                </strong>
             </OppsummeringElement>
 
         )
@@ -111,7 +115,9 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
                 key={SporsmalId.andreForhold}
                 sporsmalId={SporsmalId.andreForhold}
             >
-                <strong>Andre forhold: &nbsp;</strong>
+                <strong>
+                    <FormattedMessage id="sykmeldt-oppsummering-andre-hensyn-fortekst"/>&nbsp;
+                </strong>
             </OppsummeringElement>
         )
     }
