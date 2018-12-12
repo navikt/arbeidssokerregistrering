@@ -16,7 +16,7 @@ const alleLastetEllerReloading = (avhengigheter: {}[]) => (
 );
 
 interface InnholdslasterProps {
-    avhengigheter: { status: string }[];
+    avhengigheter: { status: STATUS }[];
     feilmeldingKomponent?: React.ReactNode;
     loaderKomponent?: React.ReactNode;
     storrelse?: storrelseType;

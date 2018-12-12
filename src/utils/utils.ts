@@ -79,6 +79,15 @@ export function hentAlder(personId: string) {
     return moment().diff(fodselsdato, 'years');
 }
 
+export function formaterDato(dato: string | undefined) {
+
+    if (!dato) {
+        return '';
+    }
+
+    return moment(dato, 'DD.MM.YYYY').format('DD. MMMM YYYY');
+}
+
 export function scrollToBanner() {
     let scrollHeight = 0;
     const header = document.querySelector('.siteheader');

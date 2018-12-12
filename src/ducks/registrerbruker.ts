@@ -1,5 +1,5 @@
 import * as Api from './api';
-import { doThenDispatch, STATUS } from './api-utils';
+import { doThenDispatch, FetchState, initialFetchState, STATUS } from './api-utils';
 import { Stilling } from './siste-stilling';
 import {
     AndreForholdSvar,
@@ -23,9 +23,8 @@ export enum ErrorTypes {
     BRUKER_MANGLER_ARBEIDSTILLATELSE = 'BRUKER_MANGLER_ARBEIDSTILLATELSE',
 }
 
-export interface State {
+export interface State extends FetchState {
     data: Data;
-    status: string;
 }
 
 interface TekstForSvar {
@@ -77,12 +76,7 @@ interface Action {
     data: Data;
 }
 
-const initialState = {
-    data: {},
-    status: STATUS.OK
-};
-
-export default function (state: State = initialState, action: Action): State {
+export default function (state: State = initialFetchState, action: Action): State {
     switch (action.type) {
         case ActionTypes.REG_BRUKER_STATUS_PENDING:
             if (state.status === STATUS.OK) {

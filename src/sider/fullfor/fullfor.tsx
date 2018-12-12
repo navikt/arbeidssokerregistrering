@@ -47,7 +47,7 @@ interface DispatchProps {
 interface EgenState {
     markert: boolean;
     visAdvarsel: boolean;
-    sblArbeidRegistrerBrukerStatus: string;
+    sblArbeidRegistrerBrukerStatus: STATUS;
 }
 
 type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps & InjectedIntlProps;

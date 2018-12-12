@@ -1,5 +1,5 @@
 import * as Api from './api';
-import { doThenDispatch, STATUS } from './api-utils';
+import { doThenDispatch, FetchState, STATUS } from './api-utils';
 import { AppState } from '../reducer';
 
 export enum ActionTypes {
@@ -12,9 +12,8 @@ export interface Data {
     'arbeidssokerregistrering.nedetid': boolean;
 }
 
-export interface State {
+export interface State extends FetchState {
     data: Data;
-    status: string;
 }
 
 interface Action {

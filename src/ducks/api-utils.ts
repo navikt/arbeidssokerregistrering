@@ -3,12 +3,22 @@ import { AppState } from '../reducer';
 import ActionType from './actions';
 import { ThunkAction } from 'redux-thunk';
 
-export const STATUS = {
-    NOT_STARTED: 'NOT_STARTED',
-    PENDING: 'PENDING',
-    OK: 'OK',
-    RELOADING: 'RELOADING',
-    ERROR: 'ERROR'
+export enum STATUS {
+    NOT_STARTED     = 'NOT_STARTED',
+    PENDING         = 'PENDING',
+    OK              = 'OK',
+    RELOADING       = 'RELOADING',
+    ERROR           = 'ERROR'
+}
+
+export interface FetchState {
+    data: any; // tslint:disable-line
+    status: STATUS;
+}
+
+export const initialFetchState: FetchState = {
+    data: {},
+    status: STATUS.NOT_STARTED
 };
 
 class FetchError extends Error {

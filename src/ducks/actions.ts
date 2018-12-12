@@ -7,16 +7,18 @@ import {ActionTypes as OversettelseAvStillingFraAARegActionTypes } from './overs
 import {ActionTypes as RegistrerBrukerActionTypes } from './registrerbruker';
 import {ActionTypes as ReaktiverBrukerActionTypes } from './reaktiverbruker';
 import {ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
+import {ActionTypes as SykmeldtInfoActionTypes } from './sykmeldt-info';
 
 type ActionTypes =
-   | RegStatusActionTypes
-   | BrukersNavnActionTypes
-   | AutentiseringsinfoActionTypes
-   | SvarActionTypes
-   | RegistrerBrukerActionTypes
-   | ReaktiverBrukerActionTypes
-   | OversettelseAvStillingFraAARegActionTypes
-   | SisteStillingFraAARegActionTypes
-   | FeatureTogglesActionTypes;
+    | RegStatusActionTypes
+    | BrukersNavnActionTypes
+    | AutentiseringsinfoActionTypes
+    | SvarActionTypes
+    | RegistrerBrukerActionTypes
+    | ReaktiverBrukerActionTypes
+    | OversettelseAvStillingFraAARegActionTypes
+    | SisteStillingFraAARegActionTypes
+    | FeatureTogglesActionTypes
+    | SykmeldtInfoActionTypes;
 
 export default ActionTypes;

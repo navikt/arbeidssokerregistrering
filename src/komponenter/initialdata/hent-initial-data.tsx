@@ -9,41 +9,71 @@ import {
     State as AuthState
 } from '../../ducks/autentiseringsinfo';
 import {
+    Data as RegistreringstatusData,
     hentRegistreringStatus,
+    RegistreringType,
     selectRegistreringstatus,
     State as RegistreringstatusState
 } from '../../ducks/registreringstatus';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import StepUp from './stepup';
-import { STATUS } from '../../ducks/api-utils';
+import { FetchState, STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import { VEILARBSTEPUP } from '../../ducks/api';
+import { hentSykmeldtInfo, selectSykmeldtInfo, State as SykmeldtInfoState } from '../../ducks/sykmeldt-info';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 import { hentFeatureToggles } from '../../ducks/feature-toggles';
+
+interface HentInitialDataState {
+    erSykmeldt: boolean;
+}
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
     autentiseringsinfo: AuthState;
     registreringstatus: RegistreringstatusState;
+    sykmeldtInfo: SykmeldtInfoState;
 }
 
 interface DispatchProps {
     hentBrukersNavn: () => Promise<void | {}>;
     hentAutentiseringsInfo: () => Promise<void | {}>;
-    hentRegistreringStatus: () => void;
+    hentRegistreringStatus: () => Promise<void | RegistreringstatusData>;
     hentFeatureToggle: () => Promise<void | {}>;
+    hentSykmeldtInfo: () => Promise<void | {}>;
 }
 
 type Props = StateProps & DispatchProps;
 
-export class HentInitialData extends React.Component<Props> {
+export class HentInitialData extends React.Component<Props, HentInitialDataState> {
+    
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            erSykmeldt: false
+        };
+    }
+
+    handleRegistreringStatusHentet = (registreringStatusData: RegistreringstatusData) => {
+
+        const erSykmeldt = registreringStatusData &&
+            registreringStatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+
+        this.setState({ erSykmeldt });
+
+        if (erSykmeldt) {
+            this.props.hentSykmeldtInfo();
+        }
+
+    }
+
     componentWillMount() {
 
         this.props.hentFeatureToggle().then(() => {
 
-            this.props.hentAutentiseringsInfo().then((res) => {
+            this.props.hentAutentiseringsInfo().then(res => {
                 if ((res as AuthData).nivaOidc === 4) {
-                    this.props.hentRegistreringStatus();
+                    this.props.hentRegistreringStatus().then(this.handleRegistreringStatusHentet);
                     this.props.hentBrukersNavn();
                 }
             });
@@ -53,7 +83,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const {children, registreringstatus, autentiseringsinfo, brukersNavn} = this.props;
+        const {children, registreringstatus, autentiseringsinfo, brukersNavn, sykmeldtInfo} = this.props;
         const {niva, nivaOidc} = autentiseringsinfo.data;
 
         if (autentiseringsinfo.status === STATUS.OK) {
@@ -68,14 +98,16 @@ export class HentInitialData extends React.Component<Props> {
             }
         }
 
+        const avhengigheter: FetchState[] = [registreringstatus, autentiseringsinfo, brukersNavn];
+
+        if (this.state.erSykmeldt) {
+            avhengigheter.push(sykmeldtInfo);
+        }
+
         return (
             <Innholdslaster
                 feilmeldingKomponent={<FeilmeldingGenerell/>}
-                avhengigheter={[
-                    registreringstatus,
-                    brukersNavn,
-                    autentiseringsinfo
-                ]}
+                avhengigheter={avhengigheter}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
             >
@@ -89,13 +121,15 @@ const mapStateToProps = (state) => ({
     autentiseringsinfo: selectAutentiseringsinfo(state),
     brukersNavn: selectBrukersNavn(state),
     registreringstatus: selectRegistreringstatus(state),
+    sykmeldtInfo: selectSykmeldtInfo(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentBrukersNavn: () => dispatch(hentBrukersNavn()),
     hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
     hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
-    hentFeatureToggle: () => dispatch(hentFeatureToggles())
+    hentFeatureToggle: () => dispatch(hentFeatureToggles()),
+    hentSykmeldtInfo: () => dispatch(hentSykmeldtInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HentInitialData);
