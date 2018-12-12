@@ -33,7 +33,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
                 key={SporsmalId.dinSituasjon}
                 sporsmalId={SporsmalId.dinSituasjon}
             >
-                <strong>Din Situasjon: &nbsp;</strong>
+                <strong><FormattedMessage id="oppsummering-situasjon-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     },
@@ -74,7 +74,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
                 sporsmalId={SporsmalId.utdanning}
                 skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
             >
-                <strong>Utdannelse: &nbsp;</strong>
+                <strong><FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     },
@@ -94,7 +94,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
                 sporsmalId={SporsmalId.utdanningGodkjent}
                 skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
             >
-                <strong>Utdannelse godkjent: &nbsp;</strong>
+                <strong><FormattedMessage id="oppsummering-utdanning-godkjent-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     },
@@ -114,7 +114,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
                 sporsmalId={SporsmalId.utdanningBestatt}
                 skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
             >
-                <strong>Utdanning bestått: &nbsp;</strong>
+                <strong><FormattedMessage id="oppsummering-utdanning-bestatt-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     },
@@ -133,7 +133,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
                 key={SporsmalId.helseHinder}
                 sporsmalId={SporsmalId.helseHinder}
             >
-                <strong>Helse hinder: &nbsp;</strong>
+                <strong><FormattedMessage id="oppsummering-helse-hinder-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     },
@@ -152,7 +152,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
                 key={SporsmalId.andreForhold}
                 sporsmalId={SporsmalId.andreForhold}
             >
-                <strong>Andre forhold: &nbsp;</strong>
+                <strong><FormattedMessage id="oppsummering-andre-forhold-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
     }
