@@ -37,7 +37,7 @@ class StartsideSykmeldt extends React.Component<StartsideProps> {
     render() {
         const { brukersNavn, history, registreringStatus } = this.props;
         const { name } = brukersNavn.data;
-        const dato = formaterDato(registreringStatus.data.sykmeldtFraDato);
+        const dato = formaterDato(registreringStatus.data.maksDato);
 
         return (
             <section className="startside">
