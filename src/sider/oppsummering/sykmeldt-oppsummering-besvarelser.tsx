@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import OppsummeringElement from './oppsummering-element';
 import { SporsmalId } from '../../ducks/svar';
 import { FormattedMessage } from 'react-intl';
-import * as moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
 import InfoViser from '../../komponenter/info-viser/info-viser';
@@ -28,8 +27,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
             return null;
         }
 
-        const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
-            'DD.MM.YYYY').format('DD. MMMM YYYY').toString();
+        const sykemeldtSidenDato = state.registreringStatus.data.maksDato;
 
         const inngangsLopSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
 
