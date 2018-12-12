@@ -23,7 +23,7 @@ export interface State extends FetchState {
 export interface Data {
     underOppfolging?: boolean;
     jobbetSeksAvTolvSisteManeder?: boolean;
-    sykmeldtFraDato?: string;
+    maksDato?: string;
     registreringType?: RegistreringType;
 }
 

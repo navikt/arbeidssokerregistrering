@@ -5,6 +5,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { Stilling } from '../../../../ducks/siste-stilling';
 
 import './autocomplete.less';
+import { Undertittel } from 'nav-frontend-typografi';
 
 // Hjelpe funksjon
 const getIndexValgteElement = (resultat: any) => { // tslint:disable-line
@@ -296,13 +297,14 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
         return (
             <form className="autocomplete-form" ref={this.setFormRef} action="">
                 <Input
+                    autoFocus={true}
                     onKeyDown={this.onKeyDown}
                     onKeyUp={this.onKeyUp}
                     onFocus={resetValue}
                     tab-index="0"
                     aria-owns="resultat"
                     autoComplete="off"
-                    label={intl.messages['siste-arbeidsforhold.undertittel']}
+                    label={<Undertittel>{intl.messages['siste-arbeidsforhold.undertittel']}</Undertittel>}
                     id="stilling"
                     aria-autocomplete="both"
                     aria-describedby="initInstr"
