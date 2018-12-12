@@ -1,15 +1,30 @@
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
-import { DinSituasjonSvar, hentSvar, IngenSvar, Svar, TilbakeIArbeidSvar, UtdanningSvar } from '../../ducks/svar-utils';
+import {
+    DinSituasjonSvar,
+    hentSvar,
+    IngenSvar,
+    Svar,
+    TilbakeIArbeidSvar,
+    UtdanningSvar
+} from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
 import {Props as SkjemaProps } from './skjema';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import { INFOSIDE_PATH } from '../../utils/konstanter';
+import {
+    hoppOverAlleUtdanningSporsmalene,
+    hoppOverSisteStillingSporsmal,
+    hoppOverUtdanningBestattOgGodkjentSporsmalene, spmSomIkkeSkalBesvaresConfig
+} from './skjema-config';
 
 export const INGEN_NESTE_SPORSMAL = -1;
 
 export type SkjemaConfig = Map<Svar, string[]>;
 
-export function getTekstIdForSvar(sporsmalId: SporsmalId, svar: Svar) {
+export function getTekstIdForSvar(sporsmalId: SporsmalId, svar: Svar | undefined) {
+    if (!svar) {
+        return '';
+    }
     return `${sporsmalId.toLowerCase()}-svar-${svarSuffiksTilTekstId(svar)}`;
 }
 
@@ -47,9 +62,9 @@ export const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[
     // For eksempel betyr [ALDRI_HATT_JOBB, ['sisteStilling']] at man skal hoppe over spørsmålet om sisteStilling
     // hvis man svarer ALDRI_HATT_JOBB på spørsmålet om dinSituasjon.
 
-    [DinSituasjonSvar.ALDRI_HATT_JOBB, ['sisteStilling']],
-    [DinSituasjonSvar.VIL_FORTSETTE_I_JOBB, ['utdanning', 'utdanningBestatt', 'utdanningGodkjent']],
-    [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
+    [DinSituasjonSvar.ALDRI_HATT_JOBB, hoppOverSisteStillingSporsmal],
+    [DinSituasjonSvar.VIL_FORTSETTE_I_JOBB, hoppOverAlleUtdanningSporsmalene],
+    [UtdanningSvar.INGEN_UTDANNING, hoppOverUtdanningBestattOgGodkjentSporsmalene],
 ]);
 
 export const vanligFlyt: SkjemaConfig = new Map<Svar, string[]>();
@@ -140,4 +155,18 @@ export function finnNesteHref(props: SkjemaProps): string {
 
     return props.baseUrl + '/' + nesteSporsmalPlassering;
 
+}
+
+export function nullStillSporsmalSomIkkeSkalBesvares(sporsmalId: any, svar: any, endreSvar: any, resetSvar) { // tslint:disable-line
+    spmSomIkkeSkalBesvaresConfig.map((config) => {
+        if (config.id === sporsmalId && config.svar === svar) {
+            config.spmHoppOver.map((spmId) => {
+                endreSvar(spmId, IngenSvar.INGEN_SVAR);
+            });
+        } else if (config.id === sporsmalId) {
+            config.spmHoppOver.map((spmId) => {
+                resetSvar(spmId);
+            });
+        }
+    });
 }
