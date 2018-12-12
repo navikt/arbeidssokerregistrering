@@ -51,10 +51,12 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                 <div className="sykmeldt-oppsummering-besvarelser--list-container">
                     <ul className="sykmeldt-oppsummering-besvarelser--list">
 
-                        <OppsummeringElement
-                            tekstId="sykmeldt-oppsummering-sykmeldt-siden"
-                            values={{ dato: sykemeldtSidenDato }}
-                        />
+                        <li className="typo-normal">
+                            <strong>
+                                <FormattedMessage id="sykmeldt-oppsummering-sykepenger-frem-til"/>&nbsp;
+                            </strong>
+                            {sykemeldtSidenDato}
+                        </li>
 
                         <OppsummeringElement
                             sporsmalId={SporsmalId.fremtidigSituasjon}
