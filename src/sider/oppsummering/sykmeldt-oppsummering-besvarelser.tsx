@@ -29,7 +29,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
         }
 
         const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
-            'YYYY-MM-DD').format('DD.MM.YY').toString();
+            'DD.MM.YYYY').format('DD. MMMM YYYY').toString();
 
         const inngangsLopSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
 
@@ -59,7 +59,9 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                         <OppsummeringElement
                             sporsmalId={SporsmalId.fremtidigSituasjon}
                         >
-                            <strong>Fremtidig situasjon: &nbsp;</strong>
+                            <strong>
+                                <FormattedMessage id="sykmeldt-oppsummering-framtidig-situasjon-fortekst"/>&nbsp;
+                            </strong>
                         </OppsummeringElement>
 
                         {element}
