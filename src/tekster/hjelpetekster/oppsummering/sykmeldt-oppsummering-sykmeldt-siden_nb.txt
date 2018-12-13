@@ -1,1 +1,0 @@
-Du har vært sykmeldt siden {dato}
