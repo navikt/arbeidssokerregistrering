@@ -1,4 +1,5 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
+@import '../../../node_modules/nav-frontend-core/less/core';
 
 .stepup {
     width: @screen-md-min;
@@ -6,9 +7,11 @@
     padding: 0 20px;
     max-width: 100%;
 
-    .alertstripe + .knapperad {
-        margin-top: 2rem;
-        text-align: center;
+    .tittel {
+        .blokk-xs();
+    }
+    .beskrivelse {
+        .blokk-s();
     }
 }
 
