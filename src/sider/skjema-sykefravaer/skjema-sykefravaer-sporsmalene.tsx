@@ -27,6 +27,7 @@ const tilbakeIArbeid = (fellesProps, regType) => {
         ),
         elementOppsummering: (
             <OppsummeringElement
+                key={SporsmalId.tilbakeIArbeid}
                 sporsmalId={SporsmalId.tilbakeIArbeid}
             >
                 <strong><FormattedMessage id="sykmeldt-oppsummering-tilbake-i-jobb-fortekst"/>&nbsp;</strong>
