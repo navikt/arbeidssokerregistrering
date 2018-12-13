@@ -12,7 +12,7 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 
 import personSvg from './person-komprimert.svg';
-import './startside.less';
+import './startside-ordinaer.less';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -21,15 +21,15 @@ interface StateProps {
 
 type StartsideProps = StateProps & RouteComponentProps<MatchProps>;
 
-class Startside extends React.Component<StartsideProps> {
+class StartsideOrdinaer extends React.Component<StartsideProps> {
     render() {
         const { brukersNavn, history } = this.props;
         const { name } = brukersNavn.data;
 
         return (
-            <section className="startside">
-                <div className="startside__banner">
-                    <div className="startside__intro">
+            <section className="startside-ordinaer">
+                <div className="startside-ordinaer__banner">
+                    <div className="startside-ordinaer__intro">
                         <Undertittel tag="h1">
                             <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
                         </Undertittel>
@@ -38,12 +38,12 @@ class Startside extends React.Component<StartsideProps> {
                         </p>
                     </div>
                     <img
-                        className="startside__intro__ikon"
+                        className="startside-ordinaer__intro__ikon"
                         src={personSvg}
                         alt="Person-ikon"
                     />
                 </div>
-                <div className="startside__innhold">
+                <div className="startside-ordinaer__innhold">
                     <Innholdstittel className="tittel">
                         <FormattedMessage id="overskrift-start"/>
                     </Innholdstittel>
@@ -69,4 +69,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     registreringstatusData: selectRegistreringstatus(state).data,
 });
 
-export default connect(mapStateToProps)(Startside);
+export default connect(mapStateToProps)(StartsideOrdinaer);

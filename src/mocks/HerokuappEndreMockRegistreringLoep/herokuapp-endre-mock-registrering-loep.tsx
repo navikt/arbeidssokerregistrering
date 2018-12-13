@@ -2,11 +2,11 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Data as StartRegistreringData, RegistreringType, ActionTypes as registringActionType }
-from '../../ducks/registreringstatus';
+    from '../../ducks/registreringstatus';
 import { ActionTypes as reaktiveringActionType }
-from '../../ducks/reaktiverbruker';
+    from '../../ducks/reaktiverbruker';
 import { ActionTypes as svarActionType }
-from '../../ducks/svar';
+    from '../../ducks/svar';
 import { RadioPanel } from 'nav-frontend-skjema';
 import getStore from '../../store';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -30,7 +30,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props> {
                 type: reaktiveringActionType.REAKTIVER_BRUKER_STATUS_PENDING,
             });
             store.dispatch({
-                type: svarActionType.AVGI_SVAR_RESET,
+                type: svarActionType.AVGI_SVAR_INIT,
             });
         };
         const oppdaterRegistreringsType = (type: RegistreringType) => {
@@ -39,7 +39,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props> {
                 data: {
                     registreringType: type,
                     underOppfolging: startRegistreringStatus.underOppfolging,
-                    sykmeldtFraDato: startRegistreringStatus.sykmeldtFraDato,
+                    maksDato: startRegistreringStatus.maksDato,
                 }
             });
             reset();

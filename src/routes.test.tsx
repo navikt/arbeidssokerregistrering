@@ -220,7 +220,7 @@ describe('Routes', () => {
 
         const store = create();
 
-        dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING, sykmeldtFraDato: "2018-10-21"}, store);
+        dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING, maksDato: "21.10.2018"}, store);
         dispatchFeaturestatus({
             'arbeidssokerregistrering.gradual-rollout-ny-registrering': true,
         }, store);

@@ -1,23 +1,23 @@
 import * as React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import Banner from './komponenter/banner/banner';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
-import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
 import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
-    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH, INFOSIDE_PATH,
-    INNGANGSSPORSMAL_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH, INFOSIDE_PATH, INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SKJEMA_PATH,
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
-import Startside from './sider/start/startside';
+import StartsideOrdinaer from './sider/startside-ordinaer/startside-ordinaer';
+import StartsideSykmeldt from './sider/startside-sykmeldt/startside-sykmeldt';
+import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
@@ -52,11 +52,13 @@ interface StateProps {
     state: AppState;
 }
 
-class Routes extends React.Component<StateProps> {
+type AllProps = StateProps & RouteComponentProps<any>; // tslint:disable-line
+
+class Routes extends React.Component<AllProps> {
 
     render() {
 
-        const { registreringstatusData, reaktivertStatus, featureToggles } = this.props;
+        const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
 
         const registreringType = registreringstatusData.registreringType;
@@ -81,6 +83,7 @@ class Routes extends React.Component<StateProps> {
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
+        const queryParams = location.search;
 
         return (
             <>
@@ -99,7 +102,7 @@ class Routes extends React.Component<StateProps> {
                             <Switch>
                                 <Route
                                     path={START_PATH}
-                                    component={Startside}
+                                    component={StartsideOrdinaer}
                                 />
                                 <Route
                                     path={`${SKJEMA_PATH}/:id`}
@@ -119,14 +122,18 @@ class Routes extends React.Component<StateProps> {
                         { visSykefravaerSkjema ? (
                             <Switch>
                                 <Route
-                                    path={INNGANGSSPORSMAL_PATH}
-                                    component={Inngangssporsmal}
+                                    path={START_PATH}
+                                    component={StartsideSykmeldt}
                                 />
                                 {klarForFullforing ?
                                     <Route path={INFOSIDE_PATH} component={Infoside} />
                                     :
                                     null
                                 }
+                                <Route
+                                    path={INNGANGSSPORSMAL_PATH}
+                                    component={Inngangssporsmal}
+                                />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
                                     component={SkjemaSykefravaerSammeArbeidsgiver}
@@ -144,7 +151,7 @@ class Routes extends React.Component<StateProps> {
                                     component={SkjemaSykefravaerUsikker}
                                 />
                                 <Redirect
-                                    to={INNGANGSSPORSMAL_PATH}
+                                    to={START_PATH + queryParams}
                                 />
                             </Switch>
                         ) : null }
@@ -164,4 +171,4 @@ const mapStateToProps = (state: AppState) => ({
     state: state,
 });
 
-export default connect(mapStateToProps, null, null, { pure: false })(Routes);
+export default connect(mapStateToProps, null, null, { pure: false })(withRouter(Routes));

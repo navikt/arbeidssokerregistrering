@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Alternativ from '../../komponenter/skjema/alternativ';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {
     getIntlTekstForSporsmal,
@@ -21,6 +20,7 @@ import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import './inngangssporsmal.less';
+import { hentAlternativeneForInngangsporsmal, hentInngangsLoep } from './inngangssporsmal-svar-alternativene';
 
 interface OwnState {
     visAdvarsel: boolean;
@@ -106,6 +106,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
             kontekst, intl, RegistreringType.SYKMELDT_REGISTRERING);
 
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
+        const alternativSvarene = hentAlternativeneForInngangsporsmal(alternativProps);
 
         return (
             <ResponsivSide>
@@ -117,14 +118,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
                             </Innholdstittel>
                         </legend>
                         <div className="spm-body">
-                            <Alternativ svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER} {...alternativProps}/>
-                            <Alternativ
-                                svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
-                                {...alternativProps}
-                            />
-                            <Alternativ svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER} {...alternativProps}/>
-                            <Alternativ svar={FremtidigSituasjonSvar.USIKKER} {...alternativProps}/>
-                            <Alternativ svar={FremtidigSituasjonSvar.INGEN_PASSER} {...alternativProps}/>
+                            {alternativSvarene}
                         </div>
                         {advarselElement}
                     </fieldset>
@@ -151,24 +145,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
             return OPPSUMMERING_PATH;
         } else {
 
-            let lop;
-
-            switch (svar) {
-                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER:
-                    lop = 1;
-                    break;
-                case FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING:
-                    lop = 2;
-                    break;
-                case FremtidigSituasjonSvar.NY_ARBEIDSGIVER:
-                    lop = 3;
-                    break;
-                case FremtidigSituasjonSvar.USIKKER:
-                    lop = 4;
-                    break;
-                default:
-                    lop = 0;
-            }
+            const lop = hentInngangsLoep(svar);
 
             return `${SKJEMA_SYKEFRAVAER_PATH}/${lop}/0`;
 

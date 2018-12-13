@@ -15,14 +15,13 @@ import {
     erSporsmalBesvart,
     finnGjeldendeSporsmalPlassering,
     finnNesteHref,
-    finnNesteSporsmalPlassering,
     getSporsmalIder,
     hentGjeldendeSporsmalId,
     isNumber,
     kanGaaTilNeste,
     SkjemaConfig
 } from './skjema-utils';
-import { hentSvar, IngenSvar, Svar } from '../../ducks/svar-utils';
+import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { START_PATH } from '../../utils/konstanter';
 import {
     Data as RegistreringstatusData,
@@ -69,26 +68,12 @@ class Skjema extends React.Component<Props, OwnState> {
     handleNesteBtnClick = (): void => {
         const gaaTilNeste = kanGaaTilNeste(this.props.svarState, hentGjeldendeSporsmalId(this.props));
 
-        if (gaaTilNeste) {
-            this.settIngenSvarForUbesvarteSporsmal();
-        }
         this.setState({ visAdvarsel: !gaaTilNeste });
     }
 
     handleTilbakeBtnClick = (): void => {
         this.setState({ visAdvarsel: false });
         this.props.history.goBack();
-    }
-
-    settIngenSvarForUbesvarteSporsmal = () => {
-        const gjeldendeSporsmalPlassering = finnGjeldendeSporsmalPlassering(this.props);
-        const nesteSporsmalPlassering = finnNesteSporsmalPlassering(this.props);
-        const sporsmalIder = getSporsmalIder(this.props);
-
-        for (let i = gjeldendeSporsmalPlassering + 1; i < nesteSporsmalPlassering; i++) {
-            const sporsmalId = sporsmalIder[i];
-            this.props.endreSvar(sporsmalId, IngenSvar.INGEN_SVAR);
-        }
     }
 
     finnGjeldendeSporsmal = (): React.ReactChild => {

@@ -1,14 +1,11 @@
 import * as _ from 'lodash';
-import { FormattedMessage } from 'react-intl';
 import * as React from 'react';
 import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
-import { SporsmalId } from '../../ducks/svar';
-import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
-import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from '../../ducks/svar-utils';
 import OppsummeringElement from './oppsummering-element';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import './ordinaer-oppsummering-besvarelser.less';
+import { hentElementOppsummering } from '../skjema-registrering/skjema-sporsmalene';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -29,6 +26,8 @@ class OrdinaerOppsummeringBesvarelser extends React.Component<StateProps> {
         const registreringStatus = state.registreringStatus.data;
         const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
 
+        const element = hentElementOppsummering(state);
+
         return (
             <div className="ordinaer-oppsummering-besvarelser">
                 <img
@@ -41,32 +40,7 @@ class OrdinaerOppsummeringBesvarelser extends React.Component<StateProps> {
                         tekstId={jobbetSeksAvTolvSisteManederTekstId}
                         skjul={jobbetSeksAvTolvSisteManederTekstId === ''}
                     />
-                    <OppsummeringElement sporsmalId={SporsmalId.dinSituasjon}>
-                        <FormattedMessage id={`oppsummering-dinsituasjon`}/>&nbsp;
-                    </OppsummeringElement>
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.sisteStilling}
-                        tekst={state.sisteStilling.data.stilling.label}
-                        skjul={state.sisteStilling.data.stilling === ingenYrkesbakgrunn}
-                    >
-                        <FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;
-                    </OppsummeringElement>
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanning}
-                        skjulHvisSvarErLik={UtdanningSvar.INGEN_SVAR}
-                    >
-                        <FormattedMessage id="oppsummering-utdanning-fortekst"/>&nbsp;
-                    </OppsummeringElement>
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanningBestatt}
-                        skjulHvisSvarErLik={UtdanningBestattSvar.INGEN_SVAR}
-                    />
-                    <OppsummeringElement
-                        sporsmalId={SporsmalId.utdanningGodkjent}
-                        skjulHvisSvarErLik={UtdanningGodkjentSvar.INGEN_SVAR}
-                    />
-                    <OppsummeringElement sporsmalId={SporsmalId.helseHinder}/>
-                    <OppsummeringElement sporsmalId={SporsmalId.andreForhold}/>
+                    {element}
                 </ul>
             </div>
         );
