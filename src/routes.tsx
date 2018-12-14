@@ -44,6 +44,7 @@ import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 import { selectFeatureToggles, Data as FeatureToggleData } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
+import { sammeArbeidsgiverSporsmaleneConfig } from './sider/skjema-sykefravaer/skjema-sykefravaer-sporsmalene';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -136,7 +137,11 @@ class Routes extends React.Component<AllProps> {
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                                    component={SkjemaSykefravaerSammeArbeidsgiver}
+                                    render={(props) => <SkjemaSykefravaerSammeArbeidsgiver
+                                        {...props}
+                                        lop={1}
+                                        lopConfig={sammeArbeidsgiverSporsmaleneConfig}
+                                    />}
                                 />
                                 <Route
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}

@@ -10,9 +10,6 @@ import { RouteComponentProps } from 'react-router';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
-import {
-    sammeArbeidsgiverSporsmaleneConfig
-} from './skjema-sykefravaer-sporsmalene';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -22,11 +19,19 @@ interface StateProps {
     svarState: SvarState;
 }
 
-type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+interface OwnProps {
+    lopConfig: (props: {}, type: string) => {
+        element: any // tslint:disable-line
+    }[];
+    lop: number;
+}
 
-class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
+type Props = OwnProps & DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+
+class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props, OwnProps> {
+
     render() {
-        const {endreSvar, intl, svarState, location, match, history} = this.props;
+        const {endreSvar, intl, lop, lopConfig, svarState, location, match, history} = this.props;
         const fellesProps = {
             endreSvar: (sporsmalId, svar) => {
                 endreSvar(sporsmalId, svar);
@@ -37,13 +42,13 @@ class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
 
         const regType = RegistreringType.SYKMELDT_REGISTRERING;
 
-        const sporsmal = sammeArbeidsgiverSporsmaleneConfig(fellesProps, regType)
+        const sporsmal = lopConfig(fellesProps, regType)
             .map(spmElement => spmElement.element);
-
+        
         return (
             <Skjema
                 config={vanligFlyt}
-                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/2`}
+                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/${lop}`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
