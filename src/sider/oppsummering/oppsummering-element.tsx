@@ -61,7 +61,7 @@ class OppsummeringElement extends React.Component<Props> {
         const { registreringType } = registreringstatusData;
 
         const endreLenke = RegistreringType.ORDINAER_REGISTRERING === registreringType
-            ? finnLenkeEndreElementForOrdinaer({}, '', this.props.sporsmalId)
+            ? finnLenkeEndreElementForOrdinaer(this.props.sporsmalId)
             : finnSykmeldtlopStien(this.props.sporsmalId);
 
         return (

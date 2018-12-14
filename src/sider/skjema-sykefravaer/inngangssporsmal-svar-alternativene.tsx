@@ -2,9 +2,9 @@ import * as React from 'react';
 import { FremtidigSituasjonSvar } from '../../ducks/svar-utils';
 import Alternativ from '../../komponenter/skjema/alternativ';
 import {
-    nyArbeidsgiverSporsmaleneConfig,
-    sammeArbeidsgiverNyStillingSporsmaleneConfig, sammeArbeidsgiverSporsmaleneConfig,
-    usikkerSporsmaleneConfig
+    nyArbSporsmalConfig,
+    sammeArbNyStillingSporsmalConfig, sammeArbSporsmalConfig,
+    usikkerSporsmalConfig
 } from './skjema-sykefravaer-sporsmalene';
 
 const svarAlternativeConfig = (alternativProps) => [
@@ -18,7 +18,7 @@ const svarAlternativeConfig = (alternativProps) => [
             />
         ),
         lop: 1,
-        lopConfig: sammeArbeidsgiverSporsmaleneConfig
+        lopConfig: sammeArbSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING,
@@ -30,7 +30,7 @@ const svarAlternativeConfig = (alternativProps) => [
             />
         ),
         lop: 2,
-        lopConfig: sammeArbeidsgiverNyStillingSporsmaleneConfig
+        lopConfig: sammeArbNyStillingSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.NY_ARBEIDSGIVER,
@@ -42,7 +42,7 @@ const svarAlternativeConfig = (alternativProps) => [
             />
         ),
         lop: 3,
-        lopConfig: nyArbeidsgiverSporsmaleneConfig
+        lopConfig: nyArbSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.USIKKER,
@@ -54,7 +54,7 @@ const svarAlternativeConfig = (alternativProps) => [
             />
         ),
         lop: 4,
-        lopConfig: usikkerSporsmaleneConfig
+        lopConfig: usikkerSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.INGEN_PASSER,

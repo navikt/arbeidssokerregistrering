@@ -12,7 +12,7 @@ import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstant
 import { SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
-    usikkerSporsmaleneConfig
+    usikkerSporsmalConfig
 } from './skjema-sykefravaer-sporsmalene';
 
 interface DispatchProps {
@@ -38,10 +38,10 @@ class SkjemaSykefravaerUsikker extends React.Component<Props> {
             },
             intl: intl,
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
+            registeringType: RegistreringType.SYKMELDT_REGISTRERING,
         };
 
-        const regType = RegistreringType.SYKMELDT_REGISTRERING;
-        const sporsmal = usikkerSporsmaleneConfig(fellesProps, regType)
+        const sporsmal = usikkerSporsmalConfig(fellesProps)
             .map(spmElement => spmElement.element);
 
         return (

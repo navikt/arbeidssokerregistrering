@@ -16,6 +16,7 @@ import {
 } from './sporsmal-siste-stilling/siste-stilling-utils';
 import { DinSituasjonSvar, Svar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
+import { SporsmalId } from '../../../ducks/svar';
 
 interface DispatchProps {
     velgStilling: (stilling: Stilling) => void;
@@ -38,7 +39,10 @@ class SporsmalDinSituasjon extends React.Component<Props> {
     }
 
     render() {
-        const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling} = this.props;
+        const {endreSvar, hentAvgittSvar, intl, velgStilling, defaultStilling} = this.props;
+
+        const sporsmalId = SporsmalId.dinSituasjon;
+
         const fellesProps = {
             intl: intl,
             avgiSvar: (svar: DinSituasjonSvar) => {

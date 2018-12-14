@@ -5,6 +5,7 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, TilbakeIArbeidSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { SporsmalId } from '../../../ducks/svar';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
@@ -12,12 +13,12 @@ function SporsmalTilbakeIArbeid(props: Props) {
 
     const fellesProps = {
         endreSvar: props.endreSvar,
-        avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
-        getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
-        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
+        avgiSvar: (svar: Svar) => props.endreSvar(SporsmalId.tilbakeIArbeid, svar),
+        getTekstId: (svar: Svar) => getTekstIdForSvar(SporsmalId.tilbakeIArbeid, svar),
+        hentAvgittSvar: () => props.hentAvgittSvar(SporsmalId.tilbakeIArbeid),
     };
 
-    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(SporsmalId.tilbakeIArbeid.toString(),
         kontekst, props.intl, props.registeringType);
 
     return (

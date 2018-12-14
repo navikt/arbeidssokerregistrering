@@ -39,10 +39,10 @@ class SkjemaRegistrering extends React.Component<Props> {
             },
             intl: intl,
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
+            registeringType: RegistreringType.ORDINAER_REGISTRERING
         };
 
-        const regType = RegistreringType.ORDINAER_REGISTRERING;
-        const registreringSporsmalElementene = hentRegistreringSporsmalene(sporsmalProps, regType);
+        const registreringSporsmalElementene = hentRegistreringSporsmalene(sporsmalProps);
 
         return (
             <LastInnSisteStilling>

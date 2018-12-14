@@ -17,15 +17,13 @@ import {
     UtdanningSvar
 } from '../../ducks/svar-utils';
 
-const sporsmaleneConfig = (sporsmalProps, regType, state) => [
+const sporsmaleneConfig = (sporsmalProps, state) => [
     {
         id: SporsmalId.dinSituasjon,
         element: (
             <SporsmalDinSituasjon
                 key={SporsmalId.dinSituasjon}
-                sporsmalId={SporsmalId.dinSituasjon}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -42,9 +40,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
         element: (
             <SisteStilling
                 key={SporsmalId.sisteStilling}
-                sporsmalId={SporsmalId.sisteStilling}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -63,9 +59,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
         element: (
             <Utdanningsporsmal
                 key={SporsmalId.utdanning}
-                sporsmalId={SporsmalId.utdanning}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -83,9 +77,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
         element: (
             <UtdanningGodkjentSporsmal
                 key={SporsmalId.utdanningGodkjent}
-                sporsmalId={SporsmalId.utdanningGodkjent}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -103,9 +95,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
         element: (
             <UtdanningBestattSporsmal
                 key={SporsmalId.utdanningBestatt}
-                sporsmalId={SporsmalId.utdanningBestatt}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -123,9 +113,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
         element: (
             <HelseHinder
                 key={SporsmalId.helseHinder}
-                sporsmalId={SporsmalId.helseHinder}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -142,9 +130,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
         element: (
             <AndreForhold
                 key={SporsmalId.andreForhold}
-                sporsmalId={SporsmalId.andreForhold}
                 {...sporsmalProps}
-                registeringType={regType}
             />
         ),
         elementOppsummering: (
@@ -158,8 +144,8 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
     }
 ];
 
-export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsmalId) => {
-    const index = sporsmaleneConfig(sporsmalProps, regType, {})
+export const finnLenkeEndreElementForOrdinaer = (sporsmalId) => {
+    const index = sporsmaleneConfig({}, {})
         .findIndex(data => data.id === sporsmalId);
     if (index >= 0) {
         return (
@@ -176,12 +162,12 @@ export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsma
 };
 
 export const hentElementOppsummering = (state) =>
-    sporsmaleneConfig({}, '', state).map((spmElement) => {
+    sporsmaleneConfig({}, state).map((spmElement) => {
         return spmElement.elementOppsummering;
     });
 
-const hentRegistreringSporsmalene = (sporsmalProps, regType) =>
-    sporsmaleneConfig(sporsmalProps, regType, {}).map((spmElement) => {
+const hentRegistreringSporsmalene = (sporsmalProps) =>
+    sporsmaleneConfig(sporsmalProps, {}).map((spmElement) => {
         return spmElement.element;
     });
 

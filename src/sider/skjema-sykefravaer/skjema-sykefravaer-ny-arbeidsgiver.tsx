@@ -15,7 +15,7 @@ import {
 } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
-    nyArbeidsgiverSporsmaleneConfig
+    nyArbSporsmalConfig
 } from './skjema-sykefravaer-sporsmalene';
 import { hentInngangsLoep } from './inngangssporsmal-svar-alternativene';
 
@@ -46,10 +46,10 @@ class SkjemaSykefravaerNyArbeidsgiver extends React.Component<Props> {
             },
             intl: intl,
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
+            registeringType: RegistreringType.SYKMELDT_REGISTRERING,
         };
 
-        const regType = RegistreringType.SYKMELDT_REGISTRERING;
-        const sporsmalene = nyArbeidsgiverSporsmaleneConfig(fellesProps, regType)
+        const sporsmalene = nyArbSporsmalConfig(fellesProps)
             .map(spmElement => spmElement.element);
 
         const inngangsLoepSvar: FremtidigSituasjonSvar = hentSvar(this.props.svarState,

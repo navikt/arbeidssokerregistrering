@@ -11,7 +11,7 @@ import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstant
 import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
-    sammeArbeidsgiverNyStillingSporsmaleneConfig
+    sammeArbNyStillingSporsmalConfig
 } from './skjema-sykefravaer-sporsmalene';
 
 interface DispatchProps {
@@ -33,11 +33,10 @@ class SkjemaSykefravaerSammeArbeidsgiverNyStilling extends React.Component<Props
             },
             intl: intl,
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
+            registeringType: RegistreringType.SYKMELDT_REGISTRERING,
         };
 
-        const regType = RegistreringType.SYKMELDT_REGISTRERING;
-
-        const sporsmal = sammeArbeidsgiverNyStillingSporsmaleneConfig(fellesProps, regType)
+        const sporsmal = sammeArbNyStillingSporsmalConfig(fellesProps)
             .map(spmElement => spmElement.element);
 
         return (

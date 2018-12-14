@@ -14,15 +14,14 @@ import {
 } from '../../ducks/svar-utils';
 import { FormattedMessage } from 'react-intl';
 import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
-const tilbakeIArbeid = (fellesProps, regType) => {
+
+const tilbakeIArbeid = (sporsmalProps) => {
     return {
         id: SporsmalId.tilbakeIArbeid,
         element: (
             <SporsmalTilbakeIArbeid
                 key={SporsmalId.tilbakeIArbeid}
-                sporsmalId={SporsmalId.tilbakeIArbeid}
-                {...fellesProps}
-                registeringType={regType}
+                {...sporsmalProps}
             />
         ),
         elementOppsummering: (
@@ -35,15 +34,13 @@ const tilbakeIArbeid = (fellesProps, regType) => {
         )
     };
 };
-const utdanningOgAndreForhold = (fellesProps, regType) => [
+const utdanningOgAndreForhold = (sporsmalProps) => [
     {
         id: SporsmalId.utdanning,
         element: (
             <Utdanningsporsmal
                 key={SporsmalId.utdanning}
-                sporsmalId={SporsmalId.utdanning}
-                {...fellesProps}
-                registeringType={regType}
+                {...sporsmalProps}
             />
         ),
         elementOppsummering: (
@@ -61,9 +58,7 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
         element: (
             <UtdanningGodkjentSporsmal
                 key={SporsmalId.utdanningGodkjent}
-                sporsmalId={SporsmalId.utdanningGodkjent}
-                {...fellesProps}
-                registeringType={regType}
+                {...sporsmalProps}
             />
         ),
         elementOppsummering: (
@@ -83,9 +78,7 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
         element: (
             <UtdanningBestattSporsmal
                 key={SporsmalId.utdanningBestatt}
-                sporsmalId={SporsmalId.utdanningBestatt}
-                {...fellesProps}
-                registeringType={regType}
+                {...sporsmalProps}
             />
         ),
         elementOppsummering: (
@@ -106,9 +99,7 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
         element: (
             <AndreForhold
                 key={SporsmalId.andreForhold}
-                sporsmalId={SporsmalId.andreForhold}
-                {...fellesProps}
-                registeringType={regType}
+                {...sporsmalProps}
             />
         ),
         elementOppsummering: (
@@ -124,17 +115,17 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
     }
 ];
 
-export const sammeArbeidsgiverSporsmaleneConfig = (fellesProps, regType) => [
-    tilbakeIArbeid(fellesProps, regType)
+export const sammeArbSporsmalConfig = (sporsmalProps) => [
+    tilbakeIArbeid(sporsmalProps)
 ];
-export const sammeArbeidsgiverNyStillingSporsmaleneConfig = (fellesProps, regType) => [
-    tilbakeIArbeid(fellesProps, regType)
+export const sammeArbNyStillingSporsmalConfig = (sporsmalProps) => [
+    tilbakeIArbeid(sporsmalProps)
 ];
-export const nyArbeidsgiverSporsmaleneConfig = (fellesProps, regType) =>
-    utdanningOgAndreForhold(fellesProps, regType);
+export const nyArbSporsmalConfig = (sporsmalProps) =>
+    utdanningOgAndreForhold(sporsmalProps);
 
-export const usikkerSporsmaleneConfig = (fellesProps, regType) =>
-    utdanningOgAndreForhold(fellesProps, regType);
+export const usikkerSporsmalConfig = (sporsmalProps) =>
+    utdanningOgAndreForhold(sporsmalProps);
 
 export const hentLenkeEndre = (sporsmalId, svar, lop) => {
     const config = hentLoepConfig({}, svar);
@@ -150,7 +141,7 @@ export const hentLenkeEndre = (sporsmalId, svar, lop) => {
         );
     }
     const index = config
-        ? config({}, '').findIndex(data => data.id === sporsmalId)
+        ? config({}).findIndex(data => data.id === sporsmalId)
         : -1;
 
     if (index >= 0) {

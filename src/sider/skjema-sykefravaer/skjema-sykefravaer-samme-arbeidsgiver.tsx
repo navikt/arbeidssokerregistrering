@@ -20,7 +20,7 @@ interface StateProps {
 }
 
 interface OwnProps {
-    lopConfig: (props: {}, type: string) => {
+    lopConfig: (props: {}) => {
         element: any // tslint:disable-line
     }[];
     lop: number;
@@ -38,11 +38,10 @@ class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props, OwnProps
             },
             intl: intl,
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
+            registeringType: RegistreringType.SYKMELDT_REGISTRERING,
         };
 
-        const regType = RegistreringType.SYKMELDT_REGISTRERING;
-
-        const sporsmal = lopConfig(fellesProps, regType)
+        const sporsmal = lopConfig(fellesProps)
             .map(spmElement => spmElement.element);
         
         return (
