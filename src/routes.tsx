@@ -31,6 +31,7 @@ import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
 import { connect } from 'react-redux';
+import { parse } from 'query-string';
 import {
     Data as RegistreringstatusData,
     RegistreringType,
@@ -60,8 +61,8 @@ class Routes extends React.Component<AllProps> {
 
         const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
-
         const registreringType = registreringstatusData.registreringType;
+        const erFraSykefravaer = parse(location.search).fraSykefravaer;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
@@ -78,12 +79,13 @@ class Routes extends React.Component<AllProps> {
                 return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
             }
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
+        } else if (erFraSykefravaer && location.pathname === START_PATH) {
+            return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
         }
 
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
-        const queryParams = location.search;
 
         return (
             <>
@@ -151,7 +153,7 @@ class Routes extends React.Component<AllProps> {
                                     component={SkjemaSykefravaerUsikker}
                                 />
                                 <Redirect
-                                    to={START_PATH + queryParams}
+                                    to={START_PATH}
                                 />
                             </Switch>
                         ) : null }
