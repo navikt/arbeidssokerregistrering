@@ -66,6 +66,15 @@ function hentAarhundre (personId: string) {
     return result;
 }
 
+export function formaterDato(dato: string | undefined) {
+
+    if (!dato) {
+        return '';
+    }
+
+    return moment(dato, 'DD.MM.YYYY').format('DD. MMMM YYYY');
+}
+
 export function hentAlder(personId: string) {
 
     const fnr = parseDNummer(personId);
