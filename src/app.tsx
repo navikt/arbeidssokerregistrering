@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as moment from 'moment';
+import 'moment/locale/nb';
 import { Provider } from 'react-redux';
 import IntlProvider from './Intl-provider';
 import getStore from './store';
@@ -16,6 +18,8 @@ import HerokuappEndreMockRegistreringLoep from
     './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 
 const store = getStore();
+
+moment.locale('nb');
 
 Modal.setAppElement('#root');
 

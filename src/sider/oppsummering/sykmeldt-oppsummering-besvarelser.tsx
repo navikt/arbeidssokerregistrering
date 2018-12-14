@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import OppsummeringElement from './oppsummering-element';
 import { SporsmalId } from '../../ducks/svar';
 import { FormattedMessage } from 'react-intl';
-import * as moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
 import InfoViser from '../../komponenter/info-viser/info-viser';
@@ -28,8 +27,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
             return null;
         }
 
-        const sykemeldtSidenDato = moment(state.registreringStatus.data.sykmeldtFraDato,
-            'YYYY-MM-DD').format('DD.MM.YY').toString();
+        const sykemeldtSidenDato = state.registreringStatus.data.maksDato;
 
         const inngangsLopSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
 
@@ -51,15 +49,19 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                 <div className="sykmeldt-oppsummering-besvarelser--list-container">
                     <ul className="sykmeldt-oppsummering-besvarelser--list">
 
-                        <OppsummeringElement
-                            tekstId="sykmeldt-oppsummering-sykmeldt-siden"
-                            values={{ dato: sykemeldtSidenDato }}
-                        />
+                        <li className="typo-normal">
+                            <strong>
+                                <FormattedMessage id="sykmeldt-oppsummering-sykepenger-frem-til"/>&nbsp;
+                            </strong>
+                            {sykemeldtSidenDato}
+                        </li>
 
                         <OppsummeringElement
                             sporsmalId={SporsmalId.fremtidigSituasjon}
                         >
-                            <strong>Fremtidig situasjon: &nbsp;</strong>
+                            <strong>
+                                <FormattedMessage id="sykmeldt-oppsummering-framtidig-situasjon-fortekst"/>&nbsp;
+                            </strong>
                         </OppsummeringElement>
 
                         {element}

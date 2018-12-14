@@ -39,7 +39,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props> {
                 data: {
                     registreringType: type,
                     underOppfolging: startRegistreringStatus.underOppfolging,
-                    sykmeldtFraDato: startRegistreringStatus.sykmeldtFraDato,
+                    maksDato: startRegistreringStatus.maksDato,
                 }
             });
             reset();
