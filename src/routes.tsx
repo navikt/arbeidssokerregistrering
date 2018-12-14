@@ -15,8 +15,8 @@ import {
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
-import StartsideOrdinaer from './sider/startside-ordinaer/startside-ordinaer';
-import StartsideSykmeldt from './sider/startside-sykmeldt/startside-sykmeldt';
+import StartsideOrdinaer from './sider/startside/startside-ordinaer';
+import StartsideSykmeldt from './sider/startside/startside-sykmeldt';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
