@@ -19,7 +19,7 @@ function KnappFullfor({ disabled, onClick, intl}: Props) {
             onClick={onClick}
             data-testid="neste"
         >
-            <Normaltekst>{getIntlMessage(intl.messages, 'knapp-fullfor')}</Normaltekst>
+            <Normaltekst>{getIntlMessage(intl.messages, 'fullfor-knapp')}</Normaltekst>
         </KnappBase>
 
     );

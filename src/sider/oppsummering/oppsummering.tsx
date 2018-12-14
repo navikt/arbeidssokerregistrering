@@ -93,11 +93,11 @@ class Oppsummering extends React.Component<Props> {
         if (visOrdinaerBesvarelser) {
            oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
            tekstPrefix = 'ordinaer-oppsummering';
-           knappTekstId = 'knapp-riktig';
+           knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
         } else {
             oppsummeringBesvarelser = <SykmeldtOppsummeringBesvarelser/>;
             tekstPrefix = 'sykmeldt-oppsummering';
-            knappTekstId = 'knapp-fullfor';
+            knappTekstId = 'sykmeldt-oppsummering-knapp-fullfor';
         }
 
         return (
