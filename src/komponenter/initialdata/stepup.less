@@ -15,8 +15,9 @@
         padding-bottom: 5rem;
 
         .beskrivelse {
-            margin-left: 10rem;
-            margin-right: 10rem;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 26rem;
             margin-bottom: 3rem;
         }
     }
@@ -36,11 +37,15 @@
 
         &__kort {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
+            flex-direction: column;
+            justify-content: center;
             .info-kort {
-                width: 40%;
+                min-width: 2rem;
+                max-width: 18rem;
+            }
+            @media (min-width: @screen-sm-min) {
+                flex-direction: row;
+                justify-content: space-between;
             }
 
         }
