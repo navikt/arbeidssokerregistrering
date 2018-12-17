@@ -8,7 +8,9 @@ import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
-    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH, INFOSIDE_PATH, INNGANGSSPORSMAL_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
+    INFOSIDE_PATH,
+    INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SKJEMA_PATH,
@@ -32,18 +34,14 @@ import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
 import { connect } from 'react-redux';
 import { parse } from 'query-string';
-import {
-    Data as RegistreringstatusData,
-    RegistreringType,
-    selectRegistreringstatus
-} from './ducks/registreringstatus';
+import {Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
-import { selectFeatureToggles, Data as FeatureToggleData } from './ducks/feature-toggles';
+import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 
 interface StateProps {
@@ -84,7 +82,8 @@ class Routes extends React.Component<AllProps> {
                 return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
             }
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
-        } else if (erFraSykefravaer && location.pathname === START_PATH) {
+        } else if (registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
+            erFraSykefravaer && location.pathname === START_PATH) {
             return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
         }
 
