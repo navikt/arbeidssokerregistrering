@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
 import { hentSvar } from '../../ducks/svar-utils';
-import { hentLoepConfig } from '../skjema-sykefravaer/inngangssporsmal-svar-alternativene';
+import { hentLoepConfig } from '../skjema-sykefravaer/inngangssporsmal-config';
 import { formaterDato } from '../../utils/utils';
 
 const oppsummeringSvg = require('./oppsummering.svg');

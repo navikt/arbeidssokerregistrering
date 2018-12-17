@@ -17,7 +17,7 @@ import {
 import {
     hentLenkeEndre,
 } from '../skjema-sykefravaer/skjema-sykefravaer-sporsmalene';
-import { hentInngangsLoep } from '../skjema-sykefravaer/inngangssporsmal-svar-alternativene';
+import { hentInngangsLoep } from '../skjema-sykefravaer/inngangssporsmal-config';
 
 interface OwnProps {
     sporsmalId?: SporsmalId;

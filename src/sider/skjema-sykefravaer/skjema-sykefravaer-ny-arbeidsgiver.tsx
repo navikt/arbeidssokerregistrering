@@ -17,7 +17,7 @@ import { RegistreringType } from '../../ducks/registreringstatus';
 import {
     nyArbSporsmalConfig
 } from './skjema-sykefravaer-sporsmalene';
-import { hentInngangsLoep } from './inngangssporsmal-svar-alternativene';
+import { hentInngangsLoep } from './inngangssporsmal-config';
 
 interface DispatchProps {
     resetSvar: (sporsmalId: SporsmalId) => void;

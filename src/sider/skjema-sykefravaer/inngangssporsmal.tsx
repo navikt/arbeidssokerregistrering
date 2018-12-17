@@ -20,7 +20,7 @@ import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import './inngangssporsmal.less';
-import { hentAlternativeneForInngangsporsmal, hentInngangsLoep } from './inngangssporsmal-svar-alternativene';
+import { hentAlternativeneForInngangsporsmal, hentInngangsLoep } from './inngangssporsmal-config';
 
 interface OwnState {
     visAdvarsel: boolean;

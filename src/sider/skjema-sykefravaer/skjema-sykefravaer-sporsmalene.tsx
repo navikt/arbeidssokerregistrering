@@ -6,7 +6,7 @@ import UtdanningGodkjentSporsmal from '../skjema-registrering/sporsmal/sporsmal-
 import AndreForhold from '../skjema-registrering/sporsmal/sporsmal-andre-forhold';
 import { Link } from 'react-router-dom';
 import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
-import { hentLoepConfig } from './inngangssporsmal-svar-alternativene';
+import { hentLoepConfig } from './inngangssporsmal-config';
 import {
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
