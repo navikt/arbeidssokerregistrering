@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { parse } from 'query-string';
 import { connect } from 'react-redux';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
@@ -22,17 +21,6 @@ interface StateProps {
 type StartsideProps = StateProps & RouteComponentProps<MatchProps>;
 
 class StartsideSykmeldt extends React.Component<StartsideProps> {
-
-    componentWillMount() {
-
-        const { history, location } = this.props;
-        const erFraSykefravaer = parse(location.search).fraSykefravaer;
-
-        if (erFraSykefravaer) {
-            history.push(INNGANGSSPORSMAL_PATH);
-        }
-
-    }
 
     render() {
         const { brukersNavn, history, registreringStatus } = this.props;
