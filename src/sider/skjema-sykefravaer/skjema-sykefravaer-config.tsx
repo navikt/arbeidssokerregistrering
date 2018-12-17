@@ -22,8 +22,15 @@ interface SporsmalProps {
     hentAvgittSvar: (sporsmalId: SporsmalId) => Svar | undefined;
     registeringType: RegistreringType;
 }
+interface KonfigVerdi {
+    id: SporsmalId;
+    element: any; //tslint:disable-line
+    elementOppsummering: any; //tslint:disable-line
+}
 
-const tilbakeIArbeid = (sporsmalProps: SporsmalProps) => [
+export type lopConfigType = (sporsmalProps: SporsmalProps) => KonfigVerdi[];
+
+const tilbakeIArbeid: lopConfigType = (sporsmalProps: SporsmalProps) => [
     {
         id: SporsmalId.tilbakeIArbeid,
         element: (
@@ -128,16 +135,16 @@ const utdanningOgAndreForhold = (sporsmalProps: SporsmalProps) => [
     }
 ];
 
-export const sammeArbSporsmalConfig = (sporsmalProps: SporsmalProps) =>
+export const sammeArbSporsmalConfig: lopConfigType = (sporsmalProps: SporsmalProps) =>
     tilbakeIArbeid(sporsmalProps);
 
-export const sammeArbNyStillingSporsmalConfig = (sporsmalProps: SporsmalProps) =>
+export const sammeArbNyStillingSporsmalConfig: lopConfigType = (sporsmalProps: SporsmalProps) =>
     tilbakeIArbeid(sporsmalProps);
 
-export const nyArbSporsmalConfig = (sporsmalProps: SporsmalProps) =>
+export const nyArbSporsmalConfig: lopConfigType = (sporsmalProps: SporsmalProps) =>
     utdanningOgAndreForhold(sporsmalProps);
 
-export const usikkerSporsmalConfig = (sporsmalProps: SporsmalProps) =>
+export const usikkerSporsmalConfig: lopConfigType = (sporsmalProps: SporsmalProps) =>
     utdanningOgAndreForhold(sporsmalProps);
 
 export const hentLenkeEndre = (sporsmalId, svar, lop) => {

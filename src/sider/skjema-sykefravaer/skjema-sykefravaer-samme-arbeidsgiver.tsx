@@ -10,6 +10,7 @@ import { RouteComponentProps } from 'react-router';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
+import { lopConfigType } from './skjema-sykefravaer-config';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
@@ -20,15 +21,13 @@ interface StateProps {
 }
 
 interface OwnProps {
-    lopConfig: (props: {}) => {
-        element: any // tslint:disable-line
-    }[];
+    lopConfig: lopConfigType;
     lop: number;
 }
 
 type Props = OwnProps & DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props, OwnProps> {
+class SkjemaSykefravaerSammeArbeidsgiver extends React.Component<Props> {
 
     render() {
         const {endreSvar, intl, lop, lopConfig, svarState, location, match, history} = this.props;
