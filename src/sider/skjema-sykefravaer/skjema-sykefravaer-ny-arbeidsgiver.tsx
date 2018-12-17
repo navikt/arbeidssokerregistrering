@@ -16,7 +16,7 @@ import {
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
     nyArbSporsmalConfig
-} from './skjema-sykefravaer-sporsmalene';
+} from './skjema-sykefravaer-config';
 import { hentInngangsLoep } from './inngangssporsmal-config';
 
 interface DispatchProps {

@@ -43,7 +43,7 @@ import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
-import { sammeArbSporsmalConfig } from './sider/skjema-sykefravaer/skjema-sykefravaer-sporsmalene';
+import { sammeArbSporsmalConfig } from './sider/skjema-sykefravaer/skjema-sykefravaer-config';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;

@@ -5,7 +5,7 @@ import {
     nyArbSporsmalConfig,
     sammeArbNyStillingSporsmalConfig, sammeArbSporsmalConfig,
     usikkerSporsmalConfig
-} from './skjema-sykefravaer-sporsmalene';
+} from './skjema-sykefravaer-config';
 
 interface SvarAlternativeProps {
     hentAvgittSvar: () => Svar | undefined;

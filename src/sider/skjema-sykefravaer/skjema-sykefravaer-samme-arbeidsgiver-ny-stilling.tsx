@@ -12,7 +12,7 @@ import { vanligFlyt } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
     sammeArbNyStillingSporsmalConfig
-} from './skjema-sykefravaer-sporsmalene';
+} from './skjema-sykefravaer-config';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;

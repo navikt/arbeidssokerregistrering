@@ -16,7 +16,7 @@ import {
 } from '../skjema-registrering/skjema-sporsmalene';
 import {
     hentLenkeEndre,
-} from '../skjema-sykefravaer/skjema-sykefravaer-sporsmalene';
+} from '../skjema-sykefravaer/skjema-sykefravaer-config';
 import { hentInngangsLoep } from '../skjema-sykefravaer/inngangssporsmal-config';
 
 interface OwnProps {

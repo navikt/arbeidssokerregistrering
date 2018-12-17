@@ -13,7 +13,7 @@ import { SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
     usikkerSporsmalConfig
-} from './skjema-sykefravaer-sporsmalene';
+} from './skjema-sykefravaer-config';
 
 interface DispatchProps {
     endreSvar: (sporsmalId: string, svar: Svar) => void;
