@@ -90,7 +90,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
                                     frontendLogger('registrering.ikke.vis.dagpenger.info');
                                 }}
                             >
-                                <FormattedMessage id="knapp-ikke-na"/>
+                                <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
                             </a>
                             <a
                                 href={veienTilArbeidMedVisInfoUrl}
@@ -99,7 +99,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
                                     frontendLogger('registrering.vis.dagpenger.info');
                                 }}
                             >
-                                <FormattedMessage id="knapp-ja-vis-meg"/>
+                                <FormattedMessage id="duernaregistrert-knapp-ja"/>
                             </a>
                         </div>
                     </div>

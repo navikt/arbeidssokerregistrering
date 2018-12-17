@@ -30,7 +30,7 @@ import utropstegnSvg from './utropstegn.svg';
 import kalenderSvg from './kalender.svg';
 import filnySvg from './fil-ny.svg';
 import epostSvg from './epost.svg';
-import ikonytelserSvg from './ikon-ytelser.svg';
+import okonomiSvg from './okonomi.svg';
 
 import './fullfor.less';
 
@@ -166,21 +166,21 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                             <ul className="fullfor-info-liste">
                                 <li className="fullfor-info-liste__element">
                                     <img
+                                        src={okonomiSvg}
+                                        alt="Økonomi"
+                                        className="illustrasjon"
+                                    />
+                                    <Element className="tittel">Økonomi</Element>
+                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-okonomi"/></Normaltekst>
+                                </li>
+                                <li className="fullfor-info-liste__element">
+                                    <img
                                         src={epostSvg}
                                         alt="Meldekort"
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">Meldekort</Element>
                                     <Normaltekst><FormattedMessage id="fullfor-les-mer-meldekort"/></Normaltekst>
-                                </li>
-                                <li className="fullfor-info-liste__element">
-                                    <img
-                                        src={filnySvg}
-                                        alt="CV"
-                                        className="illustrasjon"
-                                    />
-                                    <Element className="tittel">CV</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-CV"/></Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
                                     <img
@@ -195,12 +195,12 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                 </li>
                                 <li className="fullfor-info-liste__element">
                                     <img
-                                        src={ikonytelserSvg}
-                                        alt="Ytelser"
+                                        src={filnySvg}
+                                        alt="CV"
                                         className="illustrasjon"
                                     />
-                                    <Element className="tittel">Ytelser</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-ytelser"/></Normaltekst>
+                                    <Element className="tittel">CV</Element>
+                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-CV"/></Normaltekst>
                                 </li>
                             </ul>
 
