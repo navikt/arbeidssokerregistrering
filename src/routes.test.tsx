@@ -26,6 +26,7 @@ import InfoForIkkeArbeidssokerUtenOppfolging
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import DuErNaRegistrert from './sider/registrert/registrert';
+import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 
@@ -183,6 +184,18 @@ describe('Routes', () => {
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
         expect(wrapper.find(StartsideSykmeldt)).to.have.length(1);
+
+    });
+
+
+    it('Skal redirecte til Inngangssporsmal hvis bruker er fra Ditt Sykefravær', () => {
+
+        const store = create();
+
+        dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING, maksDato: "21.10.2018"}, store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, ["/start?fraSykefravaer=true"]);
+        expect(wrapper.find(Inngangssporsmal)).to.have.length(1);
 
     });
 
