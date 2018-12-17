@@ -23,6 +23,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <SporsmalDinSituasjon
                 key={SporsmalId.dinSituasjon}
+                sporsmalId={SporsmalId.dinSituasjon}
                 {...sporsmalProps}
             />
         ),
@@ -40,6 +41,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <SisteStilling
                 key={SporsmalId.sisteStilling}
+                sporsmalId={SporsmalId.sisteStilling}
                 {...sporsmalProps}
             />
         ),
@@ -59,6 +61,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <Utdanningsporsmal
                 key={SporsmalId.utdanning}
+                sporsmalId={SporsmalId.utdanning}
                 {...sporsmalProps}
             />
         ),
@@ -77,6 +80,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <UtdanningGodkjentSporsmal
                 key={SporsmalId.utdanningGodkjent}
+                sporsmalId={SporsmalId.utdanningGodkjent}
                 {...sporsmalProps}
             />
         ),
@@ -95,6 +99,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <UtdanningBestattSporsmal
                 key={SporsmalId.utdanningBestatt}
+                sporsmalId={SporsmalId.utdanningBestatt}
                 {...sporsmalProps}
             />
         ),
@@ -113,6 +118,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <HelseHinder
                 key={SporsmalId.helseHinder}
+                sporsmalId={SporsmalId.helseHinder}
                 {...sporsmalProps}
             />
         ),
@@ -130,6 +136,7 @@ const sporsmaleneConfig = (sporsmalProps, state) => [
         element: (
             <AndreForhold
                 key={SporsmalId.andreForhold}
+                sporsmalId={SporsmalId.andreForhold}
                 {...sporsmalProps}
             />
         ),

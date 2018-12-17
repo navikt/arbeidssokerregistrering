@@ -6,17 +6,16 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, UtdanningSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 import { injectIntl } from 'react-intl';
-import { SporsmalId } from '../../../ducks/svar';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
 function Utdanningsporsmal(props: Props) {
     const fellesProps = {
-        avgiSvar: (svar: Svar) => props.endreSvar(SporsmalId.utdanning, svar),
-        getTekstId: (svar: Svar) => getTekstIdForSvar(SporsmalId.utdanning, svar),
-        hentAvgittSvar: () => props.hentAvgittSvar(SporsmalId.utdanning),
+        avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
+        getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
+        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
-    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(SporsmalId.utdanning.toString(),
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
         kontekst, props.intl, props.registeringType);
 
     return (

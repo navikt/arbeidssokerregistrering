@@ -6,20 +6,19 @@ import Ikon from 'nav-frontend-ikoner-assets';
 import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { SporsmalId } from '../../../ducks/svar';
 
 type Props = SporsmalProps & InjectedIntlProps;
 
 function AndreForhold(props: Props) {
-    const { intl } = props;
+    const { intl, sporsmalId } = props;
     const fellesProps = {
         endreSvar: props.endreSvar,
         intl: intl,
-        avgiSvar: (svar: Svar) => props.endreSvar(SporsmalId.andreForhold, svar),
-        getTekstId: (svar: Svar) => getTekstIdForSvar(SporsmalId.andreForhold, svar),
-        hentAvgittSvar: () => props.hentAvgittSvar(SporsmalId.andreForhold),
+        avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
+        getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
+        hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
-    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(SporsmalId.andreForhold.toString(),
+    const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
         kontekst, intl, props.registeringType);
 
     return (

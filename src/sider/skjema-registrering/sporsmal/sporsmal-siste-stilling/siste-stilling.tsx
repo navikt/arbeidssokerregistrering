@@ -65,11 +65,10 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
     componentWillMount() {
         const {
             endreSvar,
+            sporsmalId,
             sisteStilling,
             svarState
         } = this.props;
-
-        const sporsmalId = SporsmalId.sisteStilling;
 
         if (skalSkjuleSvaralternativer(hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar)) {
             this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
@@ -82,14 +81,12 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
     }
 
     skalViseStillingsfelt() {
-        return (this.props.hentAvgittSvar(SporsmalId.sisteStilling) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB);
+        return (this.props.hentAvgittSvar(this.props.sporsmalId) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB);
     }
 
     angiSvarPaaDetteSporsmaletSomIkkeBesvart() {
-        const {svarState, endreSvar} = this.props;
-        const sporsmalId = SporsmalId.sisteStilling;
-
-        if (hentSvar(svarState, sporsmalId) !== SisteStillingSvar.INGEN_SVAR) {
+        const {svarState, endreSvar, sporsmalId} = this.props;
+        if (hentSvar(svarState, SporsmalId.sisteStilling) !== SisteStillingSvar.INGEN_SVAR) {
             endreSvar(sporsmalId, SisteStillingSvar.INGEN_SVAR);
         }
     }
@@ -112,14 +109,13 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
             sisteStilling,
             intl,
             endreSvar,
+            sporsmalId,
             hentAvgittSvar,
             velgStilling,
             oversettelseAvStillingFraAAReg,
             svarState,
             registreringType
         } = this.props;
-
-        const sporsmalId = SporsmalId.sisteStilling;
 
         const alternativProps = {
             intl,

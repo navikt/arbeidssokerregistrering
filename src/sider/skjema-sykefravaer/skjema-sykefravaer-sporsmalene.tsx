@@ -21,6 +21,7 @@ const tilbakeIArbeid = (sporsmalProps) => {
         element: (
             <SporsmalTilbakeIArbeid
                 key={SporsmalId.tilbakeIArbeid}
+                sporsmalId={SporsmalId.tilbakeIArbeid}
                 {...sporsmalProps}
             />
         ),
@@ -40,6 +41,7 @@ const utdanningOgAndreForhold = (sporsmalProps) => [
         element: (
             <Utdanningsporsmal
                 key={SporsmalId.utdanning}
+                sporsmalId={SporsmalId.utdanning}
                 {...sporsmalProps}
             />
         ),
@@ -58,6 +60,7 @@ const utdanningOgAndreForhold = (sporsmalProps) => [
         element: (
             <UtdanningGodkjentSporsmal
                 key={SporsmalId.utdanningGodkjent}
+                sporsmalId={SporsmalId.utdanningGodkjent}
                 {...sporsmalProps}
             />
         ),
@@ -78,6 +81,7 @@ const utdanningOgAndreForhold = (sporsmalProps) => [
         element: (
             <UtdanningBestattSporsmal
                 key={SporsmalId.utdanningBestatt}
+                sporsmalId={SporsmalId.utdanningBestatt}
                 {...sporsmalProps}
             />
         ),
@@ -99,6 +103,7 @@ const utdanningOgAndreForhold = (sporsmalProps) => [
         element: (
             <AndreForhold
                 key={SporsmalId.andreForhold}
+                sporsmalId={SporsmalId.andreForhold}
                 {...sporsmalProps}
             />
         ),
