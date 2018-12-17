@@ -133,7 +133,7 @@ export const usikkerSporsmalConfig = (sporsmalProps) =>
     utdanningOgAndreForhold(sporsmalProps);
 
 export const hentLenkeEndre = (sporsmalId, svar, lop) => {
-    const config = hentLoepConfig({}, svar);
+    const config = hentLoepConfig(svar);
 
     if (SporsmalId.fremtidigSituasjon === sporsmalId) {
         return (

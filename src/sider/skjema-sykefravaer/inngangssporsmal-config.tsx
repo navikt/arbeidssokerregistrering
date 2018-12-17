@@ -13,13 +13,13 @@ interface SvarAlternativeProps {
     getTekstId: (svar: Svar) => string;
 }
 
-interface AlterantivConfig {
+interface KonfigVerdi {
     id: FremtidigSituasjonSvar;
     element: any; //tslint:disable-line
     lopConfig: any; //tslint:disable-line
     lop: number;
 }
-type svarAlternativeConfigType = (alternativProps?: SvarAlternativeProps) => AlterantivConfig[];
+type svarAlternativeConfigType = (alternativProps?: SvarAlternativeProps) => KonfigVerdi[];
 
 const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: SvarAlternativeProps) => [
     {
@@ -89,21 +89,21 @@ const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: Svar
     }
 ];
 
-type hentSvarAlternativForInngangsporsmalType = (alternativProps: SvarAlternativeProps) => AlterantivConfig[];
+type hentSvarAlternativForInngangsporsmalType = (alternativProps: SvarAlternativeProps) => KonfigVerdi[];
 
 export const hentSvarAlternativForInngangsporsmal
     : hentSvarAlternativForInngangsporsmalType = (alternativProps: SvarAlternativeProps) =>
     svarAlternativeConfig(alternativProps).map((alternativ) => alternativ.element);
 
-export const hentInngangsLoep = (inngangsLoepSvar) => {
-    const lop = svarAlternativeConfig().find((alternativ) =>
+export const hentInngangsLoep = (inngangsLoepSvar: FremtidigSituasjonSvar | undefined) => {
+    const lop: KonfigVerdi | undefined = svarAlternativeConfig().find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );
     return lop && lop.lop;
 };
 
-export const hentLoepConfig = (alternativProps, inngangsLoepSvar) => {
-    const lop = svarAlternativeConfig(alternativProps).find((alternativ) =>
+export const hentLoepConfig = (inngangsLoepSvar: FremtidigSituasjonSvar | undefined) => {
+    const lop: KonfigVerdi | undefined = svarAlternativeConfig().find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );
     return lop && lop.lopConfig;

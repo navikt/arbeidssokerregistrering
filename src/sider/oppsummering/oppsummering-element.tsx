@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { AppState } from '../../reducer';
 import { FormattedMessage } from 'react-intl';
-import { hentSvar, Svar } from '../../ducks/svar-utils';
+import { FremtidigSituasjonSvar, hentSvar, Svar } from '../../ducks/svar-utils';
 import { MessageValue } from 'react-intl';
 import { erSporsmalBesvart, getTekstIdForSvar } from '../../komponenter/skjema/skjema-utils';
 import {
@@ -52,7 +52,7 @@ class OppsummeringElement extends React.Component<Props> {
         );
 
         const finnSykmeldtlopStien = (sporsmalId) => {
-            const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon);
+            const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon) as FremtidigSituasjonSvar;
             const lop = hentInngangsLoep(svar);
 
             return hentLenkeEndre(sporsmalId, svar, lop);
