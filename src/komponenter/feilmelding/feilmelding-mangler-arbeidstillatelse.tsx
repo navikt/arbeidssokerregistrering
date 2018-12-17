@@ -11,7 +11,7 @@ class FeilmeldingManglerArbeidstillatelse extends React.Component<InjectedIntlPr
 
     render() {
 
-        const lenkeUrl = this.props.intl.messages['feilmelding-mangler-arbeidstillatelse-lenke-url'];
+        const lenkeUrl = this.props.intl.messages['finn-ditt-nav-kontor-lenke-url'];
 
         return (
             <Feilmelding bilde={utropstegnSvg} className="feilmelding-mangler-arbeidstillatelse">
