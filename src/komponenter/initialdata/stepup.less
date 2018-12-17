@@ -2,28 +2,19 @@
 @import '../../../node_modules/nav-frontend-core/less/core';
 .stepup {
 
-
     .tittel {
-        .blokk-xs();
         margin-bottom: 2rem;
     }
-    .beskrivelse {
-        .blokk-s();
-    }
+
 
     &__login {
         display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
-
-        width: @screen-md-min;
-        margin: 6vh auto;
-        max-width: 100%;
         padding-bottom: 5rem;
 
         .beskrivelse {
-            .blokk-s();
             margin-left: 10rem;
             margin-right: 10rem;
             margin-bottom: 3rem;
@@ -38,41 +29,23 @@
         text-align: center;
         margin: 0;
 
-        &__informasjon {
+        &__innhold {
+            padding-top: 3rem;
+            padding-bottom: 7rem;
+        }
+
+        &__kort {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
 
-            > div {
-                text-align: left;
+            .info-kort {
                 width: 40%;
             }
 
-            img {
-                display: block;
-                margin: 20px auto;
-            }
-
-            .typo-undertittel {
-                margin-bottom: 20px;
-            }
-        }
-
-        .limit {
-            padding-top: 3rem;
-            padding-bottom: 7rem;
         }
     }
 
-    .hjelp-lenke {
-        color: @navDypBlaLighten20;
-        text-decoration: none;
-        border-bottom: 1px solid @navGra60;
-    }
-
-    .chevron--hoyre {
-        color: @navDypBlaLighten20;
-    }
 
 }
 
