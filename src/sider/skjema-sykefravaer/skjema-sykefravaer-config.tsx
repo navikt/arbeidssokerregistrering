@@ -8,14 +8,22 @@ import { Link } from 'react-router-dom';
 import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
 import { hentLoepConfig } from './inngangssporsmal-config';
 import {
+    Svar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../../ducks/svar-utils';
 import { FormattedMessage } from 'react-intl';
 import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
+import { RegistreringType } from '../../ducks/registreringstatus';
 
-const tilbakeIArbeid = (sporsmalProps) => [
+interface SporsmalProps {
+    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
+    hentAvgittSvar: (sporsmalId: SporsmalId) => Svar | undefined;
+    registeringType: RegistreringType;
+}
+
+const tilbakeIArbeid = (sporsmalProps: SporsmalProps) => [
     {
         id: SporsmalId.tilbakeIArbeid,
         element: (
@@ -35,7 +43,7 @@ const tilbakeIArbeid = (sporsmalProps) => [
         )
     }
 ];
-const utdanningOgAndreForhold = (sporsmalProps) => [
+const utdanningOgAndreForhold = (sporsmalProps: SporsmalProps) => [
     {
         id: SporsmalId.utdanning,
         element: (
@@ -120,16 +128,16 @@ const utdanningOgAndreForhold = (sporsmalProps) => [
     }
 ];
 
-export const sammeArbSporsmalConfig = (sporsmalProps) =>
+export const sammeArbSporsmalConfig = (sporsmalProps: SporsmalProps) =>
     tilbakeIArbeid(sporsmalProps);
 
-export const sammeArbNyStillingSporsmalConfig = (sporsmalProps) =>
+export const sammeArbNyStillingSporsmalConfig = (sporsmalProps: SporsmalProps) =>
     tilbakeIArbeid(sporsmalProps);
 
-export const nyArbSporsmalConfig = (sporsmalProps) =>
+export const nyArbSporsmalConfig = (sporsmalProps: SporsmalProps) =>
     utdanningOgAndreForhold(sporsmalProps);
 
-export const usikkerSporsmalConfig = (sporsmalProps) =>
+export const usikkerSporsmalConfig = (sporsmalProps: SporsmalProps) =>
     utdanningOgAndreForhold(sporsmalProps);
 
 export const hentLenkeEndre = (sporsmalId, svar, lop) => {
@@ -146,7 +154,7 @@ export const hentLenkeEndre = (sporsmalId, svar, lop) => {
         );
     }
     const index = config
-        ? config({}).findIndex(data => data.id === sporsmalId)
+        ? config().findIndex(data => data.id === sporsmalId)
         : -1;
 
     if (index >= 0) {

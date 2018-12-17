@@ -11,7 +11,6 @@ type Props = SporsmalProps & InjectedIntlProps;
 function SporsmalTilbakeIArbeid(props: Props) {
 
     const fellesProps = {
-        endreSvar: props.endreSvar,
         avgiSvar: (svar: Svar) => props.endreSvar(props.sporsmalId, svar),
         getTekstId: (svar: Svar) => getTekstIdForSvar(props.sporsmalId, svar),
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
