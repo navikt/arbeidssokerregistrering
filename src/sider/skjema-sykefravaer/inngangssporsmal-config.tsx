@@ -13,7 +13,15 @@ interface SvarAlternativeProps {
     getTekstId: (svar: Svar) => string;
 }
 
-const svarAlternativeConfig = (alternativProps?: SvarAlternativeProps) => [
+interface AlterantivConfig {
+    id: FremtidigSituasjonSvar;
+    element: any; //tslint:disable-line
+    lopConfig: any; //tslint:disable-line
+    lop: number;
+}
+type svarAlternativeConfigType = (alternativProps?: SvarAlternativeProps) => AlterantivConfig[];
+
+const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: SvarAlternativeProps) => [
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER,
         element: alternativProps ? (
@@ -81,7 +89,10 @@ const svarAlternativeConfig = (alternativProps?: SvarAlternativeProps) => [
     }
 ];
 
-export const hentAlternativeneForInngangsporsmal = (alternativProps: SvarAlternativeProps) =>
+type hentSvarAlternativForInngangsporsmalType = (alternativProps: SvarAlternativeProps) => AlterantivConfig[];
+
+export const hentSvarAlternativForInngangsporsmal
+    : hentSvarAlternativForInngangsporsmalType = (alternativProps: SvarAlternativeProps) =>
     svarAlternativeConfig(alternativProps).map((alternativ) => alternativ.element);
 
 export const hentInngangsLoep = (inngangsLoepSvar) => {

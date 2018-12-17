@@ -20,7 +20,7 @@ import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import './inngangssporsmal.less';
-import { hentAlternativeneForInngangsporsmal, hentInngangsLoep } from './inngangssporsmal-config';
+import { hentSvarAlternativForInngangsporsmal, hentInngangsLoep } from './inngangssporsmal-config';
 
 interface OwnState {
     visAdvarsel: boolean;
@@ -104,7 +104,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
             kontekst, intl, RegistreringType.SYKMELDT_REGISTRERING);
 
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
-        const alternativSvarene = hentAlternativeneForInngangsporsmal(alternativProps);
+        const alternativSvarene = hentSvarAlternativForInngangsporsmal(alternativProps);
 
         return (
             <ResponsivSide>
