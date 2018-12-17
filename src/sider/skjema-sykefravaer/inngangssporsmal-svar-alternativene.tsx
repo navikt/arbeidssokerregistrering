@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FremtidigSituasjonSvar } from '../../ducks/svar-utils';
+import { FremtidigSituasjonSvar, Svar } from '../../ducks/svar-utils';
 import Alternativ from '../../komponenter/skjema/alternativ';
 import {
     nyArbSporsmalConfig,
@@ -7,74 +7,85 @@ import {
     usikkerSporsmalConfig
 } from './skjema-sykefravaer-sporsmalene';
 
-const svarAlternativeConfig = (alternativProps) => [
+interface SvarAlternativeProps {
+    hentAvgittSvar: () => Svar | undefined;
+    avgiSvar: (svar: Svar) => void;
+    getTekstId: (svar: Svar) => string;
+}
+
+const svarAlternativeConfig = (alternativProps?: SvarAlternativeProps) => [
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER,
-        element: (
+        element: alternativProps ? (
             <Alternativ
                 key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 {...alternativProps}
             />
-        ),
+        )
+            : null,
         lop: 1,
         lopConfig: sammeArbSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING,
-        element: (
+        element: alternativProps ? (
             <Alternativ
                 key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
                 svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
                 {...alternativProps}
             />
-        ),
+        )
+            : null,
         lop: 2,
         lopConfig: sammeArbNyStillingSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.NY_ARBEIDSGIVER,
-        element: (
+        element: alternativProps ? (
             <Alternativ
                 key={FremtidigSituasjonSvar.NY_ARBEIDSGIVER}
                 svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER}
                 {...alternativProps}
             />
-        ),
+        )
+            : null,
         lop: 3,
         lopConfig: nyArbSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.USIKKER,
-        element: (
+        element: alternativProps ? (
             <Alternativ
                 key={FremtidigSituasjonSvar.USIKKER}
                 svar={FremtidigSituasjonSvar.USIKKER}
                 {...alternativProps}
             />
-        ),
+        )
+            : null,
         lop: 4,
         lopConfig: usikkerSporsmalConfig
     },
     {
         id: FremtidigSituasjonSvar.INGEN_PASSER,
-        element: (
+        element: alternativProps ? (
             <Alternativ
                 key={FremtidigSituasjonSvar.INGEN_PASSER}
                 svar={FremtidigSituasjonSvar.INGEN_PASSER}
                 {...alternativProps}
             />
-        ),
+        )
+            : null,
         lop: 0,
         lopConfig: undefined
     }
 ];
 
-export const hentAlternativeneForInngangsporsmal = (alternativProps) =>
+export const hentAlternativeneForInngangsporsmal = (alternativProps: SvarAlternativeProps) =>
     svarAlternativeConfig(alternativProps).map((alternativ) => alternativ.element);
 
 export const hentInngangsLoep = (inngangsLoepSvar) => {
-    const lop = svarAlternativeConfig({}).find((alternativ) =>
+    const lop = svarAlternativeConfig().find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );
     return lop && lop.lop;

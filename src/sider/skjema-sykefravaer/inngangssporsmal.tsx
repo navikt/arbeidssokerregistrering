@@ -95,8 +95,6 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
             </NavAlertStripe>) : null;
 
         const alternativProps = {
-            endreSvar: endreSvar,
-            intl: intl,
             avgiSvar: (svar: Svar) => endreSvar(sporsmalId, svar),
             getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
             hentAvgittSvar: () => hentSvar(svarState, sporsmalId),

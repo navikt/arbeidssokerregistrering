@@ -29,7 +29,7 @@ export function getTekstIdForSvar(sporsmalId: SporsmalId, svar: Svar | undefined
 }
 
 export type TekstKontekst = 'tittel' | 'info' | 'ingress';
-export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKontekst,
+export function getIntlTekstForSporsmal(sporsmalId: SporsmalId, kontekst: TekstKontekst,
                                         intl: InjectedIntl, registreringType: RegistreringType): string {
     const registreringTypeId = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
         ? 'sykmeldt' : 'registrering';
