@@ -15,8 +15,8 @@ import {
 import { FormattedMessage } from 'react-intl';
 import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
 
-const tilbakeIArbeid = (sporsmalProps) => {
-    return {
+const tilbakeIArbeid = (sporsmalProps) => [
+    {
         id: SporsmalId.tilbakeIArbeid,
         element: (
             <SporsmalTilbakeIArbeid
@@ -33,8 +33,8 @@ const tilbakeIArbeid = (sporsmalProps) => {
                 <strong><FormattedMessage id="sykmeldt-oppsummering-tilbake-i-jobb-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
         )
-    };
-};
+    }
+];
 const utdanningOgAndreForhold = (sporsmalProps) => [
     {
         id: SporsmalId.utdanning,
@@ -120,12 +120,12 @@ const utdanningOgAndreForhold = (sporsmalProps) => [
     }
 ];
 
-export const sammeArbSporsmalConfig = (sporsmalProps) => [
-    tilbakeIArbeid(sporsmalProps)
-];
-export const sammeArbNyStillingSporsmalConfig = (sporsmalProps) => [
-    tilbakeIArbeid(sporsmalProps)
-];
+export const sammeArbSporsmalConfig = (sporsmalProps) =>
+    tilbakeIArbeid(sporsmalProps);
+
+export const sammeArbNyStillingSporsmalConfig = (sporsmalProps) =>
+    tilbakeIArbeid(sporsmalProps);
+
 export const nyArbSporsmalConfig = (sporsmalProps) =>
     utdanningOgAndreForhold(sporsmalProps);
 
