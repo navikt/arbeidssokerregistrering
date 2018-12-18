@@ -5,12 +5,13 @@ import './info-kort.less';
 import LenkeMedChevron from '../lenke-med-chevron/lenke-med-chevron';
 
 type InfoKortProps = {
-    bilde: string,
-    bildeBeskrivelse: string
-    tittel: string,
-    beskrivelse: string
-    lenke: string
-    lenkeTekst: string
+    bilde: string;
+    bildeBeskrivelse: string;
+    tittel: string;
+    beskrivelse: string;
+    lenke: string;
+    lenkeTekst: string;
+    lenkeTarget?: string;
 };
 
 const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
@@ -21,7 +22,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
             <Normaltekst className="beskrivelse">
                 <FormattedMessage id={props.beskrivelse}/>
             </Normaltekst>
-            <LenkeMedChevron path={props.lenke}>
+            <LenkeMedChevron path={props.lenke} target={props.lenkeTarget}>
                 <FormattedMessage id={props.lenkeTekst}/>
             </LenkeMedChevron>
         </div>
