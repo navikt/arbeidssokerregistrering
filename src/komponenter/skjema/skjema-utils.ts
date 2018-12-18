@@ -69,6 +69,10 @@ export const defaultConfigForSporsmalsflyt: SkjemaConfig = new Map<Svar, string[
 
 export const vanligFlyt: SkjemaConfig = new Map<Svar, string[]>();
 
+export const skjemaFlytIngenUtdanning: SkjemaConfig = new Map<Svar, string[]>([
+    [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
+]);
+
 function getSporsmalSomIkkeSkalBesvares(svar: Svar | undefined, config: SkjemaConfig): string[] {
     if (!svar || !config.has(svar)) {
         return [];

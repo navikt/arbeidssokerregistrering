@@ -14,7 +14,6 @@ import {
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SKJEMA_PATH,
-    SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
 import StartsideOrdinaer from './sider/startside/startside-ordinaer';
@@ -23,11 +22,6 @@ import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 import SkjemaRegistrering from './sider/skjema-registrering/skjema-registrering';
-import SkjemaSykefravaerNyArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver';
-import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver';
-import SkjemaSykefravaerSammeArbeidsgiverNyStilling
-    from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver-ny-stilling';
-import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
 import Oppsummering from './sider/oppsummering/oppsummering';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
@@ -43,7 +37,7 @@ import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
-import { sammeArbSporsmalConfig } from './sider/skjema-sykefravaer/skjema-sykefravaer-config';
+import { hentRoutesInngangssporsmal } from './sider/skjema-sykefravaer/inngangssporsmal-config';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -137,26 +131,9 @@ class Routes extends React.Component<AllProps> {
                                     path={INNGANGSSPORSMAL_PATH}
                                     component={Inngangssporsmal}
                                 />
-                                <Route
-                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
-                                    render={(props) => <SkjemaSykefravaerSammeArbeidsgiver
-                                        {...props}
-                                        lop={1}
-                                        lopConfig={sammeArbSporsmalConfig}
-                                    />}
-                                />
-                                <Route
-                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
-                                    component={SkjemaSykefravaerSammeArbeidsgiverNyStilling}
-                                />
-                                <Route
-                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
-                                    component={SkjemaSykefravaerNyArbeidsgiver}
-                                />
-                                <Route
-                                    path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
-                                    component={SkjemaSykefravaerUsikker}
-                                />
+                                {
+                                    hentRoutesInngangssporsmal()
+                                }
                                 <Redirect
                                     to={START_PATH + queryParams}
                                 />

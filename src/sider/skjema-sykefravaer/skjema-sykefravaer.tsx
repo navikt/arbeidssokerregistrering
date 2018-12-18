@@ -1,21 +1,19 @@
 import * as React from 'react';
 import Skjema from '../../komponenter/skjema/skjema';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
-import { hentSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
+import { endreSvarAction, resetSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import { InjectedIntlProps } from 'react-intl';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
-import { SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
+import { nullStillSporsmalSomIkkeSkalBesvares, SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
-import {
-    usikkerSporsmalConfig
-} from './skjema-sykefravaer-config';
+import { lopConfigType } from './skjema-sykefravaer-config';
 
 interface DispatchProps {
+    resetSvar: (sporsmalId: SporsmalId) => void;
     endreSvar: (sporsmalId: string, svar: Svar) => void;
 }
 
@@ -23,17 +21,34 @@ interface StateProps {
     svarState: SvarState;
 }
 
-const skjemaFlytUsikker: SkjemaConfig = new Map<Svar, string[]>([
-    [UtdanningSvar.INGEN_UTDANNING, ['utdanningBestatt', 'utdanningGodkjent']],
-]);
+interface OwnProps {
+    lopConfig: lopConfigType;
+    lop: number;
+    skjemaConfig: SkjemaConfig;
+}
 
-type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+type Props = OwnProps & DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class SkjemaSykefravaerUsikker extends React.Component<Props> {
+class SkjemaSykefravaer extends React.Component<Props> {
+
     render() {
-        const {endreSvar, intl, svarState, location, match, history} = this.props;
+        const {
+            endreSvar,
+            resetSvar,
+            intl,
+            lop,
+            lopConfig,
+            skjemaConfig,
+            svarState,
+            location,
+            match,
+            history
+        } = this.props;
         const fellesProps = {
             endreSvar: (sporsmalId, svar) => {
+
+                nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
+
                 endreSvar(sporsmalId, svar);
             },
             intl: intl,
@@ -41,13 +56,13 @@ class SkjemaSykefravaerUsikker extends React.Component<Props> {
             registeringType: RegistreringType.SYKMELDT_REGISTRERING,
         };
 
-        const sporsmal = usikkerSporsmalConfig(fellesProps)
+        const sporsmal = lopConfig(fellesProps)
             .map(spmElement => spmElement.element);
 
         return (
             <Skjema
-                config={skjemaFlytUsikker}
-                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/4`}
+                config={skjemaConfig}
+                baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/${lop}`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}
             >
@@ -62,7 +77,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    resetSvar: (sporsmalId) => dispatch(resetSvarAction(sporsmalId)),
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaSykefravaerUsikker));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkjemaSykefravaer));
