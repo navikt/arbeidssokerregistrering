@@ -1,4 +1,4 @@
-import { fetchToJson, fetchWithTimeout } from './api-utils';
+import { fetchToJson } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
@@ -7,7 +7,6 @@ import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
 export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
-export const SBLARBEID_OPPRETT_MIN_ID_URL = '/sbl/nav_security_check?goto=/sbl/arbeid/opprettMinIdBruker';
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/arbeidssokerregistrering/api/feature';
 
@@ -67,19 +66,6 @@ export function startReaktivering() {
             body: JSON.stringify({})
         }
     });
-}
-
-const sblOpprettMinIdConfig = {
-    method: 'POST',
-    credentials: 'same-origin',
-    cache: 'no-store',
-    headers: {'pragma': 'no-cache', 'cache-control': 'no-cache'}
-};
-
-export function registrerBrukerSBLArbeid(timeoutMillis?: number) {
-    return timeoutMillis ?
-        fetchWithTimeout(SBLARBEID_OPPRETT_MIN_ID_URL, timeoutMillis, (sblOpprettMinIdConfig as RequestInit)) :
-        fetch(SBLARBEID_OPPRETT_MIN_ID_URL, (sblOpprettMinIdConfig as RequestInit));
 }
 
 export function hentBrukersNavn() {

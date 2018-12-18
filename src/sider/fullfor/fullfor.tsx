@@ -16,7 +16,6 @@ import {
 } from '../../ducks/registrerbruker';
 import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { registrerBrukerSBLArbeid } from '../../ducks/api';
 import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
@@ -80,14 +79,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
         this.props.onRegistrerBruker(
             this.getSvarMappetForBackend(),
             RegistreringType.ORDINAER_REGISTRERING
-        ).then((res) => {
+        ).then(res => {
             if (!!res) {
-                // Bruker må finnes i SBL arbeid for at nav.no skal forstå konteksten til bruker
-                registrerBrukerSBLArbeid(1000 * 130) // 130 sekunder
-                    .then(
-                        () => this.props.history.push(DU_ER_NA_REGISTRERT_PATH),
-                        () => this.props.history.push(DU_ER_NA_REGISTRERT_PATH),
-                    );
+                this.props.history.push(DU_ER_NA_REGISTRERT_PATH);
             }
         });
     }

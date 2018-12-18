@@ -27,7 +27,6 @@ const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 const MOCK_STYRK08_PAMJANZZ = true;
-const MOCK_SBL = true;
 const MOCK_FEATURE_TOGGLES = true;
 const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false; // Dette dispatcher svarene _før_ noe annet skjer, som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const PRINT_FRONTENDLOGGER = true;
@@ -67,10 +66,6 @@ if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
     (mock as any).post(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(DELAY, (url, config, params) => {
         return params.bodyParams;
     })));
-}
-
-if(MOCK_SBL) {
-    (mock as any).post('/sbl/arbeid/opprettMinIdBruker', respondWith(delayed(DELAY * 2, {}, 404)));
 }
 
 if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
