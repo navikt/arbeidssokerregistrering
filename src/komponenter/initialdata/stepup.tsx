@@ -40,7 +40,7 @@ const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
                             tittel="overskrift-elektronisk-hjelp-stepup"
                             beskrivelse="beskrivelse-elektronisk-hjelp-stepup"
                             lenke="https://eid.difi.no/nb/bankid"
-                            lenkeTekst="Skaff deg elektronisk ID"
+                            lenkeTekst="overskrift-elektronisk-hjelp-stepup"
                         />
                         <InfoKort
                             bilde={navKontorSvg}
@@ -48,7 +48,7 @@ const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
                             tittel="overskrift-manuell-hjelp-stepup"
                             beskrivelse="beskrivelse-manuell-hjelp-stepup"
                             lenke={navKontorLenke}
-                            lenkeTekst="Finn ditt lokale NAV-kontor"
+                            lenkeTekst="feilmelding-mangler-arbeidstillatelse-lenke-tekst"
                         />
                     </div>
                 </div>
