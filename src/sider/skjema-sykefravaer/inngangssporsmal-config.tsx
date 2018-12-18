@@ -44,6 +44,7 @@ const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: Svar
         lopConfig: sammeArbSporsmalConfig,
         routeElement: (
             <Route
+                key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 path={`${SKJEMA_SYKEFRAVAER_PATH}/1/:id`}
                 render={(props) => <SkjemaSykefravaer
                     {...props}
@@ -68,6 +69,7 @@ const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: Svar
         lopConfig: sammeArbNyStillingSporsmalConfig,
         routeElement: (
             <Route
+                key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 path={`${SKJEMA_SYKEFRAVAER_PATH}/2/:id`}
                 render={(props) => <SkjemaSykefravaer
                     {...props}
@@ -92,6 +94,7 @@ const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: Svar
         lopConfig: nyArbSporsmalConfig,
         routeElement: (
             <Route
+                key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 path={`${SKJEMA_SYKEFRAVAER_PATH}/3/:id`}
                 render={(props) => <SkjemaSykefravaer
                     {...props}
@@ -116,6 +119,7 @@ const svarAlternativeConfig: svarAlternativeConfigType = (alternativProps?: Svar
         lopConfig: usikkerSporsmalConfig,
         routeElement: (
             <Route
+                key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
                 render={(props) => <SkjemaSykefravaer
                     {...props}
