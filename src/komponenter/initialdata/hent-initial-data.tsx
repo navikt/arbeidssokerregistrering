@@ -20,6 +20,7 @@ import Loader from '../loader/loader';
 import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 import { hentFeatureToggles } from '../../ducks/feature-toggles';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
@@ -34,7 +35,7 @@ interface DispatchProps {
     hentFeatureToggle: () => Promise<void | {}>;
 }
 
-type Props = StateProps & DispatchProps;
+type Props = StateProps & DispatchProps & InjectedIntlProps;
 
 export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
@@ -64,7 +65,7 @@ export class HentInitialData extends React.Component<Props> {
             } else if (niva !== 4 || nivaOidc !== 4) {
                 // Bruker mangler enten OpenAm- eller Oidc-token på nivå 4.
                 // Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
-                return <StepUp/>;
+                return (<StepUp intl={this.props.intl} />);
             }
         }
 
@@ -98,4 +99,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentFeatureToggle: () => dispatch(hentFeatureToggles())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HentInitialData);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HentInitialData));

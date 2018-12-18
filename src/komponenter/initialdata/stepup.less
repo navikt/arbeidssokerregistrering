@@ -1,15 +1,57 @@
 @import '../../../node_modules/nav-frontend-core/less/_variabler';
-
+@import '../../../node_modules/nav-frontend-core/less/core';
 .stepup {
-    width: @screen-md-min;
-    margin: 6vh auto;
-    padding: 0 20px;
-    max-width: 100%;
 
-    .alertstripe + .knapperad {
-        margin-top: 2rem;
-        text-align: center;
+    .tittel {
+        margin-bottom: 2rem;
     }
+
+
+    &__login {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding-bottom: 5rem;
+
+        .beskrivelse {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 26rem;
+            margin-bottom: 3rem;
+        }
+    }
+
+    &__hjelp {
+        background-color: @navLysGra;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+
+        &__innhold {
+            padding-top: 3rem;
+            padding-bottom: 7rem;
+        }
+
+        &__kort {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .info-kort {
+                min-width: 2rem;
+                max-width: 18rem;
+            }
+            @media (min-width: @screen-sm-min) {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+        }
+    }
+
+
 }
 
 @media (min-width: @screen-sm-min) {
