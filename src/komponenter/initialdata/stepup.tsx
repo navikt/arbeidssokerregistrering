@@ -40,6 +40,7 @@ const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
                             tittel="overskrift-elektronisk-hjelp-stepup"
                             beskrivelse="beskrivelse-elektronisk-hjelp-stepup"
                             lenke="https://eid.difi.no/nb/bankid"
+                            lenkeTarget="_blank"
                             lenkeTekst="overskrift-elektronisk-hjelp-stepup"
                         />
                         <InfoKort
