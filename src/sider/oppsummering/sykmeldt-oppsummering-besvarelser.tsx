@@ -7,9 +7,9 @@ import { SporsmalId } from '../../ducks/svar';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
-import InfoViser from '../../komponenter/info-viser/info-viser';
 import { hentSvar } from '../../ducks/svar-utils';
 import { hentLoepConfig } from '../skjema-sykefravaer/inngangssporsmal-svar-alternativene';
+import { formaterDato } from '../../utils/utils';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
@@ -53,7 +53,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
                             <strong>
                                 <FormattedMessage id="sykmeldt-oppsummering-sykepenger-frem-til"/>&nbsp;
                             </strong>
-                            {sykemeldtSidenDato}
+                            {formaterDato(sykemeldtSidenDato)}
                         </li>
 
                         <OppsummeringElement
@@ -68,12 +68,6 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
 
                     </ul>
                 </div>
-
-                <hr className="sykmeldt-oppsummering-besvarelser--divider"/>
-                <InfoViser
-                    tekstId="sykmeldt-oppsummering-besvarelser-info"
-                    className="sykmeldt-oppsummering-besvarelser--info-viser"
-                />
             </div>
             <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
                 <FormattedMessage id="sykmeldt-oppsummering-egress"/>

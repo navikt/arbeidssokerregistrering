@@ -1,11 +1,11 @@
 @import '../../../node_modules/nav-frontend-core/less/core';
 @import '../../setup';
 
-.startside-ordinaer {
+.startside {
 
     &__banner {
         margin: -7rem 0 0;
-        padding: 3.3rem 0 1.5rem 0;
+        padding: 3.3rem 1rem 1.5rem 1rem;
         background-color: @navDypBlaLighten80;
     }
 
@@ -47,7 +47,7 @@
         .tittel {
             .blokk-xs();
         }
-        .beskrivelse {
+        .ingress {
             .blokk-s();
         }
 
@@ -65,7 +65,7 @@
 
 @media (min-width: 500px) {
 
-    .startside-ordinaer {
+    .startside {
         &__intro {
             padding: 1rem 2.5rem 1rem;
 
@@ -78,7 +78,7 @@
 }
 
 @media (min-width: @screen-sm-min) {
-    .startside-ordinaer {
+    .startside {
         &__banner {
             margin: -7rem ~'calc((740px - 100vw) / 2)' 0;
         }

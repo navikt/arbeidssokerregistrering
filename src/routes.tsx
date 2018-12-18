@@ -8,15 +8,17 @@ import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
-    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH, INFOSIDE_PATH, INNGANGSSPORSMAL_PATH,
+    IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
+    INFOSIDE_PATH,
+    INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SKJEMA_PATH,
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
-import StartsideOrdinaer from './sider/startside-ordinaer/startside-ordinaer';
-import StartsideSykmeldt from './sider/startside-sykmeldt/startside-sykmeldt';
+import StartsideOrdinaer from './sider/startside/startside-ordinaer';
+import StartsideSykmeldt from './sider/startside/startside-sykmeldt';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
@@ -31,18 +33,15 @@ import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
 import { connect } from 'react-redux';
-import {
-    Data as RegistreringstatusData,
-    RegistreringType,
-    selectRegistreringstatus
-} from './ducks/registreringstatus';
+import { parse } from 'query-string';
+import {Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
-import { selectFeatureToggles, Data as FeatureToggleData } from './ducks/feature-toggles';
+import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 
 interface StateProps {
@@ -60,8 +59,13 @@ class Routes extends React.Component<AllProps> {
 
         const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
-
         const registreringType = registreringstatusData.registreringType;
+        const erFraSykefravaer = parse(location.search).fraSykefravaer;
+
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+        const visOrdinaerSkjema = !visSykefravaerSkjema;
+        const klarForFullforing = erKlarForFullforing(this.props.state);
+        const queryParams = location.search;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
@@ -78,12 +82,10 @@ class Routes extends React.Component<AllProps> {
                 return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
             }
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
+        } else if (registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
+            erFraSykefravaer && location.pathname === START_PATH) {
+            return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
         }
-
-        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
-        const visOrdinaerSkjema = !visSykefravaerSkjema;
-        const klarForFullforing = erKlarForFullforing(this.props.state);
-        const queryParams = location.search;
 
         return (
             <>
