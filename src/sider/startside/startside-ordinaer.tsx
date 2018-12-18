@@ -9,13 +9,11 @@ import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/bruker
 import { AppState } from '../../reducer';
 import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { Data as RegistreringstatusData, selectRegistreringstatus } from '../../ducks/registreringstatus';
 
 import personSvg from './person-komprimert.svg';
-import './startside-ordinaer.less';
+import './startside.less';
 
 interface StateProps {
-    registreringstatusData: RegistreringstatusData;
     brukersNavn: BrukersNavnState;
 }
 
@@ -27,34 +25,37 @@ class StartsideOrdinaer extends React.Component<StartsideProps> {
         const { name } = brukersNavn.data;
 
         return (
-            <section className="startside-ordinaer">
-                <div className="startside-ordinaer__banner">
-                    <div className="startside-ordinaer__intro">
+            <section className="startside">
+                <div className="startside__banner">
+                    <div className="startside__intro">
                         <Undertittel tag="h1">
-                            <FormattedMessage id="overskrift-start-dialog" values={{fornavn: hentFornavn(name)}}/>
+                            <FormattedMessage
+                                id="startside-overskrift-snakkeboble"
+                                values={{fornavn: hentFornavn(name)}}
+                            />
                         </Undertittel>
                         <p className="typo-normal">
-                            <FormattedMessage id="beskrivelse-start-dialog"/>
+                            <FormattedMessage id="startside-ordinaer-tekst-snakkeboble"/>
                         </p>
                     </div>
                     <img
-                        className="startside-ordinaer__intro__ikon"
+                        className="startside__intro__ikon"
                         src={personSvg}
                         alt="Person-ikon"
                     />
                 </div>
-                <div className="startside-ordinaer__innhold">
+                <div className="startside__innhold">
                     <Innholdstittel className="tittel">
-                        <FormattedMessage id="overskrift-start"/>
+                        <FormattedMessage id="startside-ordinaer-overskrift"/>
                     </Innholdstittel>
-                    <Normaltekst className="beskrivelse"><FormattedMessage id="beskrivelse-start"/></Normaltekst>
+                    <Normaltekst className="ingress"><FormattedMessage id="startside-ordinaer-ingress"/></Normaltekst>
                     <div className={'knapper-vertikalt'}>
                         <KnappBase
                             type="hoved"
                             onClick={() => history.push(`${SKJEMA_PATH}/0`)}
                             data-testid="start-registrering"
                         >
-                            <FormattedMessage id="knapp-start"/>
+                            <FormattedMessage id="startside-ordinaer-knapp"/>
                         </KnappBase>
                         <LenkeAvbryt tekstId="avbryt-lenke" wrapperClassname="no-anim"/>
                     </div>
@@ -66,7 +67,6 @@ class StartsideOrdinaer extends React.Component<StartsideProps> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     brukersNavn: selectBrukersNavn(state),
-    registreringstatusData: selectRegistreringstatus(state).data,
 });
 
 export default connect(mapStateToProps)(StartsideOrdinaer);
