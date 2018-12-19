@@ -62,8 +62,8 @@ export class HentInitialData extends React.Component<Props> {
                 // Bruker er allerede innlogget og har OpenAM-token på nivå 4, men mangler Oidc-token med nivå 4.
                 // Redirecter til Veilarbstepup som automatisk gir bruker Oidc-token på nivå 4.
                 window.location.href = VEILARBSTEPUP;
-            } else if (nivaOidc !== 4) {
-                // Bruker mangler Oidc-token på nivå 4.
+            } else if (niva !== 4 || nivaOidc !== 4) {
+                // Bruker mangler enten OpenAm- eller Oidc-token på nivå 4.
                 // Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
                 return (<StepUp intl={this.props.intl} />);
             }
