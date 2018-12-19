@@ -13,6 +13,8 @@
         justify-content: center;
         text-align: center;
         padding-bottom: 5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
 
         .beskrivelse {
             margin-left: auto;
@@ -32,7 +34,7 @@
 
         &__innhold {
             padding-top: 3rem;
-            padding-bottom: 7rem;
+            padding-bottom: 10rem;
         }
 
         &__kort {
@@ -43,11 +45,9 @@
                 min-width: 2rem;
                 max-width: 18rem;
             }
-            @media (min-width: @screen-sm-min) {
-                flex-direction: row;
-                justify-content: space-between;
+            .info-kort:last-child {
+                margin-top: 2rem;
             }
-
         }
     }
 
@@ -60,6 +60,18 @@
         &__login {
             .beskrivelse {
                 width: 26rem;
+            }
+        }
+        &__hjelp {
+            &__innhold {
+                padding: 3rem 2rem 10rem 2rem;
+            }
+            &__kort {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .info-kort:last-child {
+                margin-top: 0;
             }
         }
     }
