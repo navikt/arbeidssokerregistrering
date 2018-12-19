@@ -13,14 +13,25 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { AppState } from '../../reducer';
 import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
+import Lukknapp from 'nav-frontend-lukknapp';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
 }
 
+interface OwnState {
+    skalVise: boolean;
+}
+
 type Props = InjectedIntlProps & StateProps;
 
-class HerokuappEndreMockRegistreringLoep extends React.Component<Props> {
+class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState> {
+
+    componentWillMount() {
+        this.state = {
+            skalVise: false
+        };
+    }
 
     render() {
         const store = getStore();
@@ -45,15 +56,40 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props> {
             reset();
         };
 
+        const { skalVise } = this.state;
+
+        const visSkjul = skalVise ? 'vis' : 'skjul';
+        const ApneLukkTekst = skalVise ? 'Lukk' : 'Åpne';
+
         return (
-            <div className="devToggleStatus">
+            <div className={`devToggleStatus ${visSkjul}`}>
                 <fieldset className="devToggleStatus__fieldset">
-                    <legend className="devToggleStatus__legend">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
                         <Normaltekst>
                             Endre registrerings løp
                         </Normaltekst>
                     </legend>
                     <div>
+                        <div
+                            className="apne-lukk-knapp"
+                            onClick={() => {
+                                this.setState({
+                                    skalVise: !this.state.skalVise
+                                });
+                            }}
+                        >
+                            <div>
+                                <Normaltekst>
+                                    {ApneLukkTekst} Demo
+                                </Normaltekst>
+                            </div>
+                            <Lukknapp>
+                                Lukk
+                            </Lukknapp>
+                        </div>
+
                         <RadioPanel
                             onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
