@@ -5,14 +5,6 @@
     margin-left: 1rem;
     right: -530px;
 
-    &.skjul{
-        right: -530px;
-    }
-
-    &.vis{
-        right: 0;
-    }
-
     .apne-lukk-knapp {
         > div {
             cursor: pointer;
@@ -27,6 +19,25 @@
             position: absolute;
             left: 0;
             top: -26px;
+        }
+    }
+
+    &.skjul{
+        right: -530px;
+        .apne-lukk-knapp {
+            > div {
+                right: 516px;
+            }
+        }
+    }
+
+    &.vis{
+        right: 0;
+        .apne-lukk-knapp {
+            > div {
+                top: -26px;
+                left: 42px;
+            }
         }
     }
 
