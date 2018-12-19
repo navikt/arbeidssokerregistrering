@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Stilling } from '../../../../ducks/siste-stilling';
+import { Stilling } from '../../../ducks/siste-stilling';
 import './inaktiv-soke-input.less';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { InjectedIntlProps, injectIntl } from 'react-intl';

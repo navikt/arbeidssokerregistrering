@@ -6,7 +6,7 @@ import * as sinon from 'sinon';
 import * as Adapter from 'enzyme-adapter-react-16';
 import {create} from '../../../../store';
 import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../../test/test-utils';
-import SisteStilling from './siste-stilling';
+import SisteStilling from './sporsmal-siste-stilling';
 import {annenStilling, ingenYrkesbakgrunn, Stilling, velgSisteStilling, ActionTypes as SisteStillingActionTypes} from '../../../../ducks/siste-stilling';
 import {sisteStillingMock} from '../../../../mocks/siste-stilling-mock';
 import oversettelseAvStillingFraAAReg, {tomOversettelseAvStillingFraAAReg} from '../../../../mocks/oversettelse-av-stilling-fra-aareg-mock';

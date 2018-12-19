@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Skjema from '../../komponenter/skjema/skjema';
 import { endreSvarAction, resetSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
-import { FremtidigSituasjonSvar, hentSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
+import { finnEndretSvar, FremtidigSituasjonSvar, hentSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -13,7 +13,6 @@ import {
     nullStillSporsmalSomIkkeSkalBesvares,
     SkjemaConfig
 } from '../../komponenter/skjema/skjema-utils';
-import { RegistreringType } from '../../ducks/registreringstatus';
 import {
     nyArbeidsgiverSporsmaleneConfig
 } from './skjema-sykefravaer-sporsmalene';
@@ -35,21 +34,23 @@ const skjemaFlytNyArbeidsgiver: SkjemaConfig = new Map<Svar, string[]>([
 type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
 class SkjemaSykefravaerNyArbeidsgiver extends React.Component<Props> {
+
+    componentDidUpdate(prevProps: Props) {
+
+        const { svarState, resetSvar, endreSvar } = this.props;
+
+        const endretSvar = finnEndretSvar(prevProps.svarState, svarState);
+
+        if (endretSvar && endretSvar.svar) {
+            nullStillSporsmalSomIkkeSkalBesvares(endretSvar.sporsmalId, endretSvar.svar, endreSvar, resetSvar);
+        }
+
+    }
+
     render() {
-        const {endreSvar, resetSvar, intl, svarState, location, match, history} = this.props;
-        const fellesProps = {
-            endreSvar: (sporsmalId, svar) => {
+        const {location, match, history} = this.props;
 
-                nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
-
-                endreSvar(sporsmalId, svar);
-            },
-            intl: intl,
-            hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
-        };
-
-        const regType = RegistreringType.SYKMELDT_REGISTRERING;
-        const sporsmalene = nyArbeidsgiverSporsmaleneConfig(fellesProps, regType)
+        const sporsmalene = nyArbeidsgiverSporsmaleneConfig()
             .map(spmElement => spmElement.element);
 
         const inngangsLoepSvar: FremtidigSituasjonSvar = hentSvar(this.props.svarState,

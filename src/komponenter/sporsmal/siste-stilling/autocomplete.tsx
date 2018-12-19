@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Input } from 'nav-frontend-skjema';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { Stilling } from '../../../../ducks/siste-stilling';
+import { Stilling } from '../../../ducks/siste-stilling';
 
 import './autocomplete.less';
 import { Undertittel } from 'nav-frontend-typografi';

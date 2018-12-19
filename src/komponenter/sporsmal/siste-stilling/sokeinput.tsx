@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { hentStillingMedStyrk08 } from '../../../../ducks/api';
-import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
+import { hentStillingMedStyrk08 } from '../../../ducks/api';
+import { Stilling, tomStilling } from '../../../ducks/siste-stilling';
 import { hentStillingsAlternativer } from './sokeinput-utils';
 import AutoComplete from './autocomplete';
 

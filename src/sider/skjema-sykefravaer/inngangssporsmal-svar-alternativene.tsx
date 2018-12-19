@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { FremtidigSituasjonSvar } from '../../ducks/svar-utils';
-import Alternativ from '../../komponenter/skjema/alternativ';
+import Alternativ from '../../komponenter/sporsmal/alternativ';
 import {
     nyArbeidsgiverSporsmaleneConfig,
     sammeArbeidsgiverNyStillingSporsmaleneConfig, sammeArbeidsgiverSporsmaleneConfig,
     usikkerSporsmaleneConfig
 } from './skjema-sykefravaer-sporsmalene';
+import { SporsmalId } from '../../ducks/svar';
 
-const svarAlternativeConfig = (alternativProps) => [
+const svarAlternativeConfig = () => [
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER,
         element: (
             <Alternativ
                 key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
                 svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER}
-                {...alternativProps}
+                sporsmalId={SporsmalId.fremtidigSituasjon}
             />
         ),
         lop: 1,
@@ -26,7 +27,7 @@ const svarAlternativeConfig = (alternativProps) => [
             <Alternativ
                 key={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
                 svar={FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER_NY_STILLING}
-                {...alternativProps}
+                sporsmalId={SporsmalId.fremtidigSituasjon}
             />
         ),
         lop: 2,
@@ -38,7 +39,7 @@ const svarAlternativeConfig = (alternativProps) => [
             <Alternativ
                 key={FremtidigSituasjonSvar.NY_ARBEIDSGIVER}
                 svar={FremtidigSituasjonSvar.NY_ARBEIDSGIVER}
-                {...alternativProps}
+                sporsmalId={SporsmalId.fremtidigSituasjon}
             />
         ),
         lop: 3,
@@ -50,7 +51,7 @@ const svarAlternativeConfig = (alternativProps) => [
             <Alternativ
                 key={FremtidigSituasjonSvar.USIKKER}
                 svar={FremtidigSituasjonSvar.USIKKER}
-                {...alternativProps}
+                sporsmalId={SporsmalId.fremtidigSituasjon}
             />
         ),
         lop: 4,
@@ -62,7 +63,7 @@ const svarAlternativeConfig = (alternativProps) => [
             <Alternativ
                 key={FremtidigSituasjonSvar.INGEN_PASSER}
                 svar={FremtidigSituasjonSvar.INGEN_PASSER}
-                {...alternativProps}
+                sporsmalId={SporsmalId.fremtidigSituasjon}
             />
         ),
         lop: 0,
@@ -70,18 +71,18 @@ const svarAlternativeConfig = (alternativProps) => [
     }
 ];
 
-export const hentAlternativeneForInngangsporsmal = (alternativProps) =>
-    svarAlternativeConfig(alternativProps).map((alternativ) => alternativ.element);
+export const hentAlternativeneForInngangsporsmal = () =>
+    svarAlternativeConfig().map((alternativ) => alternativ.element);
 
 export const hentInngangsLoep = (inngangsLoepSvar) => {
-    const lop = svarAlternativeConfig({}).find((alternativ) =>
+    const lop = svarAlternativeConfig().find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );
     return lop && lop.lop;
 };
 
 export const hentLoepConfig = (alternativProps, inngangsLoepSvar) => {
-    const lop = svarAlternativeConfig(alternativProps).find((alternativ) =>
+    const lop = svarAlternativeConfig().find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );
     return lop && lop.lopConfig;

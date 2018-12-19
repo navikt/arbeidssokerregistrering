@@ -2,7 +2,6 @@ import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {
     getIntlTekstForSporsmal,
-    getTekstIdForSvar,
     kanGaaTilNeste,
     TekstKontekst
 } from '../../komponenter/skjema/skjema-utils';
@@ -88,25 +87,17 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
 
     render() {
         const sporsmalId = SporsmalId.fremtidigSituasjon;
-        const { intl, endreSvar, svarState } = this.props;
+        const { intl } = this.props;
         const advarselElement = this.state.visAdvarsel ? (
             <NavAlertStripe type="advarsel" className="spm-advarsel inngangssporsmal-advarsel">
                 <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
             </NavAlertStripe>) : null;
 
-        const alternativProps = {
-            endreSvar: endreSvar,
-            intl: intl,
-            avgiSvar: (svar: Svar) => endreSvar(sporsmalId, svar),
-            getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
-            hentAvgittSvar: () => hentSvar(svarState, sporsmalId),
-        };
-
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
             kontekst, intl, RegistreringType.SYKMELDT_REGISTRERING);
 
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
-        const alternativSvarene = hentAlternativeneForInngangsporsmal(alternativProps);
+        const alternativSvarene = hentAlternativeneForInngangsporsmal();
 
         return (
             <ResponsivSide>

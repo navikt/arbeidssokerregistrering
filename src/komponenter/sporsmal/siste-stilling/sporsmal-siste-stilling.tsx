@@ -2,32 +2,27 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import {
-    selectSisteStillingFraAAReg,
-    State as SisteArbeidsforholdState,
-} from '../../../../ducks/siste-stilling-fra-aareg';
-import { AppState } from '../../../../reducer';
+    selectSisteStillingFraAAReg, State as SisteArbeidsforholdState
+} from '../../../ducks/siste-stilling-fra-aareg';
+import { AppState } from '../../../reducer';
 import {
-    hentStillingFraPamGittStyrkkode, selectSisteStillingNavnFraPam,
+    hentStillingFraPamGittStyrkkode,
     selectOversettelseAvStillingFraAAReg,
+    selectSisteStillingNavnFraPam,
     State as OversettelseAvStillingFraAARegState
-} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
-import EkspanderbartInfo from '../../../../komponenter/ekspanderbartinfo/ekspanderbartInfo';
+} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
+import EkspanderbartInfo from '../../ekspanderbartinfo/ekspanderbartInfo';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import SokeInput from './sokeinput';
-import {
-    ingenYrkesbakgrunn,
-    selectSisteStilling,
-    Stilling,
-    velgSisteStilling
-} from '../../../../ducks/siste-stilling';
-import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../../komponenter/skjema/skjema-utils';
-import Alternativ from '../../../../komponenter/skjema/alternativ';
+import { ingenYrkesbakgrunn, selectSisteStilling, Stilling, velgSisteStilling } from '../../../ducks/siste-stilling';
+import { getIntlTekstForSporsmal, TekstKontekst } from '../../skjema/skjema-utils';
+import Alternativ from '../alternativ';
 import { getDefaultSvar, hentOversattStillingFraAAReg, skalSkjuleSvaralternativer } from './siste-stilling-utils';
-import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../../../ducks/svar-utils';
-import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
-import { SporsmalProps } from '../../../../komponenter/skjema/sporsmal-utils';
-import { RegistreringType, selectRegistreringstatus } from '../../../../ducks/registreringstatus';
+import { DinSituasjonSvar, hentSvar, SisteStillingSvar, Svar } from '../../../ducks/svar-utils';
+import { endreSvarAction, SporsmalId, State as SvarState } from '../../../ducks/svar';
+import { RegistreringType, selectRegistreringstatus } from '../../../ducks/registreringstatus';
 import InaktivSokeInput from './inaktiv-soke-input';
+import { SporsmalProps } from '../../skjema/sporsmal-utils';
 
 interface SisteStillingState {
     erInputAktiv: boolean;
@@ -43,13 +38,14 @@ interface StateProps {
 }
 
 interface DispatchProps {
+    endreSvar: (sporsmalId: string, svar: Svar) => void;
     hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
     velgStilling: (stilling: Stilling) => void;
 }
 
-type Props = SporsmalProps & StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps & InjectedIntlProps & SporsmalProps;
 
-class SisteStilling extends React.Component<Props, SisteStillingState> {
+class SporsmalSisteStilling extends React.Component<Props, SisteStillingState> {
 
     constructor(props: Props) {
         super(props);
@@ -65,7 +61,6 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
     componentWillMount() {
         const {
             endreSvar,
-            sporsmalId,
             sisteStilling,
             svarState
         } = this.props;
@@ -74,20 +69,39 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
             this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
         } else {
             endreSvar(
-                sporsmalId,
+                SporsmalId.sisteStilling,
                 getDefaultSvar(sisteStilling)
             );
         }
     }
 
+    componentDidUpdate(prevProps: Props) {
+
+        const { velgStilling, svarState, oversettelseAvStillingFraAAReg } = this.props;
+
+        const prevSvar = hentSvar(prevProps.svarState, SporsmalId.dinSituasjon);
+        const svar = hentSvar(svarState, SporsmalId.dinSituasjon) as SisteStillingSvar;
+
+        if (prevSvar !== svar) {
+
+            if (svar === SisteStillingSvar.HAR_HATT_JOBB) {
+                velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
+            } else if (svar === SisteStillingSvar.HAR_IKKE_HATT_JOBB) {
+                velgStilling(ingenYrkesbakgrunn);
+            }
+
+        }
+
+    }
+
     skalViseStillingsfelt() {
-        return (this.props.hentAvgittSvar(this.props.sporsmalId) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB);
+        return hentSvar(this.props.svarState, SporsmalId.sisteStilling) !== SisteStillingSvar.HAR_IKKE_HATT_JOBB;
     }
 
     angiSvarPaaDetteSporsmaletSomIkkeBesvart() {
-        const {svarState, endreSvar, sporsmalId} = this.props;
+        const {svarState, endreSvar} = this.props;
         if (hentSvar(svarState, SporsmalId.sisteStilling) !== SisteStillingSvar.INGEN_SVAR) {
-            endreSvar(sporsmalId, SisteStillingSvar.INGEN_SVAR);
+            endreSvar(SporsmalId.sisteStilling, SisteStillingSvar.INGEN_SVAR);
         }
     }
 
@@ -108,20 +122,9 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
         const {
             sisteStilling,
             intl,
-            endreSvar,
-            sporsmalId,
-            hentAvgittSvar,
-            velgStilling,
-            oversettelseAvStillingFraAAReg,
             svarState,
             registreringType
         } = this.props;
-
-        const alternativProps = {
-            intl,
-            getTekstId: (svar: Svar) => getTekstIdForSvar(sporsmalId, svar),
-            hentAvgittSvar: () => hentAvgittSvar(sporsmalId)
-        };
 
         const skjulSvaralternativer = skalSkjuleSvaralternativer(
             hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar
@@ -131,24 +134,16 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
                     <>
                         <Alternativ
                             svar={SisteStillingSvar.HAR_HATT_JOBB}
-                            {...alternativProps}
-                            avgiSvar={(svar: Svar) => {
-                                endreSvar(sporsmalId, svar);
-                                velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
-                            }}
+                            sporsmalId={SporsmalId.sisteStilling}
                         />
                         <Alternativ
                             svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
-                            {...alternativProps}
-                            avgiSvar={(svar: Svar) => {
-                                endreSvar(sporsmalId, svar);
-                                velgStilling(ingenYrkesbakgrunn);
-                            }}
+                            sporsmalId={SporsmalId.sisteStilling}
                         />
                     </>
         );
 
-        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
+        const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(SporsmalId.sisteStilling,
             kontekst, intl, registreringType);
 
         const sokeInput = this.skalViseStillingsfelt() ?
@@ -191,8 +186,6 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
     }
 }
 
-//  <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
-
 const mapStateToProps = (state) => ({
     sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
@@ -203,8 +196,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SisteStilling));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SporsmalSisteStilling));

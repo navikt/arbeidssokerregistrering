@@ -1,4 +1,4 @@
-import { UTEN_STYRKKODE } from '../sider/skjema-registrering/sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
+import { UTEN_STYRKKODE } from '../komponenter/sporsmal/siste-stilling/siste-stilling-utils';
 
 export const stillingTilBrukerSomIkkeFinnesIAAReg = {
     styrk: UTEN_STYRKKODE

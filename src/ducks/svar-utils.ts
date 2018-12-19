@@ -1,4 +1,4 @@
-import { SporsmalId, State } from './svar';
+import { SporsmalId, State as SvarState, Data as SvarData } from './svar';
 
 export type Svar = UtdanningSvar
     | UtdanningBestattSvar
@@ -93,12 +93,40 @@ export enum TilbakeIArbeidSvar {
    USIKKER = 'USIKKER'
 }
 
-export const hentSvar = (svarState: State, sporsmalId: SporsmalId): Svar | undefined => {
+export const finnEndretSvar = (gammelState: SvarState, nyState: SvarState): SvarData | null => {
+
+    if (nyState.length > gammelState.length) {
+        return nyState[nyState.length - 1];
+    }
+
+    const antallSporsmal = Math.min(gammelState.length, nyState.length);
+
+    for (let i = 0; i < antallSporsmal; i++) {
+
+        const gammeltSvar = gammelState[i];
+        const nyttSvar = nyState[i];
+
+        if (gammeltSvar.svar !== nyttSvar.svar) {
+            return nyttSvar;
+        }
+
+    }
+
+    return null;
+
+};
+
+export const hentSvar = (svarState: SvarState | undefined, sporsmalId: SporsmalId): Svar | undefined => {
+
+    if (!svarState) {
+        return undefined;
+    }
+
     const sporsmalsindeks = svarState.findIndex(data => data.sporsmalId === sporsmalId);
     return (sporsmalsindeks >= 0) ? svarState[sporsmalsindeks].svar : undefined;
 };
 
-export const erSporsmalBesvarte = (svarState: State, sporsmalIder: SporsmalId[]): boolean => {
+export const erSporsmalBesvarte = (svarState: SvarState, sporsmalIder: SporsmalId[]): boolean => {
     for (let i = 0; i < sporsmalIder.length; i++) {
         if (hentSvar(svarState, sporsmalIder[i]) === undefined) {
             return false;

@@ -157,16 +157,22 @@ export function finnNesteHref(props: SkjemaProps): string {
 
 }
 
-export function nullStillSporsmalSomIkkeSkalBesvares(sporsmalId: any, svar: any, endreSvar: any, resetSvar) { // tslint:disable-line
-    spmSomIkkeSkalBesvaresConfig.map((config) => {
+export function nullStillSporsmalSomIkkeSkalBesvares(sporsmalId: SporsmalId, svar: Svar,
+                                                     endreSvar: (spmId: SporsmalId, svar: Svar) => void,
+                                                     resetSvar: (spmId: SporsmalId) => void) {
+
+    console.log("nullstill", sporsmalId, svar); // tslint:disable-line
+
+    spmSomIkkeSkalBesvaresConfig.forEach((config) => {
         if (config.id === sporsmalId && config.svar === svar) {
-            config.spmHoppOver.map((spmId) => {
+            config.spmHoppOver.forEach((spmId) => {
                 endreSvar(spmId, IngenSvar.INGEN_SVAR);
             });
         } else if (config.id === sporsmalId) {
-            config.spmHoppOver.map((spmId) => {
+            config.spmHoppOver.forEach((spmId) => {
                 resetSvar(spmId);
             });
         }
+
     });
 }

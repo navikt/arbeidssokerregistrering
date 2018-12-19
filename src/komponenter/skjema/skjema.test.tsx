@@ -16,13 +16,13 @@ import {
     UtdanningSvar
 } from "../../ducks/svar-utils";
 import {OPPSUMMERING_PATH, SKJEMA_PATH} from "../../utils/konstanter";
-import SporsmalDinSituasjon from "../../sider/skjema-registrering/sporsmal/sporsmal-din-situasjon";
-import SisteStilling from "../../sider/skjema-registrering/sporsmal/sporsmal-siste-stilling/siste-stilling";
-import Utdanningsporsmal from "../../sider/skjema-registrering/sporsmal/sporsmal-utdanning";
-import UtdanningGodkjentSporsmal from "../../sider/skjema-registrering/sporsmal/sporsmal-utdanning-godkjent";
-import UtdanningBestattSporsmal from "../../sider/skjema-registrering/sporsmal/sporsmal-utdanning-bestatt";
-import HelseHinder from "../../sider/skjema-registrering/sporsmal/sporsmal-helse-hinder";
-import AndreForhold from "../../sider/skjema-registrering/sporsmal/sporsmal-andre-forhold";
+import SporsmalDinSituasjon from "../sporsmal/sporsmal-din-situasjon";
+import SisteStilling from "../sporsmal/siste-stilling/sporsmal-siste-stilling";
+import Utdanningsporsmal from "../sporsmal/sporsmal-utdanning";
+import UtdanningGodkjentSporsmal from "../sporsmal/sporsmal-utdanning-godkjent";
+import UtdanningBestattSporsmal from "../sporsmal/sporsmal-utdanning-bestatt";
+import HelseHinder from "../sporsmal/sporsmal-helse-hinder";
+import AndreForhold from "../sporsmal/sporsmal-andre-forhold";
 import {RouteComponentProps} from "react-router";
 import {MatchProps} from "../../utils/utils";
 import {AppState} from "../../reducer";
@@ -94,11 +94,6 @@ describe('<Skjema />', () => {
 
 const mountSkjema = (config, startId: string, store: Store<AppState> | undefined) => {
 
-    const sporsmalProps = {
-        endreSvar: (sporsmalId, svar) => {},
-        hentAvgittSvar: (sporsmalId: SporsmalId) => undefined,
-    };
-
     const cfg = config ? config : defaultConfigForSporsmalsflyt;
     const id = startId ? startId : "0";
 
@@ -109,13 +104,13 @@ const mountSkjema = (config, startId: string, store: Store<AppState> | undefined
             endUrl={OPPSUMMERING_PATH}
             {... { match: { params: { id: id } }} as RouteComponentProps<MatchProps>}
         >
-            <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} {...sporsmalProps}/>
-            <SisteStilling sporsmalId={SporsmalId.sisteStilling} {...sporsmalProps}/>
-            <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} {...sporsmalProps}/>
-            <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} {...sporsmalProps}/>
-            <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} {...sporsmalProps}/>
-            <HelseHinder sporsmalId={SporsmalId.helseHinder} {...sporsmalProps}/>
-            <AndreForhold sporsmalId={SporsmalId.andreForhold} {...sporsmalProps}/>
+            <SporsmalDinSituasjon sporsmalId={SporsmalId.dinSituasjon} />
+            <SisteStilling sporsmalId={SporsmalId.sisteStilling} />
+            <Utdanningsporsmal sporsmalId={SporsmalId.utdanning} />
+            <UtdanningGodkjentSporsmal sporsmalId={SporsmalId.utdanningGodkjent} />
+            <UtdanningBestattSporsmal sporsmalId={SporsmalId.utdanningBestatt} />
+            <HelseHinder sporsmalId={SporsmalId.helseHinder} />
+            <AndreForhold sporsmalId={SporsmalId.andreForhold} />
         </Skjema>
     , store);
 

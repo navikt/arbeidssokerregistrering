@@ -1,4 +1,4 @@
-import { annenStilling } from '../../../../ducks/siste-stilling';
+import { annenStilling } from '../../../ducks/siste-stilling';
 
 export function hentStillingsAlternativer(typeaheadYrkeList: {}[], sokestreng: string) {
     const alternativer = typeaheadYrkeList

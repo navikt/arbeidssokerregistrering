@@ -1,6 +1,6 @@
-import { annenStilling, ingenYrkesbakgrunn, Stilling } from '../../../../ducks/siste-stilling';
-import { Data as OversettelseAvStillingData } from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
-import { DinSituasjonSvar, SisteStillingSvar } from '../../../../ducks/svar-utils';
+import { annenStilling, ingenYrkesbakgrunn, Stilling } from '../../../ducks/siste-stilling';
+import { Data as OversettelseAvStillingData } from '../../../ducks/oversettelse-av-stilling-fra-aareg';
+import { DinSituasjonSvar, SisteStillingSvar } from '../../../ducks/svar-utils';
 
 export const UTEN_STYRKKODE = 'utenstyrkkode';
 

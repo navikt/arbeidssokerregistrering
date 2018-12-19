@@ -33,7 +33,7 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
 
         const lopConfig = hentLoepConfig({}, inngangsLopSvar);
 
-        const element = lopConfig && lopConfig({}, '').map((config) => {
+        const element = lopConfig && lopConfig().map((config) => {
             return config.elementOppsummering;
         });
 

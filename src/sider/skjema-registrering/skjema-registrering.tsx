@@ -1,7 +1,7 @@
 import * as React from 'react';
 import LastInnSisteStilling from './last-inn-siste-stilling';
 import { endreSvarAction, resetSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
-import { hentSvar, Svar } from '../../ducks/svar-utils';
+import { finnEndretSvar, Svar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -28,21 +28,23 @@ interface StateProps {
 type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
 class SkjemaRegistrering extends React.Component<Props> {
+
+    componentDidUpdate(prevProps: Props) {
+
+        const { svarState, resetSvar, endreSvar } = this.props;
+
+        const endretSvar = finnEndretSvar(prevProps.svarState, svarState);
+
+        if (endretSvar && endretSvar.svar) {
+            nullStillSporsmalSomIkkeSkalBesvares(endretSvar.sporsmalId, endretSvar.svar, endreSvar, resetSvar);
+        }
+
+    }
+
     render() {
-        const {endreSvar, resetSvar, intl, svarState, location, match, history } = this.props;
-        const sporsmalProps = {
-            endreSvar: (sporsmalId, svar) => {
-
-                nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
-
-                endreSvar(sporsmalId, svar);
-            },
-            intl: intl,
-            hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
-        };
-
+        const { location, match, history } = this.props;
         const regType = RegistreringType.ORDINAER_REGISTRERING;
-        const registreringSporsmalElementene = hentRegistreringSporsmalene(sporsmalProps, regType);
+        const registreringSporsmalElementene = hentRegistreringSporsmalene(regType);
 
         return (
             <LastInnSisteStilling>
