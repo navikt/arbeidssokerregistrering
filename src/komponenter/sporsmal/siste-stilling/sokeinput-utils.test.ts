@@ -1,8 +1,8 @@
 /*tslint:disable*/
 import { expect } from 'chai';
 import {hentStillingsAlternativer} from "./sokeinput-utils";
-import pamJanzzData from "../../../../mocks/typeahead-mock";
-import {Stilling} from "../../../../ducks/siste-stilling";
+import pamJanzzData from "../../../mocks/typeahead-mock";
+import {Stilling} from "../../../ducks/siste-stilling";
 
 describe('utils test', () => {
     it('test hentStillingsAlternativer', () => {

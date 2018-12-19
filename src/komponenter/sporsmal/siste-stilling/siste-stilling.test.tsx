@@ -4,18 +4,18 @@ import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as sinon from 'sinon';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {create} from '../../../../store';
-import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../../test/test-utils';
+import {create} from '../../../store';
+import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../test/test-utils';
 import SisteStilling from './sporsmal-siste-stilling';
-import {annenStilling, ingenYrkesbakgrunn, Stilling, velgSisteStilling, ActionTypes as SisteStillingActionTypes} from '../../../../ducks/siste-stilling';
-import {sisteStillingMock} from '../../../../mocks/siste-stilling-mock';
-import oversettelseAvStillingFraAAReg, {tomOversettelseAvStillingFraAAReg} from '../../../../mocks/oversettelse-av-stilling-fra-aareg-mock';
-import {hentOversattStillingFraAAReg, UTEN_STYRKKODE} from './siste-stilling-utils';
-import {ActionTypes as OversettelseAvStillingActionTypes} from '../../../../ducks/oversettelse-av-stilling-fra-aareg';
-import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../../ducks/siste-stilling-fra-aareg';
-import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
-import {ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
-import Alternativ from "../../../../komponenter/skjema/alternativ";
+import {annenStilling, ingenYrkesbakgrunn, velgSisteStilling} from '../../../ducks/siste-stilling';
+import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../ducks/siste-stilling-fra-aareg';
+import {ActionTypes as OversettelseAvStillingActionTypes} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
+import {DinSituasjonSvar, hentSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../ducks/svar-utils";
+import {ActionTypes as SvarActionTypes, SporsmalId} from "../../../ducks/svar";
+import {sisteStillingMock} from "../../../mocks/siste-stilling-mock";
+import oversettelseAvStillingFraAAReg, {tomOversettelseAvStillingFraAAReg} from "../../../mocks/oversettelse-av-stilling-fra-aareg-mock";
+import {hentOversattStillingFraAAReg, UTEN_STYRKKODE} from "./siste-stilling-utils";
+import Alternativ from '../../../komponenter/sporsmal/alternativ';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -51,15 +51,9 @@ describe('<SisteStilling />', () => {
         const store = create();
         store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
 
-        const endreSvarSpy = sandbox.spy(dummyProps.endreSvar);
-        const props = {
-            ...dummyProps,
-            endreSvar: endreSvarSpy,
-        };
+        mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling} />, store);
+        expect(hentSvar(store.getState().svar, SporsmalId.sisteStilling)).to.be.equal(SisteStillingSvar.HAR_IKKE_HATT_JOBB);
 
-        mountWithStoreRouterAndIntl(<SisteStilling {...props}/>, store);
-
-        expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(SisteStillingSvar.HAR_IKKE_HATT_JOBB);
     });
 
     it('Hvis siste stilling fra state _ikke_ er ingenYrkesbakgrunn, så skal "Har hatt jobb" være default svar.',
@@ -67,14 +61,8 @@ describe('<SisteStilling />', () => {
         const store = create();
         store.dispatch(velgSisteStilling(sisteStillingMock));
 
-        const endreSvarSpy = sandbox.spy(dummyProps.endreSvar);
-        const props = {
-            ...dummyProps,
-            endreSvar: endreSvarSpy,
-        };
-        mountWithStoreRouterAndIntl(<SisteStilling {...props}/>, store);
-
-        expect(endreSvarSpy.getCall(0).args[1]).to.be.equal(SisteStillingSvar.HAR_HATT_JOBB);
+        mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling} />, store);
+        expect(hentSvar(store.getState().svar, SporsmalId.sisteStilling)).to.be.equal(SisteStillingSvar.HAR_HATT_JOBB);
     });
 
     it('Hvis bruker endrer svar til "Har ikke hatt jobb", så skal state.sisteStilling bli ingenYrkesbakgrunn',
@@ -86,7 +74,7 @@ describe('<SisteStilling />', () => {
 
         store.dispatch(velgSisteStilling(sisteStillingMock));
 
-        const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+        const wrapper = mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling} />, store);
 
         wrapper.find(`.inputPanel__field`).at(1).simulate('change'); // klikk på "Har ikke hatt jobb"
 
@@ -110,7 +98,7 @@ describe('<SisteStilling />', () => {
             });
             store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
 
-            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling}/>, store);
 
             wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "Har hatt jobb"
 
@@ -137,7 +125,7 @@ describe('<SisteStilling />', () => {
             });
             store.dispatch(velgSisteStilling(ingenYrkesbakgrunn));
 
-            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling}/>, store);
 
             wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "Har hatt jobb"
 
@@ -146,7 +134,7 @@ describe('<SisteStilling />', () => {
                     expect(store.getState().sisteStilling.data.stilling).to.deep.equal(annenStilling);
                 });
 
-        });
+    });
 
     it('Skal skjule alternativene hvis (og bare hvis) man svarer visse alternativer på spm om din situasjon',() => {
         const svarDerAlternativeneSkalSkjules: (DinSituasjonSvar | undefined)[] = [
@@ -162,13 +150,13 @@ describe('<SisteStilling />', () => {
 
         Object.keys(DinSituasjonSvar).forEach((svar: DinSituasjonSvar) => {
             store.dispatch({
-                type: DinSituasjonActionTypes.AVGI_SVAR,
+                type: SvarActionTypes.AVGI_SVAR,
                 data: {
                     sporsmalId: 'dinSituasjon',
                     svar: svar,
                 }
             });
-            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling {...dummyProps}/>, store);
+            const wrapper = mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling}/>, store);
             const expectedLength = svarDerAlternativeneSkalSkjules.includes(svar) ? 0 : 2;
 
             expect(wrapper.find(Alternativ)).to.have.length(expectedLength);
@@ -178,20 +166,15 @@ describe('<SisteStilling />', () => {
     it('Skal endre svar til INGEN_SVAR hvis alternativene er skjult',() => {
         const store = create();
         store.dispatch({
-            type: DinSituasjonActionTypes.AVGI_SVAR,
+            type: SvarActionTypes.AVGI_SVAR,
             data: {
                 sporsmalId: 'dinSituasjon',
                 svar: DinSituasjonSvar.VIL_FORTSETTE_I_JOBB,
             }
         });
-        const endreSvarSpy = sinon.spy();
-        const sisteStillingProps = {
-            ...dummyProps,
-            sporsmalId: 'sisteStilling',
-            endreSvar: endreSvarSpy,
-        };
-        mountWithStoreRouterAndIntl(<SisteStilling {...sisteStillingProps}/>, store);
 
-        expect(endreSvarSpy.getCall(0).args).to.deep.equal(['sisteStilling', SisteStillingSvar.INGEN_SVAR]);
+        mountWithStoreRouterAndIntl(<SisteStilling sporsmalId={SporsmalId.sisteStilling}/>, store);
+        expect(hentSvar(store.getState().svar, SporsmalId.sisteStilling)).to.be.equal(SisteStillingSvar.INGEN_SVAR);
+
     });
 });

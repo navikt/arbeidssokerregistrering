@@ -79,8 +79,8 @@ class SporsmalSisteStilling extends React.Component<Props, SisteStillingState> {
 
         const { velgStilling, svarState, oversettelseAvStillingFraAAReg } = this.props;
 
-        const prevSvar = hentSvar(prevProps.svarState, SporsmalId.dinSituasjon);
-        const svar = hentSvar(svarState, SporsmalId.dinSituasjon) as SisteStillingSvar;
+        const prevSvar = hentSvar(prevProps.svarState, SporsmalId.sisteStilling);
+        const svar = hentSvar(svarState, SporsmalId.sisteStilling) as SisteStillingSvar;
 
         if (prevSvar !== svar) {
 
