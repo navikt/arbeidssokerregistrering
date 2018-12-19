@@ -3,15 +3,50 @@
     z-index: 100000;
     margin-top: 15%;
     margin-left: 1rem;
-    right: -400px;
-    &:hover {
-        right: 0;
+    right: -530px;
+
+    .apne-lukk-knapp {
+        > div {
+            cursor: pointer;
+            padding: .3rem 0.4rem;
+            position: absolute;
+            right: 516px;
+            width: 100px;
+            color: white;
+            background-color: #0067c5;
+        }
+        .lukknapp {
+            position: absolute;
+            left: 0;
+            top: -26px;
+        }
     }
+
+    &.skjul{
+        right: -530px;
+        .apne-lukk-knapp {
+            > div {
+                right: 516px;
+            }
+        }
+    }
+
+    &.vis{
+        right: 0;
+        .apne-lukk-knapp {
+            > div {
+                top: -26px;
+                left: 42px;
+            }
+        }
+    }
+
     &__legend {
         padding: 0.5rem 2rem;
     }
     &__fieldset {
         border: 10px solid cadetblue;
+        background-color: white;
     }
     label {
         margin-bottom: 0.5rem;
