@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Route, RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Data as StartRegistreringData, RegistreringType, ActionTypes as registringActionType }
     from '../../ducks/registreringstatus';
+import { State as RegistrerBruker, ActionTypes as registrerbrukerActionType }
+    from '../../ducks/registrerbruker';
 import { ActionTypes as reaktiveringActionType }
     from '../../ducks/reaktiverbruker';
 import { ActionTypes as svarActionType }
@@ -14,22 +17,28 @@ import { AppState } from '../../reducer';
 import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
+import { dispatchAlleSporsmal } from '../../test/test-utils';
+import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
+import { MatchProps } from '../../utils/utils';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
+    registrerbruker: RegistrerBruker;
 }
 
 interface OwnState {
     skalVise: boolean;
+    feilmeldingRadioKnapp: string;
 }
 
-type Props = InjectedIntlProps & StateProps;
+type Props = InjectedIntlProps & StateProps & RouteComponentProps<MatchProps>;
 
 class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState> {
 
     componentWillMount() {
         this.state = {
-            skalVise: false
+            skalVise: false,
+            feilmeldingRadioKnapp: ''
         };
     }
 
@@ -42,6 +51,9 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             });
             store.dispatch({
                 type: svarActionType.AVGI_SVAR_INIT,
+            });
+            store.dispatch({
+                type: registrerbrukerActionType.REG_BRUKER_STATUS_OK,
             });
         };
         const oppdaterRegistreringsType = (type: RegistreringType) => {
@@ -56,7 +68,10 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             reset();
         };
 
-        const { skalVise } = this.state;
+        const {
+            skalVise,
+            feilmeldingRadioKnapp
+        } = this.state;
 
         const visSkjul = skalVise ? 'vis' : 'skjul';
         const ApneLukkTekst = skalVise ? 'Lukk' : 'Åpne';
@@ -96,8 +111,17 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             }}
                             name="registreringsType"
                             label="Arbeidssøker registrering"
-                            value="Sykmeldt"
+                            value="Ordinar"
                             checked={registreringType === RegistreringType.ORDINAER_REGISTRERING}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRegistreringsType(RegistreringType.SYKMELDT_REGISTRERING);
+                            }}
+                            name="registreringsType"
+                            label="Sykmeldt med arbeidsgiver > 39 uker"
+                            value="Sykmeldt med arbeidsgiver > 39 uker"
+                            checked={registreringType === RegistreringType.SYKMELDT_REGISTRERING}
                         />
                         <RadioPanel
                             onChange={() => {
@@ -119,20 +143,77 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                         />
                         <RadioPanel
                             onChange={() => {
-                                oppdaterRegistreringsType(RegistreringType.SYKMELDT_REGISTRERING);
-                            }}
-                            name="registreringsType"
-                            label="Sykmeldt med arbeidsgiver > 39 uker"
-                            value="Sykmeldt med arbeidsgiver > 39 uker"
-                            checked={registreringType === RegistreringType.SYKMELDT_REGISTRERING}
-                        /><RadioPanel
-                            onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.ALLEREDE_REGISTRERT);
                             }}
                             name="registreringsType"
                             label="Sykmeldt uten arbeidsgiver/ Arbeidssoker allerede registrert"
                             value="Sykmeldt"
                             checked={registreringType === RegistreringType.ALLEREDE_REGISTRERT}
+                        />
+                    </div>
+                </fieldset>
+
+                <fieldset className="devToggleStatus__fieldset-feilmelding">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
+                        <Normaltekst>
+                            Feilmeldinger
+                        </Normaltekst>
+                    </legend>
+                    <div>
+                        <RadioPanel
+                            onChange={() => {
+
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET
+                                });
+
+                                dispatchAlleSporsmal(store);
+
+                                this.props.history.push('/fullfor');
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'generelt'
+                                });
+
+                            }}
+                            name="generellfeil"
+                            label="Feilmelding - generell kontakt brukerstøtte"
+                            value="generellfeil"
+                            checked={
+                                feilmeldingRadioKnapp === 'generelt'
+                            }
+                        />
+                        <RadioPanel
+                            onChange={() => {
+
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: ordinaerRegistreringFeilrespons,
+                                        response: new Response(new Blob(), {status: 500})
+                                    }
+                                });
+
+                                dispatchAlleSporsmal(store);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'manglerarbtillatelse'
+                                });
+
+                                this.props.history.push('/fullfor');
+                            }}
+                            name="manglerarbtillatelse"
+                            label="Feilmelding - brukere mangler arbeidsstillatelse"
+                            value="manglerarbtillatelse"
+                            checked={
+                                feilmeldingRadioKnapp === 'manglerarbtillatelse'
+                            }
                         />
                     </div>
                 </fieldset>
@@ -143,6 +224,17 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 }
 const mapStateToProps = (state: AppState): StateProps => ({
     startRegistreringStatus: state.registreringStatus.data,
+    registrerbruker: state.registrerBruker,
 });
 
-export default connect(mapStateToProps)(injectIntl(HerokuappEndreMockRegistreringLoep));
+const HerokuMock = withRouter(connect(mapStateToProps)(injectIntl(HerokuappEndreMockRegistreringLoep)));
+
+export const RouteHerokuMockRegLoep =
+    process.env.REACT_APP_MOCK_ENDRE_REG_LOP
+    ? (
+    <Route
+        path="/"
+        component={HerokuMock}
+    />
+)
+    : null;
