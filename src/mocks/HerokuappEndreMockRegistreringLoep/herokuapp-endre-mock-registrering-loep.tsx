@@ -17,8 +17,6 @@ import { AppState } from '../../reducer';
 import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { dispatchAlleSporsmal } from '../../test/test-utils';
-import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 
 interface StateProps {
@@ -70,7 +68,6 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
         const {
             skalVise,
-            feilmeldingRadioKnapp
         } = this.state;
 
         const visSkjul = skalVise ? 'vis' : 'skjul';
@@ -164,56 +161,12 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     <div>
                         <RadioPanel
                             onChange={() => {
-
-                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
-
-                                store.dispatch({
-                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET
-                                });
-
-                                dispatchAlleSporsmal(store);
-
-                                this.props.history.push('/fullfor');
-
-                                this.setState({
-                                    feilmeldingRadioKnapp: 'generelt'
-                                });
-
+                                oppdaterRegistreringsType(RegistreringType.ALLEREDE_REGISTRERT);
                             }}
                             name="devToggleStatus"
-                            label="Feilmelding - generell kontakt brukerstøtte"
-                            value="Feilmelding - generell kontakt brukerstøtte"
-                            checked={
-                                feilmeldingRadioKnapp === 'generelt'
-                            }
-                        />
-                        <RadioPanel
-                            onChange={() => {
-
-                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
-
-                                store.dispatch({
-                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
-                                    data: {
-                                        data: ordinaerRegistreringFeilrespons,
-                                        response: new Response(new Blob(), {status: 500})
-                                    }
-                                });
-
-                                dispatchAlleSporsmal(store);
-
-                                this.setState({
-                                    feilmeldingRadioKnapp: 'manglerarbtillatelse'
-                                });
-
-                                this.props.history.push('/fullfor');
-                            }}
-                            name="devToggleStatus"
-                            label="Feilmelding - brukere mangler arbeidsstillatelse"
-                            value="Feilmelding - brukere mangler arbeidsstillatelse"
-                            checked={
-                                feilmeldingRadioKnapp === 'manglerarbtillatelse'
-                            }
+                            label="Sykmeldt uten arbeidsgiver/ Arbeidssoker allerede registrert"
+                            value="Sykmeldt"
+                            checked={registreringType === RegistreringType.ALLEREDE_REGISTRERT}
                         />
                     </div>
                 </fieldset>
