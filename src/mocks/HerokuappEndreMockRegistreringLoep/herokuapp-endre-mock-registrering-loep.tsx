@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { Route, RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Data as StartRegistreringData, RegistreringType, ActionTypes as registringActionType }
     from '../../ducks/registreringstatus';
@@ -227,14 +227,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     registrerbruker: state.registrerBruker,
 });
 
-const HerokuMock = withRouter(connect(mapStateToProps)(injectIntl(HerokuappEndreMockRegistreringLoep)));
-
-export const RouteHerokuMockRegLoep =
-    !!process.env.REACT_APP_MOCK_ENDRE_REG_LOP
-        ? (
-            <Route
-                path="/"
-                component={HerokuMock}
-            />
-        )
-        : null;
+export const HerokuMock = withRouter(connect(mapStateToProps)(injectIntl(HerokuappEndreMockRegistreringLoep)));
