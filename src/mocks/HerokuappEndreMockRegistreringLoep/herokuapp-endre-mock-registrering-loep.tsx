@@ -230,7 +230,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 const HerokuMock = withRouter(connect(mapStateToProps)(injectIntl(HerokuappEndreMockRegistreringLoep)));
 
 export const RouteHerokuMockRegLoep =
-    process.env.REACT_APP_MOCK_ENDRE_REG_LOP
+    !!process.env.REACT_APP_MOCK_ENDRE_REG_LOP
         ? (
             <Route
                 path="/"
