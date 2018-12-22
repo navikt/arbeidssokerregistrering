@@ -18,7 +18,7 @@ import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { dispatchAlleSporsmal } from '../../test/test-utils';
-// import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
+import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 
 interface StateProps {
@@ -109,7 +109,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
                             }}
-                            name="registreringsType"
+                            name="devToggleStatus"
                             label="Arbeidssøker registrering"
                             value="Ordinar"
                             checked={registreringType === RegistreringType.ORDINAER_REGISTRERING}
@@ -118,7 +118,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.SYKMELDT_REGISTRERING);
                             }}
-                            name="registreringsType"
+                            name="devToggleStatus"
                             label="Sykmeldt med arbeidsgiver > 39 uker"
                             value="Sykmeldt med arbeidsgiver > 39 uker"
                             checked={registreringType === RegistreringType.SYKMELDT_REGISTRERING}
@@ -127,7 +127,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.REAKTIVERING);
                             }}
-                            name="registreringsType"
+                            name="devToggleStatus"
                             label="Enkel reaktivering"
                             value="Sykmeldt"
                             checked={registreringType === RegistreringType.REAKTIVERING}
@@ -136,7 +136,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.SPERRET);
                             }}
-                            name="registreringsType"
+                            name="devToggleStatus"
                             label="Sykmeldt med arbeidsgiver < 39 uker"
                             value="Sykmeldt med arbeidsgiver < 39 uker"
                             checked={registreringType === RegistreringType.SPERRET}
@@ -145,7 +145,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             onChange={() => {
                                 oppdaterRegistreringsType(RegistreringType.ALLEREDE_REGISTRERT);
                             }}
-                            name="registreringsType"
+                            name="devToggleStatus"
                             label="Sykmeldt uten arbeidsgiver/ Arbeidssoker allerede registrert"
                             value="Sykmeldt"
                             checked={registreringType === RegistreringType.ALLEREDE_REGISTRERT}
@@ -180,11 +180,39 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 });
 
                             }}
-                            name="feilmelding"
+                            name="devToggleStatus"
                             label="Feilmelding - generell kontakt brukerstøtte"
                             value="Feilmelding - generell kontakt brukerstøtte"
                             checked={
                                 feilmeldingRadioKnapp === 'generelt'
+                            }
+                        />
+                        <RadioPanel
+                            onChange={() => {
+
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: ordinaerRegistreringFeilrespons,
+                                        response: new Response(new Blob(), {status: 500})
+                                    }
+                                });
+
+                                dispatchAlleSporsmal(store);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'manglerarbtillatelse'
+                                });
+
+                                this.props.history.push('/fullfor');
+                            }}
+                            name="devToggleStatus"
+                            label="Feilmelding - brukere mangler arbeidsstillatelse"
+                            value="Feilmelding - brukere mangler arbeidsstillatelse"
+                            checked={
+                                feilmeldingRadioKnapp === 'manglerarbtillatelse'
                             }
                         />
                     </div>
