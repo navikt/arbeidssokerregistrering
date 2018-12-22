@@ -8,7 +8,7 @@ import { State as RegistrerBruker, ActionTypes as registrerbrukerActionType }
     from '../../ducks/registrerbruker';
 import { ActionTypes as reaktiveringActionType }
     from '../../ducks/reaktiverbruker';
-import { ActionTypes as svarActionType }
+import {ActionTypes as SvarActionTypes, ActionTypes as svarActionType, SporsmalId }
     from '../../ducks/svar';
 import { RadioPanel } from 'nav-frontend-skjema';
 import getStore from '../../store';
@@ -19,6 +19,8 @@ import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
+import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
+import { IngenSvar } from '../../ducks/svar-utils';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
@@ -170,6 +172,27 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET
                                 });
 
+                                store.dispatch({
+                                    type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+                                    data: { stilling: annenStilling }
+                                });
+
+                                [
+                                    SporsmalId.dinSituasjon,
+                                    SporsmalId.sisteStilling,
+                                    SporsmalId.utdanning,
+                                    SporsmalId.utdanningGodkjent,
+                                    SporsmalId.utdanningBestatt,
+                                    SporsmalId.helseHinder,
+                                    SporsmalId.andreForhold,
+                                ].forEach(sporsmalId => store.dispatch({
+                                    type: SvarActionTypes.AVGI_SVAR,
+                                    data: {
+                                        sporsmalId,
+                                        svar: IngenSvar.INGEN_SVAR,
+                                    }
+                                }));
+
                                 this.props.history.push('/fullfor');
 
                                 this.setState({
@@ -196,6 +219,27 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                         response: new Response(new Blob(), {status: 500})
                                     }
                                 });
+
+                                store.dispatch({
+                                    type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+                                    data: { stilling: annenStilling }
+                                });
+
+                                [
+                                    SporsmalId.dinSituasjon,
+                                    SporsmalId.sisteStilling,
+                                    SporsmalId.utdanning,
+                                    SporsmalId.utdanningGodkjent,
+                                    SporsmalId.utdanningBestatt,
+                                    SporsmalId.helseHinder,
+                                    SporsmalId.andreForhold,
+                                ].forEach(sporsmalId => store.dispatch({
+                                    type: SvarActionTypes.AVGI_SVAR,
+                                    data: {
+                                        sporsmalId,
+                                        svar: IngenSvar.INGEN_SVAR,
+                                    }
+                                }));
 
                                 this.setState({
                                     feilmeldingRadioKnapp: 'manglerarbtillatelse'
