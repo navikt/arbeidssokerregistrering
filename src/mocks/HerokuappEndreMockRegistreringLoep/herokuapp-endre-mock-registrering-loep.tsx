@@ -170,6 +170,12 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET
                                 });
 
+                                this.props.history.push('/fullfor');
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'generelt'
+                                });
+
                             }}
                             name="devToggleStatus"
                             label="Feilmelding - generell kontakt brukerstøtte"
@@ -191,6 +197,11 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                     }
                                 });
 
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'manglerarbtillatelse'
+                                });
+
+                                this.props.history.push('/fullfor');
                             }}
                             name="devToggleStatus"
                             label="Feilmelding - brukere mangler arbeidsstillatelse"
