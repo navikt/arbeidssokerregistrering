@@ -227,4 +227,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     registrerbruker: state.registrerBruker,
 });
 
-export const HerokuMock = withRouter(connect(mapStateToProps)(injectIntl(HerokuappEndreMockRegistreringLoep)));
+export default connect(mapStateToProps)(withRouter(injectIntl(HerokuappEndreMockRegistreringLoep)));
