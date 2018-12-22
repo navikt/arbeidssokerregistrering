@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router';
+import { RouteHerokuMock } from
+        '../mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 
 interface OwnProps {
     to: string;
@@ -14,6 +16,7 @@ class RedirectAll extends React.PureComponent<OwnProps> {
 
         return (
             <>
+                {RouteHerokuMock}
                 <Route component={component} />
                 <Redirect to={to} />
             </>

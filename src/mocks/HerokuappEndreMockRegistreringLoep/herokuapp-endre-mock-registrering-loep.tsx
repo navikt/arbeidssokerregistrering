@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { Route, RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Data as StartRegistreringData, RegistreringType, ActionTypes as registringActionType }
     from '../../ducks/registreringstatus';
@@ -41,6 +41,32 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             skalVise: false,
             feilmeldingRadioKnapp: ''
         });
+    }
+
+    dispathSpmOgPush = (store, history) => {
+
+        store.dispatch({
+            type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
+            data: { stilling: annenStilling }
+        });
+
+        [
+            SporsmalId.dinSituasjon,
+            SporsmalId.sisteStilling,
+            SporsmalId.utdanning,
+            SporsmalId.utdanningGodkjent,
+            SporsmalId.utdanningBestatt,
+            SporsmalId.helseHinder,
+            SporsmalId.andreForhold,
+        ].forEach(sporsmalId => store.dispatch({
+            type: SvarActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId,
+                svar: IngenSvar.INGEN_SVAR,
+            }
+        }));
+
+        history.push('/fullfor');
     }
 
     render() {
@@ -172,35 +198,14 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET
                                 });
 
-                                store.dispatch({
-                                    type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
-                                    data: { stilling: annenStilling }
-                                });
-
-                                [
-                                    SporsmalId.dinSituasjon,
-                                    SporsmalId.sisteStilling,
-                                    SporsmalId.utdanning,
-                                    SporsmalId.utdanningGodkjent,
-                                    SporsmalId.utdanningBestatt,
-                                    SporsmalId.helseHinder,
-                                    SporsmalId.andreForhold,
-                                ].forEach(sporsmalId => store.dispatch({
-                                    type: SvarActionTypes.AVGI_SVAR,
-                                    data: {
-                                        sporsmalId,
-                                        svar: IngenSvar.INGEN_SVAR,
-                                    }
-                                }));
-
-                                this.props.history.push('/fullfor');
+                                this.dispathSpmOgPush(store, this.props.history);
 
                                 this.setState({
                                     feilmeldingRadioKnapp: 'generelt'
                                 });
 
                             }}
-                            name="devToggleStatus"
+                            name="feilmelding"
                             label="Feilmelding - generell kontakt brukerstøtte"
                             value="Feilmelding - generell kontakt brukerstøtte"
                             checked={
@@ -220,34 +225,14 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                     }
                                 });
 
-                                store.dispatch({
-                                    type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,
-                                    data: { stilling: annenStilling }
-                                });
-
-                                [
-                                    SporsmalId.dinSituasjon,
-                                    SporsmalId.sisteStilling,
-                                    SporsmalId.utdanning,
-                                    SporsmalId.utdanningGodkjent,
-                                    SporsmalId.utdanningBestatt,
-                                    SporsmalId.helseHinder,
-                                    SporsmalId.andreForhold,
-                                ].forEach(sporsmalId => store.dispatch({
-                                    type: SvarActionTypes.AVGI_SVAR,
-                                    data: {
-                                        sporsmalId,
-                                        svar: IngenSvar.INGEN_SVAR,
-                                    }
-                                }));
+                                this.dispathSpmOgPush(store, this.props.history);
 
                                 this.setState({
                                     feilmeldingRadioKnapp: 'manglerarbtillatelse'
                                 });
 
-                                this.props.history.push('/fullfor');
                             }}
-                            name="devToggleStatus"
+                            name="feilmelding"
                             label="Feilmelding - brukere mangler arbeidsstillatelse"
                             value="Feilmelding - brukere mangler arbeidsstillatelse"
                             checked={
@@ -266,4 +251,9 @@ const mapStateToProps = (state: AppState): StateProps => ({
     registrerbruker: state.registrerBruker,
 });
 
-export default connect(mapStateToProps)(withRouter(injectIntl(HerokuappEndreMockRegistreringLoep)));
+const HerokuMock = connect(mapStateToProps)(withRouter(injectIntl(HerokuappEndreMockRegistreringLoep)));
+
+export const RouteHerokuMock =
+    !!process.env.REACT_APP_MOCK_ENDRE_REG_LOP
+    ? <Route path="/" component={HerokuMock}/>
+    : null;

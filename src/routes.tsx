@@ -43,7 +43,7 @@ import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
-import HerokuappEndreMockRegistreringLoep from
+import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 
 interface StateProps {
@@ -91,12 +91,7 @@ class Routes extends React.Component<AllProps> {
 
         return (
             <>
-
-                {
-                    !!process.env.REACT_APP_MOCK_ENDRE_REG_LOP
-                        ? <Route path="/" component={HerokuappEndreMockRegistreringLoep}/>
-                        : null
-                }
+                {RouteHerokuMock}
 
                 <Route path="/" component={Banner}/>
 
