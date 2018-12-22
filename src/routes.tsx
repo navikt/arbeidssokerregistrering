@@ -94,11 +94,11 @@ class Routes extends React.Component<AllProps> {
 
                 {
                     !!process.env.REACT_APP_MOCK_ENDRE_REG_LOP
-                        ? <Route path="/" component={Banner}/>
+                        ? <Route path="/" component={HerokuappEndreMockRegistreringLoep}/>
                         : null
                 }
 
-                <Route path="/" component={HerokuappEndreMockRegistreringLoep}/>
+                <Route path="/" component={Banner}/>
 
                 <Route path="/:url" component={ProgressBarContainer}/>
 
