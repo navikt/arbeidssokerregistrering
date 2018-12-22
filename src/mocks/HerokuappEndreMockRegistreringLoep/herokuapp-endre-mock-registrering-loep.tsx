@@ -18,7 +18,7 @@ import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { dispatchAlleSporsmal } from '../../test/test-utils';
-import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
+// import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 
 interface StateProps {
@@ -185,34 +185,6 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             value="Feilmelding - generell kontakt brukerstøtte"
                             checked={
                                 feilmeldingRadioKnapp === 'generelt'
-                            }
-                        />
-                        <RadioPanel
-                            onChange={() => {
-
-                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
-
-                                store.dispatch({
-                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
-                                    data: {
-                                        data: ordinaerRegistreringFeilrespons,
-                                        response: new Response(new Blob(), {status: 500})
-                                    }
-                                });
-
-                                dispatchAlleSporsmal(store);
-
-                                this.setState({
-                                    feilmeldingRadioKnapp: 'manglerarbtillatelse'
-                                });
-
-                                this.props.history.push('/fullfor');
-                            }}
-                            name="feilmelding"
-                            label="Feilmelding - brukere mangler arbeidsstillatelse"
-                            value="Feilmelding - brukere mangler arbeidsstillatelse"
-                            checked={
-                                feilmeldingRadioKnapp === 'manglerarbtillatelse'
                             }
                         />
                     </div>
