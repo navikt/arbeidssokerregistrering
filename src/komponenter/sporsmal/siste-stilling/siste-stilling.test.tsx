@@ -10,7 +10,7 @@ import SisteStilling from './sporsmal-siste-stilling';
 import {annenStilling, ingenYrkesbakgrunn, velgSisteStilling} from '../../../ducks/siste-stilling';
 import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../ducks/siste-stilling-fra-aareg';
 import {ActionTypes as OversettelseAvStillingActionTypes} from '../../../ducks/oversettelse-av-stilling-fra-aareg';
-import {DinSituasjonSvar, hentSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../ducks/svar-utils";
+import {DinSituasjonSvar, hentSvar, SisteStillingSvar} from "../../../ducks/svar-utils";
 import {ActionTypes as SvarActionTypes, SporsmalId} from "../../../ducks/svar";
 import {sisteStillingMock} from "../../../mocks/siste-stilling-mock";
 import oversettelseAvStillingFraAAReg, {tomOversettelseAvStillingFraAAReg} from "../../../mocks/oversettelse-av-stilling-fra-aareg-mock";
@@ -30,13 +30,6 @@ afterEach(() => {
         fetch.restore();
     }
 });
-
-//tslint:disable
-const dummyProps = {
-    sporsmalId: '',
-    endreSvar: (sporsmalId: string, svar: Svar) => {},
-    hentAvgittSvar: (sporsmalId: string) => IngenSvar.INGEN_SVAR,
-};
 
 function dispatchSisteStillingFraAAReg(store, styrk) {
     store.dispatch({

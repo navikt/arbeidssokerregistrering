@@ -3,10 +3,10 @@ import { RadioPanel } from 'nav-frontend-skjema';
 import * as classNames from 'classnames';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { endreSvarAction, resetSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
-import { getTekstIdForSvar } from '../skjema/skjema-utils';
+import { getTekstIdForSvar, nullStillSporsmalSomIkkeSkalBesvares } from '../skjema/skjema-utils';
 
 interface AlternativProps {
     svar: Svar;
@@ -19,6 +19,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
+    resetSvar: (sporsmalId: SporsmalId) => void;
     endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
 }
 
@@ -30,10 +31,15 @@ const Alternativ: React.SFC<AllProps> = (props: AllProps) => {
     const tekst = intl.messages[getTekstIdForSvar(sporsmalId, svar)];
     const erBesvart = hentSvar(svarState, sporsmalId) === svar;
 
+    const handleSvarEndret = () => {
+        props.endreSvar(sporsmalId, svar);
+        nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, props.endreSvar, props.resetSvar);
+    };
+
     return (
         <div className={classNames('alternativ-wrapper', className)}>
             <RadioPanel
-                onChange={() => props.endreSvar(sporsmalId, svar)}
+                onChange={handleSvarEndret}
                 inputProps={{className: 'blokk-xs'}}
                 name={'alternativ'}
                 label={tekst}
@@ -49,6 +55,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    resetSvar: (sporsmalId) => dispatch(resetSvarAction(sporsmalId)),
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar))
 });
 

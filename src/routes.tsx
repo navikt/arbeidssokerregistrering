@@ -67,8 +67,6 @@ class Routes extends React.Component<AllProps> {
         const klarForFullforing = erKlarForFullforing(this.props.state);
         const queryParams = location.search;
 
-        console.log("klar for fullfor", klarForFullforing); // tslint:disable-line
-
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
         } else if (registreringType === RegistreringType.SPERRET) {

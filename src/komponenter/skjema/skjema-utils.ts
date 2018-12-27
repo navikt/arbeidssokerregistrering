@@ -161,8 +161,6 @@ export function nullStillSporsmalSomIkkeSkalBesvares(sporsmalId: SporsmalId, sva
                                                      endreSvar: (spmId: SporsmalId, svar: Svar) => void,
                                                      resetSvar: (spmId: SporsmalId) => void) {
 
-    console.log("nullstill", sporsmalId, svar); // tslint:disable-line
-
     spmSomIkkeSkalBesvaresConfig.forEach((config) => {
         if (config.id === sporsmalId && config.svar === svar) {
             config.spmHoppOver.forEach((spmId) => {
