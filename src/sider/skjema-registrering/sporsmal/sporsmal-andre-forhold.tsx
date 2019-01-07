@@ -30,7 +30,7 @@ function AndreForhold(props: Props) {
                             className="typo-innholdstittel spm-tittel"
                             dangerouslySetInnerHTML={{ __html: getTekst('tittel') }}
                         />
-                        <Normaltekst className="spm-ingress">
+                        <Normaltekst className="spm-beskrivelse">
                             {getTekst('ingress')}
                         </Normaltekst>
                     </legend>
