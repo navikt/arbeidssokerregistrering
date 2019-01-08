@@ -19,7 +19,7 @@ const oppsummering = new Oppsummering();
 test('Ordinær registrering', async t => {
     const browserName = uaParser(await getUA()).browser.name;
     await t
-        .navigateTo(`http://${t.fixtureCtx.ip}:4001`)
+        .navigateTo(`http://${t.fixtureCtx.ip}:4502`)
         .expect(startside.side.exists).ok()
         .takeScreenshot(`${browserName}/forside.png`)
         .click(startside.btnStartRegistrering);
