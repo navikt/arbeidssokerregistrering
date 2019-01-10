@@ -45,6 +45,7 @@ import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
+import { frontendLogger } from './metrikker/metrics-utils';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -86,6 +87,7 @@ class Routes extends React.Component<AllProps> {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         } else if (registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
             erFraSykefravaer && location.pathname === START_PATH) {
+            frontendLogger('registrering.sykmeldt.fra.sykefravaer');
             return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
         }
 

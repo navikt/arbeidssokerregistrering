@@ -12,6 +12,7 @@ import { AppState } from '../../reducer';
 import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
 import veilederSvg from './veileder.svg';
 import './startside.less';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface StateProps {
     registreringStatus: RegistreringStatusState;
@@ -54,7 +55,10 @@ class StartsideSykmeldt extends React.Component<StartsideProps> {
                     <div className="knapper-vertikalt">
                         <KnappBase
                             type="hoved"
-                            onClick={() => history.push(INNGANGSSPORSMAL_PATH)}
+                            onClick={() => {
+                                frontendLogger('registrering.sykmeldt.fra.start');
+                                history.push(INNGANGSSPORSMAL_PATH);
+                            }}
                             data-testid="start-registrering"
                         >
                             <FormattedMessage id="startside-sykmeldt-knapp"/>
