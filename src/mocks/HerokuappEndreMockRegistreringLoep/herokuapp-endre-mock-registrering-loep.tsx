@@ -38,7 +38,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
     componentWillMount() {
         this.setState({
-            skalVise: false,
+            skalVise: true,
             feilmeldingRadioKnapp: ''
         });
     }
@@ -101,7 +101,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
         } = this.state;
 
         const visSkjul = skalVise ? 'vis' : 'skjul';
-        const ApneLukkTekst = skalVise ? 'Lukk' : 'Åpne';
+        const ApneLukkTekst = skalVise ? 'Start' : 'Åpne';
 
         return (
             <div className={`devToggleStatus ${visSkjul}`}>
@@ -146,8 +146,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 oppdaterRegistreringsType(RegistreringType.SYKMELDT_REGISTRERING);
                             }}
                             name="devToggleStatus"
-                            label="Sykmeldt med arbeidsgiver mer enn 39 uker"
-                            value="Sykmeldt med arbeidsgiver mer enn 39 uker"
+                            label="Sykmeldt med arbeidsgiver 39 uker til 52 uker"
+                            value="Sykmeldt med arbeidsgiver 39 uker til 52 uker"
                             checked={registreringType === RegistreringType.SYKMELDT_REGISTRERING}
                         />
                         <RadioPanel
