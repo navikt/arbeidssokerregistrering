@@ -14,7 +14,7 @@ export const ARBEIDSSOKERREGISTRERING_START_PATH = '/arbeidssokerregistrering/st
 
 // URLer til andre applikasjoner
 const herokuUrl = 'https://veientilarbeid.herokuapp.com/veientilarbeid';
-const vanligUrl = '/veientilarbeid';
+const vanligUrl = '/veientilarbeid/';
 
 export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
 export const HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL = `${herokuUrl}/?visInformasjonsmodul=true&visdagpenger=true`;
