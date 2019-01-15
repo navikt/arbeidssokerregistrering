@@ -57,7 +57,7 @@ export class HentInitialData extends React.Component<Props> {
         const {children, registreringstatus, autentiseringsinfo, brukersNavn} = this.props;
         const {niva, nivaOidc} = autentiseringsinfo.data;
 
-        if (autentiseringsinfo.status === STATUS.OK) {
+        if (autentiseringsinfo.status === STATUS.OK || !window.location.hostname.endsWith('.adeo.no')) {
             if (niva === 4 && nivaOidc !== 4) {
                 // Bruker er allerede innlogget og har OpenAM-token på nivå 4, men mangler Oidc-token med nivå 4.
                 // Redirecter til Veilarbstepup som automatisk gir bruker Oidc-token på nivå 4.
