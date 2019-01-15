@@ -32,19 +32,20 @@ import Oppsummering from './sider/oppsummering/oppsummering';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import { parse } from 'query-string';
-import {Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
+import { Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import RedirectAll from './komponenter/redirect-all';
 import { selectReaktiveringStatus } from './ducks/reaktiverbruker';
 import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
-import {Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
+import { Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
+import { setInngangSykefravaerAction } from './ducks/logger';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -53,7 +54,11 @@ interface StateProps {
     state: AppState;
 }
 
-type AllProps = StateProps & RouteComponentProps<any>; // tslint:disable-line
+interface DispatchProps {
+    setInngangFraSykefravaer: () => void;
+}
+
+type AllProps = StateProps & RouteComponentProps<any> & DispatchProps; // tslint:disable-line
 
 class Routes extends React.Component<AllProps> {
 
@@ -86,6 +91,7 @@ class Routes extends React.Component<AllProps> {
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
         } else if (registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
             erFraSykefravaer && location.pathname === START_PATH) {
+            this.props.setInngangFraSykefravaer();
             return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
         }
 
@@ -176,4 +182,8 @@ const mapStateToProps = (state: AppState) => ({
     state: state,
 });
 
-export default connect(mapStateToProps, null, null, { pure: false })(withRouter(Routes));
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    setInngangFraSykefravaer: () => dispatch(setInngangSykefravaerAction())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(withRouter(Routes));
