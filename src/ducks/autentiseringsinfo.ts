@@ -45,8 +45,12 @@ export default function (state: State = initialState, action: Action): State {
     }
 }
 
+const erIFSS = window.location.hostname.endsWith('.adeo.no');
+
 export function hentAutentiseringsInfo() {
-    return doThenDispatch(() => Api.hentAutentiseringsInfo(), {
+    return doThenDispatch(erIFSS ? () => Promise.resolve({
+        nivaOidc: 4
+    }) : () => Api.hentAutentiseringsInfo(), {
         PENDING: ActionTypes.HENT_AUTENTISERINGSINFO_PENDING,
         OK: ActionTypes.HENT_AUTENTISERINGSINFO_OK,
         FEILET: ActionTypes.HENT_AUTENTISERINGSINFO_FEILET,
