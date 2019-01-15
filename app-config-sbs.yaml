@@ -1,0 +1,34 @@
+# ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
+image: docker.adeo.no:5000/fo/arbeidssokerregistrering
+team: teamregistrering
+replicas:
+  min: 2
+  max: 4
+  cpuThresholdPercentage: 50
+port: 8080
+healthcheck:
+  liveness:
+    path: arbeidssokerregistrering/internal/isAlive
+  readiness:
+    path: arbeidssokerregistrering/internal/isReady
+    initialDelay: 15
+prometheus:
+  # NB: pus-decorator sine metrikker
+  enabled: true
+  path: arbeidssokerregistrering/internal/metrics
+resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
+  limits:
+    cpu: 3
+    memory: 768Mi
+  requests:
+    memory: 512Mi
+fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseUrl
+  - alias: appdynamics
+    resourceType: applicationproperties
+  - alias: loadbalancer:arbeidssokerregistrering
+    resourceType: loadbalancerconfig
+alertProfiles:
+  - common-java-modules
