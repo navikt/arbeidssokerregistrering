@@ -32,5 +32,7 @@ fasitResources:
     resourceType: loadbalancerconfig
   - alias: arbeidssokerregistrering-fss
     resourceType: applicationproperties
+  - alias: unleash-api
+    resourceType: restservice
 alertProfiles:
   - common-java-modules
