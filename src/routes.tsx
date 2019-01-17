@@ -62,13 +62,26 @@ type AllProps = StateProps & RouteComponentProps<any> & DispatchProps; // tslint
 
 class Routes extends React.Component<AllProps> {
 
+    kommerFraSykefravaer() {
+        const { registreringstatusData, location } = this.props;
+        const erFraSykefravaer = parse(location.search).fraSykefravaer;
+
+        return registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
+            erFraSykefravaer && location.pathname === START_PATH;
+    }
+
+    componentDidMount() {
+
+        if (this.kommerFraSykefravaer()) {
+            this.props.setInngangFraSykefravaer();
+        }
+    }
+
     render() {
 
         const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
         const registreringType = registreringstatusData.registreringType;
-        const erFraSykefravaer = parse(location.search).fraSykefravaer;
-
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
@@ -89,9 +102,7 @@ class Routes extends React.Component<AllProps> {
                 return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
             }
             return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
-        } else if (registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
-            erFraSykefravaer && location.pathname === START_PATH) {
-            this.props.setInngangFraSykefravaer();
+        } else if (this.kommerFraSykefravaer()) {
             return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
         }
 
