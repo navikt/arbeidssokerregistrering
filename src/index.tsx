@@ -2,8 +2,8 @@ import 'babel-polyfill';
 import './polyfills/polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { hentBrukerFnr } from './utils/utils';
 import App from './app';
-
 import './index.less';
 
 if (process.env.REACT_APP_MOCK) {
@@ -26,6 +26,13 @@ if (process.env.REACT_APP_MOCK) {
     /* ************************************************************************************** */
 
     require('./mocks/mocks');
+}
+
+const brukerFnr = hentBrukerFnr();
+console.log("brukerfnr", brukerFnr); // tslint:disable-line
+
+if (brukerFnr) {
+    window.sessionStorage.setItem('fnr', brukerFnr);
 }
 
 ReactDOM.render(

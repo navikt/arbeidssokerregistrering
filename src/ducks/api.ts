@@ -3,8 +3,9 @@ import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
 import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
+import { hentBrukerFnr } from '../utils/utils';
 
-export const INNLOGGINGSLINJE_URL = '/innloggingslinje/auth';
+export const VEILARBPERSON_URL = '/veilarbperson/api/person';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
@@ -22,7 +23,7 @@ export const getCookie = name => {
 function getHeaders() {
     return new Headers({
         'Content-Type': 'application/json',
-        'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'), // eslint-disable-line quote-props
+        'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'),
     });
 }
 
@@ -31,8 +32,10 @@ const MED_CREDENTIALS = {
 };
 
 export function hentRegistreringStatus() {
+    const brukerFnr = hentBrukerFnr();
+
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/startregistrering`,
+        url: `${VEILARBREGISTRERING_URL}/startregistrering?fnr=${brukerFnr}`,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
@@ -42,11 +45,13 @@ export function hentRegistreringStatus() {
 
 export function registrerBruker(data: RegistrerBrukerData, registreringType: RegistreringType) {
 
+    const brukerFnr = hentBrukerFnr();
+
     const endepunkt = registreringType === RegistreringType.SYKMELDT_REGISTRERING ?
         'startregistrersykmeldt' : 'startregistrering';
 
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/${endepunkt}`,
+        url: `${VEILARBREGISTRERING_URL}/${endepunkt}?fnr=${brukerFnr}`,
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
@@ -57,8 +62,10 @@ export function registrerBruker(data: RegistrerBrukerData, registreringType: Reg
 }
 
 export function startReaktivering() {
+    const brukerFnr = hentBrukerFnr();
+
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/startreaktivering`,
+        url: `${VEILARBREGISTRERING_URL}/startreaktivering?fnr=${brukerFnr}`,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
@@ -69,8 +76,10 @@ export function startReaktivering() {
 }
 
 export function hentBrukersNavn() {
+    const brukerFnr = hentBrukerFnr();
+
     return fetchToJson({
-        url: `${INNLOGGINGSLINJE_URL}?randomness=${Math.random()}`,
+        url: `${VEILARBPERSON_URL}/${brukerFnr}`,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
@@ -89,8 +98,10 @@ export function hentAutentiseringsInfo() {
 }
 
 export function hentStyrkkodeForSisteStillingFraAAReg() {
+    const brukerFnr = hentBrukerFnr();
+
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/sistearbeidsforhold`,
+        url: `${VEILARBREGISTRERING_URL}/sistearbeidsforhold?fnr=${brukerFnr}`,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),

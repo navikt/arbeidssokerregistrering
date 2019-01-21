@@ -10,6 +10,7 @@ export const ALLEREDE_REGISTRERT_PATH = '/allerederegistrert';
 export const REAKTIVERING_PATH = '/reaktivering';
 export const IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH = '/ikke-arbeidssoker-utenfor-oppfolging';
 export const INFOSIDE_PATH = '/infoside';
+export const MANGLER_KONTEKST_PATH = '/mangler-kontekst';
 export const ARBEIDSSOKERREGISTRERING_START_PATH = '/arbeidssokerregistrering/start';
 
 // URLer til andre applikasjoner

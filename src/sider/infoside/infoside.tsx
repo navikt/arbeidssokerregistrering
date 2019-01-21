@@ -3,7 +3,7 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import './infoside.less';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { hentFornavn, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import InfoViser from '../../komponenter/info-viser/info-viser';
@@ -29,7 +29,7 @@ class Infoside extends React.Component<Props> {
 
     render() {
 
-        const fornavn = hentFornavn(this.props.brukersNavn.data.name);
+        const fornavn = this.props.brukersNavn.data.fornavn;
         let veilederpanelType;
         let veilederpanelKompakt;
 

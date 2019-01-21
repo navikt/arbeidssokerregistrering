@@ -1,4 +1,59 @@
 import * as moment from 'moment';
+import { parse } from 'query-string';
+import { getCookie } from '../ducks/api';
+import { MOCK_REGISTRER_MED_VEILEDER } from '../mocks/mocks';
+
+export function erIFSS(): boolean {
+
+    if (MOCK_REGISTRER_MED_VEILEDER) {
+        return true;
+    }
+
+    return window.location.hostname.endsWith('.adeo.no');
+}
+
+export function hentBrukerFnr(): string | null {
+
+    const search = parse(window.location.search);
+
+    if (search.fnr) {
+        return search.fnr;
+    }
+
+    const sessionFnr = window.sessionStorage.getItem('fnr');
+
+    if (sessionFnr) {
+        return sessionFnr;
+    }
+
+    if (!MOCK_REGISTRER_MED_VEILEDER) {
+        if (process.env.REACT_APP_MOCK) {
+            return '12345678900';
+        }
+    }
+
+    return hentFnrFraToken();
+}
+
+export function hentFnrFraToken(): string | null {
+
+    const token = getCookie('selvbetjening-idtoken');
+
+    if (!token) {
+        return null;
+    }
+
+    const sections = token.split('.');
+
+    if (sections.length !== 3) {
+        return null;
+    }
+
+    const payload = JSON.parse(atob(sections[1]));
+
+    return payload.sub;
+
+}
 
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';

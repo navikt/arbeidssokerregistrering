@@ -1,3 +1,8 @@
+import { Data as BrukersNavnData } from '../ducks/brukers-navn';
+
 export default {
-    name: 'TEST TESTESEN'
-};
+    fornavn: 'Test',
+    mellomnavn: '',
+    etternavn: 'Testesen',
+    sammensattNavn: 'Test Testesen'
+} as BrukersNavnData;

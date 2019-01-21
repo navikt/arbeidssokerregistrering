@@ -1,23 +1,24 @@
 /*tslint:disable*/
-import {delayed, lagPamjanzzRespons, mock, respondWith} from './utils';
+import { delayed, lagPamjanzzRespons, mock, respondWith } from './utils';
 import startRegistreringStatus from './registreringstatus-mock';
 import brukersNavn from './brukers-navn-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg-mock';
-import {featureTogglesMock} from "./feature-toggles-mock";
-import {FEATURE_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
+import {featureTogglesMock} from './feature-toggles-mock';
+import {FEATURE_URL, VEILARBPERSON_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
 import autentisert from './autentiseringsinfo-mock';
 import {
     ordinaerRegistreringRespons,
     sykmeldtRegistreringRespons
-} from "./registrerbruker-mock";
-import getStore from "../store";
+} from './registrerbruker-mock';
+import getStore from '../store';
 import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
-import svarMock from "./svar-mock";
+import svarMock from './svar-mock';
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
-import {sisteStillingMock} from "./siste-stilling-mock";
-import {hentSvar} from "../ducks/svar-utils";
+import {sisteStillingMock} from './siste-stilling-mock';
+import {hentSvar} from '../ducks/svar-utils';
 
+export const MOCK_REGISTRER_MED_VEILEDER = true;
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_REAKTIVER_BRUKER = true;
@@ -46,7 +47,7 @@ if (MOCK_AUTENTISERINGS_INFO) {
 
 if (MOCK_START_REGISRERING_STATUS) {
     const response = respondWith(delayed(DELAY, startRegistreringStatus));
-    (mock as any).get(`${VEILARBREGISTRERING_URL}/startregistrering`, response);
+    (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/startregistrering?fnr=*`, response);
 }
 
 if (MOCK_FEATURE_TOGGLES) {
@@ -54,16 +55,16 @@ if (MOCK_FEATURE_TOGGLES) {
 }
 
 if (MOCK_BRUKERS_NAVN) {
-    (mock as any).get('glob:/innloggingslinje/auth*', respondWith(delayed(DELAY, brukersNavn)));
+    (mock as any).get(`glob:${VEILARBPERSON_URL}/*`, respondWith(delayed(DELAY, brukersNavn)));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
     const response = respondWith(delayed(DELAY, sisteStillingFraAAReg));
-    (mock as any).get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, response);
+    (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold?fnr=*`, response);
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, respondWith(delayed(DELAY, (url, config, params) => {
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold?fnr=*`, respondWith(delayed(DELAY, (url, config, params) => {
         return params.bodyParams;
     })));
 }
@@ -81,13 +82,13 @@ if (MOCK_REGISTRER_BRUKER) {
     const ordinaerRespons = respondWith(delayed(DELAY, ordinaerRegistreringRespons, 200));
     const sykmeldtRespons = respondWith(delayed(DELAY, sykmeldtRegistreringRespons, 200));
 
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrering`, ordinaerRespons);
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt`, sykmeldtRespons);
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrering?fnr=*`, ordinaerRespons);
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrersykmeldt?fnr=*`, sykmeldtRespons);
 }
 
 if (MOCK_REAKTIVER_BRUKER) {
     const response = respondWith(delayed(DELAY, {}, 200));
-    (mock as any).post(`${VEILARBREGISTRERING_URL}/startreaktivering`, response);
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startreaktivering?fnr=*`, response);
 }
 
 if (DISPATCH_BESVARELSE) {
