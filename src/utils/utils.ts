@@ -72,7 +72,7 @@ export function formaterDato(dato: string | undefined) {
         return '';
     }
 
-    return moment(dato, 'DD.MM.YYYY').format('DD. MMMM YYYY');
+    return moment(dato, 'YYYY-MM-DD').format('DD. MMMM YYYY');
 }
 
 export function hentAlder(personId: string) {
