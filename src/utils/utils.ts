@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { parse } from 'query-string';
-import { getCookie } from '../ducks/api';
 import { MOCK_REGISTRER_MED_VEILEDER } from '../mocks/mocks';
+import brukerFnr from '../mocks/bruker-fnr';
 
 export function erIFSS(): boolean {
 
@@ -26,33 +26,11 @@ export function hentBrukerFnr(): string | null {
         return sessionFnr;
     }
 
-    if (!MOCK_REGISTRER_MED_VEILEDER) {
-        if (process.env.REACT_APP_MOCK) {
-            return '12345678900';
-        }
+    if (!MOCK_REGISTRER_MED_VEILEDER && process.env.REACT_APP_MOCK) {
+        return brukerFnr;
     }
 
-    return hentFnrFraToken();
-}
-
-export function hentFnrFraToken(): string | null {
-
-    const token = getCookie('selvbetjening-idtoken');
-
-    if (!token) {
-        return null;
-    }
-
-    const sections = token.split('.');
-
-    if (sections.length !== 3) {
-        return null;
-    }
-
-    const payload = JSON.parse(atob(sections[1]));
-
-    return payload.sub;
-
+    return null;
 }
 
 export function hentFornavn(name: string | undefined) {

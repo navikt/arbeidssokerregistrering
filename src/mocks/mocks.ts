@@ -18,7 +18,7 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
 
-export const MOCK_REGISTRER_MED_VEILEDER = true;
+export const MOCK_REGISTRER_MED_VEILEDER = false;
 const MOCK_START_REGISRERING_STATUS = true;
 const MOCK_REGISTRER_BRUKER = true;
 const MOCK_REAKTIVER_BRUKER = true;
@@ -47,7 +47,7 @@ if (MOCK_AUTENTISERINGS_INFO) {
 
 if (MOCK_START_REGISRERING_STATUS) {
     const response = respondWith(delayed(DELAY, startRegistreringStatus));
-    (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/startregistrering?fnr=*`, response);
+    (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/startregistrering*`, response);
 }
 
 if (MOCK_FEATURE_TOGGLES) {
@@ -60,11 +60,11 @@ if (MOCK_BRUKERS_NAVN) {
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
     const response = respondWith(delayed(DELAY, sisteStillingFraAAReg));
-    (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold?fnr=*`, response);
+    (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, response);
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold?fnr=*`, respondWith(delayed(DELAY, (url, config, params) => {
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, respondWith(delayed(DELAY, (url, config, params) => {
         return params.bodyParams;
     })));
 }
@@ -82,13 +82,13 @@ if (MOCK_REGISTRER_BRUKER) {
     const ordinaerRespons = respondWith(delayed(DELAY, ordinaerRegistreringRespons, 200));
     const sykmeldtRespons = respondWith(delayed(DELAY, sykmeldtRegistreringRespons, 200));
 
-    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrering?fnr=*`, ordinaerRespons);
-    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrersykmeldt?fnr=*`, sykmeldtRespons);
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrering*`, ordinaerRespons);
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrersykmeldt*`, sykmeldtRespons);
 }
 
 if (MOCK_REAKTIVER_BRUKER) {
     const response = respondWith(delayed(DELAY, {}, 200));
-    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startreaktivering?fnr=*`, response);
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startreaktivering*`, response);
 }
 
 if (DISPATCH_BESVARELSE) {

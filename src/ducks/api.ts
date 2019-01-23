@@ -1,9 +1,9 @@
-import { fetchToJson } from './api-utils';
+import { fetchToJson, leggTilFnrForFSS } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
 import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
-import { hentBrukerFnr } from '../utils/utils';
+import { erIFSS, hentBrukerFnr } from '../utils/utils';
 
 export const VEILARBPERSON_URL = '/veilarbperson/api/person';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
@@ -32,10 +32,9 @@ const MED_CREDENTIALS = {
 };
 
 export function hentRegistreringStatus() {
-    const brukerFnr = hentBrukerFnr();
 
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/startregistrering?fnr=${brukerFnr}`,
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/startregistrering`),
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
@@ -45,13 +44,11 @@ export function hentRegistreringStatus() {
 
 export function registrerBruker(data: RegistrerBrukerData, registreringType: RegistreringType) {
 
-    const brukerFnr = hentBrukerFnr();
-
     const endepunkt = registreringType === RegistreringType.SYKMELDT_REGISTRERING ?
         'startregistrersykmeldt' : 'startregistrering';
 
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/${endepunkt}?fnr=${brukerFnr}`,
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/${endepunkt}`),
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
@@ -62,10 +59,8 @@ export function registrerBruker(data: RegistrerBrukerData, registreringType: Reg
 }
 
 export function startReaktivering() {
-    const brukerFnr = hentBrukerFnr();
-
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/startreaktivering?fnr=${brukerFnr}`,
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/startreaktivering`),
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
@@ -76,10 +71,9 @@ export function startReaktivering() {
 }
 
 export function hentBrukersNavn() {
-    const brukerFnr = hentBrukerFnr();
-
+    const url = `${VEILARBPERSON_URL}/` + (erIFSS() ? hentBrukerFnr() : '');
     return fetchToJson({
-        url: `${VEILARBPERSON_URL}/${brukerFnr}`,
+        url,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
@@ -98,10 +92,8 @@ export function hentAutentiseringsInfo() {
 }
 
 export function hentStyrkkodeForSisteStillingFraAAReg() {
-    const brukerFnr = hentBrukerFnr();
-
     return fetchToJson({
-        url: `${VEILARBREGISTRERING_URL}/sistearbeidsforhold?fnr=${brukerFnr}`,
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`),
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
