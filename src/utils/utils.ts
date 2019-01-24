@@ -1,4 +1,37 @@
 import * as moment from 'moment';
+import { parse } from 'query-string';
+import { MOCK_REGISTRER_MED_VEILEDER } from '../mocks/mock-flags';
+import brukerFnr from '../mocks/bruker-fnr';
+
+export function erIFSS(): boolean {
+
+    if (MOCK_REGISTRER_MED_VEILEDER) {
+        return true;
+    }
+
+    return window.location.hostname.endsWith('.adeo.no');
+}
+
+export function hentBrukerFnr(): string | null {
+
+    const search = parse(window.location.search);
+
+    if (search.fnr) {
+        return search.fnr;
+    }
+
+    const sessionFnr = window.sessionStorage.getItem('fnr');
+
+    if (sessionFnr) {
+        return sessionFnr;
+    }
+
+    if (!MOCK_REGISTRER_MED_VEILEDER && process.env.REACT_APP_MOCK) {
+        return brukerFnr;
+    }
+
+    return null;
+}
 
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';

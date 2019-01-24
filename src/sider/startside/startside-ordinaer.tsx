@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
-import { hentFornavn, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { AppState } from '../../reducer';
 import { SKJEMA_PATH } from '../../utils/konstanter';
@@ -22,7 +22,7 @@ type StartsideProps = StateProps & RouteComponentProps<MatchProps>;
 class StartsideOrdinaer extends React.Component<StartsideProps> {
     render() {
         const { brukersNavn, history } = this.props;
-        const { name } = brukersNavn.data;
+        const { fornavn } = brukersNavn.data;
 
         return (
             <section className="startside">
@@ -31,7 +31,7 @@ class StartsideOrdinaer extends React.Component<StartsideProps> {
                         <Undertittel tag="h1">
                             <FormattedMessage
                                 id="startside-overskrift-snakkeboble"
-                                values={{fornavn: hentFornavn(name)}}
+                                values={{fornavn: fornavn}}
                             />
                         </Undertittel>
                         <p className="typo-normal">

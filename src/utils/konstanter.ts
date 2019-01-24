@@ -11,6 +11,7 @@ export const REAKTIVERING_PATH = '/reaktivering';
 export const IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH = '/ikke-arbeidssoker-utenfor-oppfolging';
 export const INFOSIDE_PATH = '/infoside';
 export const ARBEIDSSOKERREGISTRERING_START_PATH = '/arbeidssokerregistrering/start';
+export const MANGLER_KONTEKST_PATH = '/mangler-kontekst';
 
 // URLer til andre applikasjoner
 const herokuUrl = 'https://veientilarbeid.herokuapp.com/veientilarbeid';

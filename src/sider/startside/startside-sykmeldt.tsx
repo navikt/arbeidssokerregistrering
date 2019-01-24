@@ -7,7 +7,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { INNGANGSSPORSMAL_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { formaterDato, hentFornavn, MatchProps } from '../../utils/utils';
+import { formaterDato, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
 import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
 import veilederSvg from './veileder.svg';
@@ -24,7 +24,7 @@ class StartsideSykmeldt extends React.Component<StartsideProps> {
 
     render() {
         const { brukersNavn, history, registreringStatus } = this.props;
-        const { name } = brukersNavn.data;
+        const { fornavn } = brukersNavn.data;
         const dato = formaterDato(registreringStatus.data.maksDato);
 
         return (
@@ -34,7 +34,7 @@ class StartsideSykmeldt extends React.Component<StartsideProps> {
                         <Undertittel tag="h1">
                             <FormattedMessage
                                 id="startside-overskrift-snakkeboble"
-                                values={{fornavn: hentFornavn(name)}}
+                                values={{ fornavn }}
                             />
                         </Undertittel>
                         <p className="typo-normal">
