@@ -23,7 +23,7 @@ export const HEROKU_VEIENTILARBEID_MED_AAP_URL = `${herokuUrl}/?visAap=true`;
 
 export const VEIENTILARBEID_URL = vanligUrl;
 export const VEIENTILARBEID_MED_DAGPENGER_URL = `${vanligUrl}?visInformasjonsmodul=true&visdagpenger=true`;
-export const VEIENTILARBEID_MED_AAP_URL = `${vanligUrl}/?visAap=true`;
+export const VEIENTILARBEID_MED_AAP_URL = `${vanligUrl}?visAap=true`;
 
 export const DITT_NAV_URL = '/dittnav';
 export const DITT_SYKEFRAVAER_URL = '/sykefravaer';

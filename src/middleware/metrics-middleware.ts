@@ -23,6 +23,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
         loggResponstidForTjenestekall(action.type, frontendlogger);
         loggFeil(action, frontendlogger);
         loggHarStartetRegistrering(action);
+        loggRegistreringInngang(store, action, frontendlogger);
     }
     next(action);
 };
@@ -65,6 +66,21 @@ function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogg
         if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {
             frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {});
         }
+    }
+}
+
+function loggRegistreringInngang(store: any, action: Action, frontendlogger: Frontendlogger) {
+
+    if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
+        const inngangSykefravaer = store.getState().logger.data.inngangSykefravaer;
+        const sykmeldt = store.getState().registreringStatus.data.registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+
+        if (sykmeldt && inngangSykefravaer) {
+            frontendlogger.event('registrering.sykmeldt.fra.sykefravaer', {}, {});
+        } else if (sykmeldt) {
+            frontendlogger.event('registrering.sykmeldt.fra.start', {}, {});
+        }
+
     }
 }
 

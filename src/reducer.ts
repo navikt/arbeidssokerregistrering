@@ -5,6 +5,7 @@ import reaktiverBruker, {State as ReaktiveringState } from './ducks/reaktiverbru
 import registreringStatus, {State as RegStatusState } from './ducks/registreringstatus';
 import registrerBruker, {State as RegistrerBruker } from './ducks/registrerbruker';
 import brukersNavn, {State as BrukersNavnState } from './ducks/brukers-navn';
+import logger, { State as LoggerState } from './ducks/logger';
 import autentiseringsInfo, {State as AutentiseringsInfoState } from './ducks/autentiseringsinfo';
 import sisteStillingFraAAReg, {State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import featureToggles, {State as FeatureTogglesState } from './ducks/feature-toggles';
@@ -27,6 +28,8 @@ export interface AppState {
     sisteStilling: SisteStillingState;
     form: FieldState;
     featureToggles: FeatureTogglesState;
+    logger: LoggerState;
+
 }
 
 export default combineReducers<AppState>({
@@ -41,4 +44,5 @@ export default combineReducers<AppState>({
     defaultStilling,
     sisteStilling,
     featureToggles,
+    logger
 });
