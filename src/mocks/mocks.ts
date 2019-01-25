@@ -5,7 +5,7 @@ import brukersNavn from './brukers-navn-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg-mock';
 import {featureTogglesMock} from './feature-toggles-mock';
-import {FEATURE_URL, VEILARBPERSON_URL, VEILARBREGISTRERING_URL} from '../ducks/api';
+import { FEATURE_URL, VEILARBPERSON_NAVN_URL, VEILARBREGISTRERING_URL } from '../ducks/api';
 import autentisert from './autentiseringsinfo-mock';
 import {
     ordinaerRegistreringRespons,
@@ -17,19 +17,21 @@ import svarMock from './svar-mock';
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
-import {
-    DISPATCH_BESVARELSE,
-    MOCK_AUTENTISERINGS_INFO,
-    MOCK_BRUKERS_NAVN,
-    MOCK_FEATURE_TOGGLES,
-    MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ,
-    MOCK_GET_SISTE_ARBIEDSFORHOLD,
-    MOCK_POST_SISTE_ARBIEDSFORHOLD, MOCK_REAKTIVER_BRUKER, MOCK_REGISTRER_BRUKER,
-    MOCK_START_REGISRERING_STATUS,
-    MOCK_STYRK08_PAMJANZZ,
-    PRINT_FRONTENDLOGGER
-} from './mock-flags';
 
+export const MOCK_START_REGISRERING_STATUS = true;
+export const MOCK_REGISTRER_BRUKER = true;
+export const MOCK_REAKTIVER_BRUKER = true;
+export const MOCK_BRUKERS_NAVN = true;
+export const MOCK_AUTENTISERINGS_INFO = true;
+export const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
+export const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
+export const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
+export const MOCK_STYRK08_PAMJANZZ = true;
+export const MOCK_FEATURE_TOGGLES = true;
+export const PRINT_FRONTENDLOGGER = true;
+export const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false;
+// Dette dispatcher svarene _før_ noe annet skjer,
+// som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
 if (PRINT_FRONTENDLOGGER) {
@@ -54,7 +56,7 @@ if (MOCK_FEATURE_TOGGLES) {
 }
 
 if (MOCK_BRUKERS_NAVN) {
-    (mock as any).get(`glob:${VEILARBPERSON_URL}/*`, respondWith(delayed(DELAY, brukersNavn)));
+    (mock as any).get(`glob:${VEILARBPERSON_NAVN_URL}*`, respondWith(delayed(DELAY, brukersNavn)));
 }
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {

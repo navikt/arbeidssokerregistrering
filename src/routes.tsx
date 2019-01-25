@@ -70,8 +70,6 @@ class Routes extends React.Component<AllProps> {
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
         const queryParams = location.search;
-
-        console.log("fnr", hentBrukerFnr()); // tslint:disable-line
         const harIkkeFnr = hentBrukerFnr() === null;
 
         if (erIFSS() && harIkkeFnr) {

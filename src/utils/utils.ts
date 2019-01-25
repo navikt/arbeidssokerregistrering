@@ -1,11 +1,10 @@
 import * as moment from 'moment';
 import { parse } from 'query-string';
-import { MOCK_REGISTRER_MED_VEILEDER } from '../mocks/mock-flags';
 import brukerFnr from '../mocks/bruker-fnr';
 
 export function erIFSS(): boolean {
 
-    if (MOCK_REGISTRER_MED_VEILEDER) {
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
         return true;
     }
 
@@ -26,7 +25,7 @@ export function hentBrukerFnr(): string | null {
         return sessionFnr;
     }
 
-    if (!MOCK_REGISTRER_MED_VEILEDER && process.env.REACT_APP_MOCK) {
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
         return brukerFnr;
     }
 

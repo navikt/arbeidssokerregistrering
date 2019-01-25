@@ -3,9 +3,8 @@ import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
 import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
-import { erIFSS, hentBrukerFnr } from '../utils/utils';
 
-export const VEILARBPERSON_URL = '/veilarbperson/api/person';
+export const VEILARBPERSON_NAVN_URL = '/veilarbperson/api/person/navn';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
@@ -71,9 +70,8 @@ export function startReaktivering() {
 }
 
 export function hentBrukersNavn() {
-    const url = `${VEILARBPERSON_URL}/` + (erIFSS() ? hentBrukerFnr() : '');
     return fetchToJson({
-        url,
+        url: leggTilFnrForFSS(VEILARBPERSON_NAVN_URL),
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
