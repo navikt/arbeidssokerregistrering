@@ -10,7 +10,7 @@ import {
     FULLFOR_PATH,
     IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
     INFOSIDE_PATH,
-    INNGANGSSPORSMAL_PATH, MANGLER_KONTEKST_PATH,
+    INNGANGSSPORSMAL_PATH,
     OPPSUMMERING_PATH,
     REAKTIVERING_PATH,
     SKJEMA_PATH,
@@ -45,8 +45,6 @@ import { Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
-import { erIFSS, hentBrukerFnr } from './utils/utils';
-import ManglerKontekst from './sider/mangler-kontekst';
 import { setInngangSykefravaerAction } from './ducks/logger';
 
 interface StateProps {
@@ -88,11 +86,8 @@ class Routes extends React.Component<AllProps> {
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
         const queryParams = location.search;
-        const harIkkeFnr = hentBrukerFnr() === null;
 
-        if (erIFSS() && harIkkeFnr) {
-            return <RedirectAll to={MANGLER_KONTEKST_PATH} component={ManglerKontekst}/>;
-        } else if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
+        if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
         } else if (registreringType === RegistreringType.SPERRET) {
             return (

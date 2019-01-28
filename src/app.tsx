@@ -14,6 +14,7 @@ import {
 } from './utils/konstanter';
 import Routes from './routes';
 import Modal from 'react-modal';
+import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
 
 const store = getStore();
 
@@ -27,11 +28,13 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <HentInitialData>
-                        <Router basename={basename}>
-                            <Routes/>
-                        </Router>
-                    </HentInitialData>
+                    <ManuellRegistreringSjekk>
+                        <HentInitialData>
+                            <Router basename={basename}>
+                                <Routes/>
+                            </Router>
+                        </HentInitialData>
+                    </ManuellRegistreringSjekk>
                 </IntlProvider>
             </Provider>
         );
