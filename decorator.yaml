@@ -3,3 +3,8 @@ proxy:
     baseUrl: "http://veilarbstepup"
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbproxy"
+  - contextPath: "/veilarbperson"
+    baseUrl: "http://veilarbproxy"
+  - contextPath: "/pam-janzz"
+    baseUrl: "http://pam-janzz"
+    pingRequestPath: "/pam-janzz/isAlive"
