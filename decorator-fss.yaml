@@ -1,0 +1,10 @@
+proxy:
+  - contextPath: "/frontendlogger"
+    baseUrl: "http://frontendlogger-fss"
+  - contextPath: "/veilarbregistrering"
+    baseUrl: "http://veilarbregistrering"
+  - contextPath: "/veilarbperson"
+    baseUrl: "http://veilarbperson"
+  - contextPath: "/pam-janzz"
+    baseUrl: "https://tjenester.nav.no"
+    pingRequestPath: "/pam-janzz/isAlive"

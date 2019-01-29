@@ -8,7 +8,8 @@ export function erIFSS(): boolean {
         return true;
     }
 
-    return window.location.hostname.endsWith('.adeo.no');
+    const hostname = window.location.hostname;
+    return hostname.endsWith('.adeo.no') || hostname.endsWith('.preprod.local');
 }
 
 export function hentBrukerFnr(): string | null {
