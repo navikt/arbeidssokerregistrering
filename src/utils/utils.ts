@@ -1,4 +1,37 @@
 import * as moment from 'moment';
+import { parse } from 'query-string';
+import brukerFnr from '../mocks/bruker-fnr';
+
+export function erIFSS(): boolean {
+
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+        return true;
+    }
+
+    const hostname = window.location.hostname;
+    return hostname.endsWith('.adeo.no') || hostname.endsWith('.preprod.local');
+}
+
+export function hentBrukerFnr(): string | null {
+
+    const search = parse(window.location.search);
+
+    if (search.fnr) {
+        return search.fnr;
+    }
+
+    const sessionFnr = window.sessionStorage.getItem('fnr');
+
+    if (sessionFnr) {
+        return sessionFnr;
+    }
+
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+        return brukerFnr;
+    }
+
+    return null;
+}
 
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';

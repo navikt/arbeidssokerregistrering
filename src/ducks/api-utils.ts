@@ -2,6 +2,7 @@ import { Dispatch } from 'react-redux';
 import { AppState } from '../reducer';
 import ActionType from './actions';
 import { ThunkAction } from 'redux-thunk';
+import { erIFSS, hentBrukerFnr } from '../utils/utils';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -21,6 +22,16 @@ class FetchError extends Error {
 }
 
 type RecoverWith = (status: number) => ({} | null);
+
+export function leggTilFnrForFSS(url: string) {
+
+    if (erIFSS()) {
+        return url + '?fnr=' + hentBrukerFnr();
+    }
+
+    return url;
+
+}
 
 export function sjekkStatuskode(recoverWith?: RecoverWith) {
 

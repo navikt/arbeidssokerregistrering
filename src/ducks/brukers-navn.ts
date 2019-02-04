@@ -14,9 +14,10 @@ export interface State {
 }
 
 export interface Data {
-    authenticated?: boolean;
-    name?: string;
-    securityLevel?: string;
+    fornavn?: string;
+    mellomnavn?: string | null;
+    etternavn?: string;
+    sammensattNavn?: string;
 }
 
 interface Action {

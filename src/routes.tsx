@@ -140,7 +140,6 @@ class Routes extends React.Component<AllProps> {
                                 />
                             </Switch>
                         ) : null }
-
                         { visSykefravaerSkjema ? (
                             <Switch>
                                 <Route
@@ -177,13 +176,10 @@ class Routes extends React.Component<AllProps> {
                                 />
                             </Switch>
                         ) : null }
-
                     </Switch>
-
                 </Sideanimasjon>
             </>);
     }
-
 }
 
 const mapStateToProps = (state: AppState) => ({

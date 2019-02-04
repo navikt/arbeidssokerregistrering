@@ -1,6 +1,7 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
+import { erIFSS } from '../utils/utils';
 
 export enum ActionTypes {
     HENT_AUTENTISERINGSINFO_OK = 'HENT_AUTENTISERINGSINFO_OK',
@@ -46,7 +47,9 @@ export default function (state: State = initialState, action: Action): State {
 }
 
 export function hentAutentiseringsInfo() {
-    return doThenDispatch(() => Api.hentAutentiseringsInfo(), {
+    return doThenDispatch(() => {
+        return erIFSS() ? Promise.resolve({ nivaOidc: 4 }) : Api.hentAutentiseringsInfo();
+    }, {
         PENDING: ActionTypes.HENT_AUTENTISERINGSINFO_PENDING,
         OK: ActionTypes.HENT_AUTENTISERINGSINFO_OK,
         FEILET: ActionTypes.HENT_AUTENTISERINGSINFO_FEILET,

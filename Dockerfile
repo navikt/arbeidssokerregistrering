@@ -12,3 +12,4 @@ FROM docker.adeo.no:5000/pus/decorator
 ENV APPLICATION_NAME=arbeidssokerregistrering
 COPY --from=node-builder /source/build /app
 ADD decorator.yaml /decorator.yaml
+ADD decorator-fss.yaml /decorator-fss.yaml
