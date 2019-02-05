@@ -1,4 +1,4 @@
-import { fetchToJson, leggTilFnrForFSS } from './api-utils';
+import { fetchToJson, leggTilFnrForFSS, leggTilFnrOgEnhetForFSS } from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
@@ -47,7 +47,7 @@ export function registrerBruker(data: RegistrerBrukerData, registreringType: Reg
         'startregistrersykmeldt' : 'startregistrering';
 
     return fetchToJson({
-        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/${endepunkt}`),
+        url: leggTilFnrOgEnhetForFSS(`${VEILARBREGISTRERING_URL}/${endepunkt}`),
         config: { ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',

@@ -2,7 +2,7 @@ import { Dispatch } from 'react-redux';
 import { AppState } from '../reducer';
 import ActionType from './actions';
 import { ThunkAction } from 'redux-thunk';
-import { erIFSS, hentBrukerFnr } from '../utils/utils';
+import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -27,6 +27,16 @@ export function leggTilFnrForFSS(url: string) {
 
     if (erIFSS()) {
         return url + '?fnr=' + hentBrukerFnr();
+    }
+
+    return url;
+
+}
+
+export function leggTilFnrOgEnhetForFSS(url: string) {
+
+    if (erIFSS()) {
+        return url + '?fnr=' + hentBrukerFnr() + '&enhetId=' + hentVeilederEnhetId();
     }
 
     return url;

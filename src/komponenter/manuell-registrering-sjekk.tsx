@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { erIFSS, hentBrukerFnr } from '../utils/utils';
+import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
 import ManglerKontekst from '../sider/mangler-kontekst';
 
 class ManuellRegistreringSjekk extends React.Component {
 
     manglerKontekst = (): boolean => {
         const harIkkeFnr = hentBrukerFnr() === null;
-        return erIFSS() && harIkkeFnr;
+        const harIkkeEnhetId = hentVeilederEnhetId() === null;
+        return erIFSS() && harIkkeFnr && harIkkeEnhetId;
     }
 
     render() {
