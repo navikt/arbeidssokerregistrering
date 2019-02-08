@@ -1,6 +1,10 @@
 import * as moment from 'moment';
 import { parse } from 'query-string';
 import brukerFnr from '../mocks/bruker-fnr';
+import veilederEnhetId from '../mocks/veileder-enhet-id';
+
+const FNR_STORAGE_KEY = 'fnr';
+const ENHET_ID_STORAGE_KEY = 'enhetId';
 
 export function erIFSS(): boolean {
 
@@ -12,6 +16,21 @@ export function erIFSS(): boolean {
     return hostname.endsWith('.adeo.no') || hostname.endsWith('.preprod.local');
 }
 
+export function initFssVariabler() {
+
+    const fnr = hentBrukerFnr();
+    const enhetId = hentVeilederEnhetId();
+
+    if (fnr) {
+        window.sessionStorage.setItem(FNR_STORAGE_KEY, fnr);
+    }
+
+    if (enhetId) {
+        window.sessionStorage.setItem(ENHET_ID_STORAGE_KEY, enhetId);
+    }
+
+}
+
 export function hentBrukerFnr(): string | null {
 
     const search = parse(window.location.search);
@@ -20,7 +39,7 @@ export function hentBrukerFnr(): string | null {
         return search.fnr;
     }
 
-    const sessionFnr = window.sessionStorage.getItem('fnr');
+    const sessionFnr = window.sessionStorage.getItem(FNR_STORAGE_KEY);
 
     if (sessionFnr) {
         return sessionFnr;
@@ -31,6 +50,28 @@ export function hentBrukerFnr(): string | null {
     }
 
     return null;
+}
+
+export function hentVeilederEnhetId(): string | null {
+
+    const search = parse(window.location.search);
+
+    if (search.enhetId) {
+        return search.enhetId;
+    }
+
+    const sessionEnhetId = window.sessionStorage.getItem(ENHET_ID_STORAGE_KEY);
+
+    if (sessionEnhetId) {
+        return sessionEnhetId;
+    }
+
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+        return veilederEnhetId;
+    }
+
+    return null;
+
 }
 
 export function hentFornavn(name: string | undefined) {

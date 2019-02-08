@@ -1,11 +1,16 @@
 import * as React from 'react';
+import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
 
 class ManglerKontekst extends React.Component {
     render() {
+        const harIkkeFnr = hentBrukerFnr() === null;
+        const harIkkeEnhetId = hentVeilederEnhetId() === null;
+
         return (
-            <h3>
-                Du har ingen bruker i kontekst. For å kunne manuelt registrere brukere så må du bruke biff-siden!
-            </h3>
+            <>
+                {harIkkeFnr &&  <h3>Du har ingen bruker i kontekst</h3>}
+                {harIkkeEnhetId &&  <h3>Du har ikke enhet i kontekst</h3>}
+            </>
         );
     }
 }
