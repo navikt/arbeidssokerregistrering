@@ -51,36 +51,6 @@
     }
 }
 
-@keyframes panel-plassering-mobil {
-    0% {
-        opacity: 0;
-        margin-top: 400px;
-    }
-    80% {
-        opacity: 0;
-        margin-top: 400px;
-    }
-    100% {
-        opacity: 1;
-        margin-top: 6rem;
-    }
-}
-
-@keyframes panel-plassering-desktop {
-    0% {
-        opacity: 0;
-        margin-top: 400px;
-    }
-    80% {
-        opacity: 0;
-        margin-top: 400px;
-    }
-    100% {
-        opacity: 1;
-        margin-top: 11rem;
-    }
-}
-
 .registrert {
     margin: 0 1rem;
 
@@ -101,29 +71,6 @@
         animation: tittel-plassering 6s both;
     }
 
-    &__aksjonspanel {
-        top: -4rem;
-        text-align: left;
-        position: relative;
-        opacity: 0;
-        border: 3px solid @navBlaLighten80;
-        border-radius: 8px;
-        padding: 2rem;
-        animation: panel-plassering-mobil 6.5s both;
-    }
-
-    &__handinfo-ikon {
-        display: none;
-    }
-
-    &__knapperad {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        .knapp {
-            margin: 0.5rem 0;
-        }
-    }
 }
 
 @media (min-width: @screen-sm-min) {
@@ -139,34 +86,6 @@
         &__tittel {
             width: ~'calc(36rem - 140px)';
             top: 5px;
-        }
-
-        &__aksjonspanel {
-            padding: 4rem 5.5rem;
-            top: -7rem;
-            animation: panel-plassering-desktop 6.5s both;
-        }
-
-        &__handinfo-ikon {
-            display: block;
-            position: absolute;
-            top: -53px;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        &__knapperad {
-            display: flex;
-            flex-direction: row;
-            .knapp:first-child {
-                margin-right: 1rem;
-            }
-        }
-
-        &__lenke {
-            max-width: ~'calc(50% - 0.5rem)';
-            flex-grow: 1;
         }
     }
 }
@@ -185,9 +104,4 @@
         animation: none;
     }
 
-    .registrert__aksjonspanel {
-        opacity: 1;
-        margin-top: 11rem;
-        animation: none;
-    }
 }
