@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import * as cls from 'classnames';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Systemtittel } from 'nav-frontend-typografi';
 import AvsjekkBilde from './avsjekk-bilde/avsjekk-bilde';
@@ -35,11 +35,10 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         const tittelId = erIFSS() ? 'duernaregistrert-manuell-innholdstittel' : hentTekstId('innholdstittel');
 
         return (
-            <section className={`registrert ${erIE() && 'erIE'}`}>
+            <section className={cls('registrert', { 'erIE': erIE(), 'registrert-fss': erIFSS()})}>
 
                 <div
-                    className={classnames('registrert__avsjekk', erSykmeldt ?
-                        'registrert__avsjekk-sykmeldt' : null)}
+                    className={cls('registrert__avsjekk', { 'registrert__avsjekk-sykmeldt': erSykmeldt })}
                 >
                     <AvsjekkBilde/>
                     <Systemtittel tag="h1" className="registrert__tittel">
