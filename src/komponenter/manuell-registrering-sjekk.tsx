@@ -7,7 +7,7 @@ class ManuellRegistreringSjekk extends React.Component {
     manglerKontekst = (): boolean => {
         const harIkkeFnr = hentBrukerFnr() === null;
         const harIkkeEnhetId = hentVeilederEnhetId() === null;
-        return erIFSS() && harIkkeFnr && harIkkeEnhetId;
+        return erIFSS() && (harIkkeFnr || harIkkeEnhetId);
     }
 
     render() {
