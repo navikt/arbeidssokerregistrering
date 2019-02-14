@@ -63,7 +63,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
 
         const Rad2 = () => {
             return (
-                <div className="registrering-arbeidssoker__rad2">
+                <div className="registrering-arbeidssoker__rad2 rad-even">
                     <div className="rad2__boks rad2__rettigheter">
                         <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter" />
                         <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
