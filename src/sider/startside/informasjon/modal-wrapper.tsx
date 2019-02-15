@@ -71,7 +71,7 @@ class ModalWrapper extends React.Component<Props> {
                 { closeButton &&
                     <Lukkeknapp
                         overstHjorne={true}
-                        className={classnames(shouldCloseOnOverlayClick ? 'modal__lukkknapp--shake' : '')}
+                        className={classnames('modal__lukkknapp--shake')}
                         onClick={props.onRequestClose}
                         ref={(closeButtonRef) => (this.closeButtonRef = closeButtonRef)}
                     >

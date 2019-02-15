@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import ModalWrapper from './modal-wrapper';
 
@@ -26,8 +27,12 @@ class InformasjonModal extends React.Component<Props> {
                 shouldCloseOnOverlayClick={false}
                 onRequestClose={this.props.onRequestClose}
             >
-                <Innholdstittel tag="h1" className="informasjon-modal__innholdstittel">tset</Innholdstittel>
-                <Normaltekst className="informasjon-modal__ingress">test</Normaltekst>
+                <Innholdstittel tag="h1" className="informasjon-modal__innholdstittel">
+                    <FormattedMessage id="registrering-arbeidssoker.informasjon-modal.tittel"/>
+                </Innholdstittel>
+                <Normaltekst className="informasjon-modal__ingress">
+                    <FormattedMessage id="registrering-arbeidssoker.informasjon-modal.ingress"/>
+                </Normaltekst>
                 <iframe
                     title="onboarding-video"
                     frameBorder="0"
@@ -44,9 +49,11 @@ class InformasjonModal extends React.Component<Props> {
                     }
                     className="informasjon-modal__video"
                 />
-                <Undertittel tag="h2" className="informasjon-modal__undertittel">test</Undertittel>
+                <Undertittel tag="h2" className="informasjon-modal__undertittel">
+                    <FormattedMessage id="registrering-arbeidssoker.informasjon-modal.undertittel"/>
+                </Undertittel>
                 <div className="informasjon-modal__innhold">
-                    test
+                    <FormattedHTMLMessage id="registrering-arbeidssoker.informasjon-modal.innhold"/>
                 </div>
             </ModalWrapper>
         );
