@@ -11,6 +11,7 @@ import paragrafbilde from './paragraf.svg';
 import infobilde from './info.svg';
 import { MatchProps } from '../../utils/utils';
 import { SKJEMA_PATH } from '../../utils/konstanter';
+import InformasjonModal from './informasjon/informasjon-modal';
 
 interface Props {
     match: any; // tslint:disable-line
@@ -38,6 +39,10 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
         this.setState({isModalOpen: true});
     }
 
+    handleModalLukkeknappClicked = () => {
+        this.setState({isModalOpen: false});
+    }
+
     render() {
 
         const Rad1 = () => {
@@ -59,6 +64,10 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             <img className="rad1__ikon" src={aktplanbilde} alt="Arbeidssøker-ikon" />
                         </div>
                     </div>
+                    <InformasjonModal
+                        isOpen={this.state.isModalOpen}
+                        onRequestClose={this.handleModalLukkeknappClicked}
+                    />
                 </div>
             );
         };
