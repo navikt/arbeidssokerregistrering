@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { MatchProps, scrollToBanner } from '../../utils/utils';
+import { START_PATH } from '../../utils/konstanter';
 
 interface State {
     forover: boolean;
@@ -32,7 +33,10 @@ class Sideanimasjon extends React.Component<Props, State> {
 
     render() {
         return (
-            <div className={'limit ' + (this.state.forover ? 'forover' : 'bakover')}>
+            <div
+                className={(this.props.location.pathname !== START_PATH ? 'limit ' : '')
+                + (this.state.forover ? 'forover' : 'bakover')}
+            >
                 {this.props.children}
             </div>
         );

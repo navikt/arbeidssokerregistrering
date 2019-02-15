@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { RouteComponentProps } from 'react-router';
 import './registrering-arbeidssoker.less';
 import { Innholdstittel, Normaltekst, Undertittel, Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
+import KnappBase from 'nav-frontend-knapper';
 
 import aktplanbilde from './aktivitetsplan-ill.svg';
 import paragrafbilde from './paragraf.svg';
 import infobilde from './info.svg';
-
-// const navn = 'registrering-arbeidssoker';
+import { MatchProps } from '../../utils/utils';
+import { SKJEMA_PATH } from '../../utils/konstanter';
 
 interface Props {
     match: any; // tslint:disable-line
     intl: any; // tslint:disable-line
 }
 
-type RegistreringArbeidssokerProps = Props;
+type RegistreringArbeidssokerProps = Props & RouteComponentProps<MatchProps>;
 
 interface State {
     isModalOpen: boolean;
@@ -47,7 +49,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                     <div className="rad1__innhold">
                         <div className="rad__innhold-tekst">
                             <Normaltekst tag="ul">
-                                <FormattedMessage id="registrering-arbeidssoker.argument1tekst"/>
+                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument1tekst"/>
                             </Normaltekst>
                             <Knapp onClick={this.handleSeVideoBtnClicked}>
                                 <FormattedMessage id="registrering-arbeidssoker.argument1knapp"/>
@@ -70,7 +72,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             <FormattedMessage id="registrering-arbeidssoker.argument2tittel1"/>
                         </Undertittel>
                         <Normaltekst tag="div">
-                            <FormattedMessage id="registrering-arbeidssoker.argument2tekst1"/>
+                            <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1"/>
                         </Normaltekst>
                     </div>
                     <div className="rad2__boks rad2__plikter">
@@ -79,7 +81,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             <FormattedMessage id="registrering-arbeidssoker.argument2tittel2"/>
                         </Undertittel>
                         <Normaltekst tag="div">
-                            <FormattedMessage id="registrering-arbeidssoker.argument2tekst2"/>
+                            <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2"/>
                         </Normaltekst>
                     </div>
                 </div>
@@ -129,16 +131,17 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                         </Normaltekst>
                     </div>
                     <Normaltekst tag="div" className="rad3__tips">
-                        <FormattedMessage id="registrering-arbeidssoker.tipstekst"/>
+                        <FormattedHTMLMessage id="registrering-arbeidssoker.tipstekst"/>
                     </Normaltekst>
 
                     <div className="rad3__knapperad">
-                        <a
-                            href="/start"
-                            className="knapp knapp--hoved"
+                        <KnappBase
+                            type="hoved"
+                            onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
+                            data-testid="start-registrering"
                         >
-                            <FormattedMessage id="registrering-arbeidssoker.registreringsknapp"/>
-                        </a>
+                            <FormattedMessage id="startside-ordinaer-knapp"/>
+                        </KnappBase>
                     </div>
                 </div>
             );
