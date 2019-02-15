@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import './registrering-arbeidssoker.less';
-import { Innholdstittel, Normaltekst, Undertittel, Element } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst, Undertittel, Element, Sidetittel } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import KnappBase from 'nav-frontend-knapper';
 
@@ -155,6 +155,11 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
 
         return (
             <div className="registrering-arbeidssoker">
+                <div className="banner">
+                    <Sidetittel>
+                        <FormattedMessage id="registrering-arbeidssoker.tittel"/>
+                    </Sidetittel>
+                </div>
                 {rader}
             </div>
         );
