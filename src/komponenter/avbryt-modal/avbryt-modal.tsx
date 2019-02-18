@@ -10,6 +10,8 @@ import { RegistreringType, selectRegistreringstatus } from '../../ducks/registre
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
 
 import './avbryt-modal.less';
+import { erIFSS } from '../../utils/utils';
+import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 
 const avbrytSvg = require('./avbryt.svg');
 
@@ -38,10 +40,10 @@ class AvbrytModal extends React.Component<AllProps> {
 
         if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
             beskrivelseId = 'avbryt-beskrivelse-sykmeldt';
-            url = DITT_SYKEFRAVAER_URL;
+            url = erIFSS() ? lagAktivitetsplanUrl() : DITT_SYKEFRAVAER_URL;
         } else {
             beskrivelseId = 'avbryt-beskrivelse-registrering';
-            url = DITT_NAV_URL;
+            url = erIFSS() ? lagAktivitetsplanUrl() : DITT_NAV_URL;
         }
 
         return (

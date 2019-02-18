@@ -6,7 +6,7 @@ import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
+import { disableVerikalScrollingVedAnimasjon, erIFSS, getIntlMessage, MatchProps } from '../../utils/utils';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
@@ -69,7 +69,8 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
     registrerBrukerOnClick() {
 
-        if (!this.state.markert) {
+        // Veiledere trenger ikke å bekrefte
+        if (!this.state.markert && !erIFSS()) {
             this.setState({visAdvarsel: true});
             return;
         }
@@ -206,13 +207,14 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
                         </Ekspanderbartpanel>
                     </div>
-
-                    <BekreftCheckboksPanel
-                        onChange={this.settMarkert}
-                        checked={this.state.markert}
-                        label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
-                        className="fullfor-bekreft"
-                    />
+                    { !erIFSS() &&
+                        <BekreftCheckboksPanel
+                            onChange={this.settMarkert}
+                            checked={this.state.markert}
+                            label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
+                            className="fullfor-bekreft"
+                        />
+                    }
                     {advarselElement}
                     <div className="lenke-avbryt-wrapper">
                         <KnappFullfor
