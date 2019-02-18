@@ -55,14 +55,15 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                         <FormattedMessage id="registrering-arbeidssoker.introtittel"/>
                     </Innholdstittel>
                     <div className="rad1__innhold">
-                        <div className="rad__innhold-tekst">
-                            <Normaltekst tag="ul">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument1tekst"/>
-                            </Normaltekst>
+                        <Normaltekst className="rad__innhold-tekst" tag="div">
+                                <FormattedHTMLMessage
+                                    id="registrering-arbeidssoker.argument1tekst"
+                                    tagName="ul"
+                                />
                             <Knapp onClick={this.handleSeVideoBtnClicked}>
                                 <FormattedMessage id="registrering-arbeidssoker.argument1knapp"/>
                             </Knapp>
-                        </div>
+                        </Normaltekst>
                         <div className="rad__innhold-ikon">
                             <img className="rad1__ikon" src={aktplanbilde} alt="Arbeidssøker-ikon" />
                         </div>
