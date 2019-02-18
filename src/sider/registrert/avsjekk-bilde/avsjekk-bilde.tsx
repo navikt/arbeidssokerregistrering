@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { erIE } from '../../utils/ie-test';
+import { erIE } from '../../../utils/ie-test';
 
 import './avsjekk-bilde.less';
 

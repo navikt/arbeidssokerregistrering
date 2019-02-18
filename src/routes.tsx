@@ -4,6 +4,7 @@ import Banner from './komponenter/banner/banner';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';
 import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert';
+import AlleredeRegistrertFss from './sider/allerede-registrert-fss/allerede-registrert-fss';
 import {
     ALLEREDE_REGISTRERT_PATH,
     DU_ER_NA_REGISTRERT_PATH,
@@ -45,6 +46,7 @@ import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 import { setInngangSykefravaerAction } from './ducks/logger';
+import { erIFSS } from './utils/utils';
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
 
 interface StateProps {
@@ -88,7 +90,8 @@ class Routes extends React.Component<AllProps> {
         const queryParams = location.search;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
-            return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
+            const component = erIFSS() ? AlleredeRegistrertFss : AlleredeRegistrert;
+            return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={component}/>;
         } else if (registreringType === RegistreringType.SPERRET) {
             return (
                 <RedirectAll

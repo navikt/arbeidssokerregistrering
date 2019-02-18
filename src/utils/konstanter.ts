@@ -27,5 +27,7 @@ export const VEIENTILARBEID_MED_AAP_URL = `${vanligUrl}?visAap=true`;
 export const DITT_NAV_URL = '/dittnav';
 export const DITT_SYKEFRAVAER_URL = '/sykefravaer';
 
+export const AKTIVITETSPLAN_URL = '/veilarbpersonflatefs';
+
 // Besvarelser
 export const YRKESPRAKSIS = '5120.14'; // hard kodet inntil videre
