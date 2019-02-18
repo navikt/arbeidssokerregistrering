@@ -1,3 +1,4 @@
 export const featureTogglesMock = {
-    'arbeidssokerregistrering.nedetid': false
+    'arbeidssokerregistrering.nedetid': false,
+    'veiledearbeidssoker.registrering.tekst': true
 };

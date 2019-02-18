@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import './registrering-arbeidssoker.less';
@@ -12,10 +13,11 @@ import infobilde from './info.svg';
 import { MatchProps } from '../../utils/utils';
 import { SKJEMA_PATH } from '../../utils/konstanter';
 import InformasjonModal from './informasjon/informasjon-modal';
+import { AppState } from '../../reducer';
+import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
 
 interface Props {
-    match: any; // tslint:disable-line
-    intl: any; // tslint:disable-line
+    featureToggles: FeatureToggleData;
 }
 
 type RegistreringArbeidssokerProps = Props & RouteComponentProps<MatchProps>;
@@ -44,6 +46,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
     }
 
     render() {
+        const toggleRegistreringTekst = this.props.featureToggles['veiledearbeidssoker.registrering.tekst'];
 
         const Rad1 = () => {
             return (
@@ -117,19 +120,28 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4"/></li>
                         </ul>
                         <Normaltekst><FormattedMessage id="registrering-arbeidssoker.rad3.del2"/></Normaltekst>
-                        <Element tag="h3">
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del3.tittel"/>
-                        </Element>
-                        <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del1"/>{' '}
-                            <a
-                                className="lenke"
-                                href="https://arbeidsplassen.nav.no"
-                            >
-                                <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.lenke"/>
-                            </a>
-                            {' '}<FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del2"/>
-                        </Normaltekst>
+                        {
+                            toggleRegistreringTekst
+                                ?
+                                <>
+                                    <Element tag="h3">
+                                        <FormattedMessage id="registrering-arbeidssoker.rad3.del3.tittel"/>
+                                    </Element>
+                                    <Normaltekst>
+                                    <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del1"/>{' '}
+                                    <a
+                                        className="lenke"
+                                        href="https://arbeidsplassen.nav.no"
+                                    >
+                                        <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.lenke"/>
+                                    </a>{' '}
+                                    <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del2"/>
+                                    </Normaltekst>
+                                </>
+                                :
+                                null
+                        }
+
                         <Element tag="h3"><FormattedMessage id="registrering-arbeidssoker.rad3.del4.tittel"/></Element>
                         <Normaltekst>
                             <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold"/><br/>
@@ -177,4 +189,8 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
 
 }
 
-export default RegistreringArbeidssoker;
+const mapStateToProps = (state: AppState) => ({
+    featureToggles: selectFeatureToggles(state),
+});
+
+export default connect(mapStateToProps)(RegistreringArbeidssoker);
