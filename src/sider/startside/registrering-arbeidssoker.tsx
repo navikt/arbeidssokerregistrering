@@ -79,23 +79,25 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
         const Rad2 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad2 rad-even">
-                    <div className="rad2__boks rad2__rettigheter">
-                        <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter" />
-                        <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
-                            <FormattedMessage id="registrering-arbeidssoker.argument2tittel1"/>
-                        </Undertittel>
-                        <Normaltekst tag="div">
-                            <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1"/>
-                        </Normaltekst>
-                    </div>
-                    <div className="rad2__boks rad2__plikter">
-                        <img className="rad__ikon" src={infobilde} alt="Plikter" />
-                        <Undertittel tag="h2" className="rad__tittel plikter__tittel">
-                            <FormattedMessage id="registrering-arbeidssoker.argument2tittel2"/>
-                        </Undertittel>
-                        <Normaltekst tag="div">
-                            <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2"/>
-                        </Normaltekst>
+                    <div className="rad2-wrapper">
+                        <div className="rad2__boks rad2__rettigheter">
+                            <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter" />
+                            <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
+                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel1"/>
+                            </Undertittel>
+                            <Normaltekst tag="div">
+                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1"/>
+                            </Normaltekst>
+                        </div>
+                        <div className="rad2__boks rad2__plikter">
+                            <img className="rad__ikon" src={infobilde} alt="Plikter" />
+                            <Undertittel tag="h2" className="rad__tittel plikter__tittel">
+                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel2"/>
+                            </Undertittel>
+                            <Normaltekst tag="div">
+                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2"/>
+                            </Normaltekst>
+                        </div>
                     </div>
                 </div>
             );
