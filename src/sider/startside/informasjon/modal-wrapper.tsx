@@ -61,7 +61,7 @@ class ModalWrapper extends React.Component<Props> {
                 {...props}
                 className={cls(className)}
                 onRequestClose={this.onRequestClose}
-                overlayClassName="modal__overlay"
+                overlayClassName="informasjon-modal__overlay"
                 shouldCloseOnOverlayClick={true}
                 ref={(modalRef) => (this.modalRef = modalRef)}
             >
@@ -71,7 +71,7 @@ class ModalWrapper extends React.Component<Props> {
                 { closeButton &&
                     <Lukkeknapp
                         overstHjorne={true}
-                        className={classnames('modal__lukkknapp--shake')}
+                        className={classnames('informasjon-modal__lukkknapp--shake')}
                         onClick={props.onRequestClose}
                         ref={(closeButtonRef) => (this.closeButtonRef = closeButtonRef)}
                     >
