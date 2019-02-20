@@ -6,8 +6,7 @@ import { START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import {Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { MatchProps } from '../../utils/utils';
-
+import { erIFSS, MatchProps } from '../../utils/utils';
 import './banner.less';
 
 interface StateProps {
@@ -24,8 +23,10 @@ class Banner extends React.Component<Props> {
 
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
-        const bannerOverskriftId = visSykefravaerSkjema ?
+        let bannerOverskriftId = visSykefravaerSkjema ?
             'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
+
+        bannerOverskriftId = erIFSS() ? 'banner-overskrift-manuell' : bannerOverskriftId;
 
         return (!this.skalVises()) ? (null) : (
             <div className="registrering-banner">
