@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { MatchProps, scrollToBanner } from '../../utils/utils';
+import { erIFSS, MatchProps, scrollToBanner } from '../../utils/utils';
 import { START_PATH } from '../../utils/konstanter';
 
 interface State {
@@ -34,7 +34,7 @@ class Sideanimasjon extends React.Component<Props, State> {
     render() {
         return (
             <div
-                className={(this.props.location.pathname !== START_PATH ? 'limit ' : '')
+                className={(!erIFSS() || (this.props.location.pathname !== START_PATH) ? 'limit ' : '')
                 + (this.state.forover ? 'forover' : 'bakover')}
             >
                 {this.props.children}
