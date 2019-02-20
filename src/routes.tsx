@@ -18,7 +18,6 @@ import {
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
-import StartsideSykmeldt from './sider/startside/startside-sykmeldt';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
@@ -48,6 +47,7 @@ import { RouteHerokuMock } from
 import { setInngangSykefravaerAction } from './ducks/logger';
 import { erIFSS } from './utils/utils';
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
+import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-sykmeldt';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -147,7 +147,7 @@ class Routes extends React.Component<AllProps> {
                             <Switch>
                                 <Route
                                     path={START_PATH}
-                                    component={StartsideSykmeldt}
+                                    component={RegistreringArbeidssokerSykmeldt}
                                 />
                                 {klarForFullforing ?
                                     <Route path={INFOSIDE_PATH} component={Infoside} />
