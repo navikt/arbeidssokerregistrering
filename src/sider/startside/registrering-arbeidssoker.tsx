@@ -15,6 +15,7 @@ import { SKJEMA_PATH } from '../../utils/konstanter';
 import InformasjonModal from './informasjon/informasjon-modal';
 import { AppState } from '../../reducer';
 import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface Props {
     featureToggles: FeatureToggleData;
@@ -135,6 +136,9 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                                     <a
                                         className="lenke"
                                         href="https://arbeidsplassen.nav.no"
+                                        onClick={() => {
+                                            frontendLogger('veiledearbeidssoker.klikkpaarbeidsplassenlenke');
+                                        }}
                                     >
                                         <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.lenke"/>
                                     </a>{' '}
