@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
+import { FeilmeldingManglerEnhetId, FeilmeldingManglerFnr } from '../feilmeldinger';
 
 class ManglerKontekst extends React.Component {
     render() {
@@ -8,8 +9,8 @@ class ManglerKontekst extends React.Component {
 
         return (
             <>
-                {harIkkeFnr &&  <h3>Du har ingen bruker i kontekst</h3>}
-                {harIkkeEnhetId &&  <h3>Du har ikke enhet i kontekst</h3>}
+                {harIkkeFnr &&  <FeilmeldingManglerFnr/>}
+                {harIkkeEnhetId &&  <FeilmeldingManglerEnhetId/>}
             </>
         );
     }
