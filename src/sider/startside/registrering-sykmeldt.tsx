@@ -16,6 +16,7 @@ import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface Props {
     featureToggles: FeatureToggleData;
@@ -115,9 +116,16 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
                         {
                             toggleRegistreringTekst
                                 ?
-                                    <Normaltekst>
+                                    <div
+                                        className="typo-normal"
+                                        onClick={(e: any) => { // tslint:disable-line
+                                            if (e.target.tagName === 'A') {
+                                                frontendLogger('syfo.cv.lenke.klikk');
+                                            }
+                                        }}
+                                    >
                                         <FormattedHTMLMessage id="registrering-sykmeldt.rad3.del2"/>
-                                    </Normaltekst>
+                                    </div>
                                 :
                                 null
                         }
