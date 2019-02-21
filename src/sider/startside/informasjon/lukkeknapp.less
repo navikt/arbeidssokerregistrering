@@ -1,0 +1,76 @@
+@import "../../../../node_modules/nav-frontend-core/less/_variabler";
+@import "../../../../node_modules/nav-frontend-core/less/_mixins";
+
+.hide-text() {
+    font: ~"0/0" a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.lukknapp {
+    .hide-text();
+
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    color: @navGra60;
+    border: 1px solid currentColor;
+    background-color: transparent;
+    border-radius: 2px;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        width: 1.5rem;
+        height: 1px;
+        top: ~'calc(50% - 1px)';
+        left: 50%;
+        background-color: currentColor;
+    }
+
+    &:before {
+        transform: translate(-50%, 50%) rotate(-45deg);
+    }
+
+    &:after {
+        transform: translate(-50%, 50%) rotate(45deg);
+    }
+
+    &:hover {
+        color: @navBlaLighten20;
+    }
+
+    &:active {
+        color: @navBlaDarken40;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px @orangeFocus;
+    }
+
+}
+
+.lukknapp--bla {
+    color: @navLysBla;
+}
+
+.lukknapp--hvit {
+    color: @white;
+
+    &:hover {
+        background-color: @navLysBla;
+        border-color: @navLysBla;
+        color: @navGra60;
+    }
+}
+
+.lukknapp--overstHjorne {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
