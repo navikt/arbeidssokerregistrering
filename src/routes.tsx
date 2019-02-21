@@ -18,8 +18,8 @@ import {
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
-import StartsideOrdinaer from './sider/startside/startside-ordinaer';
 import StartsideSykmeldt from './sider/startside/startside-sykmeldt';
+import StartsideOrdinaer from './sider/startside/startside-ordinaer';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
@@ -48,6 +48,7 @@ import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 import { setInngangSykefravaerAction } from './ducks/logger';
 import { erIFSS } from './utils/utils';
+import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -127,7 +128,7 @@ class Routes extends React.Component<AllProps> {
                             <Switch>
                                 <Route
                                     path={START_PATH}
-                                    component={StartsideOrdinaer}
+                                    component={erIFSS() ? RegistreringArbeidssoker : StartsideOrdinaer}
                                 />
                                 <Route
                                     path={`${SKJEMA_PATH}/:id`}
