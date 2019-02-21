@@ -92,10 +92,13 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
                         </Normaltekst>
                         <img className="rad2__ikon" src={merVeiledningSvg} alt="" />
                     </div>
-                    <InformasjonModal
-                        isOpen={this.state.isModalOpen}
-                        onRequestClose={this.handleModalLukkeknappClicked}
-                    />
+                    {
+                        this.state.isModalOpen ? <InformasjonModal
+                            isOpen={this.state.isModalOpen}
+                            onRequestClose={this.handleModalLukkeknappClicked}
+                        /> : null
+                    }
+
                 </div>
             );
         };
