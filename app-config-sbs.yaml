@@ -30,5 +30,12 @@ fasitResources:
     resourceType: applicationproperties
   - alias: loadbalancer:arbeidssokerregistrering
     resourceType: loadbalancerconfig
+
+  # oidc med AzureAD B2C
+  - alias: aad_b2c_clientid
+    resourceType: credential
+  - alias: aad_b2c_discovery
+    resourceType: baseurl
+
 alertProfiles:
   - common-java-modules

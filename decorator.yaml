@@ -1,6 +1,12 @@
+auth:
+    enforce: false
+
 proxy:
   - contextPath: "/veilarbstepup"
     baseUrl: "http://veilarbstepup"
+    # veilarbstepup må kunne kalles u-innlogget
+    validateOidcToken: false
+
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbproxy"
   - contextPath: "/veilarbperson"
