@@ -14,3 +14,11 @@ proxy:
   - contextPath: "/pam-janzz"
     baseUrl: "http://pam-janzz"
     pingRequestPath: "/pam-janzz/isAlive"
+
+redirect:
+  - from: /dittnav
+    to: {{ DITTNAV_LINK_URL }}
+  - from: /veientilarbeid
+    to: {{ VEIENTILARBEID_URL }}
+  - from: /sykefravaer
+    to: {{ SYKEFRAVAER_URL }}
