@@ -5,6 +5,11 @@ import App from './app';
 import './polyfills/polyfill';
 import './index.less';
 
+if (!(window as any)._babelPolyfill) {
+    // @ts-ignore
+    require('babel-polyfill');
+}
+
 if (process.env.REACT_APP_MOCK) {
     console.log('=========================='); /*tslint:disable-line:no-console*/
     console.log('======== MED MOCK ========'); /*tslint:disable-line:no-console*/

@@ -1,5 +1,5 @@
 /*tslint:disable*/
-import { hentBrukerFnr } from './utils';
+import { hentBrukerFnr, hentVeilederEnhetId } from './utils';
 
 interface Config {
     config: {
@@ -14,8 +14,8 @@ interface Config {
             visVeileder: boolean;
         };
         applicationName: string;
-        initiellEnhet?: string;
-        fnr?: string;
+        initiellEnhet: string | null;
+        fnr: string | null;
     };
 }
 
@@ -27,6 +27,7 @@ const config = (): Config => ({
             veileder: '/veilarbveileder/api/veileder/me',
         },
         fnr: hentBrukerFnr(),
+        initiellEnhet: hentVeilederEnhetId(),
         toggles: {
             visEnhet: true,
             visEnhetVelger: false,

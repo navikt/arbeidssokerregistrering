@@ -4,8 +4,8 @@ import { FeilmeldingManglerEnhetId, FeilmeldingManglerFnr } from '../feilmelding
 
 class ManglerKontekst extends React.Component {
     render() {
-        const harIkkeFnr = hentBrukerFnr() === undefined ;
-        const harIkkeEnhetId = hentVeilederEnhetId() === undefined;
+        const harIkkeFnr = hentBrukerFnr() === null;
+        const harIkkeEnhetId = hentVeilederEnhetId() === null;
 
         return (
             <>

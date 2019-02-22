@@ -31,7 +31,7 @@ export function initFssVariabler() {
 
 }
 
-export function hentBrukerFnr(): string | undefined {
+export function hentBrukerFnr(): string | null {
 
     const search = parse(window.location.search);
 
@@ -49,7 +49,7 @@ export function hentBrukerFnr(): string | undefined {
         return brukerFnr;
     }
 
-    return undefined;
+    return null;
 }
 
 export function hentVeilederEnhetId(): string | null {
