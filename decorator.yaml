@@ -22,3 +22,5 @@ redirect:
     to: {{ VEIENTILARBEID_URL }}
   - from: /sykefravaer
     to: {{ SYKEFRAVAER_URL }}
+  - from: /aktivitetsplan
+    to: {{ AKTIVITETSPLAN_URL }}
