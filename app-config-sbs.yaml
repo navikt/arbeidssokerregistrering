@@ -34,6 +34,8 @@ fasitResources:
     resourceType: baseUrl
   - alias: veientilarbeid
     resourceType: baseUrl
+  - alias: sykefravaer
+    resourceType: baseUrl
 
   # oidc med AzureAD B2C
   - alias: loginservice
