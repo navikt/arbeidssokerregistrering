@@ -1,3 +1,4 @@
+/*tslint:disable*/
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { initFssVariabler } from './utils/utils';
