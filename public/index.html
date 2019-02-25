@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="no">
 	<head>
+
+
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Arbeidssøkerregistrering</title>
 		<script>
@@ -8,9 +10,9 @@
 			var q6Prefix = 'https://app-q6.adeo.no';
 			var relativeUrl = '/internarbeidsflatedecorator/js/head.min.js';
 
-			if (window.location.hostname.startsWith('app')) {
+			if (window.location.hostname.indexOf('app') !== -1) {
 				script.src = relativeUrl;
-			} else if(window.location.hostname.startsWith('localhost')){
+			} else if(window.location.hostname.indexOf('localhost') !== -1){
 				script.src = q6Prefix + relativeUrl;
 			}
 			document.head.appendChild(script);
