@@ -1,6 +1,12 @@
+auth:
+    enforce: false
+
 proxy:
   - contextPath: "/veilarbstepup"
     baseUrl: "http://veilarbstepup"
+    # veilarbstepup må kunne kalles u-innlogget
+    validateOidcToken: false
+
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbproxy"
   - contextPath: "/veilarbperson"
@@ -8,3 +14,13 @@ proxy:
   - contextPath: "/pam-janzz"
     baseUrl: "http://pam-janzz"
     pingRequestPath: "/pam-janzz/isAlive"
+
+redirect:
+  - from: /dittnav
+    to: {{ DITTNAV_LINK_URL }}
+  - from: /veientilarbeid
+    to: {{ VEIENTILARBEID_URL }}
+  - from: /sykefravaer
+    to: {{ SYKEFRAVAER_URL }}
+  - from: /aktivitetsplan
+    to: {{ AKTIVITETSPLAN_URL }}
