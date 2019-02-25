@@ -1,15 +1,11 @@
 /*tslint:disable*/
+import 'idempotent-babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { initFssVariabler } from './utils/utils';
 import App from './app';
 import './polyfills/polyfill';
 import './index.less';
-
-if (!(window as any)._babelPolyfill) {
-    // @ts-ignore
-    require('babel-polyfill');
-}
 
 if (process.env.REACT_APP_MOCK) {
     console.log('=========================='); /*tslint:disable-line:no-console*/
