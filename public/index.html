@@ -6,17 +6,36 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Arbeidssøkerregistrering</title>
 		<script>
-			var script = document.createElement('script');
-			var q6Prefix = 'https://app-q6.adeo.no';
-			var relativeUrl = '/internarbeidsflatedecorator/js/head.min.js';
+			function lastInnScript(scriptSrc) {
+                const script = document.createElement('script');
+                script.src = scriptSrc;
+                script.type = "text/javascript";
+                document.head.appendChild(script);
+            }
+
+            function lastInnCss(cssSrc) {
+                const css = document.createElement('link');
+                css.href = cssSrc;
+                css.type = "text/css";
+                css.rel = "stylesheet";
+                document.head.appendChild(css);
+			}
+
+			const q6Prefix = 'https://app-q6.adeo.no';
+			const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
+			const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
+			const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
 
 			if (window.location.hostname.indexOf('app') !== -1) {
-				script.src = relativeUrl;
-			} else if(window.location.hostname.indexOf('localhost') !== -1){
-				script.src = q6Prefix + relativeUrl;
+			    lastInnScript(dekoratorScriptUrl);
+			    lastInnScript(visittkortScriptUrl);
+			    lastInnCss(visittkortCssUrl);
+			} else if(window.location.hostname.indexOf('localhost') !== -1) {
+			    lastInnScript(q6Prefix + dekoratorScriptUrl);
 			}
-			document.head.appendChild(script);
+
 		</script>
+
 	</head>
 	<body>
         <div id="header"></div>
