@@ -18,7 +18,6 @@ import {
     SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
-import StartsideOrdinaer from './sider/startside/startside-ordinaer';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import Infoside from './sider/infoside/infoside';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
@@ -128,7 +127,7 @@ class Routes extends React.Component<AllProps> {
                             <Switch>
                                 <Route
                                     path={START_PATH}
-                                    component={erIFSS() ? RegistreringArbeidssoker : StartsideOrdinaer}
+                                    component={RegistreringArbeidssoker}
                                 />
                                 <Route
                                     path={`${SKJEMA_PATH}/:id`}
