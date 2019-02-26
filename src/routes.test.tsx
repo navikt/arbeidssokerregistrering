@@ -13,7 +13,6 @@ import {create} from './store';
 import Routes from './routes';
 import { RegistreringType } from './ducks/registreringstatus';
 import Fullfor from './sider/fullfor/fullfor';
-import StartsideSykmeldt from './sider/startside/startside-sykmeldt';
 import {
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
@@ -29,6 +28,8 @@ import DuErNaRegistrert from './sider/registrert/registrert';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
+
+import RegistreringArbeidssokerSykmeldt from "./sider/startside/registrering-sykmeldt";
 
 
 enzyme.configure({adapter: new Adapter()});
@@ -180,10 +181,20 @@ describe('Routes', () => {
 
         const store = create();
 
+        window.matchMedia = jest.fn().mockImplementation(query => {
+            return {
+                matches: false,
+                media: query,
+                onchange: null,
+                addListener: jest.fn(),
+                removeListener: jest.fn(),
+            };
+        });
+
         dispatchRegistreringstatus({registreringType: RegistreringType.SYKMELDT_REGISTRERING, maksDato: "21.10.2018"}, store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [START_PATH]);
-        expect(wrapper.find(StartsideSykmeldt)).to.have.length(1);
+        expect(wrapper.find(RegistreringArbeidssokerSykmeldt)).to.have.length(1);
 
     });
 
