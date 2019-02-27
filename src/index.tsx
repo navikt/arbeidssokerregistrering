@@ -1,8 +1,7 @@
-/*tslint:disable*/
 import 'idempotent-babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { initFssVariabler } from './utils/utils';
+import { FNR_STORAGE_KEY, initFssVariabler, settPersonIURL } from './utils/utils';
 import App from './app';
 import './polyfills/polyfill';
 import './index.less';
@@ -30,6 +29,18 @@ if (process.env.REACT_APP_MOCK) {
 }
 
 initFssVariabler();
+
+interface PersonsokEvent extends Event {
+    fodselsnummer: string;
+}
+
+document.addEventListener(
+    'dekorator-hode-personsok',
+    (event: PersonsokEvent) => {
+        settPersonIURL(event.fodselsnummer);
+        window.sessionStorage.setItem(FNR_STORAGE_KEY, event.fodselsnummer);
+    }
+);
 
 ReactDOM.render(
   <App />,
