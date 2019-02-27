@@ -1,7 +1,7 @@
 import 'idempotent-babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { initFssVariabler, settPersonIURL } from './utils/utils';
+import { FNR_STORAGE_KEY, initFssVariabler, settPersonIURL } from './utils/utils';
 import App from './app';
 import './polyfills/polyfill';
 import './index.less';
@@ -38,6 +38,7 @@ document.addEventListener(
     'dekorator-hode-personsok',
     (event: PersonsokEvent) => {
         settPersonIURL(event.fodselsnummer);
+        window.sessionStorage.setItem(FNR_STORAGE_KEY, event.fodselsnummer);
     }
 );
 
