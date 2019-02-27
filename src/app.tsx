@@ -38,7 +38,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <ManuellRegistreringSjekk>
-                        <Visitkort />
+                        {erIFSS() ? <Visitkort /> : null}
                         <HentInitialData>
                             <Router basename={basename}>
                                 <Routes/>
