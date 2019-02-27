@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import SpaFeil from '../komponenter/spa-feil/spa-feil';
+import SpaMock from '../komponenter/spa-mock/spa-mock';
 
 // tslint:disable no-any
 
@@ -31,7 +32,6 @@ export default class NAVSPA {
 
             public componentDidCatch(error: Error) {
                 this.setState({ hasError: true });
-                (window as any).frontendlogger.error(error);
             }
 
             public componentDidMount() {
@@ -41,7 +41,6 @@ export default class NAVSPA {
                     }
                 } catch (e) {
                     this.setState({ hasError: true });
-                    (window as any).frontendlogger.error(e);
                 }
             }
 
@@ -52,9 +51,14 @@ export default class NAVSPA {
             }
 
             public render() {
+                if (process.env.REACT_APP_MOCK) {
+                    return <SpaMock name={name}/>;
+                }
+
                 if (this.state.hasError) {
                     return <SpaFeil appNavn={name} />;
                 }
+
                 return <div ref={this.saveRef} />;
             }
 
