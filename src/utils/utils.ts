@@ -74,6 +74,13 @@ export function hentVeilederEnhetId(): string | null {
 
 }
 
+const BASE_URL = '/arbeidssokerregistrering/';
+
+export const settPersonIURL = (fodselsnummer: string): void => {
+    window.location.pathname = `${BASE_URL}${fodselsnummer ? `fnr=${fodselsnummer}` : ''}
+                                           ${`&enhetId=${hentVeilederEnhetId()}`}`;
+};
+
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';
 }
