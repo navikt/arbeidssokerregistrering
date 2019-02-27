@@ -3,7 +3,7 @@ import { parse } from 'query-string';
 import brukerFnr from '../mocks/bruker-fnr';
 import veilederEnhetId from '../mocks/veileder-enhet-id';
 
-const FNR_STORAGE_KEY = 'fnr';
+export const FNR_STORAGE_KEY = 'fnr';
 const ENHET_ID_STORAGE_KEY = 'enhetId';
 
 export function erIFSS(): boolean {
@@ -73,6 +73,15 @@ export function hentVeilederEnhetId(): string | null {
     return null;
 
 }
+
+const BASE_URL = '/arbeidssokerregistrering/';
+
+export const settPersonIURL = (fodselsnummer: string): void => {
+    const fnr = fodselsnummer ? `fnr=${fodselsnummer}` : '';
+    const enhetId = `&enhetId=${hentVeilederEnhetId()}`;
+
+    window.location.pathname = `${BASE_URL}${fnr}${enhetId}`;
+};
 
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';
