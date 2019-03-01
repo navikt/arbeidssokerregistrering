@@ -2,6 +2,8 @@ contextPath: /
 proxy:
   - contextPath: "/frontendlogger"
     baseUrl: "http://frontendlogger-fss"
+  - contextPath: "/internarbeidsflatedecorator"
+    baseUrl: "http://internarbeidsflatedecorator"
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
   - contextPath: "/veilarbperson"
