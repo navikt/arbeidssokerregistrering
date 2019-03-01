@@ -40,8 +40,6 @@ const config = (): Config => ({
 export default () => {
     if ((window as any).renderDecoratorHead) {
         (window as any).renderDecoratorHead(config());
-    } else {
-        window.location.href = 'feilsider/500.html';
     }
 };
 
