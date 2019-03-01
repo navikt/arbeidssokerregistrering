@@ -1,4 +1,3 @@
-export const basename = '/arbeidssokerregistrering';
 export const INNGANGSSPORSMAL_PATH = '/inngangssporsmal';
 export const START_PATH = '/start';
 export const SKJEMA_PATH = '/skjema';
@@ -10,7 +9,7 @@ export const ALLEREDE_REGISTRERT_PATH = '/allerederegistrert';
 export const REAKTIVERING_PATH = '/reaktivering';
 export const IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH = '/ikke-arbeidssoker-utenfor-oppfolging';
 export const INFOSIDE_PATH = '/infoside';
-export const ARBEIDSSOKERREGISTRERING_START_PATH = '/arbeidssokerregistrering/start';
+export const ARBEIDSSOKERREGISTRERING_START_PATH = '/start';
 
 // URLer til andre applikasjoner
 const herokuUrl = 'https://veientilarbeid.herokuapp.com/veientilarbeid';

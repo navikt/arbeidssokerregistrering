@@ -8,14 +8,14 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: arbeidssokerregistrering/internal/isAlive
+    path: /internal/isAlive
   readiness:
-    path: arbeidssokerregistrering/internal/isReady
+    path: /internal/isReady
     initialDelay: 15
 prometheus:
   # NB: pus-decorator sine metrikker
   enabled: true
-  path: arbeidssokerregistrering/internal/metrics
+  path: /internal/metrics
 resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
   limits:
     cpu: 3

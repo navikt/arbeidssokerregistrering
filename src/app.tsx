@@ -9,9 +9,6 @@ import {
 } from 'react-router-dom';
 import './decorator/decorator-mock';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
-import {
-    basename,
-} from './utils/konstanter';
 import Routes from './routes';
 import Modal from 'react-modal';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
@@ -38,7 +35,7 @@ class App extends React.Component {
                 <IntlProvider>
                     <ManuellRegistreringSjekk>
                         <HentInitialData>
-                            <Router basename={basename}>
+                            <Router>
                                 <Routes/>
                             </Router>
                         </HentInitialData>

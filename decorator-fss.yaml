@@ -1,3 +1,4 @@
+contextPath: /
 proxy:
   - contextPath: "/frontendlogger"
     baseUrl: "http://frontendlogger-fss"

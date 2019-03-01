@@ -74,13 +74,11 @@ export function hentVeilederEnhetId(): string | null {
 
 }
 
-const BASE_URL = '/arbeidssokerregistrering/';
-
 export const settPersonIURL = (fodselsnummer: string): void => {
     const fnr = fodselsnummer ? `fnr=${fodselsnummer}` : '';
     const enhetId = `&enhetId=${hentVeilederEnhetId()}`;
 
-    window.location.pathname = `${BASE_URL}${fnr}${enhetId}`;
+    window.location.pathname = `/${fnr}${enhetId}`;
 };
 
 export function hentFornavn(name: string | undefined) {

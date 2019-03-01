@@ -41,7 +41,7 @@ test('Forside - Ordinær registrering', async t => {
 test('Skjema 1 - Ordinær registrering', async t => {
 
     await t
-       .navigateTo(`http://${t.fixtureCtx.ip}:${port}/arbeidssokerregistrering/skjema/1`)
+       .navigateTo(`http://${t.fixtureCtx.ip}:${port}/skjema/1`)
        .expect(spmside.side.exists).ok();
 
    await t.ctx.uuCheck();
@@ -51,7 +51,7 @@ test('Skjema 1 - Ordinær registrering', async t => {
 test('Skjema 5 - Ordinær registrering', async t => {
 
     await t
-        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/arbeidssokerregistrering/skjema/5`)
+        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/skjema/5`)
         .expect(spmside.side.exists).ok();
 
     await t.ctx.uuCheck();
@@ -61,7 +61,7 @@ test('Skjema 5 - Ordinær registrering', async t => {
 test('Oppsummering', async t => {
 
     await t
-        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/arbeidssokerregistrering/oppsummering`)
+        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/oppsummering`)
         .expect(oppsummering.sideOppsummering.exists).ok();
 
     await t.ctx.uuCheck();
@@ -71,7 +71,7 @@ test('Oppsummering', async t => {
 test('Fullfør', async t => {
 
     await t
-        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/arbeidssokerregistrering/fullfor`)
+        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/fullfor`)
         .expect(oppsummering.sideFullfor.exists).ok();
 
     await t.ctx.uuCheck();
@@ -81,7 +81,7 @@ test('Fullfør', async t => {
 test('Du er nå registrert', async t => {
 
     await t
-        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/arbeidssokerregistrering/duernaregistrert`)
+        .navigateTo(`http://${t.fixtureCtx.ip}:${port}/duernaregistrert`)
         .expect(oppsummering.sideRegistrert.exists).ok();
 
     await t.ctx.uuCheck();
