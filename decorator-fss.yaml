@@ -1,14 +1,23 @@
 contextPath: /
+
+# NB: validateOidcToken: false
+# deaktiverer validering siden pus-decorator kun støtter azuread b2c oidc
+
 proxy:
   - contextPath: "/frontendlogger"
     baseUrl: "http://frontendlogger-fss"
+    validateOidcToken: false
   - contextPath: "/internarbeidsflatedecorator"
     baseUrl: "http://internarbeidsflatedecorator"
     pingRequestPath: "/isAlive"
+    validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
+    validateOidcToken: false
   - contextPath: "/veilarbperson"
     baseUrl: "http://veilarbperson"
+    validateOidcToken: false
   - contextPath: "/pam-janzz"
     baseUrl: "https://tjenester.nav.no"
     pingRequestPath: "/pam-janzz/isAlive"
+    validateOidcToken: false
