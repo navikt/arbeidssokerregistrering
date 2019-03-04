@@ -1,6 +1,6 @@
 # ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
 image: docker.adeo.no:5000/fo/arbeidssokerregistrering
-team: teamregistrering
+team: bos
 replicas:
   min: 2
   max: 4
@@ -8,14 +8,14 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: arbeidssokerregistrering/internal/isAlive
+    path: /internal/isAlive
   readiness:
-    path: arbeidssokerregistrering/internal/isReady
+    path: /internal/isReady
     initialDelay: 15
 prometheus:
   # NB: pus-decorator sine metrikker
   enabled: true
-  path: arbeidssokerregistrering/internal/metrics
+  path: /internal/metrics
 resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
   limits:
     cpu: 3
@@ -33,6 +33,10 @@ fasitResources:
   - alias: arbeidssokerregistrering-fss
     resourceType: applicationproperties
   - alias: unleash-api
+    resourceType: restservice
+
+  # brukes av internarbeidsflatedecorator
+  - alias: aktoerregister.api.v1
     resourceType: restservice
 alertProfiles:
   - common-java-modules

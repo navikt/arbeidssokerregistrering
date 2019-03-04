@@ -8,7 +8,7 @@ export const VEILARBPERSON_NAVN_URL = '/veilarbperson/api/person/navn';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
-export const FEATURE_URL = '/arbeidssokerregistrering/api/feature';
+export const FEATURE_URL = '/api/feature';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;

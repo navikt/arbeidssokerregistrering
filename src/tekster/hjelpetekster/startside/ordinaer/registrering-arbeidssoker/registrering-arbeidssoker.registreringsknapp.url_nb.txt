@@ -1,1 +1,1 @@
-/arbeidssokerregistrering/start
+/start
