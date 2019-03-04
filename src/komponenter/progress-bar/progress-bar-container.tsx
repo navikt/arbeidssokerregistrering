@@ -3,7 +3,6 @@ import ProgressBar from './progress-bar';
 import { finnRiktigConfig } from './progress-bar-utils';
 import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
-import { basename } from '../../utils/konstanter';
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer';
 import { State as SvarState } from '../../ducks/svar';
@@ -28,7 +27,7 @@ class ProgressBarContainer extends React.Component<Props> {
     render() {
         // Tar med :url fra Router for å oppdatere progressbar når url endres
 
-        const pathname = this.props.location.pathname.toString().replace(basename, '');
+        const pathname = this.props.location.pathname.toString();
         const config = finnRiktigConfig(pathname, this.props.svar, this.props.registreringstatusData.registreringType);
 
         if (config) {

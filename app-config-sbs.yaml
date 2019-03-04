@@ -1,6 +1,6 @@
 # ref https://raw.githubusercontent.com/nais/naisd/master/nais_example.yaml
 image: docker.adeo.no:5000/fo/arbeidssokerregistrering
-team: teamregistrering
+team: bos
 replicas:
   min: 2
   max: 4
@@ -8,14 +8,14 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: arbeidssokerregistrering/internal/isAlive
+    path: /internal/isAlive
   readiness:
-    path: arbeidssokerregistrering/internal/isReady
+    path: /internal/isReady
     initialDelay: 15
 prometheus:
   # NB: pus-decorator sine metrikker
   enabled: true
-  path: arbeidssokerregistrering/internal/metrics
+  path: /internal/metrics
 resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
   limits:
     cpu: 3
@@ -30,14 +30,6 @@ fasitResources:
     resourceType: applicationproperties
   - alias: loadbalancer:arbeidssokerregistrering
     resourceType: loadbalancerconfig
-  - alias: dittnav.link
-    resourceType: baseUrl
-  - alias: veientilarbeid
-    resourceType: baseUrl
-  - alias: sykefravaer
-    resourceType: baseUrl
-  - alias: aktivitetsplan
-    resourceType: baseUrl
 
   # oidc med AzureAD B2C
   - alias: loginservice
@@ -46,6 +38,18 @@ fasitResources:
     resourceType: credential
   - alias: aad_b2c_discovery
     resourceType: baseurl
+
+  # lenker
+  - alias: arbeidssokerregistrering
+    resourceType: baseUrl
+  - alias: dittnav.link
+    resourceType: baseUrl
+  - alias: veientilarbeid
+    resourceType: baseUrl
+  - alias: sykefravaer
+    resourceType: baseUrl
+  - alias: aktivitetsplan
+    resourceType: baseUrl
 
 alertProfiles:
   - common-java-modules

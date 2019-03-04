@@ -1,42 +1,43 @@
 <!doctype html>
 <html lang="no">
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Arbeidssøkerregistrering</title>
-		<script>
-			function lastInnScript(scriptSrc) {
-                const script = document.createElement('script');
-                script.src = scriptSrc;
-                script.type = "text/javascript";
-                document.head.appendChild(script);
-            }
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Arbeidssøkerregistrering</title>
+	<script>
+        function lastInnScript(scriptSrc) {
+            const script = document.createElement('script');
+            script.src = scriptSrc;
+            script.type = "text/javascript";
+            document.head.appendChild(script);
+        }
 
-            function lastInnCss(cssSrc) {
-                const css = document.createElement('link');
-                css.href = cssSrc;
-                css.type = "text/css";
-                css.rel = "stylesheet";
-                document.head.appendChild(css);
-			}
+        function lastInnCss(cssSrc) {
+            const css = document.createElement('link');
+            css.href = cssSrc;
+            css.type = "text/css";
+            css.rel = "stylesheet";
+            document.head.appendChild(css);
+        }
 
-			const q6BaseUrl = 'https://app-q6.adeo.no';
-			const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
-			const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
-			const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
+        const q6BaseUrl = 'https://app-q6.adeo.no';
+        const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
+        const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
+        const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
+        const hostname = window.location.hostname;
 
-			if (window.location.hostname.indexOf('app') !== -1) {
-			    lastInnScript(dekoratorScriptUrl);
-			    lastInnScript(visittkortScriptUrl);
-			    lastInnCss(visittkortCssUrl);
-			} else if(window.location.hostname.indexOf('localhost') !== -1) {
-			    lastInnScript(q6BaseUrl + dekoratorScriptUrl);
-			}
+        if (hostname.indexOf('adeo.no') !== -1 || hostname.indexOf('preprod.local') !== -1) {
+            lastInnScript(dekoratorScriptUrl);
+            lastInnScript(visittkortScriptUrl);
+            lastInnCss(visittkortCssUrl);
+        } else if(hostname.indexOf('localhost') !== -1) {
+            lastInnScript(q6BaseUrl + dekoratorScriptUrl);
+        }
 
-		</script>
+	</script>
 
-	</head>
-	<body>
-        <div id="header"></div>
-		<div id="root" class="arbsokreg_app"></div>
-	</body>
+</head>
+<body>
+<div id="header"></div>
+<div id="root" class="arbsokreg_app"></div>
+</body>
 </html>

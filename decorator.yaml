@@ -1,3 +1,4 @@
+contextPath: /
 auth:
     enforce: false
 
@@ -16,6 +17,8 @@ proxy:
     pingRequestPath: "/pam-janzz/isAlive"
 
 redirect:
+  - from: /arbeidssokerregistrering
+    to: {{ ARBEIDSSOKERREGISTRERING_URL }}
   - from: /dittnav
     to: {{ DITTNAV_LINK_URL }}
   - from: /veientilarbeid
