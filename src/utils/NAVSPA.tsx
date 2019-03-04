@@ -56,7 +56,7 @@ export default class NAVSPA {
                 }
 
                 if (this.state.hasError) {
-                    return <SpaFeil appNavn={name} />;
+                    return <SpaFeil name={name} />;
                 }
 
                 return <div ref={this.saveRef} />;
