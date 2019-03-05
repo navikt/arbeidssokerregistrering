@@ -140,7 +140,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                                             frontendLogger('veiledearbeidssoker.klikkpaarbeidsplassenlenke');
                                         }}
                                     >
-                                        <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.lenke"/>
+                                        <FormattedMessage id="registrering.arbeidsplassen.lenke"/>
                                     </a>{' '}
                                     <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del2"/>
                                     </Normaltekst>
