@@ -13,125 +13,118 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 
 type RegistreringArbeidssokerProps =  RouteComponentProps<MatchProps>;
 
-interface State {
-    isModalOpen: boolean;
-}
+class RegistreringArbeidssokerFss extends React.Component<RegistreringArbeidssokerProps> {
 
-class RegistreringArbeidssokerFss extends React.Component<RegistreringArbeidssokerProps, State> {
-
-    render() {
-        const Rad1 = () => {
-            return (
-                <div className="registrering-arbeidssoker__rad1">
-                    <Innholdstittel tag="h2" className="rad__tittel">
-                        <FormattedMessage id="registrering-arbeidssoker.introtittel"/>
-                    </Innholdstittel>
-                    <div className="rad1__innhold">
-                        <div className="rad1__innhold__tekst">
-                            <Normaltekst tag="div">
-                                <FormattedHTMLMessage
-                                    id="registrering-arbeidssoker.argument1tekst-fss"
-                                    tagName="ul"
-                                />
-                            </Normaltekst>
-                        </div>
-                        <div>
-                            <img className="rad1__ikon" src={aktplanbilde} alt="Arbeidssøker-ikon" />
-                        </div>
+    Rad1 = () => {
+        return (
+            <div className="registrering-arbeidssoker__rad1">
+                <Innholdstittel tag="h2" className="rad__tittel">
+                    <FormattedMessage id="registrering-arbeidssoker.introtittel"/>
+                </Innholdstittel>
+                <div className="rad1__innhold">
+                    <div className="rad1__innhold__tekst">
+                        <Normaltekst tag="div">
+                            <FormattedHTMLMessage
+                                id="registrering-arbeidssoker.argument1tekst-fss"
+                                tagName="ul"
+                            />
+                        </Normaltekst>
+                    </div>
+                    <div>
+                        <img className="rad1__ikon" src={aktplanbilde} alt="Arbeidssøker-ikon" />
                     </div>
                 </div>
-            );
-        };
+            </div>
+        );
+    }
 
-        const Rad2 = () => {
-            return (
-                <div className="registrering-arbeidssoker__rad2 rad-even">
-                    <div className="rad2-wrapper">
-                        <div className="rad2__boks rad2__rettigheter">
-                            <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter"/>
-                            <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
-                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel1"/>
-                            </Undertittel>
-                            <Normaltekst tag="div">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1-fss"/>
-                            </Normaltekst>
-                        </div>
-                        <div className="rad2__boks rad2__plikter">
-                            <img className="rad__ikon" src={infobilde} alt="Plikter"/>
-                            <Undertittel tag="h2" className="rad__tittel plikter__tittel">
-                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel2"/>
-                            </Undertittel>
-                            <Normaltekst tag="div">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2-fss"/>
-                            </Normaltekst>
-                        </div>
+    Rad2 = () => {
+        return (
+            <div className="registrering-arbeidssoker__rad2 rad-even">
+                <div className="rad2-wrapper">
+                    <div className="rad2__boks rad2__rettigheter">
+                        <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter"/>
+                        <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
+                            <FormattedMessage id="registrering-arbeidssoker.argument2tittel1"/>
+                        </Undertittel>
+                        <Normaltekst tag="div">
+                            <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1-fss"/>
+                        </Normaltekst>
+                    </div>
+                    <div className="rad2__boks rad2__plikter">
+                        <img className="rad__ikon" src={infobilde} alt="Plikter"/>
+                        <Undertittel tag="h2" className="rad__tittel plikter__tittel">
+                            <FormattedMessage id="registrering-arbeidssoker.argument2tittel2"/>
+                        </Undertittel>
+                        <Normaltekst tag="div">
+                            <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2-fss"/>
+                        </Normaltekst>
                     </div>
                 </div>
-            );
-        };
+            </div>
+        );
+    }
 
-        const Rad3 = () => {
-            return (
-                <div className="registrering-arbeidssoker__rad3">
-                    <Innholdstittel
-                        tag="h2"
-                        className="rad__tittel"
+    Rad3 = () => {
+        return (
+            <div className="registrering-arbeidssoker__rad3">
+                <Innholdstittel
+                    tag="h2"
+                    className="rad__tittel"
+                >
+                    <FormattedMessage id="registrering-arbeidssoker.argument3tittel-fss"/>
+                </Innholdstittel>
+                <div className="rad3__tekst">
+                    <Normaltekst>
+                        <FormattedMessage id="registrering-arbeidssoker.rad3.del1-fss"/>
+                    </Normaltekst>
+                    <ul className="typo-normal">
+                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt1-fss"/></li>
+                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt2-fss"/></li>
+                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt3-fss"/></li>
+                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4-fss"/></li>
+                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt5-fss"/></li>
+                    </ul>
+                    <Normaltekst>
+                        <FormattedMessage id="registrering-arbeidssoker.rad3.del2-fss"/>
+                    </Normaltekst>
+
+                    <Normaltekst>
+                        <a className="lenke" href="https://www.nav.no/personvern">
+                            <FormattedMessage id="registrering.personopplysninger.lenke"/>
+                        </a>&nbsp;
+                        <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold-fss"/><br/>
+                    </Normaltekst>
+                </div>
+            </div>
+        );
+    }
+
+    Rad4 = () => {
+        return(
+            <div>
+                <div className="rad4__knapperad">
+                    <KnappBase
+                        type="hoved"
+                        onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
+                        data-testid="start-arbeidssoker-registrering-fss"
                     >
-                        <FormattedMessage id="registrering-arbeidssoker.argument3tittel-fss"/>
-                    </Innholdstittel>
-                    <div className="rad3__tekst">
-                        <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del1-fss"/>
-                        </Normaltekst>
-                        <ul className="typo-normal">
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt1-fss"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt2-fss"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt3-fss"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4-fss"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt5-fss"/></li>
-                        </ul>
-                        <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del2-fss"/>
-                        </Normaltekst>
-
-                        <Normaltekst>
-                            <a className="lenke" href="https://www.nav.no/personvern">
-                                <FormattedMessage id="registrering.personopplysninger.lenke"/>
-                            </a>&nbsp;
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold-fss"/><br/>
-                        </Normaltekst>
-                    </div>
+                        <FormattedMessage id="startside-arbeidssoker-fss-knapp"/>
+                    </KnappBase>
                 </div>
-            );
-        };
-
-        const Rad4 = () => {
-            return(
-                <div>
-                    <div className="rad4__knapperad">
-                        <KnappBase
-                            type="hoved"
-                            onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
-                            data-testid="start-arbeidssoker-registrering-fss"
-                        >
-                            <FormattedMessage id="startside-arbeidssoker-fss-knapp"/>
-                        </KnappBase>
-                    </div>
-                    <LenkeAvbryt />
-                </div>
-            );
-        };
-
-        const rader = [
-            <Rad1 key={1} />,
-            <Rad2 key={2} />,
-            <Rad3 key={3} />,
-            <Rad4 key={4} />
-        ];
+                <LenkeAvbryt />
+            </div>
+        );
+    }
+    
+    render() {
 
         return (
             <div className="registrering-arbeidssoker-fss">
-                {rader}
+                <this.Rad1/>
+                <this.Rad2/>
+                <this.Rad3/>
+                <this.Rad4/>
             </div>
         );
 
