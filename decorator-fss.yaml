@@ -11,6 +11,9 @@ proxy:
     baseUrl: "http://internarbeidsflatedecorator"
     pingRequestPath: "/isAlive"
     validateOidcToken: false
+  - contextPath: "/veilarbvisittkortfs"
+    baseUrl: "http://veilarbvisittkortfs"
+    validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
     validateOidcToken: false
