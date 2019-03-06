@@ -5,7 +5,7 @@ import { AppState } from '../../reducer';
 import { FormattedMessage } from 'react-intl';
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { MessageValue } from 'react-intl';
-import { erSporsmalBesvart, getTekstIdForSvar } from '../../komponenter/skjema/skjema-utils';
+import { getTekstIdForSvar } from '../../komponenter/skjema/skjema-utils';
 import {
     Data as RegistreringstatusData,
     RegistreringType,
@@ -40,10 +40,6 @@ class OppsummeringElement extends React.Component<Props> {
         const { tekst, values, registreringstatusData } = this.props;
 
         if (!this.skalViseElement()) {
-            return null;
-        }
-
-        if (this.props.sporsmalId && !erSporsmalBesvart(this.props.svarState, this.props.sporsmalId)) {
             return null;
         }
 
