@@ -38,7 +38,12 @@ class Banner extends React.Component<Props> {
     }
 
     skalVises(): boolean {
+        if (erIFSS()) {
+            return (this.props.startRegistreringStatus.underOppfolging === false);
+        }
+
         const pathname = this.props.location.pathname.toString();
+
         return !(pathname.includes(START_PATH)
             && (this.props.startRegistreringStatus.underOppfolging === false));
     }
