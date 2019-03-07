@@ -13,7 +13,14 @@ import { MemoryRouter } from 'react-router';
 import * as H from 'history';
 import {ActionTypes as SisteStillingActionTypes, annenStilling } from '../ducks/siste-stilling';
 import {ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
-import { IngenSvar } from '../ducks/svar-utils';
+import {
+    AndreForholdSvar,
+    FremtidigSituasjonSvar,
+    IngenSvar,
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar,
+    UtdanningSvar
+} from '../ducks/svar-utils';
 
 export const store = getStore();
 
@@ -190,6 +197,39 @@ export function dispatchNoenSporsmal(appStore: Store<AppState>) {
         data: {
             sporsmalId,
             svar: IngenSvar.INGEN_SVAR,
+        }
+    }));
+
+}
+
+export function dispatchSykmeldtSporsmal(appStore: Store<AppState>) {
+
+    [
+        {
+            spmId: SporsmalId.fremtidigSituasjon,
+            svar: FremtidigSituasjonSvar.USIKKER
+        },
+        {
+            spmId: SporsmalId.utdanning,
+            svar: UtdanningSvar.INGEN_UTDANNING
+        },
+        {
+            spmId: SporsmalId.utdanningGodkjent,
+            svar: UtdanningGodkjentSvar.INGEN_SVAR
+        },
+        {
+            spmId: SporsmalId.utdanningBestatt,
+            svar: UtdanningBestattSvar.INGEN_SVAR
+        },
+        {
+            spmId: SporsmalId.andreForhold,
+            svar: AndreForholdSvar.JA
+        },
+    ].forEach(obj => appStore.dispatch({
+        type: SvarActionTypes.AVGI_SVAR,
+        data: {
+            sporsmalId: obj.spmId,
+            svar: obj.svar,
         }
     }));
 
