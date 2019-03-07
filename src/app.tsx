@@ -15,7 +15,7 @@ import {
 import Routes from './routes';
 import Modal from 'react-modal';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
-import initialiserToppmeny from './utils/dekorator-utils';
+import { initialiserToppmeny } from './utils/dekorator-utils';
 import { erIFSS } from './utils/utils';
 
 const store = getStore();

@@ -37,14 +37,8 @@ const config = (): Config => ({
     },
 });
 
-export default () => {
+export const initialiserToppmeny = (): void => {
     if ((window as any).renderDecoratorHead) {
         (window as any).renderDecoratorHead(config());
-    } else {
-        window.location.href = 'feilsider/500.html';
     }
-};
-
-export const initialiserToppmeny = (): void => {
-    (window as any).renderDecoratorHead(config());
 };

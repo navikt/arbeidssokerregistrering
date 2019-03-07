@@ -39,12 +39,6 @@ export function hentBrukerFnr(): string | null {
         return search.fnr;
     }
 
-    const sessionFnr = window.sessionStorage.getItem(FNR_STORAGE_KEY);
-
-    if (sessionFnr) {
-        return sessionFnr;
-    }
-
     if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
         return brukerFnr;
     }
@@ -58,12 +52,6 @@ export function hentVeilederEnhetId(): string | null {
 
     if (search.enhetId) {
         return search.enhetId;
-    }
-
-    const sessionEnhetId = window.sessionStorage.getItem(ENHET_ID_STORAGE_KEY);
-
-    if (sessionEnhetId) {
-        return sessionEnhetId;
     }
 
     if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
