@@ -13,6 +13,7 @@ proxy:
     validateOidcToken: false
   - contextPath: "/veilarbvisittkortfs"
     baseUrl: "http://veilarbvisittkortfs"
+    pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
