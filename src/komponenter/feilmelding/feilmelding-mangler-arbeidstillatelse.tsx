@@ -7,24 +7,19 @@ import Feilmelding from './feilmelding';
 import utropstegnSvg from '../../sider/fullfor/utropstegn.svg';
 import './feilmelding-mangler-arbeidstillatelse.less';
 
-class FeilmeldingManglerArbeidstillatelse extends React.Component<InjectedIntlProps> {
+const FeilmeldingManglerArbeidstillatelse: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
+    const lenkeUrl = props.intl.messages['finn-ditt-nav-kontor-lenke-url'];
 
-    render() {
-
-        const lenkeUrl = this.props.intl.messages['finn-ditt-nav-kontor-lenke-url'];
-
-        return (
-            <Feilmelding bilde={utropstegnSvg} className="feilmelding-mangler-arbeidstillatelse">
-                <Normaltekst className="blokk-s">
-                    <FormattedMessage id="feilmelding-mangler-arbeidstillatelse-innhold"/>
-                </Normaltekst>
-                <LenkeMedChevron path={lenkeUrl}>
-                    <FormattedMessage id="feilmelding-mangler-arbeidstillatelse-lenke-tekst"/>
-                </LenkeMedChevron>
-            </Feilmelding>
-        );
-
-    }
-}
+    return (
+        <Feilmelding bilde={utropstegnSvg} className="feilmelding-mangler-arbeidstillatelse">
+            <Normaltekst className="blokk-s">
+                <FormattedMessage id="feilmelding-mangler-arbeidstillatelse-innhold"/>
+            </Normaltekst>
+            <LenkeMedChevron path={lenkeUrl}>
+                <FormattedMessage id="feilmelding-mangler-arbeidstillatelse-lenke-tekst"/>
+            </LenkeMedChevron>
+        </Feilmelding>
+    );
+};
 
 export default FeilmeldingManglerArbeidstillatelse;
