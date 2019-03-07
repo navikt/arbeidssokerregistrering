@@ -1,23 +1,43 @@
 <!doctype html>
 <html lang="no">
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Arbeidssøkerregistrering</title>
-		<script>
-			var script = document.createElement('script');
-			var q6Prefix = 'https://app-q6.adeo.no';
-			var relativeUrl = '/internarbeidsflatedecorator/js/head.min.js';
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Arbeidssøkerregistrering</title>
+	<script>
+        function lastInnScript(scriptSrc) {
+            const script = document.createElement('script');
+            script.src = scriptSrc;
+            script.type = "text/javascript";
+            document.head.appendChild(script);
+        }
 
-			if (window.location.hostname.indexOf('app') !== -1) {
-				script.src = relativeUrl;
-			} else if(window.location.hostname.indexOf('localhost') !== -1){
-				script.src = q6Prefix + relativeUrl;
-			}
-			document.head.appendChild(script);
-		</script>
-	</head>
-	<body>
-        <div id="header"></div>
-		<div id="root" class="arbsokreg_app"></div>
-	</body>
+        function lastInnCss(cssSrc) {
+            const css = document.createElement('link');
+            css.href = cssSrc;
+            css.type = "text/css";
+            css.rel = "stylesheet";
+            document.head.appendChild(css);
+        }
+
+        const q6BaseUrl = 'https://app-q6.adeo.no';
+        const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
+        const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
+        const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
+        const hostname = window.location.hostname;
+
+        if (hostname.indexOf('adeo.no') !== -1 || hostname.indexOf('preprod.local') !== -1) {
+            lastInnScript(dekoratorScriptUrl);
+            lastInnScript(visittkortScriptUrl);
+            lastInnCss(visittkortCssUrl);
+        } else if(hostname.indexOf('localhost') !== -1) {
+            lastInnScript(q6BaseUrl + dekoratorScriptUrl);
+        }
+
+	</script>
+
+</head>
+<body>
+<div id="header"></div>
+<div id="root" class="arbsokreg_app"></div>
+</body>
 </html>
