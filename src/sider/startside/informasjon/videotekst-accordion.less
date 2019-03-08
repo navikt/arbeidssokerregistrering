@@ -1,0 +1,29 @@
+@import "../../../../node_modules/nav-frontend-core/less/_variabler";
+
+.videotekst-accordion {
+
+    &__lenke:hover {
+        text-decoration: underline;
+        color: @navBla;
+    }
+    &__lenke {
+        &:focus,
+        &--focus {
+            box-shadow: 0 0 0 3px @orangeFocus;
+            outline: none;
+        }
+
+        color: @navMorkGra;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+
+        > span {
+            display: block;
+        }
+        .chevronboks chevron--ned {
+            display: block;
+            text-align: center;
+        }
+    }
+}

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import ModalWrapper from './modal-wrapper';
 
 import './informasjon-modal.less';
+import VideotekstAccordion from './videotekst-accordion';
 
 interface Props {
     onRequestClose: () => void;
@@ -31,7 +32,7 @@ class InformasjonModal extends React.Component<Props> {
                     <FormattedMessage id="registrering-arbeidssoker.informasjon-modal.tittel"/>
                 </Innholdstittel>
                 <Normaltekst className="informasjon-modal__ingress">
-                    <FormattedMessage id="registrering-arbeidssoker.informasjon-modal.ingress"/>
+                    <FormattedHTMLMessage id="registrering-arbeidssoker.informasjon-modal.ingress"/>
                 </Normaltekst>
                 <iframe
                     title="onboarding-video"
@@ -49,12 +50,7 @@ class InformasjonModal extends React.Component<Props> {
                     }
                     className="informasjon-modal__video"
                 />
-                <Undertittel tag="h2" className="informasjon-modal__undertittel">
-                    <FormattedMessage id="registrering-arbeidssoker.informasjon-modal.undertittel"/>
-                </Undertittel>
-                <div className="informasjon-modal__innhold">
-                    <FormattedHTMLMessage id="registrering-arbeidssoker.informasjon-modal.innhold"/>
-                </div>
+                <VideotekstAccordion/>
             </ModalWrapper>
         );
     }
