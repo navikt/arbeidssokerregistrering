@@ -6,6 +6,9 @@ import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker'
 import './feilmelding-brukers-status-ugyldig.less';
 import FeilmeldingManglerArbeidstillatelse
     from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
+import { erIFSS } from '../../../utils/utils';
+import FeilmeldingManglerArbeidstillatelseFss
+    from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse-fss';
 
 interface FeilmeldingBrukersStatusUgyldigProps {
     feilType: FullforErrorTypes;
@@ -21,7 +24,9 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
         let feilmelding;
 
         if (feilType === FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE) {
-            feilmelding = <FeilmeldingManglerArbeidstillatelse intl={this.props.intl} />;
+            feilmelding = erIFSS() ?
+                <FeilmeldingManglerArbeidstillatelseFss/> :
+                <FeilmeldingManglerArbeidstillatelse intl={this.props.intl} />;
         } else {
 
             let messageKey;
