@@ -12,8 +12,9 @@ import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
 import Modal from 'react-modal';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
-import initialiserToppmeny from './utils/dekorator-utils';
+import { initialiserToppmeny } from './utils/dekorator-utils';
 import { erIFSS } from './utils/utils';
+import Visitkort from './komponenter/visittkort';
 
 const store = getStore();
 
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <IntlProvider>
                     <ManuellRegistreringSjekk>
+                        {erIFSS() ? <Visitkort /> : null}
                         <HentInitialData>
                             <Router>
                                 <Routes/>

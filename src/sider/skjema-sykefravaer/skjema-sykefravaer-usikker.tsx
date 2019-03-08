@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Skjema from '../../komponenter/skjema/skjema';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { endreSvarAction, resetSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
 import { hentSvar, Svar, UtdanningSvar } from '../../ducks/svar-utils';
 import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
@@ -9,13 +9,14 @@ import { MatchProps } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { InjectedIntlProps } from 'react-intl';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
-import { SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
+import { nullStillSporsmalSomIkkeSkalBesvares, SkjemaConfig } from '../../komponenter/skjema/skjema-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import {
     usikkerSporsmaleneConfig
 } from './skjema-sykefravaer-sporsmalene';
 
 interface DispatchProps {
+    resetSvar: (sporsmalId: SporsmalId) => void;
     endreSvar: (sporsmalId: string, svar: Svar) => void;
 }
 
@@ -31,9 +32,10 @@ type Props = DispatchProps & StateProps & InjectedIntlProps & RouteComponentProp
 
 class SkjemaSykefravaerUsikker extends React.Component<Props> {
     render() {
-        const {endreSvar, intl, svarState, location, match, history} = this.props;
+        const {endreSvar, intl, resetSvar, svarState, location, match, history} = this.props;
         const fellesProps = {
             endreSvar: (sporsmalId, svar) => {
+                nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
                 endreSvar(sporsmalId, svar);
             },
             intl: intl,
@@ -62,6 +64,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    resetSvar: (sporsmalId) => dispatch(resetSvarAction(sporsmalId)),
     endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
 });
 
