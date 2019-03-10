@@ -1,58 +1,42 @@
 /*tslint:disable*/
 import * as React from 'react';
-import * as sinon from 'sinon';
-import { expect } from 'chai';
+import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {
-    mountWithStoreRouterAndIntl, promiseWithSetTimeout,
-} from '../../test/test-utils';
-import {
-    Svar,
-} from "../../ducks/svar-utils";
+import {ForventetSvarHvisIngenUtdanning, mountWithStoreRouterAndIntl, promiseWithSetTimeout,} from '../../test/test-utils';
 import {create} from "../../store";
 import SkjemaSykefravaerUsikker from '../../sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
+import {usikkerSporsmaleneConfig} from "./skjema-sykefravaer-sporsmalene";
+import {SporsmalId} from "../../ducks/svar";
 
 enzyme.configure({adapter: new Adapter()});
 
-const dummyProps = {
-    endreSvar: (sporsmalId: string, svar: Svar) => {},
-    resetSvar: (sporsmalId: string) => {},
-};
-
-
-// beforeEach(() => store.dispatch(setInitialState()));
-
 describe('<Skjema />', () => {
 
-    it('Hvis bruker wip.....',
+    it('Hvis svaret er Ingen utdanning skal svarene Utdanning godkjent i Norge og Utdanning bestått settes til INGEN_SVAR',
         () => {
             const store = create();
-            const push = sinon.spy();
+
+            const UtdanningSporsmalId =
+                usikkerSporsmaleneConfig({ dummy: 'dummy' }, 'dummy')
+                    .findIndex((data) => data.id === SporsmalId.utdanning);
             const props = {
                 history: {
-                    push
+                    push: () => {} // dummy
                 },
-                match: { params: { id: 0 }}
+                match: { params: { id: UtdanningSporsmalId}}
             };
 
             const wrapper = mountWithStoreRouterAndIntl(<SkjemaSykefravaerUsikker {...props} />, store);
-            
 
-            wrapper.find(`.inputPanel__field`).at(0).simulate('change'); // klikk på "utdanning INGEN_SVAR"
+            // Klikk på "Ingen utdanning"
+            wrapper.find(`.inputPanel__field`).at(0).simulate('change');
 
-
-            // console.log('wrapper.debug()', wrapper.debug())
-
-
+            // Forventet svar state
             return promiseWithSetTimeout()
                 .then(() => {
-                    console.log('wrapper.debug()', store.getState())
-                    // expect(store.getState().sisteStilling.data.stilling).to.deep.equal(ingenYrkesbakgrunn);
+                    expect(store.getState().svar).to.deep.members(ForventetSvarHvisIngenUtdanning);
                 });
-
         });
-
-
 });
 

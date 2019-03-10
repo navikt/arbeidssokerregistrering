@@ -6,7 +6,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import {
     dispatchAlleSporsmal,
     dispatchNoenSporsmal,
-    dispatchRegistreringstatus, dispatchSykmeldtSporsmal,
+    dispatchRegistreringstatus, dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal,
     mountWithStoreRouterAndIntl,
 } from './test/test-utils';
 import {create} from './store';
@@ -212,17 +212,16 @@ describe('Routes', () => {
 
     });
 
-    it('Skal gå til oppsummering side hvis alle spørsmål flyt Sykmeldt -> Usikker -> Ingen utdanning', () => {
+    it('Skal gå til Du er nå registrert side hvis spørsmalsflyt er Sykmeldt > Usikker > Ingen utdanning > Andre forhold', () => {
         const store = create();
 
         dispatchRegistreringstatus({ registreringType: RegistreringType.SYKMELDT_REGISTRERING }, store);
 
-        dispatchSykmeldtSporsmal(store);
+        dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(store);
 
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [DU_ER_NA_REGISTRERT_PATH]);
 
         expect(wrapper.find(DuErNaRegistrert)).to.have.length(1);
     });
-
 
 });

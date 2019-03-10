@@ -202,33 +202,41 @@ export function dispatchNoenSporsmal(appStore: Store<AppState>) {
 
 }
 
-export function dispatchSykmeldtSporsmal(appStore: Store<AppState>) {
+export const ForventetSvarHvisIngenUtdanning = [
+    {
+        sporsmalId: SporsmalId.utdanning,
+        svar: UtdanningSvar.INGEN_UTDANNING
+    },
+    {
+        sporsmalId: SporsmalId.utdanningGodkjent,
+        svar: UtdanningGodkjentSvar.INGEN_SVAR
+    },
+    {
+        sporsmalId: SporsmalId.utdanningBestatt,
+        svar: UtdanningBestattSvar.INGEN_SVAR
+    }
+];
+
+export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appStore: Store<AppState>) {
 
     [
         {
-            spmId: SporsmalId.fremtidigSituasjon,
+            sporsmalId: SporsmalId.fremtidigSituasjon,
             svar: FremtidigSituasjonSvar.USIKKER
         },
-        {
-            spmId: SporsmalId.utdanning,
-            svar: UtdanningSvar.INGEN_UTDANNING
-        },
-        {
-            spmId: SporsmalId.utdanningGodkjent,
-            svar: UtdanningGodkjentSvar.INGEN_SVAR
-        },
-        {
-            spmId: SporsmalId.utdanningBestatt,
-            svar: UtdanningBestattSvar.INGEN_SVAR
-        },
-        {
-            spmId: SporsmalId.andreForhold,
-            svar: AndreForholdSvar.JA
-        },
-    ].forEach(obj => appStore.dispatch({
+
+    ]
+        .concat(ForventetSvarHvisIngenUtdanning)
+        .concat([
+            {
+                sporsmalId: SporsmalId.andreForhold,
+                svar: AndreForholdSvar.JA
+            }
+        ])
+        .forEach(obj => appStore.dispatch({
         type: SvarActionTypes.AVGI_SVAR,
         data: {
-            sporsmalId: obj.spmId,
+            sporsmalId: obj.sporsmalId,
             svar: obj.svar,
         }
     }));
