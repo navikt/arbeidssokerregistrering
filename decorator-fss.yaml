@@ -11,14 +11,19 @@ proxy:
     baseUrl: "http://internarbeidsflatedecorator"
     pingRequestPath: "/isAlive"
     validateOidcToken: false
+  - contextPath: "/veilarbvisittkortfs"
+    baseUrl: "http://veilarbvisittkortfs"
+    pingRequestPath: "/isAlive"
+    validateOidcToken: false
+  - contextPath: "/veilarbpersonflatefs"
+    baseUrl: "http://veilarbpersonflatefs"
+    pingRequestPath: "/veilarbpersonflatefs/internal/isAlive"
+    validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
     validateOidcToken: false
   - contextPath: "/veilarbperson"
     baseUrl: "http://veilarbperson"
-    validateOidcToken: false
-  - contextPath: "/veilarbveileder"
-    baseUrl: "http://veilarbveileder"
     validateOidcToken: false
   - contextPath: "/veilarbveileder"
     baseUrl: "http://veilarbveileder"

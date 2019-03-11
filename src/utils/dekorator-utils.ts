@@ -37,12 +37,8 @@ const config = (): Config => ({
     },
 });
 
-export default () => {
+export const initialiserToppmeny = (): void => {
     if ((window as any).renderDecoratorHead) {
         (window as any).renderDecoratorHead(config());
     }
-};
-
-export const initialiserToppmeny = (): void => {
-    (window as any).renderDecoratorHead(config());
 };
