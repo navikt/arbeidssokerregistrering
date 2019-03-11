@@ -4,11 +4,11 @@ export enum ActionTypes {
     SETT_KONTEKST = 'SETT_KONTEKST',
 }
 
-type Data = Partial<State>;
+export type Data = Partial<State>;
 
 export interface State {
-    brukerFnr: string | null;
-    veilederEnhetId: string | null;
+    aktivBruker: string | null;
+    aktivEnhet: string | null;
 }
 
 interface Action {
@@ -17,8 +17,8 @@ interface Action {
 }
 
 const initialState: State = {
-    brukerFnr: null,
-    veilederEnhetId: null
+    aktivBruker: null,
+    aktivEnhet: null
 };
 
 export default function (state: State = initialState, action: Action): State {
@@ -38,9 +38,9 @@ export function settFssKontekst(data: Data): Action {
 }
 
 export function selectBrukerFnr(state: AppState): string | null {
-    return state.fssKontekst.brukerFnr;
+    return state.fssKontekst.aktivBruker;
 }
 
 export function selectVeilederEnhetId(state: AppState): string | null {
-    return state.fssKontekst.veilederEnhetId;
+    return state.fssKontekst.aktivEnhet;
 }

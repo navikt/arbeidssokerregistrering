@@ -19,6 +19,9 @@ proxy:
     baseUrl: "http://veilarbpersonflatefs"
     pingRequestPath: "/veilarbpersonflatefs/internal/isAlive"
     validateOidcToken: false
+  - contextPath: "/modiacontextholder"
+    baseUrl: "http://modiacontextholder"
+    validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
     validateOidcToken: false
