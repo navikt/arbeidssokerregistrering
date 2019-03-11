@@ -6,7 +6,7 @@ import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, erIFSS, getIntlMessage, MatchProps } from '../../utils/utils';
+import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
@@ -33,6 +33,7 @@ import epostSvg from './epost.svg';
 import okonomiSvg from './okonomi.svg';
 
 import './fullfor.less';
+import { erIFSS } from '../../utils/fss-utils';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;

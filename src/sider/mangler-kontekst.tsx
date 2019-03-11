@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
+import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/fss-utils';
 import { FeilmeldingManglerEnhetId, FeilmeldingManglerFnr } from '../feilmeldinger';
 
 class ManglerKontekst extends React.Component {

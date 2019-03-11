@@ -1,7 +1,7 @@
 import * as Api from './api';
 import { doThenDispatch, STATUS } from './api-utils';
 import { AppState } from '../reducer';
-import { erIFSS } from '../utils/utils';
+import { erIFSS } from '../utils/fss-utils';
 
 export enum ActionTypes {
     HENT_AUTENTISERINGSINFO_OK = 'HENT_AUTENTISERINGSINFO_OK',

@@ -17,7 +17,7 @@ export function create(): Store<AppState> {
 }
 
 let store: Store<AppState>;
-export default function getStore(): Store<AppState> {
+export function getStore(): Store<AppState> {
     if (!store) {
         store = create();
     }

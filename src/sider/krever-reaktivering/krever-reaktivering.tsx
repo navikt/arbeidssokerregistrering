@@ -9,7 +9,7 @@ import { reaktiverBruker, State as ReaktiverBrukerState } from '../../ducks/reak
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import ReaktiveringFeilhandtering from './feilhandtering/reaktivering-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
-import { erIFSS, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import { DU_ER_NA_REGISTRERT_PATH, DITT_NAV_URL } from '../../utils/konstanter';
 import Banner from '../../komponenter/banner/banner';
 import {
@@ -20,6 +20,7 @@ import {
 import handinfoSvg from './handinfo.svg';
 import './krever-reaktivering.less';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
+import { erIFSS } from '../../utils/fss-utils';
 
 interface State {
     reaktivererBruker: boolean;
