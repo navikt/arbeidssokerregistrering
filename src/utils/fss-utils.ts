@@ -2,6 +2,7 @@ import { parse } from 'query-string';
 import mockedBrukerFnr from '../mocks/bruker-fnr';
 import mockedVeilederEnhetId from '../mocks/veileder-enhet-id';
 import { selectBrukerFnr, selectVeilederEnhetId, settFssKontekst } from '../ducks/fss-kontekst';
+import { Data as FssKontekstData  } from '../ducks/fss-kontekst';
 
 // Grunnen til at vi henter inn store på denne måten er fordi testene vil krasje grunnet circular dependencies hvis
 // modulen blir lastet inn synkront med import
@@ -18,7 +19,7 @@ interface PersonsokEvent extends Event {
 }
 
 export const settPersonIURL = (fodselsnummer: string): void => {
-    const fnr = fodselsnummer ? `fnr=${fodselsnummer}` : '';
+    const fnr = fodselsnummer ? `?fnr=${fodselsnummer}` : '';
     const enhetId = `&enhetId=${hentVeilederEnhetId()}`;
     window.location.pathname = `/${fnr}${enhetId}`;
 };
@@ -27,7 +28,7 @@ export function leggTilBrukerFnrEndretListener(): void {
     document.addEventListener(
         'dekorator-hode-personsok', (event: PersonsokEvent) => {
             settPersonIURL(event.fodselsnummer);
-            getStore().dispatch(settFssKontekst({ brukerFnr: event.fodselsnummer }));
+            getStore().dispatch(settFssKontekst({ aktivBruker: event.fodselsnummer }));
         });
 }
 
@@ -41,19 +42,23 @@ export function erIFSS(): boolean {
     return hostname.endsWith('.adeo.no') || hostname.endsWith('.preprod.local');
 }
 
-export function initFssVariabler() {
-    const brukerFnr = hentBrukerFnr();
-    const veilederEnhetId = hentVeilederEnhetId();
-    getStore().dispatch(settFssKontekst({ brukerFnr, veilederEnhetId }));
+export function hentKontekstFraUrl(): FssKontekstData {
+
+    const search = parse(window.location.search);
+    const kontekst: FssKontekstData = {};
+
+    if (search.fnr) {
+        kontekst.aktivBruker = search.fnr;
+    }
+
+    if (search.enhetId) {
+        kontekst.aktivEnhet = search.enhetId;
+    }
+
+    return kontekst;
 }
 
 export function hentBrukerFnr(): string | null {
-
-    const search = parse(window.location.search);
-
-    if (search.fnr) {
-        return search.fnr;
-    }
 
     const state = getStore().getState();
     const storedBrukerFnr = selectBrukerFnr(state);
@@ -70,12 +75,6 @@ export function hentBrukerFnr(): string | null {
 }
 
 export function hentVeilederEnhetId(): string | null {
-
-    const search = parse(window.location.search);
-
-    if (search.enhetId) {
-        return search.enhetId;
-    }
 
     const state = getStore().getState();
     const storedVeilederEnhetId = selectVeilederEnhetId(state);
