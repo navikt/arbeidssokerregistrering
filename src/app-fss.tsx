@@ -12,6 +12,7 @@ import Routes from './routes';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
 import { initialiserToppmeny } from './utils/dekorator-utils';
 import Visitkort from './komponenter/visittkort';
+import HentFssKontekst from './komponenter/hent-fss-kontekst';
 
 class AppFss extends React.Component {
 
@@ -22,14 +23,16 @@ class AppFss extends React.Component {
         return (
             <Provider store={getStore()}>
                 <IntlProvider>
-                    <ManuellRegistreringSjekk>
-                        <Visitkort />
-                        <HentInitialData>
-                            <Router>
-                                <Routes/>
-                            </Router>
-                        </HentInitialData>
-                    </ManuellRegistreringSjekk>
+                    <HentFssKontekst>
+                        <ManuellRegistreringSjekk>
+                            <Visitkort />
+                            <HentInitialData>
+                                <Router>
+                                    <Routes/>
+                                </Router>
+                            </HentInitialData>
+                        </ManuellRegistreringSjekk>
+                    </HentFssKontekst>
                 </IntlProvider>
             </Provider>
         );
