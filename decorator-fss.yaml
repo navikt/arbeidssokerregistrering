@@ -15,6 +15,9 @@ proxy:
   baseUrl: "http://veilarbvisittkortfs"
   pingRequestPath: "/isAlive"
   validateOidcToken: false
+- contextPath: "/modiacontextholder"
+  baseUrl: "http://modiacontextholder"
+  validateOidcToken: false
 - contextPath: "/veilarbregistrering"
   baseUrl: "http://veilarbregistrering"
   validateOidcToken: false
@@ -37,3 +40,4 @@ proxy:
 redirect:
   - from: /veilarbpersonflatefs
     to: {{ VEILARBPERSONFLATEFS_URL }}
+    

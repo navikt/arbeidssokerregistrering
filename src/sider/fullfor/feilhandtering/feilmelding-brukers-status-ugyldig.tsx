@@ -6,7 +6,7 @@ import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker'
 import './feilmelding-brukers-status-ugyldig.less';
 import FeilmeldingManglerArbeidstillatelse
     from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
-import { erIFSS } from '../../../utils/utils';
+import { erIFSS } from '../../../utils/fss-utils';
 import FeilmeldingManglerArbeidstillatelseFss
     from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse-fss';
 

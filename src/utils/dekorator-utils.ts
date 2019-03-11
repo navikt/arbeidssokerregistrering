@@ -1,5 +1,5 @@
 /*tslint:disable*/
-import { hentBrukerFnr, hentVeilederEnhetId } from './utils';
+import { hentBrukerFnr, hentVeilederEnhetId } from './fss-utils';
 
 interface Config {
     config: {

@@ -10,7 +10,7 @@ import { RegistreringType, selectRegistreringstatus } from '../../ducks/registre
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
 
 import './avbryt-modal.less';
-import { erIFSS } from '../../utils/utils';
+import { erIFSS } from '../../utils/fss-utils';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 
 const avbrytSvg = require('./avbryt.svg');

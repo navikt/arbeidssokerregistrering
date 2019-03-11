@@ -1,6 +1,6 @@
 import * as React from 'react';
 import NAVSPA from '../utils/NAVSPA';
-import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
+import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/fss-utils';
 
 interface VisittkortSpaProps {
     enhet?: string;
