@@ -6,8 +6,9 @@ import { START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import {Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { erIFSS, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import './banner.less';
+import { erIFSS } from '../../utils/fss-utils';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;

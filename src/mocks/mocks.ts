@@ -11,7 +11,7 @@ import {
     ordinaerRegistreringRespons,
     sykmeldtRegistreringRespons
 } from './registrerbruker-mock';
-import getStore from '../store';
+import { getStore } from '../store';
 import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
 import svarMock from './svar-mock';
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
