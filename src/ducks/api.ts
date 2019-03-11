@@ -9,6 +9,9 @@ export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/api/feature';
+export const KONTEKST_URL = '/modiacontextholder/api/context';
+export const BRUKER_KONTEKST_URL = '/modiacontextholder/api/context/aktivbruker';
+export const ENHET_KONTEKST_URL = '/modiacontextholder/api/context/aktivenhet';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
@@ -69,6 +72,21 @@ export function startReaktivering() {
     });
 }
 
+export function oppdaterAktivBruker(brukerFnr: string) {
+    return fetchToJson({
+        url: leggTilFnrForFSS(KONTEKST_URL),
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+            method: 'post',
+            body: JSON.stringify({
+                eventType: 'NY_AKTIV_BRUKER',
+                verdi: brukerFnr,
+            })
+        }
+    });
+}
+
 export function hentBrukersNavn() {
     return fetchToJson({
         url: leggTilFnrForFSS(VEILARBPERSON_NAVN_URL),
@@ -119,6 +137,26 @@ export function hentStillingMedStyrk08(sokestreng: string) {
             headers: getHeaders()
         },
         recoverWith: () => ({'typeaheadYrkeList': []})
+    });
+}
+
+export function hentBrukerIKontekst() {
+    return fetchToJson({
+        url: BRUKER_KONTEKST_URL,
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
+    });
+}
+
+export function hentEnhetIKontekst() {
+    return fetchToJson({
+        url: ENHET_KONTEKST_URL,
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
     });
 }
 
