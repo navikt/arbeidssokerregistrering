@@ -1,4 +1,4 @@
-// tslint:disable no-any
+// tslint:disable
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
@@ -16,7 +16,7 @@ import {ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 import {
     AndreForholdSvar,
     FremtidigSituasjonSvar,
-    IngenSvar,
+    IngenSvar, Svar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
     UtdanningSvar
@@ -219,13 +219,18 @@ export const ForventetSvarHvisIngenUtdanning = [
 
 export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appStore: Store<AppState>) {
 
-    [
-        {
-            sporsmalId: SporsmalId.fremtidigSituasjon,
-            svar: FremtidigSituasjonSvar.USIKKER
-        },
+    const sporsmalene: {
+        sporsmalId: SporsmalId,
+        svar: Svar
+    }[] = [];
 
-    ]
+    sporsmalene
+        .concat([
+            {
+                sporsmalId: SporsmalId.fremtidigSituasjon,
+                svar: FremtidigSituasjonSvar.USIKKER
+            }
+        ])
         .concat(ForventetSvarHvisIngenUtdanning)
         .concat([
             {
@@ -234,11 +239,10 @@ export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appSto
             }
         ])
         .forEach(obj => appStore.dispatch({
-        type: SvarActionTypes.AVGI_SVAR,
-        data: {
-            sporsmalId: obj.sporsmalId,
-            svar: obj.svar,
-        }
-    }));
-
+            type: SvarActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId: obj.sporsmalId,
+                svar: obj.svar,
+            }
+        }));
 }
