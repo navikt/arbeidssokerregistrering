@@ -1,10 +1,18 @@
 import 'idempotent-babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { FNR_STORAGE_KEY, initFssVariabler, settPersonIURL } from './utils/utils';
 import App from './app';
 import './polyfills/polyfill';
 import './index.less';
+import * as moment from 'moment';
+import 'moment/locale/nb';
+import Modal from 'react-modal';
+import { erIFSS } from './utils/fss-utils';
+import AppFss from './app-fss';
+
+moment.locale('nb');
+
+Modal.setAppElement('#root');
 
 if (process.env.REACT_APP_MOCK) {
     console.log('=========================='); /*tslint:disable-line:no-console*/
@@ -28,21 +36,7 @@ if (process.env.REACT_APP_MOCK) {
     require('./mocks/mocks');
 }
 
-initFssVariabler();
-
-interface PersonsokEvent extends Event {
-    fodselsnummer: string;
-}
-
-document.addEventListener(
-    'dekorator-hode-personsok',
-    (event: PersonsokEvent) => {
-        settPersonIURL(event.fodselsnummer);
-        window.sessionStorage.setItem(FNR_STORAGE_KEY, event.fodselsnummer);
-    }
-);
-
 ReactDOM.render(
-  <App />,
+  erIFSS() ? <AppFss/> : <App />,
   document.getElementById('root') as HTMLElement
 );

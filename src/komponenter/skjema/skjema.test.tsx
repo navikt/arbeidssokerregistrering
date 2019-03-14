@@ -26,7 +26,7 @@ import AndreForhold from "../../sider/skjema-registrering/sporsmal/sporsmal-andr
 import {RouteComponentProps} from "react-router";
 import {MatchProps} from "../../utils/utils";
 import {AppState} from "../../reducer";
-import getStore from "../../store";
+import { getStore } from "../../store";
 import {Store} from "redux";
 import AvbrytModal from "../avbryt-modal/avbryt-modal";
 

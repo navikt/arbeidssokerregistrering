@@ -2,7 +2,7 @@ import { Dispatch } from 'react-redux';
 import { AppState } from '../reducer';
 import ActionType from './actions';
 import { ThunkAction } from 'redux-thunk';
-import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
+import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from '../utils/fss-utils';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',

@@ -7,11 +7,12 @@ import { erIE } from '../../utils/ie-test';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { erIFSS, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import RegistrertAksjonspanel from './aksjonspanel/registrert-aksjonspanel';
 import RegistrertSendVidere from './send-videre-fss/registrert-send-videre';
 import './registrert.less';
+import { erIFSS } from '../../utils/fss-utils';
 
 interface StateProps {
     state: AppState;

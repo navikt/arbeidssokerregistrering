@@ -9,6 +9,7 @@ import logger, { State as LoggerState } from './ducks/logger';
 import autentiseringsInfo, {State as AutentiseringsInfoState } from './ducks/autentiseringsinfo';
 import sisteStillingFraAAReg, {State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import featureToggles, {State as FeatureTogglesState } from './ducks/feature-toggles';
+import fssKontekst, {State as FssKontekstState } from './ducks/fss-kontekst';
 import oversettelseAvStillingFraAAReg, {
     State as OversettelseAvStillingFraAARegState
 } from './ducks/oversettelse-av-stilling-fra-aareg';
@@ -29,7 +30,7 @@ export interface AppState {
     form: FieldState;
     featureToggles: FeatureTogglesState;
     logger: LoggerState;
-
+    fssKontekst: FssKontekstState;
 }
 
 export default combineReducers<AppState>({
@@ -44,5 +45,6 @@ export default combineReducers<AppState>({
     defaultStilling,
     sisteStilling,
     featureToggles,
-    logger
+    logger,
+    fssKontekst
 });
