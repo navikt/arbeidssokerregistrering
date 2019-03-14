@@ -16,10 +16,11 @@ import HentFssKontekst from './komponenter/hent-fss-kontekst';
 
 class AppFss extends React.Component {
 
-    render() {
-
+    componentWillMount() {
         initialiserToppmeny();
+    }
 
+    render() {
         return (
             <Provider store={getStore()}>
                 <IntlProvider>
