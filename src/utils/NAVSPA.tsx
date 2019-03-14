@@ -2,17 +2,19 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import SpaFeil from '../komponenter/spa-feil/spa-feil';
 import SpaMock from '../komponenter/spa-mock/spa-mock';
+import RetryInterval from './retry-interval';
 
 // tslint:disable no-any
 
 interface NAVSPAScope {
     [name: string]: NAVSPAApp;
 }
-type NAVSPAApp = (element: HTMLElement, props: any) => void;
 
 interface State {
     hasError: boolean;
 }
+
+type NAVSPAApp = (element: HTMLElement, props: any) => void;
 
 export default class NAVSPA {
 
@@ -21,27 +23,18 @@ export default class NAVSPA {
     public static importer<PROPS>(name: string): React.ComponentType<PROPS> {
         class NAVSPAImporter extends React.Component<PROPS, State> {
 
-            private el?: HTMLElement;
+            state = { hasError: false };
 
-            constructor(props: PROPS) {
-                super(props);
-                this.state = {
-                    hasError: false,
-                };
-            }
+            private el?: HTMLElement;
+            private retryInterval?: RetryInterval;
 
             public componentDidCatch(error: Error) {
                 this.setState({ hasError: true });
             }
 
             public componentDidMount() {
-                try {
-                    if (this.el) {
-                        NAVSPA.scope[name](this.el, this.props);
-                    }
-                } catch (e) {
-                    this.setState({ hasError: true });
-                }
+                this.retryInterval = new RetryInterval(this.initHandler);
+                this.retryInterval.start();
             }
 
             public componentWillUnmount() {
@@ -65,6 +58,21 @@ export default class NAVSPA {
             private saveRef = (el: HTMLDivElement) => {
                 this.el = el;
             }
+
+            private initHandler = (retryInterval: RetryInterval) => {
+                try {
+                    if (this.el) {
+                        NAVSPA.scope[name](this.el, this.props);
+                        retryInterval.stop();
+                    }
+                } catch (e) {
+                    retryInterval.decreaseRetry();
+                    if (!retryInterval.hasMoreRetries()) {
+                        this.setState({ hasError: true });
+                    }
+                }
+            }
+
         }
 
         return NAVSPAImporter;
