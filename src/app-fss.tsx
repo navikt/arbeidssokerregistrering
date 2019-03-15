@@ -12,28 +12,28 @@ import Routes from './routes';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
 import { initialiserToppmeny } from './utils/dekorator-utils';
 import Visitkort from './komponenter/visittkort';
-import HentFssKontekst from './komponenter/hent-fss-kontekst';
+import { initSessionKontekst, setExpirationOnWindowUnload } from './utils/fss-utils';
 
 class AppFss extends React.Component {
 
     componentWillMount() {
+        initSessionKontekst();
         initialiserToppmeny();
+        setExpirationOnWindowUnload();
     }
 
     render() {
         return (
             <Provider store={getStore()}>
                 <IntlProvider>
-                    <HentFssKontekst>
-                        <ManuellRegistreringSjekk>
-                            <Visitkort />
-                            <HentInitialData>
-                                <Router>
-                                    <Routes/>
-                                </Router>
-                            </HentInitialData>
-                        </ManuellRegistreringSjekk>
-                    </HentFssKontekst>
+                    <ManuellRegistreringSjekk>
+                        <Visitkort />
+                        <HentInitialData>
+                            <Router>
+                                <Routes/>
+                            </Router>
+                        </HentInitialData>
+                    </ManuellRegistreringSjekk>
                 </IntlProvider>
             </Provider>
         );
