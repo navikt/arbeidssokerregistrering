@@ -5,18 +5,29 @@ import LenkeMedChevron from '../../komponenter/lenke-med-chevron/lenke-med-chevr
 import { InjectedIntlProps } from 'react-intl';
 import Feilmelding from './feilmelding';
 import utropstegnSvg from '../../sider/fullfor/utropstegn.svg';
+import { erIFSS } from '../../utils/fss-utils';
+import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 import './feilmelding-mangler-arbeidstillatelse.less';
 
 const FeilmeldingManglerArbeidstillatelse: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
-    const lenkeUrl = props.intl.messages['finn-ditt-nav-kontor-lenke-url'];
+
+    let innholdId = 'feilmelding-mangler-arbeidstillatelse-innhold';
+    let lenkeTekstId = 'feilmelding-mangler-arbeidstillatelse-lenke-tekst';
+    let lenkeUrl = props.intl.messages['finn-ditt-nav-kontor-lenke-url'];
+
+    if (erIFSS()) {
+        innholdId += '-fss';
+        lenkeTekstId += '-fss';
+        lenkeUrl = lagAktivitetsplanUrl();
+    }
 
     return (
         <Feilmelding bilde={utropstegnSvg} className="feilmelding-mangler-arbeidstillatelse">
             <Normaltekst className="blokk-s">
-                <FormattedMessage id="feilmelding-mangler-arbeidstillatelse-innhold"/>
+                <FormattedMessage id={innholdId}/>
             </Normaltekst>
             <LenkeMedChevron path={lenkeUrl}>
-                <FormattedMessage id="feilmelding-mangler-arbeidstillatelse-lenke-tekst"/>
+                <FormattedMessage id={lenkeTekstId}/>
             </LenkeMedChevron>
         </Feilmelding>
     );

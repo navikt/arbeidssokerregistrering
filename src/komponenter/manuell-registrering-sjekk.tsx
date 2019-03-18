@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from '../utils/utils';
+import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from '../utils/fss-utils';
 import ManglerKontekst from '../sider/mangler-kontekst';
 
 class ManuellRegistreringSjekk extends React.Component {

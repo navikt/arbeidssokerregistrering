@@ -1,5 +1,6 @@
 /*tslint:disable*/
-import { hentBrukerFnr, hentVeilederEnhetId } from './utils';
+import { hentBrukerFnr, hentVeilederEnhetId } from './fss-utils';
+import RetryInterval from './retry-interval';
 
 interface Config {
     config: {
@@ -38,7 +39,12 @@ const config = (): Config => ({
 });
 
 export const initialiserToppmeny = (): void => {
-    if ((window as any).renderDecoratorHead) {
-        (window as any).renderDecoratorHead(config());
-    }
+    new RetryInterval((retryInterval: RetryInterval) => {
+        if ((window as any).renderDecoratorHead) {
+            (window as any).renderDecoratorHead(config());
+            retryInterval.stop();
+        } else {
+            retryInterval.decreaseRetry();
+        }
+    }).start();
 };

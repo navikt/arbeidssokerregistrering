@@ -15,9 +15,8 @@ proxy:
     baseUrl: "http://veilarbvisittkortfs"
     pingRequestPath: "/isAlive"
     validateOidcToken: false
-  - contextPath: "/veilarbpersonflatefs"
-    baseUrl: "http://veilarbpersonflatefs"
-    pingRequestPath: "/veilarbpersonflatefs/internal/isAlive"
+  - contextPath: "/modiacontextholder"
+    baseUrl: "http://modiacontextholder"
     validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
@@ -37,3 +36,7 @@ proxy:
     baseUrl: "https://tjenester.nav.no"
     pingRequestPath: "/pam-janzz/isAlive"
     validateOidcToken: false
+
+redirect:
+  - from: /veilarbpersonflatefs
+    to: {{ VEILARBPERSONFLATEFS_URL }}

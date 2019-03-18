@@ -5,18 +5,26 @@ import brukersNavn from './brukers-navn-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg-mock';
 import {featureTogglesMock} from './feature-toggles-mock';
-import { FEATURE_URL, VEILARBPERSON_NAVN_URL, VEILARBREGISTRERING_URL } from '../ducks/api';
+import {
+    BRUKER_KONTEKST_URL,
+    ENHET_KONTEKST_URL,
+    FEATURE_URL, OPPDATER_KONTEKST_URL,
+    VEILARBPERSON_NAVN_URL,
+    VEILARBREGISTRERING_URL
+} from '../ducks/api';
 import autentisert from './autentiseringsinfo-mock';
 import {
     ordinaerRegistreringRespons,
     sykmeldtRegistreringRespons
 } from './registrerbruker-mock';
-import getStore from '../store';
+import { getStore } from '../store';
 import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
 import svarMock from './svar-mock';
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
+import brukerKontekst from './fss-bruker-kontekst';
+import enhetKontekst from './fss-enhet-kontekst';
 
 export const MOCK_START_REGISRERING_STATUS = true;
 export const MOCK_REGISTRER_BRUKER = true;
@@ -28,6 +36,9 @@ export const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
 export const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 export const MOCK_STYRK08_PAMJANZZ = true;
 export const MOCK_FEATURE_TOGGLES = true;
+export const MOCK_BRUKER_KONTEKST = true;
+export const MOCK_ENHET_KONTEKST = true;
+export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
 export const PRINT_FRONTENDLOGGER = true;
 export const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false;
 // Dette dispatcher svarene _før_ noe annet skjer,
@@ -90,6 +101,22 @@ if (MOCK_REGISTRER_BRUKER) {
 if (MOCK_REAKTIVER_BRUKER) {
     const response = respondWith(delayed(DELAY, {}, 200));
     (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startreaktivering*`, response);
+}
+
+
+if (MOCK_BRUKER_KONTEKST) {
+    const response = respondWith(delayed(DELAY, brukerKontekst, 200));
+    (mock as any).get(`glob:${BRUKER_KONTEKST_URL}`, response);
+}
+
+if (MOCK_ENHET_KONTEKST) {
+    const response = respondWith(delayed(DELAY, enhetKontekst, 200));
+    (mock as any).get(`glob:${ENHET_KONTEKST_URL}`, response);
+}
+
+if (MOCK_OPPDATER_BRUKER_KONTEKST) {
+    const response = respondWith(delayed(DELAY, {}, 200));
+    (mock as any).post(`glob:${OPPDATER_KONTEKST_URL}`, response);
 }
 
 if (DISPATCH_BESVARELSE) {

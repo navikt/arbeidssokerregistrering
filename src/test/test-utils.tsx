@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import { shallowWithIntl } from 'enzyme-react-intl';
-import getStore from '../store';
+import { getStore } from '../store';
 import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
 import {Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
