@@ -16,7 +16,7 @@ import {ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 import {
     AndreForholdSvar,
     FremtidigSituasjonSvar,
-    IngenSvar, Svar,
+    IngenSvar, Svar, TilbakeIArbeidSvar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
     UtdanningSvar
@@ -236,6 +236,35 @@ export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appSto
             {
                 sporsmalId: SporsmalId.andreForhold,
                 svar: AndreForholdSvar.JA
+            }
+        ])
+        .forEach(obj => appStore.dispatch({
+            type: SvarActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId: obj.sporsmalId,
+                svar: obj.svar,
+            }
+        }));
+}
+
+export function dispatchSykmeldtJegSkaltilbakeTilJobbenJegHarFullStilling(appStore: Store<AppState>) {
+
+    const sporsmalene: {
+        sporsmalId: SporsmalId,
+        svar: Svar
+    }[] = [];
+
+    sporsmalene
+        .concat([
+            {
+                sporsmalId: SporsmalId.fremtidigSituasjon,
+                svar: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER
+            }
+        ])
+        .concat([
+            {
+                sporsmalId: SporsmalId.tilbakeIArbeid,
+                svar: TilbakeIArbeidSvar.JA_FULL_STILLING
             }
         ])
         .forEach(obj => appStore.dispatch({

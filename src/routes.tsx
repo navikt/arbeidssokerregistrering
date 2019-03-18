@@ -68,7 +68,7 @@ class Routes extends React.Component<AllProps> {
 
     kommerFraSykefravaer() {
         const { registreringstatusData, location } = this.props;
-        const erFraSykefravaer = parse(location.search).fraSykefravaer;
+        const erFraSykefravaer = parse(location.search).fraSykefravaer === 'true';
 
         return registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
             erFraSykefravaer && location.pathname === START_PATH;
