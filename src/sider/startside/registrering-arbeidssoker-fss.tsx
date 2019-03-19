@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
-import './registrering-arbeidssoker-fss.less';
-import { Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import aktplanbilde from './aktivitetsplan-ill.svg';
 import paragrafbilde from './paragraf.svg';
@@ -10,6 +9,7 @@ import infobilde from './info.svg';
 import { MatchProps } from '../../utils/utils';
 import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
+import './registrering-arbeidssoker.less';
 
 type RegistreringArbeidssokerProps =  RouteComponentProps<MatchProps>;
 
@@ -78,22 +78,29 @@ class RegistreringArbeidssokerFss extends React.Component<RegistreringArbeidssok
                     <Normaltekst>
                         <FormattedMessage id="registrering-arbeidssoker.rad3.del1-fss"/>
                     </Normaltekst>
-                    <ul className="typo-normal">
-                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt1-fss"/></li>
-                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt2-fss"/></li>
-                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt3-fss"/></li>
-                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4-fss"/></li>
-                        <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt5-fss"/></li>
-                    </ul>
                     <Normaltekst>
+                        <FormattedHTMLMessage id="registrering-arbeidssoker.rad3.opplysninger-fss"/>
+                    </Normaltekst>
+                    <Normaltekst className="blokk-l" tag="div">
                         <FormattedMessage id="registrering-arbeidssoker.rad3.del2-fss"/>
                     </Normaltekst>
 
-                    <Normaltekst>
-                        <a className="lenke" href="https://www.nav.no/personvern">
-                            <FormattedMessage id="registrering.personopplysninger.lenke"/>
-                        </a>&nbsp;
-                        <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold-fss"/><br/>
+                    <Element tag="h3">
+                        <FormattedMessage id="registrering-arbeidssoker.rad3.del3-tittel-fss"/>
+                    </Element>
+                    <Normaltekst className="blokk-l" tag="div">
+                        <FormattedHTMLMessage id="registrering-arbeidssoker.rad3.del3-innhold-fss"/>
+                    </Normaltekst>
+
+                    <Element tag="h3">
+                        <FormattedMessage id="registrering-arbeidssoker.rad3.del4-tittel-fss"/>
+                    </Element>
+                    <Normaltekst className="blokk-l" tag="div">
+                        <FormattedHTMLMessage id="registrering-arbeidssoker.rad3.del4-innhold-fss"/>
+                    </Normaltekst>
+
+                    <Normaltekst className="registrering-arbeidssoker__rad3--tips" tag="div">
+                        <FormattedHTMLMessage id="registrering-arbeidssoker.rad3.tips-fss"/>
                     </Normaltekst>
                 </div>
             </div>
@@ -102,25 +109,25 @@ class RegistreringArbeidssokerFss extends React.Component<RegistreringArbeidssok
 
     Rad4 = () => {
         return(
-            <div>
+            <>
                 <div className="rad4__knapperad">
                     <KnappBase
                         type="hoved"
                         onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
                         data-testid="start-arbeidssoker-registrering-fss"
                     >
-                        <FormattedMessage id="startside-arbeidssoker-fss-knapp"/>
+                        <FormattedMessage id="registrering-arbeidssoker-knapp-fss"/>
                     </KnappBase>
                 </div>
                 <LenkeAvbryt />
-            </div>
+            </>
         );
     }
-    
+
     render() {
 
         return (
-            <div className="registrering-arbeidssoker-fss">
+            <div className="registrering-arbeidssoker">
                 <this.Rad1/>
                 <this.Rad2/>
                 <this.Rad3/>

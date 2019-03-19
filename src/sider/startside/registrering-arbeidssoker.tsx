@@ -168,7 +168,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
                             data-testid="start-registrering"
                         >
-                            <FormattedMessage id="startside-ordinaer-knapp"/>
+                            <FormattedMessage id="registrering-arbeidssoker-knapp"/>
                         </KnappBase>
                     </div>
                 </div>
