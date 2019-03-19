@@ -28,9 +28,7 @@ import DuErNaRegistrert from './sider/registrert/registrert';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
-
-import RegistreringArbeidssokerSykmeldt from "./sider/startside/registrering-sykmeldt";
-
+import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-sykmeldt';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -179,7 +177,7 @@ describe('Routes', () => {
 
     /* Overgang fra Syfo sykmeldte */
 
-    it('Skal redirecte til Starside for sykmeldte dersom bruker er sykmeldt', () => {
+    it('Skal redirecte til Startside for sykmeldte dersom bruker er sykmeldt', () => {
 
         const store = create();
 

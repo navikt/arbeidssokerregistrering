@@ -75,6 +75,7 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
         };
 
         const Rad2 = () => {
+            const { isModalOpen } = this.state;
             return (
                 <div className="registrering-sykmeldt__rad2">
                     <Innholdstittel tag="h2" className="rad__tittel">
@@ -92,10 +93,12 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
                         </Normaltekst>
                         <img className="rad2__ikon" src={merVeiledningSvg} alt="" />
                     </div>
-                    <InformasjonModal
-                        isOpen={this.state.isModalOpen}
-                        onRequestClose={this.handleModalLukkeknappClicked}
-                    />
+                    { isModalOpen &&
+                        <InformasjonModal
+                            isOpen={this.state.isModalOpen}
+                            onRequestClose={this.handleModalLukkeknappClicked}
+                        />
+                    }
                 </div>
             );
         };
