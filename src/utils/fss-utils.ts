@@ -2,6 +2,7 @@ import { parse } from 'query-string';
 import mockedBrukerFnr from '../mocks/bruker-fnr';
 import mockedVeilederEnhetId from '../mocks/veileder-enhet-id';
 import { hentBrukerIKontekst, oppdaterAktivBruker } from '../ducks/api';
+import { lagAktivitetsplanUrl } from './url-utils';
 
 interface PersonsokEvent extends Event {
     fodselsnummer: string;
@@ -11,6 +12,15 @@ const EXPIRES_AFTER = 10000; // ms
 const BRUKER_FNR_TAG = 'FSS_KONTEKST_BRUKER_FNR';
 const ENHET_ID_TAG = 'FSS_KONTEKST_ENHET_ID';
 const EXPIRES_AT_TAG = 'FSS_KONTEKST_EXPIRES_AT';
+
+/*
+    Forklaring bak lagring av kontekst:
+
+    Når brukere blir manuelt registrert, så skal applikasjonen huske brukeren på tvers av page reloads,
+    men hvis brukeren kommer tilbake til arbeidssokerregistrering senere, så skal ikke brukeren ligge i kontekst lenger.
+    Dette kan bli løst ved å ha enhetId og fnr som query params under hele registreringen, men siden dette fører til
+    mange små endringer i hele applikasjonen, så blir heller session storage med en expire mekansime brukt.
+*/
 
 function settSessionBrukerFnr(fnr: string) {
     window.sessionStorage.setItem(BRUKER_FNR_TAG, fnr);
@@ -33,7 +43,6 @@ function hentSessionEnhetId(): string | null {
 export function setExpirationOnWindowUnload(): void {
     window.onbeforeunload = function() {
         setSessionExpiration();
-        // return undefined;
     };
 }
 
@@ -80,17 +89,10 @@ export function initSessionKontekst(): void {
     oppdaterModiaKontekst();
 }
 
-export function settPersonIURL(fodselsnummer: string): void {
-    const fnr = fodselsnummer ? `?fnr=${fodselsnummer}` : '';
-    const enhetId = `&enhetId=${hentVeilederEnhetId()}`;
-    window.location.pathname = `/${fnr}${enhetId}`;
-}
-
 export function leggTilBrukerFnrEndretListener(): void {
     document.addEventListener(
         'dekorator-hode-personsok', (event: PersonsokEvent) => {
-            settPersonIURL(event.fodselsnummer);
-            settSessionBrukerFnr(event.fodselsnummer);
+            window.location.href = lagAktivitetsplanUrl(event.fodselsnummer);
         });
 }
 

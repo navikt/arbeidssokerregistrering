@@ -12,11 +12,12 @@ import Routes from './routes';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
 import { initialiserToppmeny } from './utils/dekorator-utils';
 import Visitkort from './komponenter/visittkort';
-import { initSessionKontekst, setExpirationOnWindowUnload } from './utils/fss-utils';
+import { initSessionKontekst, leggTilBrukerFnrEndretListener, setExpirationOnWindowUnload } from './utils/fss-utils';
 
 class AppFss extends React.Component {
 
     componentWillMount() {
+        leggTilBrukerFnrEndretListener();
         initSessionKontekst();
         initialiserToppmeny();
         setExpirationOnWindowUnload();
