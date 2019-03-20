@@ -23,13 +23,13 @@ interface Props {
     brukersNavn: BrukersNavnState;
 }
 
-type RegistreringArbeidssokerSykmeldtProps = Props & RouteComponentProps<MatchProps>;
+type RegistreringArbeidssokerSykmeldtFssProps = Props & RouteComponentProps<MatchProps>;
 
 interface State {
     isModalOpen: boolean;
 }
 
-class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbeidssokerSykmeldtProps, State> {
+class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringArbeidssokerSykmeldtFssProps, State> {
 
     state = {
         isModalOpen: false
@@ -152,4 +152,4 @@ const mapStateToProps = (state: AppState) => ({
     brukersNavn: selectBrukersNavn(state),
 });
 
-export default connect(mapStateToProps)(withRouter(RegistreringArbeidssokerSykmeldt));
+export default connect(mapStateToProps)(withRouter(RegistreringArbeidssokerSykmeldtFss));

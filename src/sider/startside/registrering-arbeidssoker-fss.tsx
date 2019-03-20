@@ -11,9 +11,7 @@ import { SKJEMA_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import './registrering-arbeidssoker.less';
 
-type RegistreringArbeidssokerProps =  RouteComponentProps<MatchProps>;
-
-class RegistreringArbeidssokerFss extends React.Component<RegistreringArbeidssokerProps> {
+class RegistreringArbeidssokerFss extends React.Component<RouteComponentProps<MatchProps>> {
 
     Rad1 = () => {
         return (

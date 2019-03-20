@@ -29,14 +29,9 @@ interface State {
 
 class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerProps, State> {
 
-    constructor(props: RegistreringArbeidssokerProps) {
-        super(props);
-
-        this.state = {
-            isModalOpen: false
-        };
-
-    }
+    state = {
+        isModalOpen: false
+    };
 
     handleSeVideoBtnClicked = () => {
         this.setState({isModalOpen: true});
