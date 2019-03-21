@@ -1,4 +1,4 @@
-// tslint:disable no-any
+// tslint:disable
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
@@ -13,7 +13,14 @@ import { MemoryRouter } from 'react-router';
 import * as H from 'history';
 import {ActionTypes as SisteStillingActionTypes, annenStilling } from '../ducks/siste-stilling';
 import {ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
-import { IngenSvar } from '../ducks/svar-utils';
+import {
+    AndreForholdSvar,
+    FremtidigSituasjonSvar,
+    IngenSvar, Svar,
+    UtdanningBestattSvar,
+    UtdanningGodkjentSvar,
+    UtdanningSvar
+} from '../ducks/svar-utils';
 
 export const store = getStore();
 
@@ -193,4 +200,49 @@ export function dispatchNoenSporsmal(appStore: Store<AppState>) {
         }
     }));
 
+}
+
+export const ForventetSvarHvisIngenUtdanning = [
+    {
+        sporsmalId: SporsmalId.utdanning,
+        svar: UtdanningSvar.INGEN_UTDANNING
+    },
+    {
+        sporsmalId: SporsmalId.utdanningGodkjent,
+        svar: UtdanningGodkjentSvar.INGEN_SVAR
+    },
+    {
+        sporsmalId: SporsmalId.utdanningBestatt,
+        svar: UtdanningBestattSvar.INGEN_SVAR
+    }
+];
+
+export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appStore: Store<AppState>) {
+
+    const sporsmalene: {
+        sporsmalId: SporsmalId,
+        svar: Svar
+    }[] = [];
+
+    sporsmalene
+        .concat([
+            {
+                sporsmalId: SporsmalId.fremtidigSituasjon,
+                svar: FremtidigSituasjonSvar.USIKKER
+            }
+        ])
+        .concat(ForventetSvarHvisIngenUtdanning)
+        .concat([
+            {
+                sporsmalId: SporsmalId.andreForhold,
+                svar: AndreForholdSvar.JA
+            }
+        ])
+        .forEach(obj => appStore.dispatch({
+            type: SvarActionTypes.AVGI_SVAR,
+            data: {
+                sporsmalId: obj.sporsmalId,
+                svar: obj.svar,
+            }
+        }));
 }

@@ -48,7 +48,7 @@ class SkjemaSykefravaerUsikker extends React.Component<Props> {
 
         return (
             <Skjema
-                config={skjemaFlytUsikker}
+                config={skjemaFlytUsikker} // TODO lag test som fanger opp endring her
                 baseUrl={`${SKJEMA_SYKEFRAVAER_PATH}/4`}
                 endUrl={OPPSUMMERING_PATH}
                 {...{location, match, history}}

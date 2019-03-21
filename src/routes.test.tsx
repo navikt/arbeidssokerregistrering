@@ -6,7 +6,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import {
     dispatchAlleSporsmal,
     dispatchNoenSporsmal,
-    dispatchRegistreringstatus,
+    dispatchRegistreringstatus, dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal,
     mountWithStoreRouterAndIntl,
 } from './test/test-utils';
 import {create} from './store';
@@ -28,9 +28,7 @@ import DuErNaRegistrert from './sider/registrert/registrert';
 import Inngangssporsmal from './sider/skjema-sykefravaer/inngangssporsmal';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruker';
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
-
-import RegistreringArbeidssokerSykmeldt from "./sider/startside/registrering-sykmeldt";
-
+import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-sykmeldt';
 
 enzyme.configure({adapter: new Adapter()});
 
@@ -177,7 +175,9 @@ describe('Routes', () => {
 
     });
 
-    it('Skal redirecte til Starside for sykmeldte dersom bruker er sykmeldt', () => {
+    /* Overgang fra Syfo sykmeldte */
+
+    it('Skal redirecte til Startside for sykmeldte dersom bruker er sykmeldt', () => {
 
         const store = create();
 
@@ -208,6 +208,18 @@ describe('Routes', () => {
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, ["/start?fraSykefravaer=true"]);
         expect(wrapper.find(Inngangssporsmal)).to.have.length(1);
 
+    });
+
+    it('Skal gå til Du er nå registrert side hvis spørsmalsflyt er Sykmeldt > Usikker > Ingen utdanning > Andre forhold', () => {
+        const store = create();
+
+        dispatchRegistreringstatus({ registreringType: RegistreringType.SYKMELDT_REGISTRERING }, store);
+
+        dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [DU_ER_NA_REGISTRERT_PATH]);
+
+        expect(wrapper.find(DuErNaRegistrert)).to.have.length(1);
     });
 
 });

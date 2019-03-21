@@ -46,9 +46,9 @@ import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 import { setInngangSykefravaerAction } from './ducks/logger';
 import { erIFSS } from './utils/fss-utils';
+import RegistreringArbeidssokerSykmeldtFss from './sider/startside/registrering-sykmeldt-fss';
 import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-sykmeldt';
 import RegistreringArbeidssokerFss from './sider/startside/registrering-arbeidssoker-fss';
-import StartsideRegistreringSykemeldtFss from './sider/startside/startside-registrering-sykemeldt-fss';
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
 
 interface StateProps {
@@ -149,7 +149,7 @@ class Routes extends React.Component<AllProps> {
                             <Switch>
                                 <Route
                                     path={START_PATH}
-                                    component={erIFSS() ? StartsideRegistreringSykemeldtFss :
+                                    component={erIFSS() ? RegistreringArbeidssokerSykmeldtFss :
                                                 RegistreringArbeidssokerSykmeldt}
                                 />
                                 {klarForFullforing ?
