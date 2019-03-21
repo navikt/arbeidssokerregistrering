@@ -11,10 +11,13 @@ export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/api/feature';
 export const OPPDATER_KONTEKST_URL = '/modiacontextholder/api/context';
 export const BRUKER_KONTEKST_URL = '/modiacontextholder/api/context/aktivbruker';
-export const ENHET_KONTEKST_URL = '/modiacontextholder/api/context/aktivenhet';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
+
+interface BrukerIKontekstData {
+    aktivBruker: string;
+}
 
 export const getCookie = name => {
     const re = new RegExp(`${name}=([^;]+)`);
@@ -141,18 +144,8 @@ export function hentStillingMedStyrk08(sokestreng: string) {
 }
 
 export function hentBrukerIKontekst() {
-    return fetchToJson({
+    return fetchToJson<BrukerIKontekstData>({
         url: BRUKER_KONTEKST_URL,
-        config: {
-            ...MED_CREDENTIALS,
-            headers: getHeaders(),
-        }
-    });
-}
-
-export function hentEnhetIKontekst() {
-    return fetchToJson({
-        url: ENHET_KONTEKST_URL,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
