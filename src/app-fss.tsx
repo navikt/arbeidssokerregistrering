@@ -10,17 +10,28 @@ import './decorator/decorator-mock';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
-import { initialiserToppmeny } from './utils/dekorator-utils';
+import { initToppmeny } from './utils/dekorator-utils';
 import Visitkort from './komponenter/visittkort';
-import { initSessionKontekst, leggTilBrukerFnrEndretListener, setExpirationOnWindowUnload } from './utils/fss-utils';
+import {
+    clearSession,
+    hasSessionExpired,
+    initSessionKontekst,
+    startSetExpirationOnUnloadListener,
+    startBrukerFnrEndretListener
+} from './utils/fss-utils';
 
 class AppFss extends React.Component {
 
     componentWillMount() {
-        leggTilBrukerFnrEndretListener();
+        if (hasSessionExpired()) {
+            clearSession();
+        }
+
+        startBrukerFnrEndretListener();
+        startSetExpirationOnUnloadListener();
+
         initSessionKontekst();
-        initialiserToppmeny();
-        setExpirationOnWindowUnload();
+        initToppmeny();
     }
 
     render() {

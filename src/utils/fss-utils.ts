@@ -1,6 +1,4 @@
 import { parse } from 'query-string';
-import mockedBrukerFnr from '../mocks/bruker-fnr';
-import mockedVeilederEnhetId from '../mocks/veileder-enhet-id';
 import { hentBrukerIKontekst, oppdaterAktivBruker } from '../ducks/api';
 import { lagAktivitetsplanUrl } from './url-utils';
 
@@ -40,21 +38,23 @@ function hentSessionEnhetId(): string | null {
     return hasSessionExpired() ? null : enhetId;
 }
 
-export function setExpirationOnWindowUnload(): void {
+export function startSetExpirationOnUnloadListener(): void {
     window.onbeforeunload = function() {
         setSessionExpiration();
     };
 }
 
-function removeSessionExpiration(): void {
+export function clearSession(): void {
     window.sessionStorage.removeItem(EXPIRES_AT_TAG);
+    window.sessionStorage.removeItem(BRUKER_FNR_TAG);
+    window.sessionStorage.removeItem(ENHET_ID_TAG);
 }
 
 function setSessionExpiration(): void {
     window.sessionStorage.setItem(EXPIRES_AT_TAG, (Date.now() + EXPIRES_AFTER).toString());
 }
 
-function hasSessionExpired(): boolean {
+export function hasSessionExpired(): boolean {
     const expiresAt = window.sessionStorage.getItem(EXPIRES_AT_TAG);
     return expiresAt != null && parseInt(expiresAt, 10) < Date.now();
 }
@@ -85,11 +85,10 @@ export function initSessionKontekst(): void {
         settSessionEnhetId(enhetId);
     }
 
-    removeSessionExpiration();
     oppdaterModiaKontekst();
 }
 
-export function leggTilBrukerFnrEndretListener(): void {
+export function startBrukerFnrEndretListener(): void {
     document.addEventListener(
         'dekorator-hode-personsok', (event: PersonsokEvent) => {
             window.location.href = lagAktivitetsplanUrl(event.fodselsnummer);
@@ -128,9 +127,9 @@ export function hentBrukerFnr(): string | null {
         return fnrFraSession;
     }
 
-    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
-        return mockedBrukerFnr;
-    }
+    // if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+    //     return mockedBrukerFnr;
+    // }
 
     return null;
 }
@@ -149,9 +148,9 @@ export function hentVeilederEnhetId(): string | null {
         return enhetIdFraSession;
     }
 
-    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
-        return mockedVeilederEnhetId;
-    }
+    // if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+    //     return mockedVeilederEnhetId;
+    // }
 
     return null;
 }
