@@ -1,4 +1,6 @@
 import { parse } from 'query-string';
+import mockedBrukerFnr from '../mocks/bruker-fnr';
+import mockedEnhetId from '../mocks/veileder-enhet-id';
 import { hentBrukerIKontekst, oppdaterAktivBruker } from '../ducks/api';
 import { lagAktivitetsplanUrl } from './url-utils';
 
@@ -127,9 +129,9 @@ export function hentBrukerFnr(): string | null {
         return fnrFraSession;
     }
 
-    // if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
-    //     return mockedBrukerFnr;
-    // }
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+        return mockedBrukerFnr;
+    }
 
     return null;
 }
@@ -148,9 +150,9 @@ export function hentVeilederEnhetId(): string | null {
         return enhetIdFraSession;
     }
 
-    // if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
-    //     return mockedVeilederEnhetId;
-    // }
+    if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
+        return mockedEnhetId;
+    }
 
     return null;
 }
