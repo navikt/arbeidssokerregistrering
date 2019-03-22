@@ -7,6 +7,7 @@ import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 import * as _ from 'lodash';
+import { frontendLogger } from '../metrikker/metrics-utils';
 
 export interface Frontendlogger {
     event: (name: string, fields: any, tags: any) => void;
@@ -24,6 +25,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
         loggFeil(action, frontendlogger);
         loggHarStartetRegistrering(action);
         loggRegistreringInngang(store, action, frontendlogger);
+        loggRegistreringInngangFraAAP(store, action, frontendlogger);
     }
     next(action);
 };
@@ -84,6 +86,28 @@ function loggRegistreringInngang(store: any, action: Action, frontendlogger: Fro
     }
 }
 
+function loggRegistreringInngangFraAAP(store: any, action: Action, frontendlogger: Frontendlogger) {
+
+    if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
+        const inngangFraAap = store.getState().logger.data.inngangFraAap;
+        if (inngangFraAap) {
+            if (action.data.registreringType === RegistreringType.ORDINAER_REGISTRERING) {
+                frontendlogger.event('registrering.kommerfra', {
+                    registreringfullfort: true,
+                    type: RegistreringType.ORDINAER_REGISTRERING,
+                    fra: 'AAP'
+                }, {});
+            } else if (action.data.registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
+                frontendlogger.event('registrering.kommerfra', {
+                    registreringfullfort: true,
+                    type: RegistreringType.SYKMELDT_REGISTRERING,
+                    fra: 'AAP'
+                }, {});
+            }
+        }
+    }
+}
+
 function loggFeil(action: Action, frontendlogger: Frontendlogger) {
     feilTyper.map((feil) => {
         if (action.type === feil.type) {
@@ -114,3 +138,25 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
         }
     });
 }
+
+export const loggStartenPaaRegistreringFraAAP = (registreringstatusData) => {
+    if (registreringstatusData.registreringType === RegistreringType.ORDINAER_REGISTRERING) {
+        frontendLogger('registrering.kommerfra', {
+            registreringfullfort: false,
+            type: RegistreringType.ORDINAER_REGISTRERING,
+            fra: 'AAP'
+        }, {});
+    } else if (registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
+        frontendLogger('registrering.kommerfra', {
+            registreringfullfort: false,
+            type: RegistreringType.SYKMELDT_REGISTRERING,
+            fra: 'AAP'
+        }, {});
+    } else if (registreringstatusData.registreringType === RegistreringType.SPERRET) {
+        frontendLogger('registrering.kommerfra', {
+            registreringfullfort: false,
+            type: RegistreringType.SPERRET,
+            fra: 'AAP'
+        }, {});
+    }
+};
