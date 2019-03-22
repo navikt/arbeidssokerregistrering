@@ -25,7 +25,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
         loggFeil(action, frontendlogger);
         loggHarStartetRegistrering(action);
         loggRegistreringInngang(store, action, frontendlogger);
-        loggRegistreringInngangFraAAP(store, action, frontendlogger);
+        loggRegistreringInngangFraAAP(store, action);
     }
     next(action);
 };
@@ -86,24 +86,16 @@ function loggRegistreringInngang(store: any, action: Action, frontendlogger: Fro
     }
 }
 
-function loggRegistreringInngangFraAAP(store: any, action: Action, frontendlogger: Frontendlogger) {
+function loggRegistreringInngangFraAAP(store: any, action: Action) {
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
         const inngangFraAap = store.getState().logger.data.inngangFraAap;
         if (inngangFraAap) {
-            if (action.data.registreringType === RegistreringType.ORDINAER_REGISTRERING) {
-                frontendlogger.event('registrering.kommerfra', {
-                    registreringfullfort: true,
-                    type: RegistreringType.ORDINAER_REGISTRERING,
-                    fra: 'AAP'
-                }, {});
-            } else if (action.data.registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
-                frontendlogger.event('registrering.kommerfra', {
-                    registreringfullfort: true,
-                    type: RegistreringType.SYKMELDT_REGISTRERING,
-                    fra: 'AAP'
-                }, {});
-            }
+            frontendLogger('registrering.kommerfra', {
+                registreringfullfort: true,
+                type: action.data.registreringType,
+                fra: 'AAP'
+            }, {});
         }
     }
 }
@@ -140,23 +132,9 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
 }
 
 export const loggStartenPaaRegistreringFraAAP = (registreringstatusData) => {
-    if (registreringstatusData.registreringType === RegistreringType.ORDINAER_REGISTRERING) {
-        frontendLogger('registrering.kommerfra', {
-            registreringfullfort: false,
-            type: RegistreringType.ORDINAER_REGISTRERING,
-            fra: 'AAP'
-        }, {});
-    } else if (registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
-        frontendLogger('registrering.kommerfra', {
-            registreringfullfort: false,
-            type: RegistreringType.SYKMELDT_REGISTRERING,
-            fra: 'AAP'
-        }, {});
-    } else if (registreringstatusData.registreringType === RegistreringType.SPERRET) {
-        frontendLogger('registrering.kommerfra', {
-            registreringfullfort: false,
-            type: RegistreringType.SPERRET,
-            fra: 'AAP'
-        }, {});
-    }
+    frontendLogger('registrering.kommerfra', {
+        registreringfullfort: false,
+        type: registreringstatusData.registreringType,
+        fra: 'AAP'
+    }, {});
 };
