@@ -77,8 +77,7 @@ class Routes extends React.Component<AllProps> {
     }
 
     kommerAap() {
-        const erFraAap = parse(this.props.location.search).fraAap;
-        return erFraAap === 'true';
+        return parse(this.props.location.search).fraAap === 'true';
     }
 
     componentDidMount() {
