@@ -86,11 +86,12 @@ function loggRegistreringInngang(store: any, action: Action) {
 function loggRegistreringInngangFraAAP(store: any, action: Action) {
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
+        const registreringType = store.getState().registreringStatus.data.registreringType;
         const inngangFraAap = store.getState().logger.data.inngangFraAap;
         if (inngangFraAap) {
             frontendLogger('registrering.kommerfra', {
                 registreringfullfort: true,
-                type: action.data.registreringType,
+                type: registreringType,
                 fra: 'AAP'
             }, {});
         }
