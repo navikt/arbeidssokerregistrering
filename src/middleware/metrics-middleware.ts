@@ -7,6 +7,7 @@ import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 import * as _ from 'lodash';
+import { frontendLogger } from '../metrikker/metrics-utils';
 
 export interface Frontendlogger {
     event: (name: string, fields: any, tags: any) => void;
@@ -15,16 +16,14 @@ export interface Frontendlogger {
 type Action = any;
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: Action) => {
-    const frontendlogger: Frontendlogger = (window as any).frontendlogger;
-    if (frontendlogger) {
-        loggAutentiseringsinfo(action, frontendlogger);
-        loggBesvarelse(store, action, frontendlogger);
-        loggSykmeldt(store, action, frontendlogger);
-        loggResponstidForTjenestekall(action.type, frontendlogger);
-        loggFeil(action, frontendlogger);
-        loggHarStartetRegistrering(action);
-        loggRegistreringInngang(store, action, frontendlogger);
-    }
+    loggAutentiseringsinfo(action);
+    loggBesvarelse(store, action);
+    loggSykmeldt(store, action);
+    loggResponstidForTjenestekall(action.type);
+    loggFeil(action);
+    loggHarStartetRegistrering(action);
+    loggRegistreringInngang(store, action);
+    loggRegistreringInngangFraAAP(store, action);
     next(action);
 };
 
@@ -43,52 +42,66 @@ function loggHarStartetRegistrering(action: Action) {
     }
 }
 
-function loggAutentiseringsinfo(action: Action, frontendlogger: Frontendlogger) {
+function loggAutentiseringsinfo(action: Action) {
     if (action.type === AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_OK) {
         const { niva } = action.data;
-        frontendlogger.event('registrering.security.level', {'niva': niva}, {});
+        frontendLogger('registrering.security.level', {'niva': niva}, {});
     }
 }
 
-function loggSykmeldt(store: any, action: Action, frontendlogger: Frontendlogger) {
+function loggSykmeldt(store: any, action: Action) {
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
         if (action.data.registreringType === RegistreringType.SPERRET) {
-            frontendlogger.event('registrering.type.sykmeldt', {}, {});
+            frontendLogger('registrering.type.sykmeldt', {}, {});
         }
     }
 }
 
-function loggBesvarelse(store: any, action: Action, frontendlogger: Frontendlogger) {
+function loggBesvarelse(store: any, action: Action) {
     let stillingForslagFraAareg = store.getState().defaultStilling;
     let valgteStilling = store.getState().sisteStilling.data;
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
         if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {
-            frontendlogger.event('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {});
+            frontendLogger('registrering.besvarelse.sistestilling.brukerendrerstilling', {'forslagAAreg': stillingForslagFraAareg.stilling, 'brukerbesvarelse': valgteStilling.stilling}, {});
         }
     }
 }
 
-function loggRegistreringInngang(store: any, action: Action, frontendlogger: Frontendlogger) {
+function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
         const inngangSykefravaer = store.getState().logger.data.inngangSykefravaer;
         const sykmeldt = store.getState().registreringStatus.data.registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
         if (sykmeldt && inngangSykefravaer) {
-            frontendlogger.event('registrering.sykmeldt.fra.sykefravaer', {}, {});
+            frontendLogger('registrering.sykmeldt.fra.sykefravaer', {}, {});
         } else if (sykmeldt) {
-            frontendlogger.event('registrering.sykmeldt.fra.start', {}, {});
+            frontendLogger('registrering.sykmeldt.fra.start', {}, {});
         }
 
     }
 }
 
-function loggFeil(action: Action, frontendlogger: Frontendlogger) {
+function loggRegistreringInngangFraAAP(store: any, action: Action) {
+
+    if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
+        const inngangFraAap = store.getState().logger.data.inngangFraAap;
+        if (inngangFraAap) {
+            frontendLogger('registrering.kommerfra', {
+                registreringfullfort: true,
+                type: action.data.registreringType,
+                fra: 'AAP'
+            }, {});
+        }
+    }
+}
+
+function loggFeil(action: Action) {
     feilTyper.map((feil) => {
         if (action.type === feil.type) {
             if (!action.data) {
-                frontendlogger.event(feil.eventnavn, {'statusText': 'Action data er undefined'}, {});
+                frontendLogger(feil.eventnavn, {'statusText': 'Action data er undefined'}, {});
             } else {
                 const response = action.data.response || {};
                 const status = response.status;
@@ -102,7 +115,7 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
                     data.data = (typeof data.data === 'string') ? encodeURI(data.data) : data.data;
                 }
 
-                frontendlogger.event(feil.eventnavn, {
+                frontendLogger(feil.eventnavn, {
                     'useragent': navigator.userAgent,
                     url,
                     apikall,
@@ -114,3 +127,11 @@ function loggFeil(action: Action, frontendlogger: Frontendlogger) {
         }
     });
 }
+
+export const loggStartenPaaRegistreringFraAAP = (registreringstatusData) => {
+    frontendLogger('registrering.kommerfra', {
+        registreringfullfort: false,
+        type: registreringstatusData.registreringType,
+        fra: 'AAP'
+    }, {});
+};

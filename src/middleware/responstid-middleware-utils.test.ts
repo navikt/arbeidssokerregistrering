@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import * as sinon from 'sinon';
 import * as chaiAsPromised from 'chai-as-promised';
 import { ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
-import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
+import { loggResponstid } from './responstid-middleware-utils';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
@@ -17,38 +17,34 @@ afterEach(() => {
 
 describe('test logging av responstid', () => {
     it('skal logge responstid for OK kall', () => {
-        const frontendlogger = {
-            event: sinon.spy(),
-        };
+        const frontlogger = sinon.spy();
 
         const clock = sandbox.useFakeTimers();
 
-        loggResponstidForTjenestekall(RegStatusActionTypes.HENT_REG_STATUS_PENDING, frontendlogger);
+        loggResponstid(RegStatusActionTypes.HENT_REG_STATUS_PENDING, frontlogger);
+
         clock.tick(50);
-        loggResponstidForTjenestekall(RegStatusActionTypes.HENT_REG_STATUS_OK, frontendlogger);
-
-        const args = frontendlogger.event.getCall(0).args;
-        expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
-        expect(args[1].responstid >= 50).to.equal(true);
-        expect(args[1].responstid < 60).to.equal(true);
-
+        loggResponstid(RegStatusActionTypes.HENT_REG_STATUS_OK, frontlogger);
+        expect(frontlogger.calledOnce).to.equal(true);
+        expect(frontlogger.args[0][0]).to.equal('registrering.responstid.hent-reg-status');
+        expect(frontlogger.args[0][1].responstid).to.equal(50);
+        expect(frontlogger.args[0][1].responstid).to.below(60);
         clock.restore();
     });
 
     it('skal logge responstid for FEILET kall', () => {
-        const frontendlogger = {
-            event: sinon.spy(),
-        };
+        const frontlogger = sinon.spy();
 
         const clock = sandbox.useFakeTimers();
-        loggResponstidForTjenestekall(RegStatusActionTypes.HENT_REG_STATUS_PENDING, frontendlogger);
-        clock.tick(50);
-        loggResponstidForTjenestekall(RegStatusActionTypes.HENT_REG_STATUS_FEILET, frontendlogger);
 
-        const args = frontendlogger.event.getCall(0).args;
-        expect(args[0]).to.equal('registrering.responstid.hent-reg-status');
-        expect(args[1].responstid >= 50).to.equal(true);
-        expect(args[1].responstid < 60).to.equal(true);
+        loggResponstid(RegStatusActionTypes.HENT_REG_STATUS_PENDING, frontlogger);
+
+        clock.tick(50);
+        loggResponstid(RegStatusActionTypes.HENT_REG_STATUS_FEILET, frontlogger);
+        expect(frontlogger.calledOnce).to.equal(true);
+        expect(frontlogger.args[0][0]).to.equal('registrering.responstid.hent-reg-status');
+        expect(frontlogger.args[0][1].responstid).to.equal(50);
+        expect(frontlogger.args[0][1].responstid).to.below(60);
         clock.restore();
     });
 });
