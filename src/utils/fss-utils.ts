@@ -1,8 +1,8 @@
 import { parse } from 'query-string';
-import mockedBrukerFnr from '../mocks/bruker-fnr';
-import mockedEnhetId from '../mocks/veileder-enhet-id';
 import { hentBrukerIKontekst, oppdaterAktivBruker } from '../ducks/api';
 import { lagAktivitetsplanUrl } from './url-utils';
+import mockedBrukerFnr from '../mocks/bruker-fnr';
+import mockedVeilederEnhetId from '../mocks/veileder-enhet-id';
 
 interface PersonsokEvent extends Event {
     fodselsnummer: string;
@@ -44,6 +44,10 @@ export function startSetExpirationOnUnloadListener(): void {
     window.onbeforeunload = function() {
         setSessionExpiration();
     };
+}
+
+export function clearSessionExpiration(): void {
+    window.sessionStorage.removeItem(EXPIRES_AT_TAG);
 }
 
 export function clearSession(): void {
@@ -151,7 +155,7 @@ export function hentVeilederEnhetId(): string | null {
     }
 
     if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
-        return mockedEnhetId;
+        return mockedVeilederEnhetId;
     }
 
     return null;
