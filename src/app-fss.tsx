@@ -17,7 +17,8 @@ import {
     hasSessionExpired,
     initSessionKontekst,
     startSetExpirationOnUnloadListener,
-    startBrukerFnrEndretListener
+    startBrukerFnrEndretListener,
+    clearSessionExpiration
 } from './utils/fss-utils';
 
 class AppFss extends React.Component {
@@ -25,6 +26,8 @@ class AppFss extends React.Component {
     componentWillMount() {
         if (hasSessionExpired()) {
             clearSession();
+        } else {
+            clearSessionExpiration();
         }
 
         startBrukerFnrEndretListener();
