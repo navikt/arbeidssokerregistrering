@@ -12,6 +12,8 @@ import { OPPSUMMERING_PATH, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter'
 import { AppState } from '../../reducer';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { connect } from 'react-redux';
+import { erIFSS } from '../../utils/fss-utils';
+import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 
 const veilederSvg = require('./veileder-syfo.svg');
 
@@ -95,7 +97,7 @@ class Infoside extends React.Component<Props> {
                         <Link className="knapp" to={OPPSUMMERING_PATH}>
                             <FormattedMessage id="infoside-knapp-uenig"/>
                         </Link>
-                        <a href={DITT_SYKEFRAVAER_URL} className="knapp">
+                        <a href={erIFSS() ? lagAktivitetsplanUrl() : DITT_SYKEFRAVAER_URL} className="knapp">
                             <FormattedMessage id="infoside-knapp-enig"/>
                         </a>
                     </div>
