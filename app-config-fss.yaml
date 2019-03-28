@@ -36,6 +36,10 @@ fasitResources:
     resourceType: restservice
   - alias: veilarbpersonflatefs
     resourceType: baseUrl
+  - alias: veilArbOppfolgingAPI
+    resourceType: restservice
+  - alias: veilarbpersonAPI
+    resourceType: restservice
 
   # brukes av internarbeidsflatedecorator
   - alias: aktoerregister.api.v1

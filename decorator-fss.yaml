@@ -21,6 +21,9 @@ proxy:
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
     validateOidcToken: false
+  - contextPath: "/veilarboppfolging"
+    baseUrl: "http://veilarboppfolging"
+    validateOidcToken: false
   - contextPath: "/veilarbperson"
     baseUrl: "http://veilarbperson"
     validateOidcToken: false
