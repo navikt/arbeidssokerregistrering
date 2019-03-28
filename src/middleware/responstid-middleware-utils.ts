@@ -1,10 +1,14 @@
 // tslint:disable align
 import ActionTypes from '../ducks/actions';
-import { Frontendlogger } from './metrics-middleware';
+import { frontendLogger, FrontendLoggerHelper } from '../metrikker/metrics-utils';
 
 const starttider = {};
 
-export function loggResponstidForTjenestekall(actionType: ActionTypes, frontendlogger: Frontendlogger) {
+export function loggResponstidForTjenestekall(actionType: ActionTypes) {
+    loggResponstid(actionType, frontendLogger);
+}
+
+export function loggResponstid(actionType: ActionTypes, logger: FrontendLoggerHelper) {
     const type = actionType.toString();
     if (type.includes('_PENDING')) {
         const prefix = getPrefix(type);
@@ -14,7 +18,7 @@ export function loggResponstidForTjenestekall(actionType: ActionTypes, frontendl
     if (type.includes('_OK') || type.includes('_FEILET')) {
         const prefix = getPrefix(type);
         if (starttider[prefix] !== undefined) {
-            frontendlogger.event(getEventString(prefix), {
+            logger(getEventString(prefix), {
                 responstid: Date.now() - starttider[prefix],
             }, {});
         }

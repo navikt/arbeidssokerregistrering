@@ -38,7 +38,7 @@ const config = (): Config => ({
     },
 });
 
-export const initialiserToppmeny = (): void => {
+export const initToppmeny = (): void => {
     new RetryInterval((retryInterval: RetryInterval) => {
         if ((window as any).renderDecoratorHead) {
             (window as any).renderDecoratorHead(config());

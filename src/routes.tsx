@@ -44,12 +44,13 @@ import { Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
 import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
-import { setInngangSykefravaerAction } from './ducks/logger';
+import { setInngangAapAction, setInngangSykefravaerAction } from './ducks/logger';
 import { erIFSS } from './utils/fss-utils';
+import RegistreringArbeidssokerSykmeldtFss from './sider/startside/registrering-sykmeldt-fss';
 import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-sykmeldt';
 import RegistreringArbeidssokerFss from './sider/startside/registrering-arbeidssoker-fss';
-import StartsideRegistreringSykemeldtFss from './sider/startside/startside-registrering-sykemeldt-fss';
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
+import { loggStartenPaaRegistreringFraAAP } from './middleware/metrics-middleware';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -60,6 +61,7 @@ interface StateProps {
 
 interface DispatchProps {
     setInngangFraSykefravaer: () => void;
+    setInngangAapAction: () => void;
 }
 
 type AllProps = StateProps & RouteComponentProps<any> & DispatchProps; // tslint:disable-line
@@ -74,7 +76,16 @@ class Routes extends React.Component<AllProps> {
             erFraSykefravaer && location.pathname === START_PATH;
     }
 
+    kommerAap() {
+        return parse(this.props.location.search).fraAap === 'true';
+    }
+
     componentDidMount() {
+
+        if (this.kommerAap()) {
+            this.props.setInngangAapAction();
+            loggStartenPaaRegistreringFraAAP(this.props.registreringstatusData);
+        }
 
         if (this.kommerFraSykefravaer()) {
             this.props.setInngangFraSykefravaer();
@@ -149,7 +160,7 @@ class Routes extends React.Component<AllProps> {
                             <Switch>
                                 <Route
                                     path={START_PATH}
-                                    component={erIFSS() ? StartsideRegistreringSykemeldtFss :
+                                    component={erIFSS() ? RegistreringArbeidssokerSykmeldtFss :
                                                 RegistreringArbeidssokerSykmeldt}
                                 />
                                 {klarForFullforing ?
@@ -196,7 +207,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    setInngangFraSykefravaer: () => dispatch(setInngangSykefravaerAction())
+    setInngangFraSykefravaer: () => dispatch(setInngangSykefravaerAction()),
+    setInngangAapAction: () => dispatch(setInngangAapAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(withRouter(Routes));

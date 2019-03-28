@@ -187,7 +187,7 @@ describe('Routes', () => {
 
     /* Overgang fra Syfo sykmeldte */
 
-    it('Skal redirecte til Starside for sykmeldte dersom bruker er sykmeldt', () => {
+    it('Skal redirecte til Startside for sykmeldte dersom bruker er sykmeldt', () => {
 
         const store = create();
 

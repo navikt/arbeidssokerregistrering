@@ -1,8 +1,8 @@
 import { AKTIVITETSPLAN_URL } from './konstanter';
 import { hentBrukerFnr, hentVeilederEnhetId } from './fss-utils';
 
-export const lagAktivitetsplanUrl = () => {
-    return `${AKTIVITETSPLAN_URL}/${hentBrukerFnr()}?enhet=${hentVeilederEnhetId()}`;
+export const lagAktivitetsplanUrl = (fnr?: string) => {
+    return `${AKTIVITETSPLAN_URL}/${fnr ? fnr : hentBrukerFnr()}?enhet=${hentVeilederEnhetId()}`;
 };
 
 export const lagDetaljeVisningUrl = () => {

@@ -29,14 +29,9 @@ interface State {
 
 class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerProps, State> {
 
-    constructor(props: RegistreringArbeidssokerProps) {
-        super(props);
-
-        this.state = {
-            isModalOpen: false
-        };
-
-    }
+    state = {
+        isModalOpen: false
+    };
 
     handleSeVideoBtnClicked = () => {
         this.setState({isModalOpen: true});
@@ -168,7 +163,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
                             data-testid="start-registrering"
                         >
-                            <FormattedMessage id="startside-ordinaer-knapp"/>
+                            <FormattedMessage id="registrering-arbeidssoker-knapp"/>
                         </KnappBase>
                     </div>
                 </div>

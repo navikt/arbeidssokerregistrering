@@ -7,7 +7,7 @@ import './registrert-send-videre.less';
 class RegistrertSendVidere extends React.Component {
 
     // NB: Tiden for animasjonen er 6000ms, ikke redirect før dette
-    private readonly REDIRECT_AFTER = 8000;
+    private readonly REDIRECT_AFTER = 11000;
 
     componentDidMount() {
         setTimeout(this.sendVidereTilDetaljer, this.REDIRECT_AFTER);
