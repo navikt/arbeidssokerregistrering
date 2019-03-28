@@ -7,6 +7,8 @@ import {
     dispatchAlleSporsmal,
     dispatchNoenSporsmal,
     dispatchRegistreringstatus,
+    dispatchSykmeldtJegSkaltilbakeTilJobbenJegHarFullStilling,
+    dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal,
     mountWithStoreRouterAndIntl,
 } from './test/test-utils';
 import {create} from './store';
@@ -15,9 +17,9 @@ import { RegistreringType } from './ducks/registreringstatus';
 import Fullfor from './sider/fullfor/fullfor';
 import {
     DU_ER_NA_REGISTRERT_PATH,
-    FULLFOR_PATH,
+    FULLFOR_PATH, INFOSIDE_PATH,
     OPPSUMMERING_PATH,
-    REAKTIVERING_PATH,
+    REAKTIVERING_PATH, SKJEMA_SYKEFRAVAER_PATH,
     START_PATH
 } from './utils/konstanter';
 import InfoForIkkeArbeidssokerUtenOppfolging
@@ -30,6 +32,12 @@ import { ActionTypes as ReaktiverBrukerActionTypes } from './ducks/reaktiverbruk
 import KreverReaktivering from './sider/krever-reaktivering/krever-reaktivering';
 
 import RegistreringArbeidssokerSykmeldt from "./sider/startside/registrering-sykmeldt";
+import SkjemaSykefravaerUsikker from "./sider/skjema-sykefravaer/skjema-sykefravaer-usikker";
+import SkjemaSykefravaerSammeArbeidsgiver from "./sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver";
+import SkjemaSykefravaerSammeArbeidsgiverNyStilling
+    from "./sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver-ny-stilling";
+import SkjemaSykefravaerNyArbeidsgiver from "./sider/skjema-sykefravaer/skjema-sykefravaer-ny-arbeidsgiver";
+import Infoside from "./sider/infoside/infoside";
 
 
 enzyme.configure({adapter: new Adapter()});
@@ -177,7 +185,9 @@ describe('Routes', () => {
 
     });
 
-    it('Skal redirecte til Starside for sykmeldte dersom bruker er sykmeldt', () => {
+    /* Overgang fra Syfo sykmeldte */
+
+    it('Skal redirecte til Startside for sykmeldte dersom bruker er sykmeldt', () => {
 
         const store = create();
 
@@ -208,6 +218,53 @@ describe('Routes', () => {
         const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, ["/start?fraSykefravaer=true"]);
         expect(wrapper.find(Inngangssporsmal)).to.have.length(1);
 
+    });
+
+
+    it('Skal gå kunne vise spørsmålene som kommer etter Fremtidig situasjon spørsmålet', () => {
+        const store = create();
+
+        dispatchRegistreringstatus({ registreringType: RegistreringType.SYKMELDT_REGISTRERING }, store);
+
+        [
+            SkjemaSykefravaerSammeArbeidsgiver,
+            SkjemaSykefravaerSammeArbeidsgiverNyStilling,
+            SkjemaSykefravaerNyArbeidsgiver,
+            SkjemaSykefravaerUsikker
+        ].forEach((skjema, index) => {
+            const wrapper = mountWithStoreRouterAndIntl(<Routes />, store,
+                [`${SKJEMA_SYKEFRAVAER_PATH}/${index + 1}/0`]);
+
+            expect(wrapper.find(skjema)).to.have.length(1);
+        });
+
+    });
+
+    it('Skal gå til Info side hvis besvarelser er' +
+        'Jeg tilbake til jobben jeg har > Ja, i full stilling', () => {
+        const store = create();
+
+        dispatchRegistreringstatus({ registreringType: RegistreringType.SYKMELDT_REGISTRERING }, store);
+
+        dispatchSykmeldtJegSkaltilbakeTilJobbenJegHarFullStilling(store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [INFOSIDE_PATH]);
+
+        expect(wrapper.find(Infoside)).to.have.length(1);
+    });
+
+
+    it('Skal gå til Du er nå registrert side hvis besvarelser er' +
+        'Usikker > Ingen utdanning > Andre forhold', () => {
+        const store = create();
+
+        dispatchRegistreringstatus({ registreringType: RegistreringType.SYKMELDT_REGISTRERING }, store);
+
+        dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(store);
+
+        const wrapper = mountWithStoreRouterAndIntl(<Routes />, store, [DU_ER_NA_REGISTRERT_PATH]);
+
+        expect(wrapper.find(DuErNaRegistrert)).to.have.length(1);
     });
 
 });

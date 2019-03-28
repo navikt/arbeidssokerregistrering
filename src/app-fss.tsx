@@ -10,30 +10,45 @@ import './decorator/decorator-mock';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
-import { initialiserToppmeny } from './utils/dekorator-utils';
+import { initToppmeny } from './utils/dekorator-utils';
 import Visitkort from './komponenter/visittkort';
-import HentFssKontekst from './komponenter/hent-fss-kontekst';
+import {
+    clearSession,
+    hasSessionExpired,
+    initSessionKontekst,
+    startSetExpirationOnUnloadListener,
+    startBrukerFnrEndretListener,
+    clearSessionExpiration
+} from './utils/fss-utils';
 
 class AppFss extends React.Component {
 
     componentWillMount() {
-        initialiserToppmeny();
+        if (hasSessionExpired()) {
+            clearSession();
+        } else {
+            clearSessionExpiration();
+        }
+
+        startBrukerFnrEndretListener();
+        startSetExpirationOnUnloadListener();
+
+        initSessionKontekst();
+        initToppmeny();
     }
 
     render() {
         return (
             <Provider store={getStore()}>
                 <IntlProvider>
-                    <HentFssKontekst>
-                        <ManuellRegistreringSjekk>
-                            <Visitkort />
-                            <HentInitialData>
-                                <Router>
-                                    <Routes/>
-                                </Router>
-                            </HentInitialData>
-                        </ManuellRegistreringSjekk>
-                    </HentFssKontekst>
+                    <ManuellRegistreringSjekk>
+                        <Visitkort />
+                        <HentInitialData>
+                            <Router>
+                                <Routes/>
+                            </Router>
+                        </HentInitialData>
+                    </ManuellRegistreringSjekk>
                 </IntlProvider>
             </Provider>
         );

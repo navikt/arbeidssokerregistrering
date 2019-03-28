@@ -7,7 +7,6 @@ import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg
 import {featureTogglesMock} from './feature-toggles-mock';
 import {
     BRUKER_KONTEKST_URL,
-    ENHET_KONTEKST_URL,
     FEATURE_URL, OPPDATER_KONTEKST_URL,
     VEILARBPERSON_NAVN_URL,
     VEILARBREGISTRERING_URL
@@ -24,7 +23,6 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
 import brukerKontekst from './fss-bruker-kontekst';
-import enhetKontekst from './fss-enhet-kontekst';
 
 export const MOCK_START_REGISRERING_STATUS = true;
 export const MOCK_REGISTRER_BRUKER = true;
@@ -37,7 +35,6 @@ export const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
 export const MOCK_STYRK08_PAMJANZZ = true;
 export const MOCK_FEATURE_TOGGLES = true;
 export const MOCK_BRUKER_KONTEKST = true;
-export const MOCK_ENHET_KONTEKST = true;
 export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
 export const PRINT_FRONTENDLOGGER = true;
 export const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false;
@@ -107,11 +104,6 @@ if (MOCK_REAKTIVER_BRUKER) {
 if (MOCK_BRUKER_KONTEKST) {
     const response = respondWith(delayed(DELAY, brukerKontekst, 200));
     (mock as any).get(`glob:${BRUKER_KONTEKST_URL}`, response);
-}
-
-if (MOCK_ENHET_KONTEKST) {
-    const response = respondWith(delayed(DELAY, enhetKontekst, 200));
-    (mock as any).get(`glob:${ENHET_KONTEKST_URL}`, response);
 }
 
 if (MOCK_OPPDATER_BRUKER_KONTEKST) {
