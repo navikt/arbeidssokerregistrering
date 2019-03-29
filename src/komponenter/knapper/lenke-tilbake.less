@@ -6,15 +6,6 @@
     position: absolute;
     top: 3rem;
     left: ~'calc(50% - 25px)';
-    background: none;
-    cursor: pointer;
-    border-bottom: 1px solid @navGra40;
-    text-decoration: none;
-    color: @navMorkGra;
-
-    &:hover {
-        border-bottom-color: @navMorkGra;
-    }
 
     &:focus {
         outline: none;
@@ -22,7 +13,7 @@
     }
 
     &:before {
-        .pil-mixin(@navMorkGra, 225deg);
+        .pil-mixin(@navBla, 225deg);
         position: absolute;
         margin-top: -16px;
         left: ~'calc(50% - 6px)';
@@ -39,7 +30,7 @@
         left: 44px;
 
         &:before {
-            .pil-mixin(@navMorkGra, 135deg);
+            .pil-mixin(@navBla, 135deg);
             margin-top: 7px;
             left: -13px;
         }

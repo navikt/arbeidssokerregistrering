@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { Element, Innholdstittel, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import { Knapp } from 'nav-frontend-knapper';
 import { formaterDato, MatchProps } from '../../utils/utils';
@@ -132,10 +132,10 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
     render() {
         return (
             <div className="registrering-sykmeldt">
-                <div className="banner">
-                    <Sidetittel>
+                <div className="registrering-banner">
+                    <Systemtittel>
                         <FormattedMessage id="registrering-sykmeldt.tittel"/>
-                    </Sidetittel>
+                    </Systemtittel>
                 </div>
                 <this.Rad1/>
                 <this.Rad2/>
