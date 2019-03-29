@@ -11,7 +11,7 @@ import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
 import ManuellRegistreringSjekk from './komponenter/manuell-registrering-sjekk';
 import { initToppmeny } from './utils/dekorator-utils';
-import Visitkort from './komponenter/visittkort';
+import Visitkort from './komponenter/visittkort/visittkort';
 import {
     clearSession,
     hasSessionExpired,

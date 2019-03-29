@@ -18,7 +18,7 @@ function LenkeTilbake({onClick}: Props) {
     return (
         <a
             href="javascript:void(0);"
-            className="tilbakelenke typo-element"
+            className="lenke tilbakelenke typo-element"
             onClick={() => {
                 onClick();
                 hideProgressbar();

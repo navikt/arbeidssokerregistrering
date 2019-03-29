@@ -1,6 +1,7 @@
 import * as React from 'react';
-import NAVSPA from '../utils/NAVSPA';
-import { hentBrukerFnr, hentVeilederEnhetId } from '../utils/fss-utils';
+import NAVSPA from '../../utils/NAVSPA';
+import { hentBrukerFnr, hentVeilederEnhetId } from '../../utils/fss-utils';
+import './visittkort.less';
 
 interface VisittkortSpaProps {
     enhet?: string;
@@ -14,7 +15,11 @@ const VisittkortSpa: React.ComponentType<VisittkortSpaProps> =
 const Visittkort: React.SFC = () => {
     const fnr = hentBrukerFnr();
     const enhetId = hentVeilederEnhetId();
-    return <VisittkortSpa fnr={fnr ? fnr : ''} enhet={enhetId ? enhetId : ''} tilbakeTilFlate="veilarbpersonflatefs"/>;
+    return (
+        <div className="visittkortfs-wrapper">
+            <VisittkortSpa fnr={fnr ? fnr : ''} enhet={enhetId ? enhetId : ''} tilbakeTilFlate="veilarbpersonflatefs"/>
+        </div>
+    );
 };
 
 export default Visittkort;

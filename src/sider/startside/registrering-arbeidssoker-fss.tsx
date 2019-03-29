@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
-import { Element, Innholdstittel, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Element, Innholdstittel, Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import aktplanbilde from './aktivitetsplan-ill.svg';
 import paragrafbilde from './paragraf.svg';
@@ -123,9 +123,13 @@ class RegistreringArbeidssokerFss extends React.Component<RouteComponentProps<Ma
     }
 
     render() {
-
         return (
             <div className="registrering-arbeidssoker">
+                <div className="registrering-banner">
+                    <Systemtittel>
+                        <FormattedMessage id="registrering-arbeidssoker.tittel"/>
+                    </Systemtittel>
+                </div>
                 <this.Rad1/>
                 <this.Rad2/>
                 <this.Rad3/>
