@@ -19,7 +19,7 @@ interface BrukerIKontekstData {
     aktivBruker: string;
 }
 
-export const getCookie = name => {
+export const getCookie = (name: string) => {
     const re = new RegExp(`${name}=([^;]+)`);
     const match = re.exec(document.cookie);
     return match !== null ? match[1] : '';

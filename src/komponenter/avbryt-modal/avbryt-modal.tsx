@@ -36,7 +36,7 @@ class AvbrytModal extends React.Component<AllProps> {
 
         const { registreringType } = this.props;
         let beskrivelseId;
-        let url;
+        let url: string;
 
         if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
             beskrivelseId = 'avbryt-beskrivelse-sykmeldt';

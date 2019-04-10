@@ -1,14 +1,14 @@
 import * as React from 'react';
 import FeilmeldingGenerell from '../../../komponenter/feilmelding/feilmelding-generell';
 import FeilmeldingBrukersStatusUgyldig from './feilmelding-brukers-status-ugyldig';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { ErrorData as FullforErrorData, ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
+import ReactIntl from 'react-intl';
 
 interface Props {
     errorData: FullforErrorData;
 }
 
-export default function Feilhandtering(props: Props & InjectedIntlProps) {
+export default function Feilhandtering(props: Props & ReactIntl.InjectedIntlProps) {
     const { errorData } = props;
     if (errorData && errorData.data) {
         switch (errorData.data.type) {

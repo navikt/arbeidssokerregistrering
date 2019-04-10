@@ -13,9 +13,10 @@ import {
 } from "../ducks/svar-utils";
 import {mapAvgitteSvarForBackend, mapTilBesvarelse, mapTilSvarState} from "../ducks/registrerbruker-utils";
 import {InjectedIntl} from 'react-intl';
-import {OrdinaerBesvarelse, TeksterForBesvarelse} from "./registrerbruker";
+import {OrdinaerBesvarelse, SykmeldtBesvarelse, TeksterForBesvarelse} from "./registrerbruker";
 import {SporsmalId} from "./svar";
 import {RegistreringType} from "./registreringstatus";
+import {BesvarelseType} from "./registrerbruker-utils";
 
 const svarState: SvarState = [
     {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
@@ -27,7 +28,7 @@ const svarState: SvarState = [
     {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
 ];
 
-const besvarelse: OrdinaerBesvarelse = {
+const besvarelse: BesvarelseType = {
     dinSituasjon: DinSituasjonSvar.ER_PERMITTERT,
     sisteStilling: SisteStillingSvar.HAR_HATT_JOBB,
     utdanning: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER,
