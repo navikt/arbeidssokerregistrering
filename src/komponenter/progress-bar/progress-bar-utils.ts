@@ -70,7 +70,7 @@ export function finnRiktigConfig(pathname: string, svar: SvarState, registrering
     string[] | null {
 
     const fremtidigSituasjonSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
-    let config;
+    let config: string[] = [];
 
     if (!registreringType || registreringType === RegistreringType.ORDINAER_REGISTRERING) {
         config = registreringConfig;

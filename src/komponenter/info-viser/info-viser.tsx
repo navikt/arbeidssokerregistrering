@@ -1,8 +1,7 @@
 import * as React from 'react';
-import Ikon from 'nav-frontend-ikoner-assets';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 
 import './info-viser.less';
 
@@ -14,9 +13,9 @@ interface InfoViserProps {
 class InfoViser extends React.Component<InfoViserProps> {
     render() {
         return (
-            <div className={classnames('info-viser', this.props.className)}>
+            <div className={classNames('info-viser', this.props.className)}>
                 <span className="info-viser--ikon" aria-label="info">
-                    <Ikon kind="info-sirkel" size="1.5em"/>
+                    test
                 </span>
                 <Normaltekst className="info-viser--kursiv">
                     <FormattedMessage id={this.props.tekstId}/>

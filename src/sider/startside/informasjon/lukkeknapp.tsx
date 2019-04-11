@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import './lukkeknapp.less';
 
 const cls = (bla, hvit, hjorne, className) => classNames('lukknapp',

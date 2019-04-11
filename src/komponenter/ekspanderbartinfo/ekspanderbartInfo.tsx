@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Ikon from 'nav-frontend-ikoner-assets';
 import { getIntlMessage } from '../../utils/utils';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 
@@ -53,7 +52,6 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
                     aria-expanded={this.state.apen}
                 >
                     <Normaltekst className="ekspanderbartinfo__label">
-                        <Ikon kind="help-circle" size={25} className="ekspanderbartinfo__ikon"/>
                         {getIntlMessage(this.props.intl.messages, this.props.tittelId)}
                     </Normaltekst>
                 </button>

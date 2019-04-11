@@ -1,16 +1,18 @@
 import * as React from 'react';
-import NavFrontendSpinner, { storrelseType } from 'nav-frontend-spinner';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import './innholdslaster-laster.less';
 
+export type SpinnerStorrelse = 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
+
 interface LasterInterface {
-    storrelse?: storrelseType;
+    storrelse?: SpinnerStorrelse;
     className?: string;
 }
 
 function Laster({ storrelse, className }: LasterInterface) {
     return (
         <div className={className}>
-            <NavFrontendSpinner type={storrelse} />
+            <NavFrontendSpinner type={storrelse}/>
         </div>
     );
 }

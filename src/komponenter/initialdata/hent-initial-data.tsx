@@ -86,7 +86,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     autentiseringsinfo: selectAutentiseringsinfo(state),
     brukersNavn: selectBrukersNavn(state),
     registreringstatus: selectRegistreringstatus(state),

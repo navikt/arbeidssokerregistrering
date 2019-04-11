@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Modal from 'react-modal';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import Lukkeknapp from './lukkeknapp';
 import './react-modal.less';
 import './modal-wrapper-style.less';
@@ -71,7 +71,7 @@ class ModalWrapper extends React.Component<Props> {
                 { closeButton &&
                     <Lukkeknapp
                         overstHjorne={true}
-                        className={classnames('informasjon-modal__lukkknapp--shake')}
+                        className={classNames('informasjon-modal__lukkknapp--shake')}
                         onClick={props.onRequestClose}
                         ref={(closeButtonRef) => (this.closeButtonRef = closeButtonRef)}
                     >
