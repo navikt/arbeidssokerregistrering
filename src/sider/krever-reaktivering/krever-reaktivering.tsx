@@ -118,7 +118,7 @@ class KreverReaktivering extends React.Component<Props, State> {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     reaktiverBrukerData: state.reaktiverBruker,
     registreringstatusData: selectRegistreringstatus(state).data,
 });

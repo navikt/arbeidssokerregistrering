@@ -17,7 +17,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                 <Banner />
                 <div className="allerede-registrert">
                     <GraaBakgrunn />
-                    <Row>
+                    <Row className="">
                         <Column xs="12">
                             <Innholdstittel tag="h1" className="allerede-registrert__tittel">
                                 {messages['allerede-registrert-tittel']}
@@ -27,7 +27,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>
-                    <Row>
+                    <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
                                 <Normaltekst className="allerede-registrert__boks-tekst">
@@ -42,7 +42,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </div>
                         </Column>
                     </Row>
-                    <Row>
+                    <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
                                 <Normaltekst className="allerede-registrert__boks-tekst">
@@ -57,7 +57,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </div>
                         </Column>
                     </Row>
-                    <Row>
+                    <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
                                 <Normaltekst className="allerede-registrert__boks-tekst">

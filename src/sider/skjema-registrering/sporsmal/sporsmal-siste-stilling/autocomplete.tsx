@@ -113,7 +113,8 @@ interface AutoCompleteState {
 type Props = AutoCompleteProps & InjectedIntlProps;
 class AutoComplete extends React.Component<Props, AutoCompleteState> {
 
-    formRef;
+    // TODO: fix any
+    formRef: any; // tslint:disable-line
     static clickLabel() {
         document.getElementById('stilling')!.focus();
     }
@@ -167,7 +168,8 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
             resultat.scrollTop = selectionToMark.offsetTop - (resultat.offsetHeight - 40);
         }
     }
-    markSelected(selectionToMark: HTMLElement) {
+    // TODO: fix any
+    markSelected(selectionToMark: any) {  // tslint:disable-line
         if (selectionToMark) {
             selectionToMark.setAttribute('aria-selected', 'true');
             this.scrollTilMarkertElement(selectionToMark);

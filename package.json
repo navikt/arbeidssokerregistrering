@@ -94,7 +94,6 @@
     "react-router-dom": "4.2.2",
     "react-scripts": "^2.1.8",
     "react-test-renderer": "16.3.2",
-    "redux-form": "7.3.0",
     "redux-thunk": "2.2.0",
     "tslint": "^5.15.0",
     "tslint-react": "^4.0.0",
@@ -123,7 +122,8 @@
     "testcafe": "0.23.3",
     "testcafe-browser-provider-browserstack": "^1.5.0",
     "tree-kill": "^1.2.1",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "yet-another-fetch-mock": "^2.4.0"
   },
   "browserslist": [
     ">0.2%",
