@@ -5,7 +5,9 @@ import Lukkeknapp from './lukkeknapp';
 import './react-modal.less';
 import './modal-wrapper-style.less';
 
-const cls = (className) => classnames('modal', className);
+const cls = (
+    className: any // tslint:disable-line
+) => classNames('modal', className);
 
 interface Props {
     closeButton?: boolean;
@@ -32,7 +34,7 @@ class ModalWrapper extends React.Component<Props> {
     };
 
     closeButtonRef: Lukkeknapp | null;
-    modalRef: Modal;
+    modalRef: any; // tslint:disable-line
 
     static setAppElement(element: HTMLElement) {
         Modal.setAppElement(element);

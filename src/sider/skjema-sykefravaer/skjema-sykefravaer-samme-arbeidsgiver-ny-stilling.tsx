@@ -28,7 +28,7 @@ class SkjemaSykefravaerSammeArbeidsgiverNyStilling extends React.Component<Props
     render() {
         const {endreSvar, intl, svarState, location, match, history} = this.props;
         const fellesProps = {
-            endreSvar: (sporsmalId, svar) => {
+            endreSvar: (sporsmalId: SporsmalId, svar: Svar) => {
                 endreSvar(sporsmalId, svar);
             },
             intl: intl,

@@ -44,7 +44,7 @@ const keyboard = {
 interface ResultatListeProps {
     visSpinner: boolean;
     resultatListe: Resultater[];
-    oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
+    oppdaterState: (autoCompleteListIndex: number) => void;
     clearSelected: () => void;
 }
 
