@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import App from './app';
 import './polyfills/polyfill';
 import './index.less';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/nb';
 import Modal from 'react-modal';
 import { erIFSS } from './utils/fss-utils';

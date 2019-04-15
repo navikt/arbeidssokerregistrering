@@ -73,7 +73,7 @@ if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
 }
 
 if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, respondWith(delayed(DELAY, (url, config, params) => {
+    (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, respondWith(delayed(DELAY, (url: any, config: any, params: any) => {
         return params.bodyParams;
     })));
 }
@@ -84,7 +84,7 @@ if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
 
 if(MOCK_STYRK08_PAMJANZZ) {
     (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
-        respondWith(delayed(DELAY / 10, (url, config, {queryParams}) => lagPamjanzzRespons(queryParams))));
+        respondWith(delayed(DELAY / 10, (url: any, config: any, {queryParams}: any) => lagPamjanzzRespons(queryParams))));
 }
 
 if (MOCK_REGISTRER_BRUKER) {

@@ -1,7 +1,7 @@
 /*tslint:disable*/
 import * as fetchMock from 'fetch-mock';
 import * as qs from 'query-string';
-import * as pathRegex from 'path-to-regexp';
+import pathRegex from 'path-to-regexp';
 import pamJanzzData from './typeahead-mock';
 
 export function lagPamjanzzRespons({q}: { q: string}) {
@@ -15,7 +15,7 @@ export function lagPamjanzzRespons({q}: { q: string}) {
 
 export function delayed(time: any, response: any, failure?: number): any {
     const kanskjeFeil = failure ? {status: failure, body: response} : response;
-    return (...args) => new Promise((resolve) => setTimeout(() => {
+    return (...args: any) => new Promise((resolve) => setTimeout(() => {
         if(typeof kanskjeFeil === 'function') {
             return resolve(kanskjeFeil(...args));
         }

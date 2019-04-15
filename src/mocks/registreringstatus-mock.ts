@@ -1,5 +1,5 @@
 import { RegistreringType } from '../ducks/registreringstatus';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export default {
     underOppfolging: false,

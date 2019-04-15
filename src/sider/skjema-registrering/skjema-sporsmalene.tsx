@@ -16,8 +16,10 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../../ducks/svar-utils';
+import { RegistreringType } from '../../ducks/registreringstatus';
+import { AppState } from '../../reducer';
 
-const sporsmaleneConfig = (sporsmalProps, regType, state) => [
+const sporsmaleneConfig = (sporsmalProps, regType: RegistreringType, state: AppState) => [
     {
         id: SporsmalId.dinSituasjon,
         element: (
@@ -158,7 +160,7 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
     }
 ];
 
-export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsmalId) => {
+export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType: RegistreringType, sporsmalId: SporsmalId) => {
     const index = sporsmaleneConfig(sporsmalProps, regType, {})
         .findIndex(data => data.id === sporsmalId);
     if (index >= 0) {
@@ -175,12 +177,12 @@ export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsma
     }
 };
 
-export const hentElementOppsummering = (state) =>
+export const hentElementOppsummering = (state: AppState) =>
     sporsmaleneConfig({}, '', state).map((spmElement) => {
         return spmElement.elementOppsummering;
     });
 
-const hentRegistreringSporsmalene = (sporsmalProps, regType) =>
+const hentRegistreringSporsmalene = (sporsmalProps, regType: RegistreringType) =>
     sporsmaleneConfig(sporsmalProps, regType, {}).map((spmElement) => {
         return spmElement.element;
     });
