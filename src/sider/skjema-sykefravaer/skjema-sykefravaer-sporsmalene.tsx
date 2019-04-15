@@ -8,13 +8,14 @@ import { Link } from 'react-router-dom';
 import SporsmalTilbakeIArbeid from './sporsmal/sporsmal-tilbake-i-arbeid';
 import { hentLoepConfig } from './inngangssporsmal-svar-alternativene';
 import {
+    Svar,
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../../ducks/svar-utils';
 import { FormattedMessage } from 'react-intl';
 import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
-const tilbakeIArbeid = (fellesProps, regType) => {
+const tilbakeIArbeid = (fellesProps: any, regType: any) => { // tslint:disable-line
     return {
         id: SporsmalId.tilbakeIArbeid,
         element: (
@@ -35,7 +36,7 @@ const tilbakeIArbeid = (fellesProps, regType) => {
         )
     };
 };
-const utdanningOgAndreForhold = (fellesProps, regType) => [
+const utdanningOgAndreForhold = (fellesProps: any, regType: any) => [ // tslint:disable-line
     {
         id: SporsmalId.utdanning,
         element: (
@@ -124,19 +125,19 @@ const utdanningOgAndreForhold = (fellesProps, regType) => [
     }
 ];
 
-export const sammeArbeidsgiverSporsmaleneConfig = (fellesProps, regType) => [
+export const sammeArbeidsgiverSporsmaleneConfig = (fellesProps: any, regType: any) => [ // tslint:disable-line
     tilbakeIArbeid(fellesProps, regType)
 ];
-export const sammeArbeidsgiverNyStillingSporsmaleneConfig = (fellesProps, regType) => [
+export const sammeArbeidsgiverNyStillingSporsmaleneConfig = (fellesProps: any, regType: any) => [ // tslint:disable-line
     tilbakeIArbeid(fellesProps, regType)
 ];
-export const nyArbeidsgiverSporsmaleneConfig = (fellesProps, regType) =>
+export const nyArbeidsgiverSporsmaleneConfig = (fellesProps: any, regType: any) => // tslint:disable-line
     utdanningOgAndreForhold(fellesProps, regType);
 
-export const usikkerSporsmaleneConfig = (fellesProps, regType) =>
+export const usikkerSporsmaleneConfig = (fellesProps: any, regType: any) => // tslint:disable-line
     utdanningOgAndreForhold(fellesProps, regType);
 
-export const hentLenkeEndre = (sporsmalId, svar, lop) => {
+export const hentLenkeEndre = (sporsmalId: SporsmalId | undefined, svar: Svar | undefined, lop: number | undefined) => {
     const config = hentLoepConfig({}, svar);
 
     if (SporsmalId.fremtidigSituasjon === sporsmalId) {

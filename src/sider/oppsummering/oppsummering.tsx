@@ -106,7 +106,7 @@ class Oppsummering extends React.Component<Props> {
                 avhengigheter={[this.props.registrerBrukerData]}
                 loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
             >
-                <section className={classNames}>
+                <section className={classnames}>
                     <Innholdstittel tag="h1" className="oppsummering-tittel">
                         <FormattedMessage id={`${tekstPrefix}-tittel`}/>
                     </Innholdstittel>

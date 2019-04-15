@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as cls from 'classnames';
+import cls from 'classnames';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Systemtittel } from 'nav-frontend-typografi';
 import AvsjekkBilde from './avsjekk-bilde/avsjekk-bilde';

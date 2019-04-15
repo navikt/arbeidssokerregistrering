@@ -38,7 +38,7 @@ class SkjemaSykefravaerNyArbeidsgiver extends React.Component<Props> {
     render() {
         const {endreSvar, resetSvar, intl, svarState, location, match, history} = this.props;
         const fellesProps = {
-            endreSvar: (sporsmalId, svar) => {
+            endreSvar: (sporsmalId: SporsmalId, svar: Svar) => {
 
                 nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
 

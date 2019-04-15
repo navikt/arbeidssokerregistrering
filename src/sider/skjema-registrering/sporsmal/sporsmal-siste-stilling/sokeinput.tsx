@@ -24,9 +24,10 @@ interface SokeInputComponentState {
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
 
-    private waitingFor;
-    private autocompleteSearchDebounced;
-    private _autocompleteCache = {};
+    // TODO: fix any
+    private waitingFor: string;
+    private autocompleteSearchDebounced: any; // tslint:disable-line
+    private _autocompleteCache: any = {}; // tslint:disable-line
     constructor(props: SokeInputComponentProps) {
         super(props);
 
@@ -85,7 +86,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         }
     }
 
-    hentStillingsAlternativer(v) { // tslint:disable-line
+    hentStillingsAlternativer(v: React.ChangeEvent<HTMLInputElement>) {
         const sokeStreng = v.target.value;
 
         this.setState({
@@ -108,7 +109,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     }
 
-    oppdaterStillingState(valgteStillingIndex) { // tslint:disable-line
+    oppdaterStillingState(valgteStillingIndex: number) { // tslint:disable-line
         const { stilling, labelKey, id }  = this.state.stillingsAlternativer[valgteStillingIndex];
 
         this.props.onChange(stilling);

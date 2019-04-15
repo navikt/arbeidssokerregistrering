@@ -16,6 +16,7 @@ import {
     hoppOverSisteStillingSporsmal,
     hoppOverUtdanningBestattOgGodkjentSporsmalene, spmSomIkkeSkalBesvaresConfig
 } from './skjema-config';
+import {AppState} from "../../reducer";
 
 export const INGEN_NESTE_SPORSMAL = -1;
 
@@ -157,7 +158,7 @@ export function finnNesteHref(props: SkjemaProps): string {
 
 }
 
-export function nullStillSporsmalSomIkkeSkalBesvares(sporsmalId: any, svar: any, endreSvar: any, resetSvar) { // tslint:disable-line
+export function nullStillSporsmalSomIkkeSkalBesvares(sporsmalId: any, svar: any, endreSvar: any, resetSvar: (spmId: string) => void) { // tslint:disable-line
     spmSomIkkeSkalBesvaresConfig.map((config) => {
         if (config.id === sporsmalId && config.svar === svar) {
             config.spmHoppOver.map((spmId) => {

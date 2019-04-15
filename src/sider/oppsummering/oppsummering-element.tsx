@@ -47,7 +47,7 @@ class OppsummeringElement extends React.Component<Props> {
             <FormattedMessage id={this.getIntlTekstId()} values={values}/>
         );
 
-        const finnSykmeldtlopStien = (sporsmalId) => {
+        const finnSykmeldtlopStien = (sporsmalId: SporsmalId | undefined) => {
             const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon);
             const lop = hentInngangsLoep(svar);
 

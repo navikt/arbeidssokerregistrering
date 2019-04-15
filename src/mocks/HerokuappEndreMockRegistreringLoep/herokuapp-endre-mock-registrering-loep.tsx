@@ -8,7 +8,7 @@ import { State as RegistrerBruker, ActionTypes as registrerbrukerActionType }
     from '../../ducks/registrerbruker';
 import { ActionTypes as reaktiveringActionType }
     from '../../ducks/reaktiverbruker';
-import {ActionTypes as SvarActionTypes, ActionTypes as svarActionType, SporsmalId }
+import { ActionTypes as SvarActionTypes, ActionTypes as svarActionType, SporsmalId }
     from '../../ducks/svar';
 import { RadioPanel } from 'nav-frontend-skjema';
 import { getStore } from '../../store';
@@ -43,7 +43,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
         });
     }
 
-    dispathSpmOgPush = (store, history) => {
+    dispathSpmOgPush = (store: any, history: any) => { // tslint:disable-line
 
         store.dispatch({
             type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,

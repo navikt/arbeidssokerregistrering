@@ -2,7 +2,8 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
-import { shallowWithIntl } from 'enzyme-react-intl';
+import { shallowWithIntl as shIntl } from './intl-enzyme-test-helper.js';
+
 import { getStore } from '../store';
 import { Provider, Store } from 'react-redux';
 import { AppState } from '../reducer';
@@ -21,6 +22,8 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../ducks/svar-utils';
+import {SinonSandbox} from "sinon";
+
 
 export const store = getStore();
 
@@ -29,11 +32,11 @@ interface ElementWithStore {
 }
 
 export function shallowwithIntl(children: React.ReactElement<ElementWithStore>) {
-    return shallowWithIntl(React.cloneElement(children)).dive();
+    return shIntl(React.cloneElement(children)).dive();
 }
 
 export function shallowwithStoreAndIntl(children: React.ReactElement<ElementWithStore>, withStore?: Store<AppState>) {
-    return shallowWithIntl(React.cloneElement(children, {
+    return shIntl(React.cloneElement(children, {
         store: withStore || store
     })).dive().dive();
 }
@@ -75,7 +78,7 @@ export function mountWithIntl(children: React.ReactElement<ElementWithStore>) {
 }
 
 export function stubFetch(fetchStub: FetchStub): FetchStub {
-    sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+    sinon.stub(global, 'Promise').callsFake((url: string) => getPromiseResponse(url, fetchStub));
     return fetchStub;
 }
 

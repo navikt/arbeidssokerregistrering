@@ -16,10 +16,11 @@ import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../../ducks
 import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
 import {ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
 import Alternativ from "../../../../komponenter/skjema/alternativ";
+import {SinonSandbox} from "sinon";
 
 enzyme.configure({adapter: new Adapter()});
 
-let sandbox;
+let sandbox: SinonSandbox;
 beforeEach(() => {
     sandbox = sinon.createSandbox();
 });
