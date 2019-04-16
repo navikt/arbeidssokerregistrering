@@ -13,18 +13,15 @@ import autentisert from './autentiseringsinfo-mock';
 import pamJanzzData from './typeahead-mock';
 import brukersNavn from './brukers-navn-mock';
 import startRegistreringStatus from './registreringstatus-mock';
-
-
-export const MOCK_AUTENTISERINGS_INFO = true;
-
+import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import brukerKontekst from './fss-bruker-kontekst';
 
+export const MOCK_AUTENTISERINGS_INFO = true;
 export const MOCK_START_REGISRERING_STATUS = true;
 export const MOCK_BRUKERS_NAVN = true;
-// export const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
-// export const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
-// export const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
-// export const MOCK_STYRK08_PAMJANZZ = true;
+export const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
+export const MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ = true;
+export const MOCK_STYRK08_PAMJANZZ = true;
 export const MOCK_FEATURE_TOGGLES = true;
 export const MOCK_REGISTRER_BRUKER = true;
 export const MOCK_REAKTIVER_BRUKER = true;
@@ -34,18 +31,19 @@ export const PRINT_FRONTENDLOGGER = true;
 export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
 export const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false;
 
-// function lagPamjanzzRespons({q}: { q: string}) {
-//     const { typeaheadYrkeList } = pamJanzzData;
-//     const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q.toLowerCase()));
-//     return {
-//         typeaheadYrkeList: filtrertListe
-//     }
-// }
-
+function lagPamjanzzRespons({q}: { q: string}) {
+    const { typeaheadYrkeList } = pamJanzzData;
+    console.log('q', q); // tslint:disable-line
+    const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q.toLowerCase()));
+    return {
+        typeaheadYrkeList: filtrertListe
+    }
+}
 
 import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
 import {ordinaerRegistreringRespons, sykmeldtRegistreringRespons} from "./registrerbruker-mock";
 import {featureTogglesMock} from "./feature-toggles-mock";
+import oversettelseAvStillingFraAAReg from "./oversettelse-av-stilling-fra-aareg-mock";
 const loggingMiddleware: Middleware = (request, response) => {
     // tslint:disable
     console.groupCollapsed(request.url);
@@ -87,13 +85,7 @@ if (PRINT_FRONTENDLOGGER) {
     };
 }
 
-// if (MOCK_AUTENTISERINGS_INFO) {
-//     (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(DELAY, autentisert)));
-// }
-
 if (MOCK_START_REGISRERING_STATUS) {
-    // const response = respondWith(delayed(DELAY, startRegistreringStatus));
-    // (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/startregistrering*`, response);
     mock.get(`${VEILARBREGISTRERING_URL}/startregistrering`,
         ResponseUtils.delayed(DELAY, startRegistreringStatus));
 }
@@ -107,29 +99,22 @@ if (MOCK_BRUKERS_NAVN) {
     mock.get(`${VEILARBPERSON_NAVN_URL}`, ResponseUtils.delayed(DELAY, brukersNavn));
 }
 
-// if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-//     const response = respondWith(delayed(DELAY, sisteStillingFraAAReg));
-//     (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, response);
-// }
-//
-// if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-//     (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, respondWith(delayed(DELAY, (url: any, config: any, params: any) => {
-//         return params.bodyParams;
-//     })));
-// }
-//
-// if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-//     (mock as any).get('express:/pam-janzz/rest/kryssklassifiserMedKonsept(.*)', respondWith(delayed(DELAY / 2, oversettelseAvStillingFraAAReg)));
-// }
-//
-// if (MOCK_STYRK08_PAMJANZZ) {
-//     mock.get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)', ResponseUtils.delayed(DELAY,
-//         (url: any, config: any, {queryParams}: any) => lagPamjanzzRespons(queryParams))); // tslint:disable-line
-// }
+if (MOCK_GET_SISTE_ARBIEDSFORHOLD) {
+    mock.get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, ResponseUtils.delayed(DELAY, sisteStillingFraAAReg));
+}
+
+if (MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
+    mock.get('/pam-janzz/rest/kryssklassifiserMedKonsept', ResponseUtils.delayed(DELAY, oversettelseAvStillingFraAAReg)); // tslint:disable-line
+}
+
+if (MOCK_STYRK08_PAMJANZZ) {
+    mock.get('/pam-janzz/rest/typeahead/yrke-med-styrk08', ResponseUtils.delayed(DELAY,
+        (args) => ResponseUtils.jsonPromise(lagPamjanzzRespons(args.queryParams)))); // tslint:disable-line
+}
 
 if (MOCK_REGISTRER_BRUKER) {
-    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering*`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
-    mock.post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt*`, ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt`, ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)); // tslint:disable-line
 }
 
 if (MOCK_REAKTIVER_BRUKER) {
@@ -174,4 +159,3 @@ if (DISPATCH_BESVARELSE) {
 }
 
 export default mock;
-// (mock as any).mock('*', respondWith((url: string, config: {}) => mock.realFetch.call(window, url, config)));
