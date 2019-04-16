@@ -2,7 +2,7 @@ import 'idempotent-babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './app';
-// import './polyfills/polyfill';
+import 'react-app-polyfill/ie11';
 import './index.less';
 import moment from 'moment';
 import 'moment/locale/nb';

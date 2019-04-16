@@ -22,8 +22,6 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../ducks/svar-utils';
-import {SinonSandbox} from "sinon";
-
 
 export const store = getStore();
 
