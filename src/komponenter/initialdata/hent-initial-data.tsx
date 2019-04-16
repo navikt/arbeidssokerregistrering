@@ -43,7 +43,6 @@ export class HentInitialData extends React.Component<Props> {
         this.props.hentFeatureToggle().then(() => {
 
             this.props.hentAutentiseringsInfo().then((res) => {
-                console.log('res', res); // tslint:disable-line
                 if ((res as AuthData).nivaOidc === 4) {
                     this.props.hentRegistreringStatus();
                     this.props.hentBrukersNavn();
