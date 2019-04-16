@@ -8,76 +8,11 @@ import svarMock from './svar-mock';
 import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
+import autentisert from './autentiseringsinfo-mock';
+export const MOCK_AUTENTISERINGS_INFO = true;
 
 export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
 export const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false;
-// Dette dispatcher svarene _før_ noe annet skjer,
-// som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
-// const DELAY = 0;
-//
-// if (PRINT_FRONTENDLOGGER) {
-//     (window as any).frontendlogger = {
-//         event: (name: string, fields: any, tags: any) => {
-//             console.log('frontendlogger', {name, fields, tags});
-//         }
-//     }
-// }
-//
-// if (MOCK_AUTENTISERINGS_INFO) {
-//     (mock as any).get('glob:/veilarbstepup/status*', respondWith(delayed(DELAY, autentisert)));
-// }
-//
-// if (MOCK_START_REGISRERING_STATUS) {
-//     const response = respondWith(delayed(DELAY, startRegistreringStatus));
-//     (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/startregistrering*`, response);
-// }
-//
-// if (MOCK_FEATURE_TOGGLES) {
-//     (mock as any).get(`express:${FEATURE_URL}/?feature(.*)`, respondWith(delayed(DELAY, featureTogglesMock)));
-// }
-//
-// if (MOCK_BRUKERS_NAVN) {
-//     (mock as any).get(`glob:${VEILARBPERSON_NAVN_URL}*`, respondWith(delayed(DELAY, brukersNavn)));
-// }
-//
-// if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-//     const response = respondWith(delayed(DELAY, sisteStillingFraAAReg));
-//     (mock as any).get(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, response);
-// }
-//
-// if(MOCK_POST_SISTE_ARBIEDSFORHOLD) {
-//     (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/sistearbeidsforhold*`, respondWith(delayed(DELAY, (url: any, config: any, params: any) => {
-//         return params.bodyParams;
-//     })));
-// }
-//
-// if(MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-//     (mock as any).get('express:/pam-janzz/rest/kryssklassifiserMedKonsept(.*)', respondWith(delayed(DELAY / 2, oversettelseAvStillingFraAAReg)));
-// }
-//
-// if(MOCK_STYRK08_PAMJANZZ) {
-//     (mock as any).get('express:/pam-janzz/rest/typeahead/yrke-med-styrk08(.*)',
-//         respondWith(delayed(DELAY / 10, (url: any, config: any, {queryParams}: any) => lagPamjanzzRespons(queryParams))));
-// }
-//
-// if (MOCK_REGISTRER_BRUKER) {
-//     const ordinaerRespons = respondWith(delayed(DELAY, ordinaerRegistreringRespons, 200));
-//     const sykmeldtRespons = respondWith(delayed(DELAY, sykmeldtRegistreringRespons, 200));
-//
-//     (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrering*`, ordinaerRespons);
-//     (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startregistrersykmeldt*`, sykmeldtRespons);
-// }
-//
-// if (MOCK_REAKTIVER_BRUKER) {
-//     const response = respondWith(delayed(DELAY, {}, 200));
-//     (mock as any).post(`glob:${VEILARBREGISTRERING_URL}/startreaktivering*`, response);
-// }
-//
-//
-// if (MOCK_BRUKER_KONTEKST) {
-//     const response = respondWith(delayed(DELAY, brukerKontekst, 200));
-//     (mock as any).get(`glob:${BRUKER_KONTEKST_URL}`, response);
-// }
 
 import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
 const loggingMiddleware: Middleware = (request, response) => {
@@ -108,6 +43,23 @@ const mock = FetchMock.configure({
         loggingMiddleware
     )
 });
+
+// Dette dispatcher svarene _før_ noe annet skjer,
+// som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
+// const DELAY = 0;
+//
+// if (PRINT_FRONTENDLOGGER) {
+//     (window as any).frontendlogger = {
+//         event: (name: string, fields: any, tags: any) => {
+//             console.log('frontendlogger', {name, fields, tags});
+//         }
+//     }
+// }
+//
+
+if (MOCK_AUTENTISERINGS_INFO) {
+     mock.get('/veilarbstepup/status', ResponseUtils.delayed(200, autentisert));
+}
 
 if (MOCK_OPPDATER_BRUKER_KONTEKST) {
     // const response = respondWith(delayed(DELAY, {}, 200));
