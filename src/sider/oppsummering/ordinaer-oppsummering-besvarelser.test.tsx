@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {expect} from 'chai';
 import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16';
 import {
     dispatchAlleSporsmal,
     mountWithStoreRouterAndIntl,

@@ -102,6 +102,8 @@
   },
   "devDependencies": {
     "@navikt/react-intl-bundler": "^1.0.4",
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.0",
     "@types/fetch-mock": "5.12.2",
     "@types/react-test-renderer": "16.0.1",
     "axe-testcafe": "^1.1.0",
