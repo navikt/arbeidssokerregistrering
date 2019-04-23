@@ -2,6 +2,7 @@ import * as React from 'react';
 import Alternativ from '../../../komponenter/skjema/alternativ';
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Normaltekst } from 'nav-frontend-typografi';
+import Ikon from 'nav-frontend-ikoner-assets';
 import { AndreForholdSvar, Svar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
@@ -41,8 +42,7 @@ function AndreForhold(props: Props) {
             </form>
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">
-                    {/*TODO: fix ikon*/}
-                    {/*<Ikon kind="info-sirkel" size="1.5em"/>*/}
+                    <Ikon kind="info-sirkel-fyll" size="1.5em"/>
                 </span>
                 <Normaltekst>
                     {getTekst('info')}
