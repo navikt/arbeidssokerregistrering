@@ -16,13 +16,15 @@ export default function Feilhandtering(props: Props & ReactIntl.InjectedIntlProp
                 return (
                     <FeilmeldingBrukersStatusUgyldig
                         feilType={FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE}
-                    />);
+                    />
+                );
             }
             case (FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET): {
                 return (
                     <FeilmeldingBrukersStatusUgyldig
                         feilType={FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET}
-                    />);
+                    />
+                );
             }
             case (FullforErrorTypes.BRUKER_ER_UKJENT):
             case (FullforErrorTypes.BRUKER_KAN_IKKE_REAKTIVERES): {

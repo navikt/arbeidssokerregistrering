@@ -16,7 +16,7 @@ import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import LenkeNeste from '../../komponenter/knapper/lenke-neste';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
-import {Props as SkjemaProps } from '../../komponenter/skjema/skjema';
+import { Props as SkjemaProps } from '../../komponenter/skjema/skjema';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import './inngangssporsmal.less';
@@ -92,7 +92,8 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
         const advarselElement = this.state.visAdvarsel ? (
             <NavAlertStripe type="advarsel" className="spm-advarsel inngangssporsmal-advarsel">
                 <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
-            </NavAlertStripe>) : null;
+            </NavAlertStripe>
+        ) : null;
 
         const alternativProps = {
             endreSvar: endreSvar,

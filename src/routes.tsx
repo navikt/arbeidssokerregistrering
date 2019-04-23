@@ -93,7 +93,6 @@ class Routes extends React.Component<AllProps> {
     }
 
     render() {
-
         const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
         const registreringType = registreringstatusData.registreringType;
@@ -195,7 +194,8 @@ class Routes extends React.Component<AllProps> {
                         ) : null }
                     </Switch>
                 </Sideanimasjon>
-            </>);
+            </>
+        );
     }
 }
 

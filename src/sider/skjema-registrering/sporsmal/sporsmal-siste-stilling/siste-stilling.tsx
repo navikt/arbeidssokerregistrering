@@ -28,7 +28,7 @@ import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
 import { SporsmalProps } from '../../../../komponenter/skjema/sporsmal-utils';
 import { RegistreringType, selectRegistreringstatus } from '../../../../ducks/registreringstatus';
 import InaktivSokeInput from './inaktiv-soke-input';
-import App from "../../../../app";
+import App from '../../../../app';
 
 interface SisteStillingState {
     erInputAktiv: boolean;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FremtidigSituasjonSvar, Svar} from '../../ducks/svar-utils';
+import { FremtidigSituasjonSvar, Svar } from '../../ducks/svar-utils';
 import Alternativ from '../../komponenter/skjema/alternativ';
 import {
     nyArbeidsgiverSporsmaleneConfig,
