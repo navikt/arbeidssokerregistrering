@@ -76,7 +76,7 @@ export function mountWithIntl(children: React.ReactElement<ElementWithStore>) {
 }
 
 export function stubFetch(fetchStub: FetchStub): FetchStub {
-    sinon.stub(window, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+    sinon.stub(window, 'fetch').callsFake((url: string): any => getPromiseResponse(url, fetchStub));
     return fetchStub;
 }
 

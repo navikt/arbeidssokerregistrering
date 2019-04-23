@@ -8,7 +8,7 @@ import {
     UtdanningSvar
 } from '../../ducks/svar-utils';
 import { InjectedIntl } from 'react-intl';
-import {Props as SkjemaProps } from './skjema';
+import { Props as SkjemaProps } from './skjema';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import { INFOSIDE_PATH } from '../../utils/konstanter';
 import {
@@ -16,7 +16,6 @@ import {
     hoppOverSisteStillingSporsmal,
     hoppOverUtdanningBestattOgGodkjentSporsmalene, spmSomIkkeSkalBesvaresConfig
 } from './skjema-config';
-import {AppState} from "../../reducer";
 
 export const INGEN_NESTE_SPORSMAL = -1;
 
