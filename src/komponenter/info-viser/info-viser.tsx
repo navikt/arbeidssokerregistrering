@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Ikon from 'nav-frontend-ikoner-assets';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
@@ -15,7 +16,7 @@ class InfoViser extends React.Component<InfoViserProps> {
         return (
             <div className={classNames('info-viser', this.props.className)}>
                 <span className="info-viser--ikon" aria-label="info">
-                    test
+                    <Ikon kind="info-sirkel-fyll" size="1.5em"/>
                 </span>
                 <Normaltekst className="info-viser--kursiv">
                     <FormattedMessage id={this.props.tekstId}/>
