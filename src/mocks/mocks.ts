@@ -118,7 +118,7 @@ if (MOCK_REGISTRER_BRUKER) {
 }
 
 if (MOCK_REAKTIVER_BRUKER) {
-    mock.post(`${VEILARBREGISTRERING_URL}/startreaktivering*`, ResponseUtils.delayed(DELAY, {})); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startreaktivering`, ResponseUtils.delayed(DELAY, {})); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {
