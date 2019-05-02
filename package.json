@@ -13,7 +13,7 @@
     "build:ts": "react-scripts-ts build",
     "test": "npm run build:tekster && react-scripts-ts test --env=jsdom",
     "test:e2e": "node integration/runner.js --debug-mode",
-    "test:browsers": "node integration/browserstack-runner.js",
+    "test:browsers": "node integration/saucelabs-runner.js",
     "test:coverage": "npm test -- --coverage",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix",
@@ -117,7 +117,7 @@
     "path-to-regexp": "2.2.1",
     "sinon": "5.0.3",
     "testcafe": "0.23.3",
-    "testcafe-browser-provider-browserstack": "^1.5.0",
+    "testcafe-browser-provider-saucelabs": "^1.7.0",
     "tree-kill": "^1.2.1",
     "typescript": "^3.0.3",
     "watch": "^1.0.2"
