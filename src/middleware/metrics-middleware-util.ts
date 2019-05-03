@@ -1,11 +1,11 @@
-import {ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
-import {ActionTypes as RegistreringStatusActionTypes } from '../ducks/registreringstatus';
-import {ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
-import {ActionTypes as StillingFraAAregActionTypes } from '../ducks/siste-stilling-fra-aareg';
-import {ActionTypes as ReaktiverBrukerActionTypes } from '../ducks/reaktiverbruker';
-import {ActionTypes as OversettelseAvStillngFraAAregActionTypes } from '../ducks/oversettelse-av-stilling-fra-aareg';
-import {ActionTypes as FeatureToggleActionTypes } from '../ducks/feature-toggles';
-import {ActionTypes as BrukersnavnActionTypes } from '../ducks/brukers-navn';
+import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
+import { ActionTypes as RegistreringStatusActionTypes } from '../ducks/registreringstatus';
+import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
+import { ActionTypes as StillingFraAAregActionTypes } from '../ducks/siste-stilling-fra-aareg';
+import { ActionTypes as ReaktiverBrukerActionTypes } from '../ducks/reaktiverbruker';
+import { ActionTypes as OversettelseAvStillngFraAAregActionTypes } from '../ducks/oversettelse-av-stilling-fra-aareg';
+import { ActionTypes as FeatureToggleActionTypes } from '../ducks/feature-toggles';
+import { ActionTypes as BrukersnavnActionTypes } from '../ducks/brukers-navn';
 
 export const feilTyper = [
     {
