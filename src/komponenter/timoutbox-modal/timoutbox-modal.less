@@ -1,0 +1,73 @@
+@import '../../../node_modules/nav-frontend-core/less/core';
+
+.timeoutbox-modal {
+    width: 100%;
+    max-width: 740px;
+
+    &:focus {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        outline: none;
+    }
+
+    &__illustrasjon {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    &__beskrivelse {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 2rem auto 1rem auto;
+    }
+
+    &__knapp {
+        flex: 1 1 0;
+
+        &:nth-child(odd) {
+            margin-right: 0.5rem;
+        }
+
+        &:nth-child(even) {
+            margin-left: 0.5rem;
+        }
+
+    }
+
+    .nav-veileder + div {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: @screen-sm-max) {
+    .timeoutbox-modal__knapp {
+        padding: 0.5rem 1.25rem !important;
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .timeoutbox-modal {
+        width: 50%;
+    }
+}
+
+@media (min-width: @screen-md-min) {
+    .timeoutbox-modal {
+        width: 40%;
+    }
+}
+
+@media (min-width: @screen-lg-min) {
+    .timeoutbox-modal__actions {
+        width: 60%;
+    }
+}

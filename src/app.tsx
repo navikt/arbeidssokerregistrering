@@ -9,6 +9,7 @@ import {
 import './decorator/decorator-mock';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
+import TimoutboxModal from 'src/komponenter/timoutbox-modal/timoutbox-modal';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
             <Provider store={getStore()}>
                 <IntlProvider>
                     <HentInitialData>
+                        <TimoutboxModal/>
                         <Router>
                             <Routes/>
                         </Router>

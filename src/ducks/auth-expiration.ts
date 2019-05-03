@@ -54,6 +54,6 @@ export function hentAuthExpiration() {
     });
 }
 
-export function selectAutentiseringsinfo(state: AppState): State {
+export function selectAuthExpiration(state: AppState): State {
     return state.authExpiration;
 }

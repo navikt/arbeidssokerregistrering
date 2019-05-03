@@ -7,7 +7,7 @@ import registrerBruker, { State as RegistrerBruker } from './ducks/registrerbruk
 import brukersNavn, { State as BrukersNavnState } from './ducks/brukers-navn';
 import logger, { State as LoggerState } from './ducks/logger';
 import autentiseringsInfo, { State as AutentiseringsInfoState } from './ducks/autentiseringsinfo';
-import { State as AuthExpirationState } from './ducks/auth-expiration';
+import authExpiration, { State as AuthExpirationState } from './ducks/auth-expiration';
 import sisteStillingFraAAReg, { State as SisteStillingFraAARegState } from './ducks/siste-stilling-fra-aareg';
 import featureToggles, { State as FeatureTogglesState } from './ducks/feature-toggles';
 import oversettelseAvStillingFraAAReg, {
@@ -45,5 +45,6 @@ export default combineReducers<AppState>({
     defaultStilling,
     sisteStilling,
     featureToggles,
+    authExpiration,
     logger,
 });
