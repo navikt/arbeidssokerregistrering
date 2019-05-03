@@ -5,6 +5,7 @@ import { RegistreringType } from './registreringstatus';
 import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
 
 export const VEILARBPERSON_NAVN_URL = '/veilarbperson/api/person/navn';
+export const AUTHEXPIRATION_URL = '/api/auth';
 export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
 export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
@@ -103,6 +104,16 @@ export function hentBrukersNavn() {
 export function hentAutentiseringsInfo() {
     return fetchToJson({
         url: `${AUTENTISERINGSINFO_URL}`,
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
+    });
+}
+
+export function hentAuthExpiration() {
+    return fetchToJson({
+        url: `${AUTHEXPIRATION_URL}`,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),

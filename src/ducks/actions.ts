@@ -7,6 +7,7 @@ import { ActionTypes as OversettelseAvStillingFraAARegActionTypes } from './over
 import { ActionTypes as RegistrerBrukerActionTypes } from './registrerbruker';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './reaktiverbruker';
 import { ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
+import { ActionTypes as AuthExpirationTypes } from './auth-expiration';
 
 type ActionTypes =
    | RegStatusActionTypes
@@ -17,6 +18,7 @@ type ActionTypes =
    | ReaktiverBrukerActionTypes
    | OversettelseAvStillingFraAARegActionTypes
    | SisteStillingFraAARegActionTypes
+   | AuthExpirationTypes
    | FeatureTogglesActionTypes;
 
 export default ActionTypes;
