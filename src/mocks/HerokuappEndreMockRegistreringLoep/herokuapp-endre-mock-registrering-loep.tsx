@@ -20,7 +20,9 @@ import Lukknapp from 'nav-frontend-lukknapp';
 import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
+import { ActionTypes as AuthExpirationTypes } from '../../ducks/auth-expiration';
 import { IngenSvar } from '../../ducks/svar-utils';
+import * as moment from 'moment';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
@@ -185,7 +187,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                         className="devToggleStatus__legend"
                     >
                         <Normaltekst>
-                            Feilmeldinger
+                            Feilmeldinger og informasjonsmelding
                         </Normaltekst>
                     </legend>
                     <div>
@@ -237,6 +239,28 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             value="Feilmelding - brukere mangler arbeidsstillatelse"
                             checked={
                                 feilmeldingRadioKnapp === 'manglerarbtillatelse'
+                            }
+                        />
+                        <RadioPanel
+                            onChange={() => {
+
+                                store.dispatch({
+                                    type: AuthExpirationTypes.HENT_AUTHEXPIRATION_OK,
+                                    data: {
+                                        expirationTime: moment(new Date()).add(0,  'minutes').toString(),
+                                    }
+                                });
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'Informasjonsmelding_sesjon'
+                                });
+
+                            }}
+                            name="feilmelding"
+                            label="Informasjonsmelding når sesjon går ut"
+                            value="Informasjonsmelding når sesjon går ut"
+                            checked={
+                                feilmeldingRadioKnapp === 'Informasjonsmelding_sesjon'
                             }
                         />
                     </div>
