@@ -1,9 +1,6 @@
 import * as React from 'react';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { Systemtittel } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
-import { Knapp } from 'nav-frontend-knapper';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
 import {
@@ -11,93 +8,84 @@ import {
     selectAuthExpiration
 } from '../../ducks/auth-expiration';
 import './timoutbox-modal.less';
-// import * as moment from 'moment';
+import * as moment from 'moment';
+import LogginnIgjen from './logginn-igjen';
 
-const avbrytSvg = require('./avbryt.svg');
+const infoSvg = require('./info.svg');
 
 interface EgenState {
     manueltLukket: boolean;
 }
 
 interface DispatchProps {
-    hihentAuthExpiration: () => void;
+    hentAuthExpiration: () => void;
 }
 
 interface StateProps {
-    remainingSeconds?: number;
+    expirationTime?: string;
 }
 
 type AllProps = StateProps & DispatchProps;
 
 class TimoutboxModal extends React.Component<AllProps, EgenState> {
 
+    private timeout;
     constructor(props: AllProps) {
         super(props);
-        this.state = {
-            manueltLukket: false,
-        };
-        this.props.hihentAuthExpiration();
+        this.props.hentAuthExpiration();
     }
 
     componentDidUpdate() {
-        console.log('this.props.remainingSeconds', this.props.remainingSeconds); // tslint:disable-line
+        const expirationTime = this.props.expirationTime;
+        if (!this.timeout && expirationTime) {
+            const expirationInMillis = this.visningsTidspunkt().diff(
+                moment(),
+                'ms'
+            );
+            this.timeout = setTimeout(() => {
+                this.forceUpdate();
+            }, expirationInMillis + 100);
+        }
     }
 
-    // visningsTidspunkt() {
-    //     return moment(this.props.expirationTime).subtract(5, 'minutes');
-    // }
-    //
-    // skalViseModal() {
-    //     return (
-    //         moment().isAfter(this.visningsTidspunkt())
-    //     );
-    // }
+    componentWillUnmount() {
+        clearTimeout(this.timeout);
+    }
+
+    visningsTidspunkt() {
+        return moment(this.props.expirationTime).subtract(5, 'minutes');
+    }
+
+    skalViseModal() {
+        return moment().isAfter(this.visningsTidspunkt());
+    }
 
     render() {
-        const skalVise = true; // this.skalViseModal();
-        const utlopsTidspunkt = null; // this.props.expirationTime;
+        const skalVise = this.skalViseModal();
+        const utlopsTidspunkt = this.props.expirationTime;
         if (!utlopsTidspunkt) {
             return null;
         }
-
+        
         return (
             <NavFrontendModal
                 isOpen={skalVise}
                 contentLabel="Blir logget ut"
-                shouldCloseOnOverlayClick={false}
                 className="timeoutbox-modal"
-                onRequestClose={() => {
-                    this.setState({
-                        manueltLukket: true,
-                    });
-                }}
-
+                shouldCloseOnOverlayClick={false}
+                closeButton={false}
+                onRequestClose={() => false}
             >
                 <Veilederpanel
                     type="plakat"
                     kompakt={true}
                     svg={<img
-                        src={avbrytSvg}
-                        alt="Informasjon"
+                        src={infoSvg}
                         className="timeoutbox-modal__illustrasjon"
                     />}
                 >
-                    <Systemtittel className="timeoutbox-modal__beskrivelse">
-                        <FormattedMessage id="test"/>
-                    </Systemtittel>
-
-                    <div className="timeoutbox-modal__actions">
-                        <Knapp
-                            className="timeoutbox-modal__knapp"
-                            onClick={
-                                () => null
-                            }
-                        >
-                            <FormattedMessage id="knapp-ja-avbryt"/>
-                        </Knapp>
-                        <Knapp className="timeoutbox-modal__knapp" onClick={() => null}>
-                            <FormattedMessage id="knapp-nei"/>
-                        </Knapp>
+                    <div className="timeoutbox-nedtelling">
+                        <LogginnIgjen/>
                     </div>
                 </Veilederpanel>
             </NavFrontendModal>
@@ -107,11 +95,11 @@ class TimoutboxModal extends React.Component<AllProps, EgenState> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    remainingSeconds: selectAuthExpiration(state).data.remainingSeconds
+    expirationTime: selectAuthExpiration(state).data.expirationTime
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    hihentAuthExpiration: () => dispatch(hentAuthExpiration()),
+    hentAuthExpiration: () => dispatch(hentAuthExpiration()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimoutboxModal);

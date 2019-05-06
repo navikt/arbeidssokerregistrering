@@ -15,6 +15,7 @@ export interface State {
 
 export interface Data {
     remainingSeconds?: number;
+    expirationTime?: string;
 }
 
 interface Action {

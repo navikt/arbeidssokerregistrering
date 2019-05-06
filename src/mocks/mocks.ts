@@ -24,6 +24,7 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
 import brukerKontekst from './fss-bruker-kontekst';
+import * as moment from 'moment';
 
 export const MOCK_START_REGISRERING_STATUS = true;
 export const MOCK_REGISTRER_BRUKER = true;
@@ -72,7 +73,7 @@ if (MOCK_BRUKERS_NAVN) {
 if (MOCK_AUTHEXPIRATION) {
     (mock as any).get(`glob:${AUTHEXPIRATION_URL}*`, respondWith(delayed(DELAY, {
         remainingSeconds: 1121,
-        expirationTime: '2018-12-10T15:25:00+0100',
+        expirationTime: moment(new Date()).add(60,  'minutes').toString(),
     })));
 }
 

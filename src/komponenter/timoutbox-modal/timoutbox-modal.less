@@ -1,8 +1,8 @@
 @import '../../../node_modules/nav-frontend-core/less/core';
 
 .timeoutbox-modal {
-    width: 100%;
-    max-width: 740px;
+    max-width: 480px;
+    background-color: transparent;
 
     &:focus {
         -webkit-box-shadow: none;
@@ -21,53 +21,26 @@
         margin: 0 auto;
     }
 
-    &__actions {
+    .nav-veilederpanel--kompakt.nav-veilederpanel--plakat {
+        margin-top: 3.125rem;
+        padding: 4.25rem 0.5rem 2rem 0.5rem;
+        border-color: @navDypBlaLighten60;
+    }
+
+    .timeoutbox-nedtelling {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin: 2rem auto 1rem auto;
-    }
-
-    &__knapp {
-        flex: 1 1 0;
-
-        &:nth-child(odd) {
-            margin-right: 0.5rem;
-        }
-
-        &:nth-child(even) {
-            margin-left: 0.5rem;
-        }
-
-    }
-
-    .nav-veileder + div {
-        width: 100%;
+        flex-direction: column;
+        padding: 0 3rem 1rem 3rem;
     }
 
 }
 
 
-@media (max-width: @screen-sm-max) {
-    .timeoutbox-modal__knapp {
-        padding: 0.5rem 1.25rem !important;
-    }
-}
-
-@media (min-width: @screen-sm-min) {
+@media (min-width: @screen-md) {
     .timeoutbox-modal {
-        width: 50%;
-    }
-}
-
-@media (min-width: @screen-md-min) {
-    .timeoutbox-modal {
-        width: 40%;
-    }
-}
-
-@media (min-width: @screen-lg-min) {
-    .timeoutbox-modal__actions {
-        width: 60%;
+        .nav-veilederpanel--kompakt.nav-veilederpanel--plakat {
+            margin-top: 3.125rem;
+            padding: 4.25rem 2rem 2rem 2rem;
+        }
     }
 }
