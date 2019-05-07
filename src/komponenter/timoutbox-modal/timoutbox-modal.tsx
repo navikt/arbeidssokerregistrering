@@ -55,7 +55,7 @@ class TimoutboxModal extends React.Component<AllProps, EgenState> {
     }
 
     visningsTidspunkt() {
-        return moment(this.props.expirationTime).subtract(20, 'seconds');
+        return moment(this.props.expirationTime).subtract(5, 'minutes');
     }
 
     skalViseModal() {
