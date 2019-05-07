@@ -11,6 +11,7 @@ import './timoutbox-modal.less';
 import * as moment from 'moment';
 import LogginnIgjen from './logginn-igjen';
 import { frontendLogger } from '../../metrikker/metrics-utils';
+import { Data as AuthExpiration } from '../../ducks/auth-expiration';
 
 const infoSvg = require('./info.svg');
 
@@ -19,7 +20,7 @@ interface EgenState {
 }
 
 interface DispatchProps {
-    hentAuthExpiration: () => void;
+    hentAuthExpiration: () => Promise<void | {}>;
 }
 
 interface StateProps {
@@ -31,23 +32,23 @@ type AllProps = StateProps & DispatchProps;
 class TimoutboxModal extends React.Component<AllProps, EgenState> {
 
     private timeout;
-    constructor(props: AllProps) {
-        super(props);
-        this.props.hentAuthExpiration();
-    }
 
-    componentDidUpdate() {
-        const expirationTime = this.props.expirationTime;
-        if (!this.timeout && expirationTime) {
-            const expirationInMillis = this.visningsTidspunkt().diff(
-                moment(),
-                'ms'
-            );
-            this.timeout = setTimeout(() => {
-                frontendLogger('timeoutbox.sesjon.utgatt');
-                this.forceUpdate();
-            }, expirationInMillis + 100);
-        }
+    componentDidMount() {
+        this.props.hentAuthExpiration()
+            .then((authExp: AuthExpiration) => {
+                const { expirationTime } = authExp;
+
+                if (!this.timeout && expirationTime) {
+                    const expirationInMillis = this.visningsTidspunkt().diff(
+                        moment(),
+                        'ms'
+                    );
+                    this.timeout = setTimeout(() => {
+                        frontendLogger('timeoutbox.sesjon.utgatt');
+                        this.forceUpdate();
+                    }, expirationInMillis + 100);
+                }
+            });
     }
 
     componentWillUnmount() {
