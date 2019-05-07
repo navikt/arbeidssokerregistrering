@@ -9,7 +9,7 @@ const StartPaaNytt = () => {
                 Sesjonen din har utløpt
             </Systemtittel>
             <Normaltekst className="blokk-s timeoutbox-modal__beskrivelse">
-                Du må logge inn på ny for å fortsette.
+                Du må starte på nytt for å fortsette.
             </Normaltekst>
             <HovedKnapp
                 className="timeoutbox-modal__knapp"
@@ -19,7 +19,7 @@ const StartPaaNytt = () => {
                     }
                 }
             >
-                Logg inn
+                Start på nytt
             </HovedKnapp>
         </>
     );
