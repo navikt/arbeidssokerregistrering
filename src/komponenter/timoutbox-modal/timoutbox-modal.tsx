@@ -9,7 +9,7 @@ import {
 } from '../../ducks/auth-expiration';
 import './timoutbox-modal.less';
 import * as moment from 'moment';
-import LogginnIgjen from './logginn-igjen';
+import StartPaaNytt from './start-paa-nytt';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 import { Data as AuthExpiration } from '../../ducks/auth-expiration';
 
@@ -88,7 +88,7 @@ class TimoutboxModal extends React.Component<AllProps, EgenState> {
                     />}
                 >
                     <div className="timeoutbox-nedtelling">
-                        <LogginnIgjen/>
+                        <StartPaaNytt/>
                     </div>
                 </Veilederpanel>
             </NavFrontendModal>

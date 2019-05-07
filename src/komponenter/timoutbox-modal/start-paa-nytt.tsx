@@ -2,7 +2,7 @@ import * as React from 'react';
 import HovedKnapp from 'nav-frontend-knapper/lib/hovedknapp';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 
-const LogginnIgjen = () => {
+const StartPaaNytt = () => {
     return (
         <>
             <Systemtittel className="blokk-xs timeoutbox-modal__beskrivelse">
@@ -25,4 +25,4 @@ const LogginnIgjen = () => {
     );
 };
 
-export default LogginnIgjen;
+export default StartPaaNytt;
