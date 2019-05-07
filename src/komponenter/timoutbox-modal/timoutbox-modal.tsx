@@ -10,6 +10,7 @@ import {
 import './timoutbox-modal.less';
 import * as moment from 'moment';
 import LogginnIgjen from './logginn-igjen';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 const infoSvg = require('./info.svg');
 
@@ -43,6 +44,7 @@ class TimoutboxModal extends React.Component<AllProps, EgenState> {
                 'ms'
             );
             this.timeout = setTimeout(() => {
+                frontendLogger('timeoutbox.sesjon.utgatt');
                 this.forceUpdate();
             }, expirationInMillis + 100);
         }
@@ -53,7 +55,7 @@ class TimoutboxModal extends React.Component<AllProps, EgenState> {
     }
 
     visningsTidspunkt() {
-        return moment(this.props.expirationTime).subtract(5, 'minutes');
+        return moment(this.props.expirationTime).subtract(20, 'seconds');
     }
 
     skalViseModal() {
