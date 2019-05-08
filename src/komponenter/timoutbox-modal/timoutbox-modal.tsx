@@ -40,7 +40,7 @@ class TimoutboxModal extends React.Component<DispatchProps, EgenState> {
 
                 if (!this.timeout && expirationTime) {
 
-                    const expirationInMillis = moment(expirationTime).subtract(1, 'minutes').diff(
+                    const expirationInMillis = moment(expirationTime).subtract(5, 'minutes').diff(
                         moment(),
                         'ms'
                     );

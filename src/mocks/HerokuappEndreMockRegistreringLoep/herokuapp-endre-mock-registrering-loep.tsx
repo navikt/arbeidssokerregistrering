@@ -20,9 +20,9 @@ import Lukknapp from 'nav-frontend-lukknapp';
 import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
-import { ActionTypes as AuthExpirationTypes } from '../../ducks/auth-expiration';
 import { IngenSvar } from '../../ducks/svar-utils';
-import * as moment from 'moment';
+import { parse } from 'query-string';
+import { tisekunder } from '../autexpiration-mock';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
@@ -97,6 +97,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             reset();
         };
 
+        const locationSearch = parse(window.location.search);
+
         const {
             skalVise,
             feilmeldingRadioKnapp
@@ -107,6 +109,25 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
         return (
             <div className={`devToggleStatus ${visSkjul}`}>
+                <label className="sesjon-utlopt typo-normal">
+                    <input
+                        type="checkbox"
+                        onChange={(event: any) =>  { // tslint:disable-line
+                            if (event.target.checked) {
+                                window.location.href = '?visSesjonUtlopt=true';
+                            } else {
+                                window.location.href = '/';
+                            }
+                        }}
+                        checked={locationSearch.visSesjonUtlopt}
+                    />
+                    Vis informasjonsmelding når sesjonen har utløpt
+                    {
+                        locationSearch.visSesjonUtlopt
+                            ? <div>(meldingen vil vises om {tisekunder} sekunder)</div> : null
+                    }
+
+                </label>
                 <fieldset className="devToggleStatus__fieldset">
                     <legend
                         className="devToggleStatus__legend"
@@ -239,28 +260,6 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             value="Feilmelding - brukere mangler arbeidsstillatelse"
                             checked={
                                 feilmeldingRadioKnapp === 'manglerarbtillatelse'
-                            }
-                        />
-                        <RadioPanel
-                            onChange={() => {
-
-                                store.dispatch({
-                                    type: AuthExpirationTypes.HENT_AUTHEXPIRATION_OK,
-                                    data: {
-                                        expirationTime: moment(new Date()).add(0,  'minutes').toString(),
-                                    }
-                                });
-
-                                this.setState({
-                                    feilmeldingRadioKnapp: 'Informasjonsmelding_sesjon'
-                                });
-
-                            }}
-                            name="feilmelding"
-                            label="Informasjonsmelding når sesjon går ut"
-                            value="Informasjonsmelding når sesjon går ut"
-                            checked={
-                                feilmeldingRadioKnapp === 'Informasjonsmelding_sesjon'
                             }
                         />
                     </div>
