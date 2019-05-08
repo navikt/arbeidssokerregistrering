@@ -11,15 +11,12 @@ import { formaterDato, MatchProps } from '../../utils/utils';
 import { INNGANGSSPORSMAL_PATH } from '../../utils/konstanter';
 import InformasjonModal from './informasjon/informasjon-modal';
 import { AppState } from '../../reducer';
-import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
-import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface Props {
-    featureToggles: FeatureToggleData;
     registreringStatus: RegistreringStatusState;
     brukersNavn: BrukersNavnState;
 }
@@ -50,8 +47,7 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
     }
 
     render() {
-        const { registreringStatus, brukersNavn, featureToggles } = this.props;
-        const toggleRegistreringTekst = featureToggles['veiledearbeidssoker.registrering.tekst'];
+        const { registreringStatus, brukersNavn } = this.props;
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
         const { fornavn } = brukersNavn.data;
@@ -113,25 +109,9 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
                         <FormattedMessage id="registrering-sykmeldt.argument3tittel"/>
                     </Innholdstittel>
                     <div className="rad3__tekst">
-                        <Normaltekst>
+                        <Normaltekst className="blokk-l" tag="div">
                             <FormattedHTMLMessage id="registrering-sykmeldt.rad3.del1"/>
                         </Normaltekst>
-                        {
-                            toggleRegistreringTekst
-                                ?
-                                    <div
-                                        className="typo-normal"
-                                        onClick={(e: any) => { // tslint:disable-line
-                                            if (e.target.tagName === 'A') {
-                                                frontendLogger('syfo.cv.lenke.klikk');
-                                            }
-                                        }}
-                                    >
-                                        <FormattedHTMLMessage id="registrering-sykmeldt.rad3.del2"/>
-                                    </div>
-                                :
-                                null
-                        }
                     </div>
                     <div className="rad3__knapperad">
                         <KnappBase
@@ -168,7 +148,6 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
 }
 
 const mapStateToProps = (state: AppState) => ({
-    featureToggles: selectFeatureToggles(state),
     registreringStatus: selectRegistreringstatus(state),
     brukersNavn: selectBrukersNavn(state),
 });
