@@ -8,7 +8,7 @@ import { State as RegistrerBruker, ActionTypes as registrerbrukerActionType }
     from '../../ducks/registrerbruker';
 import { ActionTypes as reaktiveringActionType }
     from '../../ducks/reaktiverbruker';
-import {ActionTypes as SvarActionTypes, ActionTypes as svarActionType, SporsmalId }
+import { ActionTypes as SvarActionTypes, ActionTypes as svarActionType, SporsmalId }
     from '../../ducks/svar';
 import { RadioPanel } from 'nav-frontend-skjema';
 import { getStore } from '../../store';

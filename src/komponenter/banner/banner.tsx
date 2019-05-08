@@ -4,7 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
-import {Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
+import { Data as StartRegistreringData, RegistreringType } from '../../ducks/registreringstatus';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import './banner.less';
