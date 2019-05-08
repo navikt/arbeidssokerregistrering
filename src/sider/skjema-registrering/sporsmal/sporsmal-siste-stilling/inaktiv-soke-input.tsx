@@ -26,7 +26,7 @@ const InaktivSokeInput: React.SFC<AllProps> = (props: AllProps) => {
                 <Normaltekst tag="span" className="inaktiv-soke-input__input-felt--stilling-tekst">
                     {stilling.label}
                 </Normaltekst>
-                <span className="inaktiv-soke-input__input-felt--endre typo-normal">{tekster.endreTekst}</span>
+                <button className="inaktiv-soke-input__input-felt--endre typo-normal">{tekster.endreTekst}</button>
             </div>
         </div>
     );
