@@ -114,7 +114,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                         type="checkbox"
                         onChange={(event: any) =>  { // tslint:disable-line
                             if (event.target.checked) {
-                                window.location.href = '?visSesjonUtlopt=true';
+                                window.location.href = '/?visSesjonUtlopt=true';
                             } else {
                                 window.location.href = '/';
                             }
