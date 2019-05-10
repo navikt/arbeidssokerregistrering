@@ -55,12 +55,12 @@ class TimoutboxModal extends React.Component<DispatchProps, EgenState> {
             });
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.timeout);
-    }
-
     render() {
         const skalVise = this.state.skalVise;
+
+        if (skalVise) {
+            clearTimeout(this.timeout);
+        }
 
         return (
             <NavFrontendModal
