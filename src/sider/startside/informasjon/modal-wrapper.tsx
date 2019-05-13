@@ -45,7 +45,7 @@ class ModalWrapper extends React.Component<Props> {
         this.onRequestClose = this.onRequestClose.bind(this);
     }
 
-    onRequestClose(evt: Event) {
+    onRequestClose(evt: any) { // tslint:disable-line
         const { onRequestClose, shouldCloseOnOverlayClick } = this.props;
         if (shouldCloseOnOverlayClick || evt.type === 'keydown') {
             onRequestClose();
