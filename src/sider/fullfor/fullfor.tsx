@@ -128,10 +128,6 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                     <Innholdstittel tag="h1" className="fullfor-tittel">
                         <FormattedMessage id="fullfor-header"/>
                     </Innholdstittel>
-                    <Normaltekst className="fullfor-ingress">
-                        <FormattedMessage id="fullfor-ingress"/>
-                    </Normaltekst>
-
                     <div className="fullfor-sjekkliste">
                         <img
                             src={utropstegnSvg}
