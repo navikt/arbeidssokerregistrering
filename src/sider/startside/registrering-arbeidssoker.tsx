@@ -15,7 +15,6 @@ import { SKJEMA_PATH } from '../../utils/konstanter';
 import InformasjonModal from './informasjon/informasjon-modal';
 import { AppState } from '../../reducer';
 import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
-import { frontendLogger } from '../../metrikker/metrics-utils';
 
 interface Props {
     featureToggles: FeatureToggleData;
@@ -42,8 +41,6 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
     }
 
     render() {
-        const toggleRegistreringTekst = this.props.featureToggles['veiledearbeidssoker.registrering.tekst'];
-
         const Rad1 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad1">
@@ -119,31 +116,6 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4"/></li>
                         </ul>
                         <Normaltekst><FormattedMessage id="registrering-arbeidssoker.rad3.del2"/></Normaltekst>
-                        {
-                            toggleRegistreringTekst
-                                ?
-                                <>
-                                    <Element tag="h3">
-                                        <FormattedMessage id="registrering-arbeidssoker.rad3.del3.tittel"/>
-                                    </Element>
-                                    <Normaltekst>
-                                    <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del1"/>{' '}
-                                    <a
-                                        className="lenke"
-                                        href="https://arbeidsplassen.nav.no"
-                                        onClick={() => {
-                                            frontendLogger('veiledearbeidssoker.klikkpaarbeidsplassenlenke');
-                                        }}
-                                    >
-                                        <FormattedMessage id="registrering.arbeidsplassen.lenke"/>
-                                    </a>{' '}
-                                    <FormattedMessage id="registrering-arbeidssoker.rad3.del3.innhold.del2"/>
-                                    </Normaltekst>
-                                </>
-                                :
-                                null
-                        }
-
                         <Element tag="h3"><FormattedMessage id="registrering-arbeidssoker.rad3.del4.tittel"/></Element>
                         <Normaltekst>
                             <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold"/><br/>

@@ -2,4 +2,4 @@ language: node_js
 node_js: "8"
 
 script:
-    - '[ -n "$BROWSERSTACK_USERNAME" ] && [ -n "$BROWSERSTACK_ACCESS_KEY" ] && npm run test:browsers'
+    - '[ -n "SAUCE_USERNAME" ] && [ -n "SAUCE_ACCESS_KEY" ] && npm run test:browsers'
