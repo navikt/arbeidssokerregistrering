@@ -6,6 +6,7 @@ import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import oversettelseAvStillingFraAAReg from './oversettelse-av-stilling-fra-aareg-mock';
 import {featureTogglesMock} from './feature-toggles-mock';
 import {
+    AUTHEXPIRATION_URL,
     BRUKER_KONTEKST_URL,
     FEATURE_URL, OPPDATER_KONTEKST_URL,
     VEILARBPERSON_NAVN_URL,
@@ -23,11 +24,13 @@ import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
 import {sisteStillingMock} from './siste-stilling-mock';
 import {hentSvar} from '../ducks/svar-utils';
 import brukerKontekst from './fss-bruker-kontekst';
+import autexpirationMock from "./autexpiration-mock";
 
 export const MOCK_START_REGISRERING_STATUS = true;
 export const MOCK_REGISTRER_BRUKER = true;
 export const MOCK_REAKTIVER_BRUKER = true;
 export const MOCK_BRUKERS_NAVN = true;
+export const MOCK_AUTHEXPIRATION = true;
 export const MOCK_AUTENTISERINGS_INFO = true;
 export const MOCK_GET_SISTE_ARBIEDSFORHOLD = true;
 export const MOCK_POST_SISTE_ARBIEDSFORHOLD = true;
@@ -66,6 +69,11 @@ if (MOCK_FEATURE_TOGGLES) {
 if (MOCK_BRUKERS_NAVN) {
     (mock as any).get(`glob:${VEILARBPERSON_NAVN_URL}*`, respondWith(delayed(DELAY, brukersNavn)));
 }
+
+if (MOCK_AUTHEXPIRATION) {
+    (mock as any).get(`glob:${AUTHEXPIRATION_URL}*`, respondWith(delayed(DELAY, autexpirationMock)));
+}
+
 
 if(MOCK_GET_SISTE_ARBIEDSFORHOLD) {
     const response = respondWith(delayed(DELAY, sisteStillingFraAAReg));

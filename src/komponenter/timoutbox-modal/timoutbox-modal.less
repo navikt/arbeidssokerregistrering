@@ -1,0 +1,47 @@
+@import '../../../node_modules/nav-frontend-core/less/core';
+
+
+.timeoutbox-modal {
+    max-width: 480px;
+    background-color: transparent;
+
+    &:focus {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        outline: none;
+    }
+
+    &__illustrasjon {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    &__beskrivelse {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .nav-veilederpanel--kompakt.nav-veilederpanel--plakat {
+        margin-top: 3.125rem;
+        padding: 4.25rem 0.5rem 2rem 0.5rem;
+        border-color: @navDypBlaLighten60;
+    }
+
+    .timeoutbox-nedtelling {
+        display: flex;
+        flex-direction: column;
+        padding: 0 3rem 1rem 3rem;
+    }
+
+}
+
+
+@media (min-width: @screen-md) {
+    .timeoutbox-modal {
+        .nav-veilederpanel--kompakt.nav-veilederpanel--plakat {
+            margin-top: 3.125rem;
+            padding: 4.25rem 2rem 2rem 2rem;
+        }
+    }
+}

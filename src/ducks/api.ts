@@ -11,6 +11,7 @@ export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/api/feature';
 export const OPPDATER_KONTEKST_URL = '/modiacontextholder/api/context';
 export const BRUKER_KONTEKST_URL = '/modiacontextholder/api/context/aktivbruker';
+export const AUTHEXPIRATION_URL = '/api/auth';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
@@ -162,5 +163,15 @@ export function hentFeatureToggles() {
             headers: getHeaders(),
         },
         recoverWith: () => ({})
+    });
+}
+
+export function hentAuthExpiration() {
+    return fetchToJson({
+        url: `${AUTHEXPIRATION_URL}`,
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
     });
 }
