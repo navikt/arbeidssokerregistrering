@@ -4,8 +4,7 @@ import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { frontendLogger } from '../../../metrikker/metrics-utils';
 import {
     HEROKU_VEIENTILARBEID_MED_AAP_URL,
-    HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL,
-    HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_MED_AAP_URL, VEIENTILARBEID_MED_DAGPENGER_URL, VEIENTILARBEID_URL
+    HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_MED_AAP_URL, VEIENTILARBEID_URL, DP_SOK_URL
 } from '../../../utils/konstanter';
 
 import handinfoSvg from './clipboard.svg';
@@ -21,7 +20,6 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
     render() {
 
         const { hentTekstId, erSykmeldt } = this.props;
-
         let veienTilArbeidUrl;
         let veienTilArbeidMedVisInfoUrl;
         const brukHerokuUrl = !!process.env.REACT_APP_HEROKU_OVERGANG;
@@ -31,12 +29,12 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
 
             veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + '?' + brukerStatusQueryParam;
             veienTilArbeidMedVisInfoUrl = (erSykmeldt ? HEROKU_VEIENTILARBEID_MED_AAP_URL
-                : HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL) + '&' + brukerStatusQueryParam;
+                : DP_SOK_URL) + '&' + brukerStatusQueryParam;
 
         } else {
             veienTilArbeidUrl = VEIENTILARBEID_URL;
             veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL
-                : VEIENTILARBEID_MED_DAGPENGER_URL;
+                : DP_SOK_URL;
         }
 
         return (
@@ -54,15 +52,6 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                     </Element>
                     <div className="registrert__knapperad">
                         <a
-                            href={veienTilArbeidUrl}
-                            className="registrert__lenke knapp knapp--standard"
-                            onClick={() => {
-                                frontendLogger('registrering.ikke.vis.dagpenger.info');
-                            }}
-                        >
-                            <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
-                        </a>
-                        <a
                             href={veienTilArbeidMedVisInfoUrl}
                             className="registrert__lenke knapp knapp--hoved"
                             onClick={() => {
@@ -70,6 +59,15 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                             }}
                         >
                             <FormattedMessage id="duernaregistrert-knapp-ja"/>
+                        </a>
+                        <a
+                            href={veienTilArbeidUrl}
+                            className="registrert__lenke knapp knapp--standard"
+                            onClick={() => {
+                                frontendLogger('registrering.ikke.vis.dagpenger.info');
+                            }}
+                        >
+                            <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
                         </a>
                     </div>
                 </div>
