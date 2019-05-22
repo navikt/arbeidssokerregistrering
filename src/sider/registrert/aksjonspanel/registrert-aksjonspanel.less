@@ -86,15 +86,16 @@
 
 		&__knapperad {
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
 			.knapp:first-child {
-				margin-right: 1rem;
+				margin-right: 0;
 			}
 		}
 
 		&__lenke {
-			max-width: ~'calc(50% - 0.5rem)';
+			max-width: 100%;
 			flex-grow: 1;
+			cursor: pointer;
 		}
 	}
 }
