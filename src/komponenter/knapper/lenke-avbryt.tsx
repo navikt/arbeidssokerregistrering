@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import AvbrytModal from '../avbryt-modal/avbryt-modal';
 import { AppState } from '../../reducer';
@@ -34,7 +34,8 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
         };
     }
 
-    handleAvbrytClick = (e): void => {
+    // todo fix any
+    handleAvbrytClick = (e: any): void => {  // tslint:disable-line
         e.preventDefault();
         this.setState({ visAvbrytModal: true });
     }
@@ -56,7 +57,7 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
 
         return (
             <>
-                <div className={classnames('lenke-avbryt-wrapper', wrapperClassname)}>
+                <div className={classNames('lenke-avbryt-wrapper', wrapperClassname)}>
                     <a href="" className="lenke lenke-avbryt typo-element" onClick={this.handleAvbrytClick}>
                         <FormattedMessage id={id}/>
                     </a>

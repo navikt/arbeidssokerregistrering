@@ -1,7 +1,6 @@
 import {
-    OrdinaerBesvarelse,
+    BesvarelseType,
     OrdinaerRegistreringData,
-    SykmeldtBesvarelse,
     SykmeldtRegistreringData,
     TeksterForBesvarelse
 } from './registrerbruker';
@@ -9,7 +8,10 @@ import { SporsmalId, State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
 import { InjectedIntl } from 'react-intl';
-import { hentSvar, IngenSvar } from './svar-utils';
+import {
+    hentSvar,
+    IngenSvar,
+} from './svar-utils';
 import { RegistreringType } from './registreringstatus';
 
 export function mapAvgitteSvarForBackend(
@@ -40,9 +42,9 @@ export function mapAvgitteSvarForBackend(
     }
 }
 
-export function mapTilBesvarelse(svarState: SvarState): OrdinaerBesvarelse | SykmeldtBesvarelse {
+export function mapTilBesvarelse(svarState: SvarState): BesvarelseType {
 
-    const besvarelse = {};
+    const besvarelse: BesvarelseType = {};
 
     for (let i = 0; i < svarState.length; i++) {
         const sporsmalOgSvar = svarState[i];
@@ -53,7 +55,7 @@ export function mapTilBesvarelse(svarState: SvarState): OrdinaerBesvarelse | Syk
 
 }
 
-export function mapTilSvarState(besvarelse: OrdinaerBesvarelse | SykmeldtBesvarelse): SvarState {
+export function mapTilSvarState(besvarelse: BesvarelseType): SvarState {
     return Object.keys(besvarelse).map((sporsmalId) => ({
         sporsmalId: sporsmalId,
         svar: besvarelse[sporsmalId]

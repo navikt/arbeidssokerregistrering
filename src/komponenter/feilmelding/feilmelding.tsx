@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import navAnsattSvg from './nav-ansatt.svg';
 import './feilmelding.less';
 
@@ -15,7 +15,7 @@ class Feilmelding extends React.Component<FeilmeldingProps> {
         const feilmeldingBilde = bilde ? bilde : navAnsattSvg;
 
         return (
-            <div className={classnames('feilmelding', className)}>
+            <div className={classNames('feilmelding', className)}>
                 <img src={feilmeldingBilde} className="feilmelding__ikon" alt={!bilde ? 'NAV-ansatt' : ''}/>
                 <div className="feilmelding__innhold">
                     {this.props.children}

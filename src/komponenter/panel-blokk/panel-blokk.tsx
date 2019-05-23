@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { Panel } from 'nav-frontend-paneler';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { getIntlMessage } from '../../utils/utils';

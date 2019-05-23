@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import './knapperad.less';
 
 interface KnapperadProps {
@@ -9,7 +9,7 @@ interface KnapperadProps {
 
 function Knapperad({ children, classname }: KnapperadProps) {
     return(
-        <div className={classnames('knapperad', classname)}>
+        <div className={classNames('knapperad', classname)}>
             {children}
         </div>
     );

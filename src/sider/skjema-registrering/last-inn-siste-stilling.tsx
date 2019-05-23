@@ -98,7 +98,7 @@ class LastInnSisteStilling extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
     labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),

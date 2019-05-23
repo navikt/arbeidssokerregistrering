@@ -1,6 +1,6 @@
-import * as chai from 'chai';
+import chai from 'chai';
 import * as sinon from 'sinon';
-import * as chaiAsPromised from 'chai-as-promised';
+import chaiAsPromised from 'chai-as-promised';
 import { ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import { loggResponstid } from './responstid-middleware-utils';
 

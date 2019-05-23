@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RadioPanel } from 'nav-frontend-skjema';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Svar } from '../../ducks/svar-utils';
 

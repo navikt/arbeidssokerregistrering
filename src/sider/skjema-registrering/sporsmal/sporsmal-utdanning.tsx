@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Alternativ from '../../../komponenter/skjema/alternativ';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { getIntlTekstForSporsmal, getTekstIdForSvar, TekstKontekst } from '../../../komponenter/skjema/skjema-utils';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { Svar, UtdanningSvar } from '../../../ducks/svar-utils';
 import { SporsmalProps } from '../../../komponenter/skjema/sporsmal-utils';
-import { injectIntl } from 'react-intl';
+import ReactIntl, { injectIntl } from 'react-intl';
 
-type Props = SporsmalProps & InjectedIntlProps;
+type Props = SporsmalProps & ReactIntl.InjectedIntlProps;
 
 function Utdanningsporsmal(props: Props) {
     const fellesProps = {

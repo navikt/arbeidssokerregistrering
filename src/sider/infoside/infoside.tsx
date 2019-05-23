@@ -32,7 +32,7 @@ class Infoside extends React.Component<Props> {
     render() {
 
         const fornavn = this.props.brukersNavn.data.fornavn;
-        let veilederpanelType;
+        let veilederpanelType: 'normal' | 'plakat' = 'plakat';
         let veilederpanelKompakt;
 
         if (window.matchMedia('(min-width: 768px)').matches) {

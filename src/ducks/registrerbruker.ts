@@ -5,7 +5,7 @@ import {
     AndreForholdSvar,
     DinSituasjonSvar, FremtidigSituasjonSvar,
     HelseHinderSvar,
-    SisteStillingSvar, TilbakeIArbeidSvar, UtdanningBestattSvar,
+    SisteStillingSvar, Svar, TilbakeIArbeidSvar, UtdanningBestattSvar,
     UtdanningGodkjentSvar, UtdanningSvar
 } from './svar-utils';
 import { RegistreringType } from './registreringstatus';
@@ -51,9 +51,15 @@ export interface SykmeldtBesvarelse {
     utdanningBestatt?: UtdanningBestattSvar;
     utdanningGodkjent?: UtdanningGodkjentSvar;
     andreForhold?: AndreForholdSvar;
-    fremtidigSituason?: FremtidigSituasjonSvar;
+    fremtidigSituasjon?: FremtidigSituasjonSvar;
     tilbakeIArbeid?: TilbakeIArbeidSvar;
 }
+
+interface BesvarelseIndexType {
+    [propName: string]: Svar | undefined;
+}
+
+export type BesvarelseType = (OrdinaerBesvarelse | SykmeldtBesvarelse) & BesvarelseIndexType;
 
 export interface OrdinaerRegistreringData {
     sisteStilling?: Stilling;

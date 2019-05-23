@@ -2,7 +2,11 @@
 import ActionTypes from '../ducks/actions';
 import { frontendLogger, FrontendLoggerHelper } from '../metrikker/metrics-utils';
 
-const starttider = {};
+interface StartTiderType {
+    [propName: string]: number;
+}
+
+const starttider: StartTiderType = {};
 
 export function loggResponstidForTjenestekall(actionType: ActionTypes) {
     loggResponstid(actionType, frontendLogger);

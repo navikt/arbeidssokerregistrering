@@ -1,7 +1,10 @@
 // tslint:disable align no-any max-line-length
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
-import { ActionTypes as RegistreringStatusActionTypes, RegistreringType } from '../ducks/registreringstatus';
+import {
+    ActionTypes as RegistreringStatusActionTypes, Data as RegStatus,
+    RegistreringType,
+} from '../ducks/registreringstatus';
 import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 
 import { feilTyper } from './metrics-middleware-util';
@@ -129,7 +132,7 @@ function loggFeil(action: Action) {
     });
 }
 
-export const loggStartenPaaRegistreringFraAAP = (registreringstatusData) => {
+export const loggStartenPaaRegistreringFraAAP = (registreringstatusData: RegStatus) => {
     frontendLogger('registrering.kommerfra', {
         registreringfullfort: false,
         type: registreringstatusData.registreringType,

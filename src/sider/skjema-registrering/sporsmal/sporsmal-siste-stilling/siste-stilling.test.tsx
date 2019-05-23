@@ -3,7 +3,7 @@ import * as React from 'react';
 import {expect} from 'chai';
 import * as enzyme from 'enzyme';
 import * as sinon from 'sinon';
-import * as Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16';
 import {create} from '../../../../store';
 import {FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, stubFetch} from '../../../../test/test-utils';
 import SisteStilling from './siste-stilling';
@@ -16,10 +16,11 @@ import {ActionTypes as SisteStillingFraAARegActionTypes} from '../../../../ducks
 import {DinSituasjonSvar, IngenSvar, SisteStillingSvar, Svar} from "../../../../ducks/svar-utils";
 import {ActionTypes as DinSituasjonActionTypes} from "../../../../ducks/svar";
 import Alternativ from "../../../../komponenter/skjema/alternativ";
+import {SinonSandbox} from "sinon";
 
 enzyme.configure({adapter: new Adapter()});
 
-let sandbox;
+let sandbox: SinonSandbox;
 beforeEach(() => {
     sandbox = sinon.createSandbox();
 });

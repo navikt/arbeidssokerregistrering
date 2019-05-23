@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import { getIntlMessage } from '../../utils/utils';
-import InjectedIntl = ReactIntl.InjectedIntl;
+import ReactIntl from 'react-intl';
 
 interface Props {
     disabled?: boolean;
     onClick: () => void;
-    intl: InjectedIntl;
+    intl: ReactIntl.InjectedIntl;
 }
 
 function KnappFullfor({ disabled, onClick, intl}: Props) {

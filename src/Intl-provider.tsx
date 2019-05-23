@@ -6,11 +6,15 @@ import { parse } from 'query-string';
 
 addLocaleData(nb);
 
-function mapTeksterTilNokler(teksterTilMapping: any) { // tslint:disable-line no-any
+interface TeksterTilMappingType {
+    [propName: string]: string;
+
+}
+function mapTeksterTilNokler(teksterTilMapping: TeksterTilMappingType) { // tslint:disable-line no-any
     return Object.keys(teksterTilMapping)
         .map(key => ({key, value: `[${key}]`}))
         .reduce(
-            (previous, current) => {
+            (previous: TeksterTilMappingType, current) => {
                 previous[current.key] = current.value;
                 return previous;
             },
