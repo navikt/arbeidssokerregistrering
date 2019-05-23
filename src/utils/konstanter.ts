@@ -28,5 +28,7 @@ export const DITT_SYKEFRAVAER_URL = '/sykefravaer';
 
 export const AKTIVITETSPLAN_URL = '/veilarbpersonflatefs';
 
+export const DP_SOK_URL = 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Skjemaer/Uten+arbeid/Dagpenger';
+
 // Besvarelser
 export const YRKESPRAKSIS = '5120.14'; // hard kodet inntil videre
