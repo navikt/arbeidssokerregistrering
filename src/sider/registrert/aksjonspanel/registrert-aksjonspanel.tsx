@@ -52,15 +52,6 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                     </Element>
                     <div className="registrert__knapperad">
                         <a
-                            href={veienTilArbeidMedVisInfoUrl}
-                            className="registrert__lenke knapp knapp--hoved"
-                            onClick={() => {
-                                frontendLogger('registrering.vis.dagpenger.info');
-                            }}
-                        >
-                            <FormattedMessage id="duernaregistrert-knapp-ja"/>
-                        </a>
-                        <a
                             href={veienTilArbeidUrl}
                             className="registrert__lenke knapp knapp--standard"
                             onClick={() => {
@@ -68,6 +59,15 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                             }}
                         >
                             <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
+                        </a>
+                        <a
+                            href={veienTilArbeidMedVisInfoUrl}
+                            className="registrert__lenke knapp knapp--hoved"
+                            onClick={() => {
+                                frontendLogger('registrering.vis.dagpenger.info');
+                            }}
+                        >
+                            <FormattedMessage id="duernaregistrert-knapp-ja"/>
                         </a>
                     </div>
                 </div>
