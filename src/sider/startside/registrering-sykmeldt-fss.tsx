@@ -100,13 +100,6 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
                     <Normaltekst className="blokk-l" tag="div">
                         <FormattedHTMLMessage id="registrering-sykmeldt.rad3.del1-innhold-fss"/>
                     </Normaltekst>
-
-                    <Element tag="h3">
-                        <FormattedMessage id="registrering-sykmeldt.rad3.del2-tittel-fss"/>
-                    </Element>
-                    <Normaltekst className="blokk-xl" tag="div">
-                        <FormattedHTMLMessage id="registrering-sykmeldt.rad3.del2-innhold-fss"/>
-                    </Normaltekst>
                 </div>
                 <div className="rad3__knapperad">
                     <KnappBase
