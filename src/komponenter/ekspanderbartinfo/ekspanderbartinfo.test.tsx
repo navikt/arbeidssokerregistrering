@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { expect } from 'chai';
 import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
-import { shallowWithIntl } from 'enzyme-react-intl';
+import Adapter from 'enzyme-adapter-react-16';
 import EkspanderbartInfo from './ekspanderbartInfo';
 import {shallowwithIntl} from "../../test/test-utils";
 

@@ -6,7 +6,7 @@ import {
     FetchStub,
     mountWithStoreRouterAndIntl } from '../../test/test-utils';
 import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16';
 import { AUTENTISERINGSINFO_URL } from '../../ducks/api';
 import HentInitialData from './hent-initial-data';
 import StepUp from './stepup';

@@ -135,7 +135,8 @@ class Skjema extends React.Component<Props, OwnState> {
         const advarselElement = this.state.visAdvarsel ? (
             <NavAlertStripe type="advarsel" className="spm-advarsel">
                 <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
-            </NavAlertStripe>) : null;
+            </NavAlertStripe>
+        ) : null;
 
         const nesteHref = finnNesteHref(this.props);
         const gjeldendeSporsmal = this.finnGjeldendeSporsmal();

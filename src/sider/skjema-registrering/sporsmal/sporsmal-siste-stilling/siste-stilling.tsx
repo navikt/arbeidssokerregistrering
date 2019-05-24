@@ -28,6 +28,7 @@ import { SporsmalId, State as SvarState } from '../../../../ducks/svar';
 import { SporsmalProps } from '../../../../komponenter/skjema/sporsmal-utils';
 import { RegistreringType, selectRegistreringstatus } from '../../../../ducks/registreringstatus';
 import InaktivSokeInput from './inaktiv-soke-input';
+import App from '../../../../app';
 
 interface SisteStillingState {
     erInputAktiv: boolean;
@@ -193,7 +194,7 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
 
 //  <SokeInput defaultStilling={sisteStilling} onChange={this.props.velgStilling}/>
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
     sisteStillingFraAAReg: selectSisteStillingFraAAReg(state),
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
     labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),

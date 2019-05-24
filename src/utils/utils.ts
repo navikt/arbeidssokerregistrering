@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';

@@ -16,8 +16,14 @@ import {
     UtdanningGodkjentSvar,
     UtdanningSvar
 } from '../../ducks/svar-utils';
+import { RegistreringType } from '../../ducks/registreringstatus';
+import { AppState } from '../../reducer';
 
-const sporsmaleneConfig = (sporsmalProps, regType, state) => [
+// TODO:jcp any
+const sporsmaleneConfig = (
+    sporsmalProps: any, // tslint:disable-line
+    regType: RegistreringType | string,
+    state?: AppState) => [
     {
         id: SporsmalId.dinSituasjon,
         element: (
@@ -51,8 +57,8 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
             <OppsummeringElement
                 key={SporsmalId.sisteStilling}
                 sporsmalId={SporsmalId.sisteStilling}
-                tekst={state.sisteStilling && state.sisteStilling.data.stilling.label}
-                skjul={state.sisteStilling && state.sisteStilling.data.stilling === ingenYrkesbakgrunn}
+                tekst={state && (state.sisteStilling && state.sisteStilling.data.stilling.label)}
+                skjul={state && (state.sisteStilling && state.sisteStilling.data.stilling === ingenYrkesbakgrunn)}
             >
                 <strong><FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
@@ -158,8 +164,12 @@ const sporsmaleneConfig = (sporsmalProps, regType, state) => [
     }
 ];
 
-export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsmalId) => {
-    const index = sporsmaleneConfig(sporsmalProps, regType, {})
+// TODO:jcp any
+export const finnLenkeEndreElementForOrdinaer = (
+    sporsmalProps: any, // tslint:disable-line
+    regType: RegistreringType | '',
+    sporsmalId: SporsmalId | undefined) => {
+    const index = sporsmaleneConfig(sporsmalProps, regType)
         .findIndex(data => data.id === sporsmalId);
     if (index >= 0) {
         return (
@@ -175,13 +185,16 @@ export const finnLenkeEndreElementForOrdinaer = (sporsmalProps, regType, sporsma
     }
 };
 
-export const hentElementOppsummering = (state) =>
+export const hentElementOppsummering = (state: AppState) =>
     sporsmaleneConfig({}, '', state).map((spmElement) => {
         return spmElement.elementOppsummering;
     });
 
-const hentRegistreringSporsmalene = (sporsmalProps, regType) =>
-    sporsmaleneConfig(sporsmalProps, regType, {}).map((spmElement) => {
+// TODO:jcp any
+const hentRegistreringSporsmalene = (
+    sporsmalProps: any, // tslint:disable-line
+    regType: RegistreringType) =>
+    sporsmaleneConfig(sporsmalProps, regType).map((spmElement) => {
         return spmElement.element;
     });
 

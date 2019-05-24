@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { FieldState } from 'redux-form';
 import svar, { State as SvarState } from './ducks/svar';
 import reaktiverBruker, { State as ReaktiveringState } from './ducks/reaktiverbruker';
 import registreringStatus, { State as RegStatusState } from './ducks/registreringstatus';
@@ -26,7 +25,6 @@ export interface AppState {
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     defaultStilling: DefaultStillingState;
     sisteStilling: SisteStillingState;
-    form: FieldState;
     featureToggles: FeatureTogglesState;
     logger: LoggerState;
 }

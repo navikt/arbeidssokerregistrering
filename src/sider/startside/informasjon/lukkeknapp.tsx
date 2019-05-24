@@ -1,8 +1,13 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import './lukkeknapp.less';
 
-const cls = (bla, hvit, hjorne, className) => classNames('lukknapp',
+const cls = (
+    bla: boolean | undefined,
+    hvit: boolean | undefined,
+    hjorne: boolean | undefined,
+    className: string | undefined
+) => classNames('lukknapp',
                                                          {
         'lukknapp--hvit': hvit,
         'lukknapp--bla': bla,

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { storrelseType } from 'nav-frontend-spinner';
 import { STATUS } from '../../ducks/api-utils';
-import Laster from './innholdslaster-laster';
+import Laster, { SpinnerStorrelse } from './innholdslaster-laster';
 import ResponsivSide from '../side/responsiv-side';
 
 import './innholdslaster.less';
@@ -19,7 +18,7 @@ interface InnholdslasterProps {
     avhengigheter: { status: string }[];
     feilmeldingKomponent?: React.ReactNode;
     loaderKomponent?: React.ReactNode;
-    storrelse?: storrelseType;
+    storrelse?: SpinnerStorrelse;
 }
 
 interface InnholdslasterState {

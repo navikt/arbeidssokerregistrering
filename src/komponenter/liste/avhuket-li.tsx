@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import './avhuket-li.less';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 function AvhuketLI({children, key, classname}: Props) {
     return(
-        <li className={classnames('li__avhuket', classname)} key={key}>{children}</li>
+        <li className={classNames('li__avhuket', classname)} key={key}>{children}</li>
     );
 }
 

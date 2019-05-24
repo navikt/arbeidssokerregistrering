@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 import './lenke-neste.less';
@@ -34,7 +34,7 @@ function LenkeNeste({disabled, onClick, className, erAktiv, href}: Props) {
     return (
         <div className="nestelenke__wrapper">
             <Link
-                className={classnames('nestelenke knapp knapp--hoved', className, {erAktiv})}
+                className={classNames('nestelenke knapp knapp--hoved', className, {erAktiv})}
                 to={href}
                 onClick={e => {
                     if (!erAktiv) {

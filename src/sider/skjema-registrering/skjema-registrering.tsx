@@ -31,7 +31,7 @@ class SkjemaRegistrering extends React.Component<Props> {
     render() {
         const {endreSvar, resetSvar, intl, svarState, location, match, history } = this.props;
         const sporsmalProps = {
-            endreSvar: (sporsmalId, svar) => {
+            endreSvar: (sporsmalId: SporsmalId, svar: Svar) => {
 
                 nullStillSporsmalSomIkkeSkalBesvares(sporsmalId, svar, endreSvar, resetSvar);
 
@@ -41,7 +41,7 @@ class SkjemaRegistrering extends React.Component<Props> {
             hentAvgittSvar: (sporsmalId: SporsmalId) => hentSvar(svarState, sporsmalId),
         };
 
-        const regType = RegistreringType.ORDINAER_REGISTRERING;
+        const regType: RegistreringType = RegistreringType.ORDINAER_REGISTRERING;
         const registreringSporsmalElementene = hentRegistreringSporsmalene(sporsmalProps, regType);
 
         return (

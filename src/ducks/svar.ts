@@ -33,7 +33,7 @@ interface Action {
     data: Data;
 }
 
-const initialState = [];
+const initialState: State = [];
 
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {

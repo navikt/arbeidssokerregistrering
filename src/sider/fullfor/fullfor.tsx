@@ -160,6 +160,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                             tittel={getIntlMessage(intl.messages, 'fullfor-les-mer')}
                             tittelProps="normaltekst"
                             border={true}
+                            {...{ renderContentWhenClosed: true }}
                         >
                             <ul className="fullfor-info-liste">
                                 <li className="fullfor-info-liste__element">

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import Modal from 'react-modal';
-import * as classnames from 'classnames';
+import classNames from 'classnames';
 import Lukkeknapp from './lukkeknapp';
 import './react-modal.less';
 import './modal-wrapper-style.less';
 
-const cls = (className) => classnames('modal', className);
+const cls = (
+    className: any // tslint:disable-line
+) => classNames('modal', className);
 
 interface Props {
     closeButton?: boolean;
@@ -32,7 +34,7 @@ class ModalWrapper extends React.Component<Props> {
     };
 
     closeButtonRef: Lukkeknapp | null;
-    modalRef: Modal;
+    modalRef: any; // tslint:disable-line
 
     static setAppElement(element: HTMLElement) {
         Modal.setAppElement(element);
@@ -43,7 +45,7 @@ class ModalWrapper extends React.Component<Props> {
         this.onRequestClose = this.onRequestClose.bind(this);
     }
 
-    onRequestClose(evt: Event) {
+    onRequestClose(evt: any) { // tslint:disable-line
         const { onRequestClose, shouldCloseOnOverlayClick } = this.props;
         if (shouldCloseOnOverlayClick || evt.type === 'keydown') {
             onRequestClose();
@@ -71,7 +73,7 @@ class ModalWrapper extends React.Component<Props> {
                 { closeButton &&
                     <Lukkeknapp
                         overstHjorne={true}
-                        className={classnames('informasjon-modal__lukkknapp--shake')}
+                        className={classNames('informasjon-modal__lukkknapp--shake')}
                         onClick={props.onRequestClose}
                         ref={(closeButtonRef) => (this.closeButtonRef = closeButtonRef)}
                     >

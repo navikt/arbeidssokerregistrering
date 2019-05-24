@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FremtidigSituasjonSvar } from '../../ducks/svar-utils';
+import { FremtidigSituasjonSvar, Svar } from '../../ducks/svar-utils';
 import Alternativ from '../../komponenter/skjema/alternativ';
 import {
     nyArbeidsgiverSporsmaleneConfig,
@@ -7,7 +7,10 @@ import {
     usikkerSporsmaleneConfig
 } from './skjema-sykefravaer-sporsmalene';
 
-const svarAlternativeConfig = (alternativProps) => [
+// TODO: fix any
+const svarAlternativeConfig = (
+    alternativProps: any // tslint:disable-line
+) => [
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER,
         element: (
@@ -70,17 +73,17 @@ const svarAlternativeConfig = (alternativProps) => [
     }
 ];
 
-export const hentAlternativeneForInngangsporsmal = (alternativProps) =>
+export const hentAlternativeneForInngangsporsmal = (alternativProps: {}) =>
     svarAlternativeConfig(alternativProps).map((alternativ) => alternativ.element);
 
-export const hentInngangsLoep = (inngangsLoepSvar) => {
+export const hentInngangsLoep = (inngangsLoepSvar: Svar | undefined) => {
     const lop = svarAlternativeConfig({}).find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );
     return lop && lop.lop;
 };
 
-export const hentLoepConfig = (alternativProps, inngangsLoepSvar) => {
+export const hentLoepConfig = (alternativProps: {}, inngangsLoepSvar: Svar | undefined) => {
     const lop = svarAlternativeConfig(alternativProps).find((alternativ) =>
         alternativ.id === inngangsLoepSvar
     );

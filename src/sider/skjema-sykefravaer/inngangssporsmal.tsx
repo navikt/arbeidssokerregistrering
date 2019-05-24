@@ -92,7 +92,8 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
         const advarselElement = this.state.visAdvarsel ? (
             <NavAlertStripe type="advarsel" className="spm-advarsel inngangssporsmal-advarsel">
                 <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
-            </NavAlertStripe>) : null;
+            </NavAlertStripe>
+        ) : null;
 
         const alternativProps = {
             endreSvar: endreSvar,

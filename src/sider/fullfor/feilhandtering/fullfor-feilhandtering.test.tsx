@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {expect} from 'chai';
 import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16';
 import {shallowwithStoreAndIntl} from "../../../test/test-utils";
 import {create} from "../../../store";
 import {ActionTypes as FullforActionTypes, ErrorTypes} from '../../../ducks/registrerbruker';
