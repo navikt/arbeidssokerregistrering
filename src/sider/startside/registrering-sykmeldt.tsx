@@ -7,17 +7,15 @@ import './registrering-sykmeldt.less';
 import { Innholdstittel, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import { Knapp } from 'nav-frontend-knapper';
-import { formaterDato, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import { INNGANGSSPORSMAL_PATH } from '../../utils/konstanter';
 import InformasjonModal from './informasjon/informasjon-modal';
 import { AppState } from '../../reducer';
 import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
-import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
 
 interface Props {
-    registreringStatus: RegistreringStatusState;
     brukersNavn: BrukersNavnState;
 }
 
@@ -47,11 +45,10 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
     }
 
     render() {
-        const { registreringStatus, brukersNavn } = this.props;
+        const { brukersNavn } = this.props;
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
         const { fornavn } = brukersNavn.data;
-        const dato = formaterDato(registreringStatus.data.maksDato);
 
         const Rad1 = () => {
             return (
@@ -63,7 +60,7 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
                     >
                         <FormattedHTMLMessage
                             id="registrering-sykmeldt-snakkeboble"
-                            values={{ fornavn, dato }}
+                            values={{ fornavn }}
                         />
                     </Veilederpanel>
                 </div>
@@ -148,7 +145,6 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
 }
 
 const mapStateToProps = (state: AppState) => ({
-    registreringStatus: selectRegistreringstatus(state),
     brukersNavn: selectBrukersNavn(state),
 });
 

@@ -6,7 +6,7 @@ import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import { Knapp } from 'nav-frontend-knapper';
-import { formaterDato, MatchProps } from '../../utils/utils';
+import { MatchProps } from '../../utils/utils';
 import { INNGANGSSPORSMAL_PATH } from '../../utils/konstanter';
 import InformasjonModal from './informasjon/informasjon-modal';
 import { AppState } from '../../reducer';
@@ -14,12 +14,10 @@ import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/fea
 import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
-import { selectRegistreringstatus, State as RegistreringStatusState } from '../../ducks/registreringstatus';
 import './registrering-sykmeldt.less';
 
 interface Props {
     featureToggles: FeatureToggleData;
-    registreringStatus: RegistreringStatusState;
     brukersNavn: BrukersNavnState;
 }
 
@@ -36,11 +34,10 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
     };
 
      Rad1 = () => {
-        const { registreringStatus, brukersNavn } = this.props;
+        const { brukersNavn } = this.props;
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
         const { fornavn } = brukersNavn.data;
-        const dato = formaterDato(registreringStatus.data.maksDato);
 
         return (
             <div className="registrering-sykmeldt__rad1 rad-even">
@@ -51,7 +48,7 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
                 >
                     <FormattedHTMLMessage
                         id="registrering-sykmeldt-snakkeboble"
-                        values={{ fornavn, dato }}
+                        values={{ fornavn }}
                     />
                 </Veilederpanel>
             </div>
@@ -141,7 +138,6 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
 
 const mapStateToProps = (state: AppState) => ({
     featureToggles: selectFeatureToggles(state),
-    registreringStatus: selectRegistreringstatus(state),
     brukersNavn: selectBrukersNavn(state),
 });
 
