@@ -35,8 +35,6 @@ Registrering av arbeidssøker
 
 Spørsmål knyttet til koden eller prosjektet kan rettes mot:
 
-* Kjell Arne Brødreskift, Kjell.Arne.Brodreskift@nav.no
-* Ola Galde, Ola.Galde@nav.no
-* Lars Andreas Tveiten, Lars.Andreas.van.Woensel.Kooy.Tveiten@nav.no
-* Gård, Alexander Alexander.Gard@nav.no
 * Joselito Poblete, Joselito.Poblete@nav.no
+* Johan Rusvik, Johan.Rusvik@nav.no
+* Geir Gåsodden, geir.gasodden@nav.no
