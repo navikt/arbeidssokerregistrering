@@ -33,8 +33,8 @@ Registrering av arbeidssøker
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes mot:
+Spørsmål knyttet til koden eller prosjektet kan stilles via issues her på github.
 
-* Joselito Poblete, Joselito.Poblete@nav.no
-* Johan Rusvik, Johan.Rusvik@nav.no
-* Geir Gåsodden, geir.gasodden@nav.no
+# For NAV-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #bos.
