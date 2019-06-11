@@ -33,10 +33,8 @@ Registrering av arbeidssøker
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes mot:
+Spørsmål knyttet til koden eller prosjektet kan stilles via issues her på github.
 
-* Kjell Arne Brødreskift, Kjell.Arne.Brodreskift@nav.no
-* Ola Galde, Ola.Galde@nav.no
-* Lars Andreas Tveiten, Lars.Andreas.van.Woensel.Kooy.Tveiten@nav.no
-* Gård, Alexander Alexander.Gard@nav.no
-* Joselito Poblete, Joselito.Poblete@nav.no
+# For NAV-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #bos.
