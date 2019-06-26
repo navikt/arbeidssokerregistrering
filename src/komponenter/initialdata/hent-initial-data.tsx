@@ -21,6 +21,7 @@ import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 import { hentFeatureToggles } from '../../ducks/feature-toggles';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { erIFSS } from '../../utils/fss-utils';
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
@@ -69,9 +70,13 @@ export class HentInitialData extends React.Component<Props> {
             }
         }
 
+        const feilmelding = erIFSS() && registreringstatus.status === STATUS.ERROR
+            ? 'feilhandtering-ikke-tilgang-aareg'
+            : 'feilmelding-generell';
+
         return (
             <Innholdslaster
-                feilmeldingKomponent={<FeilmeldingGenerell/>}
+                feilmeldingKomponent={<FeilmeldingGenerell tekstId={feilmelding}/>}
                 avhengigheter={[
                     registreringstatus,
                     brukersNavn,
