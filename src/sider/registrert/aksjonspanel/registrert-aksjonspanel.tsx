@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { frontendLogger } from '../../../metrikker/metrics-utils';
 import {
@@ -45,11 +45,8 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                         <FormattedMessage id={hentTekstId('systemtittel')}/>
                     </Systemtittel>
                     <Normaltekst className="blokk">
-                        <FormattedMessage id={hentTekstId('normaltekst')}/>
+                        <FormattedHTMLMessage id={hentTekstId('normaltekst')}/>
                     </Normaltekst>
-                    <Element className="blokk-s">
-                        <FormattedMessage id={hentTekstId('element')}/>
-                    </Element>
                     <div className="registrert__knapperad">
                         <a
                             href={veienTilArbeidUrl}
