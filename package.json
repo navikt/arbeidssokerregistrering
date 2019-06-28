@@ -43,7 +43,7 @@
     "@types/sinon": "^5.0.3",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
-    "craco-less": "^1.7.0",
+    "craco-less": "1.7.0",
     "idempotent-babel-polyfill": "^7.0.0",
     "less-plugin-npm-import": "^2.1.0",
     "lodash": "4.17.11",
