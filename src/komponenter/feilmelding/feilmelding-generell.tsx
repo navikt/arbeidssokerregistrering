@@ -3,11 +3,12 @@ import { FormattedHTMLMessage } from 'react-intl';
 import Feilmelding from './feilmelding';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-function FeilmeldingGenerell() {
+function FeilmeldingGenerell({ tekstId }: { tekstId?: string }) {
+    const id = tekstId ? tekstId : 'feilmelding-generell';
     return (
         <Feilmelding>
             <Normaltekst>
-                <FormattedHTMLMessage id="feilmelding-generell"/>
+                <FormattedHTMLMessage id={id}/>
             </Normaltekst>
         </Feilmelding>
     );
