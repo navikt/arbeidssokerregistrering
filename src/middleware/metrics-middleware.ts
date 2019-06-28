@@ -2,7 +2,8 @@
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
 import {
-    ActionTypes as RegistreringStatusActionTypes, Data as RegStatus,
+    ActionTypes as RegistreringStatusActionTypes,
+    Data as RegStatus,
     RegistreringType,
 } from '../ducks/registreringstatus';
 import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
@@ -74,13 +75,19 @@ function loggBesvarelse(store: any, action: Action) {
 function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
-        const inngangSykefravaer = store.getState().logger.data.inngangSykefravaer;
-        const sykmeldt = store.getState().registreringStatus.data.registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+        const registreringType = store.getState().registreringStatus.data.registreringType;
+        const kommerFraSykefravaer = store.getState().logger.data.inngangSykefravaer;
+        const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+        const erSperret = registreringType === RegistreringType.SPERRET;
 
-        if (sykmeldt && inngangSykefravaer) {
-            frontendLogger('registrering.sykmeldt.fra.sykefravaer', {}, {});
-        } else if (sykmeldt) {
-            frontendLogger('registrering.sykmeldt.fra.start', {}, {});
+        if (erSykmeldt) {
+            frontendLogger('registrering.inngang.sykmeldt', {
+                kommerFraSykefravaer
+            }, {});
+        } else if (erSperret) {
+            frontendLogger('registrering.inngang.sperret', {
+                kommerFraSykefravaer
+            }, {});
         }
 
     }
