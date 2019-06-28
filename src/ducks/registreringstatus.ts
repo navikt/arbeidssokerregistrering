@@ -26,6 +26,7 @@ export interface Data {
     jobbetSeksAvTolvSisteManeder?: boolean;
     maksDato?: string;
     registreringType?: RegistreringType;
+    erSykmeldtMedArbeidsgiver?: boolean;
 }
 
 interface Action {
