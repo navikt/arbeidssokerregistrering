@@ -27,8 +27,6 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
             return null;
         }
 
-        const sykemeldtSidenDato = state.registreringStatus.data.maksDato;
-
         const inngangsLopSvar = hentSvar(svar, SporsmalId.fremtidigSituasjon);
 
         const lopConfig = hentLoepConfig({}, inngangsLopSvar);
@@ -48,14 +46,6 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
 
                 <div className="sykmeldt-oppsummering-besvarelser--list-container">
                     <ul className="sykmeldt-oppsummering-besvarelser--list">
-
-                        <li className="typo-normal">
-                            <strong>
-                                <FormattedMessage id="sykmeldt-oppsummering-sykepenger-frem-til"/>&nbsp;
-                            </strong>
-                            {formaterDato(sykemeldtSidenDato)}
-                        </li>
-
                         <OppsummeringElement
                             sporsmalId={SporsmalId.fremtidigSituasjon}
                         >
