@@ -7,6 +7,7 @@ import { Innholdstittel, Normaltekst, Undertittel, Element, Sidetittel } from 'n
 import { Knapp } from 'nav-frontend-knapper';
 import KnappBase from 'nav-frontend-knapper';
 
+import Kalkulator from '../../komponenter/kalkulator/kalkulator'
 import aktplanbilde from './aktivitetsplan-ill.svg';
 import paragrafbilde from './paragraf.svg';
 import infobilde from './info.svg';
