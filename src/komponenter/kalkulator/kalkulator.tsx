@@ -1,19 +1,51 @@
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
+import { FormattedMessage } from 'react-intl';
+
+const months = {
+  0: 'januar',
+  1: 'februar',
+  2: 'mars',
+  3: 'april',
+  4: 'mai',
+  5: 'juni',
+  6: 'juli',
+  7: 'august',
+  8: 'september',
+  9: 'oktober',
+  10: 'november',
+  11: 'desember'
+}
 
 function createDate (date) {
   return new Date(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
 }
-class Kalkulator extends React.Component<{}, { sisteArbeidsdag: string }> {
+
+function formatPeriode (startdato, sluttdato) {
+  const dateOne = [`${startdato.getDate()}.`]
+  if (startdato.getMonth() !== sluttdato.getMonth()) {
+    dateOne.push(months[startdato.getMonth()])
+  }
+  if (startdato.getFullYear() !== sluttdato.getFullYear()) {
+    dateOne.push(startdato.getFullYear())
+  }
+  return `${dateOne.join(' ')} - ${sluttdato.getDate()}. ${months[sluttdato.getMonth()]} ${sluttdato.getFullYear()}`
+}
+
+class Kalkulator extends React.Component<{}, { meldingsId: string, meldingsPeriode: string }> {
   constructor(props) {
     super(props);
-    this.state = {sisteArbeidsdag: ''};
+    this.state = {
+      meldingsId: '',
+      meldingsPeriode: ''
+    };
     this.regnUtPeriode = this.regnUtPeriode.bind(this);
   }
   
   regnUtPeriode (e) {
     e.preventDefault();
-    let melding = '';
+    let meldingsId = '';
+    let meldingsPeriode = '';
     const now = new Date();
     const iDag = createDate(now);
     const dato = new Date(e.target.value);
@@ -23,18 +55,19 @@ class Kalkulator extends React.Component<{}, { sisteArbeidsdag: string }> {
     fristSlutt.setDate(fristSlutt.getDate() - 1);
     const dagerTilFrist = (fristSlutt.getTime() - iDag.getTime())/86400000;
     if (dagerTilFrist < 7) {
-      melding = `Du bør søke i dag ${dagerTilFrist}`;
+      meldingsId = 'sok-na';
     } else {
-      melding = `Du bør søke i perioden ${dagerTilFrist} ${fristStart} - ${fristSlutt}`;
+      meldingsId = 'sok-periode';
+      meldingsPeriode = formatPeriode(fristStart, fristSlutt)
     }
-    this.setState({ sisteArbeidsdag: `${melding}`});
+    this.setState({ meldingsId: meldingsId, meldingsPeriode: meldingsPeriode });
   }
 
   render () {
     return (
       <div>
         <Input label={'Siste arbeidsdag:'} type="date" onChange={this.regnUtPeriode}/>
-        {this.state.sisteArbeidsdag}
+        {this.state.meldingsId !== '' ? <FormattedMessage id={this.state.meldingsId} values={{periode: this.state.meldingsPeriode}}/> : null}
       </div>
     );
   } 
