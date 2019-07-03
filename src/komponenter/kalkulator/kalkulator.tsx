@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { FormattedMessage } from 'react-intl';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 const months = {
   0: 'januar',
@@ -41,6 +42,10 @@ class Kalkulator extends React.Component<{}, { meldingsId: string, meldingsPerio
     };
     this.regnUtPeriode = this.regnUtPeriode.bind(this);
   }
+
+  componentDidMount () {
+    frontendLogger('kvittering.kalkulator.visning')
+  }
   
   regnUtPeriode (e) {
     e.preventDefault();
@@ -58,9 +63,10 @@ class Kalkulator extends React.Component<{}, { meldingsId: string, meldingsPerio
       meldingsId = 'sok-na';
     } else {
       meldingsId = 'sok-periode';
-      meldingsPeriode = formatPeriode(fristStart, fristSlutt)
+      meldingsPeriode = formatPeriode(fristStart, fristSlutt);
     }
     this.setState({ meldingsId: meldingsId, meldingsPeriode: meldingsPeriode });
+    frontendLogger('kvittering.kalkulator.bruk', { dagerTilFristFelt: dagerTilFrist })
   }
 
   render () {
