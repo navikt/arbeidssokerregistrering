@@ -75,13 +75,15 @@ class Kalkulator extends React.Component<{}, { meldingsId: string, meldingsPerio
 
   render () {
     return (
-      <Ekspanderbartpanel border tittel={'Når bør du søke Dagpenger?'}>
-        <Normaltekst>
-          <FormattedMessage id="kalkulator-ingress" />
-        </Normaltekst>
-        <Input label={<FormattedMessage id={'kalkulator-datofelt-label'} />} type="date" bredde="M" onChange={this.regnUtPeriode}/>
-        {this.state.meldingsId !== '' ? <AlertStripe type="advarsel"><FormattedMessage id={this.state.meldingsId} values={{periode: this.state.meldingsPeriode}}/></AlertStripe> : null}
-      </Ekspanderbartpanel>
+      <div className="blokk-m">
+        <Ekspanderbartpanel border apen tittel={'Når bør du søke Dagpenger?'}>
+          <Normaltekst>
+            <FormattedMessage id="kalkulator-ingress" />
+          </Normaltekst>
+          <Input label={<FormattedMessage id={'kalkulator-datofelt-label'} />} type="date" bredde="M" onChange={this.regnUtPeriode}/>
+          {this.state.meldingsId !== '' ? <AlertStripe type={this.state.meldingsId === 'kalkulator-resultat-sok-na' ? 'advarsel' : 'info'}><FormattedMessage id={this.state.meldingsId} values={{periode: this.state.meldingsPeriode}}/></AlertStripe> : null}
+        </Ekspanderbartpanel>
+      </div>
     );
   } 
 }
