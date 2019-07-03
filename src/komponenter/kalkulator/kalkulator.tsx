@@ -1,7 +1,11 @@
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { frontendLogger } from '../../metrikker/metrics-utils';
+import './kalkulator.less';
 
 const months = {
   0: 'januar',
@@ -60,9 +64,9 @@ class Kalkulator extends React.Component<{}, { meldingsId: string, meldingsPerio
     fristSlutt.setDate(fristSlutt.getDate() - 1);
     const dagerTilFrist = (fristSlutt.getTime() - iDag.getTime())/86400000;
     if (dagerTilFrist < 7) {
-      meldingsId = 'sok-na';
+      meldingsId = 'kalkulator-resultat-sok-na';
     } else {
-      meldingsId = 'sok-periode';
+      meldingsId = 'kalkulator-resultat-sok-periode';
       meldingsPeriode = formatPeriode(fristStart, fristSlutt);
     }
     this.setState({ meldingsId: meldingsId, meldingsPeriode: meldingsPeriode });
@@ -71,10 +75,13 @@ class Kalkulator extends React.Component<{}, { meldingsId: string, meldingsPerio
 
   render () {
     return (
-      <div>
-        <Input label={'Siste arbeidsdag:'} type="date" onChange={this.regnUtPeriode}/>
-        {this.state.meldingsId !== '' ? <FormattedMessage id={this.state.meldingsId} values={{periode: this.state.meldingsPeriode}}/> : null}
-      </div>
+      <Ekspanderbartpanel border tittel={'Når bør du søke Dagpenger?'}>
+        <Normaltekst>
+          <FormattedMessage id="kalkulator-ingress" />
+        </Normaltekst>
+        <Input label={<FormattedMessage id={'kalkulator-datofelt-label'} />} type="date" bredde="M" onChange={this.regnUtPeriode}/>
+        {this.state.meldingsId !== '' ? <AlertStripe type="advarsel"><FormattedMessage id={this.state.meldingsId} values={{periode: this.state.meldingsPeriode}}/></AlertStripe> : null}
+      </Ekspanderbartpanel>
     );
   } 
 }
