@@ -7,7 +7,6 @@ import { Innholdstittel, Normaltekst, Undertittel, Element, Sidetittel } from 'n
 import { Knapp } from 'nav-frontend-knapper';
 import KnappBase from 'nav-frontend-knapper';
 
-import Kalkulator from '../../komponenter/kalkulator/kalkulator'
 import aktplanbilde from './aktivitetsplan-ill.svg';
 import paragrafbilde from './paragraf.svg';
 import infobilde from './info.svg';
@@ -45,7 +44,6 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
         const Rad1 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad1">
-                    <Kalkulator />
                     <Innholdstittel tag="h2" className="rad__tittel rad1__tittel">
                         <FormattedMessage id="registrering-arbeidssoker.introtittel"/>
                     </Innholdstittel>
