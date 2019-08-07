@@ -74,26 +74,25 @@ function loggBesvarelse(store: any, action: Action) {
 
 function loggRegistreringInngang(store: any, action: Action) {
 
-    if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
-        const kommerFraSykefravaer = store.getState().logger.data.inngangSykefravaer;
-        const registreringData = store.getState().registreringStatus.data;
-        const registreringType = registreringData.registreringType;
+    if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
+        const { inngangSykefravaer } = store.getState().logger.data;
+        const { registreringType, maksDato, erSykmeldtMedArbeidsgiver } = action.data as RegStatus;
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
 
         if (erSykmeldt) {
             frontendLogger('registrering.inngang.sykmeldt', {
-                kommerFraSykefravaer
+                kommerFraSykefravaer: inngangSykefravaer
             }, {});
         } else if (erSperret) {
             frontendLogger('registrering.inngang.sperret', {
-                kommerFraSykefravaer,
-                maksDato: registreringData.maksDato,
-                erSykmeldtMedArbeidsgiver: registreringData.erSykmeldtMedArbeidsgiver
+                kommerFraSykefravaer: inngangSykefravaer,
+                maksDato,
+                erSykmeldtMedArbeidsgiver
             }, {});
         }
-
     }
+
 }
 
 function loggRegistreringInngangFraAAP(store: any, action: Action) {
