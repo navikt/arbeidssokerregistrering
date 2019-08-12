@@ -42,7 +42,6 @@
     "@types/react-select": "^1.2.0",
     "@types/sinon": "^5.0.3",
     "babel-polyfill": "^6.26.0",
-    "ci": "1.0.0",
     "classnames": "^2.2.6",
     "craco-less": "^1.7.0",
     "idempotent-babel-polyfill": "^7.0.0",
