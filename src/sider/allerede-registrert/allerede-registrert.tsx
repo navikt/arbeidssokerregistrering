@@ -72,6 +72,21 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </div>
                         </Column>
                     </Row>
+                    <Row className="">
+                        <Column xs="12" sm="8" className="allerede-registrert__boks">
+                            <div className="allerede-registrert__boks-innhold">
+                                <Normaltekst className="allerede-registrert__boks-tekst">
+                                    {messages['allerede-registrert-boks-4-tekst']}
+                                </Normaltekst>
+                                <a
+                                    href={messages['allerede-registrert-boks-4-lenke']}
+                                    className="allerede-registrert__knapp knapp"
+                                >
+                                    {messages['allerede-registrert-boks-4-knapp']}
+                                </a>
+                            </div>
+                        </Column>
+                    </Row>
                 </div>
             </div>
         );

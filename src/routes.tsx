@@ -7,6 +7,7 @@ import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert'
 import AlleredeRegistrertFss from './sider/allerede-registrert-fss/allerede-registrert-fss';
 import {
     ALLEREDE_REGISTRERT_PATH,
+    DAGPENGER_PATH,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
     IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
@@ -50,7 +51,9 @@ import RegistreringArbeidssokerSykmeldtFss from './sider/startside/registrering-
 import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-sykmeldt';
 import RegistreringArbeidssokerFss from './sider/startside/registrering-arbeidssoker-fss';
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
+import Dagpenger from './sider/dagpenger/dagpenger';
 import { loggStartenPaaRegistreringFraAAP } from './middleware/metrics-middleware';
+import dagpenger from './sider/dagpenger/dagpenger';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -128,8 +131,8 @@ class Routes extends React.Component<AllProps> {
                 <Route path="/:url" component={ProgressBarContainer}/>
 
                 <Sideanimasjon>
-
                     <Switch>
+                    <Route path={`${DAGPENGER_PATH}`} component={dagpenger} />
 
                         {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
                         {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}

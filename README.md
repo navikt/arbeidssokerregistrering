@@ -21,6 +21,9 @@ Registrering av arbeidssøker
 * Clone og start `veilarbregistrering` https://github.com/navikt/veilarbregistrering
 * Åpne appen i `localhost:8080`
 
+# Kjøre app i demo modus
+* `npm run demo`
+
 # Kjøre integrasjonstester lokalt
 * `npm run integrationtest-build`
 * `npm run heroku-serve`

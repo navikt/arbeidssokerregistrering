@@ -1,4 +1,5 @@
 export const INNGANGSSPORSMAL_PATH = '/inngangssporsmal';
+export const DAGPENGER_PATH = '/dagpenger';
 export const START_PATH = '/start';
 export const SKJEMA_PATH = '/skjema';
 export const SKJEMA_SYKEFRAVAER_PATH = '/skjema-sykefravaer';
