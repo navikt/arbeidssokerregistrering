@@ -4,12 +4,18 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 import './allerede-registrert.less';
 
 type Props = InjectedIntlProps;
 
 class AlleredeRegistrert extends React.Component<Props> {
+    loggDagpengeKlikk() {
+        console.log('You clicked me')
+        frontendLogger('registrering.allerede-registrert.dagpenger.klikk')
+    }
+
     render() {
         const messages = this.props.intl.messages;
         return (
@@ -81,6 +87,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                 <a
                                     href={messages['allerede-registrert-boks-4-lenke']}
                                     className="allerede-registrert__knapp knapp"
+                                    onClick={ this.loggDagpengeKlikk }
                                 >
                                     {messages['allerede-registrert-boks-4-knapp']}
                                 </a>

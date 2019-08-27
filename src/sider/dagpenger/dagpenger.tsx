@@ -5,15 +5,10 @@ import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
-import InfoViser from '../../komponenter/info-viser/info-viser';
-import { Link } from 'react-router-dom';
-import { OPPSUMMERING_PATH, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { AppState } from '../../reducer';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { connect } from 'react-redux';
-import { erIFSS } from '../../utils/fss-utils';
-import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 
 const veilederSvg = require('./veileder-syfo.svg');
 
