@@ -22,6 +22,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
         const { hentTekstId, erSykmeldt } = this.props;
         let veienTilArbeidUrl;
         let veienTilArbeidMedVisInfoUrl;
+        let knappetekstJa;
         const brukHerokuUrl = !!process.env.REACT_APP_HEROKU_OVERGANG;
 
         if (brukHerokuUrl) {
@@ -35,6 +36,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
             veienTilArbeidUrl = VEIENTILARBEID_URL;
             veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL
                 : DP_SOK_URL;
+            knappetekstJa = erSykmeldt ? 'duernaregistrert-knapp-les-mer' : 'duernaregistrert-knapp-sok-dagpenger';
         }
 
         return (
@@ -64,7 +66,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                                 frontendLogger('registrering.vis.dagpenger.info');
                             }}
                         >
-                            <FormattedMessage id="duernaregistrert-knapp-ja"/>
+                            <FormattedMessage id={knappetekstJa}/>
                         </a>
                     </div>
                 </div>

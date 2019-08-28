@@ -21,12 +21,11 @@ test('Ordinær registrering', async t => {
     await t
         .navigateTo(`http://${t.fixtureCtx.ip}:4502`)
         .expect(startside.side.exists).ok()
-        .takeScreenshot(`${browserName}/forside.png`)
+        .takeScreenshot(`${browserName}/forside_${new Date().getTime()}.png`)
         .click(startside.btnStartRegistrering);
 
-    await spmside.besvarAlleSpm(async (index) => await t.takeScreenshot(`${browserName}/sporsmal_${index}.png`));
+    await spmside.besvarAlleSpm(async (index) => await t.takeScreenshot(`${browserName}/sporsmal_${index}_${new Date().getTime()}.png`));
     await oppsummering.fullforOppsummering();
     await oppsummering.fullforRegistrering();
-
 });
 
