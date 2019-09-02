@@ -79,7 +79,10 @@ function loggRegistreringInngang(store: any, action: Action) {
         const { registreringType, maksDato, erSykmeldtMedArbeidsgiver } = action.data as RegStatus;
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
-
+        frontendLogger('registrering.inngang.type', {
+            registreringType: registreringType
+        }, {});
+        
         if (erSykmeldt) {
             frontendLogger('registrering.inngang.sykmeldt', {
                 kommerFraSykefravaer: inngangSykefravaer
