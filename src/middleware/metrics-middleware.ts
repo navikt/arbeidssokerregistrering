@@ -81,7 +81,7 @@ function loggRegistreringInngang(store: any, action: Action) {
         const erSperret = registreringType === RegistreringType.SPERRET;
         frontendLogger('registrering.inngang.type', {
             registreringType: registreringType
-        }, {})
+        }, {});
         
         if (erSykmeldt) {
             frontendLogger('registrering.inngang.sykmeldt', {
