@@ -15,6 +15,10 @@ Registrering av arbeidssøker
 * `npm i` 
 * `npm start`
 
+For å starte app i demo-mode
+
+* `npm run demo`
+
 ## Utvikling med backend
 
 * Clone og start (StartJetty normal) `dev-proxy`  https://github.com/navikt/dev-proxy
