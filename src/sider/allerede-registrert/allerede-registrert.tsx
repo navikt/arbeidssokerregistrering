@@ -4,12 +4,25 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
 import './allerede-registrert.less';
 
 type Props = InjectedIntlProps;
 
 class AlleredeRegistrert extends React.Component<Props> {
+    handleClickAktivitetsplan () {
+        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan');
+    }
+
+    handleClickVeienTilArbeid () {
+        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid');
+    }
+
+    handleClickDialog () {
+        frontendLogger('registrering.allerede-registrert.click.dialog');
+    }
+
     render() {
         const messages = this.props.intl.messages;
         return (
@@ -36,6 +49,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                 <a
                                     href={messages['allerede-registrert-boks-1-lenke']}
                                     className="allerede-registrert__knapp knapp"
+                                    onClick={this.handleClickAktivitetsplan}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -51,6 +65,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                 <a
                                     href={messages['allerede-registrert-boks-2-lenke']}
                                     className="allerede-registrert__knapp knapp"
+                                    onClick={this.handleClickVeienTilArbeid}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -66,6 +81,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                 <a
                                     href={messages['allerede-registrert-boks-3-lenke']}
                                     className="allerede-registrert__knapp knapp"
+                                    onClick={this.handleClickDialog}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
