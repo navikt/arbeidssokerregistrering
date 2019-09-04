@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
@@ -11,6 +12,7 @@ import './allerede-registrert.less';
 type Props = InjectedIntlProps;
 
 class AlleredeRegistrert extends React.Component<Props> {
+    
     handleClickAktivitetsplan () {
         frontendLogger('registrering.allerede-registrert.click.aktivitetsplan');
     }
@@ -94,18 +96,12 @@ class AlleredeRegistrert extends React.Component<Props> {
                     </Row>
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <div className="allerede-registrert__boks-innhold">
-                                <Normaltekst className="allerede-registrert__boks-tekst">
-                                    {messages['allerede-registrert-boks-dagpenger-tekst']}
-                                </Normaltekst>
-                                <a
-                                    href={messages['allerede-registrert-boks-dagpenger-lenke']}
-                                    className="allerede-registrert__knapp knapp"
-                                    onClick={this.handleClickDagpenger}
-                                >
-                                    {messages['allerede-registrert-boks-dagpenger-knapp']}
-                                </a>
-                            </div>
+                            <Ekspanderbartpanel
+                                tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
+                                onClick={this.handleClickDagpenger}
+                                border>
+                                {messages['allerede-registrert-panel-dagpenger-tekst']}
+                            </Ekspanderbartpanel>
                         </Column>
                     </Row>
                 </div>
