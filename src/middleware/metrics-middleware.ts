@@ -76,10 +76,17 @@ function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
         const { inngangSykefravaer } = store.getState().logger.data;
-        const { registreringType, maksDato, erSykmeldtMedArbeidsgiver } = action.data as RegStatus;
+        const { registreringType, maksDato, erSykmeldtMedArbeidsgiver, underOppfolging, jobbetSeksAvTolvSisteManeder } = action.data as RegStatus;
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
-
+        frontendLogger('registrering.inngang.type', {
+            registreringType,
+            maksDato,
+            erSykmeldtMedArbeidsgiver,
+            underOppfolging,
+            jobbetSeksAvTolvSisteManeder
+        }, {});
+        
         if (erSykmeldt) {
             frontendLogger('registrering.inngang.sykmeldt', {
                 kommerFraSykefravaer: inngangSykefravaer
