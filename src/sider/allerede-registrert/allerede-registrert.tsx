@@ -48,6 +48,16 @@ class AlleredeRegistrert extends React.Component<Props> {
                     </Row>
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
+                            <Ekspanderbartpanel
+                                tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
+                                onClick={this.handleClickDagpenger}
+                                border>
+                                {messages['allerede-registrert-panel-dagpenger-tekst']}
+                            </Ekspanderbartpanel>
+                        </Column>
+                    </Row>
+                    <Row className="">
+                        <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
                                 <Normaltekst className="allerede-registrert__boks-tekst">
                                     {messages['allerede-registrert-boks-1-tekst']}
@@ -92,16 +102,6 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
                             </div>
-                        </Column>
-                    </Row>
-                    <Row className="">
-                        <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <Ekspanderbartpanel
-                                tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
-                                onClick={this.handleClickDagpenger}
-                                border>
-                                {messages['allerede-registrert-panel-dagpenger-tekst']}
-                            </Ekspanderbartpanel>
                         </Column>
                     </Row>
                 </div>
