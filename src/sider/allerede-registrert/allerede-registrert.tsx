@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
@@ -11,6 +12,7 @@ import './allerede-registrert.less';
 type Props = InjectedIntlProps;
 
 class AlleredeRegistrert extends React.Component<Props> {
+    
     handleClickAktivitetsplan () {
         frontendLogger('registrering.allerede-registrert.click.aktivitetsplan');
     }
@@ -21,6 +23,13 @@ class AlleredeRegistrert extends React.Component<Props> {
 
     handleClickDialog () {
         frontendLogger('registrering.allerede-registrert.click.dialog');
+    }
+
+    handleClickDagpenger (event) {
+        const isOpen = event.currentTarget.getAttribute('aria-expanded') === 'false';
+        if (isOpen) {
+            frontendLogger('registrering.allerede-registrert.click.dagpenger');   
+        }
     }
 
     render() {
@@ -38,6 +47,16 @@ class AlleredeRegistrert extends React.Component<Props> {
                             <Normaltekst className="allerede-registrert__undertittel">
                                 {messages['allerede-registrert-undertittel']}
                             </Normaltekst>
+                        </Column>
+                    </Row>
+                    <Row className="">
+                        <Column xs="12" sm="8" className="allerede-registrert__boks">
+                            <Ekspanderbartpanel
+                                tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
+                                onClick={this.handleClickDagpenger}
+                                border>
+                                {messages['allerede-registrert-panel-dagpenger-tekst']}
+                            </Ekspanderbartpanel>
                         </Column>
                     </Row>
                     <Row className="">
