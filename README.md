@@ -35,6 +35,10 @@ For å starte app i demo-mode
 * `npm run heroku-serve`
 * `BROWSERSTACK_USERNAME=<> BROWSERSTACK_ACCESS_KEY=<> npm run test:browsers`
 
+# Publisere demoversjon på ZEIT/Now
+Dersom du har tilgang til [ZEIT/Now](https://zeit.co/home) og har installert [now-cli](https://zeit.co/download) kan du deploye en demoversjon av løsningen ved hjelp av now
+* `now`
+
 # Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan stilles via issues her på github.
