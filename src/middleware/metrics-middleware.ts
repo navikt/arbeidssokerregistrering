@@ -90,6 +90,8 @@ function loggRegistreringInngang(store: any, action: Action) {
             underOppfolging: underOppfolgingOrFalse,
             jobbetSeksAvTolvSisteManeder: jobbetSeksAvTolvSisteManederOrFalse
         }, {});
+
+        frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
         
         if (erSykmeldt) {
             frontendLogger('registrering.inngang.sykmeldt', {
