@@ -25,8 +25,11 @@ class AlleredeRegistrert extends React.Component<Props> {
         frontendLogger('registrering.allerede-registrert.click.dialog');
     }
 
-    handleClickDagpenger () {
-        frontendLogger('registrering.allerede-registrert.click.dagpenger');
+    handleClickDagpenger (event) {
+        const isOpen = event.currentTarget.getAttribute('aria-expanded') === 'false';
+        if (isOpen) {
+            frontendLogger('registrering.allerede-registrert.click.dagpenger');   
+        }
     }
 
     render() {
