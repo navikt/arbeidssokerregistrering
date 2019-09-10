@@ -27,6 +27,7 @@ export interface Data {
     maksDato?: string;
     registreringType?: RegistreringType;
     erSykmeldtMedArbeidsgiver?: boolean;
+    erSykmeldtUtenArbeidsgiver?: boolean;
 }
 
 interface Action {
