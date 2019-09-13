@@ -31,7 +31,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
             veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + '?' + brukerStatusQueryParam;
             veienTilArbeidMedVisInfoUrl = (erSykmeldt ? HEROKU_VEIENTILARBEID_MED_AAP_URL
                 : DP_SOK_URL) + '&' + brukerStatusQueryParam;
-
+                knappetekstJa = erSykmeldt ? 'duernaregistrert-knapp-les-mer' : 'duernaregistrert-knapp-sok-dagpenger';
         } else {
             veienTilArbeidUrl = VEIENTILARBEID_URL;
             veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL
