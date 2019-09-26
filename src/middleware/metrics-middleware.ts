@@ -76,11 +76,19 @@ function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
         const { inngangSykefravaer } = store.getState().logger.data;
-        const { registreringType, maksDato, erSykmeldtMedArbeidsgiver, underOppfolging, jobbetSeksAvTolvSisteManeder } = action.data as RegStatus;
+        const { registreringType,
+                maksDato,
+                erSykmeldtMedArbeidsgiver,
+                underOppfolging,
+                jobbetSeksAvTolvSisteManeder,
+                servicegruppe,
+                formidlingsgruppe } = action.data as RegStatus;
         const maksDatoOrFalse = maksDato || false;
         const underOppfolgingOrFalse = underOppfolging || false;
         const erSykmeldtMedArbeidsgiverOrFalse = erSykmeldtMedArbeidsgiver || false;
         const jobbetSeksAvTolvSisteManederOrFalse = jobbetSeksAvTolvSisteManeder || false;
+        const servicegrupperOrFalse = servicegruppe || false;
+        const formidlingsgruppeOrFalse = formidlingsgruppe || false;
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
         frontendLogger('registrering.inngang.type', {
@@ -88,7 +96,9 @@ function loggRegistreringInngang(store: any, action: Action) {
             maksDato: maksDatoOrFalse,
             erSykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiverOrFalse,
             underOppfolging: underOppfolgingOrFalse,
-            jobbetSeksAvTolvSisteManeder: jobbetSeksAvTolvSisteManederOrFalse
+            jobbetSeksAvTolvSisteManeder: jobbetSeksAvTolvSisteManederOrFalse,
+            servicegruppe: servicegrupperOrFalse,
+            formidlingsgruppe: formidlingsgruppeOrFalse
         }, {});
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
