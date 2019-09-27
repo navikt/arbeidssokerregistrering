@@ -17,13 +17,15 @@ export enum RegistreringType {
 }
 
 export enum Servicegruppe {
-    IKVAL = 'IKVAL',
     BATT = 'BATT',
     BFORM = 'BFORM',
-    VARIG = 'VARIG',
+    BKART = 'BKART',
+    IKVAL = 'IKVAL',
     IVURD = 'IVURD',
-    VURDU = 'VURDU',
-    VURDI = 'VURDI'
+    OPPFI = 'OPPFI',
+    VARIG = 'VARIG',
+    VURDI = 'VURDI',
+    VURDU = 'VURDU'
 }
 
 export type ServicegruppeOrNull = Servicegruppe | null;
