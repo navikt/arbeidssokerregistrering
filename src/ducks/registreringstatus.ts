@@ -16,6 +16,28 @@ export enum RegistreringType {
     ORDINAER_REGISTRERING = 'ORDINAER_REGISTRERING'
 }
 
+export enum Servicegruppe {
+    IKVAL = 'IKVAL',
+    BATT = 'BATT',
+    BFORM = 'BFORM',
+    VARIG = 'VARIG',
+    IVURD = 'IVURD',
+    VURDU = 'VURDU',
+    VURDI = 'VURDI'
+}
+
+export type ServicegruppeOrNull = Servicegruppe | null;
+
+export enum Formidlingsgruppe {
+    ISERV = 'ISERV',
+    ARBS = 'ARBS',
+    IARBS = 'IARBS',
+    PARBS = 'PARBS',
+    RARBS = 'RARBS'
+}
+
+export type FormidlingsgruppeOrNull = Formidlingsgruppe | null;
+
 export interface State {
     data: Data;
     status: string;
@@ -27,6 +49,8 @@ export interface Data {
     maksDato?: string;
     registreringType?: RegistreringType;
     erSykmeldtMedArbeidsgiver?: boolean;
+    servicegruppe?: ServicegruppeOrNull;
+    formidlingsgruppe?: FormidlingsgruppeOrNull;
 }
 
 interface Action {
