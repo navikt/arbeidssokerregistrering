@@ -254,6 +254,33 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     <div>
                         <RadioPanel
                                 onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.BATT);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - BATT"
+                                value="BATT"
+                                checked={servicegruppe === Servicegruppe.BATT}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.BFORM);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - BFORM"
+                                value="BFORM"
+                                checked={servicegruppe === Servicegruppe.BFORM}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.BKART);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - BKART"
+                                value="BKART"
+                                checked={servicegruppe === Servicegruppe.BKART}
+                        />
+                        <RadioPanel
+                                onChange={() => {
                                     oppdaterServicegruppe(Servicegruppe.IKVAL);
                                 }}
                                 name="devToggleStatusServicegruppe"
@@ -269,6 +296,15 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 label="Servicegruppe - IVURD"
                                 value="IVURD"
                                 checked={servicegruppe === Servicegruppe.IVURD}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.OPPFI);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - OPPFI"
+                                value="OPPFI"
+                                checked={servicegruppe === Servicegruppe.OPPFI}
                         />
                         <RadioPanel
                                 onChange={() => {
