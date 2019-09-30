@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Route, RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Data as StartRegistreringData, RegistreringType, ActionTypes as registringActionType }
+import { Data as StartRegistreringData, RegistreringType, Servicegruppe, Formidlingsgruppe, ActionTypes as registringActionType }
     from '../../ducks/registreringstatus';
 import { State as RegistrerBruker, ActionTypes as registrerbrukerActionType }
     from '../../ducks/registrerbruker';
@@ -71,7 +71,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
     render() {
         const store = getStore();
-        const { registreringType } = this.props.startRegistreringStatus;
+        const { registreringType, servicegruppe, formidlingsgruppe } = this.props.startRegistreringStatus;
         const reset = () => {
             store.dispatch({
                 type: reaktiveringActionType.REAKTIVER_BRUKER_STATUS_PENDING,
@@ -88,6 +88,30 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                 type: registringActionType.HENT_REG_STATUS_OK,
                 data: {
                     registreringType: type,
+                    underOppfolging: startRegistreringStatus.underOppfolging,
+                    maksDato: startRegistreringStatus.maksDato,
+                }
+            });
+            reset();
+        };
+
+        const oppdaterServicegruppe = (type: Servicegruppe) => {
+            store.dispatch({
+                type: registringActionType.HENT_REG_STATUS_OK,
+                data: {
+                    servicegruppe: type,
+                    underOppfolging: startRegistreringStatus.underOppfolging,
+                    maksDato: startRegistreringStatus.maksDato,
+                }
+            });
+            reset();
+        };
+
+        const oppdaterFormidlingsgruppe = (type: Formidlingsgruppe) => {
+            store.dispatch({
+                type: registringActionType.HENT_REG_STATUS_OK,
+                data: {
+                    formidlingsgruppe: type,
                     underOppfolging: startRegistreringStatus.underOppfolging,
                     maksDato: startRegistreringStatus.maksDato,
                 }
@@ -176,6 +200,138 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             label="Sykmeldt uten arbeidsgiver/ Arbeidssoker allerede registrert"
                             value="Sykmeldt"
                             checked={registreringType === RegistreringType.ALLEREDE_REGISTRERT}
+                        />
+                    </div>
+                </fieldset>
+
+                <fieldset className="devToggleStatus__fieldset">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
+                        <Normaltekst>
+                            Endre formidlingsgruppe
+                        </Normaltekst>
+                    </legend>
+                    <div>
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterFormidlingsgruppe(Formidlingsgruppe.ARBS);
+                            }}
+                            name="devToggleStatusFormidlingsgruppe"
+                            label="Formidlingsgruppe - ARBS"
+                            value="ARBS"
+                            checked={formidlingsgruppe === Formidlingsgruppe.ARBS}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterFormidlingsgruppe(Formidlingsgruppe.IARBS);
+                            }}
+                            name="devToggleStatusFormidlingsgruppe"
+                            label="Formidlingsgruppe - IARBS"
+                            value="IARBS"
+                            checked={formidlingsgruppe === Formidlingsgruppe.IARBS}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterFormidlingsgruppe(Formidlingsgruppe.ISERV);
+                            }}
+                            name="devToggleStatusFormidlingsgruppe"
+                            label="Formidlingsgruppe - ISERV"
+                            value="ISERV"
+                            checked={formidlingsgruppe === Formidlingsgruppe.ISERV}
+                        />
+                    </div>
+                </fieldset>
+
+                <fieldset className="devToggleStatus__fieldset">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
+                        <Normaltekst>
+                            Endre servicegruppe
+                        </Normaltekst>
+                    </legend>
+                    <div>
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.BATT);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - BATT"
+                                value="BATT"
+                                checked={servicegruppe === Servicegruppe.BATT}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.BFORM);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - BFORM"
+                                value="BFORM"
+                                checked={servicegruppe === Servicegruppe.BFORM}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.BKART);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - BKART"
+                                value="BKART"
+                                checked={servicegruppe === Servicegruppe.BKART}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.IKVAL);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - IKVAL"
+                                value="IKVAL"
+                                checked={servicegruppe === Servicegruppe.IKVAL}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.IVURD);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - IVURD"
+                                value="IVURD"
+                                checked={servicegruppe === Servicegruppe.IVURD}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.OPPFI);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - OPPFI"
+                                value="OPPFI"
+                                checked={servicegruppe === Servicegruppe.OPPFI}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.VARIG);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - VARIG"
+                                value="VARIG"
+                                checked={servicegruppe === Servicegruppe.VARIG}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.VURDI);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - VURDI"
+                                value="VURDI"
+                                checked={servicegruppe === Servicegruppe.VURDI}
+                        />
+                        <RadioPanel
+                                onChange={() => {
+                                    oppdaterServicegruppe(Servicegruppe.VURDU);
+                                }}
+                                name="devToggleStatusServicegruppe"
+                                label="Servicegruppe - VURDU"
+                                value="VURDU"
+                                checked={servicegruppe === Servicegruppe.VURDU}
                         />
                     </div>
                 </fieldset>
