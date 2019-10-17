@@ -14,7 +14,6 @@ proxy:
     baseUrl: "http://veilarbproxy"
   - contextPath: "/pam-janzz"
     baseUrl: "http://pam-janzz"
-    pingRequestPath: "/pam-janzz/isAlive"
 
 redirect:
   - from: /arbeidssokerregistrering
