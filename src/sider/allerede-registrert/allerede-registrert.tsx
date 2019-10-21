@@ -6,10 +6,15 @@ import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
 import { frontendLogger } from '../../metrikker/metrics-utils';
+import {
+    ActionTypes as RegistreringStatusActionTypes,
+    Data as RegStatus,
+    RegistreringType,
+} from '../../ducks/registreringstatus';
 
 import './allerede-registrert.less';
 
-type Props = InjectedIntlProps;
+type Props = InjectedIntlProps & RegistreringStatusActionTypes & RegStatus;
 
 class AlleredeRegistrert extends React.Component<Props> {
     
@@ -34,6 +39,8 @@ class AlleredeRegistrert extends React.Component<Props> {
 
     render() {
         const messages = this.props.intl.messages;
+        const { formidlingsgruppe } = this.props as RegStatus;
+        const formidlingsgruppeOrFalse = formidlingsgruppe || false;
         return (
             <div>
                 <Banner />
@@ -49,7 +56,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>
-                    <Row className="">
+                    <Row className={formidlingsgruppeOrFalse === 'IARBS' ? '' : 'hidden'}>
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <Ekspanderbartpanel
                                 tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
