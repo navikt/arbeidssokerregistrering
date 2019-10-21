@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
@@ -6,15 +7,13 @@ import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
 import { frontendLogger } from '../../metrikker/metrics-utils';
-import {
-    ActionTypes as RegistreringStatusActionTypes,
-    Data as RegStatus,
-    RegistreringType,
-} from '../../ducks/registreringstatus';
+import { AppState } from '../../reducer';
 
 import './allerede-registrert.less';
-
-type Props = InjectedIntlProps & RegistreringStatusActionTypes & RegStatus;
+interface StateProps {
+    state: AppState;
+}
+type Props = InjectedIntlProps & StateProps;
 
 class AlleredeRegistrert extends React.Component<Props> {
     
@@ -39,8 +38,8 @@ class AlleredeRegistrert extends React.Component<Props> {
 
     render() {
         const messages = this.props.intl.messages;
-        const { formidlingsgruppe } = this.props as RegStatus;
-        const formidlingsgruppeOrFalse = formidlingsgruppe || false;
+        const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
+        console.log(this.props.state)
         return (
             <div>
                 <Banner />
@@ -56,7 +55,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>
-                    <Row className={formidlingsgruppeOrFalse === 'IARBS' ? '' : 'hidden'}>
+                    <Row className={formidlingsgruppe === 'IARBS' ? '' : 'hidden'}>
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <Ekspanderbartpanel
                                 tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
@@ -120,4 +119,8 @@ class AlleredeRegistrert extends React.Component<Props> {
     }
 }
 
-export default injectIntl(AlleredeRegistrert);
+const mapStateToProps = (state: AppState) => ({
+    state: state,
+});
+
+export default connect(mapStateToProps)(injectIntl(AlleredeRegistrert));
