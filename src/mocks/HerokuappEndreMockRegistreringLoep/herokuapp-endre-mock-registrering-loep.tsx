@@ -90,7 +90,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     registreringType: type,
                     underOppfolging: startRegistreringStatus.underOppfolging,
                     maksDato: startRegistreringStatus.maksDato,
-                    formidlingsgruppe: formidlingsgruppe
+                    formidlingsgruppe: formidlingsgruppe,
+                    servicegruppe
                 }
             });
             reset();
@@ -100,6 +101,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             store.dispatch({
                 type: registringActionType.HENT_REG_STATUS_OK,
                 data: {
+                    registreringType,
                     servicegruppe: type,
                     underOppfolging,
                     maksDato,
@@ -113,6 +115,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             store.dispatch({
                 type: registringActionType.HENT_REG_STATUS_OK,
                 data: {
+                    registreringType,
                     servicegruppe,
                     underOppfolging,
                     maksDato,

@@ -10,6 +10,7 @@
     "start:ts": "cross-env REACT_APP_MOCK=true craco start",
     "start:ts-manuell": "cross-env REACT_APP_MOCK=true REACT_APP_MOCK_MANUELL_REGISTRERING=true craco start",
     "build": "npm-run-all -s build:tekster build:ts",
+    "now-build": "cross-env REACT_APP_HEROKU_OVERGANG=true REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build",
     "build:tekster": "react-intl-bundler --no-lookup src/tekster src/tekster",
     "build:ts": "craco build",
     "test": "npm run build:tekster && craco test --env=jsdom",
