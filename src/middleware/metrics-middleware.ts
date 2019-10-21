@@ -99,7 +99,10 @@ function loggRegistreringInngang(store: any, action: Action) {
             jobbetSeksAvTolvSisteManeder: jobbetSeksAvTolvSisteManederOrFalse,
             servicegruppe: servicegrupperOrFalse,
             formidlingsgruppe: formidlingsgruppeOrFalse
-        }, {});
+        }, {
+            servicegruppeTag: servicegrupperOrFalse,
+            formidlingsgruppeTag: formidlingsgruppeOrFalse
+        });
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
         
