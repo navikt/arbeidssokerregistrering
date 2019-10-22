@@ -16,30 +16,39 @@ interface StateProps {
 type Props = InjectedIntlProps & StateProps;
 
 class AlleredeRegistrert extends React.Component<Props> {
-    
-    handleClickAktivitetsplan () {
-        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan');
+    handleClickAktivitetsplan (event) {
+        const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
+        const servicegruppe = event.currentTarget.dataset.servicegruppe;
+        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
     }
 
-    handleClickVeienTilArbeid () {
-        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid');
+    handleClickVeienTilArbeid (event) {
+        const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
+        const servicegruppe = event.currentTarget.dataset.servicegruppe;
+        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
     }
 
-    handleClickDialog () {
-        frontendLogger('registrering.allerede-registrert.click.dialog');
+    handleClickDialog (event) {
+        const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
+        const servicegruppe = event.currentTarget.dataset.servicegruppe;
+        frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
     }
 
     handleClickDagpenger (event) {
         const isOpen = event.currentTarget.getAttribute('aria-expanded') === 'false';
         if (isOpen) {
-            frontendLogger('registrering.allerede-registrert.click.dagpenger');   
+            const formidlingsgruppe = event.currentTarget.parentNode.dataset.formidlingsgruppe;
+            const servicegruppe = event.currentTarget.parentNode.dataset.servicegruppe;
+            frontendLogger('registrering.allerede-registrert.click.dagpenger', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});   
         }
     }
 
     render() {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
-        console.log(this.props.state)
+        const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
+        const formidlingsgruppeOrFalse = formidlingsgruppe || false;
+        const servicegruppeOrFalse = servicegruppe || false;
         return (
             <div>
                 <Banner />
@@ -55,11 +64,13 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>
-                    <Row className={formidlingsgruppe === 'IARBS' ? '' : 'hidden'}>
+                    <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <Ekspanderbartpanel
                                 tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
                                 onClick={this.handleClickDagpenger}
+                                data-formidlingsgruppe={formidlingsgruppeOrFalse}
+                                data-servicegruppe={servicegruppeOrFalse}
                                 border>
                                 {messages['allerede-registrert-panel-dagpenger-tekst']}
                             </Ekspanderbartpanel>
@@ -75,6 +86,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     href={messages['allerede-registrert-boks-1-lenke']}
                                     className="allerede-registrert__knapp knapp"
                                     onClick={this.handleClickAktivitetsplan}
+                                    data-formidlingsgruppe={formidlingsgruppeOrFalse}
+                                    data-servicegruppe={servicegruppeOrFalse}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -91,6 +104,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     href={messages['allerede-registrert-boks-2-lenke']}
                                     className="allerede-registrert__knapp knapp"
                                     onClick={this.handleClickVeienTilArbeid}
+                                    data-formidlingsgruppe={formidlingsgruppeOrFalse}
+                                    data-servicegruppe={servicegruppeOrFalse}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -107,6 +122,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     href={messages['allerede-registrert-boks-3-lenke']}
                                     className="allerede-registrert__knapp knapp"
                                     onClick={this.handleClickDialog}
+                                    data-formidlingsgruppe={formidlingsgruppeOrFalse}
+                                    data-servicegruppe={servicegruppeOrFalse}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
