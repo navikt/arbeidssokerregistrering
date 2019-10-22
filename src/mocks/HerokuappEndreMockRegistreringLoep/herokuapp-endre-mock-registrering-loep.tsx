@@ -71,7 +71,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
     render() {
         const store = getStore();
-        const { registreringType, servicegruppe, formidlingsgruppe } = this.props.startRegistreringStatus;
+        const { registreringType, servicegruppe, formidlingsgruppe, underOppfolging, maksDato } = this.props.startRegistreringStatus;
         const reset = () => {
             store.dispatch({
                 type: reaktiveringActionType.REAKTIVER_BRUKER_STATUS_PENDING,
@@ -90,6 +90,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     registreringType: type,
                     underOppfolging: startRegistreringStatus.underOppfolging,
                     maksDato: startRegistreringStatus.maksDato,
+                    formidlingsgruppe: formidlingsgruppe,
+                    servicegruppe
                 }
             });
             reset();
@@ -99,9 +101,11 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             store.dispatch({
                 type: registringActionType.HENT_REG_STATUS_OK,
                 data: {
+                    registreringType,
                     servicegruppe: type,
-                    underOppfolging: startRegistreringStatus.underOppfolging,
-                    maksDato: startRegistreringStatus.maksDato,
+                    underOppfolging,
+                    maksDato,
+                    formidlingsgruppe
                 }
             });
             reset();
@@ -111,9 +115,11 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
             store.dispatch({
                 type: registringActionType.HENT_REG_STATUS_OK,
                 data: {
-                    formidlingsgruppe: type,
-                    underOppfolging: startRegistreringStatus.underOppfolging,
-                    maksDato: startRegistreringStatus.maksDato,
+                    registreringType,
+                    servicegruppe,
+                    underOppfolging,
+                    maksDato,
+                    formidlingsgruppe: type
                 }
             });
             reset();
