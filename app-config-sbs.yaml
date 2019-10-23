@@ -50,6 +50,8 @@ fasitResources:
     resourceType: baseUrl
   - alias: aktivitetsplan
     resourceType: baseUrl
+  - alias: pam-janzz
+    resourceType: baseUrl
 
 alertProfiles:
   - common-java-modules
