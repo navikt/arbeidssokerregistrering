@@ -2,9 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
+import Alert from '../../komponenter/alertstripe';
 import Banner from '../../komponenter/banner/banner';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 import { AppState } from '../../reducer';
@@ -34,21 +34,13 @@ class AlleredeRegistrert extends React.Component<Props> {
         frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
     }
 
-    handleClickDagpenger (event) {
-        const isOpen = event.currentTarget.getAttribute('aria-expanded') === 'false';
-        if (isOpen) {
-            const formidlingsgruppe = event.currentTarget.parentNode.dataset.formidlingsgruppe;
-            const servicegruppe = event.currentTarget.parentNode.dataset.servicegruppe;
-            frontendLogger('registrering.allerede-registrert.click.dagpenger', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});   
-        }
-    }
-
     render() {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
         const formidlingsgruppeOrFalse = formidlingsgruppe || false;
         const servicegruppeOrFalse = servicegruppe || false;
+        const isIARBS = formidlingsgruppeOrFalse === 'IARBS'
         return (
             <div>
                 <Banner />
@@ -64,18 +56,11 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>
-                    <Row className="">
+                    {isIARBS ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <Ekspanderbartpanel
-                                tittel={messages['allerede-registrert-panel-dagpenger-tittel']}
-                                onClick={this.handleClickDagpenger}
-                                data-formidlingsgruppe={formidlingsgruppeOrFalse}
-                                data-servicegruppe={servicegruppeOrFalse}
-                                border>
-                                {messages['allerede-registrert-panel-dagpenger-tekst']}
-                            </Ekspanderbartpanel>
+                            <Alert type="advarsel" tekst={messages['allerede-registrert-iarbsmelding']}/>
                         </Column>
-                    </Row>
+                    </Row> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
