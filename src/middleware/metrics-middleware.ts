@@ -88,7 +88,7 @@ function loggRegistreringInngang(store: any, action: Action) {
         const erSykmeldtMedArbeidsgiverOrFalse = erSykmeldtMedArbeidsgiver || false;
         const jobbetSeksAvTolvSisteManederOrFalse = jobbetSeksAvTolvSisteManeder || false;
         const servicegrupperOrFalse = servicegruppe || false;
-        const formidlingsgruppeOrFalse = formidlingsgruppe || false;
+        const formidlingsgruppeOrFalse = formidlingsgruppe || 'false';
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
         frontendLogger('registrering.inngang.type', {
