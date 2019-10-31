@@ -83,12 +83,12 @@ function loggRegistreringInngang(store: any, action: Action) {
                 jobbetSeksAvTolvSisteManeder,
                 servicegruppe,
                 formidlingsgruppe } = action.data as RegStatus;
-        const maksDatoOrFalse = maksDato || false;
+        const maksDatoOrFalse = maksDato || 'INGEN_VERDI';
         const underOppfolgingOrFalse = underOppfolging || false;
         const erSykmeldtMedArbeidsgiverOrFalse = erSykmeldtMedArbeidsgiver || false;
         const jobbetSeksAvTolvSisteManederOrFalse = jobbetSeksAvTolvSisteManeder || false;
-        const servicegrupperOrFalse = servicegruppe || false;
-        const formidlingsgruppeOrFalse = formidlingsgruppe || 'false';
+        const servicegrupperOrFalse = servicegruppe || 'INGEN_VERDI';
+        const formidlingsgruppeOrFalse = formidlingsgruppe || 'INGEN_VERDI';
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
         frontendLogger('registrering.inngang.type', {
