@@ -46,7 +46,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                 <Banner />
                 <div className="allerede-registrert">
                     <GraaBakgrunn />
-                    <Row className="">
+                    {isIARBS ? null :
+                        <Row className="">
                         <Column xs="12">
                             <Innholdstittel tag="h1" className="allerede-registrert__tittel">
                                 {messages['allerede-registrert-tittel']}
@@ -55,7 +56,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                 {messages['allerede-registrert-undertittel']}
                             </Normaltekst>
                         </Column>
-                    </Row>
+                    </Row>}
                     {isIARBS ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <Alert type="advarsel" tekst={messages['allerede-registrert-iarbsmelding']}/>
