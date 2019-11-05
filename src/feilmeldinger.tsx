@@ -1,13 +1,13 @@
-import AlertStripeInfoSolid from 'nav-frontend-alertstriper/lib/info-solid-alertstripe';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 export function FeilmeldingMedAlertStripe(props: { id: string }) {
     return (
             <div className="container feilmelding-varsel">
-                <AlertStripeInfoSolid>
+                <AlertStripeAdvarsel>
                     <FormattedMessage id={props.id} />
-                </AlertStripeInfoSolid>
+                </AlertStripeAdvarsel>
             </div>
     );
 }

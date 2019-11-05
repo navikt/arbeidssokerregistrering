@@ -4,10 +4,10 @@ import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
-import Alert from '../../komponenter/alertstripe';
 import Banner from '../../komponenter/banner/banner';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 import { AppState } from '../../reducer';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 
 import './allerede-registrert.less';
 interface StateProps {
@@ -59,7 +59,12 @@ class AlleredeRegistrert extends React.Component<Props> {
                     </Row>}
                     {isIARBS ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <Alert type="advarsel" tekst={messages['allerede-registrert-iarbsmelding']}/>
+                            <AlertStripeAdvarsel>
+                                <Normaltekst className="blokk-s">Vi ser at du ønsker å registrere deg som arbeidssøker.</Normaltekst>
+                                <Normaltekst className="blokk-s"><strong>Hvis du prøver å registrere deg fordi du ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
+                                <Normaltekst className="blokk-s"><strong>Ring 55 55 33 33</strong> med tastevalg 2.</Normaltekst>
+                                <Normaltekst>Hvis du ikke har behov for å søke om dagpenger kan du se bort fra denne meldingen.</Normaltekst>
+                            </AlertStripeAdvarsel>
                         </Column>
                     </Row> : null}
                     <Row className="">
