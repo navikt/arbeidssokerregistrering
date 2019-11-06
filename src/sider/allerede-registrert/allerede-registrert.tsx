@@ -40,7 +40,7 @@ class AlleredeRegistrert extends React.Component<Props> {
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
         const formidlingsgruppeOrFalse = formidlingsgruppe || false;
         const servicegruppeOrFalse = servicegruppe || false;
-        const isIARBS = formidlingsgruppeOrFalse === 'IARBS'
+        const isIARBS = formidlingsgruppeOrFalse === 'IARBS';
         return (
             <div>
                 <Banner />
