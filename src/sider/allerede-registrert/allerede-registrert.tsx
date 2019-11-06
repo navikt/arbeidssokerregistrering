@@ -62,7 +62,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             <AlertStripeAdvarsel>
                                 <Normaltekst className="blokk-s">Vi ser at du ønsker å registrere deg som arbeidssøker.</Normaltekst>
                                 <Normaltekst className="blokk-s"><strong>Hvis du prøver å registrere deg fordi du ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
-                                <Normaltekst className="blokk-s"><strong>Ring 55 55 33 33</strong> med tastevalg 2.</Normaltekst>
+                                <Normaltekst className="blokk-s"><strong>Ring <a href="tel:+4755553333">55 55 33 33</a></strong> med tastevalg 2.</Normaltekst>
                                 <Normaltekst>Hvis du ikke har behov for å søke om dagpenger kan du se bort fra denne meldingen.</Normaltekst>
                             </AlertStripeAdvarsel>
                         </Column>
