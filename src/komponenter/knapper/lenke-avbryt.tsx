@@ -58,6 +58,7 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
         return (
             <>
                 <div className={classNames('lenke-avbryt-wrapper', wrapperClassname)}>
+                    {/* eslint-disable-next-line */}
                     <a href="" className="lenke lenke-avbryt typo-element" onClick={this.handleAvbrytClick}>
                         <FormattedMessage id={id}/>
                     </a>

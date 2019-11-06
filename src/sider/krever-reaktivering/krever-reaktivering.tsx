@@ -124,6 +124,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    // @ts-ignore
     onReaktiverBruker: () => dispatch(reaktiverBruker()),
 });
 

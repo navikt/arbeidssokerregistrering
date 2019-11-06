@@ -107,9 +107,11 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    // @ts-ignore
     hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(
         hentStyrkkodeForSisteStillingFraAAReg()
     ),
+    // @ts-ignore
     hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
     velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
     settDefaultStilling: (stilling: Stilling) => dispatch(settDefaultStilling(stilling))

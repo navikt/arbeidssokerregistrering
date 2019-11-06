@@ -26,7 +26,7 @@
     "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less"
   },
   "dependencies": {
-    "@craco/craco": "^3.4.1",
+    "@craco/craco": "5.6.1",
     "@navikt/fo-session-timeout-modal": "^1.1.1",
     "@types/classnames": "2.2.3",
     "@types/enzyme": "^3.9.1",
@@ -45,7 +45,8 @@
     "@types/sinon": "^5.0.3",
     "babel-polyfill": "^6.26.0",
     "classnames": "2.2.6",
-    "craco-less": "^1.7.0",
+    "core-js": "3.3.6",
+    "craco-less": "1.14.4",
     "idempotent-babel-polyfill": "^7.0.0",
     "less-plugin-npm-import": "^2.1.0",
     "lodash": "4.17.11",
@@ -95,12 +96,12 @@
     "react-redux": "5.0.7",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "3.2.0",
     "react-test-renderer": "16.3.2",
     "redux-thunk": "2.2.0",
     "tslint": "^5.15.0",
     "tslint-react": "^4.0.0",
-    "typescript": "^3.4.2"
+    "typescript": "3.7.2"
   },
   "devDependencies": {
     "@navikt/react-intl-bundler": "^1.0.4",
