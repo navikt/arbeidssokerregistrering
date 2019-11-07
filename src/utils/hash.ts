@@ -1,9 +1,9 @@
 import shajs from 'sha.js';
 
-function hash(string?: string): string | undefined {
-  return string
+function hash(input?: string): string | undefined {
+  return input
       ? shajs('sha256')
-            .update(string)
+            .update(input)
             .digest('hex')
       : undefined;
 }
