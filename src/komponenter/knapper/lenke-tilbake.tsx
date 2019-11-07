@@ -15,17 +15,16 @@ function LenkeTilbake({onClick}: Props) {
         }, 600);
     }
 
+    const onclick = () => {
+        onClick();
+        hideProgressbar();
+    };
+
     return (
-        <a
-            href="javascript:void(0);"
-            className="lenke tilbakelenke typo-element"
-            onClick={() => {
-                onClick();
-                hideProgressbar();
-            }}
-        >
-            Tilbake
-        </a>
+        <>
+            {/* eslint-disable-next-line */}
+            <a href="" className="lenke tilbakelenke typo-element" onClick={onclick}>Tilbake</a>
+        </>
     );
 }
 

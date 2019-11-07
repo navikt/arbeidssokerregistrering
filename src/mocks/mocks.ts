@@ -15,6 +15,10 @@ import brukersNavn from './brukers-navn-mock';
 import startRegistreringStatus from './registreringstatus-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import brukerKontekst from './fss-bruker-kontekst';
+import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
+import {ordinaerRegistreringRespons, sykmeldtRegistreringRespons} from "./registrerbruker-mock";
+import {featureTogglesMock} from "./feature-toggles-mock";
+import oversettelseAvStillingFraAAReg from "./oversettelse-av-stilling-fra-aareg-mock";
 
 export const MOCK_AUTENTISERINGS_INFO = true;
 export const MOCK_START_REGISRERING_STATUS = true;
@@ -40,10 +44,6 @@ function lagPamjanzzRespons({q}: { q: string}) {
     }
 }
 
-import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
-import {ordinaerRegistreringRespons, sykmeldtRegistreringRespons} from "./registrerbruker-mock";
-import {featureTogglesMock} from "./feature-toggles-mock";
-import oversettelseAvStillingFraAAReg from "./oversettelse-av-stilling-fra-aareg-mock";
 const loggingMiddleware: Middleware = (request, response) => {
     // tslint:disable
     console.groupCollapsed(request.url);

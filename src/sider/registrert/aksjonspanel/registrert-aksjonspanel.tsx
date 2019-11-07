@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Element, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { frontendLogger } from '../../../metrikker/metrics-utils';
 import {
     HEROKU_VEIENTILARBEID_MED_AAP_URL,

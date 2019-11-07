@@ -137,7 +137,7 @@ function loggRegistreringInngangFraAAP(store: any, action: Action) {
 }
 
 function loggFeil(action: Action) {
-    feilTyper.map((feil) => {
+    feilTyper.forEach((feil) => {
         if (action.type === feil.type) {
             if (!action.data) {
                 frontendLogger(feil.eventnavn, {'statusText': 'Action data er undefined'}, {});

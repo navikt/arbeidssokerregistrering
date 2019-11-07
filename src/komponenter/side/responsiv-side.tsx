@@ -9,11 +9,6 @@ interface ResponsivSideProps {
 }
 
 class ResponsivSide extends React.Component<ResponsivSideProps> {
-
-    constructor(props: ResponsivSideProps) {
-        super(props);
-    }
-
     render() {
         const {children, className} = this.props;
 

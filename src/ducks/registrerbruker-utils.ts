@@ -43,16 +43,10 @@ export function mapAvgitteSvarForBackend(
 }
 
 export function mapTilBesvarelse(svarState: SvarState): BesvarelseType {
-
-    const besvarelse: BesvarelseType = {};
-
-    for (let i = 0; i < svarState.length; i++) {
-        const sporsmalOgSvar = svarState[i];
-        besvarelse[sporsmalOgSvar.sporsmalId] = sporsmalOgSvar.svar;
-    }
-
-    return besvarelse;
-
+    return svarState.reduce((previousValue, currentValue) => {
+        previousValue[currentValue.sporsmalId] = currentValue.svar;
+        return previousValue;
+    }, {});
 }
 
 export function mapTilSvarState(besvarelse: BesvarelseType): SvarState {

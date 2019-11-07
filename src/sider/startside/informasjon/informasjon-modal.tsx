@@ -13,11 +13,6 @@ interface Props {
 }
 
 class InformasjonModal extends React.Component<Props> {
-
-    constructor(props: Props) {
-        super(props);
-    }
-
     render () {
         return (
             <ModalWrapper

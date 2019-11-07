@@ -133,6 +133,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    // @ts-ignore
     onRegistrerBruker: (data, registreringType: RegistreringType) =>
         dispatch(utforRegistrering(data, registreringType)),
 });
