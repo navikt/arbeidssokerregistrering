@@ -16,7 +16,7 @@
     "test": "npm run build:tekster && craco test --env=jsdom",
     "test:e2e": "node integration/runner.js --debug-mode",
     "test:browsers": "node integration/saucelabs-runner.js",
-    "test:coverage": "npm test -- --coverage",
+    "test:coverage": "npm test -- --coverage --watchAll=false",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/*.ts* --fix",
     "heroku-serve": "node heroku-server.js",
