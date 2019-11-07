@@ -7,7 +7,6 @@ import {
     RegistreringType,
 } from '../ducks/registreringstatus';
 import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
-
 import { feilTyper } from './metrics-middleware-util';
 import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 import * as _ from 'lodash';
@@ -105,7 +104,7 @@ function loggRegistreringInngang(store: any, action: Action) {
         });
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
-        
+
         if (erSykmeldt) {
             frontendLogger('registrering.inngang.sykmeldt', {
                 kommerFraSykefravaer: inngangSykefravaer

@@ -8,6 +8,7 @@ import Banner from '../../komponenter/banner/banner';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 import { AppState } from '../../reducer';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import hash from '../../utils/hash'
 
 import './allerede-registrert.less';
 interface StateProps {
@@ -41,6 +42,8 @@ class AlleredeRegistrert extends React.Component<Props> {
         const formidlingsgruppeOrFalse = formidlingsgruppe || false;
         const servicegruppeOrFalse = servicegruppe || false;
         const isIARBS = formidlingsgruppeOrFalse === 'IARBS';
+        const hashedNavn = hash(this.props.state.brukersNavn.data.sammensattNavn)
+        frontendLogger('registrering.allerede-registrert.visning', { brukernavn : hashedNavn }, { formidlingsgruppeTag: formidlingsgruppeOrFalse, servicegruppeTag: servicegruppeOrFalse })
         return (
             <div>
                 <Banner />

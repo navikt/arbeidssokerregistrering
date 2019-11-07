@@ -100,6 +100,7 @@
     "react-scripts": "3.2.0",
     "react-test-renderer": "16.3.2",
     "redux-thunk": "2.2.0",
+    "sha.js": "2.4.11",
     "tslint": "5.15.0",
     "tslint-react": "4.0.0",
     "typescript": "3.7.2"
@@ -110,6 +111,7 @@
     "@types/chai-as-promised": "7.1.0",
     "@types/fetch-mock": "5.12.2",
     "@types/react-test-renderer": "16.0.1",
+    "@types/sha.js": "2.4.0",
     "axe-testcafe": "1.1.0",
     "browserstack": "1.5.1",
     "chai": "4.1.2",
