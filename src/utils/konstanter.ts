@@ -16,11 +16,11 @@ const herokuUrl = 'https://veientilarbeid.herokuapp.com/veientilarbeid';
 const vanligUrl = '/veientilarbeid/';
 
 export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
-export const HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL = `${herokuUrl}/?visInformasjonsmodul=true&visdagpenger=true`;
-export const HEROKU_VEIENTILARBEID_MED_AAP_URL = `${herokuUrl}/?visAap=true`;
+export const HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL = `${herokuUrl}`;
+export const HEROKU_VEIENTILARBEID_MED_AAP_URL = `${herokuUrl}?visAap=true`;
 
 export const VEIENTILARBEID_URL = vanligUrl;
-export const VEIENTILARBEID_MED_DAGPENGER_URL = `${vanligUrl}?visInformasjonsmodul=true&visdagpenger=true`;
+export const VEIENTILARBEID_MED_DAGPENGER_URL = `${vanligUrl}`;
 export const VEIENTILARBEID_MED_AAP_URL = `${vanligUrl}?visAap=true`;
 
 export const DITT_NAV_URL = '/dittnav';
@@ -28,7 +28,7 @@ export const DITT_SYKEFRAVAER_URL = '/sykefravaer';
 
 export const AKTIVITETSPLAN_URL = '/veilarbpersonflatefs';
 
-export const DP_SOK_URL = 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Skjemaer/Uten+arbeid/Dagpenger';
+export const DP_SOK_URL = 'https://www.nav.no/soknader/nb/person/arbeid/dagpenger';
 
 // Besvarelser
 export const YRKESPRAKSIS = '5120.14'; // hard kodet inntil videre
