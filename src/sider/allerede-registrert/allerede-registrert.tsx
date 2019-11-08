@@ -39,11 +39,11 @@ class AlleredeRegistrert extends React.Component<Props> {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
-        const formidlingsgruppeOrFalse = formidlingsgruppe || false;
-        const servicegruppeOrFalse = servicegruppe || false;
-        const isIARBS = formidlingsgruppeOrFalse === 'IARBS';
+        const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
+        const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
+        const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
         const hashedNavn = hash(this.props.state.brukersNavn.data.sammensattNavn)
-        frontendLogger('registrering.allerede-registrert.visning', { brukernavn : hashedNavn }, { formidlingsgruppeTag: formidlingsgruppeOrFalse, servicegruppeTag: servicegruppeOrFalse })
+        frontendLogger('registrering.allerede-registrert.visning', { brukernavn : hashedNavn }, { formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi, servicegruppeTag: servicegruppeOrIngenVerdi })
         return (
             <div>
                 <Banner />
@@ -80,8 +80,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     href={messages['allerede-registrert-boks-1-lenke']}
                                     className="allerede-registrert__knapp knapp"
                                     onClick={this.handleClickAktivitetsplan}
-                                    data-formidlingsgruppe={formidlingsgruppeOrFalse}
-                                    data-servicegruppe={servicegruppeOrFalse}
+                                    data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
+                                    data-servicegruppe={servicegruppeOrIngenVerdi}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -98,8 +98,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     href={messages['allerede-registrert-boks-2-lenke']}
                                     className="allerede-registrert__knapp knapp"
                                     onClick={this.handleClickVeienTilArbeid}
-                                    data-formidlingsgruppe={formidlingsgruppeOrFalse}
-                                    data-servicegruppe={servicegruppeOrFalse}
+                                    data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
+                                    data-servicegruppe={servicegruppeOrIngenVerdi}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -116,8 +116,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     href={messages['allerede-registrert-boks-3-lenke']}
                                     className="allerede-registrert__knapp knapp"
                                     onClick={this.handleClickDialog}
-                                    data-formidlingsgruppe={formidlingsgruppeOrFalse}
-                                    data-servicegruppe={servicegruppeOrFalse}
+                                    data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
+                                    data-servicegruppe={servicegruppeOrIngenVerdi}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
