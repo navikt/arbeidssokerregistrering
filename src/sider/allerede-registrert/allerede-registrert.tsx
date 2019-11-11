@@ -97,7 +97,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                     </Row> : null}
                     {newPlaster ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <div className="allerede-registrert__boks-innhold">
+                            <div className="allerede-registrert__boks-innhold venstrejustert">
                                 <Normaltekst className="blokk-s">Vi ser at du prøver å registrere deg som arbeidssøker.</Normaltekst>
                                 <Normaltekst className="blokk-s"><strong>Hvis du prøver å registrere deg fordi du ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
                                 <div className="blokk-s" id="kontaktMegMeldingWrapper">
@@ -108,7 +108,9 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     <Normaltekst className="hidden" id="kontaktMegMelding">
                                         Hvis du ønsker å snakke om noe annet enn dagpenger, må du ringe 55 55 33 33.
                                     </Normaltekst>
-                                    <Knapp className="hidden" id="kontaktMegKnapp" onClick={this.handleClickKontaktMeg}>Send inn henvendelsen</Knapp>
+                                    <div className="midtjustert">
+                                        <Knapp className="hidden" id="kontaktMegKnapp" onClick={this.handleClickKontaktMeg}>Send inn henvendelsen</Knapp>
+                                    </div>
                                 </div>
                                 <div className="hidden" id="kontaktMegKvittering">
                                     <Normaltekst>Din henvendelse er mottatt</Normaltekst>
