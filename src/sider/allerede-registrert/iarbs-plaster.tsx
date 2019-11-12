@@ -3,14 +3,24 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
+import { frontendLogger } from '../../metrikker/metrics-utils';
 
-function plaster () {
+interface Props {
+  formidlingsgruppe: string;
+  servicegruppe: string;
+  geografiskTilknytning: string;
+}
+
+function plaster (props: Props) {
+  const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = props;
+
   const handleClickKontaktMeg = event => {
     const kvittering = document.getElementById('kontaktMegKvittering');
     const melding = document.getElementById('kontaktMegMeldingWrapper');
     if (melding && kvittering) {
         melding.className = 'hidden';
         kvittering.className = 'blokk-s';
+        frontendLogger('registrering.allerede-registrert.click.kontakt-meg', {}, { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning })
     }
   };
 

@@ -76,7 +76,10 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </AlertStripeAdvarsel>
                         </Column>
                     </Row> : null}
-                    {newPlaster ? <IARBSPlaster /> : null}
+                    {newPlaster ? <IARBSPlaster
+                        formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
+                        servicegruppe={servicegruppeOrIngenVerdi}
+                        geografiskTilknytning={geografiskTilknytning} /> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
