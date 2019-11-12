@@ -43,11 +43,12 @@ class AlleredeRegistrert extends React.Component<Props> {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
+        const featureToggles = this.props.state.featureToggles.data
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
-        const newPlaster = isIARBS && geografiskTilknytning === '030102';
+        const newPlaster = isIARBS && geografiskTilknytning === '030102' && featureToggles["arbeidssokerregistrering.kontaktmeg"];
         const hashedNavn = hash(this.props.state.brukersNavn.data.sammensattNavn)
         frontendLogger('registrering.allerede-registrert.visning', { brukernavn : hashedNavn }, { formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi, servicegruppeTag: servicegruppeOrIngenVerdi, geografiskTilknytningTag: geografiskTilknytning })
         return (
