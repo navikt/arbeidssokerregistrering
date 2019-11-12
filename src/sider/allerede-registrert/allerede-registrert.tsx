@@ -22,19 +22,22 @@ class AlleredeRegistrert extends React.Component<Props> {
     handleClickAktivitetsplan (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
+        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickVeienTilArbeid (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
+        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickDialog (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
+        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickKontaktMeg (event) {
@@ -131,6 +134,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickAktivitetsplan}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
+                                    data-geografiskTilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -149,6 +153,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickVeienTilArbeid}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
+                                    data-geografiskTilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -167,6 +172,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickDialog}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
+                                    data-geografiskTilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
