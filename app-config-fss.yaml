@@ -24,8 +24,6 @@ resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resourc
     memory: 512Mi
 fasitResources:
   used:
-  - alias: appres.cms
-    resourceType: baseUrl
   - alias: appdynamics
     resourceType: applicationproperties
   - alias: loadbalancer:arbeidssokerregistrering
@@ -44,5 +42,8 @@ fasitResources:
   # brukes av internarbeidsflatedecorator
   - alias: aktoerregister.api.v1
     resourceType: restservice
+env:
+  - name: DISABLE_DECORATOR
+    value: 'true'
 alertProfiles:
   - common-java-modules
