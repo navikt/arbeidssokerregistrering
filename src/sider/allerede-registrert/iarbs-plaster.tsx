@@ -8,11 +8,11 @@ import { frontendLogger } from '../../metrikker/metrics-utils';
 interface Props {
   formidlingsgruppe: string;
   servicegruppe: string;
-  geografiskTilknytning: string;
+  geografisktilknytning: string;
 }
 
 function plaster (props: Props) {
-  const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = props;
+  const { formidlingsgruppe, servicegruppe, geografisktilknytning } = props;
 
   const handleClickKontaktMeg = event => {
     const kvittering = document.getElementById('kontaktMegKvittering');
@@ -20,7 +20,7 @@ function plaster (props: Props) {
     if (melding && kvittering) {
         melding.className = 'hidden';
         kvittering.className = 'blokk-s';
-        frontendLogger('registrering.allerede-registrert.click.kontakt-meg', {}, { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning })
+        frontendLogger('registrering.allerede-registrert.click.kontakt-meg', {}, { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografisktilknytning })
     }
   };
 

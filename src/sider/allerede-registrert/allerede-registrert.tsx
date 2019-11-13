@@ -20,21 +20,21 @@ class AlleredeRegistrert extends React.Component<Props> {
     handleClickAktivitetsplan (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
         frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickVeienTilArbeid (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
         frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickDialog (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
         frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
@@ -79,7 +79,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                     {nyttPlaster ? <IARBSPlaster
                         formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                         servicegruppe={servicegruppeOrIngenVerdi}
-                        geografiskTilknytning={geografiskTilknytning} /> : null}
+                        geografisktilknytning={geografiskTilknytning} /> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
@@ -92,7 +92,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickAktivitetsplan}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
-                                    data-geografiskTilknytning={geografiskTilknytning}
+                                    data-geografisktilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -111,7 +111,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickVeienTilArbeid}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
-                                    data-geografiskTilknytning={geografiskTilknytning}
+                                    data-geografisktilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -130,7 +130,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickDialog}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
-                                    data-geografiskTilknytning={geografiskTilknytning}
+                                    data-geografisktilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
