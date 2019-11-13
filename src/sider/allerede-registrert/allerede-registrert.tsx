@@ -43,7 +43,7 @@ class AlleredeRegistrert extends React.Component<Props> {
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
         const hashedNavn = hash(this.props.state.brukersNavn.data.sammensattNavn)
-        frontendLogger('registrering.allerede-registrert.visning', { brukernavn : hashedNavn }, { formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi, servicegruppeTag: servicegruppeOrIngenVerdi })
+        frontendLogger('registrering.allerede-registrert.visning', {}, { brukernavn : hashedNavn, formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi, servicegruppeTag: servicegruppeOrIngenVerdi })
         return (
             <div>
                 <Banner />
