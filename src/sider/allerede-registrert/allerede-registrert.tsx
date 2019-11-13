@@ -9,7 +9,6 @@ import { frontendLogger } from '../../metrikker/metrics-utils';
 import { AppState } from '../../reducer';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import IARBSPlaster from './iarbs-plaster'
-import hash from '../../utils/hash'
 
 import './allerede-registrert.less';
 interface StateProps {
@@ -48,15 +47,15 @@ class AlleredeRegistrert extends React.Component<Props> {
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
-        const newPlaster = isIARBS && geografiskTilknytning === '030102' && featureToggles["arbeidssokerregistrering.kontaktmeg"];
-        const hashedNavn = hash(this.props.state.brukersNavn.data.sammensattNavn)
-        frontendLogger('registrering.allerede-registrert.visning', { brukernavn : hashedNavn }, { formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi, servicegruppeTag: servicegruppeOrIngenVerdi, geografiskTilknytningTag: geografiskTilknytning })
+        const kontorToggle = `arbeidssokerregistrering.kontaktmeg-${geografiskTilknytning}`
+        const nyttPlaster = isIARBS && featureToggles[kontorToggle];
+        const gammeltPlaster = isIARBS && !featureToggles[kontorToggle]
         return (
             <div>
                 <Banner />
                 <div className="allerede-registrert">
                     <GraaBakgrunn />
-                    {isIARBS || newPlaster ? null :
+                    {gammeltPlaster || nyttPlaster ? null :
                         <Row className="">
                         <Column xs="12">
                             <Innholdstittel tag="h1" className="allerede-registrert__tittel">
@@ -67,7 +66,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>}
-                    {isIARBS && !newPlaster ? <Row className="">
+                    {gammeltPlaster ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <AlertStripeAdvarsel>
                                 <Normaltekst className="blokk-s">Vi ser at du ønsker å registrere deg som arbeidssøker.</Normaltekst>
@@ -77,7 +76,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </AlertStripeAdvarsel>
                         </Column>
                     </Row> : null}
-                    {newPlaster ? <IARBSPlaster
+                    {nyttPlaster ? <IARBSPlaster
                         formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                         servicegruppe={servicegruppeOrIngenVerdi}
                         geografiskTilknytning={geografiskTilknytning} /> : null}
