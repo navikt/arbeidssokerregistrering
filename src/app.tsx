@@ -6,7 +6,6 @@ import { getStore } from './store';
 import {
     BrowserRouter as Router,
 } from 'react-router-dom';
-import './decorator/decorator-mock';
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
 import { TimeoutModal } from '@navikt/fo-session-timeout-modal';
