@@ -42,14 +42,14 @@ class AlleredeRegistrert extends React.Component<Props> {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
-        const featureToggles = this.props.state.featureToggles.data
+        const featureToggles = this.props.state.featureToggles.data;
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
-        const kontorToggle = `arbeidssokerregistrering.kontaktmeg-${geografiskTilknytning}`
+        const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
         const nyttPlaster = isIARBS && featureToggles[kontorToggle];
-        const gammeltPlaster = isIARBS && !featureToggles[kontorToggle]
+        const gammeltPlaster = isIARBS && !featureToggles[kontorToggle];
         return (
             <div>
                 <Banner />
