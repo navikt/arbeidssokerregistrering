@@ -13,5 +13,6 @@ export default {
     maksDato: moment(new Date(), 'DD.MM.YYYY').add(13, 'week'),
     registreringType: RegistreringType.ORDINAER_REGISTRERING,
     servicegruppe: Servicegruppe.IVURD,
-    formidlingsgruppe: Formidlingsgruppe.ARBS
+    formidlingsgruppe: Formidlingsgruppe.ARBS,
+    geografiskTilknytning: '0807'
 } as RegStatusData&JSONObject&MaksDatoMomentType;

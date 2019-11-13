@@ -71,7 +71,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
     render() {
         const store = getStore();
-        const { registreringType, servicegruppe, formidlingsgruppe, underOppfolging, maksDato } = this.props.startRegistreringStatus;
+        const { registreringType, servicegruppe, formidlingsgruppe, underOppfolging, maksDato, geografiskTilknytning } = this.props.startRegistreringStatus;
         const reset = () => {
             store.dispatch({
                 type: reaktiveringActionType.REAKTIVER_BRUKER_STATUS_PENDING,
@@ -91,7 +91,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     underOppfolging: startRegistreringStatus.underOppfolging,
                     maksDato: startRegistreringStatus.maksDato,
                     formidlingsgruppe: formidlingsgruppe,
-                    servicegruppe
+                    servicegruppe,
+                    geografiskTilknytning
                 }
             });
             reset();
@@ -105,7 +106,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     servicegruppe: type,
                     underOppfolging,
                     maksDato,
-                    formidlingsgruppe
+                    formidlingsgruppe,
+                    geografiskTilknytning
                 }
             });
             reset();
@@ -119,7 +121,23 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     servicegruppe,
                     underOppfolging,
                     maksDato,
-                    formidlingsgruppe: type
+                    formidlingsgruppe: type,
+                    geografiskTilknytning
+                }
+            });
+            reset();
+        };
+
+        const oppdaterGeografiskTilknytning = (type: string) => {
+            store.dispatch({
+                type: registringActionType.HENT_REG_STATUS_OK,
+                data: {
+                    registreringType,
+                    servicegruppe,
+                    underOppfolging,
+                    maksDato,
+                    formidlingsgruppe,
+                    geografiskTilknytning: type
                 }
             });
             reset();
@@ -206,6 +224,36 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                             label="Sykmeldt uten arbeidsgiver/ Arbeidssoker allerede registrert"
                             value="Sykmeldt"
                             checked={registreringType === RegistreringType.ALLEREDE_REGISTRERT}
+                        />
+                    </div>
+                </fieldset>
+
+                <fieldset className="devToggleStatus__fieldset">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
+                        <Normaltekst>
+                            Endre geografisk tilknytning
+                        </Normaltekst>
+                    </legend>
+                    <div>
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterGeografiskTilknytning('030102');
+                            }}
+                            name="devToggleStatusGeografiskTilknytning"
+                            label="Grünerløkka"
+                            value="030102"
+                            checked={geografiskTilknytning === '030102'}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterGeografiskTilknytning('0807');
+                            }}
+                            name="devToggleStatusGeografiskTilknytning"
+                            label="Notodden"
+                            value="0807"
+                            checked={geografiskTilknytning === '0807'}
                         />
                     </div>
                 </fieldset>

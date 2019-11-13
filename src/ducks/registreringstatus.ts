@@ -53,6 +53,7 @@ export interface Data {
     erSykmeldtMedArbeidsgiver?: boolean;
     servicegruppe?: ServicegruppeOrNull;
     formidlingsgruppe?: FormidlingsgruppeOrNull;
+    geografiskTilknytning?: string;
 }
 
 interface Action {
