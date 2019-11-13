@@ -10,6 +10,7 @@ export enum ActionTypes {
 
 export interface Data {
     'arbeidssokerregistrering.nedetid': boolean;
+    'arbeidssokerregistrering.kontaktmeg': boolean;
 }
 
 export interface State {
@@ -24,11 +25,13 @@ interface Action {
 
 export const alleFeatureToggles = [
     'arbeidssokerregistrering.nedetid',
+    'arbeidssokerregistrering.kontaktmeg'
 ];
 
 const initialState = {
     data : {
         'arbeidssokerregistrering.nedetid': false,
+        'arbeidssokerregistrering.kontaktmeg': false
     },
     status: STATUS.NOT_STARTED
 };

@@ -8,7 +8,7 @@ import Banner from '../../komponenter/banner/banner';
 import { frontendLogger } from '../../metrikker/metrics-utils';
 import { AppState } from '../../reducer';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import hash from '../../utils/hash'
+import IARBSPlaster from './iarbs-plaster'
 
 import './allerede-registrert.less';
 interface StateProps {
@@ -20,36 +20,42 @@ class AlleredeRegistrert extends React.Component<Props> {
     handleClickAktivitetsplan (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
+        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickVeienTilArbeid (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
+        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     handleClickDialog (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
-        frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe}, {});
+        const geografiskTilknytning = event.currentTarget.dataset.geografiskTilknytning;
+        frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
     }
 
     render() {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
+        const featureToggles = this.props.state.featureToggles.data;
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
+        const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
-        const hashedNavn = hash(this.props.state.brukersNavn.data.sammensattNavn)
-        frontendLogger('registrering.allerede-registrert.visning', {}, { brukernavn : hashedNavn, formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi, servicegruppeTag: servicegruppeOrIngenVerdi })
+        const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
+        const nyttPlaster = isIARBS && featureToggles[kontorToggle];
+        const gammeltPlaster = isIARBS && !featureToggles[kontorToggle];
         return (
             <div>
                 <Banner />
                 <div className="allerede-registrert">
                     <GraaBakgrunn />
-                    {isIARBS ? null :
+                    {gammeltPlaster || nyttPlaster ? null :
                         <Row className="">
                         <Column xs="12">
                             <Innholdstittel tag="h1" className="allerede-registrert__tittel">
@@ -60,7 +66,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>}
-                    {isIARBS ? <Row className="">
+                    {gammeltPlaster ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <AlertStripeAdvarsel>
                                 <Normaltekst className="blokk-s">Vi ser at du ønsker å registrere deg som arbeidssøker.</Normaltekst>
@@ -70,6 +76,10 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </AlertStripeAdvarsel>
                         </Column>
                     </Row> : null}
+                    {nyttPlaster ? <IARBSPlaster
+                        formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
+                        servicegruppe={servicegruppeOrIngenVerdi}
+                        geografiskTilknytning={geografiskTilknytning} /> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
@@ -82,6 +92,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickAktivitetsplan}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
+                                    data-geografiskTilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -100,6 +111,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickVeienTilArbeid}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
+                                    data-geografiskTilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -118,6 +130,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     onClick={this.handleClickDialog}
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
+                                    data-geografiskTilknytning={geografiskTilknytning}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>
