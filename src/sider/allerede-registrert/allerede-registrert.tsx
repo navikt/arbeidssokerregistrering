@@ -63,10 +63,10 @@ class AlleredeRegistrert extends React.Component<Props> {
                     {isIARBS ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <AlertStripeAdvarsel>
-                                <Normaltekst className="blokk-s">Vi ser at du ønsker å registrere deg som arbeidssøker.</Normaltekst>
-                                <Normaltekst className="blokk-s"><strong>Hvis du prøver å registrere deg fordi du ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
-                                <Normaltekst className="blokk-s"><strong>Ring <a href="tel:+4755553333">55 55 33 33</a></strong> med tastevalg 2.</Normaltekst>
-                                <Normaltekst>Hvis du ikke har behov for å søke om dagpenger kan du se bort fra denne meldingen.</Normaltekst>
+                                <Normaltekst className="blokk-s">Ønsker du å søke dagpenger?</Normaltekst>
+                                <Normaltekst className="blokk-s"><strong>Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med oss.</strong></Normaltekst>
+                                <Normaltekst className="blokk-s"><strong>Ring <a href="tel:+4755553333">55 55 33 33</a></strong>, tastevalg 2.</Normaltekst>
+                                <Normaltekst>Hvis det ikke er aktuelt å søke dagpenger nå, kan du se bort fra denne meldingen.</Normaltekst>
                             </AlertStripeAdvarsel>
                         </Column>
                     </Row> : null}
