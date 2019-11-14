@@ -1,4 +1,4 @@
 export const featureTogglesMock = {
     'arbeidssokerregistrering.nedetid': false,
-    'arbeidssokerregistrering.kontaktmeg': true
+    'arbeidssokerregistrering.kontaktmeg.kontor-030102': true
 };
