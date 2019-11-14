@@ -75,6 +75,18 @@ export function startReaktivering() {
     });
 }
 
+export function opprettKontaktmegOppgave() {
+    return fetchToJson({
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/oppgave`),
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+            method: 'post',
+            body: JSON.stringify({})
+        }
+    });
+}
+
 export function oppdaterAktivBruker(brukerFnr: string) {
     return fetchToJson({
         url: OPPDATER_KONTEKST_URL,

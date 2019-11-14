@@ -4,6 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
+import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
 import { amplitudeLogger } from '../../metrikker/amplitude-utils';
 
 interface Props {
