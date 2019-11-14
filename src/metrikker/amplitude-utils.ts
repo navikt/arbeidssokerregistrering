@@ -1,8 +1,10 @@
 // tslint:disable align no-any
 import amplitude from 'amplitude-js';
-const API_KEY = '';
+import { AMPLITUDE_ENDPOINT, AMPLITUDE_API_KEY_TEST, AMPLITUDE_API_KEY_PROD } from '../utils/konstanter';
+import { erProduksjon } from '../utils/url-utils'
+const apiKey = erProduksjon() ? AMPLITUDE_API_KEY_PROD : AMPLITUDE_API_KEY_TEST;
 const config = {
-  apiEndpoint: 'amplitude.nav.no/collect',
+  apiEndpoint: AMPLITUDE_ENDPOINT,
   saveEvents: true,
   includeUtm: true,
   includeReferrer: true,
@@ -12,7 +14,7 @@ const config = {
   }
 };
 
-amplitude.getInstance().init(API_KEY, null, config);
+amplitude.getInstance().init(apiKey, null, config);
 
 export type AmplitudeLogger = (name: string, values?: object) => void;
 
