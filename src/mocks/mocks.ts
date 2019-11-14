@@ -19,6 +19,7 @@ import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-anoth
 import {ordinaerRegistreringRespons, sykmeldtRegistreringRespons} from "./registrerbruker-mock";
 import {featureTogglesMock} from "./feature-toggles-mock";
 import oversettelseAvStillingFraAAReg from "./oversettelse-av-stilling-fra-aareg-mock";
+import opprettKontaktmegOppgaveRespons from "./oppgave-mock";
 
 export const MOCK_AUTENTISERINGS_INFO = true;
 export const MOCK_START_REGISRERING_STATUS = true;
@@ -30,6 +31,7 @@ export const MOCK_FEATURE_TOGGLES = true;
 export const MOCK_REGISTRER_BRUKER = true;
 export const MOCK_REAKTIVER_BRUKER = true;
 export const MOCK_BRUKER_KONTEKST = true;
+export const MOCK_OPPRETT_KONTAKTMEG_OPPGAVE = true;
 export const PRINT_FRONTENDLOGGER = true;
 
 export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
@@ -119,6 +121,10 @@ if (MOCK_REGISTRER_BRUKER) {
 
 if (MOCK_REAKTIVER_BRUKER) {
     mock.post(`${VEILARBREGISTRERING_URL}/startreaktivering`, ResponseUtils.delayed(DELAY, {})); // tslint:disable-line
+}
+
+if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
+    mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(DELAY, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {
