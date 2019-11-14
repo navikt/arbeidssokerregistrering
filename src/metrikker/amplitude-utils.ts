@@ -1,7 +1,7 @@
 // tslint:disable align no-any
 import amplitude from 'amplitude-js';
 import { AMPLITUDE_ENDPOINT, AMPLITUDE_API_KEY_TEST, AMPLITUDE_API_KEY_PROD } from '../utils/konstanter';
-import { erProduksjon } from '../utils/url-utils'
+import { erProduksjon } from '../utils/url-utils';
 const apiKey = erProduksjon() ? AMPLITUDE_API_KEY_PROD : AMPLITUDE_API_KEY_TEST;
 const config = {
   apiEndpoint: AMPLITUDE_ENDPOINT,
