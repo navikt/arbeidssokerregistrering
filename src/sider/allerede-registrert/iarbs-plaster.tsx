@@ -1,9 +1,10 @@
 import * as React from 'react';
+import Alertstripe from 'nav-frontend-alertstriper';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-import { frontendLogger } from '../../metrikker/metrics-utils';
+import { amplitudeLogger } from '../../metrikker/amplitude-utils';
 
 interface Props {
   formidlingsgruppe: string;
@@ -20,7 +21,7 @@ function plaster (props: Props) {
     if (melding && kvittering) {
         melding.className = 'hidden';
         kvittering.className = 'blokk-s';
-        frontendLogger('registrering.allerede-registrert.click.kontakt-meg', {}, { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografisktilknytning })
+        amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografisktilknytning })
     }
   };
 
@@ -56,8 +57,10 @@ function plaster (props: Props) {
                     </div>
                 </div>
                 <div className="hidden" id="kontaktMegKvittering">
-                    <Normaltekst>Din henvendelse er mottatt</Normaltekst>
-                    <Normaltekst>Forventet svartid på denne henvendelsen er 2 arbeidsdager.</Normaltekst>
+                    <Alertstripe type="info">
+                        <Normaltekst>Din henvendelse er mottatt</Normaltekst>
+                        <Normaltekst>Forventet svartid på denne henvendelsen er 2 arbeidsdager.</Normaltekst>
+                    </Alertstripe>
                 </div>
             </div>
         </Column>
