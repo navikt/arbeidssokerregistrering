@@ -50,6 +50,7 @@ class AlleredeRegistrert extends React.Component<Props> {
         const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
         const nyttPlaster = isIARBS && featureToggles[kontorToggle];
         const gammeltPlaster = isIARBS && !featureToggles[kontorToggle];
+        const oppgaveStatus = this.props.state.oppgaveStatus.status
         return (
             <div>
                 <Banner />
@@ -79,7 +80,8 @@ class AlleredeRegistrert extends React.Component<Props> {
                     {nyttPlaster ? <IARBSPlaster
                         formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                         servicegruppe={servicegruppeOrIngenVerdi}
-                        geografisktilknytning={geografiskTilknytning} /> : null}
+                        geografisktilknytning={geografiskTilknytning}
+                        oppgaveStatus={oppgaveStatus} /> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">

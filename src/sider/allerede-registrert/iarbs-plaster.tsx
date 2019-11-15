@@ -4,26 +4,45 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
 import { amplitudeLogger } from '../../metrikker/amplitude-utils';
+import { opprettKontaktmegOppgave } from '../../ducks/oppgave'
 
 interface Props {
   formidlingsgruppe: string;
   servicegruppe: string;
   geografisktilknytning: string;
+  oppgaveStatus: string;
+}
+
+const OppgaveSuccess = () => {
+    return (
+        <div>
+        <Alertstripe type="info">
+            <Normaltekst>Din henvendelse er mottatt</Normaltekst>
+            <Normaltekst>Forventet svartid på denne henvendelsen er 2 arbeidsdager.</Normaltekst>
+        </Alertstripe>
+        </div>
+    )
+}
+
+const OppgaveError = () => {
+    return (
+        <div>
+        <Alertstripe type="feil">
+            <Normaltekst>Din henvendelse feilet</Normaltekst>
+            <Normaltekst>Ta kontakt med oss på 55 55 33 33, tastevalg 2</Normaltekst>
+        </Alertstripe>
+        </div>
+    )
 }
 
 function plaster (props: Props) {
-  const { formidlingsgruppe, servicegruppe, geografisktilknytning } = props;
-
+  const { formidlingsgruppe, servicegruppe, geografisktilknytning, oppgaveStatus } = props;
+  console.log(`oppgaveStatus: ${oppgaveStatus}`)
+  
   const handleClickKontaktMeg = event => {
-    const kvittering = document.getElementById('kontaktMegKvittering');
-    const melding = document.getElementById('kontaktMegMeldingWrapper');
-    if (melding && kvittering) {
-        melding.className = 'hidden';
-        kvittering.className = 'blokk-s';
-        amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografisktilknytning })
-    }
+    opprettKontaktmegOppgave();
+    amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografisktilknytning });
   };
 
  const handleClickContact = event => {
@@ -53,16 +72,10 @@ function plaster (props: Props) {
                     <Normaltekst className="hidden" id="kontaktMegMelding">
                         Hvis du ønsker å snakke om noe annet enn dagpenger, må du ringe 55 55 33 33.
                     </Normaltekst>
-                    <div className="midtjustert">
-                        <Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Send inn henvendelsen</Knapp>
-                    </div>
+                    {oppgaveStatus === 'NOT_STARTED' ? <div className="midtjustert"><Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Send inn henvendelsen</Knapp></div>: null}
                 </div>
-                <div className="hidden" id="kontaktMegKvittering">
-                    <Alertstripe type="info">
-                        <Normaltekst>Din henvendelse er mottatt</Normaltekst>
-                        <Normaltekst>Forventet svartid på denne henvendelsen er 2 arbeidsdager.</Normaltekst>
-                    </Alertstripe>
-                </div>
+                { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
+                { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
             </div>
         </Column>
     </Row>
