@@ -1,18 +1,24 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from '../../dispatch-type';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-import { amplitudeLogger } from '../../metrikker/amplitude-utils';
-import { opprettKontaktmegOppgave } from '../../ducks/oppgave'
+// import { amplitudeLogger } from '../../metrikker/amplitude-utils';
+import { AppState } from '../../reducer';
+import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
 
-interface Props {
-  formidlingsgruppe: string;
-  servicegruppe: string;
-  geografisktilknytning: string;
-  oppgaveStatus: string;
+interface DispatchProps {
+    opprettKontaktmegOppgave: () => void;
 }
+
+interface StateProps {
+    state: AppState;
+}
+
+type Props = StateProps & DispatchProps;
 
 const OppgaveSuccess = () => {
     return (
@@ -36,13 +42,13 @@ const OppgaveError = () => {
     )
 }
 
-function plaster (props: Props) {
-  const { formidlingsgruppe, servicegruppe, geografisktilknytning, oppgaveStatus } = props;
+const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
+  const oppgaveStatus = state.oppgaveStatus.status
   console.log(`oppgaveStatus: ${oppgaveStatus}`)
   
   const handleClickKontaktMeg = event => {
     opprettKontaktmegOppgave();
-    amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografisktilknytning });
+    //amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografisktilknytning });
   };
 
  const handleClickContact = event => {
@@ -82,4 +88,12 @@ function plaster (props: Props) {
   )
 };
 
-export default plaster;
+const mapStateToProps = (state: AppState): StateProps => ({
+    state
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    opprettKontaktmegOppgave: () => opprettKontaktmegOppgave()(dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(plaster);
