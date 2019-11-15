@@ -50,7 +50,6 @@ class AlleredeRegistrert extends React.Component<Props> {
         const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
         const nyttPlaster = isIARBS && featureToggles[kontorToggle];
         const gammeltPlaster = isIARBS && !featureToggles[kontorToggle];
-        const oppgaveStatus = this.props.state.oppgaveStatus.status
         return (
             <div>
                 <Banner />

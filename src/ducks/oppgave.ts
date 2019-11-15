@@ -53,5 +53,5 @@ export function opprettKontaktmegOppgave() {
 }
 
 export function selectOpprettKontaktmegOppgaveStatus(state: AppState): string {
-  return state.reaktiverBruker.status;
+  return state.oppgaveStatus.status;
 }

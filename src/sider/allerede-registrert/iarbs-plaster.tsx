@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-// import { amplitudeLogger } from '../../metrikker/amplitude-utils';
+import { amplitudeLogger } from '../../metrikker/amplitude-utils';
 import { AppState } from '../../reducer';
 import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
 
@@ -44,11 +44,14 @@ const OppgaveError = () => {
 
 const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
   const oppgaveStatus = state.oppgaveStatus.status
+  const formidlingsgruppe = state.registreringStatus.data.formidlingsgruppe;
+  const servicegruppe = state.registreringStatus.data.servicegruppe;
+  const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
   console.log(`oppgaveStatus: ${oppgaveStatus}`)
   
   const handleClickKontaktMeg = event => {
     opprettKontaktmegOppgave();
-    //amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografisktilknytning });
+    amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
   };
 
  const handleClickContact = event => {
