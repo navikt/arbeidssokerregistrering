@@ -9,12 +9,19 @@ type InfoKortProps = {
     bildeBeskrivelse: string;
     tittel: string;
     beskrivelse: string;
-    lenke: string;
-    lenkeTekst: string;
+    lenke?: string;
+    lenkeTekst?: string;
     lenkeTarget?: string;
 };
 
 const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
+    const Lenke = () => {
+        return (
+            <LenkeMedChevron path={props.lenke || ''} target={props.lenkeTarget}>
+                <FormattedMessage id={props.lenkeTekst || ''}/>
+            </LenkeMedChevron>
+        )
+    }
     return (
         <div className="info-kort">
             <img src={props.bilde} alt={props.bildeBeskrivelse}/>
@@ -22,9 +29,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
             <Normaltekst className="beskrivelse">
                 <FormattedMessage id={props.beskrivelse}/>
             </Normaltekst>
-            <LenkeMedChevron path={props.lenke} target={props.lenkeTarget}>
-                <FormattedMessage id={props.lenkeTekst}/>
-            </LenkeMedChevron>
+            {props.lenke ? <Lenke /> : null}
         </div>
     );
 };
