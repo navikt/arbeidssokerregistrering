@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from '../../dispatch-type';
+import { connect, Dispatch } from 'react-redux';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -95,8 +94,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
     state
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    opprettKontaktmegOppgave: () => opprettKontaktmegOppgave()(dispatch)
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+    opprettKontaktmegOppgave: () => dispatch(opprettKontaktmegOppgave())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(plaster);
