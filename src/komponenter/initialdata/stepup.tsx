@@ -9,7 +9,6 @@ import navKontorSvg from './nav-kontor.svg';
 import InfoKort from '../info-kort/info-kort';
 
 const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
-    const navKontorLenke = props.intl.messages['finn-ditt-nav-kontor-lenke-url'];
     return (
         <section className="stepup">
             <div className="limit stepup__login">
@@ -48,8 +47,6 @@ const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
                             bildeBeskrivelse="NAV-kontor illustrasjon"
                             tittel="overskrift-manuell-hjelp-stepup"
                             beskrivelse="beskrivelse-manuell-hjelp-stepup"
-                            lenke={navKontorLenke}
-                            lenkeTekst="feilmelding-mangler-arbeidstillatelse-lenke-tekst"
                         />
                     </div>
                 </div>
