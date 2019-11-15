@@ -46,7 +46,6 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
   const formidlingsgruppe = state.registreringStatus.data.formidlingsgruppe;
   const servicegruppe = state.registreringStatus.data.servicegruppe;
   const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
-  console.log(`oppgaveStatus: ${oppgaveStatus}`)
   
   const handleClickKontaktMeg = event => {
     opprettKontaktmegOppgave();
