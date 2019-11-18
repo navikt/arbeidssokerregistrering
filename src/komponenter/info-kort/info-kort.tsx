@@ -1,5 +1,5 @@
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import * as React from 'react';
 import './info-kort.less';
 import LenkeMedChevron from '../lenke-med-chevron/lenke-med-chevron';
@@ -27,7 +27,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
             <img src={props.bilde} alt={props.bildeBeskrivelse}/>
             <Undertittel><FormattedMessage id={props.tittel}/></Undertittel>
             <Normaltekst className="beskrivelse">
-                <FormattedMessage id={props.beskrivelse}/>
+                <FormattedHTMLMessage id={props.beskrivelse}/>
             </Normaltekst>
             {props.lenke ? <Lenke /> : null}
         </div>
