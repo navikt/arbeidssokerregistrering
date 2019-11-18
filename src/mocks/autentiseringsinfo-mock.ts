@@ -1,5 +1,5 @@
 const autentiseringsinfoMock = {
-    nivaOidc:3,
+    nivaOidc: 3,
     niva: 3
 };
 
