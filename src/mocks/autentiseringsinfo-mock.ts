@@ -1,6 +1,6 @@
 const autentiseringsinfoMock = {
-    nivaOidc: 4,
-    niva: 4
+    nivaOidc:3,
+    niva: 3
 };
 
 export default autentiseringsinfoMock;
