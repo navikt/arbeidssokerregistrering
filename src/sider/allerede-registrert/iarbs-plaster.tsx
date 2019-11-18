@@ -5,6 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 import { amplitudeLogger } from '../../metrikker/amplitude-utils';
 import { AppState } from '../../reducer';
 import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
@@ -48,8 +49,12 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
   const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
   
   const handleClickKontaktMeg = event => {
-    opprettKontaktmegOppgave();
-    amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+    const panel = document.getElementById('kontaktMegPanel');
+    if (panel) {
+        opprettKontaktmegOppgave();
+        amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        panel.className= 'hidden';
+    }
   };
 
  const handleClickContact = event => {
@@ -69,18 +74,20 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     <Row className="">
         <Column xs="12" sm="8" className="allerede-registrert__boks">
             <div className="allerede-registrert__boks-innhold venstrejustert">
-                <Normaltekst className="blokk-s">Vi ser at du prøver å registrere deg som arbeidssøker.</Normaltekst>
-                <Normaltekst className="blokk-s"><strong>Hvis du prøver å registrere deg fordi du ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
-                <div className="blokk-s" id="kontaktMegMeldingWrapper">
-                    <Fieldset legend="">
-                        <Radio label={'Ja, jeg skal søke dagpenger og vil bli kontaktet av en veileder'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
-                        <Radio label={'Jeg ønsker å snakke med en veileder uavhengig av dagpenger'} id="kontaktMegAnnet" onChange={handleClickContact} name="kontaktmeg" />
-                    </Fieldset>
-                    <Normaltekst className="hidden" id="kontaktMegMelding">
-                        Hvis du ønsker å snakke om noe annet enn dagpenger, må du ringe 55 55 33 33.
-                    </Normaltekst>
-                    {oppgaveStatus === 'NOT_STARTED' ? <div className="midtjustert"><Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Send inn henvendelsen</Knapp></div>: null}
-                </div>
+                <Normaltekst className="blokk-s"><strong>Vi får ikke registrert deg som arbeidssøker.</strong></Normaltekst>
+                <Panel border id="kontaktMegPanel">
+                    <Normaltekst className="blokk-s">Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med NAV.</Normaltekst>
+                    <div className="blokk-s" id="kontaktMegMeldingWrapper">
+                        <Fieldset legend="">
+                            <Radio label={'Ja, jeg skal søke dagpenger og vil bli kontaktet av en veileder'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
+                            <Radio label={'Jeg ønsker å snakke med en veileder uavhengig av dagpenger'} id="kontaktMegAnnet" onChange={handleClickContact} name="kontaktmeg" />
+                        </Fieldset>
+                        <Normaltekst className="hidden" id="kontaktMegMelding">
+                            Hvis du ønsker å snakke om noe annet enn dagpenger, må du ringe 55 55 33 33.
+                        </Normaltekst>
+                        {oppgaveStatus === 'NOT_STARTED' ? <div className="midtjustert"><Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Send inn henvendelsen</Knapp></div>: null}
+                    </div>
+                </Panel>
                 { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
                 { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
             </div>
