@@ -17,13 +17,12 @@ type InfoKortProps = {
 
 const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
     const { location } = window;
-    const getRetning = lenke => /nav.no/.test(lenke) ? 'inn' : 'ut'
-    const loggUtgang = event => {
+    const getRetningFraNAV = lenke => /nav.no/.test(lenke) ? 'inn' : 'ut'
+    const loggUtgangsLenkeKlikk = event => {
         const { lenke } = props
         const data = {
-            app: 'registrering',
             side: location.pathname,
-            retning: getRetning(lenke),
+            retning: getRetningFraNAV(lenke),
             lenke
         }
         amplitudeLogger('lenke', data)
@@ -31,7 +30,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
     }
     const Lenke = () => {
         return (
-            <LenkeMedChevron path={props.lenke || ''} target={props.lenkeTarget} onClick={ loggUtgang }>
+            <LenkeMedChevron path={props.lenke || ''} target={props.lenkeTarget} onClick={ loggUtgangsLenkeKlikk }>
                 <FormattedMessage id={props.lenkeTekst || ''}/>
             </LenkeMedChevron>
         )
