@@ -47,6 +47,9 @@ const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
                             bildeBeskrivelse="NAV-kontor illustrasjon"
                             tittel="overskrift-manuell-hjelp-stepup"
                             beskrivelse="beskrivelse-manuell-hjelp-stepup"
+                            lenke="https://tjenester.nav.no/nav-sok"
+                            lenkeTarget="_blank"
+                            lenkeTekst="manuell-hjelp-lenketekst"
                         />
                     </div>
                 </div>
