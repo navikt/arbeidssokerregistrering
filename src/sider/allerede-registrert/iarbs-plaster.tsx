@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-import { amplitudeLogger } from '../../metrikker/amplitude-utils';
+import { uniLogger } from '../../metrikker/uni-logger';
 import { AppState } from '../../reducer';
 import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
 
@@ -51,7 +51,7 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     const panel = document.getElementById('kontaktMegPanel');
     if (panel) {
         opprettKontaktmegOppgave();
-        amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        uniLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
         panel.className = 'hidden';
     }
   };
