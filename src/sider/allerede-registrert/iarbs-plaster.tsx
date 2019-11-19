@@ -34,8 +34,8 @@ const OppgaveError = () => {
     return (
         <div>
         <Alertstripe type="feil">
-            <Normaltekst>Din henvendelse feilet</Normaltekst>
-            <Normaltekst>Ta kontakt med oss på 55 55 33 33, tastevalg 2</Normaltekst>
+            <Normaltekst>Din henvendelse feilet.</Normaltekst>
+            <Normaltekst>Ta kontakt med oss på 55 55 33 33, tastevalg 2.</Normaltekst>
         </Alertstripe>
         </div>
     )
@@ -52,7 +52,7 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     if (panel) {
         opprettKontaktmegOppgave();
         amplitudeLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
-        panel.className= 'hidden';
+        panel.className = 'hidden';
     }
   };
 
