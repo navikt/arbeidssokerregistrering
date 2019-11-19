@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
+// import { Panel } from 'nav-frontend-paneler';
 import { amplitudeLogger } from '../../metrikker/amplitude-utils';
 import { AppState } from '../../reducer';
 import { opprettKontaktmegOppgave } from '../../ducks/oppgave';
@@ -74,9 +74,13 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     <Row className="">
         <Column xs="12" sm="8" className="allerede-registrert__boks">
             <div className="allerede-registrert__boks-innhold venstrejustert">
-                <Normaltekst className="blokk-s"><strong>Vi får ikke registrert deg som arbeidssøker.</strong></Normaltekst>
-                <Panel border id="kontaktMegPanel">
-                    <Normaltekst className="blokk-s">Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med NAV.</Normaltekst>
+                <div id="kontaktMegPanel">
+                    <Alertstripe type="advarsel" className="blokk-s">
+                        Vi får ikke registrert deg som arbeidssøker.
+                    </Alertstripe>
+                    <Normaltekst>
+                        <strong>Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med NAV.</strong>
+                    </Normaltekst>
                     <div className="blokk-s" id="kontaktMegMeldingWrapper">
                         <Fieldset legend="">
                             <Radio label={'Ja, jeg skal søke dagpenger og vil bli kontaktet av en veileder'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
@@ -87,7 +91,7 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
                         </Normaltekst>
                         {oppgaveStatus === 'NOT_STARTED' ? <div className="midtjustert"><Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Send inn henvendelsen</Knapp></div>: null}
                     </div>
-                </Panel>
+                </div>
                 { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
                 { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
             </div>
