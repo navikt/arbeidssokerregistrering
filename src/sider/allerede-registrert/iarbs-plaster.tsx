@@ -23,7 +23,7 @@ const OppgaveSuccess = () => {
     return (
         <div>
         <Alertstripe type="info">
-            <Normaltekst>Din henvendelse er mottatt</Normaltekst>
+            <Normaltekst>Din henvendelse er mottatt.</Normaltekst>
             <Normaltekst>Forventet svartid på denne henvendelsen er to arbeidsdager.</Normaltekst>
         </Alertstripe>
         </div>
