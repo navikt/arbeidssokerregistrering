@@ -18,7 +18,7 @@ type InfoKortProps = {
 const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
     const { location } = window;
     const getRetningFraNAV = lenke => /nav.no/.test(lenke) ? 'inn' : 'ut'
-    const loggUtgangsLenkeKlikk = event => {
+    const handleUtgangsLenkeKlikk = event => {
         const { lenke } = props
         const data = {
             side: location.pathname,
@@ -30,7 +30,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
     }
     const Lenke = () => {
         return (
-            <LenkeMedChevron path={props.lenke || ''} target={props.lenkeTarget} onClick={ loggUtgangsLenkeKlikk }>
+            <LenkeMedChevron path={props.lenke || ''} target={props.lenkeTarget} onClick={ handleUtgangsLenkeKlikk }>
                 <FormattedMessage id={props.lenkeTekst || ''}/>
             </LenkeMedChevron>
         )
