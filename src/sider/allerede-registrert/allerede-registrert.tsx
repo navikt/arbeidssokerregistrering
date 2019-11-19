@@ -68,12 +68,14 @@ class AlleredeRegistrert extends React.Component<Props> {
                     </Row>}
                     {gammeltPlaster ? <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <AlertStripeAdvarsel>
-                                <Normaltekst className="blokk-s">Vi får ikke registrert deg som arbeidssøker.</Normaltekst>
+                            <div className="allerede-registrert__boks-innhold venstrejustert">
+                                <AlertStripeAdvarsel className="blokk-s">
+                                    <Normaltekst>Vi får ikke registrert deg som arbeidssøker.</Normaltekst>
+                                </AlertStripeAdvarsel>
                                 <Normaltekst className="blokk-s"><strong>Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
-                                <Normaltekst className="blokk-s"><strong>Ring <a href="tel:+4755553333">55 55 33 33</a></strong>, tastevalg 2.</Normaltekst>
+                                <Normaltekst className="blokk-s"><strong>Ring <a href="tel:+4755553333">55 55 33 33</a>, tastevalg 2.</strong></Normaltekst>
                                 <Normaltekst>Hvis det ikke er aktuelt å søke dagpenger nå, eller du har arbeidsavklaringspenger kan du se bort fra denne meldingen.</Normaltekst>
-                            </AlertStripeAdvarsel>
+                            </div>
                         </Column>
                     </Row> : null}
                     {nyttPlaster ? <IARBSPlaster /> : null}
