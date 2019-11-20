@@ -82,25 +82,25 @@ function loggRegistreringInngang(store: any, action: Action) {
                 jobbetSeksAvTolvSisteManeder,
                 servicegruppe,
                 formidlingsgruppe } = action.data as RegStatus;
-        const maksDatoOrFalse = maksDato || 'INGEN_VERDI';
+        const maksDatoOrIngenVerdi = maksDato || 'INGEN_VERDI';
         const underOppfolgingOrFalse = underOppfolging || false;
         const erSykmeldtMedArbeidsgiverOrFalse = erSykmeldtMedArbeidsgiver || false;
         const jobbetSeksAvTolvSisteManederOrFalse = jobbetSeksAvTolvSisteManeder || false;
-        const servicegrupperOrFalse = servicegruppe || 'INGEN_VERDI';
-        const formidlingsgruppeOrFalse = formidlingsgruppe || 'INGEN_VERDI';
+        const servicegrupperOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
+        const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
         frontendLogger('registrering.inngang.type', {
             registreringType,
-            maksDato: maksDatoOrFalse,
+            maksDato: maksDatoOrIngenVerdi,
             erSykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiverOrFalse,
             underOppfolging: underOppfolgingOrFalse,
             jobbetSeksAvTolvSisteManeder: jobbetSeksAvTolvSisteManederOrFalse,
-            servicegruppe: servicegrupperOrFalse,
-            formidlingsgruppe: formidlingsgruppeOrFalse
+            servicegruppe: servicegrupperOrIngenVerdi,
+            formidlingsgruppe: formidlingsgruppeOrIngenVerdi
         }, {
-            servicegruppeTag: servicegrupperOrFalse,
-            formidlingsgruppeTag: formidlingsgruppeOrFalse
+            servicegruppeTag: servicegrupperOrIngenVerdi,
+            formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi
         });
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
