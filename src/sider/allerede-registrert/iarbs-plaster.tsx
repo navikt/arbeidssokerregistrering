@@ -51,7 +51,7 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     const panel = document.getElementById('kontaktMegPanel');
     if (panel) {
         opprettKontaktmegOppgave();
-        uniLogger('registrering.allerede-registrert.click.kontakt-meg', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        uniLogger('registrering.allerede-registrert.plaster.click.send-henvendelse', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
         panel.className = 'hidden';
     }
   };
@@ -62,10 +62,12 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     if (melding && knapp && event.target.id === 'kontaktMegAnnet') {
         melding.className = 'blokk-s';
         knapp.className = 'hidden';
+        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-annet', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
     }
     if (melding && knapp && event.target.id === 'kontaktMegDagpenger') {
         melding.className = 'hidden';
         knapp.className = 'knapp';
+        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-dagpenger', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
     }
   };
 
