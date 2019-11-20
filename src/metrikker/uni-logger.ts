@@ -2,7 +2,7 @@ import { name as appname, version as appversion } from '../../package.json';
 import { amplitudeLogger, getDeviceId } from './amplitude-utils';
 import { frontendLogger } from './metrics-utils';
 
-const deviceId = getDeviceId()
+const deviceId = getDeviceId();
 
 const prefix = {
   appname,
