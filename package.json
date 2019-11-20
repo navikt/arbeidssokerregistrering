@@ -108,6 +108,7 @@
   },
   "devDependencies": {
     "@navikt/react-intl-bundler": "1.0.4",
+    "@types/amplitude-js": "4.4.5",
     "@types/chai": "4.1.7",
     "@types/chai-as-promised": "7.1.0",
     "@types/fetch-mock": "5.12.2",
