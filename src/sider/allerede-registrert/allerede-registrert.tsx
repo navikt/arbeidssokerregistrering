@@ -5,7 +5,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
-import { frontendLogger } from '../../metrikker/metrics-utils';
+import { uniLogger } from '../../metrikker/uni-logger'
 import { AppState } from '../../reducer';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import IARBSPlaster from './iarbs-plaster'
@@ -21,21 +21,21 @@ class AlleredeRegistrert extends React.Component<Props> {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
         const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
-        frontendLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
+        uniLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
     }
 
     handleClickVeienTilArbeid (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
         const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
-        frontendLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
+        uniLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppe, servicegruppe, geografiskTilknytning});
     }
 
     handleClickDialog (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
         const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
-        frontendLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppeTag: formidlingsgruppe, servicegruppeTag: servicegruppe, geografiskTilknytningTag: geografiskTilknytning}, {});
+        uniLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
     }
 
     render() {
