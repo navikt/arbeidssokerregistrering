@@ -81,7 +81,8 @@ function loggRegistreringInngang(store: any, action: Action) {
                 underOppfolging,
                 jobbetSeksAvTolvSisteManeder,
                 servicegruppe,
-                formidlingsgruppe } = action.data as RegStatus;
+                formidlingsgruppe,
+                geografiskTilknytning } = action.data as RegStatus;
         const maksDatoOrIngenVerdi = maksDato || 'INGEN_VERDI';
         const underOppfolgingOrFalse = underOppfolging || false;
         const erSykmeldtMedArbeidsgiverOrFalse = erSykmeldtMedArbeidsgiver || false;
@@ -90,6 +91,7 @@ function loggRegistreringInngang(store: any, action: Action) {
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const erSperret = registreringType === RegistreringType.SPERRET;
+        const geografiskTilknytningOrIngenVerdi = geografiskTilknytning || 'INGEN_VERDI';
         frontendLogger('registrering.inngang.type', {
             registreringType,
             maksDato: maksDatoOrIngenVerdi,
@@ -100,7 +102,8 @@ function loggRegistreringInngang(store: any, action: Action) {
             formidlingsgruppe: formidlingsgruppeOrIngenVerdi
         }, {
             servicegruppeTag: servicegrupperOrIngenVerdi,
-            formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi
+            formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi,
+            geografiskTilknytningTag: geografiskTilknytningOrIngenVerdi,
         });
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
