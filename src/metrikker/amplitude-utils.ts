@@ -14,10 +14,18 @@ const config = {
   }
 };
 
-amplitude.getInstance().init(apiKey, null, config);
+let deviceId = ''
+
+amplitude.getInstance().init(apiKey, null, config, function (instance) {
+ deviceId = instance.options.deviceId;
+});
 
 export type AmplitudeLogger = (name: string, values?: object) => void;
 
-export function amplitudeLogger(name: string, values?: object) {
+export function getDeviceId () {
+  return deviceId;
+};
+
+export function amplitudeLogger (name: string, values?: object) {
   amplitude.logEvent(name, values);
 }
