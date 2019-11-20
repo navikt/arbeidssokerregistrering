@@ -1,5 +1,6 @@
 const opprettKontaktmegOppgaveRespons = {
-  oppgaveId: 'a4e77035-85bb-4f90-bef7-4eb5c8aa2ee0'
+  id: 308030803,
+  tildeltEnhetsnr: '1503',
 };
 
 export default opprettKontaktmegOppgaveRespons;

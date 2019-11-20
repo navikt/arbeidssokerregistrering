@@ -14,7 +14,8 @@ export interface State {
 }
 
 export interface Data {
-    oppgaveId?: string;
+    id?: number;
+    tildeltEnhetsnr?: string;
 }
 
 interface Action {
