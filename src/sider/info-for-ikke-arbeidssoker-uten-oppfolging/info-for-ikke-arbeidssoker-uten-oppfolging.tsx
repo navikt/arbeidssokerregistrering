@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Veilederpanel from 'nav-frontend-veilederpanel';
+import { Systemtittel } from 'nav-frontend-typografi';
+import { Column, Row } from 'nav-frontend-grid';
 import { AppState } from '../../reducer';
 import { uniLogger } from '../../metrikker/uni-logger';
-
-import utropstegnSvg from '../fullfor/utropstegn.svg';
+import NyMelding from './nyere-melding'
+import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import './info-for-ikke-arbeidssoker-uten-oppfolging.less';
 
 interface StateProps {
@@ -19,21 +18,22 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state } : StateProps) => {
     const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
     uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning })
     return (
-        <div className="info-for-ikke-arbeidssoker">
-            <Veilederpanel
-                type="plakat"
-                svg={<img
-                    src={utropstegnSvg}
-                    alt="Informasjon"
-                    className="nav-veilederpanel__illustrasjon"
-                />}
-                kompakt={true}
-            >
-                <Normaltekst>
-                    <FormattedMessage id="info-for-ikke-arbeidssoker-uten-oppfolging-innhold"/>
-                </Normaltekst>
-            </Veilederpanel>
+        <div>
+            <div className="registrering-banner">
+                <Systemtittel tag="h1">
+                    Registrering
+                </Systemtittel>
+            </div>
+            <GraaBakgrunn />
+            <Row className="">
+                <Column xs="12">
+                <div className="info-for-ikke-arbeidssoker">
+                    <NyMelding formidlingsgruppe={ formidlingsgruppe } servicegruppe={ servicegruppe } geografiskTilknytning={ geografiskTilknytning } />
+                </div>
+                </Column>
+            </Row>
         </div>
+        
     );
 }
 
