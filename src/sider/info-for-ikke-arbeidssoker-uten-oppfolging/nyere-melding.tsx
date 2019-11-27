@@ -6,7 +6,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { uniLogger } from '../../metrikker/uni-logger';
 
 const melding = props => {
-  const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = props;
+  const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging } = props;
   const hideAll = () => {
       const results = window.document.querySelectorAll("[id$='-result']")
       results.forEach(element => element.className = 'hidden')
@@ -20,12 +20,12 @@ const melding = props => {
         hideAll()
         result.className = 'show-result-text'
     }
-    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning })
+    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging })
   }
   return (
     <Panel border className="nav-veilederpanel">
         <Alertstripe type="advarsel" className="blokk-s">
-            Vi får ikke registrert deg som arbeidssøker.
+            Vi får dessverre ikke registrert deg som arbeidssøker
         </Alertstripe>
         <Normaltekst>
             <strong>Hvilken situasjon er nærmest din?</strong>
@@ -33,7 +33,7 @@ const melding = props => {
         <Fieldset legend="" id="veiledervalg">
             <Radio label={'Jeg er sykemeldt og har søkt arbeidsavklaringspenger'} name="oppfolging" id="aap" onChange={ handleClick } />
             <Normaltekst className="hidden" id="aap-result">
-                Da må du ringe oss på 55 55 33 39, tastevalg 3.
+                Da må du ringe oss så fort som mulig på 55 55 33 39, tastevalg 3.
             </Normaltekst>
             <Radio label={'Min veileder har bedt meg om å registrerer meg som arbeidssøker'} name="oppfolging" id="veileder" onChange={ handleClick } />
             <Normaltekst className="hidden" id="veileder-result">
@@ -41,16 +41,16 @@ const melding = props => {
             </Normaltekst>
             <Radio label={'Jeg er 100% sykemeldt'} name="oppfolging" id="hundre" onChange={ handleClick } />
             <Normaltekst className="hidden" id="hundre-result">
-                Da må du ringe oss på 55 55 33 39, tastevalg 3.
+                Da må du ringe oss på 55 55 33 33, tastevalg 2.
             </Normaltekst>
-            <Radio label={'Jeg er 50% eller mindre sykemeldt og 50% eller mer arbeidsledig.'} name="oppfolging" id="femtifemti" onChange={ handleClick } />
+            <Radio label={'Jeg er 50% eller mindre sykemeldt og 50% eller mer arbeidsledig'} name="oppfolging" id="femtifemti" onChange={ handleClick } />
             <Normaltekst className="hidden" id="femtifemti-result">
                 Da må du ringe oss på 55 55 33 39, tastevalg 3.
             </Normaltekst>
             <Radio label={'Jeg er mellom 50 og 100% sykemeldt'} name="oppfolging" id="femtihundre" onChange={ handleClick } />
             <Normaltekst className="hidden" id="femtihundre-result">
                 Du må vente med å registrere deg til dagen etter sykemeldingen har gått ut.<br />
-                Hvis sykemeldingen <i>har</i> gått ut må du ringe oss på 55 55 33 39, tastevalg 3.
+                <strong>Hvis sykemeldingen <i>har</i> gått ut må du ringe oss på 55 55 33 39, tastevalg 3.</strong>
             </Normaltekst>
         </Fieldset>
     </Panel>

@@ -16,7 +16,8 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state } : StateProps) => {
     const formidlingsgruppe = state.registreringStatus.data.formidlingsgruppe;
     const servicegruppe = state.registreringStatus.data.servicegruppe;
     const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
-    uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning })
+    const underOppfolging = state.registreringStatus.data.underOppfolging ? 'ja' : 'nei';
+    uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging })
     return (
         <div>
             <div className="registrering-banner">
@@ -28,7 +29,7 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state } : StateProps) => {
             <Row className="">
                 <Column xs="12">
                 <div className="info-for-ikke-arbeidssoker">
-                    <NyMelding formidlingsgruppe={ formidlingsgruppe } servicegruppe={ servicegruppe } geografiskTilknytning={ geografiskTilknytning } />
+                    <NyMelding formidlingsgruppe={ formidlingsgruppe } servicegruppe={ servicegruppe } geografiskTilknytning={ geografiskTilknytning } underOppfolging={ underOppfolging } />
                 </div>
                 </Column>
             </Row>
