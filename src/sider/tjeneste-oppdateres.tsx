@@ -14,8 +14,8 @@ class TjenesteOppdateres extends React.Component {
                         className="tjeneste-oppdateres__info--illustrasjon"
                     />
                     <Normaltekst className="tjeneste-oppdateres__info--tekst">
-                        Vi oppdaterer denne tjenesten. Du får derfor ikke registrert deg nå.
-                        Prøv igjen i morgen. Beklager bryet.
+                        Du kan ikke registrere deg nå fordi vi oppdaterer tjenesten. Prøv igjen i morgen.
+                        Vi beklager ulempene.
                     </Normaltekst>
                 </div>
             </div>
