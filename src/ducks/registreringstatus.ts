@@ -54,6 +54,7 @@ export interface Data {
     servicegruppe?: ServicegruppeOrNull;
     formidlingsgruppe?: FormidlingsgruppeOrNull;
     geografiskTilknytning?: string;
+    rettighetsgruppe?: string;
 }
 
 interface Action {
