@@ -79,12 +79,9 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
                     <Alertstripe type="advarsel" className="blokk-s">
                         Vi får ikke registrert deg som arbeidssøker.
                     </Alertstripe>
-                    <Normaltekst>
-                        <strong>Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med NAV.</strong>
-                    </Normaltekst>
                     <div className="blokk-s" id="kontaktMegMeldingWrapper">
                         <Fieldset legend="">
-                            <Radio label={'Ja, jeg skal søke dagpenger og vil bli kontaktet av en veileder'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
+                            <Radio label={'Jeg skal søke dagpenger og vil bli kontaktet av en veileder'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
                             <Radio label={'Jeg ønsker å snakke med en veileder uavhengig av dagpenger'} id="kontaktMegAnnet" onChange={handleClickContact} name="kontaktmeg" />
                         </Fieldset>
                         <Normaltekst className="hidden" id="kontaktMegMelding">
