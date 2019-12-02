@@ -49,7 +49,7 @@ class AlleredeRegistrert extends React.Component<Props> {
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
-        const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe || 'INGEN_VERDI';
+        const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
         const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
         const nyttPlaster = isIARBS && featureToggles[kontorToggle];

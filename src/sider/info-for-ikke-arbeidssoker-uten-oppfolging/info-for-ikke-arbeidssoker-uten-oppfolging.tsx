@@ -16,7 +16,7 @@ interface StateProps {
 const InfoForIkkeArbeidssokerUtenOppfolging = ({ state } : StateProps) => {
     const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = state.registreringStatus.data
     const underOppfolging = state.registreringStatus.data.underOppfolging ? 'ja' : 'nei';
-    const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe || 'INGEN_VERDI';
+    const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
     uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe })
     return (
         <div className="info-for-ikke-arbeidssoker">

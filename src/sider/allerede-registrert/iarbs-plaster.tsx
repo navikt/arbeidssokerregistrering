@@ -46,7 +46,7 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
   const formidlingsgruppe = state.registreringStatus.data.formidlingsgruppe;
   const servicegruppe = state.registreringStatus.data.servicegruppe;
   const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
-  const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe || 'INGEN_VERDI';
+  const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
   
   const handleClickKontaktMeg = event => {
     const panel = document.getElementById('kontaktMegPanel');
