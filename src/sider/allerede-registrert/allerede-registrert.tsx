@@ -21,21 +21,24 @@ class AlleredeRegistrert extends React.Component<Props> {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
         const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
-        uniLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
+        uniLogger('registrering.allerede-registrert.click.aktivitetsplan', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
 
     handleClickVeienTilArbeid (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
         const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
-        uniLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppe, servicegruppe, geografiskTilknytning});
+        const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
+        uniLogger('registrering.allerede-registrert.click.veienTilArbeid', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
 
     handleClickDialog (event) {
         const formidlingsgruppe = event.currentTarget.dataset.formidlingsgruppe;
         const servicegruppe = event.currentTarget.dataset.servicegruppe;
         const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
-        uniLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
+        uniLogger('registrering.allerede-registrert.click.dialog', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
 
     render() {
@@ -46,11 +49,12 @@ class AlleredeRegistrert extends React.Component<Props> {
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
+        const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
         const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
         const nyttPlaster = isIARBS && featureToggles[kontorToggle];
         const gammeltPlaster = isIARBS && !featureToggles[kontorToggle];
-        uniLogger('registrering.allerede-registrert.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning })
+        uniLogger('registrering.allerede-registrert.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe })
         return (
             <div>
                 <Banner />
@@ -93,6 +97,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
                                     data-geografisktilknytning={geografiskTilknytning}
+                                    data-rettighetsgruppe={rettighetsgruppe}
                                 >
                                     {messages['allerede-registrert-boks-1-knapp']}
                                 </a>
@@ -112,6 +117,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
                                     data-geografisktilknytning={geografiskTilknytning}
+                                    data-rettighetsgruppe={rettighetsgruppe}
                                 >
                                     {messages['allerede-registrert-boks-2-knapp']}
                                 </a>
@@ -131,6 +137,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
                                     data-servicegruppe={servicegruppeOrIngenVerdi}
                                     data-geografisktilknytning={geografiskTilknytning}
+                                    data-rettighetsgruppe={rettighetsgruppe}
                                 >
                                     {messages['allerede-registrert-boks-3-knapp']}
                                 </a>

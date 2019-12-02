@@ -46,12 +46,13 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
   const formidlingsgruppe = state.registreringStatus.data.formidlingsgruppe;
   const servicegruppe = state.registreringStatus.data.servicegruppe;
   const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning;
+  const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
   
   const handleClickKontaktMeg = event => {
     const panel = document.getElementById('kontaktMegPanel');
     if (panel) {
         opprettKontaktmegOppgave();
-        uniLogger('registrering.allerede-registrert.plaster.click.send-henvendelse', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        uniLogger('registrering.allerede-registrert.plaster.click.send-henvendelse', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
         panel.className = 'hidden';
     }
   };
@@ -62,12 +63,12 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
     if (melding && knapp && event.target.id === 'kontaktMegAnnet') {
         melding.className = 'blokk-s';
         knapp.className = 'hidden';
-        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-annet', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-annet', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
     if (melding && knapp && event.target.id === 'kontaktMegDagpenger') {
         melding.className = 'hidden';
         knapp.className = 'knapp';
-        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-dagpenger', { formidlingsgruppe, servicegruppe, geografiskTilknytning });
+        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-dagpenger', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
   };
 

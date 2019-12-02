@@ -14,5 +14,6 @@ export default {
     registreringType: RegistreringType.ORDINAER_REGISTRERING,
     servicegruppe: Servicegruppe.IVURD,
     formidlingsgruppe: Formidlingsgruppe.ARBS,
-    geografiskTilknytning: '0807'
+    geografiskTilknytning: '0807',
+    rettighetsgruppe: 'IYT'
 } as RegStatusData&JSONObject&MaksDatoMomentType;

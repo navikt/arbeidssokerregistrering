@@ -71,7 +71,13 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
     render() {
         const store = getStore();
-        const { registreringType, servicegruppe, formidlingsgruppe, underOppfolging, maksDato, geografiskTilknytning } = this.props.startRegistreringStatus;
+        const { registreringType,
+                servicegruppe,
+                formidlingsgruppe,
+                underOppfolging,
+                maksDato,
+                geografiskTilknytning,
+                rettighetsgruppe } = this.props.startRegistreringStatus;
         const reset = () => {
             store.dispatch({
                 type: reaktiveringActionType.REAKTIVER_BRUKER_STATUS_PENDING,
@@ -92,7 +98,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     maksDato: startRegistreringStatus.maksDato,
                     formidlingsgruppe: formidlingsgruppe,
                     servicegruppe,
-                    geografiskTilknytning
+                    geografiskTilknytning,
+                    rettighetsgruppe
                 }
             });
             reset();
@@ -107,7 +114,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     underOppfolging,
                     maksDato,
                     formidlingsgruppe,
-                    geografiskTilknytning
+                    geografiskTilknytning,
+                    rettighetsgruppe
                 }
             });
             reset();
@@ -122,7 +130,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     underOppfolging,
                     maksDato,
                     formidlingsgruppe: type,
-                    geografiskTilknytning
+                    geografiskTilknytning,
+                    rettighetsgruppe
                 }
             });
             reset();
@@ -137,7 +146,24 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     underOppfolging,
                     maksDato,
                     formidlingsgruppe,
-                    geografiskTilknytning: type
+                    geografiskTilknytning: type,
+                    rettighetsgruppe
+                }
+            });
+            reset();
+        };
+
+        const oppdaterRettighetsgruppe = (type: string) => {
+            store.dispatch({
+                type: registringActionType.HENT_REG_STATUS_OK,
+                data: {
+                    registreringType,
+                    servicegruppe,
+                    underOppfolging,
+                    maksDato,
+                    formidlingsgruppe,
+                    geografiskTilknytning,
+                    rettighetsgruppe: type
                 }
             });
             reset();
@@ -257,6 +283,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                         />
                     </div>
                 </fieldset>
+
+
 
                 <fieldset className="devToggleStatus__fieldset">
                     <legend
@@ -386,6 +414,54 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 label="Servicegruppe - VURDU"
                                 value="VURDU"
                                 checked={servicegruppe === Servicegruppe.VURDU}
+                        />
+                    </div>
+                </fieldset>
+                
+                <fieldset className="devToggleStatus__fieldset">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
+                        <Normaltekst>
+                            Endre rettighetsgruppe
+                        </Normaltekst>
+                    </legend>
+                    <div>
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRettighetsgruppe('AAP');
+                            }}
+                            name="devToggleStatusRettighetsgruppe"
+                            label="AAP"
+                            value="AAP"
+                            checked={rettighetsgruppe === 'AAP'}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRettighetsgruppe('DAGP');
+                            }}
+                            name="devToggleStatusRettighetsgruppe"
+                            label="DAGP"
+                            value="DAGP"
+                            checked={rettighetsgruppe === 'DAGP'}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRettighetsgruppe('INDS');
+                            }}
+                            name="devToggleStatusRettighetsgruppe"
+                            label="INDS"
+                            value="INDS"
+                            checked={rettighetsgruppe === 'INDS'}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRettighetsgruppe('IYT');
+                            }}
+                            name="devToggleStatusRettighetsgruppe"
+                            label="IYT"
+                            value="IYT"
+                            checked={rettighetsgruppe === 'IYT'}
                         />
                     </div>
                 </fieldset>
