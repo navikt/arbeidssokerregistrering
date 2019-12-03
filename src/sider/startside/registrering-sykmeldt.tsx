@@ -48,7 +48,7 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
     }
 
     render() {
-        const { brukersNavn } = this.props;
+        const { brukersNavn, featureToggles } = this.props;
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
         const { fornavn } = brukersNavn.data;
@@ -142,8 +142,8 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
             <Rad3 key={3} />
         ];
 
-        if (this.props.featureToggles['arbeidssokerregistrering.kunngjoring']) {
-            // Viser kunnkjøring dersom featureToggle er slått på
+        if (featureToggles['arbeidssokerregistrering.kungjoring']) {
+            // Viser kungjøring dersom featureToggle er slått på
             rader.unshift(<Rad0 key={4} />)
         }
 

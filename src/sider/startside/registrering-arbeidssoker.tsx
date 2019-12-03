@@ -44,6 +44,8 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
     }
 
     render() {
+        const { featureToggles } = this.props;
+        
         const Rad0 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad3">
@@ -161,8 +163,8 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
             <Rad3 key={3} />
         ];
 
-        if (this.props.featureToggles['arbeidssokerregistrering.kunngjoring']) {
-            // Viser kunnkjøring dersom featureToggle er slått på
+        if (featureToggles['arbeidssokerregistrering.kungjoring']) {
+            // Viser kungjøring dersom featureToggle er slått på
             rader.unshift(<Rad0 key={4} />)
         }
 
