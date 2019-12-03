@@ -42,6 +42,7 @@ import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 import { Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
+import NyttAar from './sider/nyttaar/nyttaar'
 import { RouteHerokuMock } from
         './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 import { setInngangAapAction, setInngangSykefravaerAction } from './ducks/logger';
@@ -95,6 +96,7 @@ class Routes extends React.Component<AllProps> {
     render() {
         const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
+        const erNyttaar = featureToggles['arbeidssokerregistrering.nyttaar'];
         const registreringType = registreringstatusData.registreringType;
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
@@ -113,6 +115,9 @@ class Routes extends React.Component<AllProps> {
             );
         } else if (registreringType === RegistreringType.REAKTIVERING &&
             reaktivertStatus !== STATUS.OK) {
+            if (erNyttaar) {
+                return <RedirectAll to={'/'} component={NyttAar}/>;
+            }
             if (erNede) {
                 return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
             }
@@ -131,6 +136,7 @@ class Routes extends React.Component<AllProps> {
 
                     <Switch>
 
+                        {erNyttaar ? <RedirectAll to={'/'} component={NyttAar}/> : null}
                         {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
                         {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
                         {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
