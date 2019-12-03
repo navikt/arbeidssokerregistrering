@@ -14,9 +14,12 @@ import { AppState } from '../../reducer';
 import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
+import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
+import Kunngjoring from '../../komponenter/kunngjoring/kunngjoring'
 
 interface Props {
     brukersNavn: BrukersNavnState;
+    featureToggles: FeatureToggleData;
 }
 
 type RegistreringArbeidssokerSykmeldtProps = Props & RouteComponentProps<MatchProps>;
@@ -49,6 +52,16 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
         const { fornavn } = brukersNavn.data;
+
+        const Rad0 = () => {
+            return (
+                <div className="registrering-sykmeldt__rad3">
+                    <div className="rad3__tekst">
+                        <Kunngjoring />
+                    </div>
+                </div>
+            )
+        }
 
         const Rad1 = () => {
             return (
@@ -129,6 +142,11 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
             <Rad3 key={3} />
         ];
 
+        if (this.props.featureToggles['arbeidssokerregistrering.kunngjoring']) {
+            // Viser kunnkjøring dersom featureToggle er slått på
+            rader.unshift(<Rad0 key={4} />)
+        }
+
         return (
             <div className="registrering-sykmeldt">
                 <div className="banner">
@@ -146,6 +164,7 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
 
 const mapStateToProps = (state: AppState) => ({
     brukersNavn: selectBrukersNavn(state),
+    featureToggles: selectFeatureToggles(state)
 });
 
 export default connect(mapStateToProps)(withRouter(RegistreringArbeidssokerSykmeldt));
