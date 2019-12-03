@@ -96,7 +96,7 @@ class Routes extends React.Component<AllProps> {
     render() {
         const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
-        const erNyttaar = featureToggles['arbeidssokerregistrering.nyttaar'];
+        const erNyttaar = featureToggles['arbeidssokerregistrering.nedetid.nyttaar'];
         const registreringType = registreringstatusData.registreringType;
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
