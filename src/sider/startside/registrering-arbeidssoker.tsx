@@ -163,8 +163,8 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
             <Rad3 key={3} />
         ];
 
-        if (featureToggles['arbeidssokerregistrering.kungjoring']) {
-            // Viser kungjøring dersom featureToggle er slått på
+        if (featureToggles['arbeidssokerregistrering.kunngjoring']) {
+            // Viser kunngjøring dersom featureToggle er slått på
             rader.unshift(<Rad0 key={4} />)
         }
 
