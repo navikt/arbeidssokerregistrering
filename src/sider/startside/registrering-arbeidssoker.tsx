@@ -16,6 +16,7 @@ import InformasjonModal from './informasjon/informasjon-modal';
 import { AppState } from '../../reducer';
 import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
 import { frontendLogger } from '../../metrikker/metrics-utils';
+import Kunngjoring from '../../komponenter/kunngjoring/kunngjoring'
 
 interface Props {
     featureToggles: FeatureToggleData;
@@ -43,6 +44,16 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
     }
 
     render() {
+        const Rad0 = () => {
+            return (
+                <div className="registrering-arbeidssoker__rad3">
+                    <div className="rad3__tekst">
+                        <Kunngjoring />
+                    </div>
+                </div>
+            )
+        }
+
         const Rad1 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad1">
@@ -150,6 +161,11 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
             <Rad3 key={3} />
         ];
 
+        if (this.props.featureToggles['arbeidssokerregistrering.kunngjoring']) {
+            // Viser kunnkjøring dersom featureToggle er slått på
+            rader.unshift(<Rad0 key={4} />)
+        }
+
         return (
             <div className="registrering-arbeidssoker">
                 <div className="banner">
@@ -166,7 +182,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
 }
 
 const mapStateToProps = (state: AppState) => ({
-    featureToggles: selectFeatureToggles(state),
+    featureToggles: selectFeatureToggles(state)
 });
 
 export default connect(mapStateToProps)(RegistreringArbeidssoker);
