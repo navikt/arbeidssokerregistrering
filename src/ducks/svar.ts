@@ -1,4 +1,5 @@
 import { Svar } from './svar-utils';
+import { uniLogger } from '../metrikker/uni-logger';
 
 export enum ActionTypes {
     AVGI_SVAR = 'AVGI_SVAR',
@@ -35,6 +36,13 @@ interface Action {
 
 const initialState: State = [];
 
+function doLog(sporsmalId: string, svar: string) {
+    if ((sporsmalId && svar) && (svar !== 'INGEN_SVAR')) {
+        const key = `arbeidssokerregistrering.svar.${sporsmalId}`;
+        uniLogger(key, { svar: svar });
+    }
+}
+
 export default function (state: State = initialState, action: Action): State {
     switch (action.type) {
         case ActionTypes.AVGI_SVAR: {
@@ -57,6 +65,7 @@ export default function (state: State = initialState, action: Action): State {
 }
 
 export function endreSvarAction(sporsmalId: string, svar: Svar) {
+    doLog(sporsmalId, svar);
     return {
         type: ActionTypes.AVGI_SVAR,
         data: {
