@@ -9,7 +9,7 @@ const Kunngjoring = () => {
           <Normaltekst>
             Fra 27. desember til 30. desember oppdaterer vi tjenestene våre.<br/>
             Du kan ikke registrere deg som arbeidssøker i dette tidsrommet.<br/>
-            Du kan fortsatt søke om dagpenger.<br/>
+            Du kan fortsatt søke om <a href={DP_SOK_URL}>dagpenger</a>.<br/>
             Vi beklager ulempene.
           </Normaltekst>
     </Veilederpanel>
