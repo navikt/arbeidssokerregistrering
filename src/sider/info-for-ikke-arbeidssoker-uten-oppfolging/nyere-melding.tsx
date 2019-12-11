@@ -31,7 +31,7 @@ const melding = props => {
             <strong>Hvilken situasjon er nærmest din?</strong>
         </Normaltekst>
         <Fieldset legend="" id="veiledervalg">
-            <Radio label={'Jeg er sykemeldt og har søkt arbeidsavklaringspenger'} name="oppfolging" id="aap" onChange={ handleClick } />
+            <Radio label={'Jeg har søkt arbeidsavklaringspenger'} name="oppfolging" id="aap" onChange={ handleClick } />
             <Normaltekst className="hidden" id="aap-result">
                 Da må du ringe oss så fort som mulig på 55 55 33 33.
             </Normaltekst>
