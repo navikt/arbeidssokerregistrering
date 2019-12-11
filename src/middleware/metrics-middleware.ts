@@ -75,6 +75,7 @@ function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
         const { inngangSykefravaer } = store.getState().logger.data;
+        const inngangFraAap = store.getState().logger.data.inngangFraAap;
         const { registreringType,
                 maksDato,
                 erSykmeldtMedArbeidsgiver,
@@ -95,6 +96,7 @@ function loggRegistreringInngang(store: any, action: Action) {
         const erSperret = registreringType === RegistreringType.SPERRET;
         const geografiskTilknytningOrIngenVerdi = geografiskTilknytning || 'INGEN_VERDI';
         const rettighetsgruppeOrIngenVerdi = rettighetsgruppe || 'INGEN_VERDI';
+        const kommerFra = inngangFraAap ? 'AAP' : inngangSykefravaer ? 'SYKEFRAVAER' : 'ORDINAER';
         frontendLogger('registrering.inngang.type', {
             registreringType,
             maksDato: maksDatoOrIngenVerdi,
@@ -109,7 +111,8 @@ function loggRegistreringInngang(store: any, action: Action) {
             formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi,
             geografiskTilknytningTag: geografiskTilknytningOrIngenVerdi,
             underOppfolgingTag: underOppfolgingJaNei,
-            rettighetsgruppe: rettighetsgruppeOrIngenVerdi
+            rettighetsgruppe: rettighetsgruppeOrIngenVerdi,
+            kommerFra
         });
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
