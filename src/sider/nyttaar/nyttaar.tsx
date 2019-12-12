@@ -10,7 +10,7 @@ class NyttAar extends React.Component {
             <div className="nyttaar">
                 <div className="nyttaar__info">
                     <img
-                        src={utropstegnSvg}
+                        src={ utropstegnSvg }
                         alt="Informasjon"
                         className="nyttaar__info--illustrasjon"
                     />
