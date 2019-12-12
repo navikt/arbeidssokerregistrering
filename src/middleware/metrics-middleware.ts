@@ -22,11 +22,11 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
     loggAutentiseringsinfo(action);
     loggBesvarelse(store, action);
     loggSykmeldt(store, action);
+    loggRegistreringInngangFraAAP(store, action);
     loggResponstidForTjenestekall(action.type);
     loggFeil(action);
     loggHarStartetRegistrering(action);
     loggRegistreringInngang(store, action);
-    loggRegistreringInngangFraAAP(store, action);
     next(action);
 };
 
@@ -74,8 +74,7 @@ function loggBesvarelse(store: any, action: Action) {
 function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
-        const { inngangSykefravaer } = store.getState().logger.data;
-        const inngangFraAap = store.getState().logger.data.inngangFraAap;
+        const { inngangSykefravaer, inngangFraAap } = store.getState().logger.data;
         const { registreringType,
                 maksDato,
                 erSykmeldtMedArbeidsgiver,
