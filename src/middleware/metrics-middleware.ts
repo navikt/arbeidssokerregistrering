@@ -74,7 +74,8 @@ function loggBesvarelse(store: any, action: Action) {
 function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
-        const { inngangSykefravaer, inngangFraAap } = store.getState().logger.data;
+        const inngangFraAap = store.getState().logger.data.inngangFraAap;
+        const inngangSykefravaer = store.getState().logger.data.inngangSykefravaer;
         const { registreringType,
                 maksDato,
                 erSykmeldtMedArbeidsgiver,
