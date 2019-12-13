@@ -14,6 +14,7 @@ export interface Data {
     'arbeidssokerregistrering.kunngjoring': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-0219': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-030102': boolean;
+    'arbeidssokerregistrering.kontaktmeg.kontor-5701': boolean;
     'arbeidssokerregistrering.sperret.ny-versjon': boolean;
 }
 
@@ -33,6 +34,7 @@ export const alleFeatureToggles = [
     'arbeidssokerregistrering.kunngjoring',
     'arbeidssokerregistrering.kontaktmeg.kontor-0219',
     'arbeidssokerregistrering.kontaktmeg.kontor-030102',
+    'arbeidssokerregistrering.kontaktmeg.kontor-5701',
     'arbeidssokerregistrering.sperret.ny-versjon'
 ];
 
@@ -43,6 +45,7 @@ const initialState = {
         'arbeidssokerregistrering.kunngjoring': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-0219': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-030102': false,
+        'arbeidssokerregistrering.kontaktmeg.kontor-5701': false,
         'arbeidssokerregistrering.sperret.ny-versjon': false
     },
     status: STATUS.NOT_STARTED
