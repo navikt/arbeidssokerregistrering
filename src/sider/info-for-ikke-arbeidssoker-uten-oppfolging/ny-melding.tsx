@@ -10,29 +10,29 @@ const melding = props => {
   const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging } = props;
 
   const hideAll = () => {
-      const results = window.document.querySelectorAll("[id$='-result']")
-      results.forEach(element => element.className = 'hidden')
-  }
+      const results = window.document.querySelectorAll("[id$='-result']");
+      results.forEach(element => element.className = 'hidden');
+  };
 
   const handleClick = event => {
-    const id = event.target.id
-    const key = `${id}-result`
-    const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`
-    const result = window.document.getElementById(key)
+    const id = event.target.id;
+    const key = `${id}-result`;
+    const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
+    const result = window.document.getElementById(key);
     if (result) {
-        hideAll()
-        result.className = 'show-result-text'
+        hideAll();
+        result.className = 'show-result-text';
     }
-    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging })
-  }
+    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging });
+  };
 
   const handleDialogClick = event => {
     event.preventDeafult();
-    const id = event.target.id
-    const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.dialog.click.${id}`
-    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging })
-    return true
-  }
+    const id = event.target.id;
+    const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.dialog.click.${id}`;
+    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging });
+    return true;
+  };
 
   return (
     <div className="info-for-ikke-arbeidssoker">
@@ -68,6 +68,6 @@ const melding = props => {
       </Panel>
     </div>
   )
-}
+};
 
-export default melding
+export default melding;
