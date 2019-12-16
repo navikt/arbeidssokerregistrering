@@ -4,5 +4,5 @@ export const featureTogglesMock = {
     'arbeidssokerregistrering.kontaktmeg.kontor-030102': true,
     'arbeidssokerregistrering.kontaktmeg.kontor-5701': true,
     'arbeidssokerregistrering.kunngjoring': false,
-    'arbeidssokerregistrering.sperret.ny-versjon': true
+    'arbeidssokerregistrering.sperret.ny-versjon': false
 };
