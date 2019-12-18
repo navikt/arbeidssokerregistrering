@@ -16,7 +16,7 @@ class NyttAar extends React.Component {
                     />
                     <Normaltekst className="nyttaar__info--tekst">
                         Du kan ikke registrere deg som arbeidssøker nå fordi vi oppdaterer tjenesten.<br/><br/>
-                        Tjenesten åpnes igjen 30. desember.<br/><br/>
+                        Tjenesten åpnes igjen mandag 30. desember.<br/><br/>
                         Du kan fortsatt søke om <a href={DP_SOK_URL}>dagpenger</a>, selv om du ikke kan registrere deg som arbeidssøker.<br/><br/>
                         Vi beklager ulempene.
                     </Normaltekst>
