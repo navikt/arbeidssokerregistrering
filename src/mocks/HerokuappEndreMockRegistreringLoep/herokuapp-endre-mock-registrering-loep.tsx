@@ -274,12 +274,21 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                         />
                         <RadioPanel
                             onChange={() => {
-                                oppdaterGeografiskTilknytning('5701');
+                                oppdaterGeografiskTilknytning('500101');
                             }}
                             name="devToggleStatusGeografiskTilknytning"
                             label="Falkenborg"
-                            value="5701"
-                            checked={geografiskTilknytning === '5701'}
+                            value="500101"
+                            checked={geografiskTilknytning === '500101'}
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterGeografiskTilknytning('0412');
+                            }}
+                            name="devToggleStatusGeografiskTilknytning"
+                            label="Ringsaker"
+                            value="0412"
+                            checked={geografiskTilknytning === '0412'}
                         />
                         <RadioPanel
                             onChange={() => {
