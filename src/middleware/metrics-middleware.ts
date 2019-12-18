@@ -121,6 +121,15 @@ function loggRegistreringInngang(store: any, action: Action) {
             frontendLogger('registrering.inngang.sykmeldt', {
                 kommerFraSykefravaer: inngangSykefravaer
             }, {});
+            frontendLogger('registrering.kommerfra.sykefravaer', {}, {
+                registreringType: registreringType,
+                servicegruppe: servicegrupperOrIngenVerdi,
+                formidlingsgruppe: formidlingsgruppeOrIngenVerdi,
+                geografiskTilknytning: geografiskTilknytningOrIngenVerdi,
+                underOppfolging: underOppfolgingJaNei,
+                rettighetsgruppe: rettighetsgruppeOrIngenVerdi,
+                kommerFra: 'SYKEFRAVAER'
+            });
         } else if (erSperret) {
             frontendLogger('registrering.inngang.sperret', {
                 kommerFraSykefravaer: inngangSykefravaer,
@@ -135,14 +144,32 @@ function loggRegistreringInngang(store: any, action: Action) {
 function loggRegistreringInngangFraAAP(store: any, action: Action) {
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
-        const registreringType = store.getState().registreringStatus.data.registreringType;
+        const registreringStatusData = store.getState().registreringStatus.data;
         const inngangFraAap = store.getState().logger.data.inngangFraAap;
         if (inngangFraAap) {
+            const {
+                registreringType,
+                servicegruppe,
+                formidlingsgruppe,
+                underOppfolging,
+                geografiskTilknytning,
+                rettighetsgruppe
+            } = registreringStatusData;
+            const kommerFra = 'AAP';
             frontendLogger('registrering.kommerfra', {
                 registreringfullfort: true,
                 type: registreringType,
-                fra: 'AAP'
+                fra: kommerFra
             }, {});
+            frontendLogger('registrering.kommerfra.aap', {}, {
+                servicegruppe: servicegruppe || 'INGEN_VERDI',
+                formidlingsgruppe: formidlingsgruppe || 'INGEN_VERDI',
+                underOppfolging: underOppfolging ? 'ja' : 'nei',
+                geografiskTilknytning,
+                registreringType,
+                rettighetsgruppe,
+                kommerFra
+            });
         }
     }
 }
