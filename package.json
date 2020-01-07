@@ -27,7 +27,7 @@
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i"
   },
   "dependencies": {
-    "@craco/craco": "5.6.1",
+    "@craco/craco": "5.6.3",
     "@navikt/fo-session-timeout-modal": "1.1.1",
     "@types/classnames": "2.2.3",
     "@types/enzyme": "3.9.1",
@@ -47,8 +47,8 @@
     "amplitude-js": "5.6.0",
     "babel-polyfill": "6.26.0",
     "classnames": "2.2.6",
-    "core-js": "3.3.6",
-    "craco-less": "1.14.4",
+    "core-js": "3.6.2",
+    "craco-less": "1.15.0",
     "idempotent-babel-polyfill": "7.0.0",
     "less-plugin-npm-import": "2.1.0",
     "lodash": "4.17.11",
@@ -98,7 +98,7 @@
     "react-redux": "5.0.7",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "3.3.0",
     "react-test-renderer": "16.3.2",
     "redux-thunk": "2.2.0",
     "sha.js": "2.4.11",
