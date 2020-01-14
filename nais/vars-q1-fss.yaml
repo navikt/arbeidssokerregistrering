@@ -1,0 +1,8 @@
+namespace: q1
+veilarbpersonflatefs_url: https://app-q1.adeo.no/veilarbpersonflatefs/
+veilarboppfolging_url: https://veilarboppfolging-q1.nais.preprod.local/veilarboppfolging/api
+veilarbpersonapi_url: https://veilarbperson-q1.nais.preprod.local/veilarbperson/api
+aktoerregister_api_v1_url: https://app-q1.adeo.no/aktoerregister/api/v1
+ingresses:
+  - https://arbeidssokerregistrering.nais.preprod.local
+  - https://arbeidssokerregistrering-q1.dev-sbs.nais.io/

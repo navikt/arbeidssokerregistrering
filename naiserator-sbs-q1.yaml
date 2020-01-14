@@ -3,7 +3,7 @@ kind: Application
 apiVersion: nais.io/v1alpha1
 metadata:
   name: arbeidssokerregistrering
-  namespace: default
+  namespace: q1
   labels:
     team: paw
 spec:
