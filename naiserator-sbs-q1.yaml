@@ -1,0 +1,56 @@
+---
+kind: Application
+apiVersion: nais.io/v1alpha1
+metadata:
+  name: arbeidssokerregistrering
+  namespace: default
+  labels:
+    team: paw
+spec:
+  env:
+  - name: APPRES_CMS_URL
+    value: https://appres-q1.nav.no
+  - name: LOGINSERVICE_URL
+    value: https://loginservice-q.nav.no/login
+  - name: AAD_B2C_CLIENTID_USERNAME
+    value: 0090b6e1-ffcc-4c37-bc21-049f7d1f0fe5
+  - name: AAD_B2C_DISCOVERY_URL
+    value: https://login.microsoftonline.com/NAVtestB2C.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_idporten_ver1
+  - name: ARBEIDSSOKERREGISTRERING_URL
+    value: https://arbeidssokerregistrering-q1.dev-sbs.nais.io/
+  - name: DITTNAV_LINK_URL
+    value: https://tjenester-q1.nav.no/dittnav/
+  - name: VEIENTILARBEID_URL
+    value: https://veientilarbeid-q1.dev-sbs.nais.io
+  - name: SYKEFRAVAER_URL
+    value: https://tjenester-q1.nav.no/sykefravaer
+  - name: AKTIVITETSPLAN_URL
+    value: https://aktivitetsplan-q1.dev-sbs.nais.io
+  - name: PAM_JANZZ_URL
+    value: https://pam-janzz-q0.nais.oera-q.local
+  image: docker.adeo.no:5000/fo/arbeidssokerregistrering
+  ingresses:
+  - https://arbeidssokerregistrering.nais.oera-q.local
+  - https://arbeidssokerregistrering-q1.dev-sbs.nais.io/
+  liveness:
+    path: /internal/isAlive
+    port: 8080
+  port: 8080
+  prometheus:
+    enabled: true
+    path: /internal/metrics
+  readiness:
+    path: /internal/isReady
+    port: 8080
+    initialDelay: 15
+  replicas:
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: "3"
+      memory: 768Mi
+    requests:
+      memory: 512Mi
+  webproxy: true
