@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/checkout@v1
 
-      - name: Build and publish Docker image
+      - name: Build app and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
