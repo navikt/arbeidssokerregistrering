@@ -52,6 +52,7 @@ jobs:
           CLUSTER: dev-fss
           RESOURCE: naiserator-fss.yaml
           VARS: nais/vars-q1-fss.yaml
+          VAR: version=${{ env.IMAGE_TAG }}
           DRY_RUN: false
 
   deploy-prod:
