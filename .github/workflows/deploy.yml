@@ -49,7 +49,7 @@ jobs:
           VARS: nais/vars-q0-fss.yaml
 
   deploy-q0-sbs:
-    name: Deploy application to Q0
+    name: Deploy to Q0 SBS
     needs: test-build-and-push
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +70,7 @@ jobs:
           VARS: nais/vars-q0-sbs.yaml
 
   deploy-q1-fss:
-    name: Deploy application to Q1
+    name: Deploy to Q1 FSS
     needs: test-build-and-push
     runs-on: ubuntu-latest
     steps:
@@ -91,7 +91,7 @@ jobs:
           VARS: nais/vars-q1-fss.yaml
 
   deploy-q1-sbs:
-    name: Deploy application to Q1
+    name: Deploy to Q1 SBS
     needs: test-build-and-push
     runs-on: ubuntu-latest
     steps:
@@ -112,7 +112,7 @@ jobs:
           VARS: nais/vars-q1-sbs.yaml
 
   deploy-prod-fss:
-    name: Deploy application to Prod
+    name: Deploy to Prod FSS
     needs: deploy-q0-fss
     runs-on: ubuntu-latest
     steps:
@@ -131,6 +131,34 @@ jobs:
           CLUSTER: prod-fss
           RESOURCE: naiserator-fss.yaml
           VARS: nais/vars-p-fss.yaml
+
+  deploy-prod-sbs:
+    name: Deploy to Prod SBS
+    needs: deploy-q0-sbs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+
+      - name: Deploy to P
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-sbs
+          RESOURCE: naiserator-sbs.yaml
+          VARS: nais/vars-p-sbs.yaml
+
+  relase:
+    name: Tag and release
+    needs: [deploy-prod-fss, deploy-prod-sbs]
+    steps:
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
 
       - name: Create release
         uses: actions/create-release@v1
