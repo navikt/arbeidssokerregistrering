@@ -1,0 +1,14 @@
+namespace: q1
+appres_cms_url: https://appres-q1.nav.no
+loginservice_url: https://loginservice-q.nav.no/login
+aad_b2c_clientid: 0090b6e1-ffcc-4c37-bc21-049f7d1f0fe5
+aad_b2c_discovery_url: https://login.microsoftonline.com/NAVtestB2C.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_idporten_ver1
+arbeidssokerregistrering_url: https://arbeidssokerregistrering-q1.dev-sbs.nais.io/
+dittnav_link_url: https://tjenester-q1.nav.no/dittnav/
+veientilarbeid_url: https://veientilarbeid-q1.dev-sbs.nais.io
+sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
+aktivitetsplan_url: https://aktivitetsplan-q1.dev-sbs.nais.io
+pam_janzz_url: https://pam-janzz-q0.nais.oera-q.local
+ingresses:
+  - https://arbeidssokerregistrering.nais.oera-q.local
+  - https://arbeidssokerregistrering-q1.dev-sbs.nais.io/
