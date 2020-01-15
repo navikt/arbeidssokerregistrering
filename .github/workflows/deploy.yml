@@ -3,25 +3,29 @@ name: Build, push, and deploy
 on: push
 
 env:
-  IMAGE_TAG: ${{ github.sha }}
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/arbeidssokerregistrering
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/arbeidssokerregistrering
 
 jobs:
-
   test-build-and-push:
     name: Test, build and push
     runs-on: ubuntu-latest
     steps:
-
       - uses: actions/checkout@v1
+        name: Checkout
+
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')
+
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
 
       - name: Build app and publish Docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker build --tag ${IMAGE}:${IMAGE_TAG} --tag ${IMAGE}:latest .
-          docker login docker.pkg.github.com -u arbeidssokerregistrering -p ${GITHUB_TOKEN}
-          docker push ${IMAGE}:${IMAGE_TAG}
+          docker build --tag ${IMAGE} .
+          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+          docker push ${IMAGE}
 
   deploy-q0:
     name: Deploy application to q0

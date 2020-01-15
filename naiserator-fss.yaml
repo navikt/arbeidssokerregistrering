@@ -21,7 +21,7 @@ spec:
     value: {{veilarbpersonapi_url}}
   - name: AKTOERREGISTER_API_V1_URL
     value: {{aktoerregister_api_v1_url}}
-  image: {{image}}
+  image: {{ image }}
   ingresses:
   {{#each ingresses as |url|}}
      - {{url}}
