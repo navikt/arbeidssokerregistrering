@@ -71,26 +71,31 @@ jobs:
           VARS: nais/vars-q1-fss.yaml
 
   deploy-prod:
-    name: Deploy application to production
+    name: Deploy application to Prod
     needs: deploy-q0
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
 
-      - name: Deploy to production
-        uses: nais/deploy/actions/deploy@v1
+      - name: Lag tag for image
+        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+
+      - name: Lag full image referanse
+        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+
+      - name: Deploy to P
+        uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-fss
-          RESOURCE: naiserator-prod.yaml
-          VAR: version=${{ env.IMAGE_TAG }}
-          DRY_RUN: true
+          RESOURCE: naiserator-fss.yaml
+          VARS: nais/vars-p-fss.yaml
 
       - name: Create release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: release/prod@${{ env.IMAGE_TAG }}
+          tag_name: release/prod@${{ env.TAG }}
           release_name: Release to prod
           prerelease: false

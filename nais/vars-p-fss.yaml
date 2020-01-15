@@ -1,0 +1,8 @@
+namespace: default
+veilarbpersonflatefs_url: https://app.adeo.no/veilarbpersonflatefs/
+veilarboppfolging_url: https://veilarboppfolging.nais.adeo.no/veilarboppfolging/api
+veilarbpersonapi_url: https://veilarbperson.nais.adeo.no/veilarbperson/api
+aktoerregister_api_v1_url: https://app.adeo.no/aktoerregister/api/v1
+ingresses:
+  - https://arbeidssokerregistrering.nais.adeo.no
+  - https://app.adeo.no/arbeidssokerregistrering
