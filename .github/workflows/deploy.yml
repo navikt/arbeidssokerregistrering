@@ -158,6 +158,9 @@ jobs:
     needs: [deploy-prod-fss, deploy-prod-sbs]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+        name: Checkout
+
       - name: Lag tag for image
         run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
 
@@ -166,6 +169,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: release/prod@${{ github.sha }}
+          tag_name: release/prod@${{ env.TAG }}
           release_name: Release to prod
           prerelease: false
