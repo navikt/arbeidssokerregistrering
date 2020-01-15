@@ -1,0 +1,57 @@
+---
+kind: Application
+apiVersion: nais.io/v1alpha1
+metadata:
+  name: arbeidssokerregistrering
+  namespace: {{ namespace }}
+  labels:
+    team: paw
+spec:
+  env:
+  - name: APPRES_CMS_URL
+    value: {{ appres_cms_url }}
+  - name: LOGINSERVICE_URL
+    value: {{ loginservice_url }}
+  - name: AAD_B2C_CLIENTID_USERNAME
+    value: {{ aad_b2c_clientid }}
+  - name: AAD_B2C_DISCOVERY_URL
+    value: {{ aad_b2c_discovery_url }}
+  - name: ARBEIDSSOKERREGISTRERING_URL
+    value: {{ arbeidssokerregistrering_url }}
+  - name: DITTNAV_LINK_URL
+    value: {{ dittnav_link_url }}
+  - name: VEIENTILARBEID_URL
+    value: {{ veientilarbeid_url }}
+  - name: SYKEFRAVAER_URL
+    value: {{ sykefravaer_url }}
+  - name: AKTIVITETSPLAN_URL
+    value: {{ aktivitetsplan_url }}
+  - name: PAM_JANZZ_URL
+    value: {{ pam_janzz_url }}
+  image: {{ image }}
+  ingresses:
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
+  liveness:
+    path: /internal/isAlive
+    port: 8080
+  port: 8080
+  prometheus:
+    enabled: true
+    path: /internal/metrics
+  readiness:
+    path: /internal/isReady
+    port: 8080
+    initialDelay: 15
+  replicas:
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: "3"
+      memory: 768Mi
+    requests:
+      memory: 512Mi
+  webproxy: true
