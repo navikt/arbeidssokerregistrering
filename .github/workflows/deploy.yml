@@ -28,7 +28,7 @@ jobs:
           docker push ${IMAGE}
 
   deploy-q0-fss:
-    name: Deploy application to Q0
+    name: Deploy to Q0 FSS
     needs: test-build-and-push
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +45,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-fss
-          RESOURCE: naiserator-fss.yaml
+          RESOURCE: nais/naiserator-fss.yaml
           VARS: nais/vars-q0-fss.yaml
 
   deploy-q0-sbs:
@@ -66,7 +66,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
-          RESOURCE: naiserator-sbs.yaml
+          RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-q0-sbs.yaml
 
   deploy-q1-fss:
@@ -87,7 +87,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-fss
-          RESOURCE: naiserator-fss.yaml
+          RESOURCE: nais/naiserator-fss.yaml
           VARS: nais/vars-q1-fss.yaml
 
   deploy-q1-sbs:
@@ -108,7 +108,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
-          RESOURCE: naiserator-sbs.yaml
+          RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-q1-sbs.yaml
 
   deploy-prod-fss:
@@ -129,7 +129,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-fss
-          RESOURCE: naiserator-fss.yaml
+          RESOURCE: nais/naiserator-fss.yaml
           VARS: nais/vars-p-fss.yaml
 
   deploy-prod-sbs:
@@ -150,7 +150,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-sbs
-          RESOURCE: naiserator-sbs.yaml
+          RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-p-sbs.yaml
 
   relase:
