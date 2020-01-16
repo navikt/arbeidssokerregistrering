@@ -5,4 +5,5 @@ veilarbpersonapi_url: https://veilarbperson.nais.adeo.no/veilarbperson/api
 aktoerregister_api_v1_url: https://app.adeo.no/aktoerregister/api/v1
 ingresses:
   - https://arbeidssokerregistrering.nais.adeo.no
+  - https://arbeidssokerregistrering-fss.nais.adeo.no
   - https://app.adeo.no/arbeidssokerregistrering
