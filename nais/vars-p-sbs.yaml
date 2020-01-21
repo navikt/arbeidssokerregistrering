@@ -12,3 +12,4 @@ pam_janzz_url: https://pam-janzz.nais.oera.no
 ingresses:
   - https://arbeidssokerregistrering.nais.oera.no
   - https://arbeidssokerregistrering.nav.no/
+  - https://tjenester.nav.no/arbeidssokerregistrering
