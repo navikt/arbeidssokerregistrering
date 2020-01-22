@@ -13,13 +13,18 @@ import {
     selectRegistreringstatus,
     State as RegistreringstatusState
 } from '../../ducks/registreringstatus';
+import { 
+    hentFeatureToggles,
+    selectFeatureTogglesState,
+    State as FeatureToggleState
+} from '../../ducks/feature-toggles';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import StepUp from './stepup';
+import TjenesteOppdateres from '../../sider/tjeneste-oppdateres';
 import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
-import { hentFeatureToggles } from '../../ducks/feature-toggles';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { erIFSS } from '../../utils/fss-utils';
 
@@ -27,6 +32,7 @@ interface StateProps {
     brukersNavn: BrukersNavnState;
     autentiseringsinfo: AuthState;
     registreringstatus: RegistreringstatusState;
+    featuretoggles: FeatureToggleState;
 }
 
 interface DispatchProps {
@@ -42,7 +48,6 @@ export class HentInitialData extends React.Component<Props> {
     componentWillMount() {
 
         this.props.hentFeatureToggle().then(() => {
-
             this.props.hentAutentiseringsInfo().then((res) => {
                 if ((res as AuthData).nivaOidc === 4) {
                     this.props.hentRegistreringStatus();
@@ -55,10 +60,12 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const {children, registreringstatus, autentiseringsinfo, brukersNavn} = this.props;
+        const {children, registreringstatus, autentiseringsinfo, brukersNavn, featuretoggles} = this.props;
         const {niva, nivaOidc} = autentiseringsinfo.data;
-
-        if (autentiseringsinfo.status === STATUS.OK) {
+        const erNede = featuretoggles.data['arbeidssokerregistrering.nedetid']
+        if (erNede) {
+            return (<TjenesteOppdateres />);
+        } else if (autentiseringsinfo.status === STATUS.OK) {
             if (niva === 4 && nivaOidc !== 4) {
                 // Bruker er allerede innlogget og har OpenAM-token på nivå 4, men mangler Oidc-token med nivå 4.
                 // Redirecter til Veilarbstepup som automatisk gir bruker Oidc-token på nivå 4.
@@ -80,7 +87,8 @@ export class HentInitialData extends React.Component<Props> {
                 avhengigheter={[
                     registreringstatus,
                     brukersNavn,
-                    autentiseringsinfo
+                    autentiseringsinfo,
+                    featuretoggles
                 ]}
                 storrelse="XXL"
                 loaderKomponent={<Loader/>}
@@ -95,6 +103,7 @@ const mapStateToProps = (state: AppState) => ({
     autentiseringsinfo: selectAutentiseringsinfo(state),
     brukersNavn: selectBrukersNavn(state),
     registreringstatus: selectRegistreringstatus(state),
+    featuretoggles: selectFeatureTogglesState(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

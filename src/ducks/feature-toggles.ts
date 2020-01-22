@@ -82,3 +82,7 @@ export function hentFeatureToggles() {
 export function selectFeatureToggles(state: AppState): Data {
     return state.featureToggles.data;
 }
+
+export function selectFeatureTogglesState(state: AppState): State {
+    return state.featureToggles;
+}
