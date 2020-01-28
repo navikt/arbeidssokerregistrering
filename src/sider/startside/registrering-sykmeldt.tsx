@@ -15,7 +15,6 @@ import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/feature-toggles';
-import Kunngjoring from '../../komponenter/kunngjoring/kunngjoring'
 
 interface Props {
     brukersNavn: BrukersNavnState;
@@ -48,20 +47,10 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
     }
 
     render() {
-        const { brukersNavn, featureToggles } = this.props;
+        const { brukersNavn } = this.props;
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
         const { fornavn } = brukersNavn.data;
-
-        const Rad0 = () => {
-            return (
-                <div className="registrering-sykmeldt__rad3">
-                    <div className="rad3__tekst">
-                        <Kunngjoring />
-                    </div>
-                </div>
-            )
-        }
 
         const Rad1 = () => {
             return (
@@ -141,11 +130,6 @@ class RegistreringArbeidssokerSykmeldt extends React.Component<RegistreringArbei
             <Rad2 key={2} />,
             <Rad3 key={3} />
         ];
-
-        if (featureToggles['arbeidssokerregistrering.kunngjoring']) {
-            // Viser kunngjøring dersom featureToggle er slått på
-            rader.unshift(<Rad0 key={4} />)
-        }
 
         return (
             <div className="registrering-sykmeldt">
