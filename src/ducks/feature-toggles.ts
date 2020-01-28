@@ -10,8 +10,6 @@ export enum ActionTypes {
 
 export interface Data {
     'arbeidssokerregistrering.nedetid': boolean;
-    'arbeidssokerregistrering.nedetid.nyttaar': boolean;
-    'arbeidssokerregistrering.kunngjoring': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-030102': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-500101': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-500102': boolean;
@@ -31,8 +29,6 @@ interface Action {
 
 export const alleFeatureToggles = [
     'arbeidssokerregistrering.nedetid',
-    'arbeidssokerregistrering.nedetid.nyttaar',
-    'arbeidssokerregistrering.kunngjoring',
     'arbeidssokerregistrering.kontaktmeg.kontor-030102',
     'arbeidssokerregistrering.kontaktmeg.kontor-500101',
     'arbeidssokerregistrering.kontaktmeg.kontor-500102',
@@ -43,8 +39,6 @@ export const alleFeatureToggles = [
 const initialState = {
     data : {
         'arbeidssokerregistrering.nedetid': false,
-        'arbeidssokerregistrering.nedetid.nyttaar': false,
-        'arbeidssokerregistrering.kunngjoring': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-030102': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-500101': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-500102': false,
