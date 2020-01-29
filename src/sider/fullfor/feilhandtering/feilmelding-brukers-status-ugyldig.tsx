@@ -3,6 +3,7 @@ import { InjectedIntlProps, InjectedIntl, injectIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Feilmelding from '../../../komponenter/feilmelding/feilmelding';
 import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
+import { uniLogger } from '../../../metrikker/uni-logger';
 import './feilmelding-brukers-status-ugyldig.less';
 import FeilmeldingManglerArbeidstillatelse
     from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
@@ -55,6 +56,7 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
         const { feilType, intl } = this.props;
         const feilmelding = this.lagFeilmelding(feilType, intl);
 
+        uniLogger('arbeidssokerregistrering.error', { feilType: feilType })
         return (
             <div className="feilhandtering">
                 {feilmelding}
