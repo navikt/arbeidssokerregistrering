@@ -80,6 +80,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
             : <Laster className="innholdslaster-laster" storrelse={storrelse}/>;
 
         if (alleLastet(avhengigheter)) {
+            uniLogger('arbeidssokerregistrering.success', { component: 'innholdslaster' });
             return this.renderChildren();
         } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
             this.setTimer();
