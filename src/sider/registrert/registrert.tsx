@@ -11,6 +11,7 @@ import { MatchProps } from '../../utils/utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import RegistrertAksjonspanel from './aksjonspanel/registrert-aksjonspanel';
 import RegistrertSendVidere from './send-videre-fss/registrert-send-videre';
+import { uniLogger } from '../../metrikker/uni-logger';
 import './registrert.less';
 import { erIFSS } from '../../utils/fss-utils';
 
@@ -34,7 +35,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const hentTekstId = this.hentTekstId(erSykmeldt);
         const tittelId = erIFSS() ? 'duernaregistrert-manuell-innholdstittel' : hentTekstId('innholdstittel');
-
+        uniLogger('arbeidssokerregistrering.success', { registreringType: registreringType });
         return (
             <section className={cls('registrert', { 'erIE': erIE(), 'registrert-fss': erIFSS()})}>
 

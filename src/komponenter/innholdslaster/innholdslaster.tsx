@@ -2,6 +2,7 @@ import * as React from 'react';
 import { STATUS } from '../../ducks/api-utils';
 import Laster, { SpinnerStorrelse } from './innholdslaster-laster';
 import ResponsivSide from '../side/responsiv-side';
+import { uniLogger } from '../../metrikker/uni-logger';
 
 import './innholdslaster.less';
 
@@ -87,7 +88,7 @@ class Innholdslaster extends React.Component<InnholdslasterProps, Innholdslaster
 
         if (noenHarFeil(avhengigheter)) {
             this.clearTimer();
-
+            uniLogger('arbeidssokerregistrering.error', { feilType: 'innholdslaster' });
             return (
                 <ResponsivSide><div className="innholdslaster-feilmelding">{feilmeldingKomponent}</div></ResponsivSide>
             );

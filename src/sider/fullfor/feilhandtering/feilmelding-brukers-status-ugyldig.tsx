@@ -54,7 +54,7 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
     render() {
         const { feilType, intl } = this.props;
         const feilmelding = this.lagFeilmelding(feilType, intl);
-        uniLogger('arbeidssokerregistrering.error', { feilType: feilType })
+        uniLogger('arbeidssokerregistrering.error', { feilType: feilType });
 
         return (
             <div className="feilhandtering">
