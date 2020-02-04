@@ -3,6 +3,6 @@ export const featureTogglesMock = {
     'arbeidssokerregistrering.kontaktmeg.kontor-030102': true,
     'arbeidssokerregistrering.kontaktmeg.kontor-500101': true,
     'arbeidssokerregistrering.kontaktmeg.kontor-500102': true,
-    'arbeidssokerregistrering.kontaktmeg.kontor-0412': true,
+    'arbeidssokerregistrering.kontaktmeg.kontor-3411': true,
     'arbeidssokerregistrering.sperret.ny-versjon': false
 };
