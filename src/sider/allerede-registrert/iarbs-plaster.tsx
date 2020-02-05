@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Knapp } from 'nav-frontend-knapper';
 import { uniLogger } from '../../metrikker/uni-logger';
@@ -22,7 +22,7 @@ type Props = StateProps & DispatchProps;
 const OppgaveSuccess = () => {
     return (
         <div>
-        <Alertstripe type="info">
+        <Alertstripe type="suksess">
             <Normaltekst>Din henvendelse er mottatt.</Normaltekst>
             <Normaltekst>Forventet svartid på denne henvendelsen er to arbeidsdager.</Normaltekst>
         </Alertstripe>
@@ -33,7 +33,7 @@ const OppgaveSuccess = () => {
 const OppgaveError = () => {
     return (
         <div>
-        <Alertstripe type="feil">
+        <Alertstripe type="advarsel">
             <Normaltekst>Din henvendelse feilet.</Normaltekst>
             <Normaltekst>Ta kontakt med oss på 55 55 33 33, tastevalg 2.</Normaltekst>
         </Alertstripe>
@@ -59,14 +59,23 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
 
  const handleClickContact = event => {
     const melding = document.getElementById('kontaktMegMelding');
+    const meldingDagpenger = document.getElementById('kontaktMegDagpengerMelding');
     const knapp = document.getElementById('kontaktMegKnapp');
-    if (melding && knapp && event.target.id === 'kontaktMegAnnet') {
+    if (melding && meldingDagpenger && knapp && event.target.id === 'kontaktMegAnnet') {
         melding.className = 'blokk-s';
+        meldingDagpenger.className = 'hidden';
         knapp.className = 'hidden';
         uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-annet', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
-    if (melding && knapp && event.target.id === 'kontaktMegDagpenger') {
+    if (meldingDagpenger && melding && knapp && event.target.id === 'kontaktMegAAPRadio') {
+        melding.className = 'blokk-s';
+        meldingDagpenger.className = 'hidden';
+        knapp.className = 'hidden';
+        uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-aap', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
+    }
+    if (melding && meldingDagpenger && knapp && event.target.id === 'kontaktMegDagpenger') {
         melding.className = 'hidden';
+        meldingDagpenger.className = 'blokk-s';
         knapp.className = 'knapp';
         uniLogger('registrering.allerede-registrert.plaster.click.kontakt-meg-dagpenger', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
@@ -77,18 +86,24 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
         <Column xs="12" sm="8" className="allerede-registrert__boks">
             <div className="allerede-registrert__boks-innhold venstrejustert">
                 <div id="kontaktMegPanel">
-                    <Alertstripe type="advarsel" className="blokk-s">
-                        Vi får ikke registrert deg som arbeidssøker.
+                    <Alertstripe type="info" className="blokk-s">
+                        Vi må hjelpe deg videre i andre kanaler
                     </Alertstripe>
+                    <Systemtittel>Hvorfor vil du registrere deg?</Systemtittel>
                     <div className="blokk-s" id="kontaktMegMeldingWrapper">
+
                         <Fieldset legend="">
-                            <Radio label={'Jeg skal søke dagpenger og vil bli kontaktet av en veileder'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
-                            <Radio label={'Jeg ønsker å snakke med en veileder uavhengig av dagpenger'} id="kontaktMegAnnet" onChange={handleClickContact} name="kontaktmeg" />
+                            <Radio label={'Jeg vil søke dagpenger'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
+                            <Radio label={'Jeg vil søke AAP'} name="kontaktmeg" id="kontaktMegAAPRadio" onChange={handleClickContact} />
+                            <Radio label={'Andre grunner'} id="kontaktMegAnnet" onChange={handleClickContact} name="kontaktmeg" />
                         </Fieldset>
-                        <Normaltekst className="hidden" id="kontaktMegMelding">
-                            Hvis du ønsker å snakke om noe annet enn dagpenger, må du ringe 55 55 33 33.
+                        <Normaltekst className="hidden" id="kontaktMegDagpengerMelding">
+                            Du må snakke med en veileder.
                         </Normaltekst>
-                        {oppgaveStatus === 'NOT_STARTED' ? <div className="midtjustert"><Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Send inn henvendelsen</Knapp></div>: null}
+                        <Normaltekst className="hidden" id="kontaktMegMelding">
+                            Du må ringe oss på <strong>55 55 33 33</strong> eller opprette en dialog, så hjelper vi deg videre.
+                        </Normaltekst>
+                        {oppgaveStatus === 'NOT_STARTED' ? <div className="midtjustert"><Knapp className="hidden" id="kontaktMegKnapp" onClick={handleClickKontaktMeg}>Kontakt meg</Knapp></div>: null}
                     </div>
                 </div>
                 { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
