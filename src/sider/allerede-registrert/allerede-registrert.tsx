@@ -7,8 +7,8 @@ import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
 import { uniLogger } from '../../metrikker/uni-logger'
 import { AppState } from '../../reducer';
-import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import IARBSPlaster from './iarbs-plaster'
+import Melding from './melding'
 
 import './allerede-registrert.less';
 interface StateProps {
@@ -71,18 +71,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                             </Normaltekst>
                         </Column>
                     </Row>}
-                    {gammeltPlaster ? <Row className="">
-                        <Column xs="12" sm="8" className="allerede-registrert__boks">
-                            <div className="allerede-registrert__boks-innhold venstrejustert">
-                                <AlertStripeAdvarsel className="blokk-s">
-                                    <Normaltekst>Vi får ikke registrert deg som arbeidssøker.</Normaltekst>
-                                </AlertStripeAdvarsel>
-                                <Normaltekst className="blokk-s"><strong>Hvis du har søkt eller ønsker å søke dagpenger, må du ta kontakt med NAV.</strong></Normaltekst>
-                                <Normaltekst className="blokk-s"><strong>Ring <a href="tel:+4755553333">55 55 33 33</a>, tastevalg 2.</strong></Normaltekst>
-                                <Normaltekst>Hvis det ikke er aktuelt å søke dagpenger nå, eller du har arbeidsavklaringspenger kan du se bort fra denne meldingen.</Normaltekst>
-                            </div>
-                        </Column>
-                    </Row> : null}
+                    {gammeltPlaster ? <Melding /> : null}
                     {nyttPlaster ? <IARBSPlaster /> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
