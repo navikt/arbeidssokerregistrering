@@ -122,7 +122,7 @@ class Routes extends React.Component<AllProps> {
                 return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrertFss}/>;
             }
             if (oppfolgingIArena) {
-                uniLogger('registrering.allerede-registrert.underOppfolgingIArena', {
+                uniLogger('arbeidssokerregistrering.allerede-registrert.underOppfolgingIArena', {
                     formidlingsgruppe,
                     servicegruppe,
                     geografiskTilknytning,
@@ -131,7 +131,7 @@ class Routes extends React.Component<AllProps> {
                 });
                 window.location.href = DITT_NAV_URL;
             } else {
-                uniLogger('registrering.allerede-registrert.ikkeUnderOppfolgingIArena', {
+                uniLogger('arbeidssokerregistrering.allerede-registrert.ikkeUnderOppfolgingIArena', {
                     formidlingsgruppe,
                     servicegruppe,
                     geografiskTilknytning,
