@@ -94,7 +94,7 @@ const plaster = ({opprettKontaktmegOppgave, state} : Props) => {
 
                         <Fieldset legend="">
                             <Radio label={'Jeg vil søke dagpenger'} name="kontaktmeg" id="kontaktMegDagpenger" onChange={handleClickContact} />
-                            <Radio label={'Jeg vil søke AAP'} name="kontaktmeg" id="kontaktMegAAPRadio" onChange={handleClickContact} />
+                            <Radio label={'Jeg vil søke arbeidsavklaringspenger (AAP)'} name="kontaktmeg" id="kontaktMegAAPRadio" onChange={handleClickContact} />
                             <Radio label={'Andre grunner'} id="kontaktMegAnnet" onChange={handleClickContact} name="kontaktmeg" />
                         </Fieldset>
                         <Normaltekst className="hidden" id="kontaktMegDagpengerMelding">
