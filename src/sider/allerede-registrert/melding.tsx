@@ -40,7 +40,6 @@ const Melding = ({state} : Props) => {
                     </Alertstripe>
                     <Systemtittel>Hvorfor vil du registrere deg?</Systemtittel>
                     <div className="blokk-s" id="kontaktMegMeldingWrapper">
-
                         <Fieldset legend="">
                             <Radio label={'Jeg vil søke dagpenger'} name="kontaktmeg" id="dagpenger" onChange={handleClickContact} />
                             <Radio label={'Jeg vil søke arbeidsavklaringspenger (AAP)'} name="kontaktmeg" id="aap" onChange={handleClickContact} />
