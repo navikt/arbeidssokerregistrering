@@ -7,6 +7,7 @@ import AlleredeRegistrert from './sider/allerede-registrert/allerede-registrert'
 import AlleredeRegistrertFss from './sider/allerede-registrert-fss/allerede-registrert-fss';
 import {
     ALLEREDE_REGISTRERT_PATH,
+    DITT_NAV_URL,
     DU_ER_NA_REGISTRERT_PATH,
     FULLFOR_PATH,
     IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
@@ -33,7 +34,13 @@ import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
 import { connect, Dispatch } from 'react-redux';
 import { parse } from 'query-string';
-import { Data as RegistreringstatusData, RegistreringType, selectRegistreringstatus } from './ducks/registreringstatus';
+import {
+    Data as RegistreringstatusData,
+    Formidlingsgruppe,
+    RegistreringType,
+    selectRegistreringstatus,
+    Servicegruppe
+} from './ducks/registreringstatus';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
 import RedirectAll from './komponenter/redirect-all';
@@ -42,8 +49,7 @@ import { STATUS } from './ducks/api-utils';
 import { erKlarForFullforing } from './sider/fullfor/fullfor-utils';
 import { Data as FeatureToggleData, selectFeatureToggles } from './ducks/feature-toggles';
 import TjenesteOppdateres from './sider/tjeneste-oppdateres';
-import { RouteHerokuMock } from
-        './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
+import { RouteHerokuMock } from './mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 import { setInngangAapAction, setInngangSykefravaerAction } from './ducks/logger';
 import { erIFSS } from './utils/fss-utils';
 import RegistreringArbeidssokerSykmeldtFss from './sider/startside/registrering-sykmeldt-fss';
@@ -51,6 +57,7 @@ import RegistreringArbeidssokerSykmeldt from './sider/startside/registrering-syk
 import RegistreringArbeidssokerFss from './sider/startside/registrering-arbeidssoker-fss';
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
 import { loggStartenPaaRegistreringFraAAP } from './middleware/metrics-middleware';
+import { uniLogger } from './metrikker/uni-logger';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -69,7 +76,7 @@ type AllProps = StateProps & RouteComponentProps<any> & DispatchProps; // tslint
 class Routes extends React.Component<AllProps> {
 
     kommerFraSykefravaer() {
-        const { registreringstatusData, location } = this.props;
+        const {registreringstatusData, location} = this.props;
         const erFraSykefravaer = parse(location.search).fraSykefravaer === 'true';
 
         return registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
@@ -93,17 +100,46 @@ class Routes extends React.Component<AllProps> {
     }
 
     render() {
-        const { registreringstatusData, reaktivertStatus, featureToggles, location } = this.props;
+        const {registreringstatusData, reaktivertStatus, featureToggles, location} = this.props;
         const erNede = featureToggles['arbeidssokerregistrering.nedetid'];
-        const registreringType = registreringstatusData.registreringType;
+        const {registreringType, formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe, underOppfolging} = registreringstatusData;
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
         const queryParams = location.search;
+        const IARBSmedOppfolging = formidlingsgruppe === Formidlingsgruppe.IARBS && (
+            servicegruppe === Servicegruppe.BATT ||
+            servicegruppe === Servicegruppe.VURDU ||
+            servicegruppe === Servicegruppe.VARIG ||
+            servicegruppe === Servicegruppe.BFORM ||
+            servicegruppe === Servicegruppe.IKVAL ||
+            servicegruppe === Servicegruppe.OPPFI
+        );
+        const oppfolgingIArena = formidlingsgruppe === Formidlingsgruppe.ARBS || IARBSmedOppfolging;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
-            const component = erIFSS() ? AlleredeRegistrertFss : AlleredeRegistrert;
-            return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={component}/>;
+            if (erIFSS()) {
+                return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrertFss}/>;
+            }
+            if (oppfolgingIArena) {
+                uniLogger('arbeidssokerregistrering.allerede-registrert.underOppfolgingIArena', {
+                    formidlingsgruppe,
+                    servicegruppe,
+                    geografiskTilknytning,
+                    rettighetsgruppe,
+                    underOppfolging
+                });
+                window.location.href = DITT_NAV_URL;
+            } else {
+                uniLogger('arbeidssokerregistrering.allerede-registrert.ikkeUnderOppfolgingIArena', {
+                    formidlingsgruppe,
+                    servicegruppe,
+                    geografiskTilknytning,
+                    rettighetsgruppe,
+                    underOppfolging
+                });
+                return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
+            }
         } else if (registreringType === RegistreringType.SPERRET) {
             return (
                 <RedirectAll
@@ -116,9 +152,9 @@ class Routes extends React.Component<AllProps> {
             if (erNede) {
                 return <RedirectAll to={'/'} component={TjenesteOppdateres}/>;
             }
-            return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering} />;
+            return <RedirectAll to={REAKTIVERING_PATH} component={KreverReaktivering}/>;
         } else if (this.kommerFraSykefravaer()) {
-            return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal} />;
+            return <RedirectAll to={INNGANGSSPORSMAL_PATH} component={Inngangssporsmal}/>;
         }
 
         return (
@@ -132,10 +168,11 @@ class Routes extends React.Component<AllProps> {
                     <Switch>
 
                         {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
-                        {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering} /> : null}
-                        {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert} /> : null} {/*tslint:disable-line*/}
+                        {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering}/> : null}
+                        {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH}
+                                                                                        component={DuErNaRegistrert}/> : null} {/*tslint:disable-line*/}
 
-                        { visOrdinaerSkjema ? (
+                        {visOrdinaerSkjema ? (
                             <Switch>
                                 <Route
                                     path={START_PATH}
@@ -146,7 +183,7 @@ class Routes extends React.Component<AllProps> {
                                     component={SkjemaRegistrering}
                                 />
                                 {klarForFullforing ?
-                                    <Route path={FULLFOR_PATH} component={Fullfor} />
+                                    <Route path={FULLFOR_PATH} component={Fullfor}/>
                                     :
                                     null
                                 }
@@ -154,16 +191,16 @@ class Routes extends React.Component<AllProps> {
                                     to={START_PATH}
                                 />
                             </Switch>
-                        ) : null }
-                        { visSykefravaerSkjema ? (
+                        ) : null}
+                        {visSykefravaerSkjema ? (
                             <Switch>
                                 <Route
                                     path={START_PATH}
                                     component={erIFSS() ? RegistreringArbeidssokerSykmeldtFss :
-                                                RegistreringArbeidssokerSykmeldt}
+                                        RegistreringArbeidssokerSykmeldt}
                                 />
                                 {klarForFullforing ?
-                                    <Route path={INFOSIDE_PATH} component={Infoside} />
+                                    <Route path={INFOSIDE_PATH} component={Infoside}/>
                                     :
                                     null
                                 }
@@ -191,7 +228,7 @@ class Routes extends React.Component<AllProps> {
                                     to={START_PATH + queryParams}
                                 />
                             </Switch>
-                        ) : null }
+                        ) : null}
                     </Switch>
                 </Sideanimasjon>
             </>
@@ -211,4 +248,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     setInngangAapAction: () => dispatch(setInngangAapAction())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(withRouter(Routes));
+export default connect(mapStateToProps, mapDispatchToProps, null, {pure: false})(withRouter(Routes));
