@@ -107,22 +107,13 @@ class Routes extends React.Component<AllProps> {
         const visOrdinaerSkjema = !visSykefravaerSkjema;
         const klarForFullforing = erKlarForFullforing(this.props.state);
         const queryParams = location.search;
-        const IARBSmedOppfolging = formidlingsgruppe === Formidlingsgruppe.IARBS && (
-            servicegruppe === Servicegruppe.BATT ||
-            servicegruppe === Servicegruppe.VURDU ||
-            servicegruppe === Servicegruppe.VARIG ||
-            servicegruppe === Servicegruppe.BFORM ||
-            servicegruppe === Servicegruppe.IKVAL ||
-            servicegruppe === Servicegruppe.OPPFI
-        );
-        const oppfolgingIArena = formidlingsgruppe === Formidlingsgruppe.ARBS || IARBSmedOppfolging;
 
         if (registreringType === RegistreringType.ALLEREDE_REGISTRERT) {
             if (erIFSS()) {
                 return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrertFss}/>;
             }
-            if (oppfolgingIArena) {
-                uniLogger('arbeidssokerregistrering.allerede-registrert.underOppfolgingIArena', {
+            if (formidlingsgruppe === Formidlingsgruppe.ARBS) {
+                uniLogger('arbeidssokerregistrering.allerede-registrert.redirect-dittnav', {
                     formidlingsgruppe,
                     servicegruppe,
                     geografiskTilknytning,
@@ -131,13 +122,6 @@ class Routes extends React.Component<AllProps> {
                 });
                 window.location.href = DITT_NAV_URL;
             } else {
-                uniLogger('arbeidssokerregistrering.allerede-registrert.ikkeUnderOppfolgingIArena', {
-                    formidlingsgruppe,
-                    servicegruppe,
-                    geografiskTilknytning,
-                    rettighetsgruppe,
-                    underOppfolging
-                });
                 return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert}/>;
             }
         } else if (registreringType === RegistreringType.SPERRET) {
