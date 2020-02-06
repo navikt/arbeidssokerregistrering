@@ -39,7 +39,6 @@ import {
     Formidlingsgruppe,
     RegistreringType,
     selectRegistreringstatus,
-    Servicegruppe
 } from './ducks/registreringstatus';
 import InfoForIkkeArbeidssokerUtenOppfolging
     from './sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging';
