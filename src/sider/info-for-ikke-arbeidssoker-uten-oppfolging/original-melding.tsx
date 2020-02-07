@@ -34,8 +34,8 @@ const melding = props => {
   return (
     <div className="info-for-ikke-arbeidssoker">
       <Panel border className="nav-veilederpanel">
-        <Alertstripe type="advarsel" className="blokk-s">
-            Vi får dessverre ikke registrert deg som arbeidssøker
+        <Alertstripe type="info" className="blokk-s">
+            Vi må hjelpe deg videre i andre kanaler
         </Alertstripe>
         <Normaltekst>
             <strong>Hvilken situasjon er nærmest din?</strong>
@@ -53,8 +53,12 @@ const melding = props => {
             <Normaltekst className="hidden" id="cv-result">
                 Du må <a href="https://www.arbeidsplassen.no" target="_blank" rel="noopener noreferrer" onClick={ handleArbeidsplassen }>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
             </Normaltekst>
-            <Radio label={'Jeg har mistet jobben, sagt opp eller kommer til å si opp'} name="oppfolging" id="jobbendring" onChange={ handleClick } />
-            <Normaltekst className="hidden" id="jobbendring-result">
+            <Radio label={'Jeg har blitt arbeidsledig og skal søke dagpenger'} name="oppfolging" id="dagpenger" onChange={ handleClick } />
+            <Normaltekst className="hidden" id="dagpenger-result">
+                Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
+            </Normaltekst>
+            <Radio label={'Jeg har blitt arbeidsledig og er usikker på rettighetene mine'} name="oppfolging" id="usikker" onChange={ handleClick } />
+            <Normaltekst className="hidden" id="usikker-result">
                 Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
             </Normaltekst>
             <Radio label={'Min veileder har bedt meg om å registrerer meg som arbeidssøker'} name="oppfolging" id="veileder" onChange={ handleClick } />
