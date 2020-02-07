@@ -16,7 +16,7 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state } : StateProps) => {
     const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
     const nyVersjon = state.featureToggles.data["arbeidssokerregistrering.sperret.ny-versjon"]
     uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe })
-    const melding = nyVersjon ? <NyMelding formidlingsgruppe={formidlingsgruppe} servicegruppe={servicegruppe} geografiskTilknytning={geografiskTilknytning} underOppfolging={underOppfolging} /> : <OriginalMelding />
+    const melding = nyVersjon ? <NyMelding formidlingsgruppe={formidlingsgruppe} servicegruppe={servicegruppe} geografiskTilknytning={geografiskTilknytning} underOppfolging={underOppfolging} /> : <OriginalMelding formidlingsgruppe={formidlingsgruppe} servicegruppe={servicegruppe} geografiskTilknytning={geografiskTilknytning} underOppfolging={underOppfolging} />
     return melding;
 }
 
