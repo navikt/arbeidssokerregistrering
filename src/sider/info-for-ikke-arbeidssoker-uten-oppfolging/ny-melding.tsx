@@ -8,6 +8,12 @@ import { uniLogger } from '../../metrikker/uni-logger';
 const melding = props => {
   const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging } = props;
 
+  const handleArbeidsplassen = event => {
+    const id = event.target.id;
+    const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
+    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging });
+  }
+
   const hideAll = () => {
       const results = window.document.querySelectorAll("[id$='-result']");
       results.forEach(element => element.className = 'hidden');
@@ -42,6 +48,10 @@ const melding = props => {
             <Radio label={'Jeg skal søke arbeidsavklaringspenger'} name="oppfolging" id="aap-skal-soke" onChange={ handleClick } />
             <Normaltekst className="hidden" id="aap-skal-soke-result">
                 Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
+            </Normaltekst>
+            <Radio label={'Jeg skal opprette CV eller jobbprofil'} name="oppfolging" id="cv" onChange={ handleClick } />
+            <Normaltekst className="hidden" id="cv-result">
+                Du må <a href="https://www.arbeidsplassen.no" target="_blank" rel="noopener noreferrer" onClick={ handleArbeidsplassen }>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
             </Normaltekst>
             <Radio label={'Jeg har mistet jobben, sagt opp eller kommer til å si opp'} name="oppfolging" id="jobbendring" onChange={ handleClick } />
             <Normaltekst className="hidden" id="jobbendring-result">
