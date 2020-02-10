@@ -8,11 +8,11 @@ import { uniLogger } from '../../metrikker/uni-logger';
 const melding = props => {
   const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging } = props;
 
-  const handleArbeidsplassen = event => {
+  const handleClickLog = event => {
     const id = event.target.id;
     const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
     uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging });
-  }
+  };
 
   const hideAll = () => {
       const results = window.document.querySelectorAll("[id$='-result']");
@@ -22,13 +22,12 @@ const melding = props => {
   const handleClick = event => {
     const id = event.target.id;
     const key = `${id}-result`;
-    const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
     const result = window.document.getElementById(key);
     if (result) {
         hideAll();
         result.className = 'show-result-text';
     }
-    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging });
+    handleClickLog(event);
   };
 
   return (
@@ -51,7 +50,7 @@ const melding = props => {
             </Normaltekst>
             <Radio label={'Jeg skal opprette CV eller jobbprofil'} name="oppfolging" id="cv" onChange={ handleClick } />
             <Normaltekst className="hidden" id="cv-result">
-                Du må <a href="https://www.arbeidsplassen.no" target="_blank" rel="noopener noreferrer" onClick={ handleArbeidsplassen }>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
+                Du må <a href="https://www.arbeidsplassen.no" id='arbeidsplassen' target="_blank" rel="noopener noreferrer" onClick={ handleClickLog } >gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
             </Normaltekst>
             <Radio label={'Jeg har blitt arbeidsledig og skal søke dagpenger'} name="oppfolging" id="dagpenger" onChange={ handleClick } />
             <Normaltekst className="hidden" id="dagpenger-result">
