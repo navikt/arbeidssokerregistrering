@@ -51,7 +51,7 @@ const melding = props => {
             </Normaltekst>
             <Radio label={'Jeg skal opprette CV eller jobbprofil'} name="oppfolging" id="cv" onChange={ handleClick } />
             <Normaltekst className="hidden" id="cv-result">
-                Du må <a href="https://www.arbeidsplassen.no" target="_blank" rel="noopener noreferrer" onClick={ handleArbeidsplassen }>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
+                Du må <a href="https://www.arbeidsplassen.no" id='arbeidsplassen' target="_blank" rel="noopener noreferrer" onClick={ handleArbeidsplassen } >gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
             </Normaltekst>
             <Radio label={'Jeg har blitt arbeidsledig og skal søke dagpenger'} name="oppfolging" id="dagpenger" onChange={ handleClick } />
             <Normaltekst className="hidden" id="dagpenger-result">
