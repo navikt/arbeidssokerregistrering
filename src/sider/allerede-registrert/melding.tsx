@@ -17,15 +17,22 @@ const Melding = ({state} : Props) => {
   const registreringStatusData = state.registreringStatus.data;
   const { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe } = registreringStatusData;
 
+  const hideAll = () => {
+    const results = window.document.querySelectorAll("[id$='-result']");
+    results.forEach(element => element.className = 'hidden');
+  };
+
   const handleClickContact = event => {
-    const melding = document.getElementById('melding');
-    const meldingArbeidsplassen = document.getElementById('meldingArbeidsplassen');
     const hensikt = event.target.id;
-    if (melding && meldingArbeidsplassen && hensikt !== 'arbeidsplassen') {
-        melding.className = hensikt === 'cv' ? 'hidden' : 'blokk-s';
-        meldingArbeidsplassen.className = hensikt === 'cv' ? 'blokk-s' : 'hidden';
+    const key = `${hensikt}-result`;
+    const result = window.document.getElementById(key);
+    if (result) {
+        hideAll();
+        result.className = 'blokk-s';
+    }
+    if (hensikt !== 'arbeidsplassen') {
         uniLogger('registrering.allerede-registrert.hensikt.click', { hensikt, formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
-    } else if (melding && meldingArbeidsplassen && hensikt === 'arbeidsplassen') {
+    } else if (hensikt === 'arbeidsplassen') {
         uniLogger('registrering.allerede-registrert.click.arbeidsplassen', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
     }
   };
@@ -42,16 +49,26 @@ const Melding = ({state} : Props) => {
                     <div className="blokk-s" id="kontaktMegMeldingWrapper">
                         <Fieldset legend="">
                             <Radio label={'Jeg vil søke dagpenger'} name="kontaktmeg" id="dagpenger" onChange={handleClickContact} />
+                            <Normaltekst className="hidden" id="dagpenger-result">
+                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            </Normaltekst>
                             <Radio label={'Jeg vil søke arbeidsavklaringspenger (AAP)'} name="kontaktmeg" id="aap" onChange={handleClickContact} />
+                            <Normaltekst className="hidden" id="aap-result">
+                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            </Normaltekst>
                             <Radio label={'Jeg vil opprette CV eller jobbprofil'} name="kontaktmeg" id="cv" onChange={handleClickContact} />
+                            <Normaltekst className="hidden" id="cv-result">
+                                Du må <a href="https://www.arbeidsplassen.no" id="arbeidsplassen" target="_blank" rel="noreferrer noopener" onClick={handleClickContact}>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
+                            </Normaltekst>
+                            <Radio label={'Jeg finner ikke det jeg leter etter'} id="finnerikke" onChange={handleClickContact} name="kontaktmeg" />
+                            <Normaltekst className="hidden" id="finnerikke-result">
+                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            </Normaltekst>
                             <Radio label={'Andre grunner'} id="annet" onChange={handleClickContact} name="kontaktmeg" />
+                            <Normaltekst className="hidden" id="annet-result">
+                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            </Normaltekst>
                         </Fieldset>
-                        <Normaltekst className="hidden" id="meldingArbeidsplassen">
-                            Du må <a href="https://www.arbeidsplassen.no" id="arbeidsplassen" target="_blank" rel="noreferrer noopener" onClick={handleClickContact}>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
-                        </Normaltekst>
-                        <Normaltekst className="hidden" id="melding">
-                            Du må ringe oss på <strong>55 55 33 33</strong> eller opprette en dialog, så hjelper vi deg videre.
-                        </Normaltekst>
                     </div>
                 </div>
             </div>
