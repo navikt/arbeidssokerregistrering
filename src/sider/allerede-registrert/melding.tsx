@@ -54,13 +54,13 @@ const Melding = ({state} : Props) => {
                         <Fieldset legend="">
                             <Radio label={'Jeg vil søke dagpenger'} name="kontaktmeg" id="dagpenger" onChange={handleClickContact} />
                             <Normaltekst className="hidden" id="dagpenger-result">
-                            For å søke dagpenger må du ta kontakt med NAV.<br/>
-                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong>
+                                For å få registrert deg som arbeidssøker må du kontakte NAV.<br/>
+                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Send melding til veilederen din </a> eller ring oss på <strong>55 55 33 33</strong>.
                             </Normaltekst>
                             <Radio label={'Jeg vil søke arbeidsavklaringspenger (AAP)'} name="kontaktmeg" id="aap" onChange={handleClickContact} />
                             <Normaltekst className="hidden" id="aap-result">
                                 For å søke AAP må du ta kontakt med NAV.<br/>
-                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong>
+                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Send melding til veilederen din</a> eller ring oss på <strong>55 55 33 33</strong>.
                             </Normaltekst>
                             <Radio label={'Jeg vil opprette CV eller jobbprofil'} name="kontaktmeg" id="cv" onChange={handleClickContact} />
                             <Normaltekst className="hidden" id="cv-result">
@@ -68,11 +68,11 @@ const Melding = ({state} : Props) => {
                             </Normaltekst>
                             <Radio label={'Jeg finner ikke det jeg leter etter'} id="finnerikke" onChange={handleClickContact} name="kontaktmeg" />
                             <Normaltekst className="hidden" id="finnerikke-result">
-                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre
+                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Send melding til veilederen din</a> eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre.
                             </Normaltekst>
                             <Radio label={'Andre grunner'} id="annet" onChange={handleClickContact} name="kontaktmeg" />
                             <Normaltekst className="hidden" id="annet-result">
-                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre
+                                <a href="/aktivitetsplan/dialog/ny/" target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>Send melding til veilederen din</a> eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre.
                             </Normaltekst>
                         </Fieldset>
                     </div>
