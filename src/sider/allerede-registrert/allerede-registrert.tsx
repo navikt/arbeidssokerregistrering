@@ -128,7 +128,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                                     data-geografisktilknytning={geografiskTilknytning}
                                     data-rettighetsgruppe={rettighetsgruppe}
                                 >
-                                    {messages['allerede-registrert-boks-3-knapp']}
+                                    Opprett dialog
                                 </a>
                             </div>
                         </Column>

@@ -28,7 +28,7 @@ const Melding = ({state} : Props) => {
     const result = window.document.getElementById(key);
     if (result) {
         hideAll();
-        result.className = 'blokk-s';
+        result.className = 'show-result-text';
     }
     if (hensikt !== 'arbeidsplassen') {
         uniLogger('registrering.allerede-registrert.hensikt.click', { hensikt, formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe });
