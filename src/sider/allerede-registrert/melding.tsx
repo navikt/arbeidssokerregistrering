@@ -50,23 +50,25 @@ const Melding = ({state} : Props) => {
                         <Fieldset legend="">
                             <Radio label={'Jeg vil søke dagpenger'} name="kontaktmeg" id="dagpenger" onChange={handleClickContact} />
                             <Normaltekst className="hidden" id="dagpenger-result">
-                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            For å søke dagpenger må du ta kontakt med NAV.<br/>
+                                <a href="/aktivitetsplan/dialog/ny/">Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong>
                             </Normaltekst>
                             <Radio label={'Jeg vil søke arbeidsavklaringspenger (AAP)'} name="kontaktmeg" id="aap" onChange={handleClickContact} />
                             <Normaltekst className="hidden" id="aap-result">
-                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                                For å søke AAP må du ta kontakt med NAV.<br/>
+                                <a href="/aktivitetsplan/dialog/ny/">Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong>
                             </Normaltekst>
                             <Radio label={'Jeg vil opprette CV eller jobbprofil'} name="kontaktmeg" id="cv" onChange={handleClickContact} />
                             <Normaltekst className="hidden" id="cv-result">
-                                Du må <a href="https://www.arbeidsplassen.no" id="arbeidsplassen" target="_blank" rel="noreferrer noopener" onClick={handleClickContact}>gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
+                                <a href="https://www.arbeidsplassen.no" id="arbeidsplassen" target="_blank" rel="noreferrer noopener" onClick={handleClickContact}>Gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
                             </Normaltekst>
                             <Radio label={'Jeg finner ikke det jeg leter etter'} id="finnerikke" onChange={handleClickContact} name="kontaktmeg" />
                             <Normaltekst className="hidden" id="finnerikke-result">
-                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            <a href="/aktivitetsplan/dialog/ny/">Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre
                             </Normaltekst>
                             <Radio label={'Andre grunner'} id="annet" onChange={handleClickContact} name="kontaktmeg" />
                             <Normaltekst className="hidden" id="annet-result">
-                                Opprett en dialog, eller ring oss på <strong>55 55 33 33</strong>, så hjelper vi deg videre.
+                            <a href="/aktivitetsplan/dialog/ny/">Kontakt veilederen din i dialogen på dittNAV</a> eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre
                             </Normaltekst>
                         </Fieldset>
                     </div>
