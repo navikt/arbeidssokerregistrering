@@ -10,6 +10,6 @@ sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan-q1.dev-sbs.nais.io
 pam_janzz_url: https://pam-janzz-q0.nais.oera-q.local
 ingresses:
-  - https://arbeidssokerregistrering.nais.oera-q.local
+  - https://arbeidssokerregistrering-q1.nais.oera-q.local
   - https://arbeidssokerregistrering-q1.dev-sbs.nais.io/
   - https://tjenester-q1.nav.no/arbeidssokerregistrering
