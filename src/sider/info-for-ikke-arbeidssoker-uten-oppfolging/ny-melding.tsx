@@ -64,6 +64,10 @@ const melding = props => {
             <Normaltekst className="hidden" id="veileder-result">
                 Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
             </Normaltekst>
+            <Radio label={'Jeg finner ikke det jeg leter etter'} name="oppfolging" id="finnerikke" onChange={ handleClick } />
+            <Normaltekst className="hidden" id="finnerikke-result">
+                Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
+            </Normaltekst>
             <Radio label={'Jeg er her av andre grunner'} name="oppfolging" id="andre" onChange={ handleClick } />
             <Normaltekst className="hidden" id="andre-result">
                 Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
