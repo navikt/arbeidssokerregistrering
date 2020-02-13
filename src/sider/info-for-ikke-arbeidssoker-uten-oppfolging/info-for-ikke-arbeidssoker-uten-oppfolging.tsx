@@ -10,14 +10,22 @@ interface StateProps {
     state: AppState;
 }
 
+const antallUkerSykmeldt = (naa: number, maksdato: number) => {
+    const diff = maksdato - naa;
+    return diff / 1000 / 60 / 60 / 24 / 7;
+};
+
 const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
     const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = state.registreringStatus.data;
     const underOppfolging = state.registreringStatus.data.underOppfolging ? 'ja' : 'nei';
     const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
-    const maksdato = state.registreringStatus.data.maksDato || 'null';
+
+    const maksdato = state.registreringStatus.data.maksDato;
+    const uker = maksdato ? antallUkerSykmeldt(Date.now(), new Date(maksdato).getMilliseconds()) : 'null';
+
     const nyVersjon = state.featureToggles.data['arbeidssokerregistrering.sperret.ny-versjon'];
     uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning',
-        { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, maksdato });
+        { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, uker });
     return nyVersjon ?
         (
             <NyMelding
