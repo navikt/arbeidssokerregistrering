@@ -10,16 +10,31 @@ interface StateProps {
     state: AppState;
 }
 
-const InfoForIkkeArbeidssokerUtenOppfolging = ({ state } : StateProps) => {
-    const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = state.registreringStatus.data
+const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
+    const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = state.registreringStatus.data;
     const underOppfolging = state.registreringStatus.data.underOppfolging ? 'ja' : 'nei';
     const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
     const maksdato = state.registreringStatus.data.maksDato || 'null';
-    const nyVersjon = state.featureToggles.data["arbeidssokerregistrering.sperret.ny-versjon"]
-    uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, maksdato })
-    const melding = nyVersjon ? <NyMelding formidlingsgruppe={formidlingsgruppe} servicegruppe={servicegruppe} geografiskTilknytning={geografiskTilknytning} underOppfolging={underOppfolging} /> : <OriginalMelding formidlingsgruppe={formidlingsgruppe} servicegruppe={servicegruppe} geografiskTilknytning={geografiskTilknytning} underOppfolging={underOppfolging} />
-    return melding;
-}
+    const nyVersjon = state.featureToggles.data['arbeidssokerregistrering.sperret.ny-versjon'];
+    uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning',
+        { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, maksdato });
+    return nyVersjon ?
+        (
+            <NyMelding
+                formidlingsgruppe={formidlingsgruppe}
+                servicegruppe={servicegruppe}
+                geografiskTilknytning={geografiskTilknytning}
+                underOppfolging={underOppfolging}
+            />
+        ) : (
+            <OriginalMelding
+                formidlingsgruppe={formidlingsgruppe}
+                servicegruppe={servicegruppe}
+                geografiskTilknytning={geografiskTilknytning}
+                underOppfolging={underOppfolging}
+            />
+        );
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     state
