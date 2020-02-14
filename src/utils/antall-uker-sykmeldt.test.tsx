@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { expect } from 'chai';
-import { antallUkerSykmeldt } from './info-for-ikke-arbeidssoker-uten-oppfolging';
+import { antallUkerSykmeldt } from './antall-uker-sykmeldt';
 
 describe('Info for ikke-arbeidssøker uten oppfølging', () => {
     describe('antallUkerSykmeldt', () => {

@@ -5,16 +5,11 @@ import { uniLogger } from '../../metrikker/uni-logger';
 import OriginalMelding from './original-melding';
 import NyMelding from './ny-melding';
 import './info-for-ikke-arbeidssoker-uten-oppfolging.less';
+import { antallUkerSykmeldt } from '../../utils/antall-uker-sykmeldt';
 
 interface StateProps {
     state: AppState;
 }
-
-export const antallUkerSykmeldt = (naa: Date, maksdato: Date): number => {
-    const diff = maksdato.getTime() - naa.getTime();
-    const antallUkerTilMaksdato = diff / 1000 / 60 / 60 / 24 / 7;
-    return Math.floor(52 - antallUkerTilMaksdato);
-};
 
 const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
     const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = state.registreringStatus.data;
