@@ -29,6 +29,7 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
                 servicegruppe={servicegruppe}
                 geografiskTilknytning={geografiskTilknytning}
                 underOppfolging={underOppfolging}
+                ukerSykmeldt={ukerSykmeldt}
             />
         ) : (
             <OriginalMelding
@@ -36,6 +37,7 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
                 servicegruppe={servicegruppe}
                 geografiskTilknytning={geografiskTilknytning}
                 underOppfolging={underOppfolging}
+                ukerSykmeldt={ukerSykmeldt}
             />
         );
 };

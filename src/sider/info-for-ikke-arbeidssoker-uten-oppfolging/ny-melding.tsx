@@ -6,12 +6,12 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { uniLogger } from '../../metrikker/uni-logger';
 
 const melding = props => {
-  const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging } = props;
+  const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt } = props;
 
   const handleClickLog = event => {
     const id = event.target.id;
     const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
-    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging });
+    uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt });
   };
 
   const hideAll = () => {
