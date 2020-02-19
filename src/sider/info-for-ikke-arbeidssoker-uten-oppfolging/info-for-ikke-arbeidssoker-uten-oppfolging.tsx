@@ -17,7 +17,7 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
     const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
 
     const maksdato = state.registreringStatus.data.maksDato;
-    const ukerSykmeldt = maksdato ? antallUkerSykmeldt(new Date(), new Date(maksdato)) : 'null';
+    const ukerSykmeldt: string = maksdato ? antallUkerSykmeldt(new Date(), new Date(maksdato)).toString() : 'null';
 
     const nyVersjon = state.featureToggles.data['arbeidssokerregistrering.sperret.ny-versjon'];
     uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning',
@@ -25,9 +25,9 @@ const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
     return nyVersjon ?
         (
             <NyMelding
-                formidlingsgruppe={formidlingsgruppe}
-                servicegruppe={servicegruppe}
-                geografiskTilknytning={geografiskTilknytning}
+                formidlingsgruppe={formidlingsgruppe || 'null'}
+                servicegruppe={servicegruppe || 'null'}
+                geografiskTilknytning={geografiskTilknytning || 'null'}
                 underOppfolging={underOppfolging}
                 ukerSykmeldt={ukerSykmeldt}
             />

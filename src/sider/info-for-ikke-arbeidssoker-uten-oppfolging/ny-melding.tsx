@@ -5,7 +5,20 @@ import { Panel } from 'nav-frontend-paneler';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { uniLogger } from '../../metrikker/uni-logger';
 
-const melding = props => {
+interface BaseProps {
+    formidlingsgruppe: string;
+    servicegruppe: string;
+    geografiskTilknytning: string;
+    underOppfolging: string;
+    ukerSykmeldt: string;
+}
+
+interface MeldingProps extends BaseProps {
+    pickedOption: () => void;
+    optionPicked: () => boolean;
+}
+
+const Melding = (props: MeldingProps) => {
   const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt } = props;
 
   const handleClickLog = event => {
@@ -27,7 +40,10 @@ const melding = props => {
         hideAll();
         result.className = 'show-result-text';
     }
-    handleClickLog(event);
+    if (!props.optionPicked()) {
+        handleClickLog(event);
+        props.pickedOption();
+    }
   };
 
   return (
@@ -78,4 +94,37 @@ const melding = props => {
   )
 };
 
-export default melding;
+interface OptionState {
+    hasPickedOption: boolean;
+}
+
+class StateHOC extends React.Component<BaseProps, OptionState> {
+    constructor(props: BaseProps) {
+        super(props);
+        this.state = {
+            hasPickedOption: false,
+        };
+    }
+
+    pickedOption() {
+        this.setState({
+            hasPickedOption: true,
+        });
+    }
+
+    optionPicked() {
+        return this.state.hasPickedOption;
+    }
+
+    render() {
+        return (
+            <Melding
+                pickedOption={() => this.pickedOption()}
+                optionPicked={() => this.optionPicked()}
+                {...this.props}
+            />
+        );
+    }
+}
+
+export default StateHOC;
