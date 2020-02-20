@@ -24,7 +24,7 @@ class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> 
         const maksdato = this.props.state.registreringStatus.data.maksDato;
         const ukerSykmeldt = maksdato ? antallUkerSykmeldt(new Date(), new Date(maksdato)).toString() : 'null';
 
-        const nyVersjon = true;
+        const nyVersjon = this.props.state.featureToggles.data['arbeidssokerregistrering.sperret.ny-versjon'];
         uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning',
             { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, ukerSykmeldt });
         return nyVersjon ?
