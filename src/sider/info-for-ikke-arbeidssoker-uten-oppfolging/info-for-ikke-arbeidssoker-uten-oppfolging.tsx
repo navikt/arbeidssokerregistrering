@@ -11,36 +11,42 @@ interface StateProps {
     state: AppState;
 }
 
-const InfoForIkkeArbeidssokerUtenOppfolging = ({ state }: StateProps) => {
-    const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = state.registreringStatus.data;
-    const underOppfolging = state.registreringStatus.data.underOppfolging ? 'ja' : 'nei';
-    const rettighetsgruppe = state.registreringStatus.data.rettighetsgruppe;
+class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> {
+    shouldComponentUpdate() {
+        return false;
+    }
 
-    const maksdato = state.registreringStatus.data.maksDato;
-    const ukerSykmeldt = maksdato ? antallUkerSykmeldt(new Date(), new Date(maksdato)) : 'null';
+    render() {
+        const { formidlingsgruppe, servicegruppe, geografiskTilknytning } = this.props.state.registreringStatus.data;
+        const underOppfolging = this.props.state.registreringStatus.data.underOppfolging ? 'ja' : 'nei';
+        const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
 
-    const nyVersjon = state.featureToggles.data['arbeidssokerregistrering.sperret.ny-versjon'];
-    uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning',
-        { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, ukerSykmeldt });
-    return nyVersjon ?
-        (
-            <NyMelding
-                formidlingsgruppe={formidlingsgruppe}
-                servicegruppe={servicegruppe}
-                geografiskTilknytning={geografiskTilknytning}
-                underOppfolging={underOppfolging}
-                ukerSykmeldt={ukerSykmeldt}
-            />
-        ) : (
-            <OriginalMelding
-                formidlingsgruppe={formidlingsgruppe}
-                servicegruppe={servicegruppe}
-                geografiskTilknytning={geografiskTilknytning}
-                underOppfolging={underOppfolging}
-                ukerSykmeldt={ukerSykmeldt}
-            />
-        );
-};
+        const maksdato = this.props.state.registreringStatus.data.maksDato;
+        const ukerSykmeldt = maksdato ? antallUkerSykmeldt(new Date(), new Date(maksdato)).toString() : 'null';
+
+        const nyVersjon = this.props.state.featureToggles.data['arbeidssokerregistrering.sperret.ny-versjon'];
+        uniLogger('registrering.info-for-ikke-arbeidssoker-uten-oppfolging.sidevisning',
+            { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, rettighetsgruppe, ukerSykmeldt });
+        return nyVersjon ?
+            (
+                <NyMelding
+                    formidlingsgruppe={formidlingsgruppe || 'null'}
+                    servicegruppe={servicegruppe || 'null'}
+                    geografiskTilknytning={geografiskTilknytning || 'null'}
+                    underOppfolging={underOppfolging}
+                    ukerSykmeldt={ukerSykmeldt}
+                />
+            ) : (
+                <OriginalMelding
+                    formidlingsgruppe={formidlingsgruppe}
+                    servicegruppe={servicegruppe}
+                    geografiskTilknytning={geografiskTilknytning}
+                    underOppfolging={underOppfolging}
+                    ukerSykmeldt={ukerSykmeldt}
+                />
+            );
+    }
+}
 
 const mapStateToProps = (state: AppState): StateProps => ({
     state
