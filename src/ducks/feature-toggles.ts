@@ -14,7 +14,6 @@ export interface Data {
     'arbeidssokerregistrering.kontaktmeg.kontor-500101': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-500102': boolean;
     'arbeidssokerregistrering.kontaktmeg.kontor-3411': boolean;
-    'arbeidssokerregistrering.sperret.ny-versjon': boolean;
 }
 
 export interface State {
@@ -32,18 +31,16 @@ export const alleFeatureToggles = [
     'arbeidssokerregistrering.kontaktmeg.kontor-030102',
     'arbeidssokerregistrering.kontaktmeg.kontor-500101',
     'arbeidssokerregistrering.kontaktmeg.kontor-500102',
-    'arbeidssokerregistrering.kontaktmeg.kontor-3411',
-    'arbeidssokerregistrering.sperret.ny-versjon'
+    'arbeidssokerregistrering.kontaktmeg.kontor-3411'
 ];
 
 const initialState = {
-    data : {
+    data: {
         'arbeidssokerregistrering.nedetid': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-030102': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-500101': false,
         'arbeidssokerregistrering.kontaktmeg.kontor-500102': false,
-        'arbeidssokerregistrering.kontaktmeg.kontor-3411': false,
-        'arbeidssokerregistrering.sperret.ny-versjon': false
+        'arbeidssokerregistrering.kontaktmeg.kontor-3411': false
     },
     status: STATUS.NOT_STARTED
 };
@@ -58,7 +55,7 @@ export default function (state: State = initialState, action: Action): State {
         case ActionTypes.FEATURE_TOGGLES_FEILET:
             return { ...state, status: STATUS.ERROR };
         case ActionTypes.FEATURE_TOGGLES_OK: {
-            return { ...state, status: STATUS.OK, data: action.data};
+            return { ...state, status: STATUS.OK, data: action.data };
         }
         default:
             return state;
@@ -68,7 +65,7 @@ export default function (state: State = initialState, action: Action): State {
 export function hentFeatureToggles() {
     return doThenDispatch(() => Api.hentFeatureToggles(), {
         PENDING: ActionTypes.FEATURE_TOGGLES_PENDING,
-        OK : ActionTypes.FEATURE_TOGGLES_OK,
+        OK: ActionTypes.FEATURE_TOGGLES_OK,
         FEILET: ActionTypes.FEATURE_TOGGLES_FEILET,
     });
 }
