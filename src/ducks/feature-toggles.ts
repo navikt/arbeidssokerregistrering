@@ -10,10 +10,6 @@ export enum ActionTypes {
 
 export interface Data {
     'arbeidssokerregistrering.nedetid': boolean;
-    'arbeidssokerregistrering.kontaktmeg.kontor-030102': boolean;
-    'arbeidssokerregistrering.kontaktmeg.kontor-500101': boolean;
-    'arbeidssokerregistrering.kontaktmeg.kontor-500102': boolean;
-    'arbeidssokerregistrering.kontaktmeg.kontor-3411': boolean;
 }
 
 export interface State {
@@ -27,20 +23,12 @@ interface Action {
 }
 
 export const alleFeatureToggles = [
-    'arbeidssokerregistrering.nedetid',
-    'arbeidssokerregistrering.kontaktmeg.kontor-030102',
-    'arbeidssokerregistrering.kontaktmeg.kontor-500101',
-    'arbeidssokerregistrering.kontaktmeg.kontor-500102',
-    'arbeidssokerregistrering.kontaktmeg.kontor-3411'
+    'arbeidssokerregistrering.nedetid'
 ];
 
 const initialState = {
     data: {
-        'arbeidssokerregistrering.nedetid': false,
-        'arbeidssokerregistrering.kontaktmeg.kontor-030102': false,
-        'arbeidssokerregistrering.kontaktmeg.kontor-500101': false,
-        'arbeidssokerregistrering.kontaktmeg.kontor-500102': false,
-        'arbeidssokerregistrering.kontaktmeg.kontor-3411': false
+        'arbeidssokerregistrering.nedetid': false
     },
     status: STATUS.NOT_STARTED
 };
