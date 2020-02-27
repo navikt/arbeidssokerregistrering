@@ -6,12 +6,11 @@ const deviceId = getDeviceId();
 
 const prefix = {
   appname,
-  appversion,
-  deviceId
+  appversion
 };
 
 export function uniLogger(name: string, values?: object) {
   const data = values || {};
   amplitudeLogger(name, {...prefix, ...data});
-  frontendLogger(name, {}, {...prefix, ...data});
+  frontendLogger(name, { deviceId }, {...prefix, ...data});
 }
