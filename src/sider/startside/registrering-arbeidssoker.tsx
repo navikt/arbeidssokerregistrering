@@ -35,29 +35,29 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
 
     handleSeVideoBtnClicked = () => {
         frontendLogger('registrering.start.video.open', {}, {});
-        this.setState({isModalOpen: true});
+        this.setState({ isModalOpen: true });
     }
 
     handleModalLukkeknappClicked = () => {
-        this.setState({isModalOpen: false});
+        this.setState({ isModalOpen: false });
     }
 
     render() {
-        
+
         const Rad1 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad1">
                     <Innholdstittel tag="h2" className="rad__tittel rad1__tittel">
-                        <FormattedMessage id="registrering-arbeidssoker.introtittel"/>
+                        <FormattedMessage id="registrering-arbeidssoker.introtittel" />
                     </Innholdstittel>
                     <div className="rad1__innhold">
                         <Normaltekst className="rad__innhold-tekst" tag="div">
-                                <FormattedHTMLMessage
-                                    id="registrering-arbeidssoker.argument1tekst"
-                                    tagName="ul"
-                                />
+                            <FormattedHTMLMessage
+                                id="registrering-arbeidssoker.argument1tekst"
+                                tagName="ul"
+                            />
                             <Knapp onClick={this.handleSeVideoBtnClicked}>
-                                <FormattedMessage id="registrering-arbeidssoker.argument1knapp"/>
+                                <FormattedMessage id="registrering-arbeidssoker.argument1knapp" />
                             </Knapp>
                         </Normaltekst>
                         <div className="rad__innhold-ikon">
@@ -79,19 +79,19 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                         <div className="rad2__boks rad2__rettigheter">
                             <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter" />
                             <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
-                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel1"/>
+                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel1" />
                             </Undertittel>
                             <Normaltekst tag="div">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1"/>
+                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1" />
                             </Normaltekst>
                         </div>
                         <div className="rad2__boks rad2__plikter">
                             <img className="rad__ikon" src={infobilde} alt="Plikter" />
                             <Undertittel tag="h2" className="rad__tittel plikter__tittel">
-                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel2"/>
+                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel2" />
                             </Undertittel>
                             <Normaltekst tag="div">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2"/>
+                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2" />
                             </Normaltekst>
                         </div>
                     </div>
@@ -106,30 +106,30 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                         tag="h2"
                         className="rad__tittel rad3__tittel"
                     >
-                        <FormattedMessage id="registrering-arbeidssoker.argument3tittel"/>
+                        <FormattedMessage id="registrering-arbeidssoker.argument3tittel" />
                     </Innholdstittel>
                     <div className="rad3__tekst">
                         <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del1"/>
+                            <FormattedMessage id="registrering-arbeidssoker.rad3.del1" />
                         </Normaltekst>
                         <ul className="typo-normal">
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt1"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt2"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt3"/></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4"/></li>
+                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt1" /></li>
+                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt2" /></li>
+                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt3" /></li>
+                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4" /></li>
                         </ul>
-                        <Normaltekst><FormattedMessage id="registrering-arbeidssoker.rad3.del2"/></Normaltekst>
-                        <Element tag="h3"><FormattedMessage id="registrering-arbeidssoker.rad3.del4.tittel"/></Element>
+                        <Normaltekst><FormattedHTMLMessage id="registrering-arbeidssoker.rad3.del2" /></Normaltekst>
+                        <Element tag="h3"><FormattedMessage id="registrering-arbeidssoker.rad3.del4.tittel" /></Element>
                         <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold"/><br/>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.lesmer"/>{' '}
+                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold" /><br />
+                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.lesmer" />{' '}
                             <a className="lenke" href="https://www.nav.no/personvern">
-                                <FormattedMessage id="registrering-arbeidssoker.rad3.del4.lenke"/>
+                                <FormattedMessage id="registrering-arbeidssoker.rad3.del4.lenke" />
                             </a>
                         </Normaltekst>
                     </div>
                     <Normaltekst tag="div" className="rad3__tips">
-                        <FormattedHTMLMessage id="registrering-arbeidssoker.tipstekst"/>
+                        <FormattedHTMLMessage id="registrering-arbeidssoker.tipstekst" />
                     </Normaltekst>
 
                     <div className="rad3__knapperad">
@@ -138,7 +138,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
                             data-testid="start-registrering"
                         >
-                            <FormattedMessage id="registrering-arbeidssoker-knapp"/>
+                            <FormattedMessage id="registrering-arbeidssoker-knapp" />
                         </KnappBase>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
             <div className="registrering-arbeidssoker">
                 <div className="banner">
                     <Sidetittel>
-                        <FormattedMessage id="registrering-arbeidssoker.tittel"/>
+                        <FormattedMessage id="registrering-arbeidssoker.tittel" />
                     </Sidetittel>
                 </div>
                 {rader}
