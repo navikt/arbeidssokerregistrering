@@ -2,13 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
 import Banner from '../../komponenter/banner/banner';
 import { uniLogger } from '../../metrikker/uni-logger'
 import { AppState } from '../../reducer';
-import IARBSPlaster from './iarbs-plaster'
-import Melding from './melding'
+import IARBSMelding from './iarbs-melding'
 
 import './allerede-registrert.less';
 interface StateProps {
@@ -45,34 +44,18 @@ class AlleredeRegistrert extends React.Component<Props> {
         const messages = this.props.intl.messages;
         const formidlingsgruppe = this.props.state.registreringStatus.data.formidlingsgruppe;
         const servicegruppe = this.props.state.registreringStatus.data.servicegruppe;
-        const featureToggles = this.props.state.featureToggles.data;
         const formidlingsgruppeOrIngenVerdi = formidlingsgruppe || 'INGEN_VERDI';
         const servicegruppeOrIngenVerdi = servicegruppe || 'INGEN_VERDI';
         const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
         const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
         const isIARBS = formidlingsgruppeOrIngenVerdi === 'IARBS';
-        const kontorToggle = `arbeidssokerregistrering.kontaktmeg.kontor-${geografiskTilknytning}`;
-        const nyttPlaster = isIARBS && featureToggles[kontorToggle];
-        const gammeltPlaster = isIARBS && !featureToggles[kontorToggle];
         uniLogger('registrering.allerede-registrert.sidevisning', { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe })
         return (
             <div>
                 <Banner />
                 <div className="allerede-registrert">
                     <GraaBakgrunn />
-                    {gammeltPlaster || nyttPlaster ? null :
-                        <Row className="">
-                        <Column xs="12">
-                            <Innholdstittel tag="h1" className="allerede-registrert__tittel">
-                                {messages['allerede-registrert-tittel']}
-                            </Innholdstittel>
-                            <Normaltekst className="allerede-registrert__undertittel">
-                                {messages['allerede-registrert-undertittel']}
-                            </Normaltekst>
-                        </Column>
-                    </Row>}
-                    {gammeltPlaster ? <Melding /> : null}
-                    {nyttPlaster ? <IARBSPlaster /> : null}
+                    {isIARBS ? <IARBSMelding /> : null}
                     <Row className="">
                         <Column xs="12" sm="8" className="allerede-registrert__boks">
                             <div className="allerede-registrert__boks-innhold">
