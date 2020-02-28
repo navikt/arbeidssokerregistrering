@@ -21,6 +21,7 @@ import handinfoSvg from './handinfo.svg';
 import './krever-reaktivering.less';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 import { erIFSS } from '../../utils/fss-utils';
+import { uniLogger } from '../../metrikker/uni-logger';
 
 interface State {
     reaktivererBruker: boolean;
@@ -48,9 +49,18 @@ class KreverReaktivering extends React.Component<Props, State> {
         this.reaktiverBrukerOnClick = this.reaktiverBrukerOnClick.bind(this);
     }
 
+    componentDidMount() {
+        uniLogger('arbeidssokerregistrering.reaktivering.sidevisning');
+    }
+
+    avbrytReaktiveringOnClick() {
+        uniLogger('arbeidssokerregistrering.reaktivering', { klikk: 'avbryt' });
+    }
+
     reaktiverBrukerOnClick() {
-        const {onReaktiverBruker, history} = this.props;
-        this.setState({reaktivererBruker: true});
+        const { onReaktiverBruker, history } = this.props;
+        this.setState({ reaktivererBruker: true });
+        uniLogger('arbeidssokerregistrering.reaktivering', { klikk: 'reaktiver' });
 
         onReaktiverBruker()
             .then((res) => {
@@ -63,52 +73,53 @@ class KreverReaktivering extends React.Component<Props, State> {
     render() {
 
         if (this.state.reaktivererBruker) {
-            const {reaktiverBrukerData} = this.props;
+            const { reaktiverBrukerData } = this.props;
 
             return (
                 <Innholdslaster
-                    feilmeldingKomponent={<ReaktiveringFeilhandtering/>}
+                    feilmeldingKomponent={<ReaktiveringFeilhandtering />}
                     avhengigheter={[reaktiverBrukerData]}
-                    loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
+                    loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
                 />
             );
         }
 
         return (
             <>
-                <Banner/>
+                <Banner />
                 <div className="limit">
                     <section className="krever-reaktivering">
                         <Innholdstittel className="krever-reaktivering__tittel">
-                            <FormattedMessage id="krever-reaktivering-tittel"/>
+                            <FormattedMessage id="krever-reaktivering-tittel" />
                         </Innholdstittel>
                         <div className="krever-reaktivering__infopanel">
                             <div className="krever-reaktivering__handinfo-ikon">
-                                <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon"/>
+                                <img src={handinfoSvg} alt="Hånd med info skilt" className="illustrasjon" />
                             </div>
                             <div className="krever-reaktivering__tekster">
                                 <Normaltekst>
-                                    <FormattedMessage id="krever-reaktivering-boks-tekst"/>
+                                    <FormattedMessage id="krever-reaktivering-boks-tekst" />
                                 </Normaltekst>
                             </div>
                         </div>
                         <div className="krever-reaktivering__aksjonspanel">
                             <Normaltekst>
-                                <FormattedMessage id="krever-reaktivering-undertittel"/>
+                                <FormattedMessage id="krever-reaktivering-undertittel" />
                             </Normaltekst>
                             <div className="lenke-avbryt-wrapper">
                                 <KnappBase
                                     type="hoved"
                                     onClick={this.reaktiverBrukerOnClick}
                                 >
-                                    <FormattedMessage id="ja"/>
+                                    <FormattedMessage id="ja" />
                                 </KnappBase>
                             </div>
                             <a
+                                onClick={this.avbrytReaktiveringOnClick}
                                 href={erIFSS() ? lagAktivitetsplanUrl() : DITT_NAV_URL}
                                 className="lenke lenke-avbryt typo-element"
                             >
-                                <FormattedMessage id="avbryt-lenke"/>
+                                <FormattedMessage id="avbryt-lenke" />
                             </a>
                         </div>
                     </section>
