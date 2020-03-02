@@ -12,8 +12,13 @@ import { loggResponstidForTjenestekall } from './responstid-middleware-utils';
 import * as _ from 'lodash';
 import { frontendLogger } from '../metrikker/metrics-utils';
 
+interface InfoPayload {
+    message: string
+}
+
 export interface Frontendlogger {
     event: (name: string, fields: any, tags: any) => void;
+    info: (payload: InfoPayload) => void;
 }
 
 type Action = any;
