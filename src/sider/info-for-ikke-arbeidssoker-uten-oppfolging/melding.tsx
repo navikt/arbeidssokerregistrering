@@ -14,25 +14,27 @@ interface BaseProps {
 }
 
 interface OptionState {
-    hasPickedOption: boolean;
+    numberOfChoices: number;
 }
 
 class Melding extends React.Component<BaseProps, OptionState> {
     constructor(props: BaseProps) {
         super(props);
         this.state = {
-            hasPickedOption: false,
+            numberOfChoices: 0,
         };
     }
 
-    pickedOption() {
+    increaseOptions() {
+        const numberOfChoices = this.optionCount() 
+        const newNumber = numberOfChoices + 1
         this.setState({
-            hasPickedOption: true,
+            numberOfChoices: newNumber,
         });
     }
 
-    optionPicked() {
-        return this.state.hasPickedOption;
+    optionCount() {
+        return this.state.numberOfChoices;
     }
 
     render() {
@@ -41,7 +43,9 @@ class Melding extends React.Component<BaseProps, OptionState> {
         const handleClickLog = event => {
             const id = event.target.id;
             const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
-            uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt });
+            this.increaseOptions();
+            const numberOfChoices = this.optionCount()
+            uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt, numberOfChoices });
         };
 
         const hideAll = () => {
@@ -57,10 +61,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
                 hideAll();
                 result.className = 'show-result-text';
             }
-            if (!this.optionPicked()) {
-                handleClickLog(event);
-                this.pickedOption();
-            }
+            handleClickLog(event);
         };
 
         return (
@@ -79,6 +80,10 @@ class Melding extends React.Component<BaseProps, OptionState> {
                         </Normaltekst>
                         <Radio label={'Jeg skal søke arbeidsavklaringspenger'} name="oppfolging" id="aap-skal-soke" onChange={handleClick} />
                         <Normaltekst className="hidden" id="aap-skal-soke-result">
+                            Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
+                        </Normaltekst>
+                        <Radio label={'Jeg er sykmeldt men har ikke krav på sykepenger'} name="oppfolging" id="sykepenger-slutt" onChange={handleClick} />
+                        <Normaltekst className="hidden" id="sykepenger-slutt-result">
                             Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
                         </Normaltekst>
                         <Radio label={'Jeg skal opprette CV eller jobbprofil'} name="oppfolging" id="cv" onChange={handleClick} />
