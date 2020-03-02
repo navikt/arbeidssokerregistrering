@@ -8,7 +8,13 @@ export const antallUkerSykmeldt = (naa: Date, maksdato: Date): number => {
     const antallUkerTilMaksdato = diff / 1000 / 60 / 60 / 24 / 7;
     const ukerSykmeldt = Math.floor(52 - antallUkerTilMaksdato);
 
-    uniLogger('arbeidssøkerregistrering.antall-uker-sykmeldt.data', {maksdato, antallUkerTilMaksdato, antallDagerTilMaksdato, antallTimerTilMaksdato, ukerSykmeldt});
+    uniLogger('arbeidssøkerregistrering.antall-uker-sykmeldt.data', {
+        maksdato, 
+        antallUkerTilMaksdato,
+        antallDagerTilMaksdato,
+        antallTimerTilMaksdato,
+        ukerSykmeldt
+    });
 
     const frontendlogger: Frontendlogger = (window as any).frontendlogger; // tslint:disable-line
     if (frontendlogger && frontendlogger.info) {

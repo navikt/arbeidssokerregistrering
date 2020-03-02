@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 import { frontendLogger } from '../metrikker/metrics-utils';
 
 interface InfoPayload {
-    message: string
+    message: string;
 }
 
 export interface Frontendlogger {
