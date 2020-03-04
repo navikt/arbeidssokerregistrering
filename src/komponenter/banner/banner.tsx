@@ -8,8 +8,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import './banner.less';
 import { erIFSS } from '../../utils/fss-utils';
-import alleTekster from '../../tekster'
-const tekster = alleTekster.nb
+import { getTekst } from '../../utils/utils';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
@@ -33,7 +32,7 @@ class Banner extends React.Component<Props> {
         return (!this.skalVises()) ? (null) : (
             <div className="registrering-banner">
                 <Systemtittel tag="h1">
-                    { tekster[bannerOverskriftId] }
+                    { getTekst(bannerOverskriftId, 'nb') }
                 </Systemtittel>
             </div>
         );

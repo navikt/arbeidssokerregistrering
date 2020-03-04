@@ -11,8 +11,7 @@ import { frontendLogger } from '../../metrikker/metrics-utils';
 import './avbryt-modal.less';
 import { erIFSS } from '../../utils/fss-utils';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
-import alleTekster from '../../tekster'
-const tekster = alleTekster.nb
+import { getTekst } from '../../utils/utils';
 const avbrytSvg = require('./avbryt.svg');
 
 interface OwnProps {
@@ -65,22 +64,21 @@ class AvbrytModal extends React.Component<AllProps> {
                     />}
                 >
                     <Systemtittel className="avbryt-modal__beskrivelse">
-                        { tekster[beskrivelseId] }
+                        { getTekst(beskrivelseId, 'nb') }
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
                         <Knapp className="avbryt-modal__knapp" onClick={() => this.handleAvbrytKnappClicked(url)}>
-                            { tekster['knapp-ja-avbryt'] }
+                            { getTekst('knapp-ja-avbryt', 'nb') }
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
-                            { tekster['knapp-nei'] }
+                            { getTekst('knapp-nei', 'nb') }
                         </Knapp>
                     </div>
                 </Veilederpanel>
             </NavFrontendModal>
         );
     }
-
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({

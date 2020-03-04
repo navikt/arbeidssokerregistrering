@@ -4,6 +4,7 @@ import * as React from 'react';
 import { amplitudeLogger } from '../../metrikker/amplitude-utils'
 import './info-kort.less';
 import LenkeMedChevron from '../lenke-med-chevron/lenke-med-chevron';
+import { getTekst } from '../../utils/utils';
 
 type InfoKortProps = {
     bilde: string;
@@ -18,6 +19,8 @@ type InfoKortProps = {
 const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
     const { location } = window;
     const getRetningFraNAV = lenke => /nav.no/.test(lenke) ? 'inn' : 'ut'
+    const lenketekstId = props.lenkeTekst || ''
+    const beskrivelseId = props.beskrivelse || ''
     const handleUtgangsLenkeKlikk = event => {
         const { lenke } = props
         const data = {
@@ -31,7 +34,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
     const Lenke = () => {
         return (
             <LenkeMedChevron path={props.lenke || ''} target={props.lenkeTarget} onClick={ handleUtgangsLenkeKlikk }>
-                <FormattedMessage id={props.lenkeTekst || ''}/>
+                { getTekst(lenketekstId, 'nb') }
             </LenkeMedChevron>
         )
     }
@@ -40,7 +43,7 @@ const InfoKort: React.SFC<InfoKortProps> = (props: InfoKortProps) => {
             <img src={props.bilde} alt={props.bildeBeskrivelse}/>
             <Undertittel><FormattedMessage id={props.tittel}/></Undertittel>
             <Normaltekst className="beskrivelse">
-                <FormattedHTMLMessage id={props.beskrivelse}/>
+                { getTekst(beskrivelseId, 'nb') }
             </Normaltekst>
             {props.lenke ? <Lenke /> : null}
         </div>
