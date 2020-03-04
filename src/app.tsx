@@ -1,7 +1,6 @@
 import * as React from 'react';
 import 'moment/locale/nb';
 import { Provider } from 'react-redux';
-import IntlProvider from './Intl-provider';
 import { getStore } from './store';
 import {
     BrowserRouter as Router,
@@ -15,14 +14,12 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={getStore()}>
-                <IntlProvider>
                     <HentInitialData>
                         <TimeoutModal/>
                         <Router>
                             <Routes/>
                         </Router>
                     </HentInitialData>
-                </IntlProvider>
             </Provider>
         );
     }

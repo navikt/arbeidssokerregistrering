@@ -1,7 +1,6 @@
 import * as React from 'react';
 import 'moment/locale/nb';
 import { Provider } from 'react-redux';
-import IntlProvider from './Intl-provider';
 import { getStore } from './store';
 import {
     BrowserRouter as Router,
@@ -39,16 +38,14 @@ class AppFss extends React.Component {
     render() {
         return (
             <Provider store={getStore()}>
-                <IntlProvider>
-                    <ManuellRegistreringSjekk>
-                        <Visitkort />
-                        <HentInitialData>
-                            <Router>
-                                <Routes/>
-                            </Router>
-                        </HentInitialData>
-                    </ManuellRegistreringSjekk>
-                </IntlProvider>
+                <ManuellRegistreringSjekk>
+                    <Visitkort />
+                    <HentInitialData>
+                        <Router>
+                            <Routes/>
+                        </Router>
+                    </HentInitialData>
+                </ManuellRegistreringSjekk>
             </Provider>
         );
     }
