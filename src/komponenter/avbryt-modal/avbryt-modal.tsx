@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Systemtittel } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
 import { connect } from 'react-redux';
@@ -9,11 +8,11 @@ import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
 import { frontendLogger } from '../../metrikker/metrics-utils';
-
+import alleTekster from '../../tekster'
 import './avbryt-modal.less';
 import { erIFSS } from '../../utils/fss-utils';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
-
+const tekster = alleTekster.nb
 const avbrytSvg = require('./avbryt.svg');
 
 interface OwnProps {
@@ -66,15 +65,15 @@ class AvbrytModal extends React.Component<AllProps> {
                     />}
                 >
                     <Systemtittel className="avbryt-modal__beskrivelse">
-                        <FormattedMessage id={beskrivelseId}/>
+                        { tekster[beskrivelseId] }
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
                         <Knapp className="avbryt-modal__knapp" onClick={() => this.handleAvbrytKnappClicked(url)}>
-                            <FormattedMessage id="knapp-ja-avbryt"/>
+                            { tekster['knapp-ja-avbryt'] }
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
-                            <FormattedMessage id="knapp-nei"/>
+                            { tekster['knapp-nei'] }
                         </Knapp>
                     </div>
                 </Veilederpanel>
