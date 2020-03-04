@@ -15,6 +15,7 @@ interface BaseProps {
 
 interface OptionState {
     numberOfChoices: number;
+    choices: Array<string>
 }
 
 class Melding extends React.Component<BaseProps, OptionState> {
@@ -22,7 +23,21 @@ class Melding extends React.Component<BaseProps, OptionState> {
         super(props);
         this.state = {
             numberOfChoices: 0,
+            choices: []
         };
+    }
+
+    addChoice (choice) {
+        let newChoices = this.choices()
+        if (newChoices.length === 0) {
+            newChoices = [choice]
+        } else {
+            newChoices.push(choice)
+        }
+        this.setState({
+            choices: newChoices
+        })
+        return newChoices
     }
 
     increaseOptions() {
@@ -31,10 +46,15 @@ class Melding extends React.Component<BaseProps, OptionState> {
         this.setState({
             numberOfChoices: newNumber,
         });
+        return newNumber
     }
 
     optionCount() {
         return this.state.numberOfChoices;
+    }
+
+    choices() {
+        return this.state.choices;
     }
 
     render() {
@@ -43,9 +63,9 @@ class Melding extends React.Component<BaseProps, OptionState> {
         const handleClickLog = event => {
             const id = event.target.id;
             const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
-            this.increaseOptions();
-            const numberOfChoices = this.optionCount()
-            uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt, numberOfChoices });
+            const numberOfChoices = this.increaseOptions();
+            const choices = this.addChoice(id).join(', ')
+            uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt, numberOfChoices, choices });
         };
 
         const hideAll = () => {
