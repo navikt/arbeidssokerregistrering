@@ -8,10 +8,10 @@ import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
 import { frontendLogger } from '../../metrikker/metrics-utils';
-import alleTekster from '../../tekster'
 import './avbryt-modal.less';
 import { erIFSS } from '../../utils/fss-utils';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
+import alleTekster from '../../tekster'
 const tekster = alleTekster.nb
 const avbrytSvg = require('./avbryt.svg');
 

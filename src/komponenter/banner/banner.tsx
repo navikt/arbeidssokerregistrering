@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
@@ -9,12 +8,14 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { MatchProps } from '../../utils/utils';
 import './banner.less';
 import { erIFSS } from '../../utils/fss-utils';
+import alleTekster from '../../tekster'
+const tekster = alleTekster.nb
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
 }
 
-type Props = RouteComponentProps<MatchProps> & InjectedIntlProps & StateProps;
+type Props = RouteComponentProps<MatchProps> & StateProps;
 
 class Banner extends React.Component<Props> {
 
@@ -32,7 +33,7 @@ class Banner extends React.Component<Props> {
         return (!this.skalVises()) ? (null) : (
             <div className="registrering-banner">
                 <Systemtittel tag="h1">
-                    {this.props.intl.messages[bannerOverskriftId]}
+                    { tekster[bannerOverskriftId] }
                 </Systemtittel>
             </div>
         );
@@ -50,4 +51,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     startRegistreringStatus: state.registreringStatus.data,
 });
 
-export default connect(mapStateToProps)(withRouter(injectIntl(Banner)));
+export default connect(mapStateToProps)(withRouter(Banner));
