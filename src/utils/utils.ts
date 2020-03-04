@@ -1,4 +1,5 @@
 import moment from 'moment';
+import tekster from '../tekster'
 
 export function hentFornavn(name: string | undefined) {
     return name ? storForbokstavOgEtterBindestrek(name.split(' ')[0]) : '';
@@ -16,6 +17,11 @@ function forsteTegnStorBokstav(name: string) {
 
 export function getIntlMessage(messages: { [id: string]: string }, id: string): string {
     return messages[id] || id;
+}
+
+export function getTekst(tekstId: string, language: string) {
+    const tekst = Object.keys(tekster).includes(language) ? tekster[language][tekstId] : false
+    return tekst ? tekst : ''
 }
 
 function s4() {
