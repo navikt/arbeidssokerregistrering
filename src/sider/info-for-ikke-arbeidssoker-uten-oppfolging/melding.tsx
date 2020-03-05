@@ -4,6 +4,7 @@ import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Panel } from 'nav-frontend-paneler';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { uniLogger } from '../../metrikker/uni-logger';
+import IARBSRegistreringModal from '../../komponenter/iarbs-registrering-modal/iarbs-registrering-modal'
 
 interface BaseProps {
     formidlingsgruppe: string;
@@ -15,7 +16,8 @@ interface BaseProps {
 
 interface OptionState {
     numberOfChoices: number;
-    choices: Array<string>
+    choices: Array<string>;
+    visIarbsRegistreringModal: boolean;
 }
 
 class Melding extends React.Component<BaseProps, OptionState> {
@@ -23,7 +25,8 @@ class Melding extends React.Component<BaseProps, OptionState> {
         super(props);
         this.state = {
             numberOfChoices: 0,
-            choices: []
+            choices: [],
+            visIarbsRegistreringModal: false
         };
     }
 
@@ -57,6 +60,14 @@ class Melding extends React.Component<BaseProps, OptionState> {
         return this.state.choices;
     }
 
+    openIarbsRegistreringModal = (): void => {
+        this.setState({ visIarbsRegistreringModal: true });
+    }
+
+    handleIarbsRegistreringModalClose = (): void => {
+        this.setState({ visIarbsRegistreringModal: false });
+    }
+
     render() {
         const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt } = this.props;
 
@@ -78,6 +89,9 @@ class Melding extends React.Component<BaseProps, OptionState> {
             const id = event.target.id;
             const key = `${id}-result`;
             const result = window.document.getElementById(key);
+            if (id === 'dagpenger') {
+                this.openIarbsRegistreringModal()
+            }
             if (result) {
                 hideAll();
                 result.className = 'show-result-text';
@@ -86,6 +100,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
         };
 
         return (
+            <>
             <div className="info-for-ikke-arbeidssoker">
                 <Panel border className="nav-veilederpanel">
                     <Alertstripe type="info" className="blokk-s">
@@ -134,6 +149,11 @@ class Melding extends React.Component<BaseProps, OptionState> {
                     </Fieldset>
                 </Panel>
             </div>
+            <IARBSRegistreringModal 
+                isOpen={this.state.visIarbsRegistreringModal}
+                onRequestClose={this.handleIarbsRegistreringModalClose}
+            />
+            </>
         );
     }
 }
