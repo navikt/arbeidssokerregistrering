@@ -10,7 +10,7 @@ interface BaseProps {
     servicegruppe: string;
     geografiskTilknytning: string;
     underOppfolging: string;
-    ukerSykmeldt: string;
+    dagerTilMaksdato: string;
 }
 
 interface OptionState {
@@ -58,7 +58,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
     }
 
     render() {
-        const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt } = this.props;
+        const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, dagerTilMaksdato } = this.props;
 
         const handleClickLog = event => {
             const id = event.target.id;
@@ -66,7 +66,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
             const numberOfChoices = this.increaseOptions();
             const choices = this.addChoice(id).join(', ')
             uniLogger('registrering.ikke-arbeidssoker-utenfor-oppfolging.click', { numberOfChoices, choices });
-            uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, ukerSykmeldt, numberOfChoices, choices });
+            uniLogger(metricName, { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, antallDagerTilMaksdato: dagerTilMaksdato, numberOfChoices, choices });
         };
 
         const hideAll = () => {
