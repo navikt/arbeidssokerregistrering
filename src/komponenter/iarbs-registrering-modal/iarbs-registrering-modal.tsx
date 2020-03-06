@@ -3,6 +3,7 @@ import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendModal from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
+import { Checkbox } from 'nav-frontend-skjema'
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
@@ -62,7 +63,7 @@ class AvbrytModal extends React.Component<AllProps> {
                         Å registrere deg som arbeidssøker betyr at du ikke lenger vil være registrert som sykmeldt hos NAV.<br/>
                         Hvis du mottar eller har rett til sykepenger risikerer du å miste retten til disse da du ikke kan motta to ytelser samtidig.
                         <p>
-                            Jeg bekrefter at jeg vil registrere med som arbeidssøker
+                            <Checkbox label={'Jeg bekrefter at jeg vil registrere meg som arbeidssøker'} />
                         </p>
                     </Normaltekst>
                     <div className="avbryt-modal">
