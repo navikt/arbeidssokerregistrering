@@ -54,24 +54,23 @@ class AvbrytModal extends React.Component<AllProps> {
                         className="avbryt-modal__illustrasjon"
                     />}
                 >
-                    <Systemtittel className="avbryt-modal__beskrivelse">
-                        Du ønsker å registrere deg som arbeidssøker
+                    <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
+                        Du vil søke eller har søkt dagpenger og ønsker derfor å registrere deg som arbeidssøker
                     </Systemtittel>
 
-                    <Normaltekst>
-                        Når du registrerer deg som arbeidssøker mister du retten til
-                        <li>bala bla bla</li>
-                        <li>bli bli bluff</li>
+                    <Normaltekst className="blokk-m">
+                        Å registrere deg som arbeidssøker betyr at du ikke lenger vil være registrert som sykmeldt hos NAV.<br/>
+                        Hvis du mottar eller har rett til sykepenger risikerer du å miste retten til disse da du ikke kan motta to ytelser samtidig.
                         <p>
-                            Ved å gå videre sier du at "everything is awesome!"
+                            Jeg bekrefter at jeg vil registrere med som arbeidssøker
                         </p>
                     </Normaltekst>
-                    <div className="avbryt-modal__actions">
-                        <Knapp className="avbryt-modal__knapp" onClick={this.handleRegistreringKnappClicked}>
-                            Ja, jeg vil registrere meg
+                    <div className="avbryt-modal">
+                        <Knapp className="avbryt-modal__knapp blokk-s" onClick={this.handleRegistreringKnappClicked}>
+                            Ja, jeg vil registrere meg som arbeidssøker
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.handleRegistreringAvbrytKnappClicked}>
-                            Nei, avbryt
+                            Avbryt
                         </Knapp>
                     </div>
                 </Veilederpanel>
