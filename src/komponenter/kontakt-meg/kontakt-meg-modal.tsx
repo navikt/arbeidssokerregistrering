@@ -64,7 +64,7 @@ class AvbrytModal extends React.Component<AllProps> {
         const oppgaveStatus = this.props.oppgaveStatus
         const OppgaveSuccess = () => {
           return (
-              <div>
+              <div className="blokk-m">
               <Alertstripe type="suksess">
                   <Normaltekst>Din henvendelse er mottatt.</Normaltekst>
                   <Normaltekst>Forventet svartid på denne henvendelsen er to arbeidsdager.</Normaltekst>
@@ -75,7 +75,7 @@ class AvbrytModal extends React.Component<AllProps> {
       
         const OppgaveError = () => {
           return (
-              <div>
+              <div className="blokk-m">
               <Alertstripe type="advarsel">
                   <Normaltekst>Din henvendelse feilet.</Normaltekst>
                   <Normaltekst>Ta kontakt med oss på 55 55 33 33, tastevalg 2.</Normaltekst>
@@ -126,6 +126,13 @@ class AvbrytModal extends React.Component<AllProps> {
                     : null}
                     { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
                     { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
+                    { oppgaveStatus === 'OK' || oppgaveStatus === 'ERROR' ?
+                    <div className="avbryt-modal">
+                    <Knapp className="avbryt-modal__knapp" onClick={this.handleRegistreringAvbrytKnappClicked}>
+                      Lukk
+                    </Knapp>
+                    </div>
+                    : null}
                 </Veilederpanel>
                 
             </NavFrontendModal>
