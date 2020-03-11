@@ -88,24 +88,6 @@ class AvbrytModal extends React.Component<AllProps> {
             this.setConfirmed(!event.target.checked)
         }
 
-        const ModalInnhold = () => {
-          return (
-            <>
-              <Normaltekst className="blokk-m">
-                Vi tar kontakt med deg innen to arbeidsdager.                        
-              </Normaltekst>
-              <Checkbox label={'Ja, jeg vil bli kontaktet av en veileder'} onClick={toggleConfirm} />
-              <div className="avbryt-modal">
-                <Knapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={this.handleRegistreringKnappClicked} disabled={this.state['isNotConfirmed']}>
-                  Send henvendelse
-                </Knapp>
-                <Knapp className="avbryt-modal__knapp" onClick={this.handleRegistreringAvbrytKnappClicked}>
-                  Avbryt
-                </Knapp>
-              </div>
-            </>
-          )
-        }
         return (
             <NavFrontendModal
                 isOpen={this.props.isOpen}
@@ -126,7 +108,22 @@ class AvbrytModal extends React.Component<AllProps> {
                     <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
                         En veileder må hjelpe deg videre
                     </Systemtittel>
-                    { oppgaveStatus === 'NOT_STARTED' ? <ModalInnhold />: null}
+                    { oppgaveStatus === 'NOT_STARTED' ? 
+                    <>
+                      <Normaltekst className="blokk-m">
+                        Vi tar kontakt med deg innen to arbeidsdager.                        
+                      </Normaltekst>
+                      <Checkbox label={'Ja, jeg vil bli kontaktet av en veileder'} onClick={toggleConfirm} />
+                      <div className="avbryt-modal">
+                        <Knapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={this.handleRegistreringKnappClicked} disabled={this.state['isNotConfirmed']}>
+                          Send henvendelse
+                        </Knapp>
+                        <Knapp className="avbryt-modal__knapp" onClick={this.handleRegistreringAvbrytKnappClicked}>
+                          Avbryt
+                        </Knapp>
+                      </div>
+                    </>
+                    : null}
                     { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
                     { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
                 </Veilederpanel>
