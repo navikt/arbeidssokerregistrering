@@ -124,7 +124,7 @@ if (MOCK_REAKTIVER_BRUKER) {
 }
 
 if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
-    mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(DELAY, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(2000, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {

@@ -3,6 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendModal from 'nav-frontend-modal';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 import { Knapp } from 'nav-frontend-knapper';
 import { Checkbox } from 'nav-frontend-skjema'
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -124,6 +125,7 @@ class AvbrytModal extends React.Component<AllProps> {
                       </div>
                     </>
                     : null}
+                    { oppgaveStatus === 'PENDING' ? <div className="blokk-m center"><NavFrontendSpinner type="XXL" /></div> : null}
                     { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
                     { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
                     { oppgaveStatus === 'OK' || oppgaveStatus === 'ERROR' ?
