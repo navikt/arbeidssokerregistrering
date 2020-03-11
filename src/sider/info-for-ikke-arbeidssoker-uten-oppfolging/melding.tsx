@@ -3,6 +3,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
 import { Panel } from 'nav-frontend-paneler';
 import Alertstripe from 'nav-frontend-alertstriper';
+import KontaktMegModal from '../../komponenter/kontakt-meg/kontakt-meg-modal'
 import { uniLogger } from '../../metrikker/uni-logger';
 
 interface BaseProps {
@@ -15,7 +16,8 @@ interface BaseProps {
 
 interface OptionState {
     numberOfChoices: number;
-    choices: Array<string>
+    choices: Array<string>;
+    visKontaktMegModal: boolean;
 }
 
 class Melding extends React.Component<BaseProps, OptionState> {
@@ -23,7 +25,8 @@ class Melding extends React.Component<BaseProps, OptionState> {
         super(props);
         this.state = {
             numberOfChoices: 0,
-            choices: []
+            choices: [],
+            visKontaktMegModal: false
         };
     }
 
@@ -57,6 +60,14 @@ class Melding extends React.Component<BaseProps, OptionState> {
         return this.state.choices;
     }
 
+    openKontaktMegModal = (): void => {
+        this.setState({ visKontaktMegModal: true });
+    }
+
+    handleKontaktMegModalClose = (): void => {
+        this.setState({ visKontaktMegModal: false });
+    }
+
     render() {
         const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, dagerTilMaksdato } = this.props;
 
@@ -78,6 +89,9 @@ class Melding extends React.Component<BaseProps, OptionState> {
             const id = event.target.id;
             const key = `${id}-result`;
             const result = window.document.getElementById(key);
+            if (id === 'dagpenger') {
+                this.openKontaktMegModal()
+            }
             if (result) {
                 hideAll();
                 result.className = 'show-result-text';
@@ -86,6 +100,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
         };
 
         return (
+            <>
             <div className="info-for-ikke-arbeidssoker">
                 <Panel border className="nav-veilederpanel">
                     <Alertstripe type="info" className="blokk-s">
@@ -134,6 +149,11 @@ class Melding extends React.Component<BaseProps, OptionState> {
                     </Fieldset>
                 </Panel>
             </div>
+            <KontaktMegModal 
+                isOpen={this.state.visKontaktMegModal}
+                onRequestClose={this.handleKontaktMegModalClose}
+            />
+            </>
         );
     }
 }
