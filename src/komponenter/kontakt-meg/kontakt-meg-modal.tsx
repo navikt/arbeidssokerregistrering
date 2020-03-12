@@ -67,10 +67,9 @@ class AvbrytModal extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="suksess">
-                  <Normaltekst className="blokk-s">Din henvendelse er mottatt.</Normaltekst>
                   <Normaltekst className="blokk-s">Forventet svartid er to arbeidsdager.</Normaltekst>
                   <Normaltekst className="blokk-s">
-                    Du bør søke om dagpenger omtrent én uke før den første dagen du er helt eller delvis arbeidsledig.
+                    <a href="https://www.nav.no/soknader/nb/person/arbeid/dagpenger">Du bør søke om dagpenger</a> omtrent én uke før den første dagen du er helt eller delvis arbeidsledig.
                   </Normaltekst>
                   <Normaltekst className="blokk-s">
                     Du kan tidligst få innvilget dagpenger fra den dagen du sender søknaden.
