@@ -67,8 +67,14 @@ class AvbrytModal extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="suksess">
-                  <Normaltekst>Din henvendelse er mottatt.</Normaltekst>
-                  <Normaltekst>Forventet svartid på denne henvendelsen er to arbeidsdager.</Normaltekst>
+                  <Normaltekst className="blokk-s">Din henvendelse er mottatt.</Normaltekst>
+                  <Normaltekst className="blokk-s">Forventet svartid er to arbeidsdager.</Normaltekst>
+                  <Normaltekst className="blokk-s">
+                    Du bør søke om dagpenger omtrent én uke før den første dagen du er helt eller delvis arbeidsledig.
+                  </Normaltekst>
+                  <Normaltekst className="blokk-s">
+                    Du kan tidligst få innvilget dagpenger fra den dagen du sender søknaden.
+                  </Normaltekst>
               </Alertstripe>
               </div>
           )
@@ -84,6 +90,22 @@ class AvbrytModal extends React.Component<AllProps> {
               </div>
           )
         };
+
+        const OverskriftStandard = () => {
+          return (
+            <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
+              En veileder må hjelpe deg slik at du blir registrert
+            </Systemtittel>
+          )
+        }
+
+        const OverskriftSuccess = () => {
+          return (
+            <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
+              Din henvendelse er mottatt
+            </Systemtittel>
+          )
+        }
 
         const toggleConfirm = event => {
             this.setConfirmed(!event.target.checked)
@@ -106,13 +128,11 @@ class AvbrytModal extends React.Component<AllProps> {
                         className="avbryt-modal__illustrasjon"
                     />}
                 >
-                    <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
-                        En veileder må hjelpe deg videre
-                    </Systemtittel>
+                    { oppgaveStatus === 'OK' ? <OverskriftSuccess /> : <OverskriftStandard />}
                     { oppgaveStatus === 'NOT_STARTED' ? 
                     <>
                       <Normaltekst className="blokk-m">
-                        Vi tar kontakt med deg innen to arbeidsdager.                        
+                        Vi tar kontakt med deg innen to arbeidsdager.                       
                       </Normaltekst>
                       <Checkbox label={'Ja, jeg vil bli kontaktet av en veileder'} onClick={toggleConfirm} />
                       <div className="avbryt-modal">
