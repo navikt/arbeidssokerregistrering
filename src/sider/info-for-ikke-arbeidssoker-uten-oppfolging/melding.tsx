@@ -95,12 +95,14 @@ class Melding extends React.Component<BaseProps, OptionState> {
                         <strong>Hvilken situasjon er nærmest din?</strong>
                     </Normaltekst>
                     <Fieldset legend="" id="veiledervalg">
-                        <Radio label={'Jeg har søkt arbeidsavklaringspenger'} name="oppfolging" id="aap-sokt" onChange={handleClick} />
-                        <Normaltekst className="hidden" id="aap-sokt-result">
-                            Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
+                        <Radio label={'Jeg har blitt arbeidsledig og skal søke dagpenger'} name="oppfolging" id="dagpenger" onChange={handleClick} />
+                        <Normaltekst className="hidden" id="dagpenger-result">
+                            <span>Hvis du ikke har sendt inn <a href='https://www.nav.no/soknader/nb/person/arbeid/dagpenger'>søknad om dagpenger</a> bør du gjøre dette før du registrerer deg.</span><br />
+                            <span>Du må ringe oss på 55 55 33 33 for å registrere deg som arbeidssøker.</span><br/>
+                            <span>Vi har dessverre stor pågang nå på grunn av koronaviruset så henvendelser tar ekstra tid.</span><br/>
                         </Normaltekst>
-                        <Radio label={'Jeg skal søke arbeidsavklaringspenger'} name="oppfolging" id="aap-skal-soke" onChange={handleClick} />
-                        <Normaltekst className="hidden" id="aap-skal-soke-result">
+                        <Radio label={'Jeg har søkt eller skal søke arbeidsavklaringspenger (AAP)'} name="oppfolging" id="aap-sok" onChange={handleClick} />
+                        <Normaltekst className="hidden" id="aap-sok-result">
                             Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
                         </Normaltekst>
                         <Radio label={'Jeg er sykmeldt men har ikke krav på sykepenger'} name="oppfolging" id="sykepenger-slutt" onChange={handleClick} />
@@ -111,20 +113,8 @@ class Melding extends React.Component<BaseProps, OptionState> {
                         <Normaltekst className="hidden" id="cv-result">
                             <a href="https://www.arbeidsplassen.no" id='arbeidsplassen' target="_blank" rel="noopener noreferrer" onClick={handleClickLog} >Gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
                         </Normaltekst>
-                        <Radio label={'Jeg har blitt arbeidsledig og skal søke dagpenger'} name="oppfolging" id="dagpenger" onChange={handleClick} />
-                        <Normaltekst className="hidden" id="dagpenger-result">
-                            Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
-                        </Normaltekst>
-                        <Radio label={'Jeg har blitt arbeidsledig og er usikker på rettighetene mine'} name="oppfolging" id="usikker" onChange={handleClick} />
+                        <Radio label={'Jeg har blitt arbeidsledig eller permittert og er usikker på rettighetene mine'} name="oppfolging" id="usikker" onChange={handleClick} />
                         <Normaltekst className="hidden" id="usikker-result">
-                            Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
-                        </Normaltekst>
-                        <Radio label={'Min veileder har bedt meg om å registrerer meg som arbeidssøker'} name="oppfolging" id="veileder" onChange={handleClick} />
-                        <Normaltekst className="hidden" id="veileder-result">
-                            Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
-                        </Normaltekst>
-                        <Radio label={'Jeg finner ikke det jeg leter etter'} name="oppfolging" id="finnerikke" onChange={handleClick} />
-                        <Normaltekst className="hidden" id="finnerikke-result">
                             Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
                         </Normaltekst>
                         <Radio label={'Jeg er her av andre grunner'} name="oppfolging" id="andre" onChange={handleClick} />
