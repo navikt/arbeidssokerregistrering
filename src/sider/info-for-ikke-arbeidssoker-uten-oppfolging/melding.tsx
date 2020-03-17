@@ -114,9 +114,17 @@ class Melding extends React.Component<BaseProps, OptionState> {
                             <a href="https://www.arbeidsplassen.no" id='arbeidsplassen' target="_blank" rel="noopener noreferrer" onClick={handleClickLog} >Gå til Arbeidsplassen.no</a> for å opprette CV og jobbprofil.
                         </Normaltekst>
                         <Radio label={'Jeg har blitt arbeidsledig eller permittert og er usikker på rettighetene mine'} name="oppfolging" id="usikker" onChange={handleClick} />
-                        <Normaltekst className="hidden" id="usikker-result">
-                            Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
-                        </Normaltekst>
+                        <div className="hidden" id="usikker-result">
+                            <Normaltekst className="blokk-s">
+                                <a href="https://www.nav.no/arbeid/dagpenger/permittert" id="dagpenger-permittert" target="_blank" rel="noopener noreferrer" onClick={handleClickLog}>Dine rettigheter som permittert</a>
+                            </Normaltekst>
+                            <Normaltekst className="blokk-s">
+                                <a href="https://www.nav.no/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/dagpenger-nar-du-er-arbeidsledig" className="blokk-s" id="dagpenger-arbeidsledig" target="_blank" rel="noopener noreferrer" onClick={handleClickLog}>Dine rettigheter som arbeidsledig</a>
+                            </Normaltekst>
+                            <Normaltekst className="blokk-s">
+                                <a href="https://www.nav.no/no/person/arbeid/dagpenger-ved-arbeidsloshet-og-permittering/lonnsgarantiordningen" className="blokk-s" id="dagpenger-konkurs" target="_blank" rel="noopener noreferrer" onClick={handleClickLog}>Dine rettigheter hvis du har mistet jobb på grunn av konkurs</a>
+                            </Normaltekst>                       
+                        </div>
                         <Radio label={'Jeg er her av andre grunner'} name="oppfolging" id="andre" onChange={handleClick} />
                         <Normaltekst className="hidden" id="andre-result">
                             Ring oss på 55 55 33 33 så skal vi hjelpe deg videre.
