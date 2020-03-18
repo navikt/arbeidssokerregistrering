@@ -79,7 +79,6 @@ function loggBesvarelse(store: any, action: Action) {
 function loggRegistreringInngang(store: any, action: Action) {
 
     if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
-        const inngangFraAap = store.getState().logger.data.inngangFraAap;
         const inngangSykefravaer = store.getState().logger.data.inngangSykefravaer;
         const { registreringType,
                 maksDato,
@@ -101,7 +100,6 @@ function loggRegistreringInngang(store: any, action: Action) {
         const erSperret = registreringType === RegistreringType.SPERRET;
         const geografiskTilknytningOrIngenVerdi = geografiskTilknytning || 'INGEN_VERDI';
         const rettighetsgruppeOrIngenVerdi = rettighetsgruppe || 'INGEN_VERDI';
-        const kommerFra = inngangFraAap ? 'AAP' : inngangSykefravaer ? 'SYKEFRAVAER' : 'ORDINAER';
         frontendLogger('registrering.inngang.type', {
             registreringType,
             maksDato: maksDatoOrIngenVerdi,
@@ -110,15 +108,7 @@ function loggRegistreringInngang(store: any, action: Action) {
             jobbetSeksAvTolvSisteManeder: jobbetSeksAvTolvSisteManederOrFalse,
             servicegruppe: servicegrupperOrIngenVerdi,
             formidlingsgruppe: formidlingsgruppeOrIngenVerdi
-        }, {
-            registreringTypeTag: registreringType,
-            servicegruppeTag: servicegrupperOrIngenVerdi,
-            formidlingsgruppeTag: formidlingsgruppeOrIngenVerdi,
-            geografiskTilknytningTag: geografiskTilknytningOrIngenVerdi,
-            underOppfolgingTag: underOppfolgingJaNei,
-            rettighetsgruppe: rettighetsgruppeOrIngenVerdi,
-            kommerFra
-        });
+        }, {});
 
         frontendLogger('registrering.inngang.type.ny', { registreringType }, {});
 
