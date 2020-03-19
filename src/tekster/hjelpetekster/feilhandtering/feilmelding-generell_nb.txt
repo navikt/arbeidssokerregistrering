@@ -1,1 +1,3 @@
-På grunn av feil i systemene våre kan du ikke registrere deg akkurat nå. Vi anbefaler deg å <a href="https://www.nav.no/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/kontakt-teknisk-brukerstotte-nav.no">kontakte teknisk brukerstøtte</a>.
+På grunn av feil i systemene våre kan du ikke registrere deg akkurat nå.<br/><br/>
+Vennligst prøv igjen litt senere.<br /><br/>
+<a href="https://www.nav.no/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/kontakt-teknisk-brukerstotte-nav.no">Kontakt teknisk brukerstøtte</a> dersom problemene vedvarer.
