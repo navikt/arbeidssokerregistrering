@@ -27,6 +27,7 @@ import { VEILARBSTEPUP } from '../../ducks/api';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { erIFSS } from '../../utils/fss-utils';
+import { uniLogger } from '../../metrikker/uni-logger';
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
@@ -73,6 +74,9 @@ export class HentInitialData extends React.Component<Props> {
             } else if (nivaOidc !== 4) {
                 // Bruker mangler Oidc-token på nivå 4.
                 // Sender derfor bruker til step-up-side med forklaring og Logg-inn-knapp.
+                if (niva === 3 || nivaOidc === 3) {
+                    uniLogger('registrering.niva3');
+                }
                 return (<StepUp intl={this.props.intl} />);
             }
         }
