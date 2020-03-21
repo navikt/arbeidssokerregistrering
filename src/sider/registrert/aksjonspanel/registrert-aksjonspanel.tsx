@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { frontendLogger } from '../../../metrikker/metrics-utils';
+import { uniLogger } from '../../../metrikker/uni-logger';
 import {
     HEROKU_VEIENTILARBEID_MED_AAP_URL,
     HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_MED_AAP_URL, VEIENTILARBEID_URL, DP_SOK_URL
@@ -39,6 +39,20 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
             knappetekstJa = erSykmeldt ? 'duernaregistrert-knapp-les-mer' : 'duernaregistrert-knapp-sok-dagpenger';
         }
 
+        const DagpengerEngelsk = () => {
+            return (
+                <a
+                    href={'https://www.nav.no/soknader/en/person/arbeid/dagpenger'}
+                    className='registrert__lenke knapp knapp--standard'
+                    onClick={() => {
+                        uniLogger('registrering.vis.dagpenger.info.engelsk');
+                    }}
+                    >
+                        <span>Application for unemployment benefit</span>
+                </a>
+            )
+        }
+
         return (
             <div className="registrert__aksjonspanel">
                 <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon"/>
@@ -50,23 +64,24 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                         <FormattedHTMLMessage id={hentTekstId('normaltekst')}/>
                     </Normaltekst>
                     <div className="registrert__knapperad">
-                        <a
-                            href={veienTilArbeidUrl}
-                            className="registrert__lenke knapp knapp--standard"
-                            onClick={() => {
-                                frontendLogger('registrering.ikke.vis.dagpenger.info');
-                            }}
-                        >
-                            <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
-                        </a>
+                        {knappetekstJa === 'duernaregistrert-knapp-sok-dagpenger' && <DagpengerEngelsk />}
                         <a
                             href={veienTilArbeidMedVisInfoUrl}
-                            className="registrert__lenke knapp knapp--hoved"
+                            className="registrert__lenke knapp knapp--hoved blokk-m"
                             onClick={() => {
-                                frontendLogger('registrering.vis.dagpenger.info');
+                                uniLogger('registrering.vis.dagpenger.info');
                             }}
                         >
                             <FormattedMessage id={knappetekstJa}/>
+                        </a>
+                        <a
+                            href={veienTilArbeidUrl}
+                            className="lenke typo-element"
+                            onClick={() => {
+                                uniLogger('registrering.ikke.vis.dagpenger.info');
+                            }}
+                        >
+                            <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
                         </a>
                     </div>
                 </div>
