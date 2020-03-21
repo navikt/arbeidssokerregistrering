@@ -48,7 +48,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                         uniLogger('registrering.vis.dagpenger.info.engelsk');
                     }}
                     >
-                        <span>Application for unemployment benefit</span>
+                        <span>Apply for unemployment benefit</span>
                 </a>
             )
         }
