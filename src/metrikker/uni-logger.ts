@@ -9,10 +9,9 @@ const prefix = {
   appversion
 };
 
-
 export function uniLogger(name: string, values?: object) {
   const data = values || {};
   amplitudeLogger(name, {...prefix, ...data});
   // frontendLogger(name, { deviceId }, {...prefix, ...data});
-  return true
+  return true;
 }
