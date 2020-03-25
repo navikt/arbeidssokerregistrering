@@ -1,28 +1,38 @@
 import * as React from 'react';
 import { InjectedIntlProps, InjectedIntl, injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { AppState } from '../../../reducer';
 import Feilmelding from '../../../komponenter/feilmelding/feilmelding';
 import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker';
+import { Data as FeatureToggleData, selectFeatureToggles } from '../../../ducks/feature-toggles';
 import { uniLogger } from '../../../metrikker/uni-logger';
 import './feilmelding-brukers-status-ugyldig.less';
 import FeilmeldingManglerArbeidstillatelse
     from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
+import OppholdsTillatelseKontaktMeg
+    from '../../../komponenter/oppholdstillatelse/kontakt-meg-melding'
 
 interface FeilmeldingBrukersStatusUgyldigProps {
     feilType: FullforErrorTypes;
 }
 
-type AllProps = InjectedIntlProps & FeilmeldingBrukersStatusUgyldigProps;
+interface StateProps {
+    featureToggles: FeatureToggleData;
+    state: AppState;
+}
+
+type AllProps = StateProps & InjectedIntlProps & FeilmeldingBrukersStatusUgyldigProps;
 
 class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
 
-    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl) {
+    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl, toggleOppholdstillatelse: boolean) {
 
         const { messages } = intl;
         let feilmelding;
 
         if (feilType === FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE) {
-            feilmelding = <FeilmeldingManglerArbeidstillatelse intl={this.props.intl} />;
+            feilmelding = toggleOppholdstillatelse ? <OppholdsTillatelseKontaktMeg /> : <FeilmeldingManglerArbeidstillatelse intl={this.props.intl} />;
         } else {
 
             let messageKey;
@@ -52,8 +62,9 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
     }
 
     render() {
-        const { feilType, intl } = this.props;
-        const feilmelding = this.lagFeilmelding(feilType, intl);
+        const { feilType, intl, featureToggles } = this.props;
+        const featureOppholdstillatelseKontakt = featureToggles['arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker'];
+        const feilmelding = this.lagFeilmelding(feilType, intl, featureOppholdstillatelseKontakt);
         uniLogger('arbeidssokerregistrering.error', { feilType: feilType });
 
         return (
@@ -65,4 +76,9 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
     }
 }
 
-export default injectIntl(FeilmeldingBrukersStatusUgyldig);
+const mapStateToProps = (state: AppState) => ({
+    featureToggles: selectFeatureToggles(state),
+    state: state,
+});
+
+export default connect(mapStateToProps)(injectIntl(FeilmeldingBrukersStatusUgyldig));
