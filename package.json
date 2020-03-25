@@ -9,6 +9,7 @@
     "start:tekster": "node ./scripts/watch-tekster.js",
     "start:ts": "cross-env REACT_APP_MOCK=true craco start",
     "start:ts-manuell": "cross-env REACT_APP_MOCK=true REACT_APP_MOCK_MANUELL_REGISTRERING=true craco start",
+    "start:utenmock": "craco start",
     "build": "npm-run-all -s build:tekster build:ts",
     "now-build": "cross-env REACT_APP_HEROKU_OVERGANG=true REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build",
     "build:tekster": "react-intl-bundler --no-lookup src/tekster src/tekster",
@@ -24,7 +25,10 @@
     "eject": "craco eject",
     "deploy": "npm run build && gh-pages -d build",
     "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less",
-    "refresh": "rm -rf node_modules && rm package-lock.json && npm i"
+    "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
+    "start:cypress": "npm-run-all -p start:tekster start:utenmock",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@craco/craco": "5.6.3",
@@ -120,6 +124,7 @@
     "chromedriver": "2.42.0",
     "cross-env": "5.2.0",
     "cross-spawn": "6.0.5",
+    "cypress": "^4.2.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "express": "4.16.3",
