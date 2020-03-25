@@ -3,8 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import { Panel } from 'nav-frontend-paneler'
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
-import { Knapp } from 'nav-frontend-knapper';
-import { Checkbox } from 'nav-frontend-skjema'
+import { Hovedknapp } from 'nav-frontend-knapper';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
@@ -22,30 +21,12 @@ interface StateProps {
     oppgaveStatus: any;
 }
 
-interface LocaleState {
-    isNotConfirmed: boolean;
-}
-
 type AllProps = StateProps & DispatchProps;
 
 class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
-    constructor (props: AllProps) {
-        super(props);
-
-        this.state = {
-            isNotConfirmed: true
-        }
-    }
-
-    handleRegistreringKnappClicked = () => {
-        uniLogger('registrering.modal.kontaktmeg');
+    handleKontakMegClicked = () => {
+        uniLogger('registrering.oppholdstillatelse.kontaktmeg');
         this.props.opprettKontaktmegOppgave();
-    }
-
-    setConfirmed = (value: boolean) => {
-        this.setState({
-            isNotConfirmed: value
-        })
     }
 
     render() {
@@ -64,8 +45,8 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="advarsel">
-                  <Normaltekst>Din henvendelse feilet.</Normaltekst>
-                  <Normaltekst>Ta kontakt med oss på 55 55 33 33, tastevalg 2.</Normaltekst>
+                  <Normaltekst className="blokk-s">Din henvendelse feilet.</Normaltekst>
+                  <Normaltekst className="blokk-s">Ta kontakt med oss på 55 55 33 33, tastevalg 2.</Normaltekst>
               </Alertstripe>
               </div>
           )
@@ -87,30 +68,30 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           )
         }
 
-        const toggleConfirm = event => {
-            this.setConfirmed(!event.target.checked)
-        }
-
         return (
           <Panel border>
             { oppgaveStatus === 'OK' ? <OverskriftSuccess /> : <OverskriftStandard />}
             { oppgaveStatus === 'NOT_STARTED' ? 
                 <>
                   <Normaltekst className="blokk-s">
-                    Vi har ikke mulighet til å sjekke om du har en godkjent oppholdstillatelse.                     
-                  </Normaltekst>
-                  <Normaltekst className="blokk-s">
-                    Du kan derfor ikke registrere deg som arbeidssøker nå.
+                    Vi har ikke mulighet til å sjekke om du har en godkjent oppholdstillatelse.<br/>
+                    Dette gjør at du ikke kan registrere deg som arbeidssøker her.
                   </Normaltekst>
                   <Normaltekst className="blokk-m">
-                    Send oss en henvendelse så hjelper vi deg videre.                       
+                    Kontakt oss, og så hjelper vi deg videre.
                   </Normaltekst>
-                  <Checkbox label={'Ja, jeg vil bli kontaktet av en veileder'} onClick={toggleConfirm} />
-                  <div className="avbryt-modal">
-                    <Knapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={this.handleRegistreringKnappClicked} disabled={this.state['isNotConfirmed']}>
-                      Send henvendelse
-                    </Knapp>
+                  <div className="blokk-s">
+                    <Hovedknapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={this.handleKontakMegClicked}>
+                      Ta kontakt / Contact us
+                    </Hovedknapp>
                   </div>
+                  <Normaltekst className="blokk-s">
+                    We’re not able to check whether you have an approved residency permit.<br/>
+                    This means that you cannot register as a jobseeker here.
+                  </Normaltekst>
+                  <Normaltekst className="blokk-m">
+                    Please contact us for help with this.
+                  </Normaltekst>
                 </>
                 : null}
                 { oppgaveStatus === 'PENDING' ? <div className="blokk-m center"><NavFrontendSpinner type="XXL" /></div> : null}

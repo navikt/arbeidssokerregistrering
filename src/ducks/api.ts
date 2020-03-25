@@ -82,7 +82,7 @@ export function opprettKontaktmegOppgave() {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify({})
+            body: JSON.stringify({ OppgaveType: 'OPPHOLDSTILLATELSE'})
         }
     });
 }
