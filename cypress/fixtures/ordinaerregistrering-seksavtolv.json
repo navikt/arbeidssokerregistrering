@@ -2,7 +2,7 @@
     "maksDato": null,
     "underOppfolging": false,
     "erSykmeldtMedArbeidsgiver": false,
-    "jobbetSeksAvTolvSisteManeder": false,
+    "jobbetSeksAvTolvSisteManeder": true,
     "registreringType": "ORDINAER_REGISTRERING",
     "formidlingsgruppe": null,
     "servicegruppe": null,

@@ -3,7 +3,7 @@ import * as utils from '../../../utils';
 
 describe('Avbryt-modal', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();

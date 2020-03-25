@@ -37,17 +37,37 @@ const clickOptionThenNext = n => {
 };
 
 const configureCypress = option => {
+    const featureToggles = '/api/feature/?' +
+        'feature=arbeidssokerregistrering.nedetid' +
+        '?' +
+        'feature=arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker'
     switch (option) {
-        case 'registering':
+        case 'registrering':
             cy.on('window:before:load', win => {
                 // eslint-disable-next-line no-param-reassign
                 win.fetch = null;
             });
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
-            cy.route('GET', '/api/feature/?feature=arbeidssokerregistrering.nedetid', 'fixture:feature-nedetid-false');
+            cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
             cy.route('GET', '/veilarbstepup/status', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:ordinaerregistrering');
+            cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
+            cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
+            cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
+            cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            break;
+        case 'registrering-seksavtolv':
+            cy.on('window:before:load', win => {
+                // eslint-disable-next-line no-param-reassign
+                win.fetch = null;
+            });
+            cy.server();
+            cy.route('GET', '/api/auth', 'fixture:auth');
+            cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
+            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:ordinaerregistrering-seksavtolv');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
@@ -61,7 +81,7 @@ const configureCypress = option => {
             });
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
-            cy.route('GET', '/api/feature/?feature=arbeidssokerregistrering.nedetid', 'fixture:feature-nedetid-true');
+            cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-true');
             cy.route('GET', '/veilarbstepup/status', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:ordinaerregistrering');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
@@ -76,7 +96,7 @@ const configureCypress = option => {
             });
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
-            cy.route('GET', '/api/feature/?feature=arbeidssokerregistrering.nedetid', 'fixture:feature-nedetid-false');
+            cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
             cy.route('GET', '/veilarbstepup/status', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:ordinaerregistrering');
             // cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');

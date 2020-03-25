@@ -4,7 +4,7 @@ import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json
 
 describe('/skjema/3 - Er utdanningen din godkjent i Norge?', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');

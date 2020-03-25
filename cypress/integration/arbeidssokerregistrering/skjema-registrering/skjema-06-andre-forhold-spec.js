@@ -4,7 +4,7 @@ import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json
 
 describe('/skjema/6 - Har du andre problemer med å søke eller være i jobb?', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');

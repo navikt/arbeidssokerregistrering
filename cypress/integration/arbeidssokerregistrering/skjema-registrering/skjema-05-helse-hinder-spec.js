@@ -4,7 +4,7 @@ import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json
 
 describe('/skjema/5 - Har du helseproblemer som hindrer deg i å søke eller være i jobb?', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');

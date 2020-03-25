@@ -4,7 +4,7 @@ import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json
 
 describe('/skjema/0 - Velg den situasjonen som passer deg best', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');

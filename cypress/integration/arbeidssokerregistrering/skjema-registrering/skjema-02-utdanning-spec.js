@@ -4,7 +4,7 @@ import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json
 
 describe('/skjema/2 - Hva er din høyeste fullførte utdanning?', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
     });
     it('Navigerer til korrekt steg', () => {
         cy.visit('/');

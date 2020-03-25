@@ -3,7 +3,7 @@ import * as utils from '../../../utils';
 
 describe('skjema/1 - Hva er din siste jobb?', () => {
     beforeEach(() => {
-        utils.configureCypress('registering');
+        utils.configureCypress('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');
