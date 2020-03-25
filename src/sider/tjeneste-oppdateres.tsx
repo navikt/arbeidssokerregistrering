@@ -14,7 +14,8 @@ class TjenesteOppdateres extends React.Component {
                         className="tjeneste-oppdateres__info--illustrasjon"
                     />
                     <Normaltekst className="tjeneste-oppdateres__info--tekst">
-                        Arbeidssøkerregistrering er utilgjengelig grunnet teknisk vedlikehold. Vi ber deg prøve igjen om en time.
+                        Arbeidssøkerregistrering er utilgjengelig grunnet teknisk vedlikehold. 
+                        Vi ber deg prøve igjen om en time.
                     </Normaltekst>
                 </div>
             </div>
