@@ -36,6 +36,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
               <div className="blokk-m">
               <Alertstripe type="suksess">
                   <Normaltekst className="blokk-s">Forventet svartid er to arbeidsdager.</Normaltekst>
+                  <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
               </Alertstripe>
               </div>
           )
@@ -45,8 +46,12 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="advarsel">
-                  <Normaltekst className="blokk-s">Din henvendelse feilet.</Normaltekst>
-                  <Normaltekst className="blokk-s">Ta kontakt med oss på 55 55 33 33, tastevalg 2.</Normaltekst>
+                  <Normaltekst className="blokk-s">Vi klarte ikke å ta imot henvendelsen din.</Normaltekst>
+                  <Normaltekst className="blokk-s">Vennligst forsøk igjen senere.</Normaltekst>
+                  <Normaltekst className="blokk-m">Opplever du dette flere ganger kan du ringe oss på 55 55 33 33.</Normaltekst>
+                  <Normaltekst className="blokk-s">We could not receive your message.</Normaltekst>
+                  <Normaltekst className="blokk-s">Please try again later.</Normaltekst>
+                  <Normaltekst className="blokk-s">If it happens again please give us a call 55 55 33 33</Normaltekst>
               </Alertstripe>
               </div>
           )
