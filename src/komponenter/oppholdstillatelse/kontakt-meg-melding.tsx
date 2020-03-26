@@ -35,7 +35,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="suksess">
-                  <Normaltekst className="blokk-s">Forventet svartid er to arbeidsdager.</Normaltekst>
+                  <Normaltekst className="blokk-s">Vi kontakter deg innen to arbeidsdager.</Normaltekst>
                   <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
               </Alertstripe>
               </div>
