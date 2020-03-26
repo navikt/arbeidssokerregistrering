@@ -48,10 +48,10 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
               <Alertstripe type="advarsel">
                   <Normaltekst className="blokk-s">Vi klarte ikke å ta imot henvendelsen din.</Normaltekst>
                   <Normaltekst className="blokk-s">Vennligst forsøk igjen senere.</Normaltekst>
-                  <Normaltekst className="blokk-m">Opplever du dette flere ganger kan du ringe oss på 55 55 33 33.</Normaltekst>
-                  <Normaltekst className="blokk-s">We could not receive your message.</Normaltekst>
+                  <Normaltekst className="blokk-m">Opplever du dette flere ganger kan du ringe oss på 55 55 33 33.</Normaltekst>                  
+                  <Normaltekst className="blokk-s">We’re having trouble with your request right now.</Normaltekst>
                   <Normaltekst className="blokk-s">Please try again later.</Normaltekst>
-                  <Normaltekst className="blokk-s">If it happens again please give us a call 55 55 33 33</Normaltekst>
+                  <Normaltekst className="blokk-s">If you are still having problems, you can call us on 55 55 33 33.</Normaltekst>
               </Alertstripe>
               </div>
           )
