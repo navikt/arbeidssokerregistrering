@@ -78,7 +78,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                     Dette gjør at du ikke kan registrere deg som arbeidssøker her.
                   </Normaltekst>
                   <Normaltekst className="blokk-m">
-                    Kontakt oss, og så hjelper vi deg videre.
+                    Kontakt oss, så hjelper vi deg videre.
                   </Normaltekst>
                   <div className="blokk-s">
                     <Hovedknapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={this.handleKontakMegClicked}>
