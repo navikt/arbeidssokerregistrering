@@ -35,8 +35,11 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="suksess">
-                  <Normaltekst className="blokk-s">Vi kontakter deg innen to arbeidsdager.</Normaltekst>
-                  <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
+                <Systemtittel className="blokk-m">
+                  Din henvendelse er mottatt
+                </Systemtittel>
+                <Normaltekst className="blokk-s">Vi kontakter deg innen to arbeidsdager.</Normaltekst>
+                <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
               </Alertstripe>
               </div>
           )
@@ -46,9 +49,12 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           return (
               <div className="blokk-m">
               <Alertstripe type="advarsel">
+                  <Systemtittel className="blokk-m">
+                    Noe gikk galt
+                  </Systemtittel>
                   <Normaltekst className="blokk-s">Vi klarte ikke å ta imot henvendelsen din.</Normaltekst>
                   <Normaltekst className="blokk-s">Vennligst forsøk igjen senere.</Normaltekst>
-                  <Normaltekst className="blokk-m">Opplever du dette flere ganger kan du ringe oss på 55 55 33 33.</Normaltekst>                  
+                  <Normaltekst className="blokk-m">Opplever du dette flere ganger kan du ringe oss på 55 55 33 33.</Normaltekst>               
                   <Normaltekst className="blokk-s">We’re having trouble with your request right now.</Normaltekst>
                   <Normaltekst className="blokk-s">Please try again later.</Normaltekst>
                   <Normaltekst className="blokk-s">If you are still having problems, you can call us on 55 55 33 33.</Normaltekst>
@@ -57,27 +63,13 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
           )
         };
 
-        const OverskriftStandard = () => {
-          return (
-            <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
-              En veileder må hjelpe deg slik at du blir registrert
-            </Systemtittel>
-          )
-        }
-
-        const OverskriftSuccess = () => {
-          return (
-            <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
-              Din henvendelse er mottatt
-            </Systemtittel>
-          )
-        }
-
         return (
-          <Panel border>
-            { oppgaveStatus === 'OK' ? <OverskriftSuccess /> : <OverskriftStandard />}
+          <>
             { oppgaveStatus === 'NOT_STARTED' ? 
-                <>
+            <Panel border>
+                  <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
+                    En veileder må hjelpe deg slik at du blir registrert
+                  </Systemtittel>
                   <Normaltekst className="blokk-s">
                     Vi har ikke mulighet til å sjekke om du har en godkjent oppholdstillatelse.<br/>
                     Dette gjør at du ikke kan registrere deg som arbeidssøker på nett.
@@ -97,13 +89,12 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                   <Normaltekst className="blokk-m">
                     Please contact us for help with this.
                   </Normaltekst>
-                </>
+                  </Panel>
                 : null}
                 { oppgaveStatus === 'PENDING' ? <div className="blokk-m center"><NavFrontendSpinner type="XXL" /></div> : null}
-                { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
-                { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
-            </Panel>
-    
+            { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
+            { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
+          </>
         );
     }
 }
