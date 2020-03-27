@@ -29,6 +29,14 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
         this.props.opprettKontaktmegOppgave();
     }
 
+    handleKRRNoClicked = () => {
+      uniLogger('registrering.oppholdstillatelse.krr.clicked', { locale: 'no' });
+    }
+
+    handleKRREnClicked = () => {
+      uniLogger('registrering.oppholdstillatelse.krr.clicked', { locale: 'en' });
+    }
+
     render() {
         const oppgaveStatus = this.props.oppgaveStatus
         const OppgaveSuccess = () => {
@@ -36,10 +44,12 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
               <div className="blokk-m">
               <Alertstripe type="suksess">
                 <Systemtittel className="blokk-m">
-                  Din henvendelse er mottatt
+                  Henvendelse mottatt / Request received
                 </Systemtittel>
                 <Normaltekst className="blokk-s">Vi kontakter deg innen to arbeidsdager.</Normaltekst>
+                <Normaltekst className="blokk-m">Pass på at <a href="https://brukerprofil.difi.no/minprofil?locale=nb" target="_blank" rel="noopener noreferrer" onClick={this.handleKRRNoClicked}>kontaktopplysningene dine</a> er oppdatert</Normaltekst>
                 <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
+                <Normaltekst className="blokk-m">Please make sure your <a href="https://brukerprofil.difi.no/minprofil?locale=en" target="_blank" rel="noopener noreferrer" onClick={this.handleKRREnClicked}>contact details</a> are updated</Normaltekst>
               </Alertstripe>
               </div>
           )
@@ -50,7 +60,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
               <div className="blokk-m">
               <Alertstripe type="advarsel">
                   <Systemtittel className="blokk-m">
-                    Noe gikk galt
+                    Noe gikk galt / We're having trouble
                   </Systemtittel>
                   <Normaltekst className="blokk-s">Vi klarte ikke å ta imot henvendelsen din.</Normaltekst>
                   <Normaltekst className="blokk-s">Vennligst forsøk igjen senere.</Normaltekst>
