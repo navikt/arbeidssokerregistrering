@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const stdStegTest = steg => {
     it('Steg har korrekt overskrift', () => {
         cy.get('[class="typo-innholdstittel spm-tittel"]')
@@ -13,7 +15,7 @@ const stdStegTest = steg => {
     it('Viser feilmelding ved klikk på NESTE hvis ingenting er valgt', () => {
         cy.get('[data-testid="neste"')
             .click()
-        cy.get('[class="alertstripe spm-advarsel alertstripe--advarsel"]')
+        cy.get('[class="typo-normal alertstripe__tekst"]')
             .should('exist');
     });
     it('Alle valg kan velges', () => {
@@ -84,6 +86,27 @@ const configureCypress = option => {
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
             cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            break;
+        case 'registrering-sykefravaer':
+            cy.on('window:before:load', win => {
+                // eslint-disable-next-line no-param-reassign
+                win.fetch = null;
+            });
+            cy.server();
+            cy.route('GET', '/api/auth', 'fixture:auth');
+            cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
+            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
+            cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
+            cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
+            cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            cy.fixture('registrering-sykefravaer')
+                .then(fixture => {
+                    // Setter dato tretten uker frem i tid
+                    fixture.maksDato = moment(new Date(), 'DD.MM.YYYY').add(13, 'week')
+                    cy.route('GET', '/veilarbregistrering/api/startregistrering', fixture);
+                });
             break;
         case 'nedetid':
             cy.on('window:before:load', win => {

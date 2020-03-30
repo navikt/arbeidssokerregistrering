@@ -1,0 +1,52 @@
+[
+    {
+        "overskrift": "Hva tenker du om din fremtidige situasjon?",
+        "valg": [
+            "Jeg skal tilbake til jobben jeg har",
+            "Jeg skal tilbake til arbeidsgiveren min, men i ny stilling",
+            "Jeg trenger ny jobb",
+            "Jeg er usikker",
+            "Ingen av disse alternativene passer"
+        ]
+    },
+    {
+        "overskrift": "Hva er din høyeste fullførte utdanning?",
+        "valg": [
+            "Ingen utdanning",
+            "Grunnskole",
+            "Videregående grunnutdanning (1 til 2 år)",
+            "Videregående, fagbrev eller svennebrev (3 år eller mer)",
+            "Høyere utdanning (1 til 4 år)",
+            "Høyere utdanning (5 år eller mer)"
+        ]
+    },
+    {
+        "overskrift": "Er utdanningen din godkjent i Norge?",
+        "valg": [
+            "Ja",
+            "Nei",
+            "Vet ikke"
+        ]
+    },
+    {
+        "overskrift": "Er utdanningen din bestått?",
+        "valg": [
+            "Ja",
+            "Nei"
+        ]
+    },
+    {
+        "overskrift": "Har du helseproblemer som hindrer deg i å søke eller være i jobb?",
+        "valg": [
+            "Ja",
+            "Nei"
+        ]
+    },
+    {
+        "overskrift": "Har du andre problemer med å søke eller være i jobb?",
+        "valg": [
+            "Ja",
+            "Nei"
+        ]
+    }
+]
