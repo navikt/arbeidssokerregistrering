@@ -94,7 +94,6 @@ if (MOCK_START_REGISRERING_STATUS) {
 
 if (MOCK_FEATURE_TOGGLES) {
     mock.get(`${FEATURE_URL}`, ResponseUtils.delayed(DELAY, featureTogglesMock));
-
 }
 
 if (MOCK_BRUKERS_NAVN) {
@@ -125,6 +124,7 @@ if (MOCK_REAKTIVER_BRUKER) {
 
 if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
     mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(2500, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
+    // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(500)); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {
