@@ -36,6 +36,17 @@ const clickOptionThenNext = n => {
         .click();
 };
 
+const clickOption = n => {
+    cy.get('[class="alternativ-wrapper"]')
+        .eq(n)
+        .click();
+};
+
+const clickNext = n => {
+    cy.get('[data-testid="neste"]')
+        .click();
+};
+
 const configureCypress = option => {
     const featureToggles = '/api/feature/?' +
         'feature=arbeidssokerregistrering.nedetid' +
@@ -56,7 +67,7 @@ const configureCypress = option => {
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
-            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost').as('startRegistrering');
             break;
         case 'registrering-seksavtolv':
             cy.on('window:before:load', win => {
@@ -112,4 +123,4 @@ const configureCypress = option => {
     }
 };
 
-export default { stdStegTest, clickOptionThenNext, configureCypress };
+export default { stdStegTest, clickOptionThenNext, configureCypress, clickOption, clickNext };

@@ -37,6 +37,6 @@ if (process.env.REACT_APP_MOCK) {
 }
 
 ReactDOM.render(
-  erIFSS() ? <AppFss/> : <App />,
-  document.getElementById('root') as HTMLElement
+    erIFSS() ? <AppFss /> : <App />,
+    document.getElementById('root') as HTMLElement
 );
