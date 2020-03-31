@@ -1,10 +1,10 @@
 {
-    "erSykmeldtMedArbeidsgiver": true,
+    "erSykmeldtMedArbeidsgiver": false,
     "underOppfolging": false,
     "jobbetSeksAvTolvSisteManeder": false,
     "registreringType": "SYKMELDT_REGISTRERING",
-    "formidlingsgruppe": "ARBS",
-    "servicegruppe": "IVURD",
-    "rettighetsgruppe": "IYT",
+    "formidlingsgruppe": "null",
+    "servicegruppe": "null",
+    "rettighetsgruppe": "null",
     "geografiskTilknytning": "0807"
 }

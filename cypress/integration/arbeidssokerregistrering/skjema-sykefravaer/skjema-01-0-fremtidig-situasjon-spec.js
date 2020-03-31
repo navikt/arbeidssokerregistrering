@@ -10,36 +10,56 @@ describe('/skjema-sykefravaer/1/0 - Tror du at du kommer tilbake i jobb før du 
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();
+        utils.clickOptionThenNext(0);
+        cy.get('[class="typo-innholdstittel spm-tittel blokk-xxxl"]')
+            .should('contain', 'Tror du at du kommer tilbake i jobb før du har vært sykmeldt i 52 uker?');
     });
-    utils.stdStegTest(skjemaVerdier[0]);
-    // it('Jeg skal tilbake til jobben jeg har - Navigerer til /skjema-sykefravaer/0/1', () => {
-    //     utils.clickOptionThenNext(0); // Velg "Jeg skal tilbake til jobben jeg har"
-    //     cy.get('[class="typo-innholdstittel spm-tittel blokk-xxxl"]')
-    //         .should('contain', 'Tror du at du kommer tilbake i jobb før du har vært sykmeldt i 52 uker?');
-    //     cy.go('back');
-    // });
-    // it('Jeg skal tilbake til arbeidsgiveren min, men i ny stilling - Navigerer til /skjema-sykefravaer/0/1', () => {
-    //     utils.clickOptionThenNext(1); // Velg "Jeg skal tilbake til arbeidsgiveren min, men i ny stilling"
-    //     cy.get('[class="typo-innholdstittel spm-tittel blokk-xxxl"]')
-    //         .should('contain', 'Tror du at du kommer tilbake i jobb før du har vært sykmeldt i 52 uker?');
-    //     cy.go('back');
-    // });
-    // it('Jeg trenger ny jobb - Navigerer til /skjema-sykefravaer/3/0', () => {
-    //     utils.clickOptionThenNext(2); // Velg "Jeg trenger ny jobb" 
-    //     cy.get('[class="typo-innholdstittel spm-tittel"]')
-    //         .should('contain', 'Hva er din høyeste fullførte utdanning?');
-    //     cy.go('back');
-    // });
-    // it('Jeg er usikker - Navigerer til /skjema-sykefravaer/3/0', () => {
-    //     utils.clickOptionThenNext(3); // Velg "Jeg er usikker" 
-    //     cy.get('[class="typo-innholdstittel spm-tittel"]')
-    //         .should('contain', 'Hva er din høyeste fullførte utdanning?');
-    //     cy.go('back');
-    // });
-    // it('Ingen av disse alternativene passer - Navigerer til /oppsummering', () => {
-    //     utils.clickOptionThenNext(4); // Velg "Ingen av disse alternativene passer" 
-    //     cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
-    //         .should('contain', 'Dine opplysninger');
-    //     cy.go('back');
-    // });
+    it('Alle valg har korrekt tekst', () => {
+        skjemaVerdier[1].valg.forEach((tekst, i) => {
+            cy.get('[class="alternativ-wrapper"]')
+                .eq(i)
+                .should('contain.any', tekst);
+        });
+    });
+    it('Viser feilmelding ved klikk på NESTE hvis ingenting er valgt', () => {
+        cy.get('[data-testid="neste"')
+            .click()
+        cy.get('[class="alertstripe spm-advarsel alertstripe--advarsel"]')
+            .should('exist');
+    });
+    it('Alle valg kan velges', () => {
+        skjemaVerdier[1].valg.forEach((_, i) => {
+            cy.get('[class="alternativ-wrapper"]')
+                .eq(i)
+                .click();
+            cy.get('[class="alternativ-wrapper"]>label>input')
+                .eq(i)
+                .should('have.attr', 'aria-checked', 'true')
+        });
+    });
+    it('Ja, i full stilling - Navigerer til /infoside', () => {
+        utils.clickOptionThenNext(0); // Velg "Ja, i full stilling"
+        cy.get('[class="typo-systemtittel infoside--andre-rad__tittel"]')
+            .should('contain', 'Fordi du skal tilbake i full jobb innen 52 uker');
+        cy.go('back');
+    });
+    it('Ja, i redusert stilling - Navigerer til /oppsummering', () => {
+        utils.clickOptionThenNext(1); // Velg "Ja, i redusert stilling"
+        cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
+            .should('contain', 'Dine opplysninger');
+        cy.go('back');
+    });
+    it('Usikker - Navigerer til /oppsummering', () => {
+        utils.clickOptionThenNext(2); // Velg "Usikker"
+        cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
+            .should('contain', 'Dine opplysninger');
+        cy.go('back');
+    });
+    it('Nei - Navigerer til /oppsummering', () => {
+        utils.clickOptionThenNext(2); // Velg "Nei"
+        cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
+            .should('contain', 'Dine opplysninger');
+        cy.go('back');
+    });
+
 });

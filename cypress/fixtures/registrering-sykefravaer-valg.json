@@ -10,6 +10,15 @@
         ]
     },
     {
+        "overskrift": "Tror du at du kommer tilbake i jobb før du har vært sykmeldt i 52 uker?",
+        "valg": [
+            "Ja, i full stilling",
+            "Ja, i redusert stilling",
+            "Usikker",
+            "Nei"
+        ]
+    },
+    {
         "overskrift": "Hva er din høyeste fullførte utdanning?",
         "valg": [
             "Ingen utdanning",
@@ -18,6 +27,13 @@
             "Videregående, fagbrev eller svennebrev (3 år eller mer)",
             "Høyere utdanning (1 til 4 år)",
             "Høyere utdanning (5 år eller mer)"
+        ]
+    },
+    {
+        "overskrift": "Er det noe annet enn helsen din som NAV bør ta hensyn til?",
+        "valg": [
+            "Ja",
+            "Nei"
         ]
     },
     {

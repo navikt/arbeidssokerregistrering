@@ -69,7 +69,8 @@ const configureCypress = option => {
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
-            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost').as('startRegistrering');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', {})
+                .as('startRegistrering');
             break;
         case 'registrering-seksavtolv':
             cy.on('window:before:load', win => {
@@ -85,7 +86,7 @@ const configureCypress = option => {
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
-            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', {});
             break;
         case 'registrering-sykefravaer':
             cy.on('window:before:load', win => {
@@ -100,11 +101,12 @@ const configureCypress = option => {
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
-            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            cy.route('POST', '/veilarbregistrering/api/startregistrersykmeldt', {})
+                .as('startregistrersykemeldt');
             cy.fixture('registrering-sykefravaer')
                 .then(fixture => {
                     // Setter dato tretten uker frem i tid
-                    fixture.maksDato = moment(new Date(), 'DD.MM.YYYY').add(13, 'week')
+                    fixture.maksDato = moment(new Date(), 'DD.MM.YYYY').add(13, 'week');
                     cy.route('GET', '/veilarbregistrering/api/startregistrering', fixture);
                 });
             break;
@@ -121,7 +123,7 @@ const configureCypress = option => {
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
-            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost')
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', {})
             break;
         case 'feilmelding':
             cy.on('window:before:load', win => {
@@ -136,7 +138,7 @@ const configureCypress = option => {
             // cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
-            cy.route('POST', '/veilarbregistrering/api/startregistrering', 'fixture:startregistreringPost');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', {})
             break;
         default:
             cy.on('window:before:load', win => {
