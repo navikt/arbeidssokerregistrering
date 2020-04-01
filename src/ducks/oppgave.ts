@@ -16,6 +16,7 @@ export interface State {
 export interface Data {
     id?: number;
     tildeltEnhetsnr?: string;
+    data?: any;
 }
 
 interface Action {
@@ -56,6 +57,6 @@ export function opprettKontaktmegOppgave() {
 export function selectOpprettKontaktmegOppgaveResult(state: AppState): State {
   return {
       status: state.oppgaveStatus.status,
-      data: state.oppgaveStatus.data
+      data: state.oppgaveStatus.data.data ? state.oppgaveStatus.data.data : state.oppgaveStatus.data 
     };
 }

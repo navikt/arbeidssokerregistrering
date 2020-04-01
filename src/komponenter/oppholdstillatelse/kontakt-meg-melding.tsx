@@ -39,7 +39,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
 
     render() {
         const oppgaveStatus = this.props.oppgaveStatus.status
-        const oppgaveFeilmelding = this.props.oppgaveStatus.data.data ? this.props.oppgaveStatus.data.data.code : false
+        const oppgaveFeilmelding = this.props.oppgaveStatus.data.code
         const OppgaveSuccess = () => {
           return (
               <div className="blokk-m">
