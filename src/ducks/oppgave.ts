@@ -36,7 +36,7 @@ export default function (state: State = initialState, action: Action): State {
             }
             return { ...state, status: STATUS.PENDING };
         case ActionTypes.OPPRETT_OPPGAVE_STATUS_FEILET:
-            return { ...state, status: STATUS.ERROR };
+            return { ...state, status: STATUS.ERROR, data: action.data };
         case ActionTypes.OPPRETT_OPPGAVE_STATUS_OK: {
             return { ...state, status: STATUS.OK, data: action.data };
         }
@@ -53,6 +53,9 @@ export function opprettKontaktmegOppgave() {
   });
 }
 
-export function selectOpprettKontaktmegOppgaveStatus(state: AppState): string {
-  return state.oppgaveStatus.status;
+export function selectOpprettKontaktmegOppgaveResult(state: AppState): State {
+  return {
+      status: state.oppgaveStatus.status,
+      data: state.oppgaveStatus.data
+    };
 }
