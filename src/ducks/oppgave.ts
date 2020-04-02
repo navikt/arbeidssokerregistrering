@@ -8,15 +8,18 @@ export enum ActionTypes {
     OPPRETT_OPPGAVE_STATUS_PENDING = 'OPPRETT_OPPGAVE_STATUS_PENDING'
 }
 
-export interface State {
-    data: Data;
-    status: string;
-}
-
-export interface Data {
+export interface OrdinaereData {
     id?: number;
     tildeltEnhetsnr?: string;
     data?: any;
+    response?: any;
+}
+
+export type Data = OrdinaereData;
+
+export interface State {
+    data: Data;
+    status: string;
 }
 
 interface Action {
@@ -55,8 +58,10 @@ export function opprettKontaktmegOppgave() {
 }
 
 export function selectOpprettKontaktmegOppgaveResult(state: AppState): State {
+    const response = state.oppgaveStatus.data.response
+    const data = state.oppgaveStatus.data.data ? state.oppgaveStatus.data.data : state.oppgaveStatus.data 
   return {
       status: state.oppgaveStatus.status,
-      data: state.oppgaveStatus.data.data ? state.oppgaveStatus.data.data : state.oppgaveStatus.data 
+      data: response ? response : data
     };
 }

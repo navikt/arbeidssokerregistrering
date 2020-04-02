@@ -125,7 +125,7 @@ if (MOCK_REAKTIVER_BRUKER) {
 if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
     mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(2500, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
     // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(500)); // tslint:disable-line
-    // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(500, ResponseUtils.combine(ResponseUtils.statusCode(429), ResponseUtils.statusText('TOO_SOON'), { code: 'TOO_SOON', message: 'Fant samme melding et annet sted' }))); // tslint:disable-line
+    // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(500, ResponseUtils.combine(ResponseUtils.statusCode(429), ResponseUtils.statusText('ALLEREDE_OPPRETTET_OPPGAVE')))); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {
