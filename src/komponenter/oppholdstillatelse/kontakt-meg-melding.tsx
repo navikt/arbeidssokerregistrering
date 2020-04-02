@@ -47,9 +47,9 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                   Henvendelse mottatt / Request received
                 </Systemtittel>
                 <Normaltekst className="blokk-s">Vi kontakter deg innen to arbeidsdager.</Normaltekst>
-                <Normaltekst className="blokk-m">Pass på at <a href="https://brukerprofil.difi.no/minprofil?locale=nb" target="_blank" rel="noopener noreferrer" onClick={this.handleKRRNoClicked}>kontaktopplysningene dine</a> er oppdatert</Normaltekst>
+                <Normaltekst className="blokk-m"><strong>Viktig:</strong> Pass på at <a href="https://brukerprofil.difi.no/minprofil?locale=nb" target="_blank" rel="noopener noreferrer" onClick={this.handleKRRNoClicked}>kontaktopplysningene dine</a> er oppdatert ellers kan vi ikke nå deg</Normaltekst>
                 <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
-                <Normaltekst className="blokk-m">Please make sure your <a href="https://brukerprofil.difi.no/minprofil?locale=en" target="_blank" rel="noopener noreferrer" onClick={this.handleKRREnClicked}>contact details</a> are updated</Normaltekst>
+                <Normaltekst className="blokk-m"><strong>Important: </strong>Please make sure your <a href="https://brukerprofil.difi.no/minprofil?locale=en" target="_blank" rel="noopener noreferrer" onClick={this.handleKRREnClicked}>contact details</a> are updated</Normaltekst>
               </Alertstripe>
               </div>
           )
