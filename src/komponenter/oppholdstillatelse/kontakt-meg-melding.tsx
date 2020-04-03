@@ -125,7 +125,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                 : null}
                 { oppgaveStatus === 'PENDING' ? <div className="blokk-m center"><NavFrontendSpinner type="XXL" /></div> : null}
             { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
-            { oppgaveStatus === 'ERROR' ? oppgaveStatusCode === 429 ? <OppgaveErrorTooSoon /> : <OppgaveError /> : null}
+            { oppgaveStatus === 'ERROR' ? oppgaveStatusCode === 403 ? <OppgaveErrorTooSoon /> : <OppgaveError /> : null}
           </>
         );
     }

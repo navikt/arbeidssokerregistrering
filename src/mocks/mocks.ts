@@ -125,7 +125,7 @@ if (MOCK_REAKTIVER_BRUKER) {
 if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
     mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(2500, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
     // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(500)); // tslint:disable-line
-    // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(429)); // tslint:disable-line
+    // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(403)); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {
