@@ -7,7 +7,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
-import { opprettKontaktmegOppgave, selectOpprettKontaktmegOppgaveStatus } from '../../ducks/oppgave';
+import { opprettKontaktmegOppgave, selectOpprettKontaktmegOppgaveResult } from '../../ducks/oppgave';
 import { uniLogger } from '../../metrikker/uni-logger';
 
 import './kontakt-meg-melding.less';
@@ -38,8 +38,10 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
     }
 
     render() {
-        const oppgaveStatus = this.props.oppgaveStatus
+        const oppgaveStatus = this.props.oppgaveStatus.status
+        const oppgaveStatusCode = this.props.oppgaveStatus.data.status
         const OppgaveSuccess = () => {
+          uniLogger('registrering.oppholdstillatelse.kontaktmeg.success');
           return (
               <div className="blokk-m">
               <Alertstripe type="suksess">
@@ -56,6 +58,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
         };
       
         const OppgaveError = () => {
+          uniLogger('registrering.oppholdstillatelse.kontaktmeg.error');
           return (
               <div className="blokk-m">
               <Alertstripe type="advarsel">
@@ -68,6 +71,25 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                   <Normaltekst className="blokk-s">We’re having trouble with your request right now.</Normaltekst>
                   <Normaltekst className="blokk-s">Please try again later.</Normaltekst>
                   <Normaltekst className="blokk-s">If you are still having problems, you can call us on 55 55 33 33.</Normaltekst>
+              </Alertstripe>
+              </div>
+          )
+        };
+
+        const OppgaveErrorTooSoon = () => {
+          uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
+          return (
+              <div className="blokk-m">
+              <Alertstripe type="advarsel">
+                  <Systemtittel className="blokk-m">
+                    Vennligst vent / Please wait
+                  </Systemtittel>
+                  <Normaltekst className="blokk-s">Du har allerede bedt oss kontakte deg.</Normaltekst>
+                  <Normaltekst className="blokk-s">Vi tar kontakt i løpet av to arbeidsdager regnet fra den første meldingen.</Normaltekst>
+                  <Normaltekst className="blokk-m">Pass på at <a href="https://brukerprofil.difi.no/minprofil?locale=nb" target="_blank" rel="noopener noreferrer" onClick={this.handleKRRNoClicked}>kontaktopplysningene dine</a> er oppdatert</Normaltekst>
+                  <Normaltekst className="blokk-s">We have received your first message.</Normaltekst>
+                  <Normaltekst className="blokk-s">We will contact you within two working days from the first message.</Normaltekst>
+                  <Normaltekst className="blokk-m">Please make sure your <a href="https://brukerprofil.difi.no/minprofil?locale=en" target="_blank" rel="noopener noreferrer" onClick={this.handleKRREnClicked}>contact details</a> are updated</Normaltekst>
               </Alertstripe>
               </div>
           )
@@ -103,7 +125,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                 : null}
                 { oppgaveStatus === 'PENDING' ? <div className="blokk-m center"><NavFrontendSpinner type="XXL" /></div> : null}
             { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
-            { oppgaveStatus === 'ERROR' ? <OppgaveError /> : null}
+            { oppgaveStatus === 'ERROR' ? oppgaveStatusCode === 403 ? <OppgaveErrorTooSoon /> : <OppgaveError /> : null}
           </>
         );
     }
@@ -111,7 +133,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     registreringType: selectRegistreringstatus(state).data.registreringType,
-    oppgaveStatus: selectOpprettKontaktmegOppgaveStatus(state)
+    oppgaveStatus: selectOpprettKontaktmegOppgaveResult(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
