@@ -11,8 +11,8 @@ export enum ActionTypes {
 export interface OrdinaereData {
     id?: number;
     tildeltEnhetsnr?: string;
-    data?: any;
-    response?: any;
+    data?: any; // tslint:disable-line
+    response?: any; // tslint:disable-line
 }
 
 export type Data = OrdinaereData;
@@ -58,9 +58,9 @@ export function opprettKontaktmegOppgave() {
 }
 
 export function selectOpprettKontaktmegOppgaveResult(state: AppState): State {
-    const response = state.oppgaveStatus.data.response
-    const data = state.oppgaveStatus.data.data ? state.oppgaveStatus.data.data : state.oppgaveStatus.data 
-  return {
+    const response = state.oppgaveStatus.data.response;
+    const data = state.oppgaveStatus.data.data ? state.oppgaveStatus.data.data : state.oppgaveStatus.data; 
+    return {
       status: state.oppgaveStatus.status,
       data: response ? response : data
     };
