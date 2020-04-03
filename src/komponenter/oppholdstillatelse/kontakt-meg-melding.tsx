@@ -39,7 +39,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
 
     render() {
         const oppgaveStatus = this.props.oppgaveStatus.status
-        const oppgaveFeilmelding = this.props.oppgaveStatus.data.statusText
+        const oppgaveStatusCode = this.props.oppgaveStatus.data.status
         const OppgaveSuccess = () => {
           return (
               <div className="blokk-m">
@@ -122,7 +122,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                 : null}
                 { oppgaveStatus === 'PENDING' ? <div className="blokk-m center"><NavFrontendSpinner type="XXL" /></div> : null}
             { oppgaveStatus === 'OK' ? <OppgaveSuccess /> : null}
-            { oppgaveStatus === 'ERROR' ? oppgaveFeilmelding === 'ALLEREDE_OPPRETTET_OPPGAVE' ? <OppgaveErrorTooSoon /> : <OppgaveError /> : null}
+            { oppgaveStatus === 'ERROR' ? oppgaveStatusCode === 429 ? <OppgaveErrorTooSoon /> : <OppgaveError /> : null}
           </>
         );
     }
