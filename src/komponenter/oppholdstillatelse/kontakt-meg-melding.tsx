@@ -41,6 +41,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
         const oppgaveStatus = this.props.oppgaveStatus.status
         const oppgaveStatusCode = this.props.oppgaveStatus.data.status
         const OppgaveSuccess = () => {
+          uniLogger('registrering.oppholdstillatelse.kontaktmeg.success');
           return (
               <div className="blokk-m">
               <Alertstripe type="suksess">
@@ -57,6 +58,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
         };
       
         const OppgaveError = () => {
+          uniLogger('registrering.oppholdstillatelse.kontaktmeg.error');
           return (
               <div className="blokk-m">
               <Alertstripe type="advarsel">
@@ -75,6 +77,7 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
         };
 
         const OppgaveErrorTooSoon = () => {
+          uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
           return (
               <div className="blokk-m">
               <Alertstripe type="advarsel">
