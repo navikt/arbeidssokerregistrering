@@ -8,14 +8,18 @@ export enum ActionTypes {
     OPPRETT_OPPGAVE_STATUS_PENDING = 'OPPRETT_OPPGAVE_STATUS_PENDING'
 }
 
+export interface OrdinaereData {
+    id?: number;
+    tildeltEnhetsnr?: string;
+    data?: any; // tslint:disable-line
+    response?: any; // tslint:disable-line
+}
+
+export type Data = OrdinaereData;
+
 export interface State {
     data: Data;
     status: string;
-}
-
-export interface Data {
-    id?: number;
-    tildeltEnhetsnr?: string;
 }
 
 interface Action {
@@ -36,7 +40,7 @@ export default function (state: State = initialState, action: Action): State {
             }
             return { ...state, status: STATUS.PENDING };
         case ActionTypes.OPPRETT_OPPGAVE_STATUS_FEILET:
-            return { ...state, status: STATUS.ERROR };
+            return { ...state, status: STATUS.ERROR, data: action.data };
         case ActionTypes.OPPRETT_OPPGAVE_STATUS_OK: {
             return { ...state, status: STATUS.OK, data: action.data };
         }
@@ -53,6 +57,11 @@ export function opprettKontaktmegOppgave() {
   });
 }
 
-export function selectOpprettKontaktmegOppgaveStatus(state: AppState): string {
-  return state.oppgaveStatus.status;
+export function selectOpprettKontaktmegOppgaveResult(state: AppState): State {
+    const response = state.oppgaveStatus.data.response;
+    const data = state.oppgaveStatus.data.data ? state.oppgaveStatus.data.data : state.oppgaveStatus.data; 
+    return {
+      status: state.oppgaveStatus.status,
+      data: response ? response : data
+    };
 }
