@@ -1,9 +1,9 @@
-Arbeidssøkerregistrering
-================
+# Arbeidssøkerregistrering
 
 Registrering av arbeidssøker
 
 # Editering av tekster direkte i Github
+
 1. For å se tekstnøklene (samsvarer med filnavn), legg på `?vistekster=true` i URL'en. F.eks: `https://arbeidssokerregistrering.herokuapp.com?vistekster=true`.
 2. Finn filen der teksten er definert, under `/src/tekster/hjelpetekster`.
 3. Trykk på edit og gjør endringen.
@@ -12,28 +12,30 @@ Registrering av arbeidssøker
 6. Utviklerne får automatisk beskjed om at pull requesten er oppretter, og aksepterer endringen så fort en av dem har mulighet.
 
 # Komme i gang med utvikling
-* `npm i` 
-* `npm start`
+
+- `npm i`
+- `npm start`
 
 For å starte app i demo-mode
 
-* `npm run demo`
+- `npm run demo`
 
 ## Utvikling med backend
 
-* Clone og start (StartJetty normal) `dev-proxy`  https://github.com/navikt/dev-proxy
-* Clone og start `veilarbregistrering` https://github.com/navikt/veilarbregistrering
-* Åpne appen i `localhost:8080`
+- Clone og start (StartJetty normal) `dev-proxy` https://github.com/navikt/dev-proxy
+- Clone og start `veilarbregistrering` https://github.com/navikt/veilarbregistrering
+- Åpne appen i `localhost:8080`
 
-# Kjøre integrasjonstester lokalt
-* `npm run integrationtest-build`
-* `npm run heroku-serve`
-* `npm run test:integration`
+# Kjøre GUI-tester lokalt
+
+- `npm run start:cypress`
+- `npm run cypress:run`
 
 # Kjøre browsertester lokalt
-* `npm run integrationtest-build`
-* `npm run heroku-serve`
-* `BROWSERSTACK_USERNAME=<> BROWSERSTACK_ACCESS_KEY=<> npm run test:browsers`
+
+- `npm run integrationtest-build`
+- `npm run heroku-serve`
+- `BROWSERSTACK_USERNAME=<> BROWSERSTACK_ACCESS_KEY=<> npm run test:browsers`
 
 # Henvendelser
 
