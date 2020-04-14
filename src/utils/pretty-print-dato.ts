@@ -3,12 +3,18 @@ const monthNames = {
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 };
 
+const dayNames = {
+  no: ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'],
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+};
+
 export default input => {
   const { dato, language } = input;
   const now = new Date();
   const date = new Date(dato);
   const thisYear = now.getFullYear();
   const year = date.getFullYear();
-  const monthName = monthNames[language][date.getMonth()];
-  return `${date.getDate()}. ${monthName}${thisYear !== year ? ' ' + year : ''}`;
+  const month = monthNames[language][date.getMonth()];
+  const day = dayNames[language][date.getDay()];
+  return `${day} ${date.getDate()}. ${month}${thisYear !== year ? ' ' + year : ''}`;
 };
