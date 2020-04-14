@@ -27,6 +27,7 @@
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i"
   },
   "dependencies": {
+    "@alheimsins/virkedager": "1.0.1",
     "@craco/craco": "5.6.3",
     "@navikt/fo-session-timeout-modal": "1.1.1",
     "@types/classnames": "2.2.3",

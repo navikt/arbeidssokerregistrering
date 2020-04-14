@@ -5,6 +5,8 @@ import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Alertstripe from 'nav-frontend-alertstriper';
+import virkedager from '@alheimsins/virkedager'
+import prettyPrintDato from '../../utils/pretty-print-dato'
 import { AppState } from '../../reducer';
 import { RegistreringType, selectRegistreringstatus } from '../../ducks/registreringstatus';
 import { opprettKontaktmegOppgave, selectOpprettKontaktmegOppgaveResult } from '../../ducks/oppgave';
@@ -41,6 +43,10 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
         const oppgaveStatus = this.props.oppgaveStatus.status
         const oppgaveStatusCode = this.props.oppgaveStatus.data.status
         const OppgaveSuccess = () => {
+          const idag = new Date()
+          const nesteVirkedag = virkedager(idag, 2)
+          const datoNorsk = prettyPrintDato({ dato: nesteVirkedag, language: 'no'})
+          const datoEngelsk = prettyPrintDato({ dato: nesteVirkedag, language: 'en'})
           uniLogger('registrering.oppholdstillatelse.kontaktmeg.success');
           return (
               <div className="blokk-m">
@@ -48,10 +54,10 @@ class KontaktMegOppholdstillatelse extends React.Component<AllProps> {
                 <Systemtittel className="blokk-m">
                   Henvendelse mottatt / Request received
                 </Systemtittel>
-                <Normaltekst className="blokk-s">Vi kontakter deg innen to arbeidsdager.</Normaltekst>
-                <Normaltekst className="blokk-m"><strong>Viktig:</strong> Pass på at <a href="https://brukerprofil.difi.no/minprofil?locale=nb" target="_blank" rel="noopener noreferrer" onClick={this.handleKRRNoClicked}>kontaktopplysningene dine</a> er oppdatert ellers kan vi ikke nå deg</Normaltekst>
-                <Normaltekst className="blokk-s">We will contact you within two working days.</Normaltekst>
-                <Normaltekst className="blokk-m"><strong>Important: </strong>Please make sure your <a href="https://brukerprofil.difi.no/minprofil?locale=en" target="_blank" rel="noopener noreferrer" onClick={this.handleKRREnClicked}>contact details</a> are updated</Normaltekst>
+                <Normaltekst className="blokk-s">Vi kontakter deg innen utgangen av {datoNorsk}.</Normaltekst>
+                <Normaltekst className="blokk-m"><strong>Viktig:</strong> Pass på at <a href="https://brukerprofil.difi.no/minprofil?locale=nb" target="_blank" rel="noopener noreferrer" onClick={this.handleKRRNoClicked}>kontaktopplysningene dine</a> er oppdatert ellers kan vi ikke nå deg.</Normaltekst>
+                <Normaltekst className="blokk-s">We will contact you within {datoEngelsk}.</Normaltekst>
+                <Normaltekst className="blokk-m"><strong>Important: </strong>Please make sure your <a href="https://brukerprofil.difi.no/minprofil?locale=en" target="_blank" rel="noopener noreferrer" onClick={this.handleKRREnClicked}>contact details</a> are updated.</Normaltekst>
               </Alertstripe>
               </div>
           )
