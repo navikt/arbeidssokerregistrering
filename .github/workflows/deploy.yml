@@ -9,8 +9,23 @@ env:
   IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/arbeidssokerregistrering
 
 jobs:
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+          headless: true
+          start: npm run start:cypress
+          wait-on: http://localhost:3001
+
   test-build-and-push:
     name: Test, build and push
+    needs: cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
