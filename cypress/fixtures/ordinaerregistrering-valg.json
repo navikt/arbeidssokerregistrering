@@ -1,0 +1,57 @@
+[
+    {
+        "overskrift": "Velg den situasjonen som passer deg best",
+        "valg": [
+            "Har mistet eller kommer til å miste jobben",
+            "Har sagt opp eller kommer til å si opp",
+            "Har deltidsjobb, men vil jobbe mer",
+            "Har aldri vært i jobb",
+            "Har jobb, men vil bytte",
+            "Har ikke vært i jobb de siste 2 årene",
+            "Er permittert eller kommer til å bli permittert",
+            "Er usikker på jobbsituasjonen min",
+            "Har akkurat fullført utdanning, militærtjeneste eller annet",
+            "Har jobb og ønsker å fortsette i den jobben jeg er i"
+        ]
+    },
+    {
+        "overskrift": "Hva er din høyeste fullførte utdanning?",
+        "valg": [
+            "Ingen utdanning",
+            "Grunnskole",
+            "Videregående grunnutdanning (1 til 2 år)",
+            "Videregående, fagbrev eller svennebrev (3 år eller mer)",
+            "Høyere utdanning (1 til 4 år)",
+            "Høyere utdanning (5 år eller mer)"
+        ]
+    },
+    {
+        "overskrift": "Er utdanningen din godkjent i Norge?",
+        "valg": [
+            "Ja",
+            "Nei",
+            "Vet ikke"
+        ]
+    },
+    {
+        "overskrift": "Er utdanningen din bestått?",
+        "valg": [
+            "Ja",
+            "Nei"
+        ]
+    },
+    {
+        "overskrift": "Har du helseproblemer som hindrer deg i å søke eller være i jobb?",
+        "valg": [
+            "Ja",
+            "Nei"
+        ]
+    },
+    {
+        "overskrift": "Har du andre problemer med å søke eller være i jobb?",
+        "valg": [
+            "Ja",
+            "Nei"
+        ]
+    }
+]

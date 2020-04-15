@@ -24,7 +24,11 @@
     "eject": "craco eject",
     "deploy": "npm run build && gh-pages -d build",
     "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less",
-    "refresh": "rm -rf node_modules && rm package-lock.json && npm i"
+    "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
+    "start:utenmock": "cross-env BROWSER=none craco start",
+    "start:cypress": "npm-run-all -p start:tekster start:utenmock",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@alheimsins/virkedager": "1.0.1",
@@ -121,6 +125,7 @@
     "chromedriver": "2.42.0",
     "cross-env": "5.2.0",
     "cross-spawn": "6.0.5",
+    "cypress": "4.2.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "express": "4.16.3",

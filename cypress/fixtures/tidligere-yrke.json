@@ -1,0 +1,18 @@
+{
+    "typeaheadYrkeList": [
+        {
+            "konseptId": 130063,
+            "label": "Klovn",
+            "styrk08": [
+                "5411"
+            ]
+        },
+        {
+            "konseptId": 45779,
+            "label": "Klovn kommunal sektor",
+            "styrk08": [
+                "5411"
+            ]
+        }
+    ]
+}
