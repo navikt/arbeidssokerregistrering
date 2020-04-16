@@ -17,17 +17,13 @@ interface StateProps {
 type Props = RouteComponentProps<MatchProps> & InjectedIntlProps & StateProps;
 
 class Banner extends React.Component<Props> {
+    settBannerOverskriftId(): string {
+        const registreringType = this.props.startRegistreringStatus.registreringType;
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
-    render() {
-        const bannerOverskriftId = this.settBannerOverskriftId();
+        if (erIFSS()) return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer-manuell' : 'banner-overskrift-ordinaer-manuell';
 
-        return (!this.skalVises()) ? (null) : (
-            <div className="registrering-banner">
-                <Systemtittel tag="h1">
-                    {this.props.intl.messages[bannerOverskriftId]}
-                </Systemtittel>
-            </div>
-        );
+        return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
     }
 
     skalVises(): boolean {
@@ -37,13 +33,16 @@ class Banner extends React.Component<Props> {
             && (this.props.startRegistreringStatus.underOppfolging === false));
     }
 
-    settBannerOverskriftId(): string {
-        const registreringType = this.props.startRegistreringStatus.registreringType;
-        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+    bannerOverskriftId = this.settBannerOverskriftId();
 
-        if (erIFSS()) return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer-manuell' : 'banner-overskrift-ordinaer-manuell';
-
-        return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
+    render() {
+        return (!this.skalVises()) ? (null) : (
+            <div className="registrering-banner">
+                <Systemtittel tag="h1">
+                    {this.props.intl.messages[this.bannerOverskriftId]}
+                </Systemtittel>
+            </div>
+        );
     }
 }
 
