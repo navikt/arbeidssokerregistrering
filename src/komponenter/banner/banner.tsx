@@ -19,15 +19,7 @@ type Props = RouteComponentProps<MatchProps> & InjectedIntlProps & StateProps;
 class Banner extends React.Component<Props> {
 
     render() {
-
-        const registreringType = this.props.startRegistreringStatus.registreringType;
-
-        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
-
-        let bannerOverskriftId = visSykefravaerSkjema ?
-            'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
-
-        bannerOverskriftId = erIFSS() ? 'banner-overskrift-manuell' : bannerOverskriftId;
+        const bannerOverskriftId = this.settBannerOverskriftId();
 
         return (!this.skalVises()) ? (null) : (
             <div className="registrering-banner">
@@ -43,6 +35,15 @@ class Banner extends React.Component<Props> {
 
         return !(pathname.includes(START_PATH)
             && (this.props.startRegistreringStatus.underOppfolging === false));
+    }
+
+    settBannerOverskriftId(): string {
+        const registreringType = this.props.startRegistreringStatus.registreringType;
+        const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+
+        if (erIFSS()) return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer-manuell' : 'banner-overskrift-ordinaer-manuell';
+
+        return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
     }
 }
 
