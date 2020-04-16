@@ -17,25 +17,13 @@ interface StateProps {
 type Props = RouteComponentProps<MatchProps> & InjectedIntlProps & StateProps;
 
 class Banner extends React.Component<Props> {
-
-    render() {
-
+    settBannerOverskriftId(): string {
         const registreringType = this.props.startRegistreringStatus.registreringType;
-
         const visSykefravaerSkjema = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
 
-        let bannerOverskriftId = visSykefravaerSkjema ?
-            'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
+        if (erIFSS()) return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer-manuell' : 'banner-overskrift-ordinaer-manuell';
 
-        bannerOverskriftId = erIFSS() ? 'banner-overskrift-manuell' : bannerOverskriftId;
-
-        return (!this.skalVises()) ? (null) : (
-            <div className="registrering-banner">
-                <Systemtittel tag="h1">
-                    {this.props.intl.messages[bannerOverskriftId]}
-                </Systemtittel>
-            </div>
-        );
+        return visSykefravaerSkjema ? 'banner-overskrift-sykefravaer' : 'banner-overskrift-ordinaer';
     }
 
     skalVises(): boolean {
@@ -43,6 +31,18 @@ class Banner extends React.Component<Props> {
 
         return !(pathname.includes(START_PATH)
             && (this.props.startRegistreringStatus.underOppfolging === false));
+    }
+
+    bannerOverskriftId = this.settBannerOverskriftId();
+
+    render() {
+        return (!this.skalVises()) ? (null) : (
+            <div className="registrering-banner">
+                <Systemtittel tag="h1">
+                    {this.props.intl.messages[this.bannerOverskriftId]}
+                </Systemtittel>
+            </div>
+        );
     }
 }
 
