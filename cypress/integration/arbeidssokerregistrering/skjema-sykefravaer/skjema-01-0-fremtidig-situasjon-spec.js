@@ -1,16 +1,15 @@
-import * as utils from '../../../utils';
 import * as skjemaVerdier from '../../../fixtures/registrering-sykefravaer-valg.json';
 
 
 describe('/skjema-sykefravaer/1/0 - Tror du at du kommer tilbake i jobb før du har vært sykmeldt i 52 uker??', () => {
     beforeEach(() => {
-        utils.configureCypress('registrering-sykefravaer');
+        cy.configure('registrering-sykefravaer');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();
-        utils.clickOptionThenNext(0);
+        cy.clickOptionThenNext(0);
         cy.get('[class="typo-innholdstittel spm-tittel blokk-xxxl"]')
             .should('contain', 'Tror du at du kommer tilbake i jobb før du har vært sykmeldt i 52 uker?');
     });
@@ -38,25 +37,25 @@ describe('/skjema-sykefravaer/1/0 - Tror du at du kommer tilbake i jobb før du 
         });
     });
     it('Ja, i full stilling - Navigerer til /infoside', () => {
-        utils.clickOptionThenNext(0); // Velg "Ja, i full stilling"
+        cy.clickOptionThenNext(0); // Velg "Ja, i full stilling"
         cy.get('[class="typo-systemtittel infoside--andre-rad__tittel"]')
             .should('contain', 'Fordi du skal tilbake i full jobb innen 52 uker');
         cy.go('back');
     });
     it('Ja, i redusert stilling - Navigerer til /oppsummering', () => {
-        utils.clickOptionThenNext(1); // Velg "Ja, i redusert stilling"
+        cy.clickOptionThenNext(1); // Velg "Ja, i redusert stilling"
         cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
             .should('contain', 'Dine opplysninger');
         cy.go('back');
     });
     it('Usikker - Navigerer til /oppsummering', () => {
-        utils.clickOptionThenNext(2); // Velg "Usikker"
+        cy.clickOptionThenNext(2); // Velg "Usikker"
         cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
             .should('contain', 'Dine opplysninger');
         cy.go('back');
     });
     it('Nei - Navigerer til /oppsummering', () => {
-        utils.clickOptionThenNext(2); // Velg "Nei"
+        cy.clickOptionThenNext(2); // Velg "Nei"
         cy.get('[class="typo-innholdstittel oppsummering-tittel"]')
             .should('contain', 'Dine opplysninger');
         cy.go('back');

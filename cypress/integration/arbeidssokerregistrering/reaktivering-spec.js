@@ -1,9 +1,6 @@
-import * as utils from '../../utils';
-
-
 describe('Feilmelding vises ved feil i lasting av data', () => {
     beforeEach(() => {
-        utils.configureCypress('reaktivering');
+        cy.configure('reaktivering');
     })
     it('/reaktivering - riktig side vises', () => {
         cy.visit('/');

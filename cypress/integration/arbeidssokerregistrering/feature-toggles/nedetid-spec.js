@@ -1,9 +1,6 @@
-import * as utils from '../../../utils';
-
-
 describe('FEATURE TOGGLE - Nedetid', () => {
     beforeEach(() => {
-        utils.configureCypress('nedetid');
+        cy.configure('nedetid');
     });
     it('Informasjon om nedetid vises', () => {
         cy.visit('/');

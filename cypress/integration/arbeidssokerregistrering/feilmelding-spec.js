@@ -1,9 +1,6 @@
-import * as utils from '../../utils';
-
-
 describe('Feilmelding vises ved feil i lasting av data', () => {
     beforeEach(() => {
-        utils.configureCypress('feilmelding');
+        cy.configure('feilmelding');
     })
     it('Tekst som vises er korrekt', () => {
         cy.visit('/');

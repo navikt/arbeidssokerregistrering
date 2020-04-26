@@ -1,10 +1,6 @@
-import * as utils from '../../utils';
-import { createYield } from 'typescript';
-
-
 describe('Feilmelding vises ved feil i lasting av data', () => {
     beforeEach(() => {
-        utils.configureCypress('sperret');
+        cy.configure('sperret');
     });
     it('/ikke-arbeidssoker-utenfor-oppfolging - riktig side vises', () => {
         cy.visit('/');

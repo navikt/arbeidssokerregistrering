@@ -1,15 +1,12 @@
-import * as utils from '../../../utils';
-
-
 describe('skjema/1 - Hva er din siste jobb?', () => {
     beforeEach(() => {
-        utils.configureCypress('registrering');
+        cy.configure('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();
-        utils.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
+        cy.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
     });
     it('Steg har korrekt overskrift', () => {
         cy.get('[class="typo-innholdstittel spm-tittel"]')

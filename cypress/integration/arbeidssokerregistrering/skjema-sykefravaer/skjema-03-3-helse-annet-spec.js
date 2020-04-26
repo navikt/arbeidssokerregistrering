@@ -1,19 +1,20 @@
-import * as utils from '../../../utils';
 import * as skjemaVerdier from '../../../fixtures/registrering-sykefravaer-valg.json';
 
 
 describe('/skjema-sykefravaer/3/3 - Er det noe annet enn helsen din som NAV bør ta hensyn til?', () => {
     beforeEach(() => {
-        utils.configureCypress('registrering-sykefravaer');
+        cy.configure('registrering-sykefravaer');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();
-        utils.clickOptionThenNext(2); // Velg "Jeg trenger ny jobb"
-        utils.clickOptionThenNext(0); // Velg "Ingen utdanning"
+        cy.clickOptionThenNext(2); // Velg "Jeg trenger ny jobb"
+        cy.clickOptionThenNext(0); // Velg "Ingen utdanning"
     });
-    utils.stdStegTest(skjemaVerdier[3]);
+    it('Tester alle valg', () => {
+        cy.stegTest(skjemaVerdier[3]);
+    });
     it('Går videre til /oppsummering ved klikk på NESTE', () => {
         cy.get('[class="alternativ-wrapper"]')
             .eq(0)

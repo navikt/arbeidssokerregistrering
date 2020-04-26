@@ -1,10 +1,7 @@
-import * as utils from '../../../utils';
-import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json';
-
 
 describe('/start - Sykmeldt med arbeidsgiver 39 uker til 52 uker', () => {
     beforeEach(() => {
-        utils.configureCypress('registrering-sykefravaer');
+        cy.configure('registrering-sykefravaer');
     });
     it('Viser riktig side (', () => {
         cy.visit('/');

@@ -1,20 +1,16 @@
-import * as utils from '../../../utils';
-import * as skjemaVerdier from '../../../fixtures/registrering-sykefravaer-valg.json';
-
-
 describe('/oppsummering - Dine opplysninger', () => {
     beforeEach(() => {
-        utils.configureCypress('registrering-sykefravaer');
+        cy.configure('registrering-sykefravaer');
     });
     it('Gir beskjed om bruker har jobbet de siste 12 mnd', () => {
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();
-        utils.clickOptionThenNext(3); // Velg "Jeg er usikker"
-        utils.clickOptionThenNext(1); // Velg "Grunnskole"
-        utils.clickOptionThenNext(0); // Velg "Ja"
-        utils.clickOptionThenNext(0); // Velg "Ja"
-        utils.clickOptionThenNext(0); // Velg "Ja"
+        cy.clickOptionThenNext(3); // Velg "Jeg er usikker"
+        cy.clickOptionThenNext(1); // Velg "Grunnskole"
+        cy.clickOptionThenNext(0); // Velg "Ja"
+        cy.clickOptionThenNext(0); // Velg "Ja"
+        cy.clickOptionThenNext(0); // Velg "Ja"
     });
     it('"Fremtidig situasjon" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
         cy.get('[class="typo-normal"]')

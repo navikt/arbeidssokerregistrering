@@ -1,17 +1,18 @@
-import * as utils from '../../../utils';
 import * as skjemaVerdier from '../../../fixtures/ordinaerregistrering-valg.json';
 
 
 describe('/skjema/0 - Velg den situasjonen som passer deg best', () => {
     beforeEach(() => {
-        utils.configureCypress('registrering');
+        cy.configure('registrering');
     });
     it('Navigerer til korrekt skjema', () => {
         cy.visit('/');
         cy.get('[data-testid="start-registrering"]')
             .click();
     });
-    utils.stdStegTest(skjemaVerdier[0]);
+    it('Tester alle valg', () => {
+        cy.stegTest(skjemaVerdier[0]);
+    });
     it('Går rett videre til skjema/2 hvis ingen tidligere jobb og klikk på NESTE', () => {
         cy.get('[class="alternativ-wrapper"]')
             .eq(3)
