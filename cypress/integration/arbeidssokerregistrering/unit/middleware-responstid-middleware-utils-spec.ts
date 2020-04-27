@@ -1,11 +1,9 @@
-import chai from 'chai';
 import * as sinon from 'sinon';
 import chaiAsPromised from 'chai-as-promised';
-import { ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
-import { loggResponstid } from './responstid-middleware-utils';
+import { ActionTypes as RegStatusActionTypes } from '../../../../src/ducks/registreringstatus';
+import { loggResponstid } from '../../../../src/middleware/responstid-middleware-utils';
 
 chai.use(chaiAsPromised);
-const expect = chai.expect;
 
 let sandbox;
 beforeEach(() => {

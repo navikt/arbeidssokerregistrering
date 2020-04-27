@@ -1,12 +1,6 @@
-/*tslint:disable*/
-import {expect} from 'chai';
+import { getIntlMessage, hentFornavn } from '../../../../src/utils/utils';
+import { YRKESPRAKSIS } from '../../../../src/utils/konstanter';
 
-import {
-    getIntlMessage, hentFornavn
-} from './utils';
-import {
-    YRKESPRAKSIS
-} from './konstanter';
 
 describe('utils test', () => {
     it('skal hente ut intl', () => {
@@ -14,10 +8,10 @@ describe('utils test', () => {
         const tekst = 'tekst';
         const finnesIkke = 'finnesIkke';
 
-        expect(getIntlMessage({[id]: tekst}, id )).to.equal(tekst);
-        expect(getIntlMessage({[id]: tekst}, finnesIkke )).to.equal(finnesIkke);
+        expect(getIntlMessage({ [id]: tekst }, id)).to.equal(tekst);
+        expect(getIntlMessage({ [id]: tekst }, finnesIkke)).to.equal(finnesIkke);
     });
-    
+
     it('test av hentFornavn', () => {
         expect(hentFornavn(undefined)).to.equal('');
         expect(hentFornavn('Test testesen')).to.equal('Test');

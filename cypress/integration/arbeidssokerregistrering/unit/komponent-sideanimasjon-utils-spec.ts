@@ -1,7 +1,5 @@
-/*tslint:disable*/
-import {expect} from 'chai';
-import {paths, skalAnimereForover} from "./sideanimasjon-utils";
-import {OPPSUMMERING_PATH, SKJEMA_PATH} from "../../utils/konstanter";
+import { paths, skalAnimereForover } from "../../../../src/komponenter/sideanimasjon/sideanimasjon-utils";
+import { OPPSUMMERING_PATH, SKJEMA_PATH } from "../../../../src/utils/konstanter";
 
 const skjemaPath = (n: number) => SKJEMA_PATH + '/' + n;
 
