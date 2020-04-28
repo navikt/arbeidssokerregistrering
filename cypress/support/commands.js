@@ -113,7 +113,6 @@ Cypress.Commands.add('configure', option => {
                 win.fetch = null;
             });
             cy.server();
-
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
             cy.route('GET', '/veilarbstepup/status', 'fixture:status');
@@ -133,7 +132,6 @@ Cypress.Commands.add('configure', option => {
                 }
             });
             break;
-
         case 'nedetid':
             cy.on('window:before:load', win => {
                 // eslint-disable-next-line no-param-reassign

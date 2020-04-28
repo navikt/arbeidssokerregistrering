@@ -1,6 +1,6 @@
 {
     "baseUrl": "http://localhost:3001",
-    "integrationFolder": "cypress/integration/arbeidssokerregistrering",
+    "integrationFolder": "cypress/specs/arbeidssokerregistrering",
     "video": false,
     "screenshotOnRunFailure": false
 }
