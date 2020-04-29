@@ -1,9 +1,8 @@
-/*tslint:disable*/
 import React from "react";
 import * as enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import EkspanderbartInfo from "../../../../src/komponenter/ekspanderbartinfo/ekspanderbartInfo";
-import { shallowwithIntl } from "../../../../src/test/test-utils";
+import EkspanderbartInfo from "../../../../../src/komponenter/ekspanderbartinfo/ekspanderbartInfo";
+import { shallowwithIntl } from "../../../../../src/test/test-utils";
 
 enzyme.configure({ adapter: new Adapter() });
 
