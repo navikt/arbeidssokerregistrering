@@ -1,7 +1,6 @@
 /*tslint:disable*/
-import {expect} from 'chai';
-import {State as SvarState} from '../ducks/svar';
-import {Stilling} from "../ducks/siste-stilling";
+import { State as SvarState } from '../../../../../src/ducks/svar';
+import { Stilling } from "../../../../../src/ducks/siste-stilling";
 import {
     AndreForholdSvar,
     DinSituasjonSvar,
@@ -10,22 +9,23 @@ import {
     UtdanningBestattSvar,
     UtdanningGodkjentSvar,
     UtdanningSvar
-} from "../ducks/svar-utils";
-import {mapAvgitteSvarForBackend, mapTilBesvarelse, mapTilSvarState} from "../ducks/registrerbruker-utils";
-import {InjectedIntl} from 'react-intl';
-import {OrdinaerBesvarelse, SykmeldtBesvarelse, TeksterForBesvarelse} from "./registrerbruker";
-import {SporsmalId} from "./svar";
-import {RegistreringType} from "./registreringstatus";
-import {BesvarelseType} from "./registrerbruker-utils";
+} from "../../../../../src/ducks/svar-utils";
+import { mapAvgitteSvarForBackend, mapTilBesvarelse, mapTilSvarState } from "../../../../../src/ducks/registrerbruker-utils";
+import { InjectedIntl } from 'react-intl';
+import { OrdinaerBesvarelse, SykmeldtBesvarelse, TeksterForBesvarelse } from "../../../../../src/ducks/registrerbruker";
+import { SporsmalId } from "../../../../../src/ducks/svar";
+import { RegistreringType } from "../../../../../src/ducks/registreringstatus";
+// @ts-ignore
+import { BesvarelseType } from "../../../../src/ducks/registrerbruker-utils";
 
 const svarState: SvarState = [
-    {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
-    {sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB},
-    {sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
-    {sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI},
-    {sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.JA},
-    {sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.NEI},
-    {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
+    { sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT },
+    { sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB },
+    { sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER },
+    { sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI },
+    { sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.JA },
+    { sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.NEI },
+    { sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI },
 ];
 
 const besvarelse: BesvarelseType = {
@@ -48,13 +48,13 @@ describe('utils test', () => {
         };
 
         const dummySvar: SvarState = [
-            {sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.JA},
-            {sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER},
-            {sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.INGEN_SVAR},
-            {sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI},
-            {sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI},
-            {sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB},
-            {sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT},
+            { sporsmalId: SporsmalId.helseHinder, svar: HelseHinderSvar.JA },
+            { sporsmalId: SporsmalId.utdanning, svar: UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER },
+            { sporsmalId: SporsmalId.utdanningBestatt, svar: UtdanningBestattSvar.INGEN_SVAR },
+            { sporsmalId: SporsmalId.utdanningGodkjent, svar: UtdanningGodkjentSvar.NEI },
+            { sporsmalId: SporsmalId.andreForhold, svar: AndreForholdSvar.NEI },
+            { sporsmalId: SporsmalId.sisteStilling, svar: SisteStillingSvar.HAR_HATT_JOBB },
+            { sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT },
         ];
         const messages = {
             'helsehinder-svar-ja': 'JA :)',

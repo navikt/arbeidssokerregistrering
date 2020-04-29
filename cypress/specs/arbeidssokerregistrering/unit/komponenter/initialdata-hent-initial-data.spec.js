@@ -1,25 +1,25 @@
-import * as React from 'react';
-import { expect } from 'chai';
+import React from 'react';
 import {
     promiseWithSetTimeout,
     stubFetch,
     FetchStub,
-    mountWithStoreRouterAndIntl } from '../../test/test-utils';
+    mountWithStoreRouterAndIntl
+} from '../../../../../src/test/test-utils';
 import * as enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { AUTENTISERINGSINFO_URL } from '../../ducks/api';
-import HentInitialData from './hent-initial-data';
-import StepUp from './stepup';
-import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
+import { AUTENTISERINGSINFO_URL } from '../../../../../src/ducks/api';
+import HentInitialData from '../../../../../src/komponenter/initialdata/hent-initial-data';
+import FeilmeldingGenerell from '../../../../../src/komponenter/feilmelding/feilmelding-generell';
+import StepUp from '../../../../../src/komponenter/initialdata/stepup';
 
-enzyme.configure({adapter: new Adapter()});
+enzyme.configure({ adapter: new Adapter() });
 
 afterEach(() => fetch.restore());
 
 describe('<HentInitialData />', () => {
     it('skal rendre feilmelding dersom api-kall til registreringstatus feiler', () => {
         stubFetch(new FetchStub()
-            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: 4, niva: 4})
+            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: 4, niva: 4 })
             .addErrorResponse('/startregistrering', 500));
 
         const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
@@ -32,48 +32,48 @@ describe('<HentInitialData />', () => {
     });
     it('skal rendre <StepUp/> dersom bruker ikke har gyldig oidc-token, men er innlogget i openam med nivå 3', () => {
         stubFetch(new FetchStub()
-            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: 3})
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
+            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: 3 })
+            .addResponse('/startregistrering', { underOppfolging: false, oppfyllerKrav: true }));
 
         const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(wrapper.find('StepUp')).to.have.length(1);
+                expect(wrapper.find(StepUp)).to.have.length(1);
             });
     });
     it('skal ikke rendre <StepUp/> dersom bruker er innlogget i openam med nivå 4', () => {
         stubFetch(new FetchStub()
-            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: 4})
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
+            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: 4 })
+            .addResponse('/startregistrering', { underOppfolging: false, oppfyllerKrav: true }));
 
         const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(wrapper.find('StepUp')).to.have.length(0);
+                expect(wrapper.find(StepUp)).to.have.length(0);
             });
     });
     it('skal rendre <StepUp/> dersom bruker ikke er innlogget', () => {
         stubFetch(new FetchStub()
-            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: null})
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true}));
+            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: null })
+            .addResponse('/startregistrering', { underOppfolging: false, oppfyllerKrav: true }));
 
         const wrapper = mountWithStoreRouterAndIntl(<HentInitialData />);
 
         return promiseWithSetTimeout()
             .then(() => {
                 wrapper.update();
-                expect(wrapper.find('StepUp')).to.have.length(1);
+                expect(wrapper.find(StepUp)).to.have.length(1);
             });
     });
 
     it('skal ikke hente registreringstatus om bruker ikke er innlogget', () => {
         const fetchStub = new FetchStub()
-            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: null})
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true});
+            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: null, niva: null })
+            .addResponse('/startregistrering', { underOppfolging: false, oppfyllerKrav: true });
 
         stubFetch(fetchStub);
 
@@ -87,8 +87,8 @@ describe('<HentInitialData />', () => {
     });
     it('skal ikke hente registreringstatus om bruker er innlogget på nivå 3', () => {
         const fetchStub = new FetchStub()
-            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: 3, niva: 3})
-            .addResponse('/startregistrering', {underOppfolging: false, oppfyllerKrav: true});
+            .addResponse(AUTENTISERINGSINFO_URL, { nivaOidc: 3, niva: 3 })
+            .addResponse('/startregistrering', { underOppfolging: false, oppfyllerKrav: true });
 
         stubFetch(fetchStub);
 

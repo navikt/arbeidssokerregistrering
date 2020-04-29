@@ -1,5 +1,5 @@
-import { getIntlMessage, hentFornavn } from '../../../../src/utils/utils';
-import { YRKESPRAKSIS } from '../../../../src/utils/konstanter';
+import { getIntlMessage, hentFornavn } from '../../../../../src/utils/utils';
+import { YRKESPRAKSIS } from '../../../../../src/utils/konstanter';
 
 
 describe('utils test', () => {

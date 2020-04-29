@@ -2,8 +2,8 @@ import {
   getAlleSporsmalSomIkkeSkalBesvares,
   getTekstIdForSvar,
   SkjemaConfig,
-} from "../../../../src/komponenter/skjema/skjema-utils";
-import { SporsmalId, State as SvarState } from "../../../../src/ducks/svar";
+} from "../../../../../src/komponenter/skjema/skjema-utils";
+import { SporsmalId, State as SvarState } from "../../../../../src/ducks/svar";
 import {
   DinSituasjonSvar,
   IngenSvar,
@@ -11,7 +11,7 @@ import {
   Svar,
   UtdanningGodkjentSvar,
   UtdanningSvar,
-} from "../../../../src/ducks/svar-utils";
+} from "../../../../../src/ducks/svar-utils";
 
 describe("skjema-utils", () => {
   it("getAlleSporsmalSomIkkeSkalBesvares skal returnere riktig spørsmål", () => {

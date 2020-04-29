@@ -1,21 +1,20 @@
 /*tslint:disable*/
 import * as React from 'react';
-import {expect} from 'chai';
 import * as sinon from 'sinon';
 import * as enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Fullfor from './fullfor';
-import KnappFullfor from '../skjema-registrering/knapp-fullfor';
+import Fullfor from '../../../../../src/sider/fullfor/fullfor';
+import KnappFullfor from '../../../../../src/sider/skjema-registrering/knapp-fullfor';
 import {
     FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
-} from "../../test/test-utils";
-import {create} from "../../store";
-import {ActionTypes as SvarActionTypes} from "../../ducks/svar";
-import {DU_ER_NA_REGISTRERT_PATH, START_PATH} from "../../utils/konstanter";
-import svarMock from "../../mocks/svar-mock";
+} from "../../../../../src/test/test-utils";
+import { create } from "../../../../../src/store";
+import { ActionTypes as SvarActionTypes } from "../../../../../src/ducks/svar";
+import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from "../../../../../src/utils/konstanter";
+import svarMock from "../../../../../src/mocks/svar-mock";
 
-enzyme.configure({adapter: new Adapter()});
+enzyme.configure({ adapter: new Adapter() });
 afterEach(() => {
     if (fetch.restore) {
         fetch.restore()

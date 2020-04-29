@@ -1,50 +1,48 @@
-import { promiseWithSetTimeout, stubFetch, withError, withResponse } from '../test/test-utils';
-import chai from 'chai';
+import { promiseWithSetTimeout, stubFetch, withError, withResponse } from '../../../../../src/test/test-utils';
 import chaiAsPromised from 'chai-as-promised';
 import * as sinon from 'sinon';
-import { fetchToJson, fetchWithTimeout } from './api-utils';
+import { fetchToJson, fetchWithTimeout } from '../../../../../src/ducks/api-utils';
 
 chai.use(chaiAsPromised);
-const expect = chai.expect;
 
 afterEach(() => fetch.restore());
 
 describe('Test fetchToJson', () => {
     it('skal feile', () => {
         stubFetch(withError(500));
-        return expect(fetchToJson({url: 'url'})).to.be.rejected;
+        return expect(fetchToJson({ url: 'url' })).to.be.rejected;
     });
 
     it('skal recover', () => {
         stubFetch(withError(500));
-        return expect(fetchToJson({url: 'url', recoverWith: () => ({foo: 'bar'})})).to.eventually.have.property('foo');
+        return expect(fetchToJson({ url: 'url', recoverWith: () => ({ foo: 'bar' }) })).to.eventually.have.property('foo');
     });
     it('skal reocover om 404', () => {
         stubFetch(withError(404));
         return expect(fetchToJson({
             url: 'url',
-            recoverWith: (status) => status === 404 ? {foo: 'bar'} : undefined,
+            recoverWith: (status) => status === 404 ? { foo: 'bar' } : undefined,
         })).to.eventually.have.property('foo');
     });
     it('skal ikke reocover om 500', () => {
         stubFetch(withError(500));
         return expect(fetchToJson({
             url: 'url',
-            recoverWith: (status) => status === 404 ? {foo: 'bar'} : undefined,
+            recoverWith: (status) => status === 404 ? { foo: 'bar' } : undefined,
         })).to.be.rejected;
     });
     it('skal ikke reocover om 500', () => {
         stubFetch(withError(500));
         return expect(fetchToJson({
             url: 'url',
-            recoverWith: (status) => status === 404 ? {foo: 'bar'} : null,
+            recoverWith: (status) => status === 404 ? { foo: 'bar' } : null,
         })).to.be.rejected;
     });
     it('skal ikke recover dersom fetch-kall er ok', () => {
-        stubFetch(withResponse({bar: 'foo'}));
+        stubFetch(withResponse({ bar: 'foo' }));
         return expect(fetchToJson({
             url: 'url',
-            recoverWith: () => ({foo: 'bar'}),
+            recoverWith: () => ({ foo: 'bar' }),
         })).to.eventually.have.property('bar');
     });
 });

@@ -1,6 +1,6 @@
-import { sisteStillingErSatt } from "../../../../src/sider/fullfor/fullfor-utils";
-import { annenStilling, ingenYrkesbakgrunn, tomStilling } from "../../../../src/ducks/siste-stilling";
-import { sisteStillingMock } from "../../../../src/mocks/siste-stilling-mock";
+import { sisteStillingErSatt } from "../../../../../src/sider/fullfor/fullfor-utils";
+import { annenStilling, ingenYrkesbakgrunn, tomStilling } from "../../../../../src/ducks/siste-stilling";
+import { sisteStillingMock } from "../../../../../src/mocks/siste-stilling-mock";
 
 
 describe('Test fullfor-utils', () => {

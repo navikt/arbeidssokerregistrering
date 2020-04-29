@@ -7,7 +7,7 @@ const webpackOptions = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts(x)?$/,
         exclude: [/node_modules/],
         use: [
           {
@@ -48,6 +48,10 @@ const webpackOptions = {
             },
           },
         ],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
     ]
   },

@@ -1,6 +1,6 @@
-import { hentStillingsAlternativer } from "../../../../src/sider/skjema-registrering/sporsmal/sporsmal-siste-stilling/sokeinput-utils";
-import pamJanzzData from "../../../../src/mocks/typeahead-mock";
-import { Stilling } from "../../../../src/ducks/siste-stilling";
+import { hentStillingsAlternativer } from "../../../../../src/sider/skjema-registrering/sporsmal/sporsmal-siste-stilling/sokeinput-utils";
+import pamJanzzData from "../../../../../src/mocks/typeahead-mock";
+import { Stilling } from "../../../../../src/ducks/siste-stilling";
 
 describe('utils test', () => {
     it('test hentStillingsAlternativer', () => {

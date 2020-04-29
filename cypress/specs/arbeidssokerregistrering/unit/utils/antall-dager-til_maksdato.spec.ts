@@ -1,4 +1,4 @@
-import { antallDagerTilMaksdato } from "../../../../src/utils/antall-dager-til-maksdato";
+import { antallDagerTilMaksdato } from "../../../../../src/utils/antall-dager-til-maksdato";
 
 describe("Info for ikke-arbeidssøker uten oppfølging", () => {
     describe("antallDagerTilMaksdato", () => {

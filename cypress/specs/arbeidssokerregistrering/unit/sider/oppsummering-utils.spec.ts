@@ -1,7 +1,7 @@
-import { SporsmalId, State as SvarState } from "../../../../src/ducks/svar";
-import { Data as RegStatus } from "../../../../src/ducks/registreringstatus";
-import { DinSituasjonSvar } from "../../../../src/ducks/svar-utils";
-import { getTekstIdForArbeidSisteManeder } from "../../../../src/sider/oppsummering/oppsummering-utils";
+import { SporsmalId, State as SvarState } from "../../../../../src/ducks/svar";
+import { Data as RegStatus } from "../../../../../src/ducks/registreringstatus";
+import { DinSituasjonSvar } from "../../../../../src/ducks/svar-utils";
+import { getTekstIdForArbeidSisteManeder } from "../../../../../src/sider/oppsummering/oppsummering-utils";
 
 describe("oppsummering-utils", () => {
     it("Hvis bruker og AAReg er enige om at bruker har vært i jobb, så skal getTekstIdForArbeidSisteManeder returnere tom string", () => {

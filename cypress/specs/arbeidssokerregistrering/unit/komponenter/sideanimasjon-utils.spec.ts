@@ -1,5 +1,5 @@
-import { paths, skalAnimereForover } from "../../../../src/komponenter/sideanimasjon/sideanimasjon-utils";
-import { OPPSUMMERING_PATH, SKJEMA_PATH } from "../../../../src/utils/konstanter";
+import { paths, skalAnimereForover } from "../../../../../src/komponenter/sideanimasjon/sideanimasjon-utils";
+import { OPPSUMMERING_PATH, SKJEMA_PATH } from "../../../../../src/utils/konstanter";
 
 const skjemaPath = (n: number) => SKJEMA_PATH + '/' + n;
 
