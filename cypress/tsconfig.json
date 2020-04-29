@@ -1,29 +1,8 @@
 {
   "compilerOptions": {
-    "strict": false,
-    "baseUrl": "../node_modules",
-    "target": "es5",
-    "lib": [
-      "es6",
-      "es2016.array.include",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "allowJs": false,
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noImplicitAny": false,
-    "jsx": "preserve",
-    "alwaysStrict": false,
-    "strictFunctionTypes": false,
-    "strictPropertyInitialization": false,
     "types": [
       "cypress",
       "node"
