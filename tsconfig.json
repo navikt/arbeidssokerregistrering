@@ -20,7 +20,7 @@
     "isolatedModules": true,
     "noImplicitAny": false,
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "alwaysStrict": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false

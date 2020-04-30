@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6",
+      "es2016.array.include",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "types": [
+      "cypress",
+      "node"
+    ]
+  }
+}
