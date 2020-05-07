@@ -4,11 +4,11 @@ import {
     OPPDATER_KONTEKST_URL, VEILARBPERSON_NAVN_URL, VEILARBREGISTRERING_URL,
 } from '../ducks/api';
 import { getStore } from '../store';
-import {ActionTypes as SvarActionTypes, SporsmalId} from '../ducks/svar';
+import { ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
 import svarMock from './svar-mock';
-import {ActionTypes as SisteStillingActionTypes} from '../ducks/siste-stilling';
-import {sisteStillingMock} from './siste-stilling-mock';
-import {hentSvar} from '../ducks/svar-utils';
+import { ActionTypes as SisteStillingActionTypes } from '../ducks/siste-stilling';
+import { sisteStillingMock } from './siste-stilling-mock';
+import { hentSvar } from '../ducks/svar-utils';
 import autentisert from './autentiseringsinfo-mock';
 import pamJanzzData from './typeahead-mock';
 import brukersNavn from './brukers-navn-mock';
@@ -16,10 +16,11 @@ import startRegistreringStatus from './registreringstatus-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import brukerKontekst from './fss-bruker-kontekst';
 import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
-import {ordinaerRegistreringRespons, sykmeldtRegistreringRespons} from "./registrerbruker-mock";
-import {featureTogglesMock} from "./feature-toggles-mock";
+import { ordinaerRegistreringRespons, sykmeldtRegistreringRespons } from "./registrerbruker-mock";
+import { featureTogglesMock } from "./feature-toggles-mock";
 import oversettelseAvStillingFraAAReg from "./oversettelse-av-stilling-fra-aareg-mock";
 import opprettKontaktmegOppgaveRespons from "./oppgave-mock";
+import kontaktinfo from './kontaktinfo-mock';
 
 export const MOCK_AUTENTISERINGS_INFO = true;
 export const MOCK_START_REGISRERING_STATUS = true;
@@ -33,11 +34,12 @@ export const MOCK_REAKTIVER_BRUKER = true;
 export const MOCK_BRUKER_KONTEKST = true;
 export const MOCK_OPPRETT_KONTAKTMEG_OPPGAVE = true;
 export const PRINT_FRONTENDLOGGER = true;
+export const MOCK_KONTAKTINFO = true;
 
 export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
 export const DISPATCH_BESVARELSE = process.env.REACT_APP_MOCK_BES || false;
 
-function lagPamjanzzRespons({q}: { q: string}) {
+function lagPamjanzzRespons({ q }: { q: string }) {
     const { typeaheadYrkeList } = pamJanzzData;
     console.log('q', q); // tslint:disable-line
     const filtrertListe = typeaheadYrkeList.filter((data) => data.label.toLowerCase().includes(q.toLowerCase()));
@@ -82,7 +84,7 @@ const DELAY = 0;
 if (PRINT_FRONTENDLOGGER) {
     (window as any).frontendlogger = { // tslint:disable-line
         event: (name: string, fields: any, tags: any) => { // tslint:disable-line
-            console.log('frontendlogger', {name, fields, tags}); // tslint:disable-line
+            console.log('frontendlogger', { name, fields, tags }); // tslint:disable-line
         }
     };
 }
@@ -133,7 +135,7 @@ if (MOCK_BRUKER_KONTEKST) {
 }
 
 if (MOCK_AUTENTISERINGS_INFO) {
-     mock.get('/veilarbstepup/status', ResponseUtils.delayed(DELAY, autentisert));
+    mock.get('/veilarbstepup/status', ResponseUtils.delayed(DELAY, autentisert));
 }
 
 if (MOCK_OPPDATER_BRUKER_KONTEKST) {
@@ -163,6 +165,10 @@ if (DISPATCH_BESVARELSE) {
             stilling: sisteStillingMock,
         }
     });
+}
+
+if (MOCK_KONTAKTINFO) {
+    mock.get(`${VEILARBREGISTRERING_URL}/kontaktinfo`, ResponseUtils.delayed(DELAY, kontaktinfo));
 }
 
 export default mock;

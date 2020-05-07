@@ -54,7 +54,8 @@ export function registrerBruker(data: RegistrerBrukerData, registreringType: Reg
 
     return fetchToJson({
         url: leggTilFnrOgEnhetForFSS(`${VEILARBREGISTRERING_URL}/${endepunkt}`),
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
             body: JSON.stringify(data)
@@ -82,7 +83,7 @@ export function opprettKontaktmegOppgave() {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify({ oppgaveType: 'OPPHOLDSTILLATELSE'})
+            body: JSON.stringify({ oppgaveType: 'OPPHOLDSTILLATELSE' })
         }
     });
 }
@@ -112,6 +113,16 @@ export function hentBrukersNavn() {
     });
 }
 
+export function hentKontaktinfo() {
+    return fetchToJson({
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/kontaktinfo`),
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        }
+    });
+}
+
 export function hentAutentiseringsInfo() {
     return fetchToJson({
         url: `${AUTENTISERINGSINFO_URL}`,
@@ -129,7 +140,7 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
-        recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
+        recoverWith: () => ({ arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null })
     });
 }
 
@@ -140,7 +151,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
-        recoverWith: () => ({konseptMedStyrk08List: []})
+        recoverWith: () => ({ konseptMedStyrk08List: [] })
     });
 }
 
@@ -148,10 +159,10 @@ export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${sokestreng}`,
         config: {
-            ...{redirect: 'manual'},
+            ...{ redirect: 'manual' },
             headers: getHeaders()
         },
-        recoverWith: () => ({'typeaheadYrkeList': []})
+        recoverWith: () => ({ 'typeaheadYrkeList': [] })
     });
 }
 

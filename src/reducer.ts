@@ -14,6 +14,7 @@ import oversettelseAvStillingFraAAReg, {
 } from './ducks/oversettelse-av-stilling-fra-aareg';
 import defaultStilling, { State as DefaultStillingState } from './ducks/default-stilling';
 import sisteStilling, { State as SisteStillingState } from './ducks/siste-stilling';
+import kontaktinfo, { State as KontaktinfoState } from './ducks/kontaktinfo';
 
 export interface AppState {
     svar: SvarState;
@@ -29,6 +30,7 @@ export interface AppState {
     sisteStilling: SisteStillingState;
     featureToggles: FeatureTogglesState;
     logger: LoggerState;
+    kontaktinfo: KontaktinfoState;
 }
 
 export default combineReducers<AppState>({
@@ -45,4 +47,5 @@ export default combineReducers<AppState>({
     sisteStilling,
     featureToggles,
     logger,
+    kontaktinfo,
 });
