@@ -63,7 +63,9 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
 
     render() {
         const { feilType, intl, featureToggles, state } = this.props;
-        const geografiskTilknytning = state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI';
+        const geografiskTilknytning = state.registreringStatus.data ?
+            state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI' :
+            'INGEN_DATA';
         const featureOppholdstillatelseKontakt = featureToggles['arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker'];
         const feilmelding = this.lagFeilmelding(feilType, intl, featureOppholdstillatelseKontakt);
         uniLogger('arbeidssokerregistrering.error', { feilType: feilType, geografiskTilknytning });
