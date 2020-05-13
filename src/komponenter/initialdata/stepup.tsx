@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
-import { VEILARBSTEPUP } from '../../ducks/api';
+import { LOGINSERVICEURL } from '../../ducks/api';
 import './stepup.less';
 import { InjectedIntlProps } from 'react-intl';
 import bankidSvg from './bankid.svg';
@@ -19,7 +19,7 @@ const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
                 <div className="knapper-vertikalt">
                     <a
                         className="knapp knapp--hoved stepup__knapp"
-                        href={VEILARBSTEPUP}
+                        href={LOGINSERVICEURL}
                     >
                         <Normaltekst>
                             <FormattedHTMLMessage id="knapp-logg-inn"/>

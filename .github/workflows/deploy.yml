@@ -170,6 +170,7 @@ jobs:
           CLUSTER: prod-sbs
           RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-p-sbs.yaml
+          DRY_RUN: true
 
   release:
     name: Tag and release

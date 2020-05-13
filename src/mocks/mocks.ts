@@ -133,7 +133,7 @@ if (MOCK_BRUKER_KONTEKST) {
 }
 
 if (MOCK_AUTENTISERINGS_INFO) {
-     mock.get('/veilarbstepup/status', ResponseUtils.delayed(DELAY, autentisert));
+     mock.get('/api/auth', ResponseUtils.delayed(DELAY, autentisert));
 }
 
 if (MOCK_OPPDATER_BRUKER_KONTEKST) {
