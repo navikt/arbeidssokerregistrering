@@ -37,8 +37,8 @@ class KontaktMegController extends React.Component<AllProps> {
                 {oppgaveStatus === 'ERROR' ? oppgaveStatusCode === 403 ? <OppgaveErrorTooSoon kontaktinfo={kontaktinfo} /> : <OppgaveError /> : null}
             </>
         );
-    }
-}
+    };
+};
 
 const mapStateToProps = (state: AppState): StateProps => ({
     registreringType: selectRegistreringstatus(state).data.registreringType,
