@@ -11,7 +11,7 @@ import './feilmelding-brukers-status-ugyldig.less';
 import FeilmeldingManglerArbeidstillatelse
     from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
 import OppholdsTillatelseKontaktMeg
-    from '../../../komponenter/oppholdstillatelse/kontakt-meg-melding'
+    from '../../../komponenter/oppholdstillatelse/KontaktMegController'
 
 interface FeilmeldingBrukersStatusUgyldigProps {
     feilType: FullforErrorTypes;
@@ -50,7 +50,7 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
                             {messages[messageKey]}
                         </Normaltekst>
                         <Normaltekst>
-                            <span dangerouslySetInnerHTML={{__html: messages['feilhandtering-undertekst']}}/>
+                            <span dangerouslySetInnerHTML={{ __html: messages['feilhandtering-undertekst'] }} />
                         </Normaltekst>
                     </div>
                 </Feilmelding>

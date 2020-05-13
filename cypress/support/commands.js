@@ -113,6 +113,7 @@ Cypress.Commands.add('configure', option => {
                 win.fetch = null;
             });
             cy.server();
+            cy.route('GET', '/veilarbregistrering/api/kontaktinfo', {});
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
             cy.route('GET', '/veilarbstepup/status', 'fixture:status');

@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {
     BRUKER_KONTEKST_URL, FEATURE_URL,
     OPPDATER_KONTEKST_URL, VEILARBPERSON_NAVN_URL, VEILARBREGISTRERING_URL,
@@ -16,11 +15,13 @@ import startRegistreringStatus from './registreringstatus-mock';
 import sisteStillingFraAAReg from './siste-stilling-fra-aareg-mock';
 import brukerKontekst from './fss-bruker-kontekst';
 import FetchMock, { Middleware, MiddlewareUtils, ResponseUtils } from 'yet-another-fetch-mock';
-import { ordinaerRegistreringRespons, sykmeldtRegistreringRespons } from "./registrerbruker-mock";
+// eslint-disable-next-line
+import { ordinaerRegistreringRespons, sykmeldtRegistreringRespons, ordinaerRegistreringFeilrespons } from "./registrerbruker-mock";
 import { featureTogglesMock } from "./feature-toggles-mock";
 import oversettelseAvStillingFraAAReg from "./oversettelse-av-stilling-fra-aareg-mock";
 import opprettKontaktmegOppgaveRespons from "./oppgave-mock";
-import kontaktinfo from './kontaktinfo-mock';
+// eslint-disable-next-line
+import { kontaktinfoRespons, kontaktinfoFeilrespons } from './kontaktinfo-mock';
 
 export const MOCK_AUTENTISERINGS_INFO = true;
 export const MOCK_START_REGISRERING_STATUS = true;
@@ -116,7 +117,8 @@ if (MOCK_STYRK08_PAMJANZZ) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
+    // mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.combine(ResponseUtils.statusCode(500), ordinaerRegistreringFeilrespons)); // tslint:disable-line
     mock.post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt`, ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)); // tslint:disable-line
 }
 
@@ -125,7 +127,7 @@ if (MOCK_REAKTIVER_BRUKER) {
 }
 
 if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
-    mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(2500, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(100, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
     // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(500)); // tslint:disable-line
     // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(403)); // tslint:disable-line
 }
@@ -135,11 +137,17 @@ if (MOCK_BRUKER_KONTEKST) {
 }
 
 if (MOCK_AUTENTISERINGS_INFO) {
-    mock.get('/veilarbstepup/status', ResponseUtils.delayed(DELAY, autentisert));
+    mock.get('/veilarbstepup/status', ResponseUtils.delayed(DELAY, autentisert)); // tslint:disable-line
 }
 
 if (MOCK_OPPDATER_BRUKER_KONTEKST) {
     mock.post(`${OPPDATER_KONTEKST_URL}`, ResponseUtils.delayed(DELAY, {})); // tslint:disable-line
+}
+
+if (MOCK_KONTAKTINFO) {
+    mock.get(`${VEILARBREGISTRERING_URL}/kontaktinfo`, ResponseUtils.delayed(DELAY, kontaktinfoRespons)); // tslint:disable-line
+    // mock.get(`${VEILARBREGISTRERING_URL}/kontaktinfo`, ResponseUtils.combine(ResponseUtils.statusCode(500), kontaktinfoFeilrespons)); // tslint:disable-line
+
 }
 
 if (DISPATCH_BESVARELSE) {
@@ -167,8 +175,5 @@ if (DISPATCH_BESVARELSE) {
     });
 }
 
-if (MOCK_KONTAKTINFO) {
-    mock.get(`${VEILARBREGISTRERING_URL}/kontaktinfo`, ResponseUtils.delayed(DELAY, kontaktinfo));
-}
 
 export default mock;

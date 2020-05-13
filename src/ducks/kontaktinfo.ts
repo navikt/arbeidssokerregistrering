@@ -14,8 +14,8 @@ export interface State {
 }
 
 export interface Data {
-    epost?: string | null;
-    telefon?: string | null;
+    telefonnummerHosKrr?: string;
+    telefonnummerHosNav?: string;
 }
 
 interface Action {

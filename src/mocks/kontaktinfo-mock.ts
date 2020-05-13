@@ -1,7 +1,9 @@
-import { Data as KontaktinfoData } from '../ducks/kontaktinfo';
-import { JSONObject } from 'yet-another-fetch-mock/dist/types/types';
+export const kontaktinfoRespons = {
+    telefonnummerHosKrr: '23232323',
+    telefonnummerHosNav: '22222222'
+}
 
-export default {
-    epost: 'epost@nav.no',
-    telefon: '22222222'
-} as KontaktinfoData & JSONObject;
+export const kontaktinfoFeilrespons = {
+    'id': 'fa5ec8e51366d8b9722bb564f2534e7e',
+    'type': 'FINNES_IKKE'
+}

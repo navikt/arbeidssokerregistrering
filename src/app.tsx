@@ -9,6 +9,7 @@ import {
 import HentInitialData from './komponenter/initialdata/hent-initial-data';
 import Routes from './routes';
 import { TimeoutModal } from '@navikt/fo-session-timeout-modal';
+// import KontaktMegOppholdstillatelse from './komponenter/oppholdstillatelse/KontaktMegController';
 
 class App extends React.Component {
 
@@ -17,9 +18,10 @@ class App extends React.Component {
             <Provider store={getStore()}>
                 <IntlProvider>
                     <HentInitialData>
-                        <TimeoutModal/>
+                        <TimeoutModal />
+                        {/* <KontaktMegOppholdstillatelse /> */}
                         <Router>
-                            <Routes/>
+                            <Routes />
                         </Router>
                     </HentInitialData>
                 </IntlProvider>

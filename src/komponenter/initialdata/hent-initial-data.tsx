@@ -65,7 +65,7 @@ export class HentInitialData extends React.Component<Props> {
     }
 
     render() {
-        const { children, registreringstatus, autentiseringsinfo, brukersNavn, featuretoggles, kontaktinfo } = this.props;
+        const { children, registreringstatus, autentiseringsinfo, brukersNavn, featuretoggles } = this.props;
         const { niva, nivaOidc } = autentiseringsinfo.data;
         const erNede = featuretoggles.data['arbeidssokerregistrering.nedetid']
         if (erNede) {
@@ -96,8 +96,7 @@ export class HentInitialData extends React.Component<Props> {
                     registreringstatus,
                     brukersNavn,
                     autentiseringsinfo,
-                    featuretoggles,
-                    kontaktinfo
+                    featuretoggles
                 ]}
                 storrelse="XXL"
                 loaderKomponent={<Loader />}
