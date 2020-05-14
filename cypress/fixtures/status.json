@@ -1,6 +1,6 @@
 {
   "loggedIn": true,
-  "remainingSeconds": 123,
-  "expirationTime": "2020-05-13T17:48:54+02:00",
+  "remainingSeconds": null,
+  "expirationTime": "2021-05-13T17:48:54+02:00",
   "securityLevel": "Level4"
 }
