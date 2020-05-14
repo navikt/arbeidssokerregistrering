@@ -162,6 +162,23 @@ Cypress.Commands.add('configure', option => {
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
             cy.route('POST', '/veilarbregistrering/api/startregistrering', {})
             break;
+        case 'sesjon-utgaatt':
+            cy.on('window:before:load', win => {
+                // eslint-disable-next-line no-param-reassign
+                win.fetch = null;
+            });
+            cy.server();
+            cy.route('GET', '/api/auth', 'fixture:auth');
+            cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
+            cy.route('GET', '/api/auth', 'fixture:status-sesjon-utgaatt');
+            cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/ordinaerregistrering');
+            cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
+            cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
+            cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
+            cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
+            cy.route('POST', '/veilarbregistrering/api/startregistrering', {})
+                .as('startRegistrering');
+            break;
         default:
             cy.on('window:before:load', win => {
                 // eslint-disable-next-line no-param-reassign
