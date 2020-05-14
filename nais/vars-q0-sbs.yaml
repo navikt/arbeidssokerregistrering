@@ -1,6 +1,6 @@
 namespace: q0
 appres_cms_url: https://appres-q0.nav.no
-loginservice_url: https://loginservice-q.nav.no/login
+loginservice_url: https://loginservice-q.nav.no/login?redirect=https://arbeidssokerregistrering-q.nav.no/start
 aad_b2c_clientid: 0090b6e1-ffcc-4c37-bc21-049f7d1f0fe5
 aad_b2c_discovery_url: https://login.microsoftonline.com/NAVtestB2C.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_idporten_ver1
 arbeidssokerregistrering_url: https://arbeidssokerregistrering-q.nav.no/
@@ -11,5 +11,5 @@ aktivitetsplan_url: https://aktivitetsplan-q.nav.no
 pam_janzz_url: https://pam-janzz-q0.nais.oera-q.local
 ingresses:
   - https://arbeidssokerregistrering.nais.oera-q.local
-  - https://arbeidssokerregistrering-q.nav.no/
+  - https://arbeidssokerregistrering-q.nav.no
   - https://tjenester-q0.nav.no/arbeidssokerregistrering

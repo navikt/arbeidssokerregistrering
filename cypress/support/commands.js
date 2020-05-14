@@ -12,7 +12,7 @@ Cypress.Commands.add('configure', option => {
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/ordinaerregistrering');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
@@ -29,7 +29,7 @@ Cypress.Commands.add('configure', option => {
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/ordinaerregistrering-seksavtolv');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
@@ -45,7 +45,7 @@ Cypress.Commands.add('configure', option => {
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
@@ -68,7 +68,7 @@ Cypress.Commands.add('configure', option => {
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/reaktivering');
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
@@ -84,7 +84,7 @@ Cypress.Commands.add('configure', option => {
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/sperret');
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
@@ -100,7 +100,7 @@ Cypress.Commands.add('configure', option => {
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/allerederegistrert');
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
@@ -115,7 +115,7 @@ Cypress.Commands.add('configure', option => {
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
             cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
@@ -140,7 +140,7 @@ Cypress.Commands.add('configure', option => {
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-true');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/ordinaerregistrering');
             cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
@@ -155,7 +155,7 @@ Cypress.Commands.add('configure', option => {
             cy.server();
             cy.route('GET', '/api/auth', 'fixture:auth');
             cy.route('GET', featureToggles, 'fixture:/feature-toggle/nedetid-false');
-            cy.route('GET', '/veilarbstepup/status', 'fixture:status');
+            cy.route('GET', '/api/auth', 'fixture:status');
             cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/ordinaerregistrering');
             // cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
             cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');

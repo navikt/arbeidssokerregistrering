@@ -14,9 +14,16 @@ export interface State {
     status: string;
 }
 
+export enum SecurityLevel {
+    Level1 = 'Level1',
+    Level2 = 'Level2',
+    Level3 = 'Level3',
+    Level4 = 'Level4',
+    Ukjent = 'Ukjent'
+}
+
 export interface Data {
-    nivaOidc?: number;
-    niva?: number;
+    securityLevel?: SecurityLevel;
 }
 
 interface Action {
@@ -48,7 +55,7 @@ export default function (state: State = initialState, action: Action): State {
 
 export function hentAutentiseringsInfo() {
     return doThenDispatch(() => {
-        return erIFSS() ? Promise.resolve({ nivaOidc: 4 }) : Api.hentAutentiseringsInfo();
+        return erIFSS() ? Promise.resolve({ securityLevel: SecurityLevel.Level4 }) : Api.hentAutentiseringsInfo();
     }, {
         PENDING: ActionTypes.HENT_AUTENTISERINGSINFO_PENDING,
         OK: ActionTypes.HENT_AUTENTISERINGSINFO_OK,

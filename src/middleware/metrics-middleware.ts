@@ -52,8 +52,8 @@ function loggHarStartetRegistrering(action: Action) {
 
 function loggAutentiseringsinfo(action: Action) {
     if (action.type === AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_OK) {
-        const { niva } = action.data;
-        frontendLogger('registrering.security.level', {'niva': niva}, {});
+        const { securityLevel } = action.data;
+        frontendLogger('registrering.security.level', {'niva': securityLevel}, {});
     }
 }
 

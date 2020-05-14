@@ -21,7 +21,7 @@ export const feilTyper = [
     {
         type: AutentiseringsinfoActionTypes.HENT_AUTENTISERINGSINFO_FEILET,
         eventnavn: 'registrering.feil.autentiseringsinfo',
-        apikall: 'GET /veilarbstepup/status'
+        apikall: 'GET /api/auth'
     },
     {
         type: StillingFraAAregActionTypes.SISTE_ARBEIDSFORHOLD_FRA_AAREG_FEILET,
