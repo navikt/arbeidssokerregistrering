@@ -149,7 +149,6 @@ jobs:
           CLUSTER: prod-fss
           RESOURCE: nais/naiserator-fss.yaml
           VARS: nais/vars-p-fss.yaml
-          DRY_RUN: true
 
   deploy-prod-sbs:
     name: Deploy to Prod SBS
@@ -171,7 +170,6 @@ jobs:
           CLUSTER: prod-sbs
           RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-p-sbs.yaml
-          DRY_RUN: true
 
   release:
     name: Tag and release
