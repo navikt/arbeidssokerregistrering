@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { Panel } from 'nav-frontend-paneler'
+import Panel from 'nav-frontend-paneler'
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { Hovedknapp } from 'nav-frontend-knapper';

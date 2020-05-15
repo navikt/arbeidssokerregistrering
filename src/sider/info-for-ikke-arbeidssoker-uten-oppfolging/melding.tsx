@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Fieldset, Radio } from 'nav-frontend-skjema';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { uniLogger } from '../../metrikker/uni-logger';
 
