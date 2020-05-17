@@ -194,10 +194,10 @@ if (MOCK_OPPDATER_BRUKER_KONTEKST) {
 
 if (MOCK_KONTAKTINFO) {
   mock.get(
-    `${VEILARBREGISTRERING_URL}/kontaktinfo`,
+    `${VEILARBREGISTRERING_URL}/person/kontaktinfo`,
     ResponseUtils.delayed(DELAY, kontaktinfoRespons)
   ); // tslint:disable-line
-  // mock.get(`${VEILARBREGISTRERING_URL}/kontaktinfo`, ResponseUtils.combine(ResponseUtils.statusCode(500), kontaktinfoFeilrespons)); // tslint:disable-line
+  // mock.get(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`, ResponseUtils.combine(ResponseUtils.statusCode(500), kontaktinfoFeilrespons)); // tslint:disable-line
 }
 
 if (DISPATCH_BESVARELSE) {

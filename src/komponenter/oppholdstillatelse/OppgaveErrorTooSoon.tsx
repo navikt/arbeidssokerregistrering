@@ -1,7 +1,8 @@
 import React from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Feilmelding, Undertittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Veilederpanel from 'nav-frontend-veilederpanel';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
 
 import { State as KontaktinfoState } from '../../ducks/kontaktinfo';
 import { Kontaktinformasjon } from './'
@@ -22,53 +23,58 @@ class OppgaveErrorTooSoon extends React.Component<Props> {
         uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
 
         return (
-            <div className="blokk-m">
-                <Veilederpanel
-                    svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
-                    type={"plakat"}
-                    kompakt
-                >
-                    <Alertstripe type="info">
-                        <Undertittel>Vennligst vent / Please wait</Undertittel>
-                    </Alertstripe>
-                    <p className="blokk-m">
-                        <Normaltekst>Du har allerede bedt oss kontakte deg.</Normaltekst>
-                        <Normaltekst>Vi tar kontakt i løpet av to arbeidsdager regnet fra den første meldingen.</Normaltekst>
-                        <Normaltekst>Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.</Normaltekst>
-                    </p>
-                    <p className="blokk-m">
-                        <Normaltekst>We have received your first message.</Normaltekst>
-                        <Normaltekst>We will contact you within two working days from the first message.</Normaltekst>
-                        <Normaltekst>Please make sure your contact details are updated.</Normaltekst>
-                    </p>
-                    {kontaktinfoStatus === 'OK' && telefonnummerFinnes ?
-                        <>
-                            {kontaktinfo.telefonnummerHosKrr ?
-                                <Kontaktinformasjon
-                                    telefonnummer={kontaktinfo.telefonnummerHosKrr}
-                                    kilde="Kontakt- og reservasjonsregisteret"
-                                /> : null}
-                            {kontaktinfo.telefonnummerHosNav ?
-                                <Kontaktinformasjon
-                                    telefonnummer={kontaktinfo.telefonnummerHosNav}
-                                    kilde="NAV"
-                                /> : null}
-                            <EksternLenke
-                                url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                                tekst="Endre lagrede opplysninger" />
-                        </>
-                        :
-                        <>
-                            <p>
-                                <Normaltekst>Ingen kontaktinformasjon funnet.</Normaltekst>
-                            </p>
-                            <EksternLenke
-                                url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                                tekst="Legg inn opplysninger" />
-                        </>
-                    }
-                </Veilederpanel>
-            </div>
+            <Veilederpanel
+                svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
+                type={"plakat"}
+                kompakt
+            >
+                <Alertstripe type="info" data-testid="alertstripe">
+                    <Undertittel>Vennligst vent / Please wait</Undertittel>
+                </Alertstripe>
+                <p>
+                    Du har allerede bedt oss kontakte deg.
+                    Vi tar kontakt i løpet av to arbeidsdager regnet fra den første meldingen.
+                    Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                </p>
+                <p>
+                    We have received your first message.
+                    We will contact you within two working days from the first message.
+                    Please make sure your contact details are updated.
+                </p>
+                {kontaktinfoStatus === 'OK' && telefonnummerFinnes ?
+                    <>
+                        {kontaktinfo.telefonnummerHosKrr ?
+                            <Kontaktinformasjon
+                                telefonnummer={kontaktinfo.telefonnummerHosKrr}
+                                kilde="Kontakt- og reservasjonsregisteret"
+                                data-testid="kontaktinformasjonskort-krr"
+                            /> : null}
+                        {kontaktinfo.telefonnummerHosNav ?
+                            <Kontaktinformasjon
+                                telefonnummer={kontaktinfo.telefonnummerHosNav}
+                                kilde="NAV"
+                                data-testid="kontaktinformasjonskort-nav"
+                            /> : null}
+                        <EksternLenke
+                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                            tekst="Endre opplysninger / Change contact details"
+                            data-testid="ekstern-lenke-endre-opplysninger" />
+                    </>
+                    :
+                    <>
+                        <p style={{ display: 'flex' }}>
+                            <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+                            <Hjelpetekst>
+                                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg. / Please make sure your contact details are updated or we will be unable to reach you.
+                            </Hjelpetekst>
+                        </p>
+                        <EksternLenke
+                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                            tekst="Legg inn kontaktopplysninger / Enter contact details"
+                            data-testid="ekstern-lenke-legg-inn-opplysninger" />
+                    </>
+                }
+            </Veilederpanel>
         )
     }
 };

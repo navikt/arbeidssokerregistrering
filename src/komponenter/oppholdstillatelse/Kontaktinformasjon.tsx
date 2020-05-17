@@ -7,19 +7,19 @@ import './kontaktinformasjon.less';
 interface Props {
     telefonnummer: string | undefined;
     kilde: string;
-}
+};
 
 class Kontaktinformasjon extends React.Component<Props> {
     render() {
-        const { telefonnummer, kilde } = this.props;
+        const { telefonnummer, kilde, ...children } = this.props;
         return (
-            <Panel border className="kontaktinfo-kort">
+            <Panel border className="kontaktinfo-kort" {...children}>
                 <Undertittel>{`Telefonnummer lagret hos ${kilde}`}</Undertittel>
-                <Undertittel>{telefonnummer}</Undertittel>
-                <EtikettLiten>{`kilde: ${kilde}`}</EtikettLiten>
+                <Undertittel className="informasjon">{telefonnummer}</Undertittel>
+                <EtikettLiten>{`Kilde: ${kilde}`}</EtikettLiten>
             </Panel>
         )
-    }
-}
+    };
+};
 
 export default Kontaktinformasjon;

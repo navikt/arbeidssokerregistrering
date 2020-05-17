@@ -1,8 +1,9 @@
 import React from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel, Feilmelding } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import virkedager from '@alheimsins/virkedager'
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
 
 import prettyPrintDato from '../../utils/pretty-print-dato'
 import { State as KontaktinfoState } from '../../ducks/kontaktinfo';
@@ -41,52 +42,58 @@ class OppgaveSuccess extends React.Component<Props> {
         this.telfonnummerLogger(kontaktinfo);
 
         return (
-            <div className="blokk-m">
-                <Veilederpanel
-                    svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
-                    type={"plakat"}
-                    kompakt
-                >
-                    <Alertstripe type="suksess">
-                        <Undertittel>Henvendelse mottatt / Request received</Undertittel>
-                    </Alertstripe>
-                    <p className="blokk-m">
-                        <Undertittel>Viktig / Important:</Undertittel>
-                        <Normaltekst>Vi kontakter deg innen utgangen av {datoNorsk}.</Normaltekst>
-                        <Normaltekst>Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.</Normaltekst>
-                    </p>
-                    <p className="blokk-m">
-                        <Normaltekst>We will contact you before the end of {datoEngelsk}.</Normaltekst>
-                        <Normaltekst>Please make sure your contact details are updated.</Normaltekst>
-                    </p>
-                    {kontaktinfoStatus === 'OK' && telefonnummerRegistrert ?
-                        <>
-                            {kontaktinfo.telefonnummerHosKrr ?
-                                <Kontaktinformasjon
-                                    telefonnummer={kontaktinfo.telefonnummerHosKrr}
-                                    kilde="Kontakt- og reservasjonsregisteret"
-                                /> : null}
-                            {kontaktinfo.telefonnummerHosNav ?
-                                <Kontaktinformasjon
-                                    telefonnummer={kontaktinfo.telefonnummerHosNav}
-                                    kilde="NAV"
-                                /> : null}
-                            <EksternLenke
-                                url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                                tekst="Endre lagrede opplysninger" />
-                        </>
-                        :
-                        <>
-                            <p>
-                                <Normaltekst>Ingen kontaktinformasjon funnet.</Normaltekst>
-                            </p>
-                            <EksternLenke
-                                url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                                tekst="Legg inn opplysninger" />
-                        </>
-                    }
-                </Veilederpanel>
-            </div>
+            <Veilederpanel
+                svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
+                type={"plakat"}
+                kompakt
+            >
+                <Alertstripe type="suksess" data-testid="alertstripe">
+                    <Undertittel >Henvendelse mottatt / Request received</Undertittel>
+                </Alertstripe>
+                <Undertittel className="tekstboks">Viktig / Important:</Undertittel>
+                <p>
+                    Vi kontakter deg innen utgangen av <strong>{datoNorsk}</strong>.
+                    Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                </p>
+                <p>
+                    We will contact you before the end of <strong>{datoEngelsk}</strong>.
+                    Please make sure your contact details are updated.
+                </p>
+                {kontaktinfoStatus === 'OK' && telefonnummerRegistrert ?
+                    <>
+                        {kontaktinfo.telefonnummerHosKrr ?
+                            <Kontaktinformasjon
+                                telefonnummer={kontaktinfo.telefonnummerHosKrr}
+                                kilde="Kontakt- og reservasjonsregisteret"
+                                data-testid="kontaktinformasjonskort-krr"
+                            /> : null}
+                        {kontaktinfo.telefonnummerHosNav ?
+                            <Kontaktinformasjon
+                                telefonnummer={kontaktinfo.telefonnummerHosNav}
+                                kilde="NAV"
+                                data-testid="kontaktinformasjonskort-nav"
+                            /> : null}
+                        <EksternLenke
+                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                            tekst="Endre opplysninger / Change contact details"
+                            data-testid="ekstern-lenke-endre-opplysninger" />
+                    </>
+                    :
+                    <>
+                        <p style={{ display: 'flex' }}>
+                            <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+                            <Hjelpetekst>
+                                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                                / Please make sure your contact details are updated or we will be unable to reach you.
+                            </Hjelpetekst>
+                        </p>
+                        <EksternLenke
+                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                            tekst="Legg inn kontaktopplysninger / Enter contact details"
+                            data-testid="ekstern-lenke-legg-inn-opplysninger" />
+                    </>
+                }
+            </Veilederpanel>
         )
     };
 };

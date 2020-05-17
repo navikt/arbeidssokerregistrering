@@ -11,10 +11,10 @@ interface Props {
 
 class EksternLenke extends React.Component<Props> {
     render() {
-        const { url, tekst } = this.props;
+        const { url, tekst, ...children } = this.props;
         return (
-            <Lenke href={`${url}`} className="blokk-m">
-                <span >
+            <Lenke href={`${url}`} className="blokk-m" {...children}>
+                <span>
                     <img className="icon" src={link} alt="Ekstern lenke" />
                     {tekst}
                 </span>
