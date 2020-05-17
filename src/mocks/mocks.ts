@@ -22,8 +22,8 @@ import FetchMock, {
   MiddlewareUtils,
   ResponseUtils,
 } from "yet-another-fetch-mock";
-// eslint-disable-next-line
 import {
+  // eslint-disable-next-line
   ordinaerRegistreringRespons,
   sykmeldtRegistreringRespons,
   ordinaerRegistreringFeilrespons,
