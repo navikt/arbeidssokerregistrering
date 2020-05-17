@@ -2,21 +2,21 @@ import {
     fetchToJson,
     leggTilFnrForFSS,
     leggTilFnrOgEnhetForFSS,
-} from "./api-utils";
-import { Data as RegistrerBrukerData } from "./registrerbruker";
-import { alleFeatureToggles } from "./feature-toggles";
-import { RegistreringType } from "./registreringstatus";
+} from './api-utils';
+import { Data as RegistrerBrukerData } from './registrerbruker';
+import { alleFeatureToggles } from './feature-toggles';
+import { RegistreringType } from './registreringstatus';
 
-export const VEILARBPERSON_NAVN_URL = "/veilarbperson/api/person/navn";
-export const AUTENTISERINGSINFO_URL = "/api/auth";
+export const VEILARBPERSON_NAVN_URL = '/veilarbperson/api/person/navn';
+export const AUTENTISERINGSINFO_URL = '/api/auth';
 export const LOGINSERVICEURL = `/loginservice/login?redirect=${window.location.origin}`;
-export const VEILARBREGISTRERING_URL = "/veilarbregistrering/api";
-export const FEATURE_URL = "/api/feature";
-export const OPPDATER_KONTEKST_URL = "/modiacontextholder/api/context";
+export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
+export const FEATURE_URL = '/api/feature';
+export const OPPDATER_KONTEKST_URL = '/modiacontextholder/api/context';
 export const BRUKER_KONTEKST_URL =
-    "/modiacontextholder/api/context/aktivbruker";
+    '/modiacontextholder/api/context/aktivbruker';
 
-const PAM_JANZZ_URL = "/pam-janzz/rest";
+const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
 interface BrukerIKontekstData {
@@ -26,18 +26,18 @@ interface BrukerIKontekstData {
 export const getCookie = (name: string) => {
     const re = new RegExp(`${name}=([^;]+)`);
     const match = re.exec(document.cookie);
-    return match !== null ? match[1] : "";
+    return match !== null ? match[1] : '';
 };
 
 function getHeaders() {
     return new Headers({
-        "Content-Type": "application/json",
-        NAV_CSRF_PROTECTION: getCookie("NAV_CSRF_PROTECTION"),
+        'Content-Type': 'application/json',
+        NAV_CSRF_PROTECTION: getCookie('NAV_CSRF_PROTECTION'),
     });
 }
 
 const MED_CREDENTIALS = {
-    credentials: "same-origin" as RequestCredentials,
+    credentials: 'same-origin' as RequestCredentials,
 };
 
 export function hentRegistreringStatus() {
@@ -56,15 +56,15 @@ export function registrerBruker(
 ) {
     const endepunkt =
         registreringType === RegistreringType.SYKMELDT_REGISTRERING
-            ? "startregistrersykmeldt"
-            : "startregistrering";
+            ? 'startregistrersykmeldt'
+            : 'startregistrering';
 
     return fetchToJson({
         url: leggTilFnrOgEnhetForFSS(`${VEILARBREGISTRERING_URL}/${endepunkt}`),
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-            method: "post",
+            method: 'post',
             body: JSON.stringify(data),
         },
     });
@@ -76,7 +76,7 @@ export function startReaktivering() {
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-            method: "post",
+            method: 'post',
             body: JSON.stringify({}),
         },
     });
@@ -88,8 +88,8 @@ export function opprettKontaktmegOppgave() {
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-            method: "post",
-            body: JSON.stringify({ oppgaveType: "OPPHOLDSTILLATELSE" }),
+            method: 'post',
+            body: JSON.stringify({ oppgaveType: 'OPPHOLDSTILLATELSE' }),
         },
     });
 }
@@ -100,9 +100,9 @@ export function oppdaterAktivBruker(brukerFnr: string) {
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-            method: "post",
+            method: 'post',
             body: JSON.stringify({
-                eventType: "NY_AKTIV_BRUKER",
+                eventType: 'NY_AKTIV_BRUKER',
                 verdi: brukerFnr,
             }),
         },
@@ -171,7 +171,7 @@ export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${sokestreng}`,
         config: {
-            ...{ redirect: "manual" },
+            ...{ redirect: 'manual' },
             headers: getHeaders(),
         },
         recoverWith: () => ({ typeaheadYrkeList: [] }),
@@ -190,8 +190,8 @@ export function hentBrukerIKontekst() {
 
 export function hentFeatureToggles() {
     const parameters = alleFeatureToggles
-        .map((element) => "feature=" + element)
-        .join("&");
+        .map((element) => 'feature=' + element)
+        .join('&');
     return fetchToJson({
         url: `${FEATURE_URL}/?${parameters}`,
         config: {
