@@ -1,7 +1,6 @@
 {
-    "erInnlogget": false,
-    "harGyldigOidcToken": true,
-    "brukerId": null,
-    "niva": null,
-    "nivaOidc": 4
+  "loggedIn": true,
+  "remainingSeconds": null,
+  "expirationTime": "2021-05-13T17:48:54+02:00",
+  "securityLevel": "Level4"
 }

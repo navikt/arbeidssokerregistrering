@@ -158,7 +158,6 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                     <div className="fullfor-info">
                         <Ekspanderbartpanel
                             tittel={getIntlMessage(intl.messages, 'fullfor-les-mer')}
-                            tittelProps="normaltekst"
                             border={true}
                             {...{ renderContentWhenClosed: true }}
                         >

@@ -2,11 +2,10 @@ import { fetchToJson, leggTilFnrForFSS, leggTilFnrOgEnhetForFSS } from './api-ut
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
-import { ARBEIDSSOKERREGISTRERING_START_PATH } from '../utils/konstanter';
 
 export const VEILARBPERSON_NAVN_URL = '/veilarbperson/api/person/navn';
-export const AUTENTISERINGSINFO_URL = '/veilarbstepup/status';
-export const VEILARBSTEPUP = `/veilarbstepup/oidc?url=${ARBEIDSSOKERREGISTRERING_START_PATH}`;
+export const AUTENTISERINGSINFO_URL = '/api/auth';
+export const LOGINSERVICEURL = `/loginservice/login?redirect=${window.location.origin}`;
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/api/feature';
 export const OPPDATER_KONTEKST_URL = '/modiacontextholder/api/context';

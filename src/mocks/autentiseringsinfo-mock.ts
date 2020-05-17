@@ -1,6 +1,7 @@
+import { SecurityLevel } from '../ducks/autentiseringsinfo';
+
 const autentiseringsinfoMock = {
-    nivaOidc: 4,
-    niva: 4
+    securityLevel: SecurityLevel.Level4
 };
 
 export default autentiseringsinfoMock;
