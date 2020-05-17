@@ -7,7 +7,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import HentInitialData from "./komponenter/initialdata/hent-initial-data";
 import Routes from "./routes";
 import { TimeoutModal } from "@navikt/fo-session-timeout-modal";
-// import KontaktMegOppholdstillatelse from "./komponenter/oppholdstillatelse/KontaktMegController";
 
 class App extends React.Component {
     render() {
@@ -16,7 +15,6 @@ class App extends React.Component {
                 <IntlProvider>
                     <HentInitialData>
                         <TimeoutModal />
-                        {/* <KontaktMegOppholdstillatelse /> */}
                         <Router>
                             <Routes />
                         </Router>
