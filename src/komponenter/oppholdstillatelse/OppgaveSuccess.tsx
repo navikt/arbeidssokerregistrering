@@ -43,7 +43,7 @@ class OppgaveSuccess extends React.Component<Props> {
         return (
             <div className="blokk-m">
                 <Veilederpanel
-                    svg={<img src={veilederSvg} alt="" className="nav-veilederpanel-illustrasjon" />}
+                    svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
                     type={"plakat"}
                     kompakt
                 >

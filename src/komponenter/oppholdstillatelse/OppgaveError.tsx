@@ -15,7 +15,7 @@ class OppgaveError extends React.Component {
         return (
             <div className="blokk-m">
                 <Veilederpanel
-                    svg={<img src={veilederSvg} alt="" className="nav-veilederpanel-illustrasjon" />}
+                    svg={<img src={veilederSvg} alt="veilder" className="veileder-illustrasjon" />}
                     type={"plakat"}
                     kompakt
                 >
