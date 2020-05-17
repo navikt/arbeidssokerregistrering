@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Panel } from 'nav-frontend-paneler';
-
+import Panel from 'nav-frontend-paneler';
 import { Undertittel, EtikettLiten } from 'nav-frontend-typografi';
 
 import './kontaktinformasjon.less';
