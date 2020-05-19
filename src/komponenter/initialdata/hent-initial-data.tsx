@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { AppState } from '../../reducer';
 import { hentBrukersNavn, selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
-import { hentKontaktinfo, selectKontaktinfo, State as KontaktinfoState } from '../../ducks/kontaktinfo';
+import { hentKontaktinfo } from '../../ducks/kontaktinfo';
 import {
     Data as AuthData,
     hentAutentiseringsInfo,
