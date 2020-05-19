@@ -35,7 +35,6 @@ interface StateProps {
     autentiseringsinfo: AuthState;
     registreringstatus: RegistreringstatusState;
     featuretoggles: FeatureToggleState;
-    kontaktinfo: KontaktinfoState;
 }
 
 interface DispatchProps {
@@ -59,9 +58,7 @@ export class HentInitialData extends React.Component<Props> {
                     this.props.hentKontaktinfo();
                 }
             });
-
         });
-
     }
 
     render() {
@@ -108,7 +105,6 @@ const mapStateToProps = (state: AppState) => ({
     brukersNavn: selectBrukersNavn(state),
     registreringstatus: selectRegistreringstatus(state),
     featuretoggles: selectFeatureTogglesState(state),
-    kontaktinfo: selectKontaktinfo(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({

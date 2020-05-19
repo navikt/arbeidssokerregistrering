@@ -48,7 +48,7 @@ class OppgaveErrorTooSoon extends React.Component<Props> {
                 :
                 <>
                     <div style={{ display: 'flex' }}>
-                        <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+                        <Feilmelding data-testid="feilmelding">Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
                         <Hjelpetekst className="tekstboks">
                             Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
                             / Please make sure your contact details are updated or we will be unable to reach you.
