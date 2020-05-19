@@ -16,10 +16,13 @@ import './kontakt-meg-melding.less';
 
 interface Props {
     kontaktinfo: KontaktinfoState;
+    visKontaktopplysninger: boolean;
 };
 
 class OppgaveSuccess extends React.Component<Props> {
-    private telfonnummerLogger(kontaktinfo) {
+    private telfonnummerLogger() {
+        const { kontaktinfo: { data: kontaktinfo } } = this.props;
+
         if (kontaktinfo.telefonnummerHosKrr && kontaktinfo.telefonnummerHosNav) {
             uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer.krrognav');
         } else if (kontaktinfo.telefonnummerHosKrr) {
@@ -31,15 +34,55 @@ class OppgaveSuccess extends React.Component<Props> {
         }
     };
 
-    render() {
+    kontaktOpplysninger() {
         const { kontaktinfo: { status: kontaktinfoStatus, data: kontaktinfo } } = this.props;
+        const telefonnummerRegistrert = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav
+
+        return (
+            kontaktinfoStatus === 'OK' && telefonnummerRegistrert ?
+                <>
+                    {kontaktinfo.telefonnummerHosKrr ?
+                        <Kontaktinformasjon
+                            telefonnummer={kontaktinfo.telefonnummerHosKrr}
+                            kilde="Kontakt- og reservasjonsregisteret"
+                            data-testid="kontaktinformasjonskort-krr"
+                        /> : null}
+                    {kontaktinfo.telefonnummerHosNav ?
+                        <Kontaktinformasjon
+                            telefonnummer={kontaktinfo.telefonnummerHosNav}
+                            kilde="NAV"
+                            data-testid="kontaktinformasjonskort-nav"
+                        /> : null}
+                    <EksternLenke
+                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                        tekst="Endre opplysninger / Change contact details"
+                        data-testid="ekstern-lenke-endre-opplysninger" />
+                </>
+                :
+                <>
+                    <div style={{ display: 'flex' }}>
+                        <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+                        <Hjelpetekst className="tekstboks">
+                            Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                            / Please make sure your contact details are updated or we will be unable to reach you.
+                        </Hjelpetekst>
+                    </div>
+                    <EksternLenke
+                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                        tekst="Legg inn kontaktopplysninger / Enter contact details"
+                        data-testid="ekstern-lenke-legg-inn-opplysninger" />
+                </>
+        )
+    };
+
+    render() {
+        const { visKontaktopplysninger } = this.props;
         const idag = new Date();
         const nesteVirkedag = virkedager(idag, 2);
         const datoNorsk = prettyPrintDato({ dato: nesteVirkedag, language: 'no' });
         const datoEngelsk = prettyPrintDato({ dato: nesteVirkedag, language: 'en' });
-        const telefonnummerRegistrert = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav
         uniLogger('registrering.oppholdstillatelse.kontaktmeg.success');
-        this.telfonnummerLogger(kontaktinfo);
+        this.telfonnummerLogger();
 
         return (
             <Veilederpanel
@@ -59,40 +102,11 @@ class OppgaveSuccess extends React.Component<Props> {
                     We will contact you before the end of <strong>{datoEngelsk}</strong>.
                     Please make sure your contact details are updated.
                 </p>
-                {kontaktinfoStatus === 'OK' && telefonnummerRegistrert ?
-                    <>
-                        {kontaktinfo.telefonnummerHosKrr ?
-                            <Kontaktinformasjon
-                                telefonnummer={kontaktinfo.telefonnummerHosKrr}
-                                kilde="Kontakt- og reservasjonsregisteret"
-                                data-testid="kontaktinformasjonskort-krr"
-                            /> : null}
-                        {kontaktinfo.telefonnummerHosNav ?
-                            <Kontaktinformasjon
-                                telefonnummer={kontaktinfo.telefonnummerHosNav}
-                                kilde="NAV"
-                                data-testid="kontaktinformasjonskort-nav"
-                            /> : null}
-                        <EksternLenke
-                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                            tekst="Endre opplysninger / Change contact details"
-                            data-testid="ekstern-lenke-endre-opplysninger" />
-                    </>
-                    :
-                    <>
-                        <p style={{ display: 'flex' }}>
-                            <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
-                            <Hjelpetekst>
-                                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
-                                / Please make sure your contact details are updated or we will be unable to reach you.
-                            </Hjelpetekst>
-                        </p>
-                        <EksternLenke
-                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                            tekst="Legg inn kontaktopplysninger / Enter contact details"
-                            data-testid="ekstern-lenke-legg-inn-opplysninger" />
-                    </>
-                }
+                {visKontaktopplysninger ? this.kontaktOpplysninger() :
+                    <EksternLenke
+                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                        tekst="Legg inn kontaktopplysninger / Enter contact details"
+                        data-testid="ekstern-lenke-legg-inn-opplysninger" />}
             </Veilederpanel>
         )
     };

@@ -106,10 +106,7 @@ if (PRINT_FRONTENDLOGGER) {
 }
 
 if (MOCK_START_REGISRERING_STATUS) {
-    mock.get(
-        `${VEILARBREGISTRERING_URL}/startregistrering`,
-        ResponseUtils.delayed(DELAY, startRegistreringStatus)
-    );
+    mock.get(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, startRegistreringStatus));
 }
 
 if (MOCK_FEATURE_TOGGLES) {
@@ -117,71 +114,39 @@ if (MOCK_FEATURE_TOGGLES) {
 }
 
 if (MOCK_BRUKERS_NAVN) {
-    mock.get(
-        `${VEILARBPERSON_NAVN_URL}`,
-        ResponseUtils.delayed(DELAY, brukersNavn)
-    );
+    mock.get(`${VEILARBPERSON_NAVN_URL}`, ResponseUtils.delayed(DELAY, brukersNavn));
 }
 
 if (MOCK_GET_SISTE_ARBIEDSFORHOLD) {
-    mock.get(
-        `${VEILARBREGISTRERING_URL}/sistearbeidsforhold`,
-        ResponseUtils.delayed(DELAY, sisteStillingFraAAReg)
-    );
+    mock.get(`${VEILARBREGISTRERING_URL}/sistearbeidsforhold`, ResponseUtils.delayed(DELAY, sisteStillingFraAAReg));
 }
 
 if (MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-    mock.get(
-        '/pam-janzz/rest/kryssklassifiserMedKonsept',
-        ResponseUtils.delayed(DELAY, oversettelseAvStillingFraAAReg)
-    ); // tslint:disable-line
+    mock.get('/pam-janzz/rest/kryssklassifiserMedKonsept', ResponseUtils.delayed(DELAY, oversettelseAvStillingFraAAReg)); // tslint:disable-line
 }
 
 if (MOCK_STYRK08_PAMJANZZ) {
-    mock.get(
-        '/pam-janzz/rest/typeahead/yrke-med-styrk08',
-        ResponseUtils.delayed(DELAY, (args) =>
-            ResponseUtils.jsonPromise(lagPamjanzzRespons(args.queryParams))
-        )
-    ); // tslint:disable-line
+    mock.get('/pam-janzz/rest/typeahead/yrke-med-styrk08', ResponseUtils.delayed(DELAY, (args) => ResponseUtils.jsonPromise(lagPamjanzzRespons(args.queryParams)))); // tslint:disable-line
 }
 
 if (MOCK_REGISTRER_BRUKER) {
     // mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
-    mock.post(
-        `${VEILARBREGISTRERING_URL}/startregistrering`,
-        ResponseUtils.combine(
-            ResponseUtils.statusCode(500),
-            ordinaerRegistreringFeilrespons
-        )
-    ); // tslint:disable-line
-    mock.post(
-        `${VEILARBREGISTRERING_URL}/startregistrersykmeldt`,
-        ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)
-    ); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.combine(ResponseUtils.statusCode(500), ordinaerRegistreringFeilrespons)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt`, ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)); // tslint:disable-line
 }
 
 if (MOCK_REAKTIVER_BRUKER) {
-    mock.post(
-        `${VEILARBREGISTRERING_URL}/startreaktivering`,
-        ResponseUtils.delayed(DELAY, {})
-    ); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startreaktivering`, ResponseUtils.delayed(DELAY, {})); // tslint:disable-line
 }
 
 if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
-    mock.post(
-        `${VEILARBREGISTRERING_URL}/oppgave`,
-        ResponseUtils.delayed(100, opprettKontaktmegOppgaveRespons)
-    ); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.delayed(100, opprettKontaktmegOppgaveRespons)); // tslint:disable-line
     // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(500)); // tslint:disable-line
     // mock.post(`${VEILARBREGISTRERING_URL}/oppgave`, ResponseUtils.statusCode(403)); // tslint:disable-line
 }
 
 if (MOCK_BRUKER_KONTEKST) {
-    mock.get(
-        `${BRUKER_KONTEKST_URL}`,
-        ResponseUtils.delayed(DELAY, brukerKontekst)
-    ); // tslint:disable-line
+    mock.get(`${BRUKER_KONTEKST_URL}`, ResponseUtils.delayed(DELAY, brukerKontekst)); // tslint:disable-line
 }
 
 if (MOCK_AUTENTISERINGS_INFO) {
@@ -193,10 +158,7 @@ if (MOCK_OPPDATER_BRUKER_KONTEKST) {
 }
 
 if (MOCK_KONTAKTINFO) {
-    mock.get(
-        `${VEILARBREGISTRERING_URL}/person/kontaktinfo`,
-        ResponseUtils.delayed(DELAY, kontaktinfoRespons)
-    ); // tslint:disable-line
+    mock.get(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`, ResponseUtils.delayed(DELAY, kontaktinfoRespons)); // tslint:disable-line
     // mock.get(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`, ResponseUtils.combine(ResponseUtils.statusCode(500), kontaktinfoFeilrespons)); // tslint:disable-line
 }
 

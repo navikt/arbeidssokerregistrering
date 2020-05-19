@@ -14,12 +14,56 @@ import './kontakt-meg-melding.less';
 
 interface Props {
     kontaktinfo: KontaktinfoState;
+    visKontaktopplysninger: boolean;
 };
 
+
+
 class OppgaveErrorTooSoon extends React.Component<Props> {
-    render() {
+
+    kontaktOpplysninger() {
         const { kontaktinfo: { status: kontaktinfoStatus, data: kontaktinfo } } = this.props;
-        const telefonnummerFinnes = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav;
+        const telefonnummerRegistrert = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav
+
+        return (
+            kontaktinfoStatus === 'OK' && telefonnummerRegistrert ?
+                <>
+                    {kontaktinfo.telefonnummerHosKrr ?
+                        <Kontaktinformasjon
+                            telefonnummer={kontaktinfo.telefonnummerHosKrr}
+                            kilde="Kontakt- og reservasjonsregisteret"
+                            data-testid="kontaktinformasjonskort-krr"
+                        /> : null}
+                    {kontaktinfo.telefonnummerHosNav ?
+                        <Kontaktinformasjon
+                            telefonnummer={kontaktinfo.telefonnummerHosNav}
+                            kilde="NAV"
+                            data-testid="kontaktinformasjonskort-nav"
+                        /> : null}
+                    <EksternLenke
+                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                        tekst="Endre opplysninger / Change contact details"
+                        data-testid="ekstern-lenke-endre-opplysninger" />
+                </>
+                :
+                <>
+                    <div style={{ display: 'flex' }}>
+                        <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+                        <Hjelpetekst className="tekstboks">
+                            Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                            / Please make sure your contact details are updated or we will be unable to reach you.
+                        </Hjelpetekst>
+                    </div>
+                    <EksternLenke
+                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                        tekst="Legg inn kontaktopplysninger / Enter contact details"
+                        data-testid="ekstern-lenke-legg-inn-opplysninger" />
+                </>
+        )
+    };
+
+    render() {
+        const { visKontaktopplysninger } = this.props;
         uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
 
         return (
@@ -41,39 +85,11 @@ class OppgaveErrorTooSoon extends React.Component<Props> {
                     We will contact you within two working days from the first message.
                     Please make sure your contact details are updated.
                 </p>
-                {kontaktinfoStatus === 'OK' && telefonnummerFinnes ?
-                    <>
-                        {kontaktinfo.telefonnummerHosKrr ?
-                            <Kontaktinformasjon
-                                telefonnummer={kontaktinfo.telefonnummerHosKrr}
-                                kilde="Kontakt- og reservasjonsregisteret"
-                                data-testid="kontaktinformasjonskort-krr"
-                            /> : null}
-                        {kontaktinfo.telefonnummerHosNav ?
-                            <Kontaktinformasjon
-                                telefonnummer={kontaktinfo.telefonnummerHosNav}
-                                kilde="NAV"
-                                data-testid="kontaktinformasjonskort-nav"
-                            /> : null}
-                        <EksternLenke
-                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                            tekst="Endre opplysninger / Change contact details"
-                            data-testid="ekstern-lenke-endre-opplysninger" />
-                    </>
-                    :
-                    <>
-                        <p style={{ display: 'flex' }}>
-                            <Feilmelding>Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
-                            <Hjelpetekst>
-                                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg. / Please make sure your contact details are updated or we will be unable to reach you.
-                            </Hjelpetekst>
-                        </p>
-                        <EksternLenke
-                            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                            tekst="Legg inn kontaktopplysninger / Enter contact details"
-                            data-testid="ekstern-lenke-legg-inn-opplysninger" />
-                    </>
-                }
+                {visKontaktopplysninger ? this.kontaktOpplysninger() :
+                    <EksternLenke
+                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                        tekst="Legg inn kontaktopplysninger / Enter contact details"
+                        data-testid="ekstern-lenke-legg-inn-opplysninger" />}
             </Veilederpanel>
         )
     }

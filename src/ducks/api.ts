@@ -32,7 +32,7 @@ export const getCookie = (name: string) => {
 function getHeaders() {
     return new Headers({
         'Content-Type': 'application/json',
-        NAV_CSRF_PROTECTION: getCookie('NAV_CSRF_PROTECTION'),
+        'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'),
     });
 }
 
