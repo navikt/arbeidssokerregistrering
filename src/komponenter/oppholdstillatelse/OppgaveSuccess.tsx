@@ -22,16 +22,11 @@ interface Props {
 class OppgaveSuccess extends React.Component<Props> {
     private telfonnummerLogger() {
         const { kontaktinfo: { data: kontaktinfo } } = this.props;
-
-        if (kontaktinfo.telefonnummerHosKrr && kontaktinfo.telefonnummerHosNav) {
-            uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer.krrognav');
-        } else if (kontaktinfo.telefonnummerHosKrr) {
-            uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer.krr');
-        } else if (kontaktinfo.telefonnummerHosNav) {
-            uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer.nav');
-        } else {
-            uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer.ingen');
-        }
+        const telefonnummer = {
+            krr: kontaktinfo.telefonnummerHosKrr ? "true" : "false",
+            nav: kontaktinfo.telefonnummerHosNav ? "true" : "false"
+        };
+        uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer', telefonnummer);
     };
 
     kontaktOpplysninger() {
