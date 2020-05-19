@@ -8,6 +8,7 @@ import { ActionTypes as OpprettKontaktmegOppgaveActionTypes } from './oppgave';
 import { ActionTypes as RegistrerBrukerActionTypes } from './registrerbruker';
 import { ActionTypes as ReaktiverBrukerActionTypes } from './reaktiverbruker';
 import { ActionTypes as FeatureTogglesActionTypes } from './feature-toggles';
+import { ActionTypes as KontaktinfoActionTypes } from './kontaktinfo';
 
 type ActionTypes =
    | RegStatusActionTypes
@@ -19,6 +20,7 @@ type ActionTypes =
    | OversettelseAvStillingFraAARegActionTypes
    | OpprettKontaktmegOppgaveActionTypes
    | SisteStillingFraAARegActionTypes
-   | FeatureTogglesActionTypes;
+   | FeatureTogglesActionTypes
+   | KontaktinfoActionTypes;
 
 export default ActionTypes;

@@ -21,6 +21,9 @@ import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
 import { IngenSvar } from '../../ducks/svar-utils';
+import { ActionTypes as KontaktinfoTypes } from '../../ducks/kontaktinfo';
+import { kontaktinfoRespons } from '../kontaktinfo-mock';
+import { ActionTypes as OppgaveTypes } from '../../ducks/oppgave';
 
 interface StateProps {
     startRegistreringStatus: StartRegistreringData;
@@ -72,12 +75,12 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
     render() {
         const store = getStore();
         const { registreringType,
-                servicegruppe,
-                formidlingsgruppe,
-                underOppfolging,
-                maksDato,
-                geografiskTilknytning,
-                rettighetsgruppe } = this.props.startRegistreringStatus;
+            servicegruppe,
+            formidlingsgruppe,
+            underOppfolging,
+            maksDato,
+            geografiskTilknytning,
+            rettighetsgruppe } = this.props.startRegistreringStatus;
         const reset = () => {
             store.dispatch({
                 type: reaktiveringActionType.REAKTIVER_BRUKER_STATUS_PENDING,
@@ -353,89 +356,89 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                     </legend>
                     <div>
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.BATT);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - BATT"
-                                value="BATT"
-                                checked={servicegruppe === Servicegruppe.BATT}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.BATT);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - BATT"
+                            value="BATT"
+                            checked={servicegruppe === Servicegruppe.BATT}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.BFORM);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - BFORM"
-                                value="BFORM"
-                                checked={servicegruppe === Servicegruppe.BFORM}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.BFORM);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - BFORM"
+                            value="BFORM"
+                            checked={servicegruppe === Servicegruppe.BFORM}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.BKART);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - BKART"
-                                value="BKART"
-                                checked={servicegruppe === Servicegruppe.BKART}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.BKART);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - BKART"
+                            value="BKART"
+                            checked={servicegruppe === Servicegruppe.BKART}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.IKVAL);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - IKVAL"
-                                value="IKVAL"
-                                checked={servicegruppe === Servicegruppe.IKVAL}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.IKVAL);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - IKVAL"
+                            value="IKVAL"
+                            checked={servicegruppe === Servicegruppe.IKVAL}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.IVURD);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - IVURD"
-                                value="IVURD"
-                                checked={servicegruppe === Servicegruppe.IVURD}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.IVURD);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - IVURD"
+                            value="IVURD"
+                            checked={servicegruppe === Servicegruppe.IVURD}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.OPPFI);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - OPPFI"
-                                value="OPPFI"
-                                checked={servicegruppe === Servicegruppe.OPPFI}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.OPPFI);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - OPPFI"
+                            value="OPPFI"
+                            checked={servicegruppe === Servicegruppe.OPPFI}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.VARIG);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - VARIG"
-                                value="VARIG"
-                                checked={servicegruppe === Servicegruppe.VARIG}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.VARIG);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - VARIG"
+                            value="VARIG"
+                            checked={servicegruppe === Servicegruppe.VARIG}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.VURDI);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - VURDI"
-                                value="VURDI"
-                                checked={servicegruppe === Servicegruppe.VURDI}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.VURDI);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - VURDI"
+                            value="VURDI"
+                            checked={servicegruppe === Servicegruppe.VURDI}
                         />
                         <RadioPanel
-                                onChange={() => {
-                                    oppdaterServicegruppe(Servicegruppe.VURDU);
-                                }}
-                                name="devToggleStatusServicegruppe"
-                                label="Servicegruppe - VURDU"
-                                value="VURDU"
-                                checked={servicegruppe === Servicegruppe.VURDU}
+                            onChange={() => {
+                                oppdaterServicegruppe(Servicegruppe.VURDU);
+                            }}
+                            name="devToggleStatusServicegruppe"
+                            label="Servicegruppe - VURDU"
+                            value="VURDU"
+                            checked={servicegruppe === Servicegruppe.VURDU}
                         />
                     </div>
                 </fieldset>
-                
+
                 <fieldset className="devToggleStatus__fieldset">
                     <legend
                         className="devToggleStatus__legend"
@@ -525,7 +528,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
                                         data: ordinaerRegistreringFeilrespons,
-                                        response: new Response(new Blob(), {status: 500})
+                                        response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
 
@@ -543,6 +546,180 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 feilmeldingRadioKnapp === 'manglerarbtillatelse'
                             }
                         />
+                        <RadioPanel
+                            onChange={() => {
+
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: ordinaerRegistreringFeilrespons,
+                                        response: new Response(new Blob(), { status: 500 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: OppgaveTypes.OPPRETT_OPPGAVE_STATUS_FEILET,
+                                    data: {
+                                        data: {},
+                                        response: new Response(new Blob(), { status: 500 })
+                                    }
+                                });
+
+                                this.dispathSpmOgPush(store, this.props.history);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'opprettOppgaveFeilet'
+                                });
+
+                            }}
+                            name="feilmelding"
+                            label="Feilmelding - Opprett Oppgave"
+                            value="Feilmelding - Opprett Oppgave"
+                            checked={
+                                feilmeldingRadioKnapp === 'opprettOppgaveFeilet'
+                            }
+                        />
+
+                    </div>
+                </fieldset>
+                <fieldset className="devToggleStatus__fieldset">
+                    <legend
+                        className="devToggleStatus__legend"
+                    >
+                        <Normaltekst>
+                            Kvitteringsmeldinger
+                        </Normaltekst>
+                    </legend>
+                    <div>
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: ordinaerRegistreringFeilrespons,
+                                        response: new Response(new Blob(), { status: 500 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: KontaktinfoTypes.HENT_KONTAKTINFO_OK,
+                                    data: {
+                                        ...kontaktinfoRespons,
+                                        response: new Response(new Blob(), { status: 200 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: OppgaveTypes.OPPRETT_OPPGAVE_STATUS_OK,
+                                    data: {
+                                        data: {},
+                                        response: new Response(new Blob(), { status: 200 })
+                                    }
+                                });
+
+                                this.dispathSpmOgPush(store, this.props.history);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'ManglerArbtillatelseOK'
+                                });
+
+                            }}
+                            name="oppgave"
+                            label="Opprett Oppgave - Mangler arbeidsstillatelse - OK"
+                            value="Opprett Oppgave - Mangler arbeidsstillatelse - OK"
+                            checked={
+                                feilmeldingRadioKnapp === 'ManglerArbtillatelseOK'
+                            }
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: ordinaerRegistreringFeilrespons,
+                                        response: new Response(new Blob(), { status: 500 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: KontaktinfoTypes.HENT_KONTAKTINFO_OK,
+                                    data: {
+                                        data: {},
+                                        response: new Response(new Blob(), { status: 200 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: OppgaveTypes.OPPRETT_OPPGAVE_STATUS_OK,
+                                    data: {
+                                        data: {},
+                                        response: new Response(new Blob(), { status: 200 })
+                                    }
+                                });
+
+                                this.dispathSpmOgPush(store, this.props.history);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'ManglerArbtillatelseManglerKontaktopplysinger'
+                                });
+
+                            }}
+                            name="oppgave"
+                            label="Opprett Oppgave - Mangler arbeidsstillatelse - /u tlf"
+                            value="Opprett Oppgave - Mangler arbeidsstillatelse - /u tlf"
+                            checked={
+                                feilmeldingRadioKnapp === 'ManglerArbtillatelseManglerKontaktopplysinger'
+                            }
+                        />
+                        <RadioPanel
+                            onChange={() => {
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: ordinaerRegistreringFeilrespons,
+                                        response: new Response(new Blob(), { status: 500 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: KontaktinfoTypes.HENT_KONTAKTINFO_OK,
+                                    data: {
+                                        ...kontaktinfoRespons,
+                                        response: new Response(new Blob(), { status: 200 })
+                                    }
+                                });
+
+                                store.dispatch({
+                                    type: OppgaveTypes.OPPRETT_OPPGAVE_STATUS_FEILET,
+                                    data: {
+                                        data: {},
+                                        response: new Response(new Blob(), { status: 403 })
+                                    }
+                                });
+
+                                this.dispathSpmOgPush(store, this.props.history);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'ManglerArbtillatelseTooSoon'
+                                });
+
+                            }}
+                            name="oppgave"
+                            label="Opprett Oppgave - Mangler arbeidsstillatelse - Vent"
+                            value="Opprett Oppgave - Mangler arbeidsstillatelse - Vent"
+                            checked={
+                                feilmeldingRadioKnapp === 'ManglerArbtillatelseTooSoon'
+                            }
+                        />
+
                     </div>
                 </fieldset>
             </div>
@@ -559,5 +736,5 @@ const HerokuMock = connect(mapStateToProps)(withRouter(injectIntl(HerokuappEndre
 
 export const RouteHerokuMock =
     !!process.env.REACT_APP_MOCK_ENDRE_REG_LOP
-        ? <Route path="/" component={HerokuMock}/>
+        ? <Route path="/" component={HerokuMock} />
         : null;

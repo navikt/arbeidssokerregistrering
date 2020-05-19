@@ -1,4 +1,8 @@
-import { fetchToJson, leggTilFnrForFSS, leggTilFnrOgEnhetForFSS } from './api-utils';
+import {
+    fetchToJson,
+    leggTilFnrForFSS,
+    leggTilFnrOgEnhetForFSS,
+} from './api-utils';
 import { Data as RegistrerBrukerData } from './registrerbruker';
 import { alleFeatureToggles } from './feature-toggles';
 import { RegistreringType } from './registreringstatus';
@@ -9,7 +13,8 @@ export const LOGINSERVICEURL = `/loginservice/login?redirect=${window.location.o
 export const VEILARBREGISTRERING_URL = '/veilarbregistrering/api';
 export const FEATURE_URL = '/api/feature';
 export const OPPDATER_KONTEKST_URL = '/modiacontextholder/api/context';
-export const BRUKER_KONTEKST_URL = '/modiacontextholder/api/context/aktivbruker';
+export const BRUKER_KONTEKST_URL =
+    '/modiacontextholder/api/context/aktivbruker';
 
 const PAM_JANZZ_URL = '/pam-janzz/rest';
 const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
@@ -32,34 +37,37 @@ function getHeaders() {
 }
 
 const MED_CREDENTIALS = {
-    credentials: ('same-origin' as RequestCredentials)
+    credentials: 'same-origin' as RequestCredentials,
 };
 
 export function hentRegistreringStatus() {
-
     return fetchToJson({
         url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/startregistrering`),
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-        }
+        },
     });
 }
 
-export function registrerBruker(data: RegistrerBrukerData, registreringType: RegistreringType) {
-
-    const endepunkt = registreringType === RegistreringType.SYKMELDT_REGISTRERING ?
-        'startregistrersykmeldt' : 'startregistrering';
+export function registrerBruker(
+    data: RegistrerBrukerData,
+    registreringType: RegistreringType
+) {
+    const endepunkt =
+        registreringType === RegistreringType.SYKMELDT_REGISTRERING
+            ? 'startregistrersykmeldt'
+            : 'startregistrering';
 
     return fetchToJson({
         url: leggTilFnrOgEnhetForFSS(`${VEILARBREGISTRERING_URL}/${endepunkt}`),
-        config: { ...MED_CREDENTIALS,
+        config: {
+            ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify(data)
-        }
+            body: JSON.stringify(data),
+        },
     });
-
 }
 
 export function startReaktivering() {
@@ -69,8 +77,8 @@ export function startReaktivering() {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify({})
-        }
+            body: JSON.stringify({}),
+        },
     });
 }
 
@@ -81,8 +89,8 @@ export function opprettKontaktmegOppgave() {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify({ oppgaveType: 'OPPHOLDSTILLATELSE'})
-        }
+            body: JSON.stringify({ oppgaveType: 'OPPHOLDSTILLATELSE' }),
+        },
     });
 }
 
@@ -96,8 +104,8 @@ export function oppdaterAktivBruker(brukerFnr: string) {
             body: JSON.stringify({
                 eventType: 'NY_AKTIV_BRUKER',
                 verdi: brukerFnr,
-            })
-        }
+            }),
+        },
     });
 }
 
@@ -107,7 +115,17 @@ export function hentBrukersNavn() {
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-        }
+        },
+    });
+}
+
+export function hentKontaktinfo() {
+    return fetchToJson({
+        url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`),
+        config: {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+        },
     });
 }
 
@@ -117,7 +135,7 @@ export function hentAutentiseringsInfo() {
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-        }
+        },
     });
 }
 
@@ -128,7 +146,13 @@ export function hentStyrkkodeForSisteStillingFraAAReg() {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
-        recoverWith: () => ({arbeidsgiver: null, stilling: null, styrk: null, fra: null, til: null})
+        recoverWith: () => ({
+            arbeidsgiver: null,
+            stilling: null,
+            styrk: null,
+            fra: null,
+            til: null,
+        }),
     });
 }
 
@@ -139,7 +163,7 @@ export function hentStillingFraPamGittStyrkkode(styrk: string) {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
-        recoverWith: () => ({konseptMedStyrk08List: []})
+        recoverWith: () => ({ konseptMedStyrk08List: [] }),
     });
 }
 
@@ -147,10 +171,10 @@ export function hentStillingMedStyrk08(sokestreng: string) {
     return fetchToJson({
         url: `${STYRK_URL}?q=${sokestreng}`,
         config: {
-            ...{redirect: 'manual'},
-            headers: getHeaders()
+            ...{ redirect: 'manual' },
+            headers: getHeaders(),
         },
-        recoverWith: () => ({'typeaheadYrkeList': []})
+        recoverWith: () => ({ typeaheadYrkeList: [] }),
     });
 }
 
@@ -160,18 +184,20 @@ export function hentBrukerIKontekst() {
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
-        }
+        },
     });
 }
 
 export function hentFeatureToggles() {
-    const parameters = alleFeatureToggles.map(element => 'feature=' + element).join('&');
+    const parameters = alleFeatureToggles
+        .map((element) => 'feature=' + element)
+        .join('&');
     return fetchToJson({
         url: `${FEATURE_URL}/?${parameters}`,
         config: {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
         },
-        recoverWith: () => ({})
+        recoverWith: () => ({}),
     });
 }
