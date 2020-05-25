@@ -20,6 +20,10 @@ interface Props {
 };
 
 class OppgaveSuccess extends React.Component<Props> {
+    handleEndreOpplysningerClicked = () => {
+        uniLogger('registrering.oppholdstillatelse.endreopplysninger.clicked');
+    };
+
     private telfonnummerLogger() {
         const { kontaktinfo: { data: kontaktinfo } } = this.props;
         const telefonnummer = {
@@ -51,7 +55,9 @@ class OppgaveSuccess extends React.Component<Props> {
                     <EksternLenke
                         url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
                         tekst="Endre opplysninger / Change contact details"
-                        data-testid="ekstern-lenke-endre-opplysninger" />
+                        data-testid="ekstern-lenke-endre-opplysninger"
+                        onClick={this.handleEndreOpplysningerClicked}
+                    />
                 </>
                 :
                 <>
@@ -65,7 +71,9 @@ class OppgaveSuccess extends React.Component<Props> {
                     <EksternLenke
                         url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
                         tekst="Legg inn kontaktopplysninger / Enter contact details"
-                        data-testid="ekstern-lenke-legg-inn-opplysninger" />
+                        data-testid="ekstern-lenke-legg-inn-opplysninger"
+                        onClick={this.handleEndreOpplysningerClicked}
+                    />
                 </>
         )
     };
@@ -101,7 +109,9 @@ class OppgaveSuccess extends React.Component<Props> {
                     <EksternLenke
                         url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
                         tekst="Legg inn kontaktopplysninger / Enter contact details"
-                        data-testid="ekstern-lenke-legg-inn-opplysninger" />}
+                        data-testid="ekstern-lenke-legg-inn-opplysninger"
+                        onClick={this.handleEndreOpplysningerClicked}
+                    />}
             </Veilederpanel>
         )
     };
