@@ -17,14 +17,6 @@ class KontaktMegForm extends React.Component<Props> {
         this.props.opprettKontaktmegOppgave();
     }
 
-    handleKRRNoClicked = () => {
-        uniLogger('registrering.oppholdstillatelse.krr.clicked', { locale: 'no' });
-    }
-
-    handleKRREnClicked = () => {
-        uniLogger('registrering.oppholdstillatelse.krr.clicked', { locale: 'en' });
-    }
-
     render() {
 
         return (
