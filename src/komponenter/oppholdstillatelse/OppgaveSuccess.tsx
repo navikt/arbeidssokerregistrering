@@ -19,36 +19,38 @@ interface Props {
     visKontaktopplysninger: boolean;
 };
 
-class OppgaveSuccess extends React.Component<Props> {
-    handleEndreOpplysningerClicked = () => {
+const OppgaveSuccess = ({kontaktinfo, visKontaktopplysninger}: Props) => {
+    const { status, data: {telefonnummerHosKrr, telefonnummerHosNav} } = kontaktinfo;
+    const telefonnummer = {
+        krr: telefonnummerHosKrr ? 'true' : 'false',
+        nav: telefonnummerHosNav ? 'true' : 'false'
+    };
+    uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer', telefonnummer);
+    uniLogger('registrering.oppholdstillatelse.kontaktmeg.success');
+    const idag = new Date();
+    const nesteVirkedag = virkedager(idag, 2);
+    const datoNorsk = prettyPrintDato({ dato: nesteVirkedag, language: 'no' });
+    const datoEngelsk = prettyPrintDato({ dato: nesteVirkedag, language: 'en' });
+
+    const handleEndreOpplysningerClicked = () => {
         uniLogger('registrering.oppholdstillatelse.endreopplysninger.clicked');
     };
 
-    private telfonnummerLogger() {
-        const { kontaktinfo: { data: kontaktinfo } } = this.props;
-        const telefonnummer = {
-            krr: kontaktinfo.telefonnummerHosKrr ? "true" : "false",
-            nav: kontaktinfo.telefonnummerHosNav ? "true" : "false"
-        };
-        uniLogger('registrering.oppholdstillatelse.kontaktmeg.telefonnummer', telefonnummer);
-    };
-
-    kontaktOpplysninger() {
-        const { kontaktinfo: { status: kontaktinfoStatus, data: kontaktinfo } } = this.props;
-        const telefonnummerRegistrert = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav
+    const kontaktOpplysninger = () => {
+        const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
 
         return (
-            kontaktinfoStatus === 'OK' && telefonnummerRegistrert ?
+            status === 'OK' && telefonnummerRegistrert ?
                 <>
-                    {kontaktinfo.telefonnummerHosKrr ?
+                    {telefonnummerHosKrr ?
                         <Kontaktinformasjon
-                            telefonnummer={kontaktinfo.telefonnummerHosKrr}
+                            telefonnummer={telefonnummerHosKrr}
                             kilde="Kontakt- og reservasjonsregisteret"
                             data-testid="kontaktinformasjonskort-krr"
                         /> : null}
-                    {kontaktinfo.telefonnummerHosNav ?
+                    {telefonnummerHosNav ?
                         <Kontaktinformasjon
-                            telefonnummer={kontaktinfo.telefonnummerHosNav}
+                            telefonnummer={telefonnummerHosNav}
                             kilde="NAV"
                             data-testid="kontaktinformasjonskort-nav"
                         /> : null}
@@ -56,7 +58,7 @@ class OppgaveSuccess extends React.Component<Props> {
                         url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
                         tekst="Endre opplysninger / Change contact details"
                         data-testid="ekstern-lenke-endre-opplysninger"
-                        onClick={this.handleEndreOpplysningerClicked}
+                        onClick={handleEndreOpplysningerClicked}
                     />
                 </>
                 :
@@ -72,49 +74,39 @@ class OppgaveSuccess extends React.Component<Props> {
                         url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
                         tekst="Legg inn kontaktopplysninger / Enter contact details"
                         data-testid="ekstern-lenke-legg-inn-opplysninger"
-                        onClick={this.handleEndreOpplysningerClicked}
+                        onClick={handleEndreOpplysningerClicked}
                     />
                 </>
         )
     };
 
-    render() {
-        const { visKontaktopplysninger } = this.props;
-        const idag = new Date();
-        const nesteVirkedag = virkedager(idag, 2);
-        const datoNorsk = prettyPrintDato({ dato: nesteVirkedag, language: 'no' });
-        const datoEngelsk = prettyPrintDato({ dato: nesteVirkedag, language: 'en' });
-        uniLogger('registrering.oppholdstillatelse.kontaktmeg.success');
-        this.telfonnummerLogger();
-
-        return (
-            <Veilederpanel
-                svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
-                type={"plakat"}
-                kompakt
-            >
-                <Alertstripe type="suksess" data-testid="alertstripe">
-                    <Undertittel >Henvendelse mottatt / Request received</Undertittel>
-                </Alertstripe>
-                <Undertittel className="tekstboks">Viktig / Important:</Undertittel>
-                <p>
-                    Vi kontakter deg innen utgangen av <strong>{datoNorsk}</strong>.
-                    Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
-                </p>
-                <p>
-                    We will contact you before the end of <strong>{datoEngelsk}</strong>.
-                    Please make sure your contact details are updated.
-                </p>
-                {visKontaktopplysninger ? this.kontaktOpplysninger() :
-                    <EksternLenke
-                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                        tekst="Legg inn kontaktopplysninger / Enter contact details"
-                        data-testid="ekstern-lenke-legg-inn-opplysninger"
-                        onClick={this.handleEndreOpplysningerClicked}
-                    />}
-            </Veilederpanel>
-        )
-    };
+    return (
+        <Veilederpanel
+            svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
+            type={"plakat"}
+            kompakt
+        >
+            <Alertstripe type="suksess" data-testid="alertstripe">
+                <Undertittel >Henvendelse mottatt / Request received</Undertittel>
+            </Alertstripe>
+            <Undertittel className="tekstboks">Viktig / Important:</Undertittel>
+            <p>
+                Vi kontakter deg innen utgangen av <strong>{datoNorsk}</strong>.
+                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+            </p>
+            <p>
+                We will contact you before the end of <strong>{datoEngelsk}</strong>.
+                Please make sure your contact details are updated.
+            </p>
+            {visKontaktopplysninger ? kontaktOpplysninger() :
+                <EksternLenke
+                    url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+                    tekst="Legg inn kontaktopplysninger / Enter contact details"
+                    data-testid="ekstern-lenke-legg-inn-opplysninger"
+                    onClick={handleEndreOpplysningerClicked}
+                />}
+        </Veilederpanel>
+    )
 };
 
 export default OppgaveSuccess;
