@@ -20,6 +20,8 @@ interface Props {
 const OppgaveErrorTooSoon = ({kontaktinfo, visKontaktopplysninger}: Props) => {
     const { status, data: {telefonnummerHosKrr, telefonnummerHosNav} } = kontaktinfo;
 
+    uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
+
     const kontaktOpplysninger = () => {
         const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
 
@@ -62,8 +64,6 @@ const OppgaveErrorTooSoon = ({kontaktinfo, visKontaktopplysninger}: Props) => {
             )
         );
     };
-
-    uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
 
     return (
         <Veilederpanel
