@@ -38,7 +38,7 @@ class KontaktMegForm extends React.Component<Props> {
                 </div>
                 <Normaltekst className="blokk-s">
                     We’re not able to check whether you have an approved residency permit.<br />
-                    This means that you cannot register as a jobseeker onlinee.
+                    This means that you cannot register as a jobseeker online.
                   </Normaltekst>
                 <Normaltekst className="blokk-m">
                     Please contact us for help with this.
