@@ -540,8 +540,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
                             }}
                             name="feilmelding"
-                            label="Feilmelding - brukere mangler arbeidsstillatelse"
-                            value="Feilmelding - brukere mangler arbeidsstillatelse"
+                            label="Feilmelding - bruker mangler arbeidsstillatelse"
+                            value="Feilmelding - bruker mangler arbeidsstillatelse"
                             checked={
                                 feilmeldingRadioKnapp === 'manglerarbtillatelse'
                             }
