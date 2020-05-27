@@ -17,7 +17,7 @@ import { AppState } from '../../reducer';
 import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
+import { manglerArbeidstillatelseFeilResponse } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
 import { IngenSvar } from '../../ducks/svar-utils';
@@ -527,7 +527,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -554,7 +554,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -600,7 +600,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -642,7 +642,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -684,7 +684,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
