@@ -20,9 +20,14 @@ export const ordinaerRegistreringRespons = {
 
 };
 
-export const ordinaerRegistreringFeilrespons = {
+export const manglerArbeidstillatelseFeilResponse = {
     'id': 'fa5ec8e51366d8b9722bb564f2534e7e',
     'type': 'BRUKER_MANGLER_ARBEIDSTILLATELSE',
+};
+
+export const utvandretFeilResponse = {
+    'id': 'fa5ec8e51366d8b9722bb564f2534e7e',
+    'type': 'BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET',
 };
 
 export const sykmeldtRegistreringRespons = {};
