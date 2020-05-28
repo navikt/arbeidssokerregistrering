@@ -24,7 +24,7 @@
         "start:utenmock": "cross-env BROWSER=none craco start",
         "start:cypress": "npm-run-all -p start:tekster start:utenmock",
         "cypress:open": "cypress open",
-        "cypress:run": "cypress run"
+        "cypress:run": "cypress run --headless --browser chrome"
     },
     "dependencies": {
         "@alheimsins/virkedager": "1.0.2",
