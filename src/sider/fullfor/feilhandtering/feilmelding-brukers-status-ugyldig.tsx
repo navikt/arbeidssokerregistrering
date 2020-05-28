@@ -8,10 +8,8 @@ import { ErrorTypes as FullforErrorTypes } from '../../../ducks/registrerbruker'
 import { Data as FeatureToggleData, selectFeatureToggles } from '../../../ducks/feature-toggles';
 import { uniLogger } from '../../../metrikker/uni-logger';
 import './feilmelding-brukers-status-ugyldig.less';
-import FeilmeldingManglerArbeidstillatelse
-    from '../../../komponenter/feilmelding/feilmelding-mangler-arbeidstillatelse';
-import OppholdsTillatelseKontaktMeg
-    from '../../../komponenter/oppholdstillatelse/KontaktMegController'
+import OppholdsTillatelseKontaktMeg from '../../../komponenter/oppholdstillatelse/KontaktMegController';
+import KontaktMeg from '../../../komponenter/utvandret/kontakt-meg';
 
 interface FeilmeldingBrukersStatusUgyldigProps {
     feilType: FullforErrorTypes;
@@ -26,13 +24,15 @@ type AllProps = StateProps & InjectedIntlProps & FeilmeldingBrukersStatusUgyldig
 
 class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
 
-    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl, toggleOppholdstillatelse: boolean) {
+    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl, toggleUtvandret: boolean) {
 
         const { messages } = intl;
         let feilmelding;
 
         if (feilType === FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE) {
-            feilmelding = toggleOppholdstillatelse ? <OppholdsTillatelseKontaktMeg /> : <FeilmeldingManglerArbeidstillatelse intl={this.props.intl} />;
+            feilmelding = <OppholdsTillatelseKontaktMeg />;
+        } else if (feilType === FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET && toggleUtvandret) {
+            feilmelding = <KontaktMeg />;
         } else {
 
             let messageKey;
@@ -66,8 +66,8 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
         const geografiskTilknytning = state.registreringStatus.data ?
             state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI' :
             'INGEN_DATA';
-        const featureOppholdstillatelseKontakt = featureToggles['arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker'];
-        const feilmelding = this.lagFeilmelding(feilType, intl, featureOppholdstillatelseKontakt);
+        const featureUtvandretKontakt = featureToggles['arbeidssokerregistrering.utvandret.kontakt-bruker'];
+        const feilmelding = this.lagFeilmelding(feilType, intl, featureUtvandretKontakt);
         uniLogger('arbeidssokerregistrering.error', { feilType: feilType, geografiskTilknytning });
 
         return (

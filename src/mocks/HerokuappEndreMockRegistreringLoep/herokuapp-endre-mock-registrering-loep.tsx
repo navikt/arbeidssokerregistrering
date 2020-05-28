@@ -17,7 +17,7 @@ import { AppState } from '../../reducer';
 import './herokuapp-endre-mock-registrering-loep.less';
 import startRegistreringStatus from '../registreringstatus-mock';
 import Lukknapp from 'nav-frontend-lukknapp';
-import { ordinaerRegistreringFeilrespons } from '../registrerbruker-mock';
+import { manglerArbeidstillatelseFeilResponse, utvandretFeilResponse } from '../registrerbruker-mock';
 import { MatchProps } from '../../utils/utils';
 import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
 import { IngenSvar } from '../../ducks/svar-utils';
@@ -527,7 +527,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -540,8 +540,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
 
                             }}
                             name="feilmelding"
-                            label="Feilmelding - brukere mangler arbeidsstillatelse"
-                            value="Feilmelding - brukere mangler arbeidsstillatelse"
+                            label="Feilmelding - bruker mangler arbeidsstillatelse"
+                            value="Feilmelding - bruker mangler arbeidsstillatelse"
                             checked={
                                 feilmeldingRadioKnapp === 'manglerarbtillatelse'
                             }
@@ -554,7 +554,34 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: utvandretFeilResponse,
+                                        response: new Response(new Blob(), { status: 500 })
+                                    }
+                                });
+
+                                this.dispathSpmOgPush(store, this.props.history);
+
+                                this.setState({
+                                    feilmeldingRadioKnapp: 'utvandret'
+                                });
+
+                            }}
+                            name="feilmelding"
+                            label="Feilmelding - bruker står som utvandret"
+                            value="Feilmelding - bruker står som utvandret"
+                            checked={
+                                feilmeldingRadioKnapp === 'utvandret'
+                            }
+                        />
+                        <RadioPanel
+                            onChange={() => {
+
+                                oppdaterRegistreringsType(RegistreringType.ORDINAER_REGISTRERING);
+
+                                store.dispatch({
+                                    type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
+                                    data: {
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -600,7 +627,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -642,7 +669,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });
@@ -684,7 +711,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                                 store.dispatch({
                                     type: registrerbrukerActionType.REG_BRUKER_STATUS_FEILET,
                                     data: {
-                                        data: ordinaerRegistreringFeilrespons,
+                                        data: manglerArbeidstillatelseFeilResponse,
                                         response: new Response(new Blob(), { status: 500 })
                                     }
                                 });

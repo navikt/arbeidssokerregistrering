@@ -7,13 +7,14 @@ import './ekstern-lenke.less';
 interface Props {
     url: string;
     tekst: string;
+    onClick?: () => void;
 };
 
 class EksternLenke extends React.Component<Props> {
     render() {
-        const { url, tekst, ...children } = this.props;
+        const { url, tekst, onClick, ...props } = this.props;
         return (
-            <Lenke href={`${url}`} className="blokk-m" {...children}>
+            <Lenke href={`${url}`} className="blokk-m" onClick={onClick} {...props}>
                 <span>
                     <img className="icon" src={link} alt="Ekstern lenke" />
                     {tekst}
