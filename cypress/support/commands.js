@@ -2,7 +2,7 @@ import moment from "moment";
 
 
 Cypress.Commands.add('configure', option => {
-    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid&feature=arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker&feature=arbeidssokerregistrering.kontaktopplysninger`
+    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid&feature=arbeidssokerregistrering.kontaktopplysninger`
     switch (option) {
         case 'registrering':
             cy.on('window:before:load', win => {

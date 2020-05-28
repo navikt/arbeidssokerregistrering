@@ -10,7 +10,6 @@ export enum ActionTypes {
 
 export interface Data {
     'arbeidssokerregistrering.nedetid': boolean;
-    'arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker': boolean;
     'arbeidssokerregistrering.kontaktopplysninger': boolean;
 }
 
@@ -26,7 +25,6 @@ interface Action {
 
 export const alleFeatureToggles = [
     'arbeidssokerregistrering.nedetid',
-    'arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker',
     'arbeidssokerregistrering.utvandret.kontakt-bruker',
     'arbeidssokerregistrering.kontaktopplysninger'
 ];
@@ -34,7 +32,6 @@ export const alleFeatureToggles = [
 const initialState = {
     data: {
         'arbeidssokerregistrering.nedetid': false,
-        'arbeidssokerregistrering.oppholdstillatelse.kontakt-bruker': false,
         'arbeidssokerregistrering.utvandret.kontakt-bruker': false,
         'arbeidssokerregistrering.kontaktopplysninger': false
     },
