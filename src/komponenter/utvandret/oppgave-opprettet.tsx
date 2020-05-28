@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { Feilmelding, Undertittel } from 'nav-frontend-typografi';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import { Undertittel } from 'nav-frontend-typografi';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Alertstripe from 'nav-frontend-alertstriper';
 import virkedager from '@alheimsins/virkedager';
-import EksternLenke from '../ekstern-lenke/ekstern-lenke';
 import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import prettyPrintDato from '../../utils/pretty-print-dato';
 import veilederSvg from './veileder-mann.svg';
 import { uniLogger } from '../../metrikker/uni-logger';
-import Kontaktinformasjon from './kontaktinformasjon';
+import KontaktOpplysninger from './kontaktopplysninger';
+import KontaktOpplysningerMangler from './kontaktopplysninger-mangler';
 
 const OppgaveOpprettet = () => {
     interface Kontaktinfo {
@@ -58,49 +57,6 @@ const OppgaveOpprettet = () => {
 
     const telefonnummerRegistrert = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav;
 
-    const kontaktOpplysninger = () => (
-        <>
-            {kontaktinfo.telefonnummerHosKrr ?
-                <Kontaktinformasjon
-                    telefonnummer={kontaktinfo.telefonnummerHosKrr}
-                    kilde="Kontakt- og reservasjonsregisteret"
-                    data-testid="kontaktinformasjonskort-krr"
-                /> : null}
-            {kontaktinfo.telefonnummerHosNav ?
-                <Kontaktinformasjon
-                    telefonnummer={kontaktinfo.telefonnummerHosNav}
-                    kilde="NAV"
-                    data-testid="kontaktinformasjonskort-nav"
-                /> : null}
-            <EksternLenke
-                url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                tekst="Endre opplysninger / Change contact details"
-                data-testid="ekstern-lenke-endre-opplysninger"
-                onClick={handleEndreOpplysningerClicked}
-            />
-        </>
-    );
-
-    const kontaktOpplysningerMangler = () => (
-        <>
-            <div style={{ display: 'flex' }}>
-                <Feilmelding data-testid="feilmelding">
-                    Ingen kontaktopplysninger funnet! / No contact details found!
-                </Feilmelding>
-                <Hjelpetekst className="tekstboks">
-                    Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
-                    / Please make sure your contact details are updated or we will be unable to reach you.
-                </Hjelpetekst>
-            </div>
-            <EksternLenke
-                url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                tekst="Legg inn kontaktopplysninger / Enter contact details"
-                data-testid="ekstern-lenke-legg-inn-opplysninger"
-                onClick={handleEndreOpplysningerClicked}
-            />
-        </>
-    );
-
     return (
         <Veilederpanel
             svg={<img src={veilederSvg} alt="veileder" className="veileder-illustrasjon" />}
@@ -119,7 +75,16 @@ const OppgaveOpprettet = () => {
                 We will contact you before the end of <strong>{datoEngelsk}</strong>.
                 Please make sure your contact details are updated.
             </p>
-            {telefonnummerRegistrert ? kontaktOpplysninger() : kontaktOpplysningerMangler()}
+            {telefonnummerRegistrert ?
+                <KontaktOpplysninger
+                    telefonnummerHosKrr={kontaktinfo.telefonnummerHosKrr}
+                    telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
+                    handleEndreOpplysningerClicked={handleEndreOpplysningerClicked}
+                /> :
+                <KontaktOpplysningerMangler
+                    handleEndreOpplysningerClicked={handleEndreOpplysningerClicked}
+                />
+            }
         </Veilederpanel>
     );
 }
