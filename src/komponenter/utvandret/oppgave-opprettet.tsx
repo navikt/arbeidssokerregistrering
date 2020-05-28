@@ -4,12 +4,12 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Alertstripe from 'nav-frontend-alertstriper';
 import virkedager from '@alheimsins/virkedager';
-import { Kontaktinformasjon } from '../oppholdstillatelse';
 import EksternLenke from '../ekstern-lenke/ekstern-lenke';
 import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import prettyPrintDato from '../../utils/pretty-print-dato';
-import veilederSvg from '../oppholdstillatelse/veileder-mann.svg';
+import veilederSvg from './veileder-mann.svg';
 import { uniLogger } from '../../metrikker/uni-logger';
+import Kontaktinformasjon from './kontaktinformasjon';
 
 const OppgaveOpprettet = () => {
     interface Kontaktinfo {

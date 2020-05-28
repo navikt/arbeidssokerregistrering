@@ -2,7 +2,7 @@ import * as React from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import '../oppholdstillatelse/kontakt-meg-melding.less';
+import './kontakt-meg-melding.less';
 import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import { uniLogger } from '../../metrikker/uni-logger';
 import OppgaveOpprettet from './oppgave-opprettet';
