@@ -35,9 +35,39 @@ const KontaktMeg = () => {
         }
     };
 
+    interface Kontaktinfo {
+        telefonnummerHosKrr: string | null;
+        telefonnummerHosNav: string | null;
+    }
+    const [kontaktinfo, setKontaktinfo] = React.useState<Kontaktinfo>({
+        telefonnummerHosKrr: null,
+        telefonnummerHosNav: null
+    });
+
+    const hentKontaktinfo = async (url) => {
+        const response: Response = await fetch(url, {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+            method: 'get',
+        });
+
+        if (response.status === 200) {
+            const data = await response.json();
+            uniLogger('registrering.utvandret.kontaktmeg.telefonnummer', {
+                krr: data.telefonnummerHosKrr ? 'true' : 'false',
+                nav: data.telefonnummerHosNav ? 'true' : 'false'
+            });
+            setKontaktinfo({
+                telefonnummerHosKrr: data.telefonnummerHosKrr,
+                telefonnummerHosNav: data.telefonnummerHosNav
+            });
+        }
+    };
+
     const handleKontakMegClicked = () => {
         uniLogger('registrering.utvandret.kontaktmeg');
         opprettOppgave('/veilarbregistrering/api/oppgave');
+        hentKontaktinfo('/veilarbregistrering/api/person/kontaktinfo');
     };
 
     if (oppgave.id === -1) {
@@ -68,7 +98,12 @@ const KontaktMeg = () => {
             </Panel>
         );
     } else {
-        return <OppgaveOpprettet />;
+        return (
+            <OppgaveOpprettet
+                telefonnummerHosKrr={kontaktinfo.telefonnummerHosKrr}
+                telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
+            />
+        );
     }
 }
 

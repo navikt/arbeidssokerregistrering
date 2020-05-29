@@ -3,48 +3,20 @@ import { Undertittel } from 'nav-frontend-typografi';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Alertstripe from 'nav-frontend-alertstriper';
 import virkedager from '@alheimsins/virkedager';
-import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import prettyPrintDato from '../../utils/pretty-print-dato';
 import veilederSvg from './veileder-mann.svg';
 import { uniLogger } from '../../metrikker/uni-logger';
 import KontaktOpplysninger from './kontaktopplysninger';
 import KontaktOpplysningerMangler from './kontaktopplysninger-mangler';
 
-const OppgaveOpprettet = () => {
-    interface Kontaktinfo {
-        telefonnummerHosKrr: string | null;
-        telefonnummerHosNav: string | null;
-    }
-    const [kontaktinfo, setKontaktinfo] = React.useState<Kontaktinfo>({
-        telefonnummerHosKrr: null,
-        telefonnummerHosNav: null
-    });
+interface Props {
+    telefonnummerHosKrr: string | null;
+    telefonnummerHosNav: string | null;
+}
 
-    const hentKontaktinfo = async (url) => {
-        const response: Response = await fetch(url, {
-            ...MED_CREDENTIALS,
-            headers: getHeaders(),
-            method: 'get',
-        });
-
-        if (response.status === 200) {
-            const data = await response.json();
-            setKontaktinfo({
-                telefonnummerHosKrr: data.telefonnummerHosKrr,
-                telefonnummerHosNav: data.telefonnummerHosNav
-            });
-        }
-    };
+const OppgaveOpprettet = ({telefonnummerHosKrr, telefonnummerHosNav}: Props) => {
 
     uniLogger('registrering.utvandret.kontaktmeg.success');
-    uniLogger('registrering.utvandret.kontaktmeg.telefonnummer', {
-        krr: kontaktinfo.telefonnummerHosKrr ? 'true' : 'false',
-        nav: kontaktinfo.telefonnummerHosNav ? 'true' : 'false'
-    });
-
-    React.useEffect(() => {
-        hentKontaktinfo('/veilarbregistrering/api/person/kontaktinfo');
-    }, []);
 
     const idag = new Date();
     const nesteVirkedag = virkedager(idag, 2);
@@ -52,10 +24,10 @@ const OppgaveOpprettet = () => {
     const datoEngelsk = prettyPrintDato({ dato: nesteVirkedag, language: 'en' });
 
     const handleEndreOpplysningerClicked = () => {
-        uniLogger('registrering.utvandret.endreopplysninger.clicked');
+        uniLogger('registrering.utvandret.kontaktmeg.success.endreopplysninger');
     };
 
-    const telefonnummerRegistrert = kontaktinfo.telefonnummerHosKrr || kontaktinfo.telefonnummerHosNav;
+    const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
 
     return (
         <Veilederpanel
@@ -77,8 +49,8 @@ const OppgaveOpprettet = () => {
             </p>
             {telefonnummerRegistrert ?
                 <KontaktOpplysninger
-                    telefonnummerHosKrr={kontaktinfo.telefonnummerHosKrr}
-                    telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
+                    telefonnummerHosKrr={telefonnummerHosKrr}
+                    telefonnummerHosNav={telefonnummerHosNav}
                     handleEndreOpplysningerClicked={handleEndreOpplysningerClicked}
                 /> :
                 <KontaktOpplysningerMangler
