@@ -1,11 +1,9 @@
 import * as React from 'react';
-import Panel from 'nav-frontend-paneler';
-import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import './kontakt-meg-melding.less';
+import './kontakt-meg.less';
 import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import { uniLogger } from '../../metrikker/uni-logger';
 import OppgaveOpprettet from './oppgave-opprettet';
+import KontaktMegMelding from './kontakt-meg-melding';
 
 const KontaktMeg = () => {
 
@@ -35,40 +33,50 @@ const KontaktMeg = () => {
         }
     };
 
+    interface Kontaktinfo {
+        telefonnummerHosKrr: string | null;
+        telefonnummerHosNav: string | null;
+    }
+    const [kontaktinfo, setKontaktinfo] = React.useState<Kontaktinfo>({
+        telefonnummerHosKrr: null,
+        telefonnummerHosNav: null
+    });
+
+    const hentKontaktinfo = async (url) => {
+        const response: Response = await fetch(url, {
+            ...MED_CREDENTIALS,
+            headers: getHeaders(),
+            method: 'get',
+        });
+
+        if (response.status === 200) {
+            const data = await response.json();
+            uniLogger('registrering.utvandret.kontaktmeg.telefonnummer', {
+                krr: data.telefonnummerHosKrr ? 'true' : 'false',
+                nav: data.telefonnummerHosNav ? 'true' : 'false'
+            });
+            setKontaktinfo({
+                telefonnummerHosKrr: data.telefonnummerHosKrr,
+                telefonnummerHosNav: data.telefonnummerHosNav
+            });
+        }
+    };
+
     const handleKontakMegClicked = () => {
         uniLogger('registrering.utvandret.kontaktmeg');
         opprettOppgave('/veilarbregistrering/api/oppgave');
+        hentKontaktinfo('/veilarbregistrering/api/person/kontaktinfo');
     };
 
     if (oppgave.id === -1) {
-        return (
-            <Panel border>
-                <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
-                    En veileder må hjelpe deg slik at du blir registrert
-                </Systemtittel>
-                <Normaltekst className="blokk-s">
-                    Du står registrert som utvandret i våre systemer.<br />
-                    Dette gjør at du ikke kan registrere deg som arbeidssøker på nett.
-                </Normaltekst>
-                <Normaltekst className="blokk-m">
-                    Kontakt oss, så hjelper vi deg videre.
-                </Normaltekst>
-                <div className="blokk-s">
-                    <Hovedknapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={handleKontakMegClicked}>
-                        Ta kontakt / Contact us
-                    </Hovedknapp>
-                </div>
-                <Normaltekst className="blokk-s">
-                    You're listed as emigrated in our systems.<br />
-                    This means that you cannot register as a jobseeker online.
-                </Normaltekst>
-                <Normaltekst className="blokk-m">
-                    Please contact us for help with this.
-                </Normaltekst>
-            </Panel>
-        );
+        return <KontaktMegMelding handleKontakMegClicked={handleKontakMegClicked}/>;
     } else {
-        return <OppgaveOpprettet />;
+        return (
+            <OppgaveOpprettet
+                telefonnummerHosKrr={kontaktinfo.telefonnummerHosKrr}
+                telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
+            />
+        );
     }
 }
 
