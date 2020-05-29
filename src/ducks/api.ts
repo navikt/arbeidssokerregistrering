@@ -29,14 +29,14 @@ export const getCookie = (name: string) => {
     return match !== null ? match[1] : '';
 };
 
-function getHeaders() {
+export function getHeaders() {
     return new Headers({
         'Content-Type': 'application/json',
         'NAV_CSRF_PROTECTION': getCookie('NAV_CSRF_PROTECTION'),
     });
 }
 
-const MED_CREDENTIALS = {
+export const MED_CREDENTIALS = {
     credentials: 'same-origin' as RequestCredentials,
 };
 
