@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './kontakt-meg-melding.less';
+import './kontakt-meg.less';
 import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import { uniLogger } from '../../metrikker/uni-logger';
 import OppgaveOpprettet from './oppgave-opprettet';
