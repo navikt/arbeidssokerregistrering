@@ -5,13 +5,17 @@ import { uniLogger } from '../../metrikker/uni-logger';
 import OppgaveOpprettet from './oppgave-opprettet';
 import KontaktMegMelding from './kontakt-meg-melding';
 import OppgaveErrorAlleredeOpprettet from './oppgave-error-allerede-opprettet';
+import OppgaveError from './oppgave-error';
 
 const KontaktMeg = () => {
+
+    uniLogger('registrering.utvandret.kontaktmeg');
 
     enum OpprettOppgaveStatus {
         IKKE_STARTET = 'IKKE_STARTET',
         SUKSESS = 'SUKSESS',
         ALLEREDE_OPPRETTET = 'ALLEREDE_OPPRETTET',
+        FEIL = 'FEIL',
     }
 
     interface Oppgave {
@@ -34,6 +38,8 @@ const KontaktMeg = () => {
             setOppgave({status: OpprettOppgaveStatus.SUKSESS});
         } else if (response.status === 403) {
             setOppgave({status: OpprettOppgaveStatus.ALLEREDE_OPPRETTET});
+        } else {
+            setOppgave({status: OpprettOppgaveStatus.FEIL});
         }
     };
 
@@ -68,7 +74,7 @@ const KontaktMeg = () => {
     };
 
     const handleKontakMegClicked = () => {
-        uniLogger('registrering.utvandret.kontaktmeg');
+        uniLogger('registrering.utvandret.kontaktmeg.klikk');
         opprettOppgave('/veilarbregistrering/api/oppgave');
         hentKontaktinfo('/veilarbregistrering/api/person/kontaktinfo');
     };
@@ -87,6 +93,8 @@ const KontaktMeg = () => {
                 telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
             />
         );
+    } else if (oppgave.status === OpprettOppgaveStatus.FEIL) {
+        return <OppgaveError/>;
     } else {
         return <KontaktMegMelding handleKontakMegClicked={handleKontakMegClicked}/>;
     }
