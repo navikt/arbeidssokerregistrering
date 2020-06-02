@@ -5,6 +5,7 @@ import { uniLogger } from '../../metrikker/uni-logger';
 import OppgaveOpprettet from './oppgave-opprettet';
 import KontaktMegMelding from './kontakt-meg-melding';
 import OppgaveErrorAlleredeOpprettet from './oppgave-error-allerede-opprettet';
+import OppgaveError from './oppgave-error';
 
 const KontaktMeg = () => {
 
@@ -12,6 +13,7 @@ const KontaktMeg = () => {
         IKKE_STARTET = 'IKKE_STARTET',
         SUKSESS = 'SUKSESS',
         ALLEREDE_OPPRETTET = 'ALLEREDE_OPPRETTET',
+        FEIL = 'FEIL',
     }
 
     interface Oppgave {
@@ -34,6 +36,8 @@ const KontaktMeg = () => {
             setOppgave({status: OpprettOppgaveStatus.SUKSESS});
         } else if (response.status === 403) {
             setOppgave({status: OpprettOppgaveStatus.ALLEREDE_OPPRETTET});
+        } else {
+            setOppgave({status: OpprettOppgaveStatus.FEIL});
         }
     };
 
@@ -87,6 +91,8 @@ const KontaktMeg = () => {
                 telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
             />
         );
+    } else if (oppgave.status === OpprettOppgaveStatus.FEIL) {
+        return <OppgaveError/>;
     } else {
         return <KontaktMegMelding handleKontakMegClicked={handleKontakMegClicked}/>;
     }
