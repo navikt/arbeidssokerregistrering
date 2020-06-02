@@ -4,19 +4,22 @@ import { getHeaders, MED_CREDENTIALS } from '../../ducks/api';
 import { uniLogger } from '../../metrikker/uni-logger';
 import OppgaveOpprettet from './oppgave-opprettet';
 import KontaktMegMelding from './kontakt-meg-melding';
+import OppgaveErrorAlleredeOpprettet from './oppgave-error-allerede-opprettet';
 
 const KontaktMeg = () => {
 
+    enum OpprettOppgaveStatus {
+        IKKE_STARTET = 'IKKE_STARTET',
+        SUKSESS = 'SUKSESS',
+        ALLEREDE_OPPRETTET = 'ALLEREDE_OPPRETTET',
+    }
+
     interface Oppgave {
-        id: number;
-        tildeltEnhetsnr: string;
-        oppgaveType: string;
+        status: OpprettOppgaveStatus;
     }
 
     const [oppgave, setOppgave] = React.useState<Oppgave>({
-        id: -1,
-        tildeltEnhetsnr: '',
-        oppgaveType: ''
+        status: OpprettOppgaveStatus.IKKE_STARTET
     });
 
     const opprettOppgave = async (url) => {
@@ -24,12 +27,13 @@ const KontaktMeg = () => {
             ...MED_CREDENTIALS,
             headers: getHeaders(),
             method: 'post',
-            body: JSON.stringify({ oppgaveType: 'UTVANDRET' })
+            body: JSON.stringify({oppgaveType: 'UTVANDRET'})
         });
 
         if (response.status === 200) {
-            const data = await response.json();
-            setOppgave({ id: data.id, tildeltEnhetsnr: data.tildeltEnhetsnr, oppgaveType: data.oppgaveType });
+            setOppgave({status: OpprettOppgaveStatus.SUKSESS});
+        } else if (response.status === 403) {
+            setOppgave({status: OpprettOppgaveStatus.ALLEREDE_OPPRETTET});
         }
     };
 
@@ -37,6 +41,7 @@ const KontaktMeg = () => {
         telefonnummerHosKrr: string | null;
         telefonnummerHosNav: string | null;
     }
+
     const [kontaktinfo, setKontaktinfo] = React.useState<Kontaktinfo>({
         telefonnummerHosKrr: null,
         telefonnummerHosNav: null
@@ -68,15 +73,22 @@ const KontaktMeg = () => {
         hentKontaktinfo('/veilarbregistrering/api/person/kontaktinfo');
     };
 
-    if (oppgave.id === -1) {
-        return <KontaktMegMelding handleKontakMegClicked={handleKontakMegClicked}/>;
-    } else {
+    if (oppgave.status === OpprettOppgaveStatus.SUKSESS) {
         return (
             <OppgaveOpprettet
                 telefonnummerHosKrr={kontaktinfo.telefonnummerHosKrr}
                 telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
             />
         );
+    } else if (oppgave.status === OpprettOppgaveStatus.ALLEREDE_OPPRETTET) {
+        return (
+            <OppgaveErrorAlleredeOpprettet
+                telefonnummerHosKrr={kontaktinfo.telefonnummerHosKrr}
+                telefonnummerHosNav={kontaktinfo.telefonnummerHosNav}
+            />
+        );
+    } else {
+        return <KontaktMegMelding handleKontakMegClicked={handleKontakMegClicked}/>;
     }
 }
 
