@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { Element, Innholdstittel, Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 import aktplanbilde from './aktivitetsplan-ill.svg';

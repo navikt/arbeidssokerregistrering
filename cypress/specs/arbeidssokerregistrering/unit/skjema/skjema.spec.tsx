@@ -22,7 +22,7 @@ import UtdanningGodkjentSporsmal from "../../../../../src/sider/skjema-registrer
 import UtdanningBestattSporsmal from "../../../../../src/sider/skjema-registrering/sporsmal/sporsmal-utdanning-bestatt";
 import HelseHinder from "../../../../../src/sider/skjema-registrering/sporsmal/sporsmal-helse-hinder";
 import AndreForhold from "../../../../../src/sider/skjema-registrering/sporsmal/sporsmal-andre-forhold";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps } from "react-router-dom";
 import { MatchProps } from "../../../../../src/utils/utils";
 import { AppState } from "../../../../../src/reducer";
 import { getStore } from "../../../../../src/store";

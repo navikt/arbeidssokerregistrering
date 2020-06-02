@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
+import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import Banner from './komponenter/banner/banner';
 import ProgressBarContainer from './komponenter/progress-bar/progress-bar-container';
 import Sideanimasjon from './komponenter/sideanimasjon/sideanimasjon';

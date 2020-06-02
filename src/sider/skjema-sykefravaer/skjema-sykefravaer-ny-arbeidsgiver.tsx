@@ -6,7 +6,7 @@ import { AppState } from '../../reducer';
 import { connect, Dispatch } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { MatchProps } from '../../utils/utils';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { InjectedIntlProps } from 'react-intl';
 import { OPPSUMMERING_PATH, SKJEMA_SYKEFRAVAER_PATH } from '../../utils/konstanter';
 import {

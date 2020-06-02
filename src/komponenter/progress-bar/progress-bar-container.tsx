@@ -2,7 +2,7 @@ import * as React from 'react';
 import ProgressBar from './progress-bar';
 import { finnRiktigConfig } from './progress-bar-utils';
 import { MatchProps } from '../../utils/utils';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from '../../reducer';
 import { State as SvarState } from '../../ducks/svar';
