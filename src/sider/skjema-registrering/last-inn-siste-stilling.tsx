@@ -23,7 +23,6 @@ import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import Loader from '../../komponenter/loader/loader';
 import { hentOversattStillingFraAAReg, UTEN_STYRKKODE } from './sporsmal/sporsmal-siste-stilling/siste-stilling-utils';
 import { STATUS } from '../../ducks/api-utils';
-import { selectFeatureToggles, Data as FeatureTogglesData } from '../../ducks/feature-toggles';
 import FeilmeldingGenerell from '../../komponenter/feilmelding/feilmelding-generell';
 import { settDefaultStilling } from '../../ducks/default-stilling';
 
@@ -32,11 +31,10 @@ interface StateProps {
     oversettelseAvStillingFraAAReg: OversettelseAvStillingFraAARegState;
     labelTilStillingFraAAReg: string;
     sisteStilling: Stilling;
-    featureToggles: FeatureTogglesData;
 }
 
 interface DispatchProps {
-    hentStyrkkodeForSisteStillingFraAAReg: (featureToggles: FeatureTogglesData) => Promise<void | {}>;
+    hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
     hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
     velgStilling: (stilling: Stilling) => void;
     settDefaultStilling: (stilling: Stilling) => void;
@@ -50,7 +48,7 @@ class LastInnSisteStilling extends React.Component<Props> {
             this.props.velgStilling(stilling);
         };
         if (this.props.sisteStillingFraAAReg.status === STATUS.NOT_STARTED) {
-            this.props.hentStyrkkodeForSisteStillingFraAAReg(this.props.featureToggles)
+            this.props.hentStyrkkodeForSisteStillingFraAAReg()
                 .then((responseSisteArbeidsforhold) => {
                     const {styrk} = responseSisteArbeidsforhold as SisteArbeidsforholdData;
 
@@ -103,7 +101,6 @@ const mapStateToProps = (state: AppState) => ({
     oversettelseAvStillingFraAAReg: selectOversettelseAvStillingFraAAReg(state),
     labelTilStillingFraAAReg: selectSisteStillingNavnFraPam(state),
     sisteStilling: selectSisteStilling(state),
-    featureToggles: selectFeatureToggles(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
