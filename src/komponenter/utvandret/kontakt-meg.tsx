@@ -9,6 +9,8 @@ import OppgaveError from './oppgave-error';
 
 const KontaktMeg = () => {
 
+    uniLogger('registrering.utvandret.kontaktmeg');
+
     enum OpprettOppgaveStatus {
         IKKE_STARTET = 'IKKE_STARTET',
         SUKSESS = 'SUKSESS',
@@ -72,7 +74,7 @@ const KontaktMeg = () => {
     };
 
     const handleKontakMegClicked = () => {
-        uniLogger('registrering.utvandret.kontaktmeg');
+        uniLogger('registrering.utvandret.kontaktmeg.klikk');
         opprettOppgave('/veilarbregistrering/api/oppgave');
         hentKontaktinfo('/veilarbregistrering/api/person/kontaktinfo');
     };
