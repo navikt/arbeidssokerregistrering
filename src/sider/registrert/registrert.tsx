@@ -6,7 +6,7 @@ import AvsjekkBilde from './avsjekk-bilde/avsjekk-bilde';
 import { erIE } from '../../utils/ie-test';
 import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { MatchProps } from '../../utils/utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import RegistrertAksjonspanel from './aksjonspanel/registrert-aksjonspanel';

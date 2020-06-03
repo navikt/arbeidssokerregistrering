@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { Route, RouteComponentProps, withRouter } from 'react-router';
+import { Route, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Data as StartRegistreringData, RegistreringType, Servicegruppe, Formidlingsgruppe, ActionTypes as registringActionType }
     from '../../ducks/registreringstatus';

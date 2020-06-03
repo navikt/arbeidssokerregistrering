@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Route, RouteComponentProps } from 'react-router';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { RouteHerokuMock } from
         '../mocks/HerokuappEndreMockRegistreringLoep/herokuapp-endre-mock-registrering-loep';
 

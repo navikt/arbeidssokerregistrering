@@ -10,7 +10,7 @@ import { AppState } from '../reducer';
 import {Data as RegStatusData, ActionTypes as RegStatusActionTypes } from '../ducks/registreringstatus';
 import {Data as FeatureStatusData, ActionTypes as FeatureStatusActionTypes } from '../ducks/feature-toggles';
 import IntlProvider from '../Intl-provider';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import * as H from 'history';
 import {ActionTypes as SisteStillingActionTypes, annenStilling } from '../ducks/siste-stilling';
 import {ActionTypes as SvarActionTypes, SporsmalId } from '../ducks/svar';
