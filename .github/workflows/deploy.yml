@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v1
-        with:
-          browser: chrome
-          headless: true
-          start: npm run start:cypress
-          wait-on: http://localhost:3001
+      - name: Build
+        run: npm ci
+      - name: Start server
+        run: npm run start:cypress &
+      - name: Run Cypress
+        run: npm run cypress:run
