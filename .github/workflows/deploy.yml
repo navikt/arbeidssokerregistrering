@@ -11,13 +11,10 @@ env:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    container:
-      image: cypress/included:4.7.0
     steps:
-      - name: Clear cypress cache
-        run: ./node_modules/.bin/cypress cache clear
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v1
+        run: ./node_modules/.bin/cypress cache clear
         with:
           browser: chrome
           headless: true
