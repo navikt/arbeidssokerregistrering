@@ -12,8 +12,6 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Cypress cache clear
-        run: npx cypress cache clear
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v1
         with:

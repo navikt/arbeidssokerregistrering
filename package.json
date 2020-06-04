@@ -22,7 +22,8 @@
         "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less",
         "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
         "start:utenmock": "cross-env BROWSER=none craco start",
-        "start:cypress": "npm-run-all -p start:tekster start:utenmock",
+        "start:cypress": "npm-run-all -p cypress:clear start:tekster start:utenmock",
+        "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
         "cypress:run": "cypress run --headless --browser chrome"
     },
