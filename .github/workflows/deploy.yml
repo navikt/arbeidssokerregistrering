@@ -13,10 +13,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build
-        run: npm ci
       - name: Clear Cypress cache
         run: npx cypress cache clear
+      - name: Build
+        run: npm ci
       - name: Start server
         run: npm run start:cypress &
       - name: Run Cypress
