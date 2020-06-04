@@ -10,7 +10,7 @@ env:
 
 jobs:
   cypress-run:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     container:
       image: cypress/included:4.7.0
     steps:
