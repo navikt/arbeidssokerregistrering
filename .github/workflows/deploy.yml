@@ -14,9 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v1
-        run: ./node_modules/.bin/cypress cache clear
         with:
           browser: chrome
           headless: true
           start: npm run start:cypress
           wait-on: http://localhost:3001
+      - name: Cypress cache clear
+        run: ./node_modules/.bin/cypress cache clear
