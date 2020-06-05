@@ -22,7 +22,7 @@ import {
 
 class AppFss extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         if (hasSessionExpired()) {
             clearSession();
         } else {
