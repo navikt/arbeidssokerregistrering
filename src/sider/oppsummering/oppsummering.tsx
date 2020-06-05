@@ -44,7 +44,7 @@ class Oppsummering extends React.Component<Props> {
         this.handleNesteBtnClicked = this.handleNesteBtnClicked.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         disableVerikalScrollingVedAnimasjon();
     }
 

@@ -38,12 +38,12 @@ interface OwnState {
 type Props = InjectedIntlProps & StateProps & RouteComponentProps<MatchProps>;
 
 class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState> {
-
-    componentWillMount() {
-        this.setState({
+    constructor(props: Props) {
+        super(props);
+        this.state = {
             skalVise: true,
             feilmeldingRadioKnapp: ''
-        });
+        };
     }
 
     dispathSpmOgPush = (store: any, history: any) => { // tslint:disable-line

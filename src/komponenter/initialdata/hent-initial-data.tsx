@@ -47,7 +47,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 export class HentInitialData extends React.Component<Props> {
-    componentWillMount() {
+    componentDidMount() {
 
         this.props.hentFeatureToggle().then(() => {
             this.props.hentAutentiseringsInfo().then((res) => {
