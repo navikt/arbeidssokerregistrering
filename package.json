@@ -27,7 +27,7 @@
         "cypress:run": "cypress run"
     },
     "dependencies": {
-        "@alheimsins/virkedager": "1.0.2",
+        "@alheimsins/virkedager": "1.0.3",
         "@craco/craco": "5.6.4",
         "@navikt/fnrvalidator": "1.1.2",
         "@navikt/fo-session-timeout-modal": "1.1.1",
@@ -40,7 +40,7 @@
         "less-plugin-npm-import": "2.1.0",
         "lodash": "4.17.15",
         "lodash.throttle": "4.1.1",
-        "moment": "2.25.3",
+        "moment": "2.26.0",
         "nav-frontend-alertstriper": "3.0.15",
         "nav-frontend-alertstriper-style": "2.0.13",
         "nav-frontend-chevron": "1.0.10",
