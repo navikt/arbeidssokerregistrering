@@ -9,19 +9,25 @@ import navKontorSvg from './nav-kontor.svg';
 const InfoNavKontor = () => {
     const { location } = window;
     const lenke = 'https://tjenester.nav.no/nav-sok';
+    const amplitudeNameInternalSite = 'Går til intern side';
+
     const getRetningFraNAV = () => /nav.no/.test(lenke) ? 'inn' : 'ut';
-    const handleUtgangsLenkeKlikk = () => {
+    const handleUtgangsLenkeKlikk = (amplitudeName) => {
         const data = {
             side: location.pathname,
             retning: getRetningFraNAV(),
             lenke
         };
-        amplitudeLogger('lenke', data);
+        amplitudeLogger(amplitudeName, data);
         return true;
     };
     const Lenke = () => {
         return (
-            <LenkeMedChevron path={lenke} target="_blank" onClick={ handleUtgangsLenkeKlikk }>
+            <LenkeMedChevron
+                path={lenke}
+                target="_blank"
+                onClick={ () => handleUtgangsLenkeKlikk(amplitudeNameInternalSite) }
+            >
                 <FormattedMessage id="manuell-hjelp-lenketekst"/>
             </LenkeMedChevron>
         );
