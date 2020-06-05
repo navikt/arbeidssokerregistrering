@@ -12,20 +12,27 @@ const InfoElektroniskId = () => {
     const lenkeBankID = 'https://eid.difi.no/nb/bankid';
     const lenkePassportIDEng = 'https://eid.difi.no/en/minid/passport';
     const lenkePassportIDNor = 'https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/minid-passport--mangler-du-elektronisk-id-til-navs-digitale-tjenester';
+    const amplitudeNameExternalSite = 'Går til ekstern side';
+    const amplitudeNameInternalSite = 'Går til intern side';
 
     const getRetningFraNAV = (lenke) => /nav.no/.test(lenke) ? 'inn' : 'ut';
-    const handleUtgangsLenkeKlikk = (lenke) => {
+    const handleUtgangsLenkeKlikk = (lenke, amplitudeName) => {
         const data = {
             side: location.pathname,
             retning: getRetningFraNAV(lenke),
             lenke
         };
-        amplitudeLogger('lenke', data);
+        amplitudeLogger(amplitudeName, data);
         return true;
     };
     const LenkeBankID = ({classes}) => {
         return (
-            <LenkeMedChevron path={lenkeBankID} target="_blank" onClick={ () => handleUtgangsLenkeKlikk(lenkeBankID) } className={classes}>
+            <LenkeMedChevron
+                path={lenkeBankID}
+                target="_blank"
+                onClick={ () => handleUtgangsLenkeKlikk(lenkeBankID, amplitudeNameExternalSite) }
+                className={classes}
+            >
                 <FormattedMessage id="overskrift-elektronisk-hjelp-stepup" />
             </LenkeMedChevron>
         );
@@ -44,7 +51,7 @@ const InfoElektroniskId = () => {
                 <Lenke
                     href={lenkePassportIDEng}
                     target="_blank"
-                    onClick={() => handleUtgangsLenkeKlikk(lenkePassportIDEng)}
+                    onClick={() => handleUtgangsLenkeKlikk(lenkePassportIDEng, amplitudeNameExternalSite)}
                 >
                     uses passport verification
                 </Lenke>
@@ -54,7 +61,7 @@ const InfoElektroniskId = () => {
                 <Lenke
                     href={lenkePassportIDNor}
                     target="_blank"
-                    onClick={() => handleUtgangsLenkeKlikk(lenkePassportIDNor)}
+                    onClick={() => handleUtgangsLenkeKlikk(lenkePassportIDNor, amplitudeNameInternalSite)}
                 >
                     bruker pass som bekreftelse
                 </Lenke>
