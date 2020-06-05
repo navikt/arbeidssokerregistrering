@@ -64,7 +64,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
         this.registrerBrukerOnClick = this.registrerBrukerOnClick.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         disableVerikalScrollingVedAnimasjon();
     }
 

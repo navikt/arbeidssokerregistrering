@@ -42,18 +42,14 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
             visAdvarsel: false
         };
 
-    }
-
-    componentWillMount() {
-
-        const { svarState } = this.props;
+        const { svarState } = props;
 
         // Ikke reset svar hvis ingen eller kun dette spørsmålet er besvart
         if (svarState.length <= 1) {
             return;
         }
 
-        const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon);
+        const svar = hentSvar(props.svarState, SporsmalId.fremtidigSituasjon);
 
         // Reset alle svar bortsett fra det første spørsmålet
         if (svar) {
