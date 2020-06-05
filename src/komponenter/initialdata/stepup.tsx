@@ -3,12 +3,11 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { LOGINSERVICEURL } from '../../ducks/api';
 import './stepup.less';
-import { InjectedIntlProps } from 'react-intl';
 import bankidSvg from './bankid.svg';
 import navKontorSvg from './nav-kontor.svg';
 import InfoKort from '../info-kort/info-kort';
 
-const StepUp = (props: InjectedIntlProps) => (
+const StepUp = () => (
     <section className="stepup">
         <div className="limit stepup__login">
             <Systemtittel className="tittel">
