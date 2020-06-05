@@ -8,54 +8,52 @@ import bankidSvg from './bankid.svg';
 import navKontorSvg from './nav-kontor.svg';
 import InfoKort from '../info-kort/info-kort';
 
-const StepUp: React.SFC<InjectedIntlProps> = (props: InjectedIntlProps) => {
-    return (
-        <section className="stepup">
-            <div className="limit stepup__login">
+const StepUp = (props: InjectedIntlProps) => (
+    <section className="stepup">
+        <div className="limit stepup__login">
+            <Systemtittel className="tittel">
+                <FormattedMessage id="overskrift-stepup"/>
+            </Systemtittel>
+            <Normaltekst className="beskrivelse"><FormattedMessage id="stepup-melding"/></Normaltekst>
+            <div className="knapper-vertikalt">
+                <a
+                    className="knapp knapp--hoved stepup__knapp"
+                    href={LOGINSERVICEURL}
+                >
+                    <Normaltekst>
+                        <FormattedHTMLMessage id="knapp-logg-inn"/>
+                    </Normaltekst>
+                </a>
+            </div>
+        </div>
+        <div className="stepup__hjelp">
+            <div className="stepup__hjelp__innhold limit">
                 <Systemtittel className="tittel">
-                    <FormattedMessage id="overskrift-stepup"/>
+                    <FormattedMessage id="overskrift-hjelp-stepup"/>
                 </Systemtittel>
-                <Normaltekst className="beskrivelse"><FormattedMessage id="stepup-melding"/></Normaltekst>
-                <div className="knapper-vertikalt">
-                    <a
-                        className="knapp knapp--hoved stepup__knapp"
-                        href={LOGINSERVICEURL}
-                    >
-                        <Normaltekst>
-                            <FormattedHTMLMessage id="knapp-logg-inn"/>
-                        </Normaltekst>
-                    </a>
+                <div className="stepup__hjelp__kort">
+                    <InfoKort
+                        bilde={bankidSvg}
+                        bildeBeskrivelse="BankID illustrasjon"
+                        tittel="overskrift-elektronisk-hjelp-stepup"
+                        beskrivelse="beskrivelse-elektronisk-hjelp-stepup"
+                        lenke="https://eid.difi.no/nb/bankid"
+                        lenkeTarget="_blank"
+                        lenkeTekst="overskrift-elektronisk-hjelp-stepup"
+                    />
+                    <InfoKort
+                        bilde={navKontorSvg}
+                        bildeBeskrivelse="NAV-kontor illustrasjon"
+                        tittel="overskrift-manuell-hjelp-stepup"
+                        beskrivelse="beskrivelse-manuell-hjelp-stepup"
+                        lenke="https://tjenester.nav.no/nav-sok"
+                        lenkeTarget="_blank"
+                        lenkeTekst="manuell-hjelp-lenketekst"
+                    />
                 </div>
             </div>
-            <div className="stepup__hjelp">
-                <div className="stepup__hjelp__innhold limit">
-                    <Systemtittel className="tittel">
-                        <FormattedMessage id="overskrift-hjelp-stepup"/>
-                    </Systemtittel>
-                    <div className="stepup__hjelp__kort">
-                        <InfoKort
-                            bilde={bankidSvg}
-                            bildeBeskrivelse="BankID illustrasjon"
-                            tittel="overskrift-elektronisk-hjelp-stepup"
-                            beskrivelse="beskrivelse-elektronisk-hjelp-stepup"
-                            lenke="https://eid.difi.no/nb/bankid"
-                            lenkeTarget="_blank"
-                            lenkeTekst="overskrift-elektronisk-hjelp-stepup"
-                        />
-                        <InfoKort
-                            bilde={navKontorSvg}
-                            bildeBeskrivelse="NAV-kontor illustrasjon"
-                            tittel="overskrift-manuell-hjelp-stepup"
-                            beskrivelse="beskrivelse-manuell-hjelp-stepup"
-                            lenke="https://tjenester.nav.no/nav-sok"
-                            lenkeTarget="_blank"
-                            lenkeTekst="manuell-hjelp-lenketekst"
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
+        </div>
+    </section>
+);
 
 export default StepUp;
