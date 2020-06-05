@@ -11,7 +11,7 @@ const InfoElektroniskId = () => {
     const { location } = window;
     const lenkeBankID = 'https://eid.difi.no/nb/bankid';
     const lenkePassportIDEng = 'https://eid.difi.no/en/minid/passport';
-    const lenkePassportIDNor = 'https://www.nav.no/no/person/innhold-til-person-forside/nyttig-a-vite/minid-passport--mangler-du-elektronisk-id-til-navs-digitale-tjenester';
+    const lenkePassportIDNor = 'https://eid.difi.no/nb/minid/passport';
     const amplitudeNameExternalSite = 'Går til ekstern side';
     const amplitudeNameInternalSite = 'Går til intern side';
 
