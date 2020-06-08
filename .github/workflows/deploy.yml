@@ -10,14 +10,15 @@ env:
 
 jobs:
   cypress-run:
-    runs-on: macos-latest
+    runs-on: ubuntu-16.04
     steps:
-      - uses: actions/checkout@v2
-      - name: Clear Cypress cache
-        run: npx cypress cache clear
-      - name: Build
-        run: npm ci
-      - name: Start server
-        run: npm run start:cypress &
-      - name: Run Cypress
-        run: npm run cypress:run
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+          headless: true
+          start: npm run start:cypress
+          wait-on: http://localhost:3001

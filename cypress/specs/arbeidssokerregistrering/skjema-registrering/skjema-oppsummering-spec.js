@@ -26,6 +26,7 @@ describe('Er opplysningene riktige?', () => {
         })
         it('Navigerer frem til oppsummeringssiden', () => {
             cy.visit('/');
+            cy.wait(2000);
             cy.get('[data-testid="start-registrering"]')
                 .click();
             cy.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
