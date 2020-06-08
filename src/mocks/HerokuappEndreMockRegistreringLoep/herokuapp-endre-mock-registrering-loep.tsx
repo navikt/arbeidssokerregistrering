@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { Route, RouteComponentProps, withRouter } from 'react-router';
+import { Route, RouteComponentProps, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Data as StartRegistreringData, RegistreringType, Servicegruppe, Formidlingsgruppe, ActionTypes as registringActionType }
     from '../../ducks/registreringstatus';
@@ -38,12 +38,12 @@ interface OwnState {
 type Props = InjectedIntlProps & StateProps & RouteComponentProps<MatchProps>;
 
 class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState> {
-
-    componentWillMount() {
-        this.setState({
+    constructor(props: Props) {
+        super(props);
+        this.state = {
             skalVise: true,
             feilmeldingRadioKnapp: ''
-        });
+        };
     }
 
     dispathSpmOgPush = (store: any, history: any) => { // tslint:disable-line

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import './infoside.less';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { MatchProps } from '../../utils/utils';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';

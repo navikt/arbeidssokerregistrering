@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
@@ -64,7 +64,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
         this.registrerBrukerOnClick = this.registrerBrukerOnClick.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         disableVerikalScrollingVedAnimasjon();
     }
 

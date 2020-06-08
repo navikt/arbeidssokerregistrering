@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import { Innholdstittel } from 'nav-frontend-typografi';

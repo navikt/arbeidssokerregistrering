@@ -31,21 +31,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
     constructor(props: SokeInputComponentProps) {
         super(props);
 
-        this.resetValue = this.resetValue.bind(this);
-        this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
-        this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
-        this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
-
-        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300);
-
-    }
-
-    componentWillMount() {
-        this.updateState(this.props);
-    }
-
-    updateState(props: SokeInputComponentProps) {
-        this.setState({
+        this.state = {
             value: {
                 stilling: props.defaultStilling,
                 labelKey: props.defaultStilling.label,
@@ -53,7 +39,15 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
             },
             stillingsAlternativer: [],
             visSpinner: false
-        });
+        };
+
+        this.resetValue = this.resetValue.bind(this);
+        this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
+        this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
+        this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
+
+        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300);
+
     }
 
     autocompleteSearch (sokeStreng: string) {

@@ -7,12 +7,10 @@ interface EgenState {
 }
 
 class VideotekstAccordion extends React.Component<{}, EgenState> {
-    componentWillMount() {
-        this.setState({
-            apen: false,
-        });
+    constructor(props: {}) {
+        super(props);
+        this.state = {apen: false};
     }
-
     render() {
         return(
             <section className="videotekst-accordion">

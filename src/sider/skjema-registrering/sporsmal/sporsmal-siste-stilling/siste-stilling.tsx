@@ -58,17 +58,12 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
             erInputAktiv: false
         };
 
-        this.onInputAktivert = this.onInputAktivert.bind(this);
-        this.onStillingEndret = this.onStillingEndret.bind(this);
-    }
-
-    componentWillMount() {
         const {
             endreSvar,
             sporsmalId,
             sisteStilling,
             svarState
-        } = this.props;
+        } = props;
 
         if (skalSkjuleSvaralternativer(hentSvar(svarState, SporsmalId.dinSituasjon) as DinSituasjonSvar)) {
             this.angiSvarPaaDetteSporsmaletSomIkkeBesvart();
@@ -78,6 +73,9 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
                 getDefaultSvar(sisteStilling)
             );
         }
+
+        this.onInputAktivert = this.onInputAktivert.bind(this);
+        this.onStillingEndret = this.onStillingEndret.bind(this);
     }
 
     skalViseStillingsfelt() {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import './registrering-arbeidssoker.less';
 import { Innholdstittel, Normaltekst, Undertittel, Element, Sidetittel } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';

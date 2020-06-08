@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
@@ -44,7 +44,7 @@ class Oppsummering extends React.Component<Props> {
         this.handleNesteBtnClicked = this.handleNesteBtnClicked.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         disableVerikalScrollingVedAnimasjon();
     }
 

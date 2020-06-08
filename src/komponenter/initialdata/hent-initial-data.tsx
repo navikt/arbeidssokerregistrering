@@ -26,7 +26,6 @@ import TjenesteOppdateres from '../../sider/tjeneste-oppdateres';
 import { STATUS } from '../../ducks/api-utils';
 import Loader from '../loader/loader';
 import FeilmeldingGenerell from '../feilmelding/feilmelding-generell';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { erIFSS } from '../../utils/fss-utils';
 import { uniLogger } from '../../metrikker/uni-logger';
 
@@ -45,10 +44,10 @@ interface DispatchProps {
     hentKontaktinfo: () => Promise<void | {}>;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps;
 
 export class HentInitialData extends React.Component<Props> {
-    componentWillMount() {
+    componentDidMount() {
 
         this.props.hentFeatureToggle().then(() => {
             this.props.hentAutentiseringsInfo().then((res) => {
@@ -74,7 +73,7 @@ export class HentInitialData extends React.Component<Props> {
                 if (securityLevel === SecurityLevel.Level3) {
                     uniLogger('registrering.niva3');
                 }
-                return (<StepUp intl={this.props.intl} />);
+                return <StepUp />;
             }
         }
 
@@ -120,4 +119,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
     hentKontaktinfo: () => dispatch(hentKontaktinfo()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HentInitialData));
+export default connect(mapStateToProps, mapDispatchToProps)(HentInitialData);

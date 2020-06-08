@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
