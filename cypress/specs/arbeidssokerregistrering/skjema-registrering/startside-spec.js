@@ -4,6 +4,7 @@ describe('/start - Sykmeldt med arbeidsgiver 39 uker til 52 uker', () => {
     });
     it('Viser riktig side (', () => {
         cy.visit('/');
+        cy.wait(2000);
         cy.get('[class="typo-sidetittel"]')
             .should('contain', 'Registrer deg som arbeidssøker');
     });

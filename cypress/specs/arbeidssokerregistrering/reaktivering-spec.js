@@ -4,6 +4,7 @@ describe('Feilmelding vises ved feil i lasting av data', () => {
     })
     it('/reaktivering - riktig side vises', () => {
         cy.visit('/');
+        cy.wait(2000);
         cy.get('[class="krever-reaktivering"]')
             .should('contain', 'Du er ikke lenger registrert som arbeidssøker');
     });

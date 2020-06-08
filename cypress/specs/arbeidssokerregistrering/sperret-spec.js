@@ -4,6 +4,7 @@ describe('Feilmelding vises ved feil i lasting av data', () => {
     });
     it('/ikke-arbeidssoker-utenfor-oppfolging - riktig side vises', () => {
         cy.visit('/');
+        cy.wait(2000);
         cy.get('[class="typo-normal alertstripe__tekst"]')
             .should('contain', 'Du er ikke registrert som arbeidssøker. Vi må hjelpe deg videre i andre kanaler.')
     });

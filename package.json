@@ -25,7 +25,7 @@
         "start:cypress": "npm-run-all -p start:tekster start:utenmock",
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
-        "cypress:run": "cypress run --headless --browser chrome"
+        "cypress:run": "cypress run"
     },
     "dependencies": {
         "@alheimsins/virkedager": "1.0.2",

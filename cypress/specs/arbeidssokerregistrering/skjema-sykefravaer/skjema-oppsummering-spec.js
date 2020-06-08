@@ -4,6 +4,7 @@ describe('/oppsummering - Dine opplysninger', () => {
     });
     it('Gir beskjed om bruker har jobbet de siste 12 mnd', () => {
         cy.visit('/');
+        cy.wait(2000);
         cy.get('[data-testid="start-registrering"]')
             .click();
         cy.clickOptionThenNext(3); // Velg "Jeg er usikker"

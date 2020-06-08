@@ -5,6 +5,7 @@ describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
     it("Navigerer gjennom skjema", () => {
         cy.route("GET", "/veilarbregistrering/api/person/kontaktinfo", {});
         cy.visit("/");
+        cy.wait(2000);
         cy.get('[data-testid="start-registrering"]').click();
         cy.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
         // Legger inn annen stilling enn allere lagret informasjon

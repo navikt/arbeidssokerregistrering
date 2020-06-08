@@ -2,6 +2,7 @@ describe('Avbryt-modal', () => {
     beforeEach(() => {
         cy.configure('registrering');
         cy.visit('/');
+        cy.wait(2000);
         cy.get('[data-testid="start-registrering"]')
             .click();
     });

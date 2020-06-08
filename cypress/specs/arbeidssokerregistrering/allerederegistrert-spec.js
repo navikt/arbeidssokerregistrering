@@ -4,6 +4,7 @@ describe("/allerederegistrert", () => {
     });
     it("/allerederegistrert - riktig side vises", () => {
         cy.visit("/");
+        cy.wait(2000);
         cy.get('[class="typo-normal alertstripe__tekst"]').should(
             "contain",
             "Vi må hjelpe deg videre i andre kanaler"
