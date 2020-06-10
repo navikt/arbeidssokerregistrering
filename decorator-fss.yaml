@@ -30,6 +30,7 @@ proxy:
   - contextPath: "/veilarbveileder"
     baseUrl: "http://veilarbveileder"
     validateOidcToken: false
+    pingRequestPath: "/internal/isAlive"
   - contextPath: "/aktoerregister/api/v1"
     baseUrl: "{{ AKTOERREGISTER_API_V1_URL }}"
     pingRequestPath: "/../../internal/isAlive"
