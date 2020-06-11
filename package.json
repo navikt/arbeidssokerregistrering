@@ -90,7 +90,7 @@
         "react-router-dom": "5.2.0",
         "react-scripts": "3.4.1",
         "react-test-renderer": "16.13.1",
-        "redux-thunk": "2.2.0",
+        "redux-thunk": "2.3.0",
         "tslint": "5.20.1",
         "tslint-react": "4.1.0",
         "typescript": "3.9.2"
