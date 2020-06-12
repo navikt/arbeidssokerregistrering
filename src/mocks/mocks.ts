@@ -26,6 +26,7 @@ import {
     // eslint-disable-next-line
     ordinaerRegistreringRespons,
     sykmeldtRegistreringRespons,
+    // eslint-disable-next-line
     manglerArbeidstillatelseFeilResponse,
 } from './registrerbruker-mock';
 import { featureTogglesMock } from './feature-toggles-mock';
@@ -130,8 +131,8 @@ if (MOCK_STYRK08_PAMJANZZ) {
 }
 
 if (MOCK_REGISTRER_BRUKER) {
-    // mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
-    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.combine(ResponseUtils.statusCode(500), manglerArbeidstillatelseFeilResponse)); // tslint:disable-line
+    mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
+    // mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.combine(ResponseUtils.statusCode(500), manglerArbeidstillatelseFeilResponse)); // tslint:disable-line
     mock.post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt`, ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)); // tslint:disable-line
 }
 
