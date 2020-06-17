@@ -14,56 +14,50 @@ import './kontakt-meg-melding.less';
 
 interface Props {
     kontaktinfo: KontaktinfoState;
-    visKontaktopplysninger: boolean;
 }
 
-const OppgaveErrorTooSoon = ({kontaktinfo, visKontaktopplysninger}: Props) => {
-    const { status, data: {telefonnummerHosKrr, telefonnummerHosNav} } = kontaktinfo;
+const OppgaveErrorTooSoon = ({ kontaktinfo }: Props) => {
+    const { status, data: { telefonnummerHosKrr, telefonnummerHosNav } } = kontaktinfo;
+    const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
+
+    console.log('STATUS', status)
 
     uniLogger('registrering.oppholdstillatelse.kontaktmeg.vennligstvent');
 
-    const kontaktOpplysninger = () => {
-        const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
+    const Kontaktinfo = () => <>
+        {telefonnummerHosKrr ?
+            <Kontaktinformasjon
+                telefonnummer={telefonnummerHosKrr}
+                kilde="Kontakt- og reservasjonsregisteret"
+                data-testid="kontaktinformasjonskort-krr"
+            /> : null}
+        {telefonnummerHosNav ?
+            <Kontaktinformasjon
+                telefonnummer={telefonnummerHosNav}
+                kilde="NAV"
+                data-testid="kontaktinformasjonskort-nav"
+            /> : null}
+        <EksternLenke
+            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+            tekst="Endre opplysninger / Change contact details"
+            data-testid="ekstern-lenke-endre-opplysninger"
+        />
+    </>
 
-        return (
-            status === 'OK' && telefonnummerRegistrert ? (
-                <>
-                    {telefonnummerHosKrr ?
-                        <Kontaktinformasjon
-                            telefonnummer={telefonnummerHosKrr}
-                            kilde="Kontakt- og reservasjonsregisteret"
-                            data-testid="kontaktinformasjonskort-krr"
-                        /> : null}
-                    {telefonnummerHosNav ?
-                        <Kontaktinformasjon
-                            telefonnummer={telefonnummerHosNav}
-                            kilde="NAV"
-                            data-testid="kontaktinformasjonskort-nav"
-                        /> : null}
-                    <EksternLenke
-                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                        tekst="Endre opplysninger / Change contact details"
-                        data-testid="ekstern-lenke-endre-opplysninger"
-                    />
-                </>
-            ) : (
-                <>
-                    <div style={{ display: 'flex' }}>
-                        <Feilmelding data-testid="feilmelding">Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
-                        <Hjelpetekst className="tekstboks">
-                            Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
-                            / Please make sure your contact details are updated or we will be unable to reach you.
-                        </Hjelpetekst>
-                    </div>
-                    <EksternLenke
-                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                        tekst="Legg inn kontaktopplysninger / Enter contact details"
-                        data-testid="ekstern-lenke-legg-inn-opplysninger"
-                    />
-                </>
-            )
-        );
-    };
+    const IngenKontaktinfo = () => <>
+        <div style={{ display: 'flex' }}>
+            <Feilmelding data-testid="feilmelding">Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+            <Hjelpetekst className="infoboks">
+                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                / Please make sure your contact details are updated or we will be unable to reach you.
+            </Hjelpetekst>
+        </div>
+        <EksternLenke
+            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+            tekst="Legg inn kontaktopplysninger / Enter contact details"
+            data-testid="ekstern-lenke-legg-inn-opplysninger"
+        />
+    </>
 
     return (
         <Veilederpanel
@@ -84,12 +78,7 @@ const OppgaveErrorTooSoon = ({kontaktinfo, visKontaktopplysninger}: Props) => {
                 We will contact you within two working days from the first message.
                 Please make sure your contact details are updated.
             </p>
-            {visKontaktopplysninger ? kontaktOpplysninger() :
-                <EksternLenke
-                    url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                    tekst="Legg inn kontaktopplysninger / Enter contact details"
-                    data-testid="ekstern-lenke-legg-inn-opplysninger"
-                />}
+            {status === 'OK' && telefonnummerRegistrert ? <Kontaktinfo /> : <IngenKontaktinfo />}
         </Veilederpanel>
     );
 };

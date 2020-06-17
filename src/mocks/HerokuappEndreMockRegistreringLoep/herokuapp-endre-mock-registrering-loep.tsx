@@ -22,7 +22,8 @@ import { MatchProps } from '../../utils/utils';
 import { ActionTypes as SisteStillingActionTypes, annenStilling } from '../../ducks/siste-stilling';
 import { IngenSvar } from '../../ducks/svar-utils';
 import { ActionTypes as KontaktinfoTypes } from '../../ducks/kontaktinfo';
-import { kontaktinfoRespons } from '../kontaktinfo-mock';
+// eslint-disable-next-line
+import { kontaktinfoFeilrespons, kontaktinfoRespons } from '../kontaktinfo-mock';
 import { ActionTypes as OppgaveTypes } from '../../ducks/oppgave';
 
 interface StateProps {
