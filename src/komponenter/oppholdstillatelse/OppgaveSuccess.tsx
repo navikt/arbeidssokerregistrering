@@ -16,11 +16,10 @@ import './kontakt-meg-melding.less';
 
 interface Props {
     kontaktinfo: KontaktinfoState;
-    visKontaktopplysninger: boolean;
 };
 
-const OppgaveSuccess = ({kontaktinfo, visKontaktopplysninger}: Props) => {
-    const { status, data: {telefonnummerHosKrr, telefonnummerHosNav} } = kontaktinfo;
+const OppgaveSuccess = ({ kontaktinfo }: Props) => {
+    const { status, data: { telefonnummerHosKrr, telefonnummerHosNav } } = kontaktinfo;
     const telefonnummer = {
         krr: telefonnummerHosKrr ? 'true' : 'false',
         nav: telefonnummerHosNav ? 'true' : 'false'
@@ -31,54 +30,48 @@ const OppgaveSuccess = ({kontaktinfo, visKontaktopplysninger}: Props) => {
     const nesteVirkedag = virkedager(idag, 2);
     const datoNorsk = prettyPrintDato({ dato: nesteVirkedag, language: 'no' });
     const datoEngelsk = prettyPrintDato({ dato: nesteVirkedag, language: 'en' });
+    const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
 
     const handleEndreOpplysningerClicked = () => {
         uniLogger('registrering.oppholdstillatelse.endreopplysninger.clicked');
     };
 
-    const kontaktOpplysninger = () => {
-        const telefonnummerRegistrert = telefonnummerHosKrr || telefonnummerHosNav;
+    const Kontaktinfo = () => <>
+        {telefonnummerHosKrr ?
+            <Kontaktinformasjon
+                telefonnummer={telefonnummerHosKrr}
+                kilde="Kontakt- og reservasjonsregisteret"
+                data-testid="kontaktinformasjonskort-krr"
+            /> : null}
+        {telefonnummerHosNav ?
+            <Kontaktinformasjon
+                telefonnummer={telefonnummerHosNav}
+                kilde="NAV"
+                data-testid="kontaktinformasjonskort-nav"
+            /> : null}
+        <EksternLenke
+            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+            tekst="Endre opplysninger / Change contact details"
+            data-testid="ekstern-lenke-endre-opplysninger"
+            onClick={handleEndreOpplysningerClicked}
+        />
+    </>
 
-        return (
-            status === 'OK' && telefonnummerRegistrert ?
-                <>
-                    {telefonnummerHosKrr ?
-                        <Kontaktinformasjon
-                            telefonnummer={telefonnummerHosKrr}
-                            kilde="Kontakt- og reservasjonsregisteret"
-                            data-testid="kontaktinformasjonskort-krr"
-                        /> : null}
-                    {telefonnummerHosNav ?
-                        <Kontaktinformasjon
-                            telefonnummer={telefonnummerHosNav}
-                            kilde="NAV"
-                            data-testid="kontaktinformasjonskort-nav"
-                        /> : null}
-                    <EksternLenke
-                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                        tekst="Endre opplysninger / Change contact details"
-                        data-testid="ekstern-lenke-endre-opplysninger"
-                        onClick={handleEndreOpplysningerClicked}
-                    />
-                </>
-                :
-                <>
-                    <div style={{ display: 'flex' }}>
-                        <Feilmelding data-testid="feilmelding">Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
-                        <Hjelpetekst className="tekstboks">
-                            Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
-                            / Please make sure your contact details are updated or we will be unable to reach you.
-                        </Hjelpetekst>
-                    </div>
-                    <EksternLenke
-                        url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                        tekst="Legg inn kontaktopplysninger / Enter contact details"
-                        data-testid="ekstern-lenke-legg-inn-opplysninger"
-                        onClick={handleEndreOpplysningerClicked}
-                    />
-                </>
-        )
-    };
+    const IngenKontaktinfo = () => <>
+        <div style={{ display: 'flex' }}>
+            <Feilmelding data-testid="feilmelding">Ingen kontaktopplysninger funnet! / No contact details found!</Feilmelding>
+            <Hjelpetekst className="infoboks">
+                Pass på at kontaktopplysningene dine er oppdatert ellers kan vi ikke nå deg.
+                / Please make sure your contact details are updated or we will be unable to reach you.
+            </Hjelpetekst>
+        </div>
+        <EksternLenke
+            url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
+            tekst="Legg inn kontaktopplysninger / Enter contact details"
+            data-testid="ekstern-lenke-legg-inn-opplysninger"
+            onClick={handleEndreOpplysningerClicked}
+        />
+    </>
 
     return (
         <Veilederpanel
@@ -98,13 +91,7 @@ const OppgaveSuccess = ({kontaktinfo, visKontaktopplysninger}: Props) => {
                 We will contact you before the end of <strong>{datoEngelsk}</strong>.
                 Please make sure your contact details are updated.
             </p>
-            {visKontaktopplysninger ? kontaktOpplysninger() :
-                <EksternLenke
-                    url="https://www.nav.no/person/personopplysninger/#kontaktinformasjon"
-                    tekst="Legg inn kontaktopplysninger / Enter contact details"
-                    data-testid="ekstern-lenke-legg-inn-opplysninger"
-                    onClick={handleEndreOpplysningerClicked}
-                />}
+            {status === 'OK' && telefonnummerRegistrert ? <Kontaktinfo /> : <IngenKontaktinfo />}
         </Veilederpanel>
     )
 };
