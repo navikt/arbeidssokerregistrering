@@ -9,7 +9,7 @@ proxy:
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbproxy"
   - contextPath: "/veilarbperson"
-    baseUrl: "http://veilarbproxy"
+    baseUrl: "http://veilarbperson"
     pingRequestPath: "/veilarbperson/internal/isAlive"
   - contextPath: "/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
