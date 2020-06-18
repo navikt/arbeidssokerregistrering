@@ -1,12 +1,13 @@
 contextPath: /
 auth:
-    enforce: false
+  enforce: false
 
 proxy:
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbproxy"
   - contextPath: "/veilarbperson"
     baseUrl: "http://veilarbproxy"
+    pingRequestPath: "/veilarbperson/internal/isAlive"
   - contextPath: "/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
     pingRequestPath: "/pam-janzz/isAlive"
