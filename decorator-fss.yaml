@@ -26,6 +26,7 @@ proxy:
     validateOidcToken: false
   - contextPath: "/veilarbperson"
     baseUrl: "http://veilarbperson"
+    pingRequestPath: "/veilarbperson/internal/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbveileder"
     baseUrl: "http://veilarbveileder"
