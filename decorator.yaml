@@ -3,14 +3,10 @@ auth:
     enforce: false
 
 proxy:
-  - contextPath: "/frontendlogger"
-    baseUrl: "http://frontendlogger"
-    pingRequestPath: /frontendlogger/internal/isAlive
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbproxy"
   - contextPath: "/veilarbperson"
-    baseUrl: "http://veilarbperson"
-    pingRequestPath: "/veilarbperson/internal/isAlive"
+    baseUrl: "http://veilarbproxy"
   - contextPath: "/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
     pingRequestPath: "/pam-janzz/isAlive"
