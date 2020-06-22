@@ -96,15 +96,15 @@ const mock = FetchMock.configure({
 // som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
 
+// tslint:disable
 if (PRINT_FRONTENDLOGGER) {
     (window as any).frontendlogger = {
-        // tslint:disable-line
         event: (name: string, fields: any, tags: any) => {
-            // tslint:disable-line
-            console.log('frontendlogger', { name, fields, tags }); // tslint:disable-line
+            console.log('frontendlogger', { name, fields, tags });
         },
     };
 }
+// tslint:enable
 
 if (MOCK_START_REGISRERING_STATUS) {
     mock.get(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, startRegistreringStatus));
@@ -132,7 +132,11 @@ if (MOCK_STYRK08_PAMJANZZ) {
 
 if (MOCK_REGISTRER_BRUKER) {
     mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, ordinaerRegistreringRespons)); // tslint:disable-line
-    // mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.combine(ResponseUtils.statusCode(500), manglerArbeidstillatelseFeilResponse)); // tslint:disable-line
+    /*
+        mock.post(`${VEILARBREGISTRERING_URL}/startregistrering`,
+                   ResponseUtils.combine(ResponseUtils.statusCode(500),
+                   manglerArbeidstillatelseFeilResponse));
+    */
     mock.post(`${VEILARBREGISTRERING_URL}/startregistrersykmeldt`, ResponseUtils.delayed(DELAY, sykmeldtRegistreringRespons)); // tslint:disable-line
 }
 
@@ -160,7 +164,11 @@ if (MOCK_OPPDATER_BRUKER_KONTEKST) {
 
 if (MOCK_KONTAKTINFO) {
     mock.get(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`, ResponseUtils.delayed(DELAY, kontaktinfoRespons)); // tslint:disable-line
-    // mock.get(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`, ResponseUtils.combine(ResponseUtils.statusCode(500), kontaktinfoFeilrespons)); // tslint:disable-line
+    /*
+        mock.get(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`,
+                 ResponseUtils.combine(ResponseUtils.statusCode(500),
+                 kontaktinfoFeilrespons));
+    */
 }
 
 if (DISPATCH_BESVARELSE) {
