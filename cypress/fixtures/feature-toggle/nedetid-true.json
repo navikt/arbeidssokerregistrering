@@ -1,4 +1,4 @@
 {
     "arbeidssokerregistrering.nedetid": true,
-    "arbeidssokerregistrering.kontaktopplysninger": true
+    "feature=arbeidssokerregistrering.utvandret.kontakt-bruker": true
 }

@@ -2,7 +2,7 @@ import moment from "moment";
 
 
 Cypress.Commands.add('configure', option => {
-    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid&feature=arbeidssokerregistrering.utvandret.kontakt-bruker&feature=arbeidssokerregistrering.kontaktopplysninger`
+    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid&feature=arbeidssokerregistrering.utvandret.kontakt-bruker`
     switch (option) {
         case 'registrering':
             cy.on('window:before:load', win => {
@@ -168,30 +168,6 @@ Cypress.Commands.add('configure', option => {
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
             cy.route('POST', '/veilarbregistrering/api/startregistrering', {})
                 .as('startRegistrering');
-            break;
-        case 'kontaktinfo-toggle':
-            cy.on('window:before:load', win => {
-                // eslint-disable-next-line no-param-reassign
-                win.fetch = null;
-            });
-            cy.server();
-            cy.route('GET', featureToggles, 'fixture:/feature-toggle/kontaktinfo-false');
-            cy.route('GET', '/api/auth', 'fixture:status');
-            cy.route('GET', '/veilarbperson/api/person/navn', 'fixture:navn');
-            cy.route('GET', '/veilarbregistrering/api/sistearbeidsforhold', 'fixture:sistearbeidsforhold');
-            cy.route('GET', '/pam-janzz/rest/kryssklassifiserMedKonsept?kodeForOversetting=2419114', 'fixture:kryssklassifiserMedKonsept');
-            cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
-            cy.route('GET', '/veilarbregistrering/api/startregistrering', 'fixture:startregistrering/ordinaerregistrering');
-            cy.route('POST', '/veilarbregistrering/api/startreaktivering', {});
-            cy.route({
-                method: 'POST',
-                url: '/veilarbregistrering/api/startregistrering',
-                status: 500,
-                response: {
-                    'id': 'fa5ec8e51366d8b9722bb564f2534e7e',
-                    'type': 'BRUKER_MANGLER_ARBEIDSTILLATELSE'
-                }
-            });
             break;
         default:
             cy.on('window:before:load', win => {
