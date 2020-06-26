@@ -93,7 +93,7 @@
         "redux-thunk": "2.2.0",
         "tslint": "5.20.1",
         "tslint-react": "4.1.0",
-        "typescript": "3.9.4"
+        "typescript": "3.9.5"
     },
     "devDependencies": {
         "@babel/preset-react": "7.9.4",
