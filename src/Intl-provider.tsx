@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
-import tekster from './tekster/bundle';
+import tekster from './tekster/tekster';
 import { parse } from 'query-string';
 
 addLocaleData(nb);
@@ -12,7 +12,7 @@ interface TeksterTilMappingType {
 }
 function mapTeksterTilNokler(teksterTilMapping: TeksterTilMappingType) { // tslint:disable-line no-any
     return Object.keys(teksterTilMapping)
-        .map(key => ({key, value: `[${key}]`}))
+        .map(key => ({ key, value: `[${key}]` }))
         .reduce(
             (previous: TeksterTilMappingType, current) => {
                 previous[current.key] = current.value;
@@ -30,7 +30,7 @@ function skalViseTekstnokler(): boolean {
 class IntlProvider extends React.Component {
 
     render() {
-        const {children, ...props} = this.props;
+        const { children, ...props } = this.props;
         const locale = 'nb';
 
         const teksterEllerNokler = skalViseTekstnokler() ? mapTeksterTilNokler(tekster.nb) : tekster.nb;
