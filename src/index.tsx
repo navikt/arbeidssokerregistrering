@@ -9,6 +9,7 @@ import 'moment/locale/nb';
 import Modal from 'react-modal';
 import { erIFSS } from './utils/fss-utils';
 import AppFss from './app-fss';
+import './i18n';
 
 moment.locale('nb');
 

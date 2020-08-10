@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router-dom';
 import './registrering-arbeidssoker.less';
 import { Innholdstittel, Normaltekst, Undertittel, Element, Sidetittel } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
 import KnappBase from 'nav-frontend-knapper';
+import { withTranslation, WithTranslation } from 'react-i18next'
 
 import aktplanbilde from './aktivitetsplan-ill.svg';
 import paragrafbilde from './paragraf.svg';
@@ -21,7 +21,7 @@ interface Props {
     featureToggles: FeatureToggleData;
 }
 
-type RegistreringArbeidssokerProps = Props & RouteComponentProps<MatchProps>;
+type RegistreringArbeidssokerProps = Props & RouteComponentProps<MatchProps> & WithTranslation;
 
 interface State {
     isModalOpen: boolean;
@@ -43,21 +43,32 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
     }
 
     render() {
+        const { t } = this.props
 
         const Rad1 = () => {
             return (
                 <div className="registrering-arbeidssoker__rad1">
                     <Innholdstittel tag="h2" className="rad__tittel rad1__tittel">
-                        <FormattedMessage id="registrering-arbeidssoker.introtittel" />
+                        {t('registrering-arbeidssoker.introtittel')}
                     </Innholdstittel>
                     <div className="rad1__innhold">
                         <Normaltekst className="rad__innhold-tekst" tag="div">
-                            <FormattedHTMLMessage
-                                id="registrering-arbeidssoker.argument1tekst"
-                                tagName="ul"
-                            />
+                            <ul>
+                                <li>
+                                    {t('registrering-arbeidssoker.argument1-liste-del1')}
+                                </li>
+                                <li>
+                                    {t('registrering-arbeidssoker.argument1-liste-del2')}
+                                </li>
+                                <li>
+                                    {t('registrering-arbeidssoker.argument1-liste-del3')}
+                                </li>
+                                <li>
+                                    {t('registrering-arbeidssoker.argument1-liste-del4')}
+                                </li>
+                            </ul>
                             <Knapp onClick={this.handleSeVideoBtnClicked}>
-                                <FormattedMessage id="registrering-arbeidssoker.argument1knapp" />
+                                {t('registrering-arbeidssoker.argument1knapp')}
                             </Knapp>
                         </Normaltekst>
                         <div className="rad__innhold-ikon">
@@ -79,23 +90,44 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                         <div className="rad2__boks rad2__rettigheter">
                             <img className="rad__ikon" src={paragrafbilde} alt="Rettigheter" />
                             <Undertittel tag="h2" className="rad__tittel rettigheter__tittel">
-                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel1" />
+                                {t('registrering-arbeidssoker.argument2tittel1')}
                             </Undertittel>
                             <Normaltekst tag="div">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst1" />
+                                <ul>
+                                    <li>
+                                        {t('registrering-arbeidssoker.argument2-liste1-del1')}
+                                        <a className="lenke"
+                                            href="https://lovdata.no/NL/lov/2006-06-16-20/%C2%A714a"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {t('registrering-arbeidssoker.argument-liste1-lenke')}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {t('registrering-arbeidssoker.argument2-liste1-del2')}
+                                    </li>
+                                </ul>
                             </Normaltekst>
                         </div>
                         <div className="rad2__boks rad2__plikter">
                             <img className="rad__ikon" src={infobilde} alt="Plikter" />
                             <Undertittel tag="h2" className="rad__tittel plikter__tittel">
-                                <FormattedMessage id="registrering-arbeidssoker.argument2tittel2" />
+                                {t('registrering-arbeidssoker.argument2tittel2')}
                             </Undertittel>
                             <Normaltekst tag="div">
-                                <FormattedHTMLMessage id="registrering-arbeidssoker.argument2tekst2" />
+                                <ul>
+                                    <li>
+                                        {t('registrering-arbeidssoker.argument2-liste2-del1')}
+                                    </li>
+                                    <li>
+                                        {t('registrering-arbeidssoker.argument2-liste2-del2')}
+                                    </li>
+                                </ul>
                             </Normaltekst>
                         </div>
                     </div>
-                </div>
+                </div >
             );
         };
 
@@ -106,30 +138,38 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                         tag="h2"
                         className="rad__tittel rad3__tittel"
                     >
-                        <FormattedMessage id="registrering-arbeidssoker.argument3tittel" />
+                        {t('registrering-arbeidssoker.argument3tittel')}
                     </Innholdstittel>
                     <div className="rad3__tekst">
                         <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del1" />
+                            {t('registrering-arbeidssoker.rad3.del1')}
                         </Normaltekst>
                         <ul className="typo-normal">
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt1" /></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt2" /></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt3" /></li>
-                            <li><FormattedMessage id="registrering-arbeidssoker.rad3.punkt4" /></li>
+                            <li>{t('registrering-arbeidssoker.rad3.punkt1')}</li>
+                            <li>{t('registrering-arbeidssoker.rad3.punkt2')}</li>
+                            <li>{t('registrering-arbeidssoker.rad3.punkt3')}</li>
+                            <li>{t('registrering-arbeidssoker.rad3.punkt4')}</li>
                         </ul>
-                        <Normaltekst><FormattedHTMLMessage id="registrering-arbeidssoker.rad3.del2" /></Normaltekst>
-                        <Element tag="h3"><FormattedMessage id="registrering-arbeidssoker.rad3.del4.tittel" /></Element>
                         <Normaltekst>
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.innhold" /><br />
-                            <FormattedMessage id="registrering-arbeidssoker.rad3.del4.lesmer" />{' '}
+                            {t('registrering-arbeidssoker.rad3.del2-1')}
+                            <br />
+                            {t('registrering-arbeidssoker.rad3.del2-2')}
+                        </Normaltekst>
+                        <Element tag="h3">
+                            {t('registrering-arbeidssoker.rad3.del4.tittel')}
+                        </Element>
+                        <Normaltekst>
+                            {t('registrering-arbeidssoker.rad3.del4.innhold')}
+                            <br />
+                            {t('registrering-arbeidssoker.rad3.del4.lesmer')}
                             <a className="lenke" href="https://www.nav.no/personvern">
-                                <FormattedMessage id="registrering-arbeidssoker.rad3.del4.lenke" />
+                                {t('registrering-arbeidssoker.rad3.del4.lenke')}
                             </a>
                         </Normaltekst>
                     </div>
                     <Normaltekst tag="div" className="rad3__tips">
-                        <FormattedHTMLMessage id="registrering-arbeidssoker.tipstekst" />
+                        <strong>{t('registrering-arbiedssoker.tipstekst-del1')} </strong>
+                        {t('registrering-arbiedssoker.tipstekst-del2')}
                     </Normaltekst>
 
                     <div className="rad3__knapperad">
@@ -138,7 +178,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
                             onClick={() => this.props.history.push(`${SKJEMA_PATH}/0`)}
                             data-testid="start-registrering"
                         >
-                            <FormattedMessage id="registrering-arbeidssoker-knapp" />
+                            {t('registrering-arbeidssoker-knapp')}
                         </KnappBase>
                     </div>
                 </div>
@@ -152,10 +192,10 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
         ];
 
         return (
-            <div className="registrering-arbeidssoker">
+            <div className="registrering-arbeidssoker" >
                 <div className="banner">
                     <Sidetittel>
-                        <FormattedMessage id="registrering-arbeidssoker.tittel" />
+                        {t('registrering-arbeidssoker.tittel')}
                     </Sidetittel>
                 </div>
                 {rader}
@@ -170,4 +210,4 @@ const mapStateToProps = (state: AppState) => ({
     featureToggles: selectFeatureToggles(state)
 });
 
-export default connect(mapStateToProps)(RegistreringArbeidssoker);
+export default connect(mapStateToProps)(withTranslation()(RegistreringArbeidssoker));

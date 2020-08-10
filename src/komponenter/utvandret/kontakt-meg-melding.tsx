@@ -2,35 +2,40 @@ import Panel from 'nav-frontend-paneler';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next'
 
 interface Props {
     handleKontakMegClicked: () => void;
 }
 
-const KontaktMegMelding = ({handleKontakMegClicked}: Props) => {
+const KontaktMegMelding = ({ handleKontakMegClicked }: Props) => {
+    const { t } = useTranslation()
+
     return (
         <Panel border>
             <Systemtittel className="avbryt-modal__beskrivelse blokk-m">
-                En veileder må hjelpe deg slik at du blir registrert
+                {t('utvandret-kontakt-meg.tittel')}
             </Systemtittel>
             <Normaltekst className="blokk-s">
-                Du står registrert som utvandret i våre systemer.<br />
-                Dette gjør at du ikke kan registrere deg som arbeidssøker på nett.
+                {t('utvandret-kontakt-meg.del1-innhold')}
+                <br />
+                {t('utvandret-kontakt-meg.del2-innhold')}
             </Normaltekst>
             <Normaltekst className="blokk-m">
-                Kontakt oss, så hjelper vi deg videre.
+                {t('utvandret-kontakt-meg.del3-innhold')}
             </Normaltekst>
             <div className="blokk-s">
                 <Hovedknapp className="avbryt-modal__knapp blokk-s" id="confirmKnapp" onClick={handleKontakMegClicked}>
-                    Ta kontakt / Contact us
+                    {t('utvandret-kontakt-meg.knapp')}
                 </Hovedknapp>
             </div>
             <Normaltekst className="blokk-s">
-                You're listed as emigrated in our systems.<br />
-                This means that you cannot register as a jobseeker online.
+                {t('utvandret-kontakt-meg.del4-innhold')}
+                <br />
+                {t('utvandret-kontakt-meg.del5-innhold')}
             </Normaltekst>
             <Normaltekst className="blokk-m">
-                Please contact us for help with this.
+                {t('utvandret-kontakt-meg.del6-innhold')}
             </Normaltekst>
         </Panel>
     );
