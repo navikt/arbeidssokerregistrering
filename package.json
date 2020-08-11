@@ -39,7 +39,7 @@
         "craco-less": "1.16.0",
         "idempotent-babel-polyfill": "7.4.4",
         "less-plugin-npm-import": "2.1.0",
-        "lodash": "4.17.16",
+        "lodash": "4.17.19",
         "lodash.throttle": "4.1.1",
         "moment": "2.27.0",
         "nav-frontend-alertstriper": "3.0.18",
