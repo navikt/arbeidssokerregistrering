@@ -36,7 +36,7 @@
         "babel-polyfill": "6.26.0",
         "classnames": "2.2.6",
         "core-js": "3.6.5",
-        "craco-less": "1.17.0",
+        "craco-less": "1.16.0",
         "idempotent-babel-polyfill": "7.4.4",
         "less-plugin-npm-import": "2.1.0",
         "lodash": "4.17.19",
