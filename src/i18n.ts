@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import tekster from './tekster-nb'
+import tekster from './tekster/tekster-nb.json'
 
 const resources = {
     nb: {
