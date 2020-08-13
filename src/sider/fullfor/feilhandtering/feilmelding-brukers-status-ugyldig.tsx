@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InjectedIntlProps, InjectedIntl, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { AppState } from '../../../reducer';
@@ -10,6 +9,7 @@ import { uniLogger } from '../../../metrikker/uni-logger';
 import './feilmelding-brukers-status-ugyldig.less';
 import OppholdsTillatelseKontaktMeg from '../../../komponenter/oppholdstillatelse/KontaktMegController';
 import KontaktMeg from '../../../komponenter/utvandret/kontakt-meg';
+import { withTranslation, WithTranslation } from 'react-i18next'
 
 interface FeilmeldingBrukersStatusUgyldigProps {
     feilType: FullforErrorTypes;
@@ -20,13 +20,13 @@ interface StateProps {
     state: AppState;
 }
 
-type AllProps = StateProps & InjectedIntlProps & FeilmeldingBrukersStatusUgyldigProps;
+type AllProps = StateProps & FeilmeldingBrukersStatusUgyldigProps & WithTranslation;
 
 class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
 
-    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl, toggleUtvandret: boolean) {
+    lagFeilmelding(feilType: FullforErrorTypes, toggleUtvandret: boolean) {
 
-        const { messages } = intl;
+        const { t } = this.props;
         let feilmelding;
 
         if (feilType === FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE) {
@@ -47,10 +47,10 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
                 <Feilmelding>
                     <div>
                         <Normaltekst className="blokk-s">
-                            {messages[messageKey]}
+                            {t(messageKey)}
                         </Normaltekst>
                         <Normaltekst>
-                            <span dangerouslySetInnerHTML={{ __html: messages['feilhandtering-undertekst'] }} />
+                            <span dangerouslySetInnerHTML={{ __html: t('feilhandtering-undertekst') }} />
                         </Normaltekst>
                     </div>
                 </Feilmelding>
@@ -62,12 +62,12 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
     }
 
     render() {
-        const { feilType, intl, featureToggles, state } = this.props;
+        const { feilType, featureToggles, state } = this.props;
         const geografiskTilknytning = state.registreringStatus.data ?
             state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI' :
             'INGEN_DATA';
         const featureUtvandretKontakt = featureToggles['arbeidssokerregistrering.utvandret.kontakt-bruker'];
-        const feilmelding = this.lagFeilmelding(feilType, intl, featureUtvandretKontakt);
+        const feilmelding = this.lagFeilmelding(feilType, featureUtvandretKontakt);
         uniLogger('arbeidssokerregistrering.error', { feilType: feilType, geografiskTilknytning });
 
         return (
@@ -84,4 +84,4 @@ const mapStateToProps = (state: AppState) => ({
     state: state,
 });
 
-export default connect(mapStateToProps)(injectIntl(FeilmeldingBrukersStatusUgyldig));
+export default connect(mapStateToProps)(withTranslation()(FeilmeldingBrukersStatusUgyldig));

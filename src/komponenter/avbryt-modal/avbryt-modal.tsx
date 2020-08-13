@@ -66,15 +66,15 @@ class AvbrytModal extends React.Component<AllProps> {
                     />}
                 >
                     <Systemtittel className="avbryt-modal__beskrivelse">
-                        <FormattedMessage id={beskrivelseId}/>
+                        <FormattedMessage id={beskrivelseId} />
                     </Systemtittel>
 
                     <div className="avbryt-modal__actions">
                         <Knapp className="avbryt-modal__knapp" onClick={() => this.handleAvbrytKnappClicked(url)}>
-                            <FormattedMessage id="knapp-ja-avbryt"/>
+                            <FormattedMessage id="knapp-ja-avbryt" />
                         </Knapp>
                         <Knapp className="avbryt-modal__knapp" onClick={this.props.onRequestClose}>
-                            <FormattedMessage id="knapp-nei"/>
+                            <FormattedMessage id="knapp-nei" />
                         </Knapp>
                     </div>
                 </Veilederpanel>

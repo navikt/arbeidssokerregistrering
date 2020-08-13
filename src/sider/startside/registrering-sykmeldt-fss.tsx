@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Element, Innholdstittel, Normaltekst, Systemtittel } from 'nav-frontend-typografi';
@@ -14,6 +13,7 @@ import { Data as FeatureToggleData, selectFeatureToggles } from '../../ducks/fea
 import veilederSvg from './veileder-mann.svg';
 import merVeiledningSvg from './mer-veiledning.svg';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
+import { withTranslation, WithTranslation } from 'react-i18next';
 import './registrering-sykmeldt.less';
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
     brukersNavn: BrukersNavnState;
 }
 
-type RegistreringArbeidssokerSykmeldtFssProps = Props & RouteComponentProps<MatchProps>;
+type RegistreringArbeidssokerSykmeldtFssProps = Props & RouteComponentProps<MatchProps> & WithTranslation;
 
 interface State {
     isModalOpen: boolean;
@@ -33,7 +33,8 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
         isModalOpen: false
     };
 
-     Rad1 = () => {
+    Rad1 = () => {
+        const { t } = this.props;
         const { brukersNavn } = this.props;
         const veilederpanelKompakt = window.matchMedia('(min-width: 768px)').matches;
         const veilederpanelType = veilederpanelKompakt ? 'normal' : 'plakat';
@@ -46,29 +47,40 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
                     type={veilederpanelType}
                     kompakt={veilederpanelKompakt}
                 >
-                    <FormattedHTMLMessage
-                        id="registrering-sykmeldt-snakkeboble"
-                        values={{ fornavn }}
-                    />
+                    <strong>{t('registrering-sykmeldt-snakkeboble-del1', { fornavn })}</strong>
+                    <br />
+                    {t('registrering-sykmeldt-snakkeboble-del2')}
                 </Veilederpanel>
             </div>
         );
     }
 
     Rad2 = () => {
+        const { t } = this.props;
+
         return (
             <div className="registrering-sykmeldt__rad2">
                 <Innholdstittel tag="h2" className="rad__tittel">
-                    <FormattedMessage id="registrering-sykmeldt.introtittel"/>
+                    {t('registrering-sykmeldt.introtittel')}
                 </Innholdstittel>
                 <div className="rad2__innhold">
                     <Normaltekst className="rad__innhold-tekst" tag="div">
-                        <FormattedHTMLMessage
-                            id="registrering-sykmeldt.argument1tekst"
-                            tagName="ul"
-                        />
+                        <ul>
+                            <li>
+                                {t('registrering-sykmeldt.argument1tekst-liste-del1')}
+                            </li>
+                            <li>
+                                {t('registrering-sykmeldt.argument1tekst-liste-del2')}
+                            </li>
+                            <li>
+                                {t('registrering-sykmeldt.argument1tekst-liste-del3')}
+                            </li>
+                            <li>
+                                {t('registrering-sykmeldt.argument1tekst-liste-del4')}
+                            </li>
+                        </ul>
                         <Knapp onClick={this.handleSeVideoBtnClicked}>
-                            <FormattedMessage id="registrering-sykmeldt.argument1knapp"/>
+                            {t('registrering-sykmeldt.argument1knapp')}
                         </Knapp>
                     </Normaltekst>
                     <img className="rad2__ikon" src={merVeiledningSvg} alt="" />
@@ -82,20 +94,27 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
     }
 
     Rad3 = () => {
+        const { t } = this.props;
+
         return (
             <div className="registrering-sykmeldt__rad3">
                 <Innholdstittel
                     tag="h2"
                     className="rad__tittel rad3__tittel"
                 >
-                    <FormattedMessage id="registrering-sykmeldt.argument3tittel"/>
+                    {t('registrering-sykmeldt.argument3tittel')}
                 </Innholdstittel>
                 <div className="rad3__tekst">
                     <Element tag="h3">
-                        <FormattedMessage id="registrering-sykmeldt.rad3.del1-tittel-fss"/>
+                        {t('registrering-sykmeldt.rad3.del1-tittel-fss')}
                     </Element>
                     <Normaltekst className="blokk-l" tag="div">
-                        <FormattedHTMLMessage id="registrering-sykmeldt.rad3.del1-innhold-fss"/>
+                        {t('registrering-sykmeldt.rad3.del1')}
+                        <a className="lenke"
+                            href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
+                        >
+                            {t('registrering-sykmeldt.rad3.del1-lenke')}.
+                        </a>.
                     </Normaltekst>
                 </div>
                 <div className="rad3__knapperad">
@@ -104,7 +123,7 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
                         onClick={() => this.props.history.push(INNGANGSSPORSMAL_PATH)}
                         data-testid="start-registrering"
                     >
-                        <FormattedMessage id="registrering-sykmeldt-knapp-fss"/>
+                        {t('registrering-sykmeldt-knapp-fss')}
                     </KnappBase>
                 </div>
             </div>
@@ -112,24 +131,26 @@ class RegistreringArbeidssokerSykmeldtFss extends React.Component<RegistreringAr
     }
 
     handleSeVideoBtnClicked = () => {
-        this.setState({isModalOpen: true});
+        this.setState({ isModalOpen: true });
     }
 
     handleModalLukkeknappClicked = () => {
-        this.setState({isModalOpen: false});
+        this.setState({ isModalOpen: false });
     }
 
     render() {
+        const { t } = this.props;
+
         return (
             <div className="registrering-sykmeldt">
                 <div className="registrering-banner">
                     <Systemtittel>
-                        <FormattedMessage id="registrering-sykmeldt.tittel"/>
+                        {t('registrering-sykmeldt.tittel')}
                     </Systemtittel>
                 </div>
-                <this.Rad1/>
-                <this.Rad2/>
-                <this.Rad3/>
+                <this.Rad1 />
+                <this.Rad2 />
+                <this.Rad3 />
             </div>
         );
     }
@@ -141,4 +162,4 @@ const mapStateToProps = (state: AppState) => ({
     brukersNavn: selectBrukersNavn(state),
 });
 
-export default connect(mapStateToProps)(withRouter(RegistreringArbeidssokerSykmeldtFss));
+export default connect(mapStateToProps)(withRouter(withTranslation()(RegistreringArbeidssokerSykmeldtFss)));

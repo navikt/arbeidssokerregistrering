@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl, FormattedMessage } from 'react-intl';
 import BannerFss from '../../komponenter/banner-fss/banner-fss';
 import aktivitetsplanIkon from './aktivitetsplan-ikon.svg';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
 import './allerede-registrert-fss.less';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
+import { withTranslation, WithTranslation } from 'react-i18next'
 
-class AlleredeRegistrertFss extends React.Component<InjectedIntlProps> {
+class AlleredeRegistrertFss extends React.Component<WithTranslation> {
     render() {
+        const { t } = this.props;
         return (
             <>
                 <BannerFss tekstId="banner-fss-bruker-allerede-registrert" />
@@ -20,17 +21,17 @@ class AlleredeRegistrertFss extends React.Component<InjectedIntlProps> {
                         />
                         <div>
                             <Systemtittel>
-                                <FormattedMessage id="allerede-registrert-fss-tittel"/>
+                                {t('allerede-registrert-fss-tittel')}
                             </Systemtittel>
                             <div className="allerede-registrert-fss__melding">
                                 <Normaltekst>
-                                    <FormattedMessage id="allerede-registrert-fss-melding"/>
+                                    {t('allerede-registrert-fss-melding')}
                                 </Normaltekst>
                             </div>
                             <a className="lenke allerede-registrert-fss__lenke" href={lagAktivitetsplanUrl()}>
-                                <FormattedMessage id="allerede-registrert-fss-lenke"/>
+                                {t('allerede-registrert-fss-lenke')}
                             </a>
-                            <span className="chevron--hoyre"/>
+                            <span className="chevron--hoyre" />
                         </div>
                     </div>
                 </div>
@@ -39,4 +40,4 @@ class AlleredeRegistrertFss extends React.Component<InjectedIntlProps> {
     }
 }
 
-export default injectIntl(AlleredeRegistrertFss);
+export default withTranslation()(AlleredeRegistrertFss);

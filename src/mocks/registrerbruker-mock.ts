@@ -1,8 +1,8 @@
 
 export const ordinaerRegistreringRespons = {
-    'id' : 55,
-    'yrkesPraksis' : '5223',
-    'opprettetDato' : '2018-06-06T00:00:00+02:00',
+    'id': 55,
+    'yrkesPraksis': '5223',
+    'opprettetDato': '2018-06-06T00:00:00+02:00',
     'besvarelse': {
         'utdanning': 'HOYERE_UTDANNING_5_ELLER_MER',
         'utdanningBestatt': 'NEI',

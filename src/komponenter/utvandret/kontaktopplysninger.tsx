@@ -28,7 +28,7 @@ interface Kontaktopplysninger {
     handleEndreOpplysningerClicked: () => void;
 }
 
-const KontaktOpplysninger = ({telefonnummerHosKrr, telefonnummerHosNav, handleEndreOpplysningerClicked}: Kontaktopplysninger) => (
+const KontaktOpplysninger = ({ telefonnummerHosKrr, telefonnummerHosNav, handleEndreOpplysningerClicked }: Kontaktopplysninger) => (
     <>
         {telefonnummerHosKrr ?
             <Kontaktinformasjon

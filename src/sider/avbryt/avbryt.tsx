@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import Lukknapp from 'nav-frontend-lukknapp';
@@ -8,13 +7,14 @@ import { Container, Column, Row } from 'nav-frontend-grid';
 import { MatchProps } from '../../utils/utils';
 import { DITT_NAV_URL } from '../../utils/konstanter';
 import GraaBakgrunn from '../../komponenter/graa-bakgrunn/graa-bakgrunn';
+import { withTranslation, WithTranslation } from 'react-i18next'
 
 import avbrytSvg from './avbryt.svg';
 import './avbryt.less';
 
-type Props = RouteComponentProps<MatchProps>;
+type Props = RouteComponentProps<MatchProps> & WithTranslation;
 
-function Avbryt({history}: Props) {
+function Avbryt({ history, t }: Props) {
     return (
         <Container className="avbryt-panel-wrapper">
             <GraaBakgrunn />
@@ -25,24 +25,24 @@ function Avbryt({history}: Props) {
             </Row>
             <Row className="avbryt-panel">
                 <Column sm="3">
-                    <img src={avbrytSvg} alt="Avsjekk" className="avbryt-panel__illustrasjon"/>
+                    <img src={avbrytSvg} alt="Avsjekk" className="avbryt-panel__illustrasjon" />
                 </Column>
                 <Column sm="9" xs="12">
                     <Innholdstittel className="avbryt-panel__tittel">
-                        <FormattedMessage id="beskrivelse-avbryt"/>
+                        {t('beskrivelse-avbryt')}
                     </Innholdstittel>
                     <div className="avbryt-panel__knapperad">
                         <KnappBase
                             type="standard"
                             onClick={() => document.location!.href = DITT_NAV_URL}
                         >
-                            <FormattedMessage id="knapp-ja-avbryt"/>
+                            {t('knapp-ja-avbryt')}
                         </KnappBase>
                         <KnappBase
                             type="standard"
                             onClick={() => history.goBack()}
                         >
-                            <FormattedMessage id="knapp-nei"/>
+                            {t('knapp-nei')}
                         </KnappBase>
                     </div>
                 </Column>
@@ -51,4 +51,4 @@ function Avbryt({history}: Props) {
     );
 }
 
-export default Avbryt;
+export default withTranslation()(Avbryt);
