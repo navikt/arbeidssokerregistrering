@@ -17,20 +17,20 @@ function SporsmalHvorLangTid(props: Props) {
     };
 
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
-        kontekst, props.intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <form className="spm-skjema">
             <fieldset className="skjema__fieldset">
-            <legend className="skjema__legend spm-hode">
-                <Innholdstittel tag="h1" className="spm-tittel blokk-xxxl">
-                    {getTekst('tittel')}
-                </Innholdstittel>
-            </legend>
-            <div className="spm-body">
-                <Alternativ svar={HvorLangTidSvar.KORT_SIKT} {...fellesProps}/>
-                <Alternativ svar={HvorLangTidSvar.LANG_SIKT} {...fellesProps}/>
-            </div>
+                <legend className="skjema__legend spm-hode">
+                    <Innholdstittel tag="h1" className="spm-tittel blokk-xxxl">
+                        {getTekst('tittel')}
+                    </Innholdstittel>
+                </legend>
+                <div className="spm-body">
+                    <Alternativ svar={HvorLangTidSvar.KORT_SIKT} {...fellesProps} />
+                    <Alternativ svar={HvorLangTidSvar.LANG_SIKT} {...fellesProps} />
+                </div>
             </fieldset>
         </form>
     );

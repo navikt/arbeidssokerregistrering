@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { withTranslation, WithTranslation } from 'react-i18next'
 import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
@@ -36,7 +36,7 @@ interface DispatchProps {
     onReaktiverBruker: () => Promise<void | {}>;
 }
 
-type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps;
+type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps & WithTranslation;
 
 class KreverReaktivering extends React.Component<Props, State> {
 
@@ -71,6 +71,7 @@ class KreverReaktivering extends React.Component<Props, State> {
     }
 
     render() {
+        const { t } = this.props
 
         if (this.state.reaktivererBruker) {
             const { reaktiverBrukerData } = this.props;
@@ -90,7 +91,7 @@ class KreverReaktivering extends React.Component<Props, State> {
                 <div className="limit">
                     <section className="krever-reaktivering">
                         <Innholdstittel className="krever-reaktivering__tittel">
-                            <FormattedMessage id="krever-reaktivering-tittel" />
+                            {t('krever-reaktivering-tittel')}
                         </Innholdstittel>
                         <div className="krever-reaktivering__infopanel">
                             <div className="krever-reaktivering__handinfo-ikon">
@@ -98,20 +99,20 @@ class KreverReaktivering extends React.Component<Props, State> {
                             </div>
                             <div className="krever-reaktivering__tekster">
                                 <Normaltekst>
-                                    <FormattedMessage id="krever-reaktivering-boks-tekst" />
+                                    {t('krever-reaktivering-boks-tekst')}
                                 </Normaltekst>
                             </div>
                         </div>
                         <div className="krever-reaktivering__aksjonspanel">
                             <Normaltekst>
-                                <FormattedMessage id="krever-reaktivering-undertittel" />
+                                {t('krever-reaktivering-undertittel')}
                             </Normaltekst>
                             <div className="lenke-avbryt-wrapper">
                                 <KnappBase
                                     type="hoved"
                                     onClick={this.reaktiverBrukerOnClick}
                                 >
-                                    <FormattedMessage id="ja" />
+                                    {t('ja')}
                                 </KnappBase>
                             </div>
                             <a
@@ -119,7 +120,7 @@ class KreverReaktivering extends React.Component<Props, State> {
                                 href={erIFSS() ? lagAktivitetsplanUrl() : DITT_NAV_URL}
                                 className="lenke lenke-avbryt typo-element"
                             >
-                                <FormattedMessage id="avbryt-lenke" />
+                                {t('avbryt-lenke')}
                             </a>
                         </div>
                     </section>
@@ -140,5 +141,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(
-    KreverReaktivering
+    withTranslation()(KreverReaktivering)
 ));

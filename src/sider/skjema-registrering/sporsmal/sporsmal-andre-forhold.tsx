@@ -19,7 +19,7 @@ function AndreForhold(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
-        kontekst, intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <>
@@ -35,14 +35,14 @@ function AndreForhold(props: Props) {
                         </Normaltekst>
                     </legend>
                     <div className="spm-body">
-                        <Alternativ svar={AndreForholdSvar.JA} {...fellesProps}/>
-                        <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps}/>
+                        <Alternativ svar={AndreForholdSvar.JA} {...fellesProps} />
+                        <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps} />
                     </div>
                 </fieldset>
             </form>
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">
-                    <Ikon kind="info-sirkel-fyll" size="1.5em"/>
+                    <Ikon kind="info-sirkel-fyll" size="1.5em" />
                 </span>
                 <Normaltekst>
                     {getTekst('info')}

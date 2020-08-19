@@ -7,7 +7,7 @@ import {
     TilbakeIArbeidSvar,
     UtdanningSvar
 } from '../../ducks/svar-utils';
-import { InjectedIntl } from 'react-intl';
+import i18next from 'i18next';
 import { Props as SkjemaProps } from './skjema';
 import { RegistreringType } from '../../ducks/registreringstatus';
 import { INFOSIDE_PATH } from '../../utils/konstanter';
@@ -30,19 +30,18 @@ export function getTekstIdForSvar(sporsmalId: SporsmalId, svar: Svar | undefined
 
 export type TekstKontekst = 'tittel' | 'info' | 'ingress';
 export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKontekst,
-                                        intl: InjectedIntl, registreringType: RegistreringType): string {
+    registreringType: RegistreringType): string {
     const registreringTypeId = (registreringType === RegistreringType.SYKMELDT_REGISTRERING)
         ? 'sykmeldt' : 'registrering';
 
     const idMedRegType = `${sporsmalId.toLowerCase()}-${kontekst}-${registreringTypeId}`;
     const idUtenRegType = `${sporsmalId.toLowerCase()}-${kontekst}`;
 
-    if (intl.messages[idMedRegType]) {
-        return intl.messages[idMedRegType];
-    } else {
-        return intl.messages[idUtenRegType];
-    }
+    // console.log('ID MED REG TYPE', idUtenRegType, i18next.t(idMedRegType))
+    // console.log('ID MUTEN REG TYPE', idUtenRegType, i18next.t('registrering-arbeidssoker.introtittel'))
+    // console.log('EXISTS?', i18next.exists('registrering-arbeidssoker.introtittel'))
 
+    return i18next.exists(idMedRegType) ? i18next.t(idMedRegType) : i18next.t(idUtenRegType)
 }
 
 export function svarSuffiksTilTekstId(svar: Svar) {

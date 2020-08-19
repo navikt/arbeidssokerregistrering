@@ -104,7 +104,7 @@
     "infoside-tilbake-full-stilling-tittel": "Fordi du skal tilbake i full jobb innen 52 uker",
     "infoside-trenger-plan-tittel": "Er du enig i NAV sin vurdering over?",
     "infoside-veilederpanel-tekst": "På spørsmål om hva du mener er din fremtidige situasjon, har du svart at du skal tilbake i full jobb før du har vært sykmeldt i 52 uker.",
-    "infoside-veilederpanel-tittel": "Hei, {fornavn}",
+    "infoside-veilederpanel-tittel": "Hei, {{fornavn}}",
     "ja": "Ja",
     "krever-reaktivering-boks-tekst": "Hvis du fortsatt skal motta ytelser må du først bekrefte at du ønsker å være registrert, så søke på nytt.",
     "krever-reaktivering-tittel": "Du er ikke lenger registrert som arbeidssøker",

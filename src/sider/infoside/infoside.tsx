@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import './infoside.less';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -14,6 +13,7 @@ import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/bruker
 import { connect } from 'react-redux';
 import { erIFSS } from '../../utils/fss-utils';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 const veilederSvg = require('./veileder-syfo.svg');
 
@@ -21,7 +21,7 @@ interface StateProps {
     brukersNavn: BrukersNavnState;
 }
 
-type Props = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+type Props = StateProps & RouteComponentProps<MatchProps> & WithTranslation;
 
 class Infoside extends React.Component<Props> {
 
@@ -31,6 +31,7 @@ class Infoside extends React.Component<Props> {
 
     render() {
 
+        const { t } = this.props;
         const fornavn = this.props.brukersNavn.data.fornavn;
         let veilederpanelType: 'normal' | 'plakat' = 'plakat';
         let veilederpanelKompakt;
@@ -45,7 +46,7 @@ class Infoside extends React.Component<Props> {
 
         return (
             <>
-                <div className="infoside--forste-rad__bakgrunn"/>
+                <div className="infoside--forste-rad__bakgrunn" />
                 <div className="infoside--forste-rad">
                     <Veilederpanel
                         type={veilederpanelType}
@@ -57,11 +58,11 @@ class Infoside extends React.Component<Props> {
                         kompakt={veilederpanelKompakt}
                     >
                         <Undertittel>
-                            <FormattedMessage id={'infoside-veilederpanel-tittel'} values={{ fornavn }}/>
+                            {t('infoside-veilederpanel-tittel', { fornavn })}
                         </Undertittel>
 
                         <Normaltekst>
-                            <FormattedMessage id="infoside-veilederpanel-tekst"/>
+                            {t('infoside-veilederpanel-tekst')}
                         </Normaltekst>
 
                     </Veilederpanel>
@@ -70,18 +71,18 @@ class Infoside extends React.Component<Props> {
                 <div className="infoside--andre-rad">
                     <div className="infoside--andre-rad__container">
                         <Systemtittel className="infoside--andre-rad__tittel">
-                            <FormattedMessage id="infoside-tilbake-full-stilling-tittel"/>
+                            {t('infoside-tilbake-full-stilling-tittel')}
                         </Systemtittel>
                         <ul className="infoside--andre-rad__liste">
                             <li className="blokk-xs">
-                                <FormattedMessage id="infoside-tilbake-full-stilling-tekst-1"/>
+                                {t('infoside-tilbake-full-stilling-tekst-1')}
                             </li>
                             <li className="blokk-xs">
-                                <FormattedMessage id="infoside-tilbake-full-stilling-tekst-2"/>
+                                {t('infoside-tilbake-full-stilling-tekst-2')}
                             </li>
                         </ul>
                     </div>
-                    <hr className="infoside--andre-rad__divider"/>
+                    <hr className="infoside--andre-rad__divider" />
                     <InfoViser
                         tekstId="infoside-tilbake-full-stilling-info"
                         className="infoside--andre-rad__info-viser"
@@ -90,15 +91,15 @@ class Infoside extends React.Component<Props> {
 
                 <div className="infoside--tredje-rad">
                     <Systemtittel className="blokk-m infoside--tredje-rad__tittel">
-                        <FormattedMessage id="infoside-trenger-plan-tittel"/>
+                        {t('infoside-trenger-plan-tittel')}
                     </Systemtittel>
 
                     <div className="infoside--tredje-rad__knapper">
                         <Link className="knapp" to={OPPSUMMERING_PATH}>
-                            <FormattedMessage id="infoside-knapp-uenig"/>
+                            {t('infoside-knapp-uenig')}
                         </Link>
                         <a href={erIFSS() ? lagAktivitetsplanUrl() : DITT_SYKEFRAVAER_URL} className="knapp">
-                            <FormattedMessage id="infoside-knapp-enig"/>
+                            {t('infoside-knapp-enig')}
                         </a>
                     </div>
                 </div>
@@ -116,4 +117,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     brukersNavn: selectBrukersNavn(state),
 });
 
-export default connect(mapStateToProps)(withRouter(injectIntl(Infoside)));
+export default connect(mapStateToProps)(withRouter(withTranslation()(Infoside)));

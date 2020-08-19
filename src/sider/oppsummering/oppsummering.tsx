@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { withTranslation, WithTranslation } from 'react-i18next'
 import { RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
@@ -35,7 +35,7 @@ interface DispatchProps {
     onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | {}>;
 }
 
-type Props = StateProps & DispatchProps & RouteComponentProps<MatchProps> & InjectedIntlProps;
+type Props = StateProps & DispatchProps & RouteComponentProps<MatchProps> & WithTranslation;
 
 class Oppsummering extends React.Component<Props> {
 
@@ -50,13 +50,13 @@ class Oppsummering extends React.Component<Props> {
 
     handleNesteBtnClicked() {
 
-        const { history, state, intl } = this.props;
+        const { history, state } = this.props;
         const regType = this.props.state.registreringStatus.data.registreringType;
 
         if (regType === RegistreringType.SYKMELDT_REGISTRERING) {
 
             const svarTilBackend = mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state),
-                intl, RegistreringType.SYKMELDT_REGISTRERING);
+                RegistreringType.SYKMELDT_REGISTRERING);
 
             this.props.onRegistrerBruker(
                 svarTilBackend,
@@ -79,7 +79,7 @@ class Oppsummering extends React.Component<Props> {
     }
 
     render() {
-        const { state } = this.props;
+        const { state, t } = this.props;
         let classnames = 'oppsummering ';
         classnames += erIE() ? 'erIE' : '';
 
@@ -91,36 +91,36 @@ class Oppsummering extends React.Component<Props> {
         let knappTekstId;
 
         if (visOrdinaerBesvarelser) {
-           oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
-           tekstPrefix = 'ordinaer-oppsummering';
-           knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
+            oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser />;
+            tekstPrefix = 'ordinaer-oppsummering';
+            knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
         } else {
-            oppsummeringBesvarelser = <SykmeldtOppsummeringBesvarelser/>;
+            oppsummeringBesvarelser = <SykmeldtOppsummeringBesvarelser />;
             tekstPrefix = 'sykmeldt-oppsummering';
             knappTekstId = 'sykmeldt-oppsummering-knapp-fullfor';
         }
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<FullforFeilhandtering/>}
+                feilmeldingKomponent={<FullforFeilhandtering />}
                 avhengigheter={[this.props.registrerBrukerData]}
-                loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
+                loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
             >
                 <section className={classnames}>
                     <Innholdstittel tag="h1" className="oppsummering-tittel">
-                        <FormattedMessage id={`${tekstPrefix}-tittel`}/>
+                        {t(`${tekstPrefix}-tittel`)}
                     </Innholdstittel>
                     <Normaltekst className="oppsummering-ingress">
-                        <FormattedMessage id={`${tekstPrefix}-ingress`}/>
+                        {t(`${tekstPrefix}-ingress`)}
                     </Normaltekst>
                     {oppsummeringBesvarelser}
                     <div className="lenke-avbryt-wrapper">
                         <KnappBase type="hoved" onClick={this.handleNesteBtnClicked} data-testid="neste">
-                            <FormattedMessage id={knappTekstId}/>
+                            {t(knappTekstId)}
                         </KnappBase>
                     </div>
-                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                    <LenkeAvbryt wrapperClassname="wrapper-too"/>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()} />
+                    <LenkeAvbryt wrapperClassname="wrapper-too" />
                 </section>
             </Innholdslaster>
         );
@@ -139,5 +139,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(Oppsummering)
+    withTranslation()(Oppsummering)
 );

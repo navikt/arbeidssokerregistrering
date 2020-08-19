@@ -7,22 +7,21 @@ import {
 import { SporsmalId, State as SvarState } from './svar';
 import { ingenYrkesbakgrunn, Stilling, tomStilling } from './siste-stilling';
 import { getIntlTekstForSporsmal, getTekstIdForSvar } from '../komponenter/skjema/skjema-utils';
-import { InjectedIntl } from 'react-intl';
 import {
     hentSvar,
     IngenSvar,
 } from './svar-utils';
 import { RegistreringType } from './registreringstatus';
+import i18next from 'i18next'
 
 export function mapAvgitteSvarForBackend(
     svar: SvarState,
     sisteStilling: Stilling,
-    intl: InjectedIntl,
     registreringType: RegistreringType
 ): OrdinaerRegistreringData | SykmeldtRegistreringData {
 
     const besvarelse = mapTilBesvarelse(svar);
-    const teksterForBesvarelse = genererTeksterForBesvarelse(svar, intl, sisteStilling, registreringType);
+    const teksterForBesvarelse = genererTeksterForBesvarelse(svar, sisteStilling, registreringType);
 
     if (registreringType === RegistreringType.SYKMELDT_REGISTRERING) {
 
@@ -58,21 +57,27 @@ export function mapTilSvarState(besvarelse: BesvarelseType): SvarState {
 
 export function genererTeksterForBesvarelse(
     svarState: SvarState,
-    intl: InjectedIntl,
     sisteStilling: Stilling,
     registreringType: RegistreringType
 ): TeksterForBesvarelse {
-    return svarState.map(sporsmalOgSvar => ({
+    // return svarState.map(sporsmalOgSvar => ({
+    //     sporsmalId: sporsmalOgSvar.sporsmalId,
+    //     sporsmal: getIntlTekstForSporsmal(sporsmalOgSvar.sporsmalId, 'tittel', registreringType),
+    //     svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalOgSvar.sporsmalId, svarState, sisteStilling),
+    // }));
+    console.log('SVAR STATE', svarState)
+    const tekster = svarState.map(sporsmalOgSvar => ({
         sporsmalId: sporsmalOgSvar.sporsmalId,
-        sporsmal: getIntlTekstForSporsmal(sporsmalOgSvar.sporsmalId, 'tittel', intl, registreringType),
-        svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalOgSvar.sporsmalId, svarState, intl, sisteStilling),
+        sporsmal: getIntlTekstForSporsmal(sporsmalOgSvar.sporsmalId, 'tittel', registreringType),
+        svar: getIntlTekstForPotensieltUbesvartSporsmal(sporsmalOgSvar.sporsmalId, svarState, sisteStilling),
     }));
+    console.log('TEKSTER', tekster)
+    return tekster;
 }
 
 function getIntlTekstForPotensieltUbesvartSporsmal(
     sporsmalId: SporsmalId,
     svarState: SvarState,
-    intl: InjectedIntl,
     sisteStilling: Stilling,
 ): string {
     if (sporsmalId === 'sisteStilling') {
@@ -83,7 +88,7 @@ function getIntlTekstForPotensieltUbesvartSporsmal(
         return 'Ikke aktuelt';
     }
     const tekstId = getTekstIdForSvar(sporsmalId, svar);
-    return intlHarTekstId(intl, tekstId) ? intl.messages[tekstId] : svar.toString();
+    return intlHarTekstId(tekstId) ? i18next.t(tekstId) : svar.toString();
 }
 
 function hentAvgittSvarForSisteStilling(sisteStilling: Stilling): string {
@@ -93,6 +98,6 @@ function hentAvgittSvarForSisteStilling(sisteStilling: Stilling): string {
     return sisteStilling.label;
 }
 
-function intlHarTekstId(intl: InjectedIntl, tekstId: string): boolean {
-    return Object.keys(intl.messages).includes(tekstId);
+function intlHarTekstId(tekstId: string): boolean {
+    return i18next.exists(tekstId);
 }

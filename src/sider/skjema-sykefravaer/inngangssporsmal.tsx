@@ -87,7 +87,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
         const { intl, endreSvar, svarState } = this.props;
         const advarselElement = this.state.visAdvarsel ? (
             <NavAlertStripe type="advarsel" className="spm-advarsel inngangssporsmal-advarsel">
-                <FormattedMessage id="skjema.alternativ.advarsel.tekst"/>
+                <FormattedMessage id="skjema.alternativ.advarsel.tekst" />
             </NavAlertStripe>
         ) : null;
 
@@ -100,7 +100,7 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
         };
 
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
-            kontekst, intl, RegistreringType.SYKMELDT_REGISTRERING);
+            kontekst, RegistreringType.SYKMELDT_REGISTRERING);
 
         const kanGaaTilNesteTmp = kanGaaTilNeste(this.props.svarState, SporsmalId.fremtidigSituasjon);
         const alternativSvarene = hentAlternativeneForInngangsporsmal(alternativProps);

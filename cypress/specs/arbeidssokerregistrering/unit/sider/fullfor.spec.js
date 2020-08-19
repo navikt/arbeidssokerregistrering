@@ -27,7 +27,7 @@ describe('<Fullfor />', () => {
         const store = create();
         dispatchTilfeldigeSvar(store);
 
-        const push = sinon.spy();
+        const push = cy.spy();
         const props = {
             history: {
                 push
@@ -36,6 +36,7 @@ describe('<Fullfor />', () => {
 
 
         const wrapper = shallowwithStoreAndIntl(<Fullfor {...props} />, store);
+        console.log(wrapper)
         expect(wrapper.find(KnappFullfor)).to.be.have.length(1);
     });
 

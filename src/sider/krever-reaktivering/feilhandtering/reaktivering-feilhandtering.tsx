@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { AppState } from '../../../reducer';
 import { ErrorData as FullforErrorData } from '../../../ducks/registrerbruker';
@@ -9,13 +8,12 @@ interface StateProps {
     errorData: FullforErrorData;
 }
 
-type Props = StateProps & InjectedIntlProps;
+type Props = StateProps;
 
 class ReaktiveringFeilhandtering extends React.Component<Props> {
     render() {
         const errorData = this.props.errorData;
-        const intl = this.props.intl;
-        return <Feilhandtering errorData={errorData} {...{intl}}/>;
+        return <Feilhandtering errorData={errorData} />;
     }
 }
 
@@ -25,4 +23,4 @@ function mapStateToProps(state: AppState) {
     };
 }
 
-export default connect(mapStateToProps)(injectIntl(ReaktiveringFeilhandtering));
+export default connect(mapStateToProps)(ReaktiveringFeilhandtering);

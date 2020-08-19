@@ -72,11 +72,11 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
 
         // Veiledere trenger ikke å bekrefte
         if (!this.state.markert && !erIFSS()) {
-            this.setState({visAdvarsel: true});
+            this.setState({ visAdvarsel: true });
             return;
         }
 
-        this.setState((prevState) => ({...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING}));
+        this.setState((prevState) => ({ ...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING }));
 
         this.props.onRegistrerBruker(
             this.getSvarMappetForBackend(),
@@ -89,9 +89,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     getSvarMappetForBackend() {
-        const {state, intl} = this.props;
+        const { state, intl } = this.props;
         return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state),
-            intl, RegistreringType.ORDINAER_REGISTRERING);
+            RegistreringType.ORDINAER_REGISTRERING);
     }
 
     settMarkert() {
@@ -99,7 +99,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
             markert: !this.state.markert
         });
 
-        const {markert} = this.state;
+        const { markert } = this.state;
         if (!markert) {
             this.setState({
                 visAdvarsel: false
@@ -108,25 +108,25 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     render() {
-        const {registrerBrukerData, intl} = this.props;
+        const { registrerBrukerData, intl } = this.props;
 
         const advarselElement = this.state.visAdvarsel && (
             <NavAlertStripe type="advarsel" className="fullfor-advarsel-stripe">
                 <Normaltekst>
-                    <FormattedMessage id="fullfor-advarsel"/>
+                    <FormattedMessage id="fullfor-advarsel" />
                 </Normaltekst>
             </NavAlertStripe>
         );
 
         return (
             <Innholdslaster
-                feilmeldingKomponent={<FullforFeilhandtering/>}
-                avhengigheter={[registrerBrukerData, {status: this.state.sblArbeidRegistrerBrukerStatus}]}
-                loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
+                feilmeldingKomponent={<FullforFeilhandtering />}
+                avhengigheter={[registrerBrukerData, { status: this.state.sblArbeidRegistrerBrukerStatus }]}
+                loaderKomponent={<Loader tittelElement={loaderTittelElement} />}
             >
                 <section className={`fullfor ${erIE() && 'erIE'}`}>
                     <Innholdstittel tag="h1" className="fullfor-tittel">
-                        <FormattedMessage id="fullfor-header"/>
+                        <FormattedMessage id="fullfor-header" />
                     </Innholdstittel>
                     <div className="fullfor-sjekkliste">
                         <img
@@ -136,21 +136,21 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                         />
 
                         <Element tag="h2" className="fullfor-sjekkliste__heading">
-                            <FormattedMessage id="fullfor-overskrift-liste"/>
+                            <FormattedMessage id="fullfor-overskrift-liste" />
                         </Element>
 
                         <ul className="fullfor-sjekkliste__liste">
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-1"/>
+                                <FormattedMessage id="fullfor-liste-1" />
                             </li>
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-2"/>
+                                <FormattedMessage id="fullfor-liste-2" />
                             </li>
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-3"/>
+                                <FormattedMessage id="fullfor-liste-3" />
                             </li>
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-4"/>
+                                <FormattedMessage id="fullfor-liste-4" />
                             </li>
                         </ul>
                     </div>
@@ -169,7 +169,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">Økonomi</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-okonomi"/></Normaltekst>
+                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-okonomi" /></Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
                                     <img
@@ -178,7 +178,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">Meldekort</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-meldekort"/></Normaltekst>
+                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-meldekort" /></Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
                                     <img
@@ -188,7 +188,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                     />
                                     <Element className="tittel">Aktivitetsplanen</Element>
                                     <Normaltekst>
-                                        <FormattedMessage id="fullfor-les-mer-aktivitetsplan"/>
+                                        <FormattedMessage id="fullfor-les-mer-aktivitetsplan" />
                                     </Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
@@ -198,13 +198,13 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">CV</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-CV"/></Normaltekst>
+                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-CV" /></Normaltekst>
                                 </li>
                             </ul>
 
                         </Ekspanderbartpanel>
                     </div>
-                    { !erIFSS() &&
+                    {!erIFSS() &&
                         <BekreftCheckboksPanel
                             onChange={this.settMarkert}
                             checked={this.state.markert}
@@ -219,8 +219,8 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                             onClick={this.registrerBrukerOnClick}
                         />
                     </div>
-                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                    <LenkeAvbryt wrapperClassname="wrapper-too"/>
+                    <LenkeTilbake onClick={() => this.props.history.goBack()} />
+                    <LenkeAvbryt wrapperClassname="wrapper-too" />
                 </section>
             </Innholdslaster>
         );

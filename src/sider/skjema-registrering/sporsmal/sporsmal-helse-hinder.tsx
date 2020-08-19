@@ -17,7 +17,7 @@ function HelseHinder(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
-        kontekst, props.intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <>
@@ -29,14 +29,14 @@ function HelseHinder(props: Props) {
                         </Innholdstittel>
                     </legend>
                     <div className="spm-body">
-                        <Alternativ svar={HelseHinderSvar.JA} {...fellesProps}/>
-                        <Alternativ svar={HelseHinderSvar.NEI} {...fellesProps}/>
+                        <Alternativ svar={HelseHinderSvar.JA} {...fellesProps} />
+                        <Alternativ svar={HelseHinderSvar.NEI} {...fellesProps} />
                     </div>
                 </fieldset>
             </form>
             <div className="spm-info">
                 <span className="spm-info__ikon" aria-label="info">
-                    <Ikon kind="info-sirkel-fyll" size="1.5em"/>
+                    <Ikon kind="info-sirkel-fyll" size="1.5em" />
                 </span>
                 <Normaltekst>
                     {getTekst('info')}

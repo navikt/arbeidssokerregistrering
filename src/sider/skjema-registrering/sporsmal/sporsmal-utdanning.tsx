@@ -15,7 +15,7 @@ function Utdanningsporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
-        kontekst, props.intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <form className="spm-skjema">
@@ -26,12 +26,12 @@ function Utdanningsporsmal(props: Props) {
                     </Innholdstittel>
                 </legend>
                 <div className="spm-body">
-                    <Alternativ svar={UtdanningSvar.INGEN_UTDANNING} {...fellesProps}/>
-                    <Alternativ svar={UtdanningSvar.GRUNNSKOLE} {...fellesProps}/>
-                    <Alternativ svar={UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING} {...fellesProps}/>
-                    <Alternativ svar={UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV} {...fellesProps}/>
-                    <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_1_TIL_4} {...fellesProps}/>
-                    <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER} {...fellesProps}/>
+                    <Alternativ svar={UtdanningSvar.INGEN_UTDANNING} {...fellesProps} />
+                    <Alternativ svar={UtdanningSvar.GRUNNSKOLE} {...fellesProps} />
+                    <Alternativ svar={UtdanningSvar.VIDEREGAENDE_GRUNNUTDANNING} {...fellesProps} />
+                    <Alternativ svar={UtdanningSvar.VIDEREGAENDE_FAGBREV_SVENNEBREV} {...fellesProps} />
+                    <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_1_TIL_4} {...fellesProps} />
+                    <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER} {...fellesProps} />
                 </div>
             </fieldset>
         </form>

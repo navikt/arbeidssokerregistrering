@@ -31,14 +31,14 @@ type Props = SporsmalProps & InjectedIntlProps & DispatchProps & StateProps;
 class SporsmalDinSituasjon extends React.Component<Props> {
 
     velgStillingHvisDenIkkeAlleredeErValgt(stilling: Stilling) {
-        const {sisteStilling, velgStilling} = this.props;
+        const { sisteStilling, velgStilling } = this.props;
         if (sisteStilling.label !== stilling.label) {
             velgStilling(stilling);
         }
     }
 
     render() {
-        const {endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling} = this.props;
+        const { endreSvar, hentAvgittSvar, sporsmalId, intl, velgStilling, defaultStilling } = this.props;
         const fellesProps = {
             intl: intl,
             avgiSvar: (svar: DinSituasjonSvar) => {
@@ -50,7 +50,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                     if ((defaultStilling === ingenYrkesbakgrunn)
                         && situasjonerDerViVetAtBrukerenHarHattJobb.includes(svar)) {
                         this.velgStillingHvisDenIkkeAlleredeErValgt(annenStilling);
-                    }  else {
+                    } else {
                         this.velgStillingHvisDenIkkeAlleredeErValgt(defaultStilling);
                     }
                 }
@@ -64,20 +64,20 @@ class SporsmalDinSituasjon extends React.Component<Props> {
                 <fieldset className="skjema__fieldset">
                     <legend className="skjema__legend spm-hode">
                         <Innholdstittel tag="h1" className="spm-tittel">
-                            {getIntlTekstForSporsmal(sporsmalId, 'tittel', intl, this.props.registeringType)}
+                            {getIntlTekstForSporsmal(sporsmalId, 'tittel', this.props.registeringType)}
                         </Innholdstittel>
                     </legend>
                     <div className="spm-body">
-                        <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.DELTIDSJOBB_VIL_MER} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.ALDRI_HATT_JOBB} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.VIL_BYTTE_JOBB} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.JOBB_OVER_2_AAR} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.ER_PERMITTERT} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.USIKKER_JOBBSITUASJON} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.AKKURAT_FULLFORT_UTDANNING} {...fellesProps}/>
-                        <Alternativ svar={DinSituasjonSvar.VIL_FORTSETTE_I_JOBB} {...fellesProps}/>
+                        <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.DELTIDSJOBB_VIL_MER} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.ALDRI_HATT_JOBB} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.VIL_BYTTE_JOBB} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.JOBB_OVER_2_AAR} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.ER_PERMITTERT} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.USIKKER_JOBBSITUASJON} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.AKKURAT_FULLFORT_UTDANNING} {...fellesProps} />
+                        <Alternativ svar={DinSituasjonSvar.VIL_FORTSETTE_I_JOBB} {...fellesProps} />
                     </div>
                 </fieldset>
             </form>

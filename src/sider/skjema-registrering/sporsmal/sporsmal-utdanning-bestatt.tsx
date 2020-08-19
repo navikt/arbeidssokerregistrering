@@ -16,7 +16,7 @@ function UtdanningBestattSporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
-        kontekst, props.intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <form className="spm-skjema">
@@ -27,8 +27,8 @@ function UtdanningBestattSporsmal(props: Props) {
                     </Innholdstittel>
                 </legend>
                 <div className="spm-body">
-                    <Alternativ svar={UtdanningBestattSvar.JA} {...fellesProps}/>
-                    <Alternativ svar={UtdanningBestattSvar.NEI} {...fellesProps}/>
+                    <Alternativ svar={UtdanningBestattSvar.JA} {...fellesProps} />
+                    <Alternativ svar={UtdanningBestattSvar.NEI} {...fellesProps} />
                 </div>
             </fieldset>
         </form>

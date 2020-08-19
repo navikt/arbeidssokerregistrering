@@ -83,7 +83,7 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
     }
 
     angiSvarPaaDetteSporsmaletSomIkkeBesvart() {
-        const {svarState, endreSvar, sporsmalId} = this.props;
+        const { svarState, endreSvar, sporsmalId } = this.props;
         if (hentSvar(svarState, SporsmalId.sisteStilling) !== SisteStillingSvar.INGEN_SVAR) {
             endreSvar(sporsmalId, SisteStillingSvar.INGEN_SVAR);
         }
@@ -126,32 +126,32 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
         );
 
         const alternativer = skjulSvaralternativer ? (null) : (
-                    <>
-                        <Alternativ
-                            svar={SisteStillingSvar.HAR_HATT_JOBB}
-                            {...alternativProps}
-                            avgiSvar={(svar: Svar) => {
-                                endreSvar(sporsmalId, svar);
-                                velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
-                            }}
-                        />
-                        <Alternativ
-                            svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
-                            {...alternativProps}
-                            avgiSvar={(svar: Svar) => {
-                                endreSvar(sporsmalId, svar);
-                                velgStilling(ingenYrkesbakgrunn);
-                            }}
-                        />
-                    </>
+            <>
+                <Alternativ
+                    svar={SisteStillingSvar.HAR_HATT_JOBB}
+                    {...alternativProps}
+                    avgiSvar={(svar: Svar) => {
+                        endreSvar(sporsmalId, svar);
+                        velgStilling(hentOversattStillingFraAAReg(oversettelseAvStillingFraAAReg.data));
+                    }}
+                />
+                <Alternativ
+                    svar={SisteStillingSvar.HAR_IKKE_HATT_JOBB}
+                    {...alternativProps}
+                    avgiSvar={(svar: Svar) => {
+                        endreSvar(sporsmalId, svar);
+                        velgStilling(ingenYrkesbakgrunn);
+                    }}
+                />
+            </>
         );
 
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
-            kontekst, intl, registreringType);
+            kontekst, registreringType);
 
         const sokeInput = this.skalViseStillingsfelt() ?
             (this.state.erInputAktiv ?
-                <SokeInput defaultStilling={sisteStilling} onChange={this.onStillingEndret}/>
+                <SokeInput defaultStilling={sisteStilling} onChange={this.onStillingEndret} />
                 :
                 <InaktivSokeInput stilling={sisteStilling} onInputAktivert={this.onInputAktivert} />
             )
@@ -167,7 +167,7 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
                             </Innholdstittel>
                             <Normaltekst className="spm-beskrivelse">
                                 <span
-                                    dangerouslySetInnerHTML={{__html: intl.messages['siste-arbeidsforhold.ingress']}}
+                                    dangerouslySetInnerHTML={{ __html: intl.messages['siste-arbeidsforhold.ingress'] }}
                                 />
                             </Normaltekst>
                         </legend>
@@ -180,7 +180,7 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
                     {sokeInput}
                     <EkspanderbartInfo tittelId="siste-arbeidsforhold.info.tittel" className="ekspanderbartinfo">
                         <Normaltekst>
-                            <FormattedMessage id="siste-arbeidsforhold.info.tekst"/>
+                            <FormattedMessage id="siste-arbeidsforhold.info.tekst" />
                         </Normaltekst>
                     </EkspanderbartInfo>
                 </div>

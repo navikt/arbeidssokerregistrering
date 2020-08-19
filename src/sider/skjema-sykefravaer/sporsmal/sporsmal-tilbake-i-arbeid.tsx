@@ -18,7 +18,7 @@ function SporsmalTilbakeIArbeid(props: Props) {
     };
 
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
-        kontekst, props.intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <form className="spm-skjema">
@@ -29,10 +29,10 @@ function SporsmalTilbakeIArbeid(props: Props) {
                     </Innholdstittel>
                 </legend>
                 <div className="spm-body">
-                    <Alternativ svar={TilbakeIArbeidSvar.JA_FULL_STILLING} {...fellesProps}/>
-                    <Alternativ svar={TilbakeIArbeidSvar.JA_REDUSERT_STILLING} {...fellesProps}/>
-                    <Alternativ svar={TilbakeIArbeidSvar.USIKKER} {...fellesProps}/>
-                    <Alternativ svar={TilbakeIArbeidSvar.NEI} {...fellesProps}/>
+                    <Alternativ svar={TilbakeIArbeidSvar.JA_FULL_STILLING} {...fellesProps} />
+                    <Alternativ svar={TilbakeIArbeidSvar.JA_REDUSERT_STILLING} {...fellesProps} />
+                    <Alternativ svar={TilbakeIArbeidSvar.USIKKER} {...fellesProps} />
+                    <Alternativ svar={TilbakeIArbeidSvar.NEI} {...fellesProps} />
                 </div>
             </fieldset>
         </form>

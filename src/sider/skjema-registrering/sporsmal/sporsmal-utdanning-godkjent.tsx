@@ -16,21 +16,21 @@ function UtdanningGodkjentSporsmal(props: Props) {
         hentAvgittSvar: () => props.hentAvgittSvar(props.sporsmalId),
     };
     const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(props.sporsmalId,
-        kontekst, props.intl, props.registeringType);
+        kontekst, props.registeringType);
 
     return (
         <form className="spm-skjema">
             <fieldset className="skjema__fieldset">
-            <legend className="skjema__legend spm-hode">
-                <Innholdstittel tag="h1" className="spm-tittel">
-                    {getTekst('tittel')}
-                </Innholdstittel>
-            </legend>
-            <div className="spm-body">
-                <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps}/>
-                <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps}/>
-                <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps}/>
-            </div>
+                <legend className="skjema__legend spm-hode">
+                    <Innholdstittel tag="h1" className="spm-tittel">
+                        {getTekst('tittel')}
+                    </Innholdstittel>
+                </legend>
+                <div className="spm-body">
+                    <Alternativ svar={UtdanningGodkjentSvar.JA} {...fellesProps} />
+                    <Alternativ svar={UtdanningGodkjentSvar.NEI} {...fellesProps} />
+                    <Alternativ svar={UtdanningGodkjentSvar.VET_IKKE} {...fellesProps} />
+                </div>
             </fieldset>
         </form>
     );

@@ -1,4 +1,5 @@
 /*tslint:disable*/
+import i18next from 'i18next';
 import { State as SvarState } from '../../../../../src/ducks/svar';
 import { Stilling } from "../../../../../src/ducks/siste-stilling";
 import {
@@ -11,8 +12,7 @@ import {
     UtdanningSvar
 } from "../../../../../src/ducks/svar-utils";
 import { mapAvgitteSvarForBackend, mapTilBesvarelse, mapTilSvarState } from "../../../../../src/ducks/registrerbruker-utils";
-import { InjectedIntl } from 'react-intl';
-import { OrdinaerBesvarelse, SykmeldtBesvarelse, TeksterForBesvarelse } from "../../../../../src/ducks/registrerbruker";
+import { TeksterForBesvarelse } from "../../../../../src/ducks/registrerbruker";
 import { SporsmalId } from "../../../../../src/ducks/svar";
 import { RegistreringType } from "../../../../../src/ducks/registreringstatus";
 // @ts-ignore
@@ -40,6 +40,7 @@ const besvarelse: BesvarelseType = {
 
 describe('utils test', () => {
     it('test mapAvgitteSvarForBackend', () => {
+
 
         const stilling: Stilling = {
             styrk08: '6236',
@@ -73,8 +74,9 @@ describe('utils test', () => {
             'dinsituasjon-tittel': 'dinsituasjon-tittel',
         };
 
-        let dummyIntl = {} as InjectedIntl;
-        dummyIntl.messages = messages;
+        cy.stub(i18next, 't').callsFake(id => messages[id] ? messages[id] : id)
+
+        cy.stub(i18next, 'exists').callsFake(id => messages[id] ? true : false)
 
         const expectedTekster: TeksterForBesvarelse = [
             {
@@ -113,7 +115,7 @@ describe('utils test', () => {
             besvarelse: mapTilBesvarelse(dummySvar),
             teksterForBesvarelse: expectedTekster,
         };
-        const mappet = mapAvgitteSvarForBackend(dummySvar, stilling, dummyIntl, RegistreringType.ORDINAER_REGISTRERING);
+        const mappet = mapAvgitteSvarForBackend(dummySvar, stilling, RegistreringType.ORDINAER_REGISTRERING);
         expect(mappet).to.deep.equal(expectData);
     });
 
