@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
-import { getIntlMessage } from '../../utils/utils';
-import ReactIntl from 'react-intl';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     disabled?: boolean;
     onClick: () => void;
-    intl: ReactIntl.InjectedIntl;
 }
 
-function KnappFullfor({ disabled, onClick, intl}: Props) {
-    return(
+function KnappFullfor({ disabled, onClick }: Props) {
+    const { t } = useTranslation();
+    return (
         <KnappBase
             type="hoved"
             className="knapp-neste"
@@ -19,7 +18,7 @@ function KnappFullfor({ disabled, onClick, intl}: Props) {
             onClick={onClick}
             data-testid="neste"
         >
-            <Normaltekst>{getIntlMessage(intl.messages, 'fullfor-knapp')}</Normaltekst>
+            <Normaltekst>{t('fullfor-knapp')}</Normaltekst>
         </KnappBase>
 
     );

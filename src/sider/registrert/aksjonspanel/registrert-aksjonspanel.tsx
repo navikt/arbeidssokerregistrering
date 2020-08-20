@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { withTranslation, WithTranslation, Trans, TransProps } from 'react-i18next';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { uniLogger } from '../../../metrikker/uni-logger';
 import {
@@ -15,11 +15,11 @@ interface RegistrertAksjonspanelProps {
     erSykmeldt: boolean;
 }
 
-class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps> {
+class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps & WithTranslation & TransProps> {
 
     render() {
 
-        const { hentTekstId, erSykmeldt } = this.props;
+        const { hentTekstId, erSykmeldt, t } = this.props;
         let veienTilArbeidUrl;
         let veienTilArbeidMedVisInfoUrl;
         let knappetekstJa;
@@ -31,7 +31,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
             veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + '?' + brukerStatusQueryParam;
             veienTilArbeidMedVisInfoUrl = (erSykmeldt ? HEROKU_VEIENTILARBEID_MED_AAP_URL
                 : DP_SOK_URL) + '&' + brukerStatusQueryParam;
-                knappetekstJa = erSykmeldt ? 'duernaregistrert-knapp-les-mer' : 'duernaregistrert-knapp-sok-dagpenger';
+            knappetekstJa = erSykmeldt ? 'duernaregistrert-knapp-les-mer' : 'duernaregistrert-knapp-sok-dagpenger';
         } else {
             veienTilArbeidUrl = VEIENTILARBEID_URL;
             veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL
@@ -47,21 +47,21 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                     onClick={() => {
                         uniLogger('registrering.vis.dagpenger.info.engelsk');
                     }}
-                    >
-                        <span>Apply for unemployment benefit</span>
+                >
+                    <span>Apply for unemployment benefit</span>
                 </a>
             )
         }
 
         return (
             <div className="registrert__aksjonspanel">
-                <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon"/>
+                <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon" />
                 <div className="registrert__tekster">
                     <Systemtittel tag="h2" className="blokk-xs">
-                        <FormattedMessage id={hentTekstId('systemtittel')}/>
+                        {t(hentTekstId('systemtittel'))}
                     </Systemtittel>
                     <Normaltekst className="blokk">
-                        <FormattedHTMLMessage id={hentTekstId('normaltekst')}/>
+                        <Trans i18nKey={hentTekstId('normaltekst')} />
                     </Normaltekst>
                     <div className="registrert__knapperad">
                         {knappetekstJa === 'duernaregistrert-knapp-sok-dagpenger' && <DagpengerEngelsk />}
@@ -72,7 +72,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                                 uniLogger('registrering.vis.dagpenger.info');
                             }}
                         >
-                            <FormattedMessage id={knappetekstJa}/>
+                            {t(knappetekstJa)}
                         </a>
                         <a
                             href={veienTilArbeidUrl}
@@ -81,7 +81,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
                                 uniLogger('registrering.ikke.vis.dagpenger.info');
                             }}
                         >
-                            <FormattedMessage id="duernaregistrert-knapp-ikke-na"/>
+                            {t('duernaregistrert-knapp-ikke-na')}
                         </a>
                     </div>
                 </div>
@@ -90,4 +90,4 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
     }
 }
 
-export default RegistrertAksjonspanel;
+export default withTranslation()(RegistrertAksjonspanel);

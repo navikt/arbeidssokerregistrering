@@ -4,7 +4,7 @@ import { AppState } from '../../reducer';
 import { connect } from 'react-redux';
 import OppsummeringElement from './oppsummering-element';
 import { SporsmalId } from '../../ducks/svar';
-import { FormattedMessage } from 'react-intl';
+import { withTranslation, WithTranslation } from 'react-i18next';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './sykmeldt-oppsummering-besvarelser.less';
 import { hentSvar } from '../../ducks/svar-utils';
@@ -16,10 +16,10 @@ interface StateProps {
     state: AppState;
 }
 
-class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
+class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps & WithTranslation> {
 
     render() {
-        const { state } = this.props;
+        const { state, t } = this.props;
         const svar = state.svar;
 
         if (_.isEmpty(svar)) {
@@ -36,42 +36,36 @@ class SykmeldtOppsummeringBesvarelser extends React.Component<StateProps> {
 
         return (
             <>
-            <div className="sykmeldt-oppsummering-besvarelser">
-                <img
-                    src={oppsummeringSvg}
-                    alt="Oppsummering sjekkliste"
-                    className="sykmeldt-oppsummering-besvarelser--illustrasjon"
-                />
+                <div className="sykmeldt-oppsummering-besvarelser">
+                    <img
+                        src={oppsummeringSvg}
+                        alt="Oppsummering sjekkliste"
+                        className="sykmeldt-oppsummering-besvarelser--illustrasjon"
+                    />
 
-                <div className="sykmeldt-oppsummering-besvarelser--list-container">
-                    <ul className="sykmeldt-oppsummering-besvarelser--list">
-                        <OppsummeringElement
-                            sporsmalId={SporsmalId.fremtidigSituasjon}
-                        >
-                            <strong>
-                                <FormattedMessage id="sykmeldt-oppsummering-framtidig-situasjon-fortekst"/>&nbsp;
-                            </strong>
-                        </OppsummeringElement>
-
-                        {element}
-
-                    </ul>
+                    <div className="sykmeldt-oppsummering-besvarelser--list-container">
+                        <ul className="sykmeldt-oppsummering-besvarelser--list">
+                            <OppsummeringElement
+                                sporsmalId={SporsmalId.fremtidigSituasjon}
+                            >
+                                <strong>
+                                    {t('sykmeldt-oppsummering-framtidig-situasjon-fortekst')}&nbsp;
+                                </strong>
+                            </OppsummeringElement>
+                            {element}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
-                <FormattedMessage id="sykmeldt-oppsummering-egress"/>
-            </Normaltekst>
+                <Normaltekst className="blokk-m sykmeldt-oppsummering-besvarelser--egress">
+                    {t('sykmeldt-oppsummering-egress')}
+                </Normaltekst>
             </>
-
         );
     }
-
 }
 
 const mapStateToProps = (state: AppState) => ({
     state: state
 });
 
-export default connect(mapStateToProps)(
-    SykmeldtOppsummeringBesvarelser
-);
+export default connect(mapStateToProps)(withTranslation()(SykmeldtOppsummeringBesvarelser));

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cls from 'classnames';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { withTranslation, WithTranslation } from 'react-i18next';
 import { Systemtittel } from 'nav-frontend-typografi';
 import AvsjekkBilde from './avsjekk-bilde/avsjekk-bilde';
 import { erIE } from '../../utils/ie-test';
@@ -19,38 +19,38 @@ interface StateProps {
     state: AppState;
 }
 
-type AllProps = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+type AllProps = StateProps & WithTranslation & RouteComponentProps<MatchProps>;
 
 class DuErNaRegistrert extends React.Component<AllProps> {
 
     hentTekstId(erSykmeldt: boolean): (id: string) => string {
         return (id: string) => {
-            return `duernaregistrert-${( erSykmeldt ? 'sykmeldt' : 'ordinaer')}-${id}`;
+            return `duernaregistrert-${(erSykmeldt ? 'sykmeldt' : 'ordinaer')}-${id}`;
         };
     }
 
     render() {
-
+        const { t } = this.props;
         const registreringType = this.props.state.registreringStatus.data.registreringType;
         const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
         const hentTekstId = this.hentTekstId(erSykmeldt);
         const tittelId = erIFSS() ? 'duernaregistrert-manuell-innholdstittel' : hentTekstId('innholdstittel');
         uniLogger('arbeidssokerregistrering.success', { registreringType: registreringType });
         return (
-            <section className={cls('registrert', { 'erIE': erIE(), 'registrert-fss': erIFSS()})}>
+            <section className={cls('registrert', { 'erIE': erIE(), 'registrert-fss': erIFSS() })}>
 
                 <div
                     className={cls('registrert__avsjekk', { 'registrert__avsjekk-sykmeldt': erSykmeldt })}
                 >
-                    <AvsjekkBilde/>
+                    <AvsjekkBilde />
                     <Systemtittel tag="h1" className="registrert__tittel">
-                        <FormattedMessage id={tittelId}/>
+                        {t(tittelId)}
                     </Systemtittel>
                 </div>
-                { erIFSS() ?
-                    <RegistrertSendVidere/>
+                {erIFSS() ?
+                    <RegistrertSendVidere />
                     :
-                    <RegistrertAksjonspanel hentTekstId={this.hentTekstId(erSykmeldt)} erSykmeldt={erSykmeldt}/>
+                    <RegistrertAksjonspanel hentTekstId={this.hentTekstId(erSykmeldt)} erSykmeldt={erSykmeldt} />
                 }
             </section>
         );
@@ -61,4 +61,4 @@ const mapStateToProps = (state: AppState) => ({
     state: state,
 });
 
-export default connect(mapStateToProps)(injectIntl(DuErNaRegistrert));
+export default connect(mapStateToProps)(withTranslation()(DuErNaRegistrert));

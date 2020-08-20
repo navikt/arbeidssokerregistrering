@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import { AppState } from '../../reducer';
-import { FormattedMessage } from 'react-intl';
+import { withTranslation, WithTranslation } from 'react-i18next'
 import { hentSvar, Svar } from '../../ducks/svar-utils';
 import { MessageValue } from 'react-intl';
 import { getTekstIdForSvar } from '../../komponenter/skjema/skjema-utils';
@@ -25,7 +25,7 @@ interface OwnProps {
     tekst?: string;
     skjul?: boolean;
     skjulHvisSvarErLik?: Svar | Svar[];
-    values?: {[key: string]: MessageValue | JSX.Element};
+    values?: { [key: string]: MessageValue | JSX.Element };
 }
 
 interface StateProps {
@@ -33,19 +33,21 @@ interface StateProps {
     registreringstatusData: RegistreringstatusData;
 }
 
-type Props = OwnProps & StateProps;
+type Props = OwnProps & StateProps & WithTranslation;
 
 class OppsummeringElement extends React.Component<Props> {
     render() {
-        const { tekst, values, registreringstatusData } = this.props;
+        const { tekst, values, registreringstatusData, t } = this.props;
 
         if (!this.skalViseElement()) {
             return null;
         }
-
-        const tekstTilRendring = tekst ? tekst : (
-            <FormattedMessage id={this.getIntlTekstId()} values={values}/>
-        );
+        
+        const tekstTilRendring = tekst ? tekst :
+            <>
+                {t(this.getIntlTekstId(), { values })}
+            </>
+            ;
 
         const finnSykmeldtlopStien = (sporsmalId: SporsmalId | undefined) => {
             const svar = hentSvar(this.props.svarState, SporsmalId.fremtidigSituasjon);
@@ -109,4 +111,4 @@ const mapStateToProps = (state: AppState) => ({
     registreringstatusData: selectRegistreringstatus(state).data,
 });
 
-export default connect(mapStateToProps)(OppsummeringElement);
+export default connect(mapStateToProps)(withTranslation()(OppsummeringElement));

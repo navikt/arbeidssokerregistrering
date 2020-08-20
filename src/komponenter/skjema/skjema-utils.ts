@@ -37,10 +37,6 @@ export function getIntlTekstForSporsmal(sporsmalId: string, kontekst: TekstKonte
     const idMedRegType = `${sporsmalId.toLowerCase()}-${kontekst}-${registreringTypeId}`;
     const idUtenRegType = `${sporsmalId.toLowerCase()}-${kontekst}`;
 
-    // console.log('ID MED REG TYPE', idUtenRegType, i18next.t(idMedRegType))
-    // console.log('ID MUTEN REG TYPE', idUtenRegType, i18next.t('registrering-arbeidssoker.introtittel'))
-    // console.log('EXISTS?', i18next.exists('registrering-arbeidssoker.introtittel'))
-
     return i18next.exists(idMedRegType) ? i18next.t(idMedRegType) : i18next.t(idUtenRegType)
 }
 

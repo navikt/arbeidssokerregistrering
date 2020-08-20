@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { withTranslation, WithTranslation } from 'react-i18next';
 import { connect, Dispatch } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
+import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
@@ -50,7 +50,7 @@ interface EgenState {
     sblArbeidRegistrerBrukerStatus: string;
 }
 
-type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps & InjectedIntlProps;
+type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps & WithTranslation;
 
 class Fullfor extends React.PureComponent<Props, EgenState> {
     constructor(props: Props) {
@@ -89,7 +89,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     getSvarMappetForBackend() {
-        const { state, intl } = this.props;
+        const { state } = this.props;
         return mapAvgitteSvarForBackend(state.svar, selectSisteStilling(state),
             RegistreringType.ORDINAER_REGISTRERING);
     }
@@ -108,12 +108,12 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     render() {
-        const { registrerBrukerData, intl } = this.props;
+        const { registrerBrukerData, t } = this.props;
 
         const advarselElement = this.state.visAdvarsel && (
             <NavAlertStripe type="advarsel" className="fullfor-advarsel-stripe">
                 <Normaltekst>
-                    <FormattedMessage id="fullfor-advarsel" />
+                    {t('fullfor-advarsel')}
                 </Normaltekst>
             </NavAlertStripe>
         );
@@ -126,7 +126,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
             >
                 <section className={`fullfor ${erIE() && 'erIE'}`}>
                     <Innholdstittel tag="h1" className="fullfor-tittel">
-                        <FormattedMessage id="fullfor-header" />
+                        {t('fullfor-header')}
                     </Innholdstittel>
                     <div className="fullfor-sjekkliste">
                         <img
@@ -136,28 +136,28 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                         />
 
                         <Element tag="h2" className="fullfor-sjekkliste__heading">
-                            <FormattedMessage id="fullfor-overskrift-liste" />
+                            {t('fullfor-overskrift-liste')}
                         </Element>
 
                         <ul className="fullfor-sjekkliste__liste">
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-1" />
+                                {t('fullfor-liste-1')}
                             </li>
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-2" />
+                                {t('fullfor-liste-2')}
                             </li>
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-3" />
+                                {t('fullfor-liste-3')}
                             </li>
                             <li className="typo-normal">
-                                <FormattedMessage id="fullfor-liste-4" />
+                                {t('fullfor-liste-4')}
                             </li>
                         </ul>
                     </div>
 
                     <div className="fullfor-info">
                         <Ekspanderbartpanel
-                            tittel={getIntlMessage(intl.messages, 'fullfor-les-mer')}
+                            tittel={t('fullfor-les-mer')}
                             border={true}
                             {...{ renderContentWhenClosed: true }}
                         >
@@ -169,7 +169,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">Økonomi</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-okonomi" /></Normaltekst>
+                                    <Normaltekst>
+                                        {t('fullfor-les-mer-okonomi')}
+                                    </Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
                                     <img
@@ -178,7 +180,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">Meldekort</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-meldekort" /></Normaltekst>
+                                    <Normaltekst>
+                                        {t('fullfor-les-mer-meldekort')}
+                                    </Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
                                     <img
@@ -188,7 +192,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                     />
                                     <Element className="tittel">Aktivitetsplanen</Element>
                                     <Normaltekst>
-                                        <FormattedMessage id="fullfor-les-mer-aktivitetsplan" />
+                                        {t('fullfor-les-mer-aktivitetsplan')}
                                     </Normaltekst>
                                 </li>
                                 <li className="fullfor-info-liste__element">
@@ -198,24 +202,24 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
                                         className="illustrasjon"
                                     />
                                     <Element className="tittel">CV</Element>
-                                    <Normaltekst><FormattedMessage id="fullfor-les-mer-CV" /></Normaltekst>
+                                    <Normaltekst>
+                                        {t('fullfor-les-mer-CV')}
+                                    </Normaltekst>
                                 </li>
                             </ul>
-
                         </Ekspanderbartpanel>
                     </div>
                     {!erIFSS() &&
                         <BekreftCheckboksPanel
                             onChange={this.settMarkert}
                             checked={this.state.markert}
-                            label={getIntlMessage(intl.messages, 'fullfor-sjekkboks')}
+                            label={t('fullfor-sjekkboks')}
                             className="fullfor-bekreft"
                         />
                     }
                     {advarselElement}
                     <div className="lenke-avbryt-wrapper">
                         <KnappFullfor
-                            intl={intl}
                             onClick={this.registrerBrukerOnClick}
                         />
                     </div>
@@ -239,5 +243,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    injectIntl(Fullfor)
+    withTranslation()(Fullfor)
 );
