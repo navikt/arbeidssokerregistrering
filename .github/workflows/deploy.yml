@@ -25,7 +25,6 @@ jobs:
 
   test-build-and-push:
     name: Test, build and push
-    needs: cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

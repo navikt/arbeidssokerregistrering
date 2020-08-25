@@ -37,7 +37,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
 
 const loggHarStartetRegistreringKunEngang = _.once(() => {
     const frontendlogger: Frontendlogger = (window as any).frontendlogger;
-    if (frontendlogger) {
+    if (frontendlogger && frontendlogger.event) {
         frontendlogger.event('registrering.harstartetregistrering', {}, {});
     }
 });
