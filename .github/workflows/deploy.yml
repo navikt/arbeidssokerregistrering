@@ -22,170 +22,139 @@ jobs:
           headless: true
           start: npm run start:cypress
           wait-on: http://localhost:3001
-
-  test-build-and-push:
-    name: Test, build and push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-        name: Checkout
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Build app and publish Docker image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          docker build --tag ${IMAGE} .
-          echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
-          docker push ${IMAGE}
-
-  deploy-q0-fss:
-    name: Deploy to Q0 FSS
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Deploy to Q0
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-fss
-          RESOURCE: nais/naiserator-fss.yaml
-          VARS: nais/vars-q0-fss.yaml
-
-  deploy-q0-sbs:
-    name: Deploy to Q0 SBS
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Deploy to Q0
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: nais/naiserator-sbs.yaml
-          VARS: nais/vars-q0-sbs.yaml
-
-  deploy-q1-fss:
-    name: Deploy to Q1 FSS
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Deploy to Q1
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-fss
-          RESOURCE: nais/naiserator-fss.yaml
-          VARS: nais/vars-q1-fss.yaml
-
-  deploy-q1-sbs:
-    name: Deploy to Q1 SBS
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Deploy to Q1
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: nais/naiserator-sbs.yaml
-          VARS: nais/vars-q1-sbs.yaml
-
-  deploy-prod-fss:
-    name: Deploy to Prod FSS
-    needs: deploy-q0-fss
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Deploy to P
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-fss
-          RESOURCE: nais/naiserator-fss.yaml
-          VARS: nais/vars-p-fss.yaml
-
-  deploy-prod-sbs:
-    name: Deploy to Prod SBS
-    needs: deploy-q0-sbs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Lag full image referanse
-        run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
-
-      - name: Deploy to P
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
-          RESOURCE: nais/naiserator-sbs.yaml
-          VARS: nais/vars-p-sbs.yaml
-
-  release:
-    name: Tag and release
-    needs: [deploy-prod-fss, deploy-prod-sbs]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-        name: Checkout
-
-      - name: Lag tag for image
-        run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
-
-      - name: Create release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: release/prod@${{ env.TAG }}
-          release_name: Release to prod
-          prerelease: false
+  # test-build-and-push:
+  #   name: Test, build and push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #       name: Checkout
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Build app and publish Docker image
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       run: |
+  #         docker build --tag ${IMAGE} .
+  #         echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
+  #         docker push ${IMAGE}
+  # deploy-q0-fss:
+  #   name: Deploy to Q0 FSS
+  #   needs: test-build-and-push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Deploy to Q0
+  #       uses: nais/deploy/actions/deploy@master
+  #       env:
+  #         APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  #         CLUSTER: dev-fss
+  #         RESOURCE: nais/naiserator-fss.yaml
+  #         VARS: nais/vars-q0-fss.yaml
+  # deploy-q0-sbs:
+  #   name: Deploy to Q0 SBS
+  #   needs: test-build-and-push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Deploy to Q0
+  #       uses: nais/deploy/actions/deploy@master
+  #       env:
+  #         APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  #         CLUSTER: dev-sbs
+  #         RESOURCE: nais/naiserator-sbs.yaml
+  #         VARS: nais/vars-q0-sbs.yaml
+  # deploy-q1-fss:
+  #   name: Deploy to Q1 FSS
+  #   needs: test-build-and-push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Deploy to Q1
+  #       uses: nais/deploy/actions/deploy@master
+  #       env:
+  #         APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  #         CLUSTER: dev-fss
+  #         RESOURCE: nais/naiserator-fss.yaml
+  #         VARS: nais/vars-q1-fss.yaml
+  # deploy-q1-sbs:
+  #   name: Deploy to Q1 SBS
+  #   needs: test-build-and-push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Deploy to Q1
+  #       uses: nais/deploy/actions/deploy@master
+  #       env:
+  #         APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  #         CLUSTER: dev-sbs
+  #         RESOURCE: nais/naiserator-sbs.yaml
+  #         VARS: nais/vars-q1-sbs.yaml
+  # deploy-prod-fss:
+  #   name: Deploy to Prod FSS
+  #   needs: deploy-q0-fss
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Deploy to P
+  #       uses: nais/deploy/actions/deploy@master
+  #       env:
+  #         APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  #         CLUSTER: prod-fss
+  #         RESOURCE: nais/naiserator-fss.yaml
+  #         VARS: nais/vars-p-fss.yaml
+  # deploy-prod-sbs:
+  #   name: Deploy to Prod SBS
+  #   needs: deploy-q0-sbs
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Lag full image referanse
+  #       run: echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+  #     - name: Deploy to P
+  #       uses: nais/deploy/actions/deploy@master
+  #       env:
+  #         APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  #         CLUSTER: prod-sbs
+  #         RESOURCE: nais/naiserator-sbs.yaml
+  #         VARS: nais/vars-p-sbs.yaml
+  # release:
+  #   name: Tag and release
+  #   needs: [deploy-prod-fss, deploy-prod-sbs]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #       name: Checkout
+  #     - name: Lag tag for image
+  #       run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
+  #     - name: Create release
+  #       uses: actions/create-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         tag_name: release/prod@${{ env.TAG }}
+  #         release_name: Release to prod
+  #         prerelease: false
