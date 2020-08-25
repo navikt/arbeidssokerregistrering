@@ -3,7 +3,7 @@ name: Build, push, and deploy
 on:
   push:
     branches:
-      - master
+      - cypress-fix
 
 env:
   IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/arbeidssokerregistrering
