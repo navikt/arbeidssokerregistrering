@@ -8,7 +8,7 @@ import navKontorSvg from './nav-kontor.svg';
 
 const InfoNavKontor = () => {
     const { location } = window;
-    const lenke = 'https://tjenester.nav.no/nav-sok';
+    const lenke = 'https://www.nav.no/person/kontakt-oss/nb/finnkontor';
     const amplitudeNameInternalSite = 'Går til intern side';
 
     const getRetningFraNAV = () => /nav.no/.test(lenke) ? 'inn' : 'ut';
