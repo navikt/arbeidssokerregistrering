@@ -28,7 +28,7 @@ import SkjemaSykefravaerSammeArbeidsgiver from './sider/skjema-sykefravaer/skjem
 import SkjemaSykefravaerSammeArbeidsgiverNyStilling
     from './sider/skjema-sykefravaer/skjema-sykefravaer-samme-arbeidsgiver-ny-stilling';
 import SkjemaSykefravaerUsikker from './sider/skjema-sykefravaer/skjema-sykefravaer-usikker';
-import Oppsummering from './sider/oppsummering/oppsummering';
+import OppsummeringSykmeldt from './sider/oppsummering/oppsummering-sykmeldt';
 import Fullfor from './sider/fullfor/fullfor';
 import DuErNaRegistrert from './sider/registrert/registrert';
 import { AppState } from './reducer';
@@ -57,6 +57,7 @@ import RegistreringArbeidssokerFss from './sider/startside/registrering-arbeidss
 import RegistreringArbeidssoker from './sider/startside/registrering-arbeidssoker';
 import { loggStartenPaaRegistreringFraAAP } from './middleware/metrics-middleware';
 import { uniLogger } from './metrikker/uni-logger';
+import OppsummeringOrdinaer from './sider/oppsummering/oppsummering-ordinaer';
 
 interface StateProps {
     registreringstatusData: RegistreringstatusData;
@@ -151,7 +152,6 @@ class Routes extends React.Component<AllProps> {
                     <Switch>
 
                         {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
-                        {klarForFullforing ? <Route path={OPPSUMMERING_PATH} component={Oppsummering}/> : null}
                         {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH}
                                                                                         component={DuErNaRegistrert}/> : null} {/*tslint:disable-line*/}
 
@@ -170,6 +170,9 @@ class Routes extends React.Component<AllProps> {
                                     :
                                     null
                                 }
+                                {klarForFullforing ?
+                                    <Route path={OPPSUMMERING_PATH} component={OppsummeringOrdinaer}/>
+                                    : null}
                                 <Redirect
                                     to={START_PATH}
                                 />
@@ -207,6 +210,8 @@ class Routes extends React.Component<AllProps> {
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
                                     component={SkjemaSykefravaerUsikker}
                                 />
+                                {klarForFullforing
+                                    ? <Route path={OPPSUMMERING_PATH} component={OppsummeringSykmeldt}/> : null}
                                 <Redirect
                                     to={START_PATH + queryParams}
                                 />
