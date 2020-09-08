@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { RouteComponentProps } from 'react-router-dom';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
-import { FULLFOR_PATH } from '../../utils/konstanter';
+import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
 import { erIE } from '../../utils/ie-test';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
@@ -18,6 +18,7 @@ import {
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import FullforFeilhandtering from '../fullfor/feilhandtering/fullfor-feilhandtering';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
+import { erKlarForFullforing } from '../fullfor/fullfor-utils';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -43,6 +44,10 @@ class OppsummeringOrdinaer extends React.Component<Props> {
     }
 
     render() {
+        if (!erKlarForFullforing(this.props.state)) {
+            return <Redirect to={START_PATH} />;
+        }
+
         let classnames = 'oppsummering ';
         classnames += erIE() ? 'erIE' : '';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
@@ -18,7 +18,7 @@ import FullforFeilhandtering from './feilhandtering/fullfor-feilhandtering';
 import Innholdslaster from '../../komponenter/innholdslaster/innholdslaster';
 import { STATUS } from '../../ducks/api-utils';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
-import { DU_ER_NA_REGISTRERT_PATH } from '../../utils/konstanter';
+import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import Loader, { loaderTittelElement } from '../../komponenter/loader/loader';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
 import { erIE } from '../../utils/ie-test';
@@ -34,6 +34,7 @@ import okonomiSvg from './okonomi.svg';
 
 import './fullfor.less';
 import { erIFSS } from '../../utils/fss-utils';
+import { erKlarForFullforing } from './fullfor-utils';
 
 interface StateProps {
     registrerBrukerData: RegistrerBrukerState;
@@ -108,6 +109,9 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     render() {
+        if (!erKlarForFullforing(this.props.state)) {
+            return <Redirect to={START_PATH} />;
+        }
         const {registrerBrukerData, intl} = this.props;
 
         const advarselElement = this.state.visAdvarsel && (
