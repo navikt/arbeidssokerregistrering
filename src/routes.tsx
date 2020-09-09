@@ -165,14 +165,8 @@ class Routes extends React.Component<AllProps> {
                                     path={`${SKJEMA_PATH}/:id`}
                                     component={SkjemaRegistrering}
                                 />
-                                {klarForFullforing ?
-                                    <Route path={FULLFOR_PATH} component={Fullfor}/>
-                                    :
-                                    null
-                                }
-                                {klarForFullforing ?
-                                    <Route path={OPPSUMMERING_PATH} component={OppsummeringOrdinaer}/>
-                                    : null}
+                                <Route path={FULLFOR_PATH} component={Fullfor}/>
+                                <Route path={OPPSUMMERING_PATH} component={OppsummeringOrdinaer}/>
                                 <Redirect
                                     to={START_PATH}
                                 />
@@ -185,11 +179,7 @@ class Routes extends React.Component<AllProps> {
                                     component={erIFSS() ? RegistreringArbeidssokerSykmeldtFss :
                                         RegistreringArbeidssokerSykmeldt}
                                 />
-                                {klarForFullforing ?
-                                    <Route path={INFOSIDE_PATH} component={Infoside}/>
-                                    :
-                                    null
-                                }
+                                <Route path={INFOSIDE_PATH} component={Infoside}/>
                                 <Route
                                     path={INNGANGSSPORSMAL_PATH}
                                     component={Inngangssporsmal}
@@ -210,8 +200,7 @@ class Routes extends React.Component<AllProps> {
                                     path={`${SKJEMA_SYKEFRAVAER_PATH}/4/:id`}
                                     component={SkjemaSykefravaerUsikker}
                                 />
-                                {klarForFullforing
-                                    ? <Route path={OPPSUMMERING_PATH} component={OppsummeringSykmeldt}/> : null}
+                                <Route path={OPPSUMMERING_PATH} component={OppsummeringSykmeldt}/>
                                 <Redirect
                                     to={START_PATH + queryParams}
                                 />

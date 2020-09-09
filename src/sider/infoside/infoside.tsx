@@ -2,23 +2,25 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import './infoside.less';
 import LenkeTilbake from '../../komponenter/knapper/lenke-tilbake';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import { MatchProps } from '../../utils/utils';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import InfoViser from '../../komponenter/info-viser/info-viser';
 import { Link } from 'react-router-dom';
-import { OPPSUMMERING_PATH, DITT_SYKEFRAVAER_URL } from '../../utils/konstanter';
+import { OPPSUMMERING_PATH, DITT_SYKEFRAVAER_URL, START_PATH } from '../../utils/konstanter';
 import { AppState } from '../../reducer';
 import { selectBrukersNavn, State as BrukersNavnState } from '../../ducks/brukers-navn';
 import { connect } from 'react-redux';
 import { erIFSS } from '../../utils/fss-utils';
 import { lagAktivitetsplanUrl } from '../../utils/url-utils';
+import { erKlarForFullforing } from '../fullfor/fullfor-utils';
 
 const veilederSvg = require('./veileder-syfo.svg');
 
 interface StateProps {
     brukersNavn: BrukersNavnState;
+    state: AppState;
 }
 
 type Props = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
@@ -30,6 +32,9 @@ class Infoside extends React.Component<Props> {
     }
 
     render() {
+        if (!erKlarForFullforing(this.props.state)) {
+            return <Redirect to={START_PATH} />;
+        }
 
         const fornavn = this.props.brukersNavn.data.fornavn;
         let veilederpanelType: 'normal' | 'plakat' = 'plakat';
@@ -114,6 +119,7 @@ class Infoside extends React.Component<Props> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     brukersNavn: selectBrukersNavn(state),
+    state: state
 });
 
 export default connect(mapStateToProps)(withRouter(injectIntl(Infoside)));
