@@ -12,9 +12,7 @@ import {
     stubFetch
 } from "../../../../../src/test/test-utils";
 import { create } from "../../../../../src/store";
-import { ActionTypes as SvarActionTypes } from "../../../../../src/ducks/svar";
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from "../../../../../src/utils/konstanter";
-import svarMock from "../../../../../src/mocks/svar-mock";
 import {RegistreringType} from "../../../../../src/ducks/registreringstatus";
 
 enzyme.configure({ adapter: new Adapter() });
