@@ -6,6 +6,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import Fullfor from '../../../../../src/sider/fullfor/fullfor';
 import KnappFullfor from '../../../../../src/sider/skjema-registrering/knapp-fullfor';
 import {
+    dispatchAlleSporsmal,
+    dispatchRegistreringstatus,
     FetchStub, mountWithStoreRouterAndIntl, promiseWithSetTimeout, shallowwithStoreAndIntl,
     stubFetch
 } from "../../../../../src/test/test-utils";
@@ -13,6 +15,7 @@ import { create } from "../../../../../src/store";
 import { ActionTypes as SvarActionTypes } from "../../../../../src/ducks/svar";
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from "../../../../../src/utils/konstanter";
 import svarMock from "../../../../../src/mocks/svar-mock";
+import {RegistreringType} from "../../../../../src/ducks/registreringstatus";
 
 enzyme.configure({ adapter: new Adapter() });
 afterEach(() => {
@@ -25,7 +28,10 @@ describe('<Fullfor />', () => {
 
     it('Skal ha fullfor knapp som er aktiv', () => {
         const store = create();
-        dispatchTilfeldigeSvar(store);
+        dispatchAlleSporsmal(store);
+        dispatchRegistreringstatus({
+            registreringType: RegistreringType.ORDINAER_REGISTRERING
+        }, store);
 
         const push = sinon.spy();
         const props = {
@@ -39,9 +45,12 @@ describe('<Fullfor />', () => {
         expect(wrapper.find(KnappFullfor)).to.be.have.length(1);
     });
 
-    it('Skal vise advarsel når sjekkboks ikke er marker, når fullknapp klikkes', () => {
+    it('Skal vise advarsel når sjekkboks ikke er markert, når fullknapp klikkes', () => {
         const store = create();
-        dispatchTilfeldigeSvar(store);
+        dispatchAlleSporsmal(store);
+        dispatchRegistreringstatus({
+            registreringType: RegistreringType.ORDINAER_REGISTRERING
+        }, store);
 
         const push = sinon.spy();
         const props = {
@@ -61,7 +70,10 @@ describe('<Fullfor />', () => {
 
     it('Skal vise feilmelding dersom fullfor feiler', () => {
         const store = create();
-        dispatchTilfeldigeSvar(store);
+        dispatchAlleSporsmal(store);
+        dispatchRegistreringstatus({
+            registreringType: RegistreringType.ORDINAER_REGISTRERING
+        }, store);
         const push = sinon.spy();
         const props = {
             history: {
@@ -95,7 +107,10 @@ describe('<Fullfor />', () => {
             },
         };
 
-        dispatchTilfeldigeSvar(store);
+        dispatchAlleSporsmal(store);
+        dispatchRegistreringstatus({
+            registreringType: RegistreringType.ORDINAER_REGISTRERING
+        }, store);
 
         stubFetch(new FetchStub().addResponse('/startregistrering', {}));
 
@@ -112,23 +127,4 @@ describe('<Fullfor />', () => {
                 expect(pushedPath.includes(DU_ER_NA_REGISTRERT_PATH)).to.equal(true);
             });
     });
-
-    function dispatchTilfeldigeSvar(store) {
-        [
-            'utdanning',
-            'utdanningBestatt',
-            'utdanningGodkjent',
-            'helseHinder',
-            'andreForhold',
-            'sisteStilling',
-            'dinSituasjon',
-        ].forEach(sporsmalId => store.dispatch({
-            type: SvarActionTypes.AVGI_SVAR,
-            data: {
-                sporsmalId,
-                svar: svarMock[sporsmalId],
-            }
-        }));
-    }
-
 });
