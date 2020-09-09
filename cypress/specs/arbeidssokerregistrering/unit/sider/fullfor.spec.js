@@ -12,7 +12,7 @@ import {
     stubFetch
 } from "../../../../../src/test/test-utils";
 import { create } from "../../../../../src/store";
-import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from "../../../../../src/utils/konstanter";
+import { DU_ER_NA_REGISTRERT_PATH } from "../../../../../src/utils/konstanter";
 import {RegistreringType} from "../../../../../src/ducks/registreringstatus";
 
 enzyme.configure({ adapter: new Adapter() });
