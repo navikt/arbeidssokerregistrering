@@ -17,7 +17,7 @@ proxy:
     validateOidcToken: false
   - contextPath: "/modiacontextholder"
     baseUrl: "http://modiacontextholder"
-    pingRequestPath: "/internal/isAlive"
+    pingRequestPath: "/modiacontextholder/internal/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbregistrering"
     baseUrl: "http://veilarbregistrering"
