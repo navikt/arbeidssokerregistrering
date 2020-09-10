@@ -27,60 +27,54 @@ interface StateProps {
 
 type Props = StateProps & RouteComponentProps<MatchProps> & InjectedIntlProps;
 
-class OppsummeringOrdinaer extends React.Component<Props> {
+const OppsummeringOrdinaer = (props: Props) => {
 
-    constructor(props: Props) {
-        super(props);
-        this.handleNesteBtnClicked = this.handleNesteBtnClicked.bind(this);
-    }
-
-    componentDidMount() {
+    React.useEffect(() => {
         disableVerikalScrollingVedAnimasjon();
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    handleNesteBtnClicked() {
-        const { history} = this.props;
+    const handleNesteBtnClicked = () => {
+        const { history} = props;
         history.push(FULLFOR_PATH);
+    };
+
+    if (!erKlarForFullforing(props.state)) {
+        return <Redirect to={START_PATH} />;
     }
 
-    render() {
-        if (!erKlarForFullforing(this.props.state)) {
-            return <Redirect to={START_PATH} />;
-        }
+    let classnames = 'oppsummering ';
+    classnames += erIE() ? 'erIE' : '';
 
-        let classnames = 'oppsummering ';
-        classnames += erIE() ? 'erIE' : '';
+    const oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
+    const tekstPrefix = 'ordinaer-oppsummering';
+    const knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
 
-        const oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
-        const tekstPrefix = 'ordinaer-oppsummering';
-        const knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
-
-        return (
-            <Innholdslaster
-                feilmeldingKomponent={<FullforFeilhandtering/>}
-                avhengigheter={[this.props.registrerBrukerData]}
-                loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
-            >
-                <section className={classnames}>
-                    <Innholdstittel tag="h1" className="oppsummering-tittel">
-                        <FormattedMessage id={`${tekstPrefix}-tittel`}/>
-                    </Innholdstittel>
-                    <Normaltekst className="oppsummering-ingress">
-                        <FormattedMessage id={`${tekstPrefix}-ingress`}/>
-                    </Normaltekst>
-                    {oppsummeringBesvarelser}
-                    <div className="lenke-avbryt-wrapper">
-                        <KnappBase type="hoved" onClick={this.handleNesteBtnClicked} data-testid="neste">
-                            <FormattedMessage id={knappTekstId}/>
-                        </KnappBase>
-                    </div>
-                    <LenkeTilbake onClick={() => this.props.history.goBack()}/>
-                    <LenkeAvbryt wrapperClassname="wrapper-too"/>
-                </section>
-            </Innholdslaster>
-        );
-    }
-}
+    return (
+        <Innholdslaster
+            feilmeldingKomponent={<FullforFeilhandtering/>}
+            avhengigheter={[props.registrerBrukerData]}
+            loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
+        >
+            <section className={classnames}>
+                <Innholdstittel tag="h1" className="oppsummering-tittel">
+                    <FormattedMessage id={`${tekstPrefix}-tittel`}/>
+                </Innholdstittel>
+                <Normaltekst className="oppsummering-ingress">
+                    <FormattedMessage id={`${tekstPrefix}-ingress`}/>
+                </Normaltekst>
+                {oppsummeringBesvarelser}
+                <div className="lenke-avbryt-wrapper">
+                    <KnappBase type="hoved" onClick={handleNesteBtnClicked} data-testid="neste">
+                        <FormattedMessage id={knappTekstId}/>
+                    </KnappBase>
+                </div>
+                <LenkeTilbake onClick={() => props.history.goBack()}/>
+                <LenkeAvbryt wrapperClassname="wrapper-too"/>
+            </section>
+        </Innholdslaster>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
     registrerBrukerData: state.registrerBruker,
