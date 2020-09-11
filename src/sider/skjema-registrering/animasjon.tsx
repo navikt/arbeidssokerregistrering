@@ -6,7 +6,7 @@ interface Props {
 }
 
 interface State {
-    visible: boolean;
+    currentFlag: number | string;
 }
 
 class Animasjon extends React.Component<Props, State> {
@@ -16,26 +16,23 @@ class Animasjon extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            visible: true
+            currentFlag: this.props.flag
         };
         disableVerikalScrollingVedAnimasjon();
     }
 
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.flag !== this.props.flag) {
-            this.setState({visible: false});
+    componentDidUpdate() {
+        if (this.props.flag !== this.state.currentFlag) {
+            disableVerikalScrollingVedAnimasjon();
+            this.setState({currentFlag: this.props.flag});
         }
     }
 
     render() {
-        return this.state.visible ? this.props.children : null;
-    }
-
-    componentDidUpdate() {
-        if (!this.state.visible) {
-            disableVerikalScrollingVedAnimasjon();
-            this.setState({visible: true});
+        if (this.props.flag !== this.state.currentFlag) {
+            return null;
         }
+        return this.props.children;
     }
 }
 

@@ -3,39 +3,24 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { MatchProps, scrollToBanner } from '../../utils/utils';
 import { START_PATH } from '../../utils/konstanter';
 
-interface State {
-    forover: boolean;
-}
-
 type Props = RouteComponentProps<MatchProps>;
 
-class Sideanimasjon extends React.Component<Props, State> {
+class Sideanimasjon extends React.Component<Props> {
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            forover: true
-        };
-    }
-
-    componentWillReceiveProps(nextProps: Props) {
-        const currentLocation = this.props.location;
-        const nextLocation = nextProps.location;
-        if (nextLocation !== currentLocation) {
+    componentDidUpdate(prevProps: Readonly<Props>) {
+        const newLocation = this.props.location;
+        const currentLocation = prevProps.location;
+        if (currentLocation !== newLocation) {
             scrollToBanner();
-            this.setState({
-                ...this.state,
-                forover: nextProps.history.action !== 'POP'
-                // skalAnimereForover(currentLocation.pathname, nextLocation.pathname),
-            });
         }
     }
 
     render() {
+        const forover: Boolean = (this.props.history.action === 'PUSH');
         return (
             <div
                 className={(this.props.location.pathname !== START_PATH ? 'limit ' : '')
-                + (this.state.forover ? 'forover' : 'bakover')}
+                + (forover ? 'forover' : 'bakover')}
             >
                 {this.props.children}
             </div>
