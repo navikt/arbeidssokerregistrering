@@ -4,7 +4,7 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
+import { disableVertikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
 import { FULLFOR_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
@@ -30,7 +30,7 @@ type Props = StateProps & RouteComponentProps<MatchProps> & InjectedIntlProps;
 const OppsummeringOrdinaer = (props: Props) => {
 
     React.useEffect(() => {
-        disableVerikalScrollingVedAnimasjon();
+        disableVertikalScrollingVedAnimasjon();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -43,10 +43,8 @@ const OppsummeringOrdinaer = (props: Props) => {
         return <Redirect to={START_PATH} />;
     }
 
-    let classnames = 'oppsummering ';
-    classnames += erIE() ? 'erIE' : '';
+    const classnames = 'oppsummering' + (erIE() ? ' erIE' : '');
 
-    const oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
     const tekstPrefix = 'ordinaer-oppsummering';
     const knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
 
@@ -63,7 +61,7 @@ const OppsummeringOrdinaer = (props: Props) => {
                 <Normaltekst className="oppsummering-ingress">
                     <FormattedMessage id={`${tekstPrefix}-ingress`}/>
                 </Normaltekst>
-                {oppsummeringBesvarelser}
+                <OrdinaerOppsummeringBesvarelser/>
                 <div className="lenke-avbryt-wrapper">
                     <KnappBase type="hoved" onClick={handleNesteBtnClicked} data-testid="neste">
                         <FormattedMessage id={knappTekstId}/>

@@ -6,7 +6,7 @@ import NavAlertStripe from 'nav-frontend-alertstriper';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
+import { disableVertikalScrollingVedAnimasjon, getIntlMessage, MatchProps } from '../../utils/utils';
 import KnappFullfor from '../skjema-registrering/knapp-fullfor';
 import { AppState } from '../../reducer';
 import {
@@ -66,7 +66,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     }
 
     componentDidMount() {
-        disableVerikalScrollingVedAnimasjon();
+        disableVertikalScrollingVedAnimasjon();
     }
 
     registrerBrukerOnClick() {
