@@ -61,7 +61,7 @@ const OppsummeringOrdinaer = ({state, registrerBrukerData, history}: Props) => {
                     <FormattedMessage id={`${tekstPrefix}-ingress`}/>
                 </Normaltekst>
                 <OrdinaerOppsummeringBesvarelser
-                    registreringStatus={state.registreringStatus}
+                    registreringStatus={state.registreringStatus.data}
                     sisteStilling={state.sisteStilling}
                     svar={state.svar}
                 />

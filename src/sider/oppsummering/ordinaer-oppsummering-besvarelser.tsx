@@ -4,20 +4,20 @@ import OppsummeringElement from './oppsummering-element';
 import './ordinaer-oppsummering-besvarelser.less';
 import { hentElementOppsummering } from '../skjema-registrering/skjema-sporsmalene';
 import { State as SvarState } from '../../ducks/svar';
-import { State as RegStatusState } from '../../ducks/registreringstatus';
+import { Data as RegStatusData } from '../../ducks/registreringstatus';
 import { State as SisteStillingState } from '../../ducks/siste-stilling';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
 interface OwnProps {
     svar: SvarState;
-    registreringStatus: RegStatusState;
+    registreringStatus: RegStatusData;
     sisteStilling: SisteStillingState;
 }
 
 const OrdinaerOppsummeringBesvarelser = ({svar, registreringStatus, sisteStilling}: OwnProps) => {
 
-    const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus.data);
+    const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
 
     const element = hentElementOppsummering(sisteStilling);
 
