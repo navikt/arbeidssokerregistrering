@@ -43,8 +43,7 @@ const OppsummeringOrdinaer = (props: Props) => {
         return <Redirect to={START_PATH} />;
     }
 
-    let classnames = 'oppsummering ';
-    classnames += erIE() ? 'erIE' : '';
+    const classnames = 'oppsummering' + (erIE() ? ' erIE' : '');
 
     const tekstPrefix = 'ordinaer-oppsummering';
     const knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
