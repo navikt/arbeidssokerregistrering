@@ -61,7 +61,7 @@ const OppsummeringOrdinaer = (props: Props) => {
                 <Normaltekst className="oppsummering-ingress">
                     <FormattedMessage id={`${tekstPrefix}-ingress`}/>
                 </Normaltekst>
-                <OrdinaerOppsummeringBesvarelser/>
+                <OrdinaerOppsummeringBesvarelser state={props.state}/>
                 <div className="lenke-avbryt-wrapper">
                     <KnappBase type="hoved" onClick={handleNesteBtnClicked} data-testid="neste">
                         <FormattedMessage id={knappTekstId}/>
