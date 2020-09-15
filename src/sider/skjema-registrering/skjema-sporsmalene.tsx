@@ -9,7 +9,7 @@ import Utdanningsporsmal from './sporsmal/sporsmal-utdanning';
 import UtdanningGodkjentSporsmal from './sporsmal/sporsmal-utdanning-godkjent';
 import UtdanningBestattSporsmal from './sporsmal/sporsmal-utdanning-bestatt';
 import { Link } from 'react-router-dom';
-import { ingenYrkesbakgrunn } from '../../ducks/siste-stilling';
+import { ingenYrkesbakgrunn, State as SisteStillingState } from '../../ducks/siste-stilling';
 import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
 import {
     UtdanningBestattSvar,
@@ -17,13 +17,12 @@ import {
     UtdanningSvar
 } from '../../ducks/svar-utils';
 import { RegistreringType } from '../../ducks/registreringstatus';
-import { AppState } from '../../reducer';
 
 // TODO:jcp any
 const sporsmaleneConfig = (
     sporsmalProps: any, // tslint:disable-line
     regType: RegistreringType | string,
-    state?: AppState) => [
+    sisteStilling?: SisteStillingState) => [
     {
         id: SporsmalId.dinSituasjon,
         element: (
@@ -57,8 +56,8 @@ const sporsmaleneConfig = (
             <OppsummeringElement
                 key={SporsmalId.sisteStilling}
                 sporsmalId={SporsmalId.sisteStilling}
-                tekst={state && (state.sisteStilling && state.sisteStilling.data.stilling.label)}
-                skjul={state && (state.sisteStilling && state.sisteStilling.data.stilling === ingenYrkesbakgrunn)}
+                tekst={sisteStilling && sisteStilling.data.stilling.label}
+                skjul={sisteStilling && sisteStilling.data.stilling === ingenYrkesbakgrunn}
             >
                 <strong><FormattedMessage id="oppsummering-sistestilling-fortekst"/>&nbsp;</strong>
             </OppsummeringElement>
@@ -185,8 +184,8 @@ export const finnLenkeEndreElementForOrdinaer = (
     }
 };
 
-export const hentElementOppsummering = (state: AppState) =>
-    sporsmaleneConfig({}, '', state).map((spmElement) => {
+export const hentElementOppsummering = (sisteStilling: SisteStillingState) =>
+    sporsmaleneConfig({}, '', sisteStilling).map((spmElement) => {
         return spmElement.elementOppsummering;
     });
 

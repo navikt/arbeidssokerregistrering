@@ -1,24 +1,25 @@
 import * as React from 'react';
 import { getTekstIdForArbeidSisteManeder } from './oppsummering-utils';
 import OppsummeringElement from './oppsummering-element';
-import { AppState } from '../../reducer';
 import './ordinaer-oppsummering-besvarelser.less';
 import { hentElementOppsummering } from '../skjema-registrering/skjema-sporsmalene';
+import { State as SvarState } from '../../ducks/svar';
+import { State as RegStatusState } from '../../ducks/registreringstatus';
+import { State as SisteStillingState } from '../../ducks/siste-stilling';
 
 const oppsummeringSvg = require('./oppsummering.svg');
 
 interface OwnProps {
-    state: AppState;
+    svar: SvarState;
+    registreringStatus: RegStatusState;
+    sisteStilling: SisteStillingState;
 }
 
-const OrdinaerOppsummeringBesvarelser = ({state}: OwnProps) => {
+const OrdinaerOppsummeringBesvarelser = ({svar, registreringStatus, sisteStilling}: OwnProps) => {
 
-    const svar = state.svar;
+    const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus.data);
 
-    const registreringStatus = state.registreringStatus.data;
-    const jobbetSeksAvTolvSisteManederTekstId = getTekstIdForArbeidSisteManeder(svar, registreringStatus);
-
-    const element = hentElementOppsummering(state);
+    const element = hentElementOppsummering(sisteStilling);
 
     return (
         <div className="ordinaer-oppsummering-besvarelser">

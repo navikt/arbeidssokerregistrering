@@ -27,7 +27,7 @@ interface StateProps {
 
 type Props = StateProps & RouteComponentProps<MatchProps> & InjectedIntlProps;
 
-const OppsummeringOrdinaer = (props: Props) => {
+const OppsummeringOrdinaer = ({state, registrerBrukerData, history}: Props) => {
 
     React.useEffect(() => {
         disableVertikalScrollingVedAnimasjon();
@@ -35,11 +35,10 @@ const OppsummeringOrdinaer = (props: Props) => {
     }, []);
 
     const handleNesteBtnClicked = () => {
-        const { history} = props;
         history.push(FULLFOR_PATH);
     };
 
-    if (!erKlarForFullforing(props.state)) {
+    if (!erKlarForFullforing(state)) {
         return <Redirect to={START_PATH} />;
     }
 
@@ -51,7 +50,7 @@ const OppsummeringOrdinaer = (props: Props) => {
     return (
         <Innholdslaster
             feilmeldingKomponent={<FullforFeilhandtering/>}
-            avhengigheter={[props.registrerBrukerData]}
+            avhengigheter={[registrerBrukerData]}
             loaderKomponent={<Loader tittelElement={loaderTittelElement}/>}
         >
             <section className={classnames}>
@@ -61,13 +60,17 @@ const OppsummeringOrdinaer = (props: Props) => {
                 <Normaltekst className="oppsummering-ingress">
                     <FormattedMessage id={`${tekstPrefix}-ingress`}/>
                 </Normaltekst>
-                <OrdinaerOppsummeringBesvarelser state={props.state}/>
+                <OrdinaerOppsummeringBesvarelser
+                    registreringStatus={state.registreringStatus}
+                    sisteStilling={state.sisteStilling}
+                    svar={state.svar}
+                />
                 <div className="lenke-avbryt-wrapper">
                     <KnappBase type="hoved" onClick={handleNesteBtnClicked} data-testid="neste">
                         <FormattedMessage id={knappTekstId}/>
                     </KnappBase>
                 </div>
-                <LenkeTilbake onClick={() => props.history.goBack()}/>
+                <LenkeTilbake onClick={() => history.goBack()}/>
                 <LenkeAvbryt wrapperClassname="wrapper-too"/>
             </section>
         </Innholdslaster>
