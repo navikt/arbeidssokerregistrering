@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import NavAlertStripe from 'nav-frontend-alertstriper';
 import { AppState } from '../../reducer';
-import { endreSvarAction, SporsmalId, State as SvarState } from '../../ducks/svar';
+import { SporsmalId, State as SvarState } from '../../ducks/svar';
 import LenkeAvbryt from '../knapper/lenke-avbryt';
 import LenkeTilbake from '../knapper/lenke-tilbake';
 import LenkeNeste from '../knapper/lenke-neste';
@@ -21,7 +21,7 @@ import {
     kanGaaTilNeste,
     SkjemaConfig
 } from './skjema-utils';
-import { hentSvar, Svar } from '../../ducks/svar-utils';
+import { hentSvar } from '../../ducks/svar-utils';
 import { START_PATH } from '../../utils/konstanter';
 import {
     Data as RegistreringstatusData,
@@ -36,10 +36,6 @@ interface StateProps {
     registreringstatusData: RegistreringstatusData;
 }
 
-interface DispatchProps {
-    endreSvar: (sporsmalId: SporsmalId, svar: Svar) => void;
-}
-
 interface OwnState {
     visAdvarsel: boolean;
 }
@@ -51,7 +47,7 @@ interface OwnProps {
     endUrl: string;
 }
 
-export type Props = OwnProps & StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
+export type Props = OwnProps & StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
 class Skjema extends React.Component<Props, OwnState> {
     constructor(props: Props) {
@@ -167,8 +163,4 @@ const mapStateToProps = (state: AppState): StateProps => ({
     registreringstatusData: selectRegistreringstatus(state).data,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-    endreSvar: (sporsmalId, svar) => dispatch(endreSvarAction(sporsmalId, svar)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Skjema));
+export default connect(mapStateToProps)(injectIntl(Skjema));
