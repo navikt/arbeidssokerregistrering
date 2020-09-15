@@ -4,7 +4,7 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import KnappBase from 'nav-frontend-knapper';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { disableVerikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
+import { disableVertikalScrollingVedAnimasjon, MatchProps } from '../../utils/utils';
 import { AppState } from '../../reducer';
 import { DU_ER_NA_REGISTRERT_PATH, START_PATH } from '../../utils/konstanter';
 import LenkeAvbryt from '../../komponenter/knapper/lenke-avbryt';
@@ -45,7 +45,7 @@ class OppsummeringSykmeldt extends React.Component<Props> {
     }
 
     componentDidMount() {
-        disableVerikalScrollingVedAnimasjon();
+        disableVertikalScrollingVedAnimasjon();
     }
 
     handleNesteBtnClicked() {

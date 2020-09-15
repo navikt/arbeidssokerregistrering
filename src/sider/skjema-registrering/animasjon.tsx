@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { disableVerikalScrollingVedAnimasjon } from '../../utils/utils';
+import { disableVertikalScrollingVedAnimasjon } from '../../utils/utils';
 
 interface Props {
     flag: number | string;
@@ -18,12 +18,12 @@ class Animasjon extends React.Component<Props, State> {
         this.state = {
             currentFlag: this.props.flag
         };
-        disableVerikalScrollingVedAnimasjon();
+        disableVertikalScrollingVedAnimasjon();
     }
 
     componentDidUpdate() {
         if (this.props.flag !== this.state.currentFlag) {
-            disableVerikalScrollingVedAnimasjon();
+            disableVertikalScrollingVedAnimasjon();
             this.setState({currentFlag: this.props.flag});
         }
     }
