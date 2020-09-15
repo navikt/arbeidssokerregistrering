@@ -46,7 +46,6 @@ const OppsummeringOrdinaer = (props: Props) => {
     let classnames = 'oppsummering ';
     classnames += erIE() ? 'erIE' : '';
 
-    const oppsummeringBesvarelser = <OrdinaerOppsummeringBesvarelser/>;
     const tekstPrefix = 'ordinaer-oppsummering';
     const knappTekstId = 'ordinaer-oppsummering-knapp-riktig';
 
@@ -63,7 +62,7 @@ const OppsummeringOrdinaer = (props: Props) => {
                 <Normaltekst className="oppsummering-ingress">
                     <FormattedMessage id={`${tekstPrefix}-ingress`}/>
                 </Normaltekst>
-                {oppsummeringBesvarelser}
+                <OrdinaerOppsummeringBesvarelser/>
                 <div className="lenke-avbryt-wrapper">
                     <KnappBase type="hoved" onClick={handleNesteBtnClicked} data-testid="neste">
                         <FormattedMessage id={knappTekstId}/>
