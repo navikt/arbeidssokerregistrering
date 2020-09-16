@@ -34,7 +34,7 @@ class OppgaveError extends React.Component {
             </Veilederpanel>
         )
     }
-};
+}
 
 export default OppgaveError;
 

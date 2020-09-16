@@ -18,7 +18,7 @@ interface Option {
 
 interface SokeInputComponentState {
     value: Option;
-    stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[];
+    stillingsAlternativer: {stilling: Stilling; labelKey: string; id: number}[];
     visSpinner: boolean;
 }
 
@@ -55,7 +55,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         const cached = this._autocompleteCache[sokeStreng];
         if (cached) {
             Promise.resolve(cached).then(
-                (stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[]) => {
+                (stillingsAlternativer: {stilling: Stilling; labelKey: string; id: number}[]) => {
                 this.setState({
                     stillingsAlternativer,
                     visSpinner: false

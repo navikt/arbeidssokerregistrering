@@ -109,7 +109,7 @@ export function dispatchFeaturestatus(data: FeatureStatusData, s: Store<AppState
 }
 
 export class FetchStub {
-    urlMap: { [url: string]: {response?: any, status: number}};
+    urlMap: { [url: string]: {response?: any; status: number}};
     callCount: { [url: string]: number };
     constructor() {
         this.urlMap = {};
@@ -221,8 +221,8 @@ export const ForventetSvarHvisIngenUtdanning = [
 export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appStore: Store<AppState>) {
 
     const sporsmalene: {
-        sporsmalId: SporsmalId,
-        svar: Svar
+        sporsmalId: SporsmalId;
+        svar: Svar;
     }[] = [];
 
     sporsmalene
@@ -251,8 +251,8 @@ export function dispatchSykmeldtUsikkerIngenUtdanningAndreforholdSporsmal(appSto
 export function dispatchSykmeldtJegSkaltilbakeTilJobbenJegHarFullStilling(appStore: Store<AppState>) {
 
     const sporsmalene: {
-        sporsmalId: SporsmalId,
-        svar: Svar
+        sporsmalId: SporsmalId;
+        svar: Svar;
     }[] = [];
 
     sporsmalene

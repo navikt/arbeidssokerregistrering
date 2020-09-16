@@ -73,7 +73,7 @@ describe('utils test', () => {
             'dinsituasjon-tittel': 'dinsituasjon-tittel',
         };
 
-        let dummyIntl = {} as InjectedIntl;
+        const dummyIntl = {} as InjectedIntl;
         dummyIntl.messages = messages;
 
         const expectedTekster: TeksterForBesvarelse = [

@@ -66,8 +66,8 @@ function loggSykmeldt(store: any, action: Action) {
 }
 
 function loggBesvarelse(store: any, action: Action) {
-    let stillingForslagFraAareg = store.getState().defaultStilling;
-    let valgteStilling = store.getState().sisteStilling.data;
+    const stillingForslagFraAareg = store.getState().defaultStilling;
+    const valgteStilling = store.getState().sisteStilling.data;
 
     if (action.type === RegistrerbrukerActionTypes.REG_BRUKER_STATUS_OK) {
         if (stillingForslagFraAareg.stilling.konseptId !== valgteStilling.stilling.konseptId) {

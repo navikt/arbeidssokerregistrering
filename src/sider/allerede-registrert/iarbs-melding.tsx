@@ -13,7 +13,7 @@ interface StateProps {
 
 type Props = StateProps;
 
-const Melding = ({state} : Props) => {
+const Melding = ({state}: Props) => {
   const registreringStatusData = state.registreringStatus.data;
   const { formidlingsgruppe, servicegruppe, geografiskTilknytning, rettighetsgruppe } = registreringStatusData;
 

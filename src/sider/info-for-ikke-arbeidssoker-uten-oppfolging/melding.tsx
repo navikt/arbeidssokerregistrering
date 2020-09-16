@@ -15,7 +15,7 @@ interface BaseProps {
 
 interface OptionState {
     numberOfChoices: number;
-    choices: Array<string>
+    choices: Array<string>;
 }
 
 class Melding extends React.Component<BaseProps, OptionState> {

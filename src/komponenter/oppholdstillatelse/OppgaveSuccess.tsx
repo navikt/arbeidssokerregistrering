@@ -16,7 +16,7 @@ import './kontakt-meg-melding.less';
 
 interface Props {
     kontaktinfo: KontaktinfoState;
-};
+}
 
 const OppgaveSuccess = ({ kontaktinfo }: Props) => {
     const { status, data: { telefonnummerHosKrr, telefonnummerHosNav } } = kontaktinfo;

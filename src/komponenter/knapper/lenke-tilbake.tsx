@@ -8,7 +8,7 @@ interface Props {
 function LenkeTilbake({onClick}: Props) {
 
     function hideProgressbar() {
-        let framdrift = document.querySelector('.framdrift');
+        const framdrift = document.querySelector('.framdrift');
         framdrift!.classList.add('bakover');
         setTimeout(() => {
             framdrift!.classList.remove('bakover');

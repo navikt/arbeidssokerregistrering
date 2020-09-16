@@ -34,8 +34,8 @@ class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> 
                 dagerTilMaksdato={dagerTilMaksdato}
             />
         );
-    };
-};
+    }
+}
 
 const mapStateToProps = (state: AppState): StateProps => ({
     state

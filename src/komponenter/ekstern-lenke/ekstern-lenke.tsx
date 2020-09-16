@@ -8,7 +8,7 @@ interface Props {
     url: string;
     tekst: string;
     onClick?: () => void;
-};
+}
 
 class EksternLenke extends React.Component<Props> {
     render() {
@@ -22,6 +22,6 @@ class EksternLenke extends React.Component<Props> {
             </Lenke>
         )
     }
-};
+}
 
 export default EksternLenke;

@@ -7,7 +7,7 @@ import './kontaktinformasjon.less';
 interface Props {
     telefonnummer: string | undefined;
     kilde: string;
-};
+}
 
 class Kontaktinformasjon extends React.Component<Props> {
     render() {
@@ -19,7 +19,7 @@ class Kontaktinformasjon extends React.Component<Props> {
                 <EtikettLiten>{`Kilde: ${kilde}`}</EtikettLiten>
             </Panel>
         )
-    };
-};
+    }
+}
 
 export default Kontaktinformasjon;
