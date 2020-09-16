@@ -8,6 +8,8 @@ metadata:
     team: paw
 spec:
   env:
+  - name: APP_ENVIRONMENT_NAME
+    value: {{ app_environment_name }}
   - name: APPRES_CMS_URL
     value: {{ appres_cms_url }}
   - name: LOGINSERVICE_URL

@@ -1,4 +1,5 @@
 namespace: q0
+app_environment_name: q0
 appres_cms_url: https://appres-q0.nav.no
 loginservice_url: https://loginservice-q.nav.no
 aad_b2c_clientid: 0090b6e1-ffcc-4c37-bc21-049f7d1f0fe5
