@@ -124,7 +124,7 @@
         "cross-spawn": "7.0.2",
         "cypress": "4.12.1",
         "enzyme": "3.11.0",
-        "enzyme-adapter-react-16": "1.15.2",
+        "enzyme-adapter-react-16": "1.15.5",
         "express": "4.17.1",
         "fetch-mock": "5.13.1",
         "npm-run-all": "4.1.5",
