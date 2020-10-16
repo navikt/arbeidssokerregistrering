@@ -8,7 +8,7 @@ metadata:
 spec:
   env:
   - name: CONFIGURATION_LOCATION
-    value: /decorator-fss.yaml
+    value: {{configuration_location}}
   - name: DISABLE_DECORATOR
     value: "true"
   - name: UNLEASH_API_URL

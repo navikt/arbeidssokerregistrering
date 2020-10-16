@@ -12,7 +12,7 @@ proxy:
     pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbvisittkortfs"
-    baseUrl: "http://veilarbvisittkortfs"
+    baseUrl: "https://veilarbvisittkortfs-q1.nais.preprod.local"
     pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/modiacontextholder"
@@ -23,14 +23,14 @@ proxy:
     baseUrl: "http://veilarbregistrering"
     validateOidcToken: false
   - contextPath: "/veilarboppfolging"
-    baseUrl: "http://veilarboppfolging"
+    baseUrl: "https://veilarboppfolging-q1.nais.preprod.local"
     validateOidcToken: false
   - contextPath: "/veilarbperson"
-    baseUrl: "http://veilarbperson"
+    baseUrl: "https://veilarbperson-q1.nais.preprod.local"
     pingRequestPath: "/veilarbperson/internal/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbveileder"
-    baseUrl: "http://veilarbveileder"
+    baseUrl: "https://veilarbveileder-q1.nais.preprod.local"
     validateOidcToken: false
     pingRequestPath: "/veilarbveileder/internal/isAlive"
   - contextPath: "/aktoerregister/api/v1"

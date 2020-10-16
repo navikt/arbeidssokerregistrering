@@ -3,6 +3,7 @@ veilarbpersonflatefs_url: https://app-q0.adeo.no/veilarbpersonflatefs/
 veilarboppfolging_url: https://veilarboppfolging-q0.nais.preprod.local/veilarboppfolging/api
 veilarbpersonapi_url: https://veilarbperson-q0.nais.preprod.local/veilarbperson/api
 aktoerregister_api_v1_url: https://app-q0.adeo.no/aktoerregister/api/v1
+configuration_location: /decorator-q0-fss.yaml
 ingresses:
   - https://arbeidssokerregistrering-q0.nais.preprod.local
   - https://arbeidssokerregistrering-fss-q0.nais.preprod.local
