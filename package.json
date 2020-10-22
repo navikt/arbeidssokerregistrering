@@ -100,7 +100,7 @@
         "@bahmutov/add-typescript-to-cypress": "2.1.2",
         "@navikt/react-intl-bundler": "1.0.4",
         "@types/amplitude-js": "6.0.0",
-        "@types/chai": "4.2.11",
+        "@types/chai": "4.2.14",
         "@types/chai-as-promised": "7.1.2",
         "@types/classnames": "2.2.10",
         "@types/enzyme": "3.10.5",
