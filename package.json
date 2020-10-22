@@ -107,7 +107,7 @@
         "@types/enzyme-adapter-react-16": "1.0.6",
         "@types/fetch-mock": "5.12.2",
         "@types/jest": "25.2.2",
-        "@types/lodash": "4.14.150",
+        "@types/lodash": "4.14.162",
         "@types/node": "14.0.1",
         "@types/query-string": "5.1.0",
         "@types/react-intl": "2.3.8",
