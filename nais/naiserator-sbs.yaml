@@ -14,10 +14,6 @@ spec:
     value: {{ appres_cms_url }}
   - name: LOGINSERVICE_URL
     value: {{ loginservice_url }}
-  - name: AAD_B2C_CLIENTID_USERNAME
-    value: {{ aad_b2c_clientid }}
-  - name: AAD_B2C_DISCOVERY_URL
-    value: {{ aad_b2c_discovery_url }}
   - name: ARBEIDSSOKERREGISTRERING_URL
     value: {{ arbeidssokerregistrering_url }}
   - name: DITTNAV_LINK_URL
@@ -30,6 +26,8 @@ spec:
     value: {{ aktivitetsplan_url }}
   - name: PAM_JANZZ_URL
     value: {{ pam_janzz_url }}
+  envFrom:
+    - configmap: loginservice-idporten
   image: {{ image }}
   ingresses:
   {{#each ingresses as |url|}}
