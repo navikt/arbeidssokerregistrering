@@ -3,7 +3,7 @@ name: Build, push, and deploy
 on:
   push:
     branches:
-      - ssl-context
+      - main
 
 env:
   IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/arbeidssokerregistrering
@@ -124,7 +124,6 @@ jobs:
           CLUSTER: prod-fss
           RESOURCE: nais/naiserator-fss.yaml
           VARS: nais/vars-p-fss.yaml
-          DRY_RUN: true
   deploy-prod-sbs:
     name: Deploy to Prod SBS
     needs: deploy-q0-sbs
@@ -142,7 +141,6 @@ jobs:
           CLUSTER: prod-sbs
           RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-p-sbs.yaml
-          DRY_RUN: true
   release:
     name: Tag and release
     needs: [deploy-prod-fss, deploy-prod-sbs]
