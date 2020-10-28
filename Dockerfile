@@ -8,7 +8,7 @@ WORKDIR /source
 RUN npm ci && npm run build
 
 
-FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator
+FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator-ssl
 ENV APPLICATION_NAME=arbeidssokerregistrering
 COPY --from=node-builder /source/build /app
 ADD decorator.yaml /decorator.yaml
