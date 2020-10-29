@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import {
     selectSisteStillingFraAAReg,
     State as SisteArbeidsforholdState,
@@ -149,6 +150,17 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
         const getTekst = (kontekst: TekstKontekst) => getIntlTekstForSporsmal(sporsmalId,
             kontekst, intl, registreringType);
 
+        const fantIkkeJanzz = oversettelseAvStillingFraAAReg.data.konseptMedStyrk08List.length === 0;
+
+        const InformasjonOmManglendeStilling = () => {
+            return  (
+                <AlertStripeInfo>
+                    Vi finner ikke beskrivelsen av stillingen du har oppgitt.<br/>
+                    Det kan være et midlertidig problem og du kan trygt gå videre i registreringen.
+                </AlertStripeInfo>
+            )
+        }
+
         const sokeInput = this.skalViseStillingsfelt() ?
             (this.state.erInputAktiv ?
                 <SokeInput defaultStilling={sisteStilling} onChange={this.onStillingEndret}/>
@@ -184,6 +196,7 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
                         </Normaltekst>
                     </EkspanderbartInfo>
                 </div>
+                { fantIkkeJanzz && <InformasjonOmManglendeStilling />}
             </>
         );
     }

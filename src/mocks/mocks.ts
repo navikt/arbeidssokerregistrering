@@ -124,10 +124,12 @@ if (MOCK_GET_SISTE_ARBIEDSFORHOLD) {
 
 if (MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
     mock.get('/pam-janzz/rest/kryssklassifiserMedKonsept', ResponseUtils.delayed(DELAY, oversettelseAvStillingFraAAReg)); // tslint:disable-line
+    //mock.get('/pam-janzz/rest/kryssklassifiserMedKonsept', ResponseUtils.statusCode(500)); // tslint:disable-line
 }
 
 if (MOCK_STYRK08_PAMJANZZ) {
     mock.get('/pam-janzz/rest/typeahead/yrke-med-styrk08', ResponseUtils.delayed(DELAY, (args) => ResponseUtils.jsonPromise(lagPamjanzzRespons(args.queryParams)))); // tslint:disable-line
+    //mock.get('/pam-janzz/rest/typeahead/yrke-med-styrk08', ResponseUtils.statusCode(500)); // tslint:disable-line
 }
 
 if (MOCK_REGISTRER_BRUKER) {
