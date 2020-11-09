@@ -24,30 +24,21 @@ type AllProps = StateProps & InjectedIntlProps & FeilmeldingBrukersStatusUgyldig
 
 class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
 
-    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl, toggleUtvandret: boolean) {
+    lagFeilmelding(feilType: FullforErrorTypes, intl: InjectedIntl) {
 
         const { messages } = intl;
         let feilmelding;
 
         if (feilType === FullforErrorTypes.BRUKER_MANGLER_ARBEIDSTILLATELSE) {
             feilmelding = <OppholdsTillatelseKontaktMeg />;
-        } else if (feilType === FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET && toggleUtvandret) {
+        } else if (feilType === FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET) {
             feilmelding = <KontaktMeg />;
         } else {
-
-            let messageKey;
-
-            if (feilType === FullforErrorTypes.BRUKER_ER_DOD_UTVANDRET_ELLER_FORSVUNNET) {
-                messageKey = 'feilhandtering-utvandret-overtekst';
-            } else {
-                messageKey = 'feilhandtering-overtekst';
-            }
-
             feilmelding = (
                 <Feilmelding>
                     <div>
                         <Normaltekst className="blokk-s">
-                            {messages[messageKey]}
+                            {messages['feilhandtering-overtekst']}
                         </Normaltekst>
                         <Normaltekst>
                             <span dangerouslySetInnerHTML={{ __html: messages['feilhandtering-undertekst'] }} />
@@ -62,12 +53,11 @@ class FeilmeldingBrukersStatusUgyldig extends React.Component<AllProps> {
     }
 
     render() {
-        const { feilType, intl, featureToggles, state } = this.props;
+        const { feilType, intl, state } = this.props;
         const geografiskTilknytning = state.registreringStatus.data ?
             state.registreringStatus.data.geografiskTilknytning || 'INGEN_VERDI' :
             'INGEN_DATA';
-        const featureUtvandretKontakt = featureToggles['arbeidssokerregistrering.utvandret.kontakt-bruker'];
-        const feilmelding = this.lagFeilmelding(feilType, intl, featureUtvandretKontakt);
+        const feilmelding = this.lagFeilmelding(feilType, intl);
         uniLogger('arbeidssokerregistrering.error', { feilType: feilType, geografiskTilknytning });
 
         return (
