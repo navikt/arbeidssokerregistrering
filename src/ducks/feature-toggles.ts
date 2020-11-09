@@ -23,14 +23,12 @@ interface Action {
 }
 
 export const alleFeatureToggles = [
-    'arbeidssokerregistrering.nedetid',
-    'arbeidssokerregistrering.utvandret.kontakt-bruker',
+    'arbeidssokerregistrering.nedetid'
 ];
 
 const initialState = {
     data: {
-        'arbeidssokerregistrering.nedetid': false,
-        'arbeidssokerregistrering.utvandret.kontakt-bruker': false,
+        'arbeidssokerregistrering.nedetid': false
     },
     status: STATUS.NOT_STARTED
 };
