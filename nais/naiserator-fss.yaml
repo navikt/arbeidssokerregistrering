@@ -11,8 +11,6 @@ spec:
     value: {{configuration_location}}
   - name: DISABLE_DECORATOR
     value: "true"
-  - name: UNLEASH_API_URL
-    value: https://unleash.nais.adeo.no/api/
   - name: VEILARBPERSONFLATEFS_URL
     value: {{veilarbpersonflatefs_url}}
   - name: VEILARBOPPFOLGINGAPI_URL
