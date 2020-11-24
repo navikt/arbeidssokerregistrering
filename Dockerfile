@@ -8,7 +8,7 @@ WORKDIR /source
 RUN npm ci && npm run build
 
 
-FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator-dependencies-upgrade
+FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator
 ENV APPLICATION_NAME=arbeidssokerregistrering
 COPY --from=node-builder /source/build /app
 ADD decorator.yaml /decorator.yaml
