@@ -47,7 +47,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
         };
     }
 
-    dispathSpmOgPush = (store: any, history: any) => { // tslint:disable-line
+    dispathSpmOgPush = (store: any, history: any) => {
 
         store.dispatch({
             type: SisteStillingActionTypes.ENDRE_SISTE_STILLING,

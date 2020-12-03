@@ -9,7 +9,7 @@ import {
 
 // TODO: fix any
 const svarAlternativeConfig = (
-    alternativProps: any // tslint:disable-line
+    alternativProps: any
 ) => [
     {
         id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER,

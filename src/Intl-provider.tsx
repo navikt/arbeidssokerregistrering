@@ -10,7 +10,7 @@ interface TeksterTilMappingType {
     [propName: string]: string;
 
 }
-function mapTeksterTilNokler(teksterTilMapping: TeksterTilMappingType) { // tslint:disable-line no-any
+function mapTeksterTilNokler(teksterTilMapping: TeksterTilMappingType) {
     return Object.keys(teksterTilMapping)
         .map(key => ({key, value: `[${key}]`}))
         .reduce(

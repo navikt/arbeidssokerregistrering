@@ -15,9 +15,9 @@ moment.locale('nb');
 Modal.setAppElement('#root');
 
 if (process.env.REACT_APP_MOCK) {
-    console.log('=========================='); /*tslint:disable-line:no-console*/
-    console.log('======== MED MOCK ========'); /*tslint:disable-line:no-console*/
-    console.log('=========================='); /*tslint:disable-line:no-console*/
+    console.log('==========================');
+    console.log('======== MED MOCK ========');
+    console.log('==========================');
 
     /* ************************************************************************************** */
     /* Hotjar script som bruke i herokuapp for brukertesting */

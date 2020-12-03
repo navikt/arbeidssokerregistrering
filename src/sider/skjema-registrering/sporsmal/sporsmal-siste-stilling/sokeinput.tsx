@@ -26,8 +26,8 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     // TODO: fix any
     private waitingFor: string;
-    private autocompleteSearchDebounced: any; // tslint:disable-line
-    private _autocompleteCache: any = {}; // tslint:disable-line
+    private autocompleteSearchDebounced: any;
+    private _autocompleteCache: any = {};
     constructor(props: SokeInputComponentProps) {
         super(props);
 
@@ -103,7 +103,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
 
     }
 
-    oppdaterStillingState(valgteStillingIndex: number) { // tslint:disable-line
+    oppdaterStillingState(valgteStillingIndex: number) {
         const { stilling, labelKey, id }  = this.state.stillingsAlternativer[valgteStillingIndex];
 
         this.props.onChange(stilling);

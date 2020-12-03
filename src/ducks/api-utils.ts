@@ -64,7 +64,7 @@ export function toJson(response: Response) {
 }
 
 export function sendResultatTilDispatch(dispatch: Dispatch<AppState>, action: ActionType)  {
-    return <S>(data: S): S => { // tslint:disable-line no-any
+    return <S>(data: S): S => {
         // if (data.length === 1) {
         //     return dispatch({ type: action, data: data[0] });
         // }
@@ -84,7 +84,7 @@ export function handterFeil(dispatch: Dispatch<AppState>, action: ActionType) {
                 }
             }).catch();
         } else {
-            console.error(error, error.stack); // tslint:disable-line no-console
+            console.error(error, error.stack);
             dispatch({ type: action, data: error.toString() });
         }
     };

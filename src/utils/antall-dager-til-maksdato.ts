@@ -10,7 +10,7 @@ export const antallDagerTilMaksdato = (naa: Date, maksdato: Date): number => {
         antallDagerTilMaksdato: antallDager,
     });
 
-    const frontendlogger: Frontendlogger = (window as any).frontendlogger; // tslint:disable-line
+    const frontendlogger: Frontendlogger = (window as any).frontendlogger;
     if (frontendlogger && frontendlogger.info) {
         const message = `Dager til maksdato: ${antallDager} (Maksdato kan være satt til 350 dager frem i tid)\nMaksdato: ${maksdato}\nNå-dato: ${naa}`;
         frontendlogger.info({

@@ -11,8 +11,8 @@ export enum ActionTypes {
 export interface OrdinaereData {
     id?: number;
     tildeltEnhetsnr?: string;
-    data?: any; // tslint:disable-line
-    response?: any; // tslint:disable-line
+    data?: any;
+    response?: any;
 }
 
 export type Data = OrdinaereData;

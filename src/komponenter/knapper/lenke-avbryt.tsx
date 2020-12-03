@@ -35,7 +35,7 @@ class LenkeAvbryt extends React.Component<AllProps, LenkeAvbrytState> {
     }
 
     // todo fix any
-    handleAvbrytClick = (e: any): void => {  // tslint:disable-line
+    handleAvbrytClick = (e: any): void => {
         e.preventDefault();
         this.setState({ visAvbrytModal: true });
     }

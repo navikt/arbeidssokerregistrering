@@ -15,7 +15,7 @@ function LenkeTilbake({onClick}: Props) {
         }, 600);
     }
 
-    const onclick = (e: any) => { // tslint:disable-line
+    const onclick = (e: any) => {
         e.preventDefault();
         onClick();
         hideProgressbar();

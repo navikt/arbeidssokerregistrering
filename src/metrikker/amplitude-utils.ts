@@ -1,4 +1,3 @@
-// tslint:disable align no-any
 import amplitude from 'amplitude-js';
 import { AMPLITUDE_ENDPOINT, AMPLITUDE_API_KEY_TEST, AMPLITUDE_API_KEY_PROD } from '../utils/konstanter';
 import { erProduksjon } from '../utils/url-utils';

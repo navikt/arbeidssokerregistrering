@@ -1,4 +1,3 @@
-// tslint:disable align no-any max-line-length
 import { ActionTypes as AutentiseringsinfoActionTypes } from '../ducks/autentiseringsinfo';
 import { ActionTypes as RegistrerbrukerActionTypes } from '../ducks/registrerbruker';
 import {

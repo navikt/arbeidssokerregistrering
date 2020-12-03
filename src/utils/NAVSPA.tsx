@@ -4,8 +4,6 @@ import SpaFeil from '../komponenter/spa-feil/spa-feil';
 import SpaMock from '../komponenter/spa-mock/spa-mock';
 import RetryInterval from './retry-interval';
 
-// tslint:disable no-any
-
 interface NAVSPAScope {
     [name: string]: NAVSPAApp;
 }

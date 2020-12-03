@@ -5,7 +5,7 @@ import { RouteHerokuMock } from
 
 interface OwnProps {
     to: string;
-    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>; // tslint:disable-line
+    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
 }
 
 class RedirectAll extends React.PureComponent<OwnProps> {

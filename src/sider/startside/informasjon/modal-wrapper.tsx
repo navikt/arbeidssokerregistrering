@@ -6,7 +6,7 @@ import './react-modal.less';
 import './modal-wrapper-style.less';
 
 const cls = (
-    className: any // tslint:disable-line
+    className: any
 ) => classNames('modal', className);
 
 interface Props {
@@ -34,7 +34,7 @@ class ModalWrapper extends React.Component<Props> {
     };
 
     closeButtonRef: Lukkeknapp | null;
-    modalRef: any; // tslint:disable-line
+    modalRef: any;
 
     static setAppElement(element: HTMLElement) {
         Modal.setAppElement(element);
@@ -45,7 +45,7 @@ class ModalWrapper extends React.Component<Props> {
         this.onRequestClose = this.onRequestClose.bind(this);
     }
 
-    onRequestClose(evt: any) { // tslint:disable-line
+    onRequestClose(evt: any) {
         const { onRequestClose, shouldCloseOnOverlayClick } = this.props;
         if (shouldCloseOnOverlayClick || evt.type === 'keydown') {
             onRequestClose();

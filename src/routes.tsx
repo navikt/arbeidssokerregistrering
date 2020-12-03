@@ -71,7 +71,7 @@ interface DispatchProps {
     setInngangAapAction: () => void;
 }
 
-type AllProps = StateProps & RouteComponentProps<any> & DispatchProps; // tslint:disable-line
+type AllProps = StateProps & RouteComponentProps<any> & DispatchProps;
 
 class Routes extends React.Component<AllProps> {
 
@@ -152,8 +152,7 @@ class Routes extends React.Component<AllProps> {
                     <Switch>
 
                         {erNede ? <RedirectAll to={'/'} component={TjenesteOppdateres}/> : null}
-                        {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH}
-                                                                                        component={DuErNaRegistrert}/> : null} {/*tslint:disable-line*/}
+                        {(klarForFullforing || reaktivertStatus === STATUS.OK) ? <Route path={DU_ER_NA_REGISTRERT_PATH} component={DuErNaRegistrert}/> : null}
 
                         {visOrdinaerSkjema ? (
                             <Switch>

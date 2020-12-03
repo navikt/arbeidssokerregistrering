@@ -8,7 +8,7 @@ import './autocomplete.less';
 import { Undertittel } from 'nav-frontend-typografi';
 
 // Hjelpe funksjon
-const getIndexValgteElement = (resultat: any) => { // tslint:disable-line
+const getIndexValgteElement = (resultat: any) => {
     let indexElement;
     if (resultat) {
         for (let i = 0; i < resultat.children.length; i++) {
@@ -55,7 +55,7 @@ class ResultatListe extends React.Component<ResultatListeProps> {
         this.onOptionClick = this.onOptionClick.bind(this);
     }
 
-    onOptionClick (e: any) { // tslint:disable-line
+    onOptionClick (e: any) {
         this.props.oppdaterState(e.target.getAttribute('data-stilling-index'));
     }
 
@@ -99,9 +99,9 @@ interface Resultater {
 interface AutoCompleteProps {
     value: string;
     visSpinner: boolean;
-    onChange: (e: any) => void; //tslint:disable-line
+    onChange: (e: any) => void;
     resultatListe: Resultater[];
-    oppdaterState: (autoCompleteListIndex: any) => void; //tslint:disable-line
+    oppdaterState: (autoCompleteListIndex: any) => void;
     oppdaterDefaultState: () => void;
     resetValue: () => void;
 }
@@ -114,7 +114,7 @@ type Props = AutoCompleteProps & InjectedIntlProps;
 class AutoComplete extends React.Component<Props, AutoCompleteState> {
 
     // TODO: fix any
-    formRef: any; // tslint:disable-line
+    formRef: any;
     static clickLabel() {
         document.getElementById('stilling')!.focus();
     }
@@ -169,7 +169,7 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
         }
     }
     // TODO: fix any
-    markSelected(selectionToMark: any) {  // tslint:disable-line
+    markSelected(selectionToMark: any) {
         if (selectionToMark) {
             selectionToMark.setAttribute('aria-selected', 'true');
             this.scrollTilMarkertElement(selectionToMark);
@@ -229,7 +229,7 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
         this.toggleResultatListe(true);
     }
 
-    onKeyUp (e: any) { //tslint:disable-line
+    onKeyUp (e: any) {
         const kc = e.keyCode;
         const key = keyboard;
         if (kc === key.up || kc === key.down || kc === key.tab || kc === key.enter || kc === key.esc) {
@@ -237,7 +237,7 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
         }
     }
 
-    onKeyDown (e: any) { //tslint:disable-line
+    onKeyDown (e: any) {
         const oppdaterStateOnKeyDown = () => {
             const resultat = document.getElementById('resultat');
             const indexElement = getIndexValgteElement(resultat);

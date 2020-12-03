@@ -13,8 +13,6 @@
         "now-build": "cross-env REACT_APP_HEROKU_OVERGANG=true REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build",
         "build:tekster": "react-intl-bundler --no-lookup src/tekster src/tekster",
         "build:ts": "craco build",
-        "lint": "tslint ./src/**/*.ts*",
-        "lint:fix": "tslint ./src/**/*.ts* --fix",
         "heroku-serve": "node heroku-server.js",
         "heroku-postbuild": "cross-env REACT_APP_HEROKU_OVERGANG=true REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build",
         "eject": "craco eject",
@@ -91,8 +89,6 @@
         "react-scripts": "3.4.4",
         "react-test-renderer": "16.14.0",
         "redux-thunk": "2.2.0",
-        "tslint": "6.1.3",
-        "tslint-react": "5.0.0",
         "typescript": "3.9.7"
     },
     "devDependencies": {

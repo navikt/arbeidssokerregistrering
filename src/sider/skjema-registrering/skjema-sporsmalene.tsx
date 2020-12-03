@@ -20,7 +20,7 @@ import { RegistreringType } from '../../ducks/registreringstatus';
 
 // TODO:jcp any
 const sporsmaleneConfig = (
-    sporsmalProps: any, // tslint:disable-line
+    sporsmalProps: any,
     regType: RegistreringType | string,
     sisteStilling?: SisteStillingState) => [
     {
@@ -165,7 +165,7 @@ const sporsmaleneConfig = (
 
 // TODO:jcp any
 export const finnLenkeEndreElementForOrdinaer = (
-    sporsmalProps: any, // tslint:disable-line
+    sporsmalProps: any,
     regType: RegistreringType | '',
     sporsmalId: SporsmalId | undefined) => {
     const index = sporsmaleneConfig(sporsmalProps, regType)
@@ -191,7 +191,7 @@ export const hentElementOppsummering = (sisteStilling: SisteStillingState) =>
 
 // TODO:jcp any
 const hentRegistreringSporsmalene = (
-    sporsmalProps: any, // tslint:disable-line
+    sporsmalProps: any,
     regType: RegistreringType) =>
     sporsmaleneConfig(sporsmalProps, regType).map((spmElement) => {
         return spmElement.element;

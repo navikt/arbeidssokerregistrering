@@ -4,7 +4,7 @@ import navAnsattSvg from './nav-ansatt.svg';
 import './feilmelding.less';
 
 interface FeilmeldingProps {
-    bilde?: any; // tslint:disable-line
+    bilde?: any;
     className?: string;
 }
 

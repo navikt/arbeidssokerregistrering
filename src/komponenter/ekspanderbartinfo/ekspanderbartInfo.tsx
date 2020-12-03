@@ -36,7 +36,7 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
         }
         this.setState({
             apen: !this.state.apen
-        },() => { // tslint:disable-line
+        },() => {
             if (this.state.apen) {
                 frontendLogger(this.props.tittelId + '.ekspandert');
             }

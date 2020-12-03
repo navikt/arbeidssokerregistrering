@@ -1,4 +1,3 @@
-/*tslint:disable*/
 import { hentBrukerFnr, hentVeilederEnhetId } from './fss-utils';
 import RetryInterval from './retry-interval';
 

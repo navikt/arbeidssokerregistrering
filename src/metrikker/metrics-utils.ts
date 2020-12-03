@@ -1,4 +1,3 @@
-// tslint:disable align no-any
 import { Frontendlogger } from '../middleware/metrics-middleware';
 export type FrontendLoggerHelper = (eventNavn: string, feltObjekt?: object, tagObjekt?: object) => void;
 

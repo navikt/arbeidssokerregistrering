@@ -1,4 +1,3 @@
-/*tslint:disable*/
 import { State as SvarState } from '../../../../../src/ducks/svar';
 import { Stilling } from "../../../../../src/ducks/siste-stilling";
 import {

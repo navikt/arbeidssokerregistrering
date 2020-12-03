@@ -15,7 +15,7 @@ import {
 } from '../../ducks/svar-utils';
 import { FormattedMessage } from 'react-intl';
 import OppsummeringElement from '../../sider/oppsummering/oppsummering-element';
-const tilbakeIArbeid = (fellesProps: any, regType: any) => { // tslint:disable-line
+const tilbakeIArbeid = (fellesProps: any, regType: any) => {
     return {
         id: SporsmalId.tilbakeIArbeid,
         element: (
@@ -36,7 +36,7 @@ const tilbakeIArbeid = (fellesProps: any, regType: any) => { // tslint:disable-l
         )
     };
 };
-const utdanningOgAndreForhold = (fellesProps: any, regType: any) => [ // tslint:disable-line
+const utdanningOgAndreForhold = (fellesProps: any, regType: any) => [
     {
         id: SporsmalId.utdanning,
         element: (
@@ -125,16 +125,16 @@ const utdanningOgAndreForhold = (fellesProps: any, regType: any) => [ // tslint:
     }
 ];
 
-export const sammeArbeidsgiverSporsmaleneConfig = (fellesProps: any, regType: any) => [ // tslint:disable-line
+export const sammeArbeidsgiverSporsmaleneConfig = (fellesProps: any, regType: any) => [
     tilbakeIArbeid(fellesProps, regType)
 ];
-export const sammeArbeidsgiverNyStillingSporsmaleneConfig = (fellesProps: any, regType: any) => [ // tslint:disable-line
+export const sammeArbeidsgiverNyStillingSporsmaleneConfig = (fellesProps: any, regType: any) => [
     tilbakeIArbeid(fellesProps, regType)
 ];
-export const nyArbeidsgiverSporsmaleneConfig = (fellesProps: any, regType: any) => // tslint:disable-line
+export const nyArbeidsgiverSporsmaleneConfig = (fellesProps: any, regType: any) =>
     utdanningOgAndreForhold(fellesProps, regType);
 
-export const usikkerSporsmaleneConfig = (fellesProps: any, regType: any) => // tslint:disable-line
+export const usikkerSporsmaleneConfig = (fellesProps: any, regType: any) =>
     utdanningOgAndreForhold(fellesProps, regType);
 
 export const hentLenkeEndre = (sporsmalId: SporsmalId | undefined, svar: Svar | undefined, lop: number | undefined) => {

@@ -1,4 +1,3 @@
-// tslint:disable align
 import ActionTypes from '../ducks/actions';
 import { frontendLogger, FrontendLoggerHelper } from '../metrikker/metrics-utils';
 

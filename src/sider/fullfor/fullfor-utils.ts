@@ -73,6 +73,6 @@ export function sisteStillingErSatt(stilling: Stilling | undefined) {
         && !isNullOrUndefined(stilling.konseptId);
 }
 
-function isNullOrUndefined(obj: any) { // tslint:disable-line no-any
+function isNullOrUndefined(obj: any) {
     return (obj === null) || (obj === undefined);
 }
