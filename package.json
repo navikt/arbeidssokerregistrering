@@ -140,5 +140,10 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "ts-standard": {
+        "ignore": ["cypress"],
+        "globals": ["cy", "describe", "it", "beforeEach", "Cypress", "afterEach", "fetch", "expect"],
+        "files": [""]
+    }
 }
