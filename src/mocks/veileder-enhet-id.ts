@@ -1,2 +1,2 @@
-const veilederEnhetId = '1234';
-export default veilederEnhetId;
+const veilederEnhetId = '1234'
+export default veilederEnhetId

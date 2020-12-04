@@ -1,7 +1,7 @@
-import { annenStilling } from "../../../../ducks/siste-stilling";
+import { annenStilling } from '../../../../ducks/siste-stilling'
 
-export function hentStillingsAlternativer(
-  typeaheadYrkeList: {}[],
+export function hentStillingsAlternativer (
+  typeaheadYrkeList: Array<{}>,
   sokestreng: string
 ) {
   const alternativer = typeaheadYrkeList
@@ -10,31 +10,31 @@ export function hentStillingsAlternativer(
     )
     .map(
       (
-        stilling: { label: string; styrk08: string[]; konseptId: number },
+        stilling: { label: string, styrk08: string[], konseptId: number },
         index: number
       ) => {
-        const styrk08 = stilling.styrk08.length > 0 ? stilling.styrk08[0] : "";
+        const styrk08 = stilling.styrk08.length > 0 ? stilling.styrk08[0] : ''
         return {
           id: index,
           labelKey: stilling.label,
           stilling: {
             label: stilling.label,
             styrk08: styrk08,
-            konseptId: stilling.konseptId,
-          },
-        };
+            konseptId: stilling.konseptId
+          }
+        }
       }
-    );
+    )
 
-  const blankSokestreng = sokestreng.length === 0;
+  const blankSokestreng = sokestreng.length === 0
   const alternativerMedAnnenStilling = [
     ...alternativer,
     {
       id: alternativer.length,
-      labelKey: "Annen stilling",
-      stilling: annenStilling,
-    },
-  ];
+      labelKey: 'Annen stilling',
+      stilling: annenStilling
+    }
+  ]
 
-  return blankSokestreng ? [] : alternativerMedAnnenStilling;
+  return blankSokestreng ? [] : alternativerMedAnnenStilling
 }

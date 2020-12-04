@@ -1,7 +1,7 @@
-import { SecurityLevel } from '../ducks/autentiseringsinfo';
+import { SecurityLevel } from '../ducks/autentiseringsinfo'
 
 const autentiseringsinfoMock = {
-    securityLevel: SecurityLevel.Level4
-};
+  securityLevel: SecurityLevel.Level4
+}
 
-export default autentiseringsinfoMock;
+export default autentiseringsinfoMock

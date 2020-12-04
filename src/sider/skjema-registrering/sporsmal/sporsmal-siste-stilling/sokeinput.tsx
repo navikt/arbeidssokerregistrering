@@ -1,161 +1,157 @@
-import * as React from 'react';
-import * as _ from 'lodash';
-import { hentStillingMedStyrk08 } from '../../../../ducks/api';
-import { Stilling, tomStilling } from '../../../../ducks/siste-stilling';
-import { hentStillingsAlternativer } from './sokeinput-utils';
-import AutoComplete from './autocomplete';
+import * as React from 'react'
+import * as _ from 'lodash'
+import { hentStillingMedStyrk08 } from '../../../../ducks/api'
+import { Stilling, tomStilling } from '../../../../ducks/siste-stilling'
+import { hentStillingsAlternativer } from './sokeinput-utils'
+import AutoComplete from './autocomplete'
 
 interface SokeInputComponentProps {
-    defaultStilling: Stilling;
-    onChange: (stilling: Stilling) => void;
+  defaultStilling: Stilling
+  onChange: (stilling: Stilling) => void
 }
 
 interface Option {
-    stilling: Stilling;
-    labelKey: string;
-    id: number;
+  stilling: Stilling
+  labelKey: string
+  id: number
 }
 
 interface SokeInputComponentState {
-    value: Option;
-    stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[];
-    visSpinner: boolean;
+  value: Option
+  stillingsAlternativer: Array<{stilling: Stilling, labelKey: string, id: number}>
+  visSpinner: boolean
 }
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
+  // TODO: fix any
+  private waitingFor: string
+  private readonly autocompleteSearchDebounced: any
+  private _autocompleteCache: any = {}
+  constructor (props: SokeInputComponentProps) {
+    super(props)
 
-    // TODO: fix any
-    private waitingFor: string;
-    private autocompleteSearchDebounced: any;
-    private _autocompleteCache: any = {};
-    constructor(props: SokeInputComponentProps) {
-        super(props);
+    this.state = {
+      value: {
+        stilling: props.defaultStilling,
+        labelKey: props.defaultStilling.label,
+        id: 0
+      },
+      stillingsAlternativer: [],
+      visSpinner: false
+    }
 
-        this.state = {
-            value: {
-                stilling: props.defaultStilling,
-                labelKey: props.defaultStilling.label,
-                id: 0
-            },
-            stillingsAlternativer: [],
+    this.resetValue = this.resetValue.bind(this)
+    this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this)
+    this.oppdaterStillingState = this.oppdaterStillingState.bind(this)
+    this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this)
+
+    this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300)
+  }
+
+  autocompleteSearch (sokeStreng: string) {
+    this.waitingFor = sokeStreng
+    const cached = this._autocompleteCache[sokeStreng]
+    if (cached) {
+      Promise.resolve(cached).then(
+        (stillingsAlternativer: Array<{stilling: Stilling, labelKey: string, id: number}>) => {
+          this.setState({
+            stillingsAlternativer,
             visSpinner: false
-        };
+          })
+        })
+    } else {
+      hentStillingMedStyrk08(encodeURI(sokeStreng))
+        .then((response: { typeaheadYrkeList: Array<{}> }) => {
+          const { typeaheadYrkeList } = response
 
-        this.resetValue = this.resetValue.bind(this);
-        this.hentStillingsAlternativer = this.hentStillingsAlternativer.bind(this);
-        this.oppdaterStillingState = this.oppdaterStillingState.bind(this);
-        this.oppdaterDefaultState = this.oppdaterDefaultState.bind(this);
+          const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng)
 
-        this.autocompleteSearchDebounced = _.debounce(this.autocompleteSearch, 300);
+          if (sokeStreng === this.waitingFor) {
+            this._autocompleteCache[sokeStreng] = stillingsAlternativer
+            this.setState({
+              stillingsAlternativer,
+              visSpinner: false
+            })
+          }
+        })
+    }
+  }
 
+  hentStillingsAlternativer (v: React.ChangeEvent<HTMLInputElement>) {
+    const sokeStreng = v.target.value
+
+    this.setState({
+      value: {
+        stilling: tomStilling,
+        labelKey: sokeStreng,
+        id: 0
+      }
+    })
+
+    if (sokeStreng.length < 2) {
+      return
     }
 
-    autocompleteSearch (sokeStreng: string) {
-        this.waitingFor = sokeStreng;
-        const cached = this._autocompleteCache[sokeStreng];
-        if (cached) {
-            Promise.resolve(cached).then(
-                (stillingsAlternativer: {stilling: Stilling, labelKey: string, id: number}[]) => {
-                this.setState({
-                    stillingsAlternativer,
-                    visSpinner: false
-                });
-            });
-        } else {
-            hentStillingMedStyrk08(encodeURI(sokeStreng))
-                .then((response: { typeaheadYrkeList: {}[] }) => {
+    this.setState({
+      visSpinner: true
+    })
 
-                    const {typeaheadYrkeList} = response;
+    this.autocompleteSearchDebounced(sokeStreng)
+  }
 
-                    const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
+  oppdaterStillingState (valgteStillingIndex: number) {
+    const { stilling, labelKey, id } = this.state.stillingsAlternativer[valgteStillingIndex]
 
-                    if (sokeStreng === this.waitingFor) {
-                        this._autocompleteCache[sokeStreng] = stillingsAlternativer;
-                        this.setState({
-                            stillingsAlternativer,
-                            visSpinner: false
-                        });
-                    }
-                });
-        }
-    }
+    this.props.onChange(stilling)
 
-    hentStillingsAlternativer(v: React.ChangeEvent<HTMLInputElement>) {
-        const sokeStreng = v.target.value;
+    this.setState({
+      value: {
+        stilling,
+        labelKey,
+        id
+      },
+      stillingsAlternativer: []
+    })
+  }
 
-        this.setState({
-            value: {
-                stilling: tomStilling,
-                labelKey: sokeStreng,
-                id: 0
-            }
-        });
+  oppdaterDefaultState () {
+    const stilling = this.props.defaultStilling
+    const labelKey = this.props.defaultStilling.label
+    this.props.onChange(stilling)
 
-        if (sokeStreng.length < 2) {
-            return;
-        }
+    this.setState({
+      value: {
+        stilling,
+        labelKey,
+        id: 0
+      },
+      stillingsAlternativer: []
+    })
+  }
 
-        this.setState({
-            visSpinner: true
-        });
+  resetValue () {
+    this.setState({
+      value: {
+        stilling: tomStilling,
+        labelKey: '',
+        id: 0
+      }
+    })
+  }
 
-        this.autocompleteSearchDebounced(sokeStreng);
-
-    }
-
-    oppdaterStillingState(valgteStillingIndex: number) {
-        const { stilling, labelKey, id }  = this.state.stillingsAlternativer[valgteStillingIndex];
-
-        this.props.onChange(stilling);
-
-        this.setState({
-            value: {
-                stilling,
-                labelKey,
-                id
-            },
-            stillingsAlternativer: []
-        });
-    }
-
-    oppdaterDefaultState() {
-        const stilling = this.props.defaultStilling;
-        const labelKey = this.props.defaultStilling.label;
-        this.props.onChange(stilling);
-
-        this.setState({
-            value: {
-                stilling,
-                labelKey,
-                id: 0
-            },
-            stillingsAlternativer: []
-        });
-    }
-
-    resetValue() {
-        this.setState({
-            value: {
-                stilling: tomStilling,
-                labelKey: '',
-                id: 0
-            },
-        });
-    }
-
-    render() {
-        return (
-            <AutoComplete
-                value={this.state.value.labelKey}
-                resetValue={this.resetValue}
-                onChange={this.hentStillingsAlternativer}
-                oppdaterState={this.oppdaterStillingState}
-                oppdaterDefaultState={this.oppdaterDefaultState}
-                resultatListe={this.state.stillingsAlternativer}
-                visSpinner={this.state.visSpinner}
-            />
-        );
-    }
+  render () {
+    return (
+      <AutoComplete
+        value={this.state.value.labelKey}
+        resetValue={this.resetValue}
+        onChange={this.hentStillingsAlternativer}
+        oppdaterState={this.oppdaterStillingState}
+        oppdaterDefaultState={this.oppdaterDefaultState}
+        resultatListe={this.state.stillingsAlternativer}
+        visSpinner={this.state.visSpinner}
+      />
+    )
+  }
 }
 
-export default SokeInputComponent;
+export default SokeInputComponent
