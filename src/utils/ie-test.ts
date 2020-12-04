@@ -25,7 +25,6 @@ export function getTridentVersion () {
 export function getEdge () {
   if (navigator) {
     const userAgent = navigator.userAgent
-    const regEx = new RegExp('Edge')
     return userAgent.includes('Edge')
   }
   return false
