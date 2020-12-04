@@ -144,6 +144,6 @@
     "ts-standard": {
         "ignore": ["cypress"],
         "globals": ["cy", "describe", "it", "beforeEach", "Cypress", "afterEach", "fetch", "expect"],
-        "files": [""]
+        "files": ["src/sider/avbryt/*.tsx"]
     }
 }

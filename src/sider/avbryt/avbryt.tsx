@@ -14,7 +14,7 @@ import './avbryt.less'
 
 type Props = RouteComponentProps<MatchProps>
 
-function Avbryt ({ history }: Props) {
+function Avbryt ({ history }: Props): JSX.Element {
   return (
     <Container className='avbryt-panel-wrapper'>
       <GraaBakgrunn />
@@ -34,7 +34,7 @@ function Avbryt ({ history }: Props) {
           <div className='avbryt-panel__knapperad'>
             <KnappBase
               type='standard'
-              onClick={() => document.location.href = DITT_NAV_URL}
+              onClick={() => { document.location.href = DITT_NAV_URL }}
             >
               <FormattedMessage id='knapp-ja-avbryt' />
             </KnappBase>
