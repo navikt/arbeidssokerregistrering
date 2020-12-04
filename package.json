@@ -9,6 +9,8 @@
         "start:tekster": "node ./scripts/watch-tekster.js",
         "start:ts": "cross-env REACT_APP_MOCK=true craco start",
         "start:ts-manuell": "cross-env REACT_APP_MOCK=true REACT_APP_MOCK_MANUELL_REGISTRERING=true craco start",
+        "lint": "ts-standard",
+        "lint:fix": "ts-standard --fix",
         "build": "npm-run-all -s build:tekster build:ts",
         "now-build": "cross-env REACT_APP_HEROKU_OVERGANG=true REACT_APP_MOCK_ENDRE_REG_LOP=true REACT_APP_MOCK=true npm run build",
         "build:tekster": "react-intl-bundler --no-lookup src/tekster src/tekster",
@@ -129,6 +131,7 @@
         "svg-inline-loader": "0.8.2",
         "tree-kill": "1.2.2",
         "ts-loader": "7.0.4",
+        "ts-standard": "8.0.1",
         "watch": "1.0.2",
         "yet-another-fetch-mock": "3.4.0"
     },
