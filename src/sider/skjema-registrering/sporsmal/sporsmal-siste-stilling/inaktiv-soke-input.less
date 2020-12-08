@@ -1,39 +1,36 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 .inaktiv-soke-input {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 
-	&__input-felt {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		background-color: @navLysGra;
-		height: 39px;
-		padding: 0.25rem 1rem;
-		margin-top: 0.25rem;
-		border-radius: 4px;
+  &__input-felt {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: @navLysGra;
+    height: 39px;
+    padding: 0.25rem 1rem;
+    margin-top: 0.25rem;
+    border-radius: 4px;
 
-		&--stilling-tekst {
-			margin: auto 0;
-		}
+    &--stilling-tekst {
+      margin: auto 0;
+    }
 
-		&--endre {
-			background: transparent;
-			border: none;
-			color: @navBla;
-			margin: auto 0;
-			font-size: 1rem;
-		}
+    &--endre {
+      background: transparent;
+      border: none;
+      color: @navBla;
+      margin: auto 0;
+      font-size: 1rem;
+    }
 
-		&:hover {
-			cursor: pointer;
+    &:hover {
+      cursor: pointer;
 
-			.inaktiv-soke-input__input-felt--endre {
-				color: @navDypBlaDarken40;
-			}
-
-		}
-
-	}
-
+      .inaktiv-soke-input__input-felt--endre {
+        color: @navDypBlaDarken40;
+      }
+    }
+  }
 }

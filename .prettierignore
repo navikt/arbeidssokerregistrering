@@ -1,0 +1,8 @@
+/.github
+/.idea
+/build
+/cypress
+/nais
+**/node_modules
+/public
+/src/tekster

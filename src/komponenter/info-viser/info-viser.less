@@ -1,23 +1,22 @@
 @import "~nav-frontend-core/less/_variabler";
 
 .info-viser {
+  display: flex;
+  flex-direction: row;
+  flex-flow: nowrap;
+  padding: 1rem;
+
+  &--ikon {
+    border-right: 1px solid @navGra40;
+    margin-right: 0.75rem;
+    padding-right: 0.75rem;
+    width: 2.5rem;
     display: flex;
-    flex-direction: row;
-    flex-flow: nowrap;
-    padding: 1rem;
+    flex-shrink: 0;
+    align-items: center;
+  }
 
-    &--ikon {
-        border-right: 1px solid @navGra40;
-        margin-right: 0.75rem;
-        padding-right: 0.75rem;
-        width: 2.5rem;
-        display: flex;
-        flex-shrink: 0;
-        align-items: center;
-    }
-
-    &--kursiv {
-        font-style: italic;
-    }
-
+  &--kursiv {
+    font-style: italic;
+  }
 }

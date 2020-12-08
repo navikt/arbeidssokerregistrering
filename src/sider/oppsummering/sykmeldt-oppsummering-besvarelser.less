@@ -1,67 +1,64 @@
-@import '~nav-frontend-core/less/core';
+@import "~nav-frontend-core/less/core";
 
 .sykmeldt-oppsummering-besvarelser {
-    margin-bottom: 2rem;
-    border-radius: 5px;
-    border: 3px solid @navBlaLighten80;
-    position: relative;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  border: 3px solid @navBlaLighten80;
+  position: relative;
 
-    &--list-container {
-        padding: 3rem 1.5rem 2rem;
+  &--list-container {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  &--illustrasjon {
+    position: absolute;
+    top: -53px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  &--list {
+    padding-left: 0;
+
+    li {
+      padding: 0.8rem 0;
+      list-style: none;
+      border-bottom: 1px solid @navGra20;
+      .lenke {
+        margin-left: 10px;
+      }
     }
+  }
 
-    &--illustrasjon {
-        position: absolute;
-        top: -53px;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
+  &--divider {
+    border: 1px solid @navBlaLighten80;
+  }
 
-    &--list {
-        padding-left: 0;
-
-        li {
-            padding: 0.8rem 0;
-            list-style: none;
-            border-bottom: 1px solid @navGra20;
-            .lenke {
-                margin-left: 10px;
-            }
-        }
-    }
-
-    &--divider {
-        border: 1px solid @navBlaLighten80;
-    }
-
-    &--egress {
-        margin: 2rem 0;
-        text-align: center;
-    }
-
+  &--egress {
+    margin: 2rem 0;
+    text-align: center;
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-    .sykmeldt-oppsummering-besvarelser {
-        margin: 6rem -1rem;
+  .sykmeldt-oppsummering-besvarelser {
+    margin: 6rem -1rem;
 
-        &--list-container {
-            padding: 4rem 3rem 3rem;
-        }
-
-        &--list {
-            li {
-                .lenke {
-                    float: right;
-                }
-            }
-        }
-
-        &--info-viser {
-            margin-left: 1rem;
-        }
-
+    &--list-container {
+      padding: 4rem 3rem 3rem;
     }
-}
 
+    &--list {
+      li {
+        .lenke {
+          float: right;
+        }
+      }
+    }
+
+    &--info-viser {
+      margin-left: 1rem;
+    }
+  }
+}

@@ -1,38 +1,38 @@
-@import '~nav-frontend-core/less/_variabler';
-@import '../../setup';
+@import "~nav-frontend-core/less/_variabler";
+@import "../../setup";
 
 .tilbakelenke {
-    display: inline-block;
+  display: inline-block;
+  position: absolute;
+  top: 3rem;
+  left: ~"calc(50% - 25px)";
+
+  &:focus {
+    outline: none;
+    background: @orangeFocus;
+  }
+
+  &:before {
+    .pil-mixin(@navBla, 225deg);
     position: absolute;
-    top: 3rem;
-    left: ~'calc(50% - 25px)';
+    margin-top: -16px;
+    left: ~"calc(50% - 6px)";
+  }
 
-    &:focus {
-        outline: none;
-        background: @orangeFocus;
-    }
-
-    &:before {
-        .pil-mixin(@navBla, 225deg);
-        position: absolute;
-        margin-top: -16px;
-        left: ~'calc(50% - 6px)';
-    }
-
-    .gjemt {
-        .gjemt-mixin();
-    }
+  .gjemt {
+    .gjemt-mixin();
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-    .tilbakelenke {
-        top: 2rem;
-        left: 44px;
+  .tilbakelenke {
+    top: 2rem;
+    left: 44px;
 
-        &:before {
-            .pil-mixin(@navBla, 135deg);
-            margin-top: 7px;
-            left: -13px;
-        }
+    &:before {
+      .pil-mixin(@navBla, 135deg);
+      margin-top: 7px;
+      left: -13px;
     }
+  }
 }

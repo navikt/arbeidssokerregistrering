@@ -1,85 +1,83 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 .sporsmal {
-    padding: 1rem 1.4rem;
+  padding: 1rem 1.4rem;
 
-    .spm-hode {
-        margin: 0 auto 1rem;
+  .spm-hode {
+    margin: 0 auto 1rem;
+  }
+
+  .spm-tittel {
+    text-align: center;
+  }
+
+  .spm-beskrivelse {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .spm-skjema {
+    margin-bottom: 1rem;
+
+    .alternativ-wrapper {
+      margin: 0.5rem 0;
     }
+  }
 
-    .spm-tittel {
-        text-align: center;
+  .spm-valg {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .alternativ-wrapper + .spm-valg {
+    margin: -2rem 0;
+  }
+
+  .spm-info {
+    display: flex;
+    margin: 2rem auto;
+
+    &__ikon {
+      border-right: 1px solid @navGra40;
+      margin-right: 0.75rem;
+      padding-right: 0.75rem;
+      width: 2.5rem;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
     }
-
-    .spm-beskrivelse {
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    .spm-skjema {
-        margin-bottom: 1rem;
-
-        .alternativ-wrapper {
-            margin: 0.5rem 0;
-        }
-    }
-
-    .spm-valg {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .alternativ-wrapper + .spm-valg {
-        margin: -2rem 0;
-    }
-
-    .spm-info {
-        display: flex;
-        margin: 2rem auto;
-
-        &__ikon {
-            border-right: 1px solid @navGra40;
-            margin-right: 0.75rem;
-            padding-right: 0.75rem;
-            width: 2.5rem;
-            display: flex;
-            flex-shrink: 0;
-            align-items: center;
-        }
-    }
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-    .sporsmal {
-
-        &:focus {
-            outline: 0;
-        }
-
-        .spm-skjema {
-            .spm-body {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-
-                .alternativ-wrapper {
-                    width: 48.2%;
-                    margin: 0.3rem;
-
-                    &--small {
-                        width: 25%;
-                    }
-
-                    > .inputPanel {
-                        height: 100%;
-                    }
-                }
-            }
-        }
-
-        .spm-info {
-            max-width: 63%;
-        }
+  .sporsmal {
+    &:focus {
+      outline: 0;
     }
-}
 
+    .spm-skjema {
+      .spm-body {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .alternativ-wrapper {
+          width: 48.2%;
+          margin: 0.3rem;
+
+          &--small {
+            width: 25%;
+          }
+
+          > .inputPanel {
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .spm-info {
+      max-width: 63%;
+    }
+  }
+}

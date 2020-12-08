@@ -45,4 +45,4 @@ proxy:
 
 redirect:
   - from: /veilarbpersonflatefs
-    to: {{ VEILARBPERSONFLATEFS_URL }}
+    to: { { VEILARBPERSONFLATEFS_URL } }

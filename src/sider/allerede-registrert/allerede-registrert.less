@@ -1,63 +1,63 @@
-@import '~nav-frontend-core/less/core';
+@import "~nav-frontend-core/less/core";
 
 .allerede-registrert {
-    margin: 6vh auto 0;
-    max-width: @screen-sm-min;
+  margin: 6vh auto 0;
+  max-width: @screen-sm-min;
 
-    &__tittel {
-        text-align: center;
-        .blokk-xs();
+  &__tittel {
+    text-align: center;
+    .blokk-xs();
+  }
+
+  &__undertittel {
+    text-align: center;
+    .blokk-s();
+  }
+
+  &__knapp {
+    text-align: center;
+    width: 100%;
+  }
+
+  &__boks {
+    margin-bottom: 16px;
+
+    &-innhold {
+      padding: 1.5rem 1.2rem;
+      background-color: white;
     }
 
-    &__undertittel {
-        text-align: center;
-        .blokk-s();
+    &-tekst {
+      .blokk-s();
     }
-
-    &__knapp {
-        text-align: center;
-        width: 100%;
-    }
-
-    &__boks {
-        margin-bottom: 16px;
-
-        &-innhold {
-            padding: 1.5rem 1.2rem;
-            background-color: white;
-        }
-
-        &-tekst {
-            .blokk-s();
-        }
-    }
-    .venstrejustert {
-        text-align: left;
-    }
+  }
+  .venstrejustert {
+    text-align: left;
+  }
 }
 
 .midtjustert {
-    text-align: center;
+  text-align: center;
 }
 
 .show-result-text {
-    padding-left: 2rem;
-    line-height: 1.5rem;
+  padding-left: 2rem;
+  line-height: 1.5rem;
 }
 
 @media (min-width: 425px) {
-    .allerede-registrert {
-        &__knapp {
-            width: 14rem;
-        }
-
-        &__boks {
-            margin-left: percentage(2/12);
-            max-width: percentage(8/12);
-
-            &-innhold {
-                text-align: center;
-            }
-        }
+  .allerede-registrert {
+    &__knapp {
+      width: 14rem;
     }
+
+    &__boks {
+      margin-left: percentage(2/12);
+      max-width: percentage(8/12);
+
+      &-innhold {
+        text-align: center;
+      }
+    }
+  }
 }
