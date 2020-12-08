@@ -139,7 +139,6 @@ class Skjema extends React.Component<Props, OwnState> {
     return (
       <ResponsivSide>
         {" "}
-        {/* TODO FO-1547 Sleng på IE-classnames? */}
         {gjeldendeSporsmal}
         {advarselElement}
         <Animasjon flag={this.props.match.params.id}>

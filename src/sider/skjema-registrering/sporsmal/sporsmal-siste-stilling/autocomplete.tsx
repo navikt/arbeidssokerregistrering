@@ -106,7 +106,6 @@ interface AutoCompleteState {
 
 type Props = AutoCompleteProps & InjectedIntlProps;
 class AutoComplete extends React.Component<Props, AutoCompleteState> {
-  // TODO: fix any
   formRef: any;
   static clickLabel() {
     document.getElementById("stilling")!.focus();
@@ -159,7 +158,6 @@ class AutoComplete extends React.Component<Props, AutoCompleteState> {
       resultat.scrollTop = selectionToMark.offsetTop - (resultat.offsetHeight - 40);
     }
   }
-  // TODO: fix any
   markSelected(selectionToMark: any) {
     if (selectionToMark) {
       selectionToMark.setAttribute("aria-selected", "true");
