@@ -1,45 +1,45 @@
-@import '~nav-frontend-core/less/core';
+@import "~nav-frontend-core/less/core";
 
 .ordinaer-oppsummering-besvarelser {
-    margin-bottom: 2rem;
-    padding: 3rem 1rem 1rem;
-    border-radius: 5px;
-    border: 3px solid @navBlaLighten80;
-    position: relative;
+  margin-bottom: 2rem;
+  padding: 3rem 1rem 1rem;
+  border-radius: 5px;
+  border: 3px solid @navBlaLighten80;
+  position: relative;
 
-    &__illustrasjon {
-        position: absolute;
-        top: -53px;
-        left: 0;
-        right: 0;
-        margin: auto;
+  &__illustrasjon {
+    position: absolute;
+    top: -53px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  &__list {
+    padding-left: 0;
+
+    li {
+      padding: 0.8rem 0;
+      list-style: none;
+      border-bottom: 1px solid @navGra20;
+      .lenke {
+        margin-left: 10px;
+      }
     }
-
-    &__list {
-        padding-left: 0;
-
-        li {
-            padding: 0.8rem 0;
-            list-style: none;
-            border-bottom: 1px solid @navGra20;
-            .lenke {
-                margin-left: 10px;
-            }
-        }
-    }
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-    .ordinaer-oppsummering-besvarelser {
-        margin: 6rem -1rem;
-        padding: 4rem 3rem 3rem;
+  .ordinaer-oppsummering-besvarelser {
+    margin: 6rem -1rem;
+    padding: 4rem 3rem 3rem;
 
-        &__list {
-            li {
-                .lenke {
-                    float: right;
-                }
-            }
+    &__list {
+      li {
+        .lenke {
+          float: right;
         }
+      }
     }
+  }
 }

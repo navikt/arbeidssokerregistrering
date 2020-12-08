@@ -1,51 +1,51 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 @keyframes slideAhead {
-    0% {
-        transform: translateY(100vh) translateZ(0);
-    }
-    100% {
-        transform: translateY(0) translateZ(0);
-    }
+  0% {
+    transform: translateY(100vh) translateZ(0);
+  }
+  100% {
+    transform: translateY(0) translateZ(0);
+  }
 }
 
 @keyframes slideBack {
-    0% {
-        transform: translateY(-100vh);
-    }
-    100% {
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-    @keyframes slideAhead {
-        0% {
-            transform: translateX(100vw) translateZ(0);
-        }
-        100% {
-            transform: translateX(0) translateZ(0);
-        }
+  @keyframes slideAhead {
+    0% {
+      transform: translateX(100vw) translateZ(0);
     }
+    100% {
+      transform: translateX(0) translateZ(0);
+    }
+  }
 
-    @keyframes slideBack {
-        0% {
-            transform: translateX(-100vw);
-        }
-        100% {
-            transform: translateX(0);
-        }
+  @keyframes slideBack {
+    0% {
+      transform: translateX(-100vw);
     }
+    100% {
+      transform: translateX(0);
+    }
+  }
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

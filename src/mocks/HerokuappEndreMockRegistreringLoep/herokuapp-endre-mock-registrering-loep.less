@@ -1,62 +1,62 @@
 .devToggleStatus {
-    position: absolute;
-    z-index: 100000;
-    margin-top: 15%;
-    margin-left: 1rem;
+  position: absolute;
+  z-index: 100000;
+  margin-top: 15%;
+  margin-left: 1rem;
+  right: -530px;
+  background-color: white;
+
+  .apne-lukk-knapp {
+    > div {
+      cursor: pointer;
+      position: absolute;
+      right: 516px;
+      padding: 0.6rem 1rem;
+      width: 128px;
+      color: white;
+      background-color: #ff9800;
+      border-radius: 30px;
+    }
+    .lukknapp {
+      position: absolute;
+      right: 0;
+      top: -37px;
+    }
+  }
+
+  &.skjul {
     right: -530px;
-    background-color: white;
-
     .apne-lukk-knapp {
-        > div {
-            cursor: pointer;
-            position: absolute;
-            right: 516px;
-            padding: 0.6rem 1rem;
-            width: 128px;
-            color: white;
-            background-color: #FF9800;
-            border-radius: 30px;
-        }
-        .lukknapp {
-            position: absolute;
-            right: 0;
-            top: -37px;
-        }
+      > div {
+        padding: 3.3rem 0.5em;
+        border-radius: 50px;
+        right: 522px;
+      }
     }
+  }
 
-    &.skjul{
-        right: -530px;
-        .apne-lukk-knapp {
-            > div {
-                padding: 3.3rem 0.5em;
-                border-radius: 50px;
-                right: 522px;
-            }
-        }
+  &.vis {
+    right: 0;
+    .apne-lukk-knapp {
+      > div {
+        top: -45px;
+        left: 0;
+      }
     }
+  }
 
-    &.vis{
-        right: 0;
-        .apne-lukk-knapp {
-            > div {
-                top: -45px;
-                left: 0;
-            }
-        }
-    }
-
-    &__legend {
-        padding: 0.5rem 2rem;
-    }
-    &__fieldset {
-        border: 10px solid cadetblue;
-        background-color: white;
-    }
-    &__fieldset-feilmelding {
-        border: 10px solid #ffd399;
-        background-color: white;
-    }
-    label {
-        margin-bottom: 0.5rem;
-    }
+  &__legend {
+    padding: 0.5rem 2rem;
+  }
+  &__fieldset {
+    border: 10px solid cadetblue;
+    background-color: white;
+  }
+  &__fieldset-feilmelding {
+    border: 10px solid #ffd399;
+    background-color: white;
+  }
+  label {
+    margin-bottom: 0.5rem;
+  }
 }

@@ -1,6 +1,6 @@
 contextPath: /
 auth:
-    enforce: false
+  enforce: false
 
 proxy:
   - contextPath: "/veilarbregistrering"
@@ -8,19 +8,19 @@ proxy:
   - contextPath: "/veilarbperson"
     baseUrl: "http://veilarbproxy"
   - contextPath: "/pam-janzz"
-    baseUrl: {{ PAM_JANZZ_URL }}
+    baseUrl: { { PAM_JANZZ_URL } }
     pingRequestPath: "/pam-janzz/isAlive"
 
 redirect:
   - from: /arbeidssokerregistrering
-    to: {{ ARBEIDSSOKERREGISTRERING_URL }}
+    to: { { ARBEIDSSOKERREGISTRERING_URL } }
   - from: /dittnav
-    to: {{ DITTNAV_LINK_URL }}
+    to: { { DITTNAV_LINK_URL } }
   - from: /veientilarbeid
-    to: {{ VEIENTILARBEID_URL }}
+    to: { { VEIENTILARBEID_URL } }
   - from: /sykefravaer
-    to: {{ SYKEFRAVAER_URL }}
+    to: { { SYKEFRAVAER_URL } }
   - from: /aktivitetsplan
-    to: {{ AKTIVITETSPLAN_URL }}
+    to: { { AKTIVITETSPLAN_URL } }
   - from: /loginservice
-    to: {{ LOGINSERVICE_URL }}
+    to: { { LOGINSERVICE_URL } }

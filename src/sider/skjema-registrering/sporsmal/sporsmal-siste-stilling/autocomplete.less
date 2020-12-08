@@ -1,82 +1,78 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 .autocomplete-form {
-    position: relative;
+  position: relative;
 
-    &__resultat-list,
-    &__tekst-laster {
-        color: @navMorkGra;
-        margin: 0;
-        position: absolute;
-        top: 67px;
-        background-color: @white;
-        z-index: 1000;
-        width: 100%;
+  &__resultat-list,
+  &__tekst-laster {
+    color: @navMorkGra;
+    margin: 0;
+    position: absolute;
+    top: 67px;
+    background-color: @white;
+    z-index: 1000;
+    width: 100%;
 
-        border-left: 1px solid @navGra20;
-        border-bottom: 1px solid @navGra20;
-        border-right: 1px solid @navGra20;
-        border-radius: 0 0 5px 5px;
+    border-left: 1px solid @navGra20;
+    border-bottom: 1px solid @navGra20;
+    border-right: 1px solid @navGra20;
+    border-radius: 0 0 5px 5px;
+  }
+
+  &__resultat-list {
+    padding: 0;
+    display: none;
+    max-height: 235px;
+    overflow-y: auto;
+
+    li {
+      list-style: none;
+      padding: 0.5rem 1rem;
     }
 
-    &__resultat-list {
-        padding: 0;
-        display: none;
-        max-height: 235px;
-        overflow-y: auto;
-
-        li {
-            list-style: none;
-            padding: 0.5rem 1rem;
-        }
-
-        li:last-child {
-            border-top: 1px solid @navGra20;
-        }
-        li:hover, [aria-selected='true'] {
-            background-color: @navDypBlaLighten80;
-        }
+    li:last-child {
+      border-top: 1px solid @navGra20;
     }
-
-    &__tekst-laster {
-        padding: 1rem;
+    li:hover,
+    [aria-selected="true"] {
+      background-color: @navDypBlaLighten80;
     }
+  }
 
-    &__spinner {
-        display: none;
-        position: absolute;
-        background-color: @white;
-        top: 40px;
-        right: 7px;
-    }
+  &__tekst-laster {
+    padding: 1rem;
+  }
 
-    &__screen-reader-text {
-        position: absolute !important;
-        display: block;
-        visibility: visible;
-        overflow: hidden;
-        width: 1px;
-        height: 1px;
-        margin: -1px;
-        border: 0;
-        padding: 0;
-        clip: rect(0, 0, 0, 0);
-        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-        white-space: nowrap;
-    }
+  &__spinner {
+    display: none;
+    position: absolute;
+    background-color: @white;
+    top: 40px;
+    right: 7px;
+  }
 
-    input[aria-owns='resultat'] {
-        font-style: italic;
-        color: @navGra80;
-        height: 35px;
-    }
+  &__screen-reader-text {
+    position: absolute !important;
+    display: block;
+    visibility: visible;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0, 0, 0, 0);
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+    white-space: nowrap;
+  }
+
+  input[aria-owns="resultat"] {
+    font-style: italic;
+    color: @navGra80;
+    height: 35px;
+  }
 }
 
 #initInstr {
-    display: none;
+  display: none;
 }
-
-
-
-
-

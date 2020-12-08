@@ -1,52 +1,51 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 @keyframes panel-plassering-mobil {
-	0% {
-		opacity: 0;
-		margin-top: 400px;
-	}
-	80% {
-		opacity: 0;
-		margin-top: 400px;
-	}
-	100% {
-		opacity: 1;
-		margin-top: 6rem;
-	}
+  0% {
+    opacity: 0;
+    margin-top: 400px;
+  }
+  80% {
+    opacity: 0;
+    margin-top: 400px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 6rem;
+  }
 }
 
 @keyframes panel-plassering-desktop {
-	0% {
-		opacity: 0;
-		margin-top: 400px;
-	}
-	80% {
-		opacity: 0;
-		margin-top: 400px;
-	}
-	100% {
-		opacity: 1;
-		margin-top: 11rem;
-	}
+  0% {
+    opacity: 0;
+    margin-top: 400px;
+  }
+  80% {
+    opacity: 0;
+    margin-top: 400px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 11rem;
+  }
 }
 
 .registrert-send-videre {
-	display: flex;
-	flex-direction: column;
-	animation: panel-plassering-mobil 6.5s both;
+  display: flex;
+  flex-direction: column;
+  animation: panel-plassering-mobil 6.5s both;
 
-	&__tekst {
-		text-align: center;
-	}
+  &__tekst {
+    text-align: center;
+  }
 
-	&__lenke {
-		margin: 3rem auto 0;
-	}
-
+  &__lenke {
+    margin: 3rem auto 0;
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-	.registrert-send-videre {
-		animation: panel-plassering-desktop 6.5s both;
-	}
+  .registrert-send-videre {
+    animation: panel-plassering-desktop 6.5s both;
+  }
 }

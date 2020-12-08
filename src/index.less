@@ -1,73 +1,73 @@
-@import '~nav-frontend-core/less/core';
-@import '~nav-frontend-lenker-style/src/lenker-style';
+@import "~nav-frontend-core/less/core";
+@import "~nav-frontend-lenker-style/src/lenker-style";
 
-@import './setup';
-@import './sider/skjema-registrering/sideanimasjon';
+@import "./setup";
+@import "./sider/skjema-registrering/sideanimasjon";
 
 *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    background-color: @navLysGra;
+  width: 10px;
+  height: 10px;
+  background-color: @navLysGra;
 }
 
 *::-webkit-scrollbar-thumb {
-    background: @navGra60;
-    border-radius: 3px;
+  background: @navGra60;
+  border-radius: 3px;
 }
 
 body {
-    background-color: @white;
+  background-color: @white;
 }
 
 // TODO: Fjern etter ny dekoratør er lansert
 .btn-auth {
-    min-height: 25px !important;
+  min-height: 25px !important;
 }
 
 .arbsokreg_app:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .limit {
-    position: relative;
-    margin: 0 auto;
-    padding-top: 6rem;
+  position: relative;
+  margin: 0 auto;
+  padding-top: 6rem;
 
-    &:focus {
-        outline: 0;
-    }
+  &:focus {
+    outline: 0;
+  }
 }
 
 .hodefot {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .hodefot-footer {
-    width: 100%;
-    bottom: 0;
+  width: 100%;
+  bottom: 0;
 }
 
 .maincontent {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 @media (min-width: @screen-sm-min) {
-    .pagewrapper {
-        padding-bottom: 200px !important;
-    }
+  .pagewrapper {
+    padding-bottom: 200px !important;
+  }
 
-    .limit {
-        padding-top: 7rem;
-        width: @desktopLimitWidth;
-    }
+  .limit {
+    padding-top: 7rem;
+    width: @desktopLimitWidth;
+  }
 
-    .sitefooter {
-        display: block;
-    }
+  .sitefooter {
+    display: block;
+  }
 }
 
 .feilmelding-varsel {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }

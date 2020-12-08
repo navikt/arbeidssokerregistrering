@@ -1,104 +1,102 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 .limit {
-    .fullfor {
-        padding: 1rem 1.4rem;
-    }
+  .fullfor {
+    padding: 1rem 1.4rem;
+  }
 }
 
 .fullfor {
-    width: 100%;
-    margin: auto;
+  width: 100%;
+  margin: auto;
 
-    .fullfor-advarsel-stripe {
-        margin-bottom: 3rem;
+  .fullfor-advarsel-stripe {
+    margin-bottom: 3rem;
+  }
+
+  .fullfor-tittel {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .fullfor-sjekkliste {
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 2rem 0 0 0;
+    border-radius: 5px;
+    border: 3px solid @navOransjeLighten60;
+    position: relative;
+
+    &__illustrasjon {
+      display: none;
     }
+    &__liste {
+      padding-left: 20px;
+      margin: 10px 0;
 
-    .fullfor-tittel {
-        text-align: center;
-        margin-bottom: 1rem;
+      > li {
+        margin: 0.5rem 0;
+      }
     }
+  }
 
-    .fullfor-sjekkliste {
-        padding: 1rem 1rem 1rem 1rem;
-        margin: 2rem 0 0 0;
-        border-radius: 5px;
-        border: 3px solid @navOransjeLighten60;
-        position: relative;
+  .fullfor-bekreft {
+    margin: 1rem 0 2rem;
+  }
 
-        &__illustrasjon {
-            display: none;
-        }
-        &__liste {
-            padding-left: 20px;
-            margin: 10px 0;
+  .fullfor-info {
+    margin: 1rem 0;
+  }
 
-            > li {
-                margin: 0.5rem 0;
-            }
-        }
+  .fullfor-info-liste {
+    list-style: none;
+    padding-left: 0;
+    &__element {
+      margin-bottom: 1.5rem;
+      .illustrasjon {
+        display: inline-block;
+        margin-bottom: 9px;
+      }
+      .tittel {
+        display: inline-block;
+        margin-left: 9px;
+      }
     }
+  }
 
-    .fullfor-bekreft {
-        margin: 1rem 0 2rem;
-    }
-
-    .fullfor-info {
-        margin: 1rem 0;
-    }
-
-    .fullfor-info-liste {
-        list-style: none;
-        padding-left: 0;
-        &__element {
-            margin-bottom: 1.5rem;
-            .illustrasjon {
-                display: inline-block;
-                margin-bottom: 9px;
-            }
-            .tittel {
-                display: inline-block;
-                margin-left: 9px;
-            }
-        }
-    }
-
-    .wrapper-too {
-        margin-top: -2rem;
-    }
+  .wrapper-too {
+    margin-top: -2rem;
+  }
 }
-
 
 @media (min-width: @screen-sm-min) {
-    .fullfor {
-        .fullfor-sjekkliste {
-            padding: 4rem 3rem 2rem 3rem;
-            margin: 5rem 0 0 0;
-            &__illustrasjon {
-                display: block;
-                position: absolute;
-                top: -53px;
-                left: 0;
-                right: 0;
-                margin: auto;
-            }
-        }
-        .fullfor-info-liste {
-            list-style: none;
-            padding-left: 40px;
-            &__element {
-                position: relative;
-                margin: 1.5rem;
-                .illustrasjon{
-                    position: absolute;
-                    left: -45px;
-                    top:26px;
-                }
-                .tittel {
-                    margin-left: 0;
-                }
-            }
-        }
+  .fullfor {
+    .fullfor-sjekkliste {
+      padding: 4rem 3rem 2rem 3rem;
+      margin: 5rem 0 0 0;
+      &__illustrasjon {
+        display: block;
+        position: absolute;
+        top: -53px;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
     }
+    .fullfor-info-liste {
+      list-style: none;
+      padding-left: 40px;
+      &__element {
+        position: relative;
+        margin: 1.5rem;
+        .illustrasjon {
+          position: absolute;
+          left: -45px;
+          top: 26px;
+        }
+        .tittel {
+          margin-left: 0;
+        }
+      }
+    }
+  }
 }
-

@@ -1,200 +1,201 @@
 @import "~nav-frontend-core/less/_variabler";
 
-@gronnFargeRettigheter: #9BD0B0;
-@gulFargePlikter: #FFD399;
+@gronnFargeRettigheter: #9bd0b0;
+@gulFargePlikter: #ffd399;
 
 .registrering-arbeidssoker {
+  .banner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: @navBlaLighten80;
+    border-bottom: 5px solid @navBlaLighten60;
+  }
 
-    .banner {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 3rem 2rem;
-        background-color: @navBlaLighten80;
-        border-bottom: 5px solid @navBlaLighten60;
+  .rad-even {
+    background-color: @navLysGra;
+  }
+
+  .registrering-arbeidssoker__rad1,
+  .registrering-arbeidssoker__rad2,
+  .registrering-arbeidssoker__rad3 {
+    padding: 2rem 1rem;
+  }
+
+  .registrering-arbeidssoker__rad2 {
+    padding-top: 5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .rad3__tekst {
+    p {
+      margin: 0.75rem 0;
     }
-
-    .rad-even {
-        background-color: @navLysGra;
+    h3 + p {
+      margin-top: 0.15rem;
     }
+  }
 
-    .registrering-arbeidssoker__rad1, .registrering-arbeidssoker__rad2, .registrering-arbeidssoker__rad3 {
-        padding: 2rem 1rem;
+  ul {
+    padding-left: 1.5rem;
+  }
+
+  .rad__tittel {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    &:after {
+      border-top: 1px solid @navGra60;
+      clear: both;
+      content: " ";
+      display: block;
+      margin: 1rem auto 0;
+      width: 30px;
     }
+  }
 
-    .registrering-arbeidssoker__rad2 {
-        padding-top: 5rem;
-        display: flex;
-        justify-content: center;
+  .rad__ikon {
+    display: inline-block;
+    position: absolute;
+    top: -53px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .rad1__ikon {
+    display: none;
+  }
+
+  .rad3__ikon {
+    width: 30%;
+  }
+
+  .rad2__boks {
+    background-color: @white;
+    border: 2px solid @navGra60;
+    border-radius: 8px;
+    padding: 4rem 1rem 1rem 1rem;
+    position: relative;
+    width: 100%;
+
+    li:not(:first-child) {
+      margin-top: 1rem;
     }
+  }
 
-    .rad3__tekst {
-        p {
-            margin: 0.75rem 0;
-        }
-        h3 + p {
-            margin-top: 0.15rem;
-        }
+  .rad2__rettigheter {
+    margin-bottom: 5rem;
+    padding-bottom: 2rem;
+    border-color: @gronnFargeRettigheter;
+    .rettigheter__tittel:after {
+      border-color: @gronnFargeRettigheter;
     }
+  }
 
-    ul {
-        padding-left: 1.5rem;
+  .rad2__plikter {
+    border-color: @gulFargePlikter;
+    .plikter__tittel:after {
+      border-color: @gulFargePlikter;
     }
+  }
 
-    .rad__tittel {
-        text-align: center;
-        margin-bottom: 2.5rem;
-        &:after {
-            border-top: 1px solid @navGra60;
-            clear: both;
-            content: " ";
-            display: block;
-            margin: 1rem auto 0;
-            width: 30px;
-        }
+  .rad1__innhold {
+    align-items: flex-start;
+
+    justify-content: center;
+    display: flex;
+
+    .knapp {
+      margin-top: 1.5rem;
+      white-space: pre-wrap;
     }
+  }
 
-    .rad__ikon {
-        display: inline-block;
-        position: absolute;
-        top: -53px;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
+  .rad3__tips {
+    margin: 2rem 1rem 3rem;
+    text-align: center;
+  }
 
-    .rad1__ikon {
-        display: none;
-    }
+  .rad3__knapperad {
+    padding: 0 0 3rem;
+    text-align: center;
+  }
 
-    .rad3__ikon {
-        width: 30%;
-    }
-
-    .rad2__boks {
-        background-color: @white;
-        border: 2px solid @navGra60;
-        border-radius: 8px;
-        padding: 4rem 1rem 1rem 1rem;
-        position: relative;
-        width: 100%;
-
-        li:not(:first-child) {
-            margin-top: 1rem;
-        }
-
-    }
-
-    .rad2__rettigheter {
-        margin-bottom: 5rem;
-        padding-bottom: 2rem;
-        border-color: @gronnFargeRettigheter;
-        .rettigheter__tittel:after {
-            border-color: @gronnFargeRettigheter;
-        }
-    }
-
-    .rad2__plikter {
-        border-color: @gulFargePlikter;
-        .plikter__tittel:after {
-            border-color: @gulFargePlikter;
-        }
-    }
-
-    .rad1__innhold {
-        align-items: flex-start;
-
-        justify-content: center;
-        display: flex;
-
-        .knapp {
-            margin-top: 1.5rem;
-            white-space: pre-wrap;
-        }
-    }
-
-    .rad3__tips {
-        margin: 2rem 1rem 3rem;
-        text-align: center;
-    }
-
-    .rad3__knapperad {
-        padding: 0 0 3rem;
-        text-align: center;
-    }
-
-    .rad4__knapperad {
-        padding: 2rem 0 2rem;
-        text-align: center;
-        align-items: center;
-    }
+  .rad4__knapperad {
+    padding: 2rem 0 2rem;
+    text-align: center;
+    align-items: center;
+  }
 }
 
 @media (min-width: @screen-md-min) {
-    .registrering-arbeidssoker {
-        .registrering-arbeidssoker__rad1 {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            padding: 3rem 0;
-        }
-
-        .registrering-arbeidssoker__rad2 {
-            .rad2-wrapper {
-                display: flex;
-                justify-content: center;
-            }
-        }
-
-        .registrering-arbeidssoker__rad3 {
-            display: block;
-            padding: 3rem 0;
-            width: 840px;
-            margin: auto;
-
-            &--tips {
-                text-align: center;
-            }
-        }
-
-        .rad1__innhold {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0 1rem;
-        }
-
-        .rad1__innhold-tekst {
-            width: 60%;
-        }
-
-        .rad1__innhold-ikon {
-            width: 40%;
-        }
-
-        .rad1__ikon {
-            display: block;
-            width: 220px;
-            margin-left: 2rem;
-        }
-
-        .rad2__boks {
-            padding: 4.5rem 2rem 1.5rem 2rem;
-            margin-bottom: 0;
-            width: 25rem;
-            &:first-child {
-                margin-bottom: 0;
-                margin-right: 2rem;
-            }
-        }
-
-        .rad2__ikon, .rad3__ikon {
-            width: auto;
-        }
+  .registrering-arbeidssoker {
+    .registrering-arbeidssoker__rad1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 3rem 0;
     }
+
+    .registrering-arbeidssoker__rad2 {
+      .rad2-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .registrering-arbeidssoker__rad3 {
+      display: block;
+      padding: 3rem 0;
+      width: 840px;
+      margin: auto;
+
+      &--tips {
+        text-align: center;
+      }
+    }
+
+    .rad1__innhold {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    .rad1__innhold-tekst {
+      width: 60%;
+    }
+
+    .rad1__innhold-ikon {
+      width: 40%;
+    }
+
+    .rad1__ikon {
+      display: block;
+      width: 220px;
+      margin-left: 2rem;
+    }
+
+    .rad2__boks {
+      padding: 4.5rem 2rem 1.5rem 2rem;
+      margin-bottom: 0;
+      width: 25rem;
+      &:first-child {
+        margin-bottom: 0;
+        margin-right: 2rem;
+      }
+    }
+
+    .rad2__ikon,
+    .rad3__ikon {
+      width: auto;
+    }
+  }
 }

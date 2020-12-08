@@ -1,111 +1,108 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 @keyframes avsjekk-plassering {
-    0% {
-        left: ~'calc((100% - 159px) / 2)';
-        top: ~'calc((55% - 159px) / 2)';
-        height: 159px;
-    }
-    67% {
-        left: ~'calc((100% - 159px) / 2)';
-        top: ~'calc((55% - 159px) / 2)';
-        height: 159px;
-    }
-    100% {
-        left: 150px;
-        top: 40px;
-        height: 70px;
-    }
+  0% {
+    left: ~"calc((100% - 159px) / 2)";
+    top: ~"calc((55% - 159px) / 2)";
+    height: 159px;
+  }
+  67% {
+    left: ~"calc((100% - 159px) / 2)";
+    top: ~"calc((55% - 159px) / 2)";
+    height: 159px;
+  }
+  100% {
+    left: 150px;
+    top: 40px;
+    height: 70px;
+  }
 }
 
 @keyframes avsjekk-plassering-mobil {
-    0% {
-        left: ~'calc((100% - 159px) / 2)';
-        top: ~'calc((47% - 159px) / 2)';
-        height: 159px;
-    }
-    67% {
-        left: ~'calc((100% - 159px) / 2)';
-        top: ~'calc((47% - 159px) / 2)';
-        height: 159px;
-    }
-    100% {
-        left: 22px;
-        top: 30px;
-        height: 70px;
-    }
+  0% {
+    left: ~"calc((100% - 159px) / 2)";
+    top: ~"calc((47% - 159px) / 2)";
+    height: 159px;
+  }
+  67% {
+    left: ~"calc((100% - 159px) / 2)";
+    top: ~"calc((47% - 159px) / 2)";
+    height: 159px;
+  }
+  100% {
+    left: 22px;
+    top: 30px;
+    height: 70px;
+  }
 }
 
 @keyframes tittel-plassering {
-    0% {
-        opacity: 0;
-        margin-top: 120px;
-    }
-    80% {
-        opacity: 0;
-        margin-top: 120px;
-    }
-    100% {
-        opacity: 1;
-        margin-top: 0;
-    }
+  0% {
+    opacity: 0;
+    margin-top: 120px;
+  }
+  80% {
+    opacity: 0;
+    margin-top: 120px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0;
+  }
 }
 
 .registrert-fss {
-    margin-top: -7rem !important;
+  margin-top: -7rem !important;
 }
 
 .registrert {
-    margin: 0 1rem;
+  margin: 0 1rem;
 
-    &__avsjekk {
-        position: absolute;
-        left: ~'calc((100% - 159px) / 2)';
-        top: ~'calc((90% - 159px) / 2)';
-        animation: avsjekk-plassering-mobil 5s both;
-        margin: 1rem 0 0 1rem;
-    }
+  &__avsjekk {
+    position: absolute;
+    left: ~"calc((100% - 159px) / 2)";
+    top: ~"calc((90% - 159px) / 2)";
+    animation: avsjekk-plassering-mobil 5s both;
+    margin: 1rem 0 0 1rem;
+  }
 
-    &__tittel {
-        position: absolute;
-        left: 4rem;
-        top: -7px;
-        width: ~'calc(100vw - 7.4rem)';
-        opacity: 0;
-        animation: tittel-plassering 6s both;
-    }
-
+  &__tittel {
+    position: absolute;
+    left: 4rem;
+    top: -7px;
+    width: ~"calc(100vw - 7.4rem)";
+    opacity: 0;
+    animation: tittel-plassering 6s both;
+  }
 }
 
 @media (min-width: @screen-sm-min) {
-    .registrert {
-        text-align: left;
-        width: 36rem;
-        margin: 0 auto;
+  .registrert {
+    text-align: left;
+    width: 36rem;
+    margin: 0 auto;
 
-        &__avsjekk {
-            animation: avsjekk-plassering 5s both;
-        }
-
-        &__tittel {
-            width: ~'calc(36rem - 140px)';
-            top: 5px;
-        }
+    &__avsjekk {
+      animation: avsjekk-plassering 5s both;
     }
+
+    &__tittel {
+      width: ~"calc(36rem - 140px)";
+      top: 5px;
+    }
+  }
 }
 
 .registrert.erIE {
+  .registrert__avsjekk {
+    left: 108px;
+    top: 40px;
+    height: 70px;
+    animation: none;
+  }
 
-    .registrert__avsjekk {
-        left: 108px;
-        top: 40px;
-        height: 70px;
-        animation: none;
-    }
-
-    .registrert__tittel {
-        opacity: 1;
-        animation: none;
-    }
-
+  .registrert__tittel {
+    opacity: 1;
+    animation: none;
+  }
 }
