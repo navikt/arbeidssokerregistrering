@@ -14,7 +14,6 @@ import OppsummeringElement from "../../sider/oppsummering/oppsummering-element";
 import { UtdanningBestattSvar, UtdanningGodkjentSvar, UtdanningSvar } from "../../ducks/svar-utils";
 import { RegistreringType } from "../../ducks/registreringstatus";
 
-// TODO:jcp any
 const sporsmaleneConfig = (
   sporsmalProps: any,
   regType: RegistreringType | string,
@@ -172,7 +171,6 @@ const sporsmaleneConfig = (
   },
 ];
 
-// TODO:jcp any
 export const finnLenkeEndreElementForOrdinaer = (
   sporsmalProps: any,
   regType: RegistreringType | "",
@@ -195,7 +193,6 @@ export const hentElementOppsummering = (sisteStilling: SisteStillingState) =>
     return spmElement.elementOppsummering;
   });
 
-// TODO:jcp any
 const hentRegistreringSporsmalene = (sporsmalProps: any, regType: RegistreringType) =>
   sporsmaleneConfig(sporsmalProps, regType).map((spmElement) => {
     return spmElement.element;

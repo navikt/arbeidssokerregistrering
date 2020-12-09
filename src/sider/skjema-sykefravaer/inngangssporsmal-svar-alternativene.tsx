@@ -8,7 +8,6 @@ import {
   usikkerSporsmaleneConfig,
 } from "./skjema-sykefravaer-sporsmalene";
 
-// TODO: fix any
 const svarAlternativeConfig = (alternativProps: any) => [
   {
     id: FremtidigSituasjonSvar.SAMME_ARBEIDSGIVER,

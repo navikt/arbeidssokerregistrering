@@ -23,7 +23,6 @@ interface SokeInputComponentState {
 }
 
 class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeInputComponentState> {
-  // TODO: fix any
   private waitingFor: string;
   private autocompleteSearchDebounced: any;
   private _autocompleteCache: any = {};
