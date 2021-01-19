@@ -3,7 +3,7 @@ app_environment_name: q1
 appres_cms_url: https://appres-q1.nav.no
 loginservice_url: https://loginservice-q.nav.no
 arbeidssokerregistrering_url: https://arbeidssokerregistrering-q1.nav.no
-dittnav_link_url: https://tjenester-q1.nav.no/dittnav/
+dittnav_link_url: https://www.dev.nav.no/person/dittnav
 veientilarbeid_url: https://veientilarbeid-q1.nav.no
 sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan-q1.dev-sbs.nais.io
