@@ -44,15 +44,13 @@ function ReaktivertAksjonspanel() {
       <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon" />
       <div className="registrert__tekster">
         <Systemtittel tag="h2" className="blokk-xs">
-          Har du søkt om dagpenger?
+          Har du mottatt dagpenger?
         </Systemtittel>
         <Normaltekst className="blokk">
-          Er du permittert eller arbeidsledig må du søke om dagpenger i egen søknad.
+          Har du mottatt dagpenger før du reaktiverte deg vil utbetalingene nå være stoppet.
         </Normaltekst>
+        <Normaltekst className="">Du må sende inn ny søknad om dagpenger.</Normaltekst>
         <Normaltekst className="blokk">Du kan tidligst få dagpenger fra den dagen du sender søknaden.</Normaltekst>
-        <Normaltekst className="blokk">
-          For å ikke tape dager med dagpenger må du sende søknaden senest samme dag som du ønsker dagpenger fra.
-        </Normaltekst>
         <div className="registrert__knapperad">
           <DagpengerEngelsk />
           <a
