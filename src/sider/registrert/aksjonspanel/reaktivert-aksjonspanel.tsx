@@ -54,7 +54,7 @@ function ReaktivertAksjonspanel() {
         <Normaltekst className="blokk">
           Har du mottatt dagpenger før du reaktiverte deg vil utbetalingene nå være stoppet.
         </Normaltekst>
-        <Normaltekst className="">Du må sende inn ny søknad om dagpenger.</Normaltekst>
+        <Normaltekst className="blokk">Du må sende inn ny søknad om dagpenger.</Normaltekst>
         <Normaltekst className="blokk">Du kan tidligst få dagpenger fra den dagen du sender søknaden.</Normaltekst>
         <div className="registrert__knapperad">
           <DagpengerEngelsk />
