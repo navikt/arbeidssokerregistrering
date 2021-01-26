@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
-import { uniLogger } from "../../../metrikker/uni-logger";
+import { amplitudeLogger } from "../../../metrikker/amplitude-utils";
 import { HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_URL, DP_SOK_URL } from "../../../utils/konstanter";
 
 import handinfoSvg from "./clipboard.svg";
@@ -27,7 +27,10 @@ function ReaktivertAksjonspanel() {
         href={"https://www.nav.no/soknader/en/person/arbeid/dagpenger"}
         className="registrert__lenke knapp knapp--standard"
         onClick={() => {
-          uniLogger("registrering.vis.dagpenger.info.engelsk");
+          amplitudeLogger("registrering.aktivitet", {
+            aktivitet: "Går til dagpenger fra reaktivering",
+            sprak: "engelsk",
+          });
         }}
       >
         <span>Apply for unemployment benefit</span>
@@ -56,7 +59,10 @@ function ReaktivertAksjonspanel() {
             href={veienTilArbeidMedVisInfoUrl}
             className="registrert__lenke knapp knapp--hoved blokk-m"
             onClick={() => {
-              uniLogger("registrering.vis.dagpenger.info");
+              amplitudeLogger("registrering.aktivitet", {
+                aktivitet: "Går til dagpenger fra reaktivering",
+                sprak: "norsk",
+              });
             }}
           >
             Søk dagpenger
@@ -65,7 +71,9 @@ function ReaktivertAksjonspanel() {
             href={veienTilArbeidUrl}
             className="lenke typo-element"
             onClick={() => {
-              uniLogger("registrering.ikke.vis.dagpenger.info");
+              amplitudeLogger("registrering.aktivitet", {
+                aktivitet: "Velger å ikke gå til dagpenger fra reaktivering",
+              });
             }}
           >
             Skal ikke søke nå
