@@ -12,10 +12,10 @@ function ReaktivertAksjonspanel() {
   const brukHerokuUrl = !!process.env.REACT_APP_HEROKU_OVERGANG;
 
   if (brukHerokuUrl) {
-    const brukerStatusQueryParam = "brukerStatus=" + "ordinaer";
+    const brukerStatusQueryParam = "brukerStatus=ordinaer";
 
-    veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + "?" + brukerStatusQueryParam;
-    veienTilArbeidMedVisInfoUrl = DP_SOK_URL + "&" + brukerStatusQueryParam;
+    veienTilArbeidUrl = `${HEROKU_VEIENTILARBEID_URL}?${brukerStatusQueryParam}`;
+    veienTilArbeidMedVisInfoUrl = `${DP_SOK_URL}&${brukerStatusQueryParam}`;
   } else {
     veienTilArbeidUrl = VEIENTILARBEID_URL;
     veienTilArbeidMedVisInfoUrl = DP_SOK_URL;
