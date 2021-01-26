@@ -46,7 +46,6 @@ function ReaktivertAksjonspanel() {
 
   return (
     <div className="registrert__aksjonspanel">
-      Reaktiveringsorama
       <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon" />
       <div className="registrert__tekster">
         <Systemtittel tag="h2" className="blokk-xs">
