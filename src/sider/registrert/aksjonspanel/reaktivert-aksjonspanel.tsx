@@ -38,6 +38,12 @@ function ReaktivertAksjonspanel() {
     );
   };
 
+  React.useEffect(() => {
+    amplitudeLogger("registrering.aktivitet", {
+      aktivitet: "Viser kvittering etter reaktivering",
+    });
+  }, []);
+
   return (
     <div className="registrert__aksjonspanel">
       Reaktiveringsorama
