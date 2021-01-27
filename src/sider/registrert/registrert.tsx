@@ -10,6 +10,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { MatchProps } from "../../utils/utils";
 import { RegistreringType } from "../../ducks/registreringstatus";
 import RegistrertAksjonspanel from "./aksjonspanel/registrert-aksjonspanel";
+import ReaktivertAksjonspanel from "./aksjonspanel/reaktivert-aksjonspanel";
 import RegistrertSendVidere from "./send-videre-fss/registrert-send-videre";
 import { uniLogger } from "../../metrikker/uni-logger";
 import "./registrert.less";
@@ -31,6 +32,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
   render() {
     const registreringType = this.props.state.registreringStatus.data.registreringType;
     const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+    const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
     const hentTekstId = this.hentTekstId(erSykmeldt);
     const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : hentTekstId("innholdstittel");
     uniLogger("arbeidssokerregistrering.success", { registreringType: registreringType });
@@ -44,6 +46,8 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         </div>
         {erIFSS() ? (
           <RegistrertSendVidere />
+        ) : erReaktivert ? (
+          <ReaktivertAksjonspanel />
         ) : (
           <RegistrertAksjonspanel hentTekstId={this.hentTekstId(erSykmeldt)} erSykmeldt={erSykmeldt} />
         )}

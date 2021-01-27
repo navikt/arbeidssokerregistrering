@@ -22,5 +22,5 @@ export function getDeviceId() {
 }
 
 export function amplitudeLogger(name: string, values?: object) {
-  amplitude.logEvent(name, values);
+  amplitude.getInstance().logEvent(name, values);
 }
