@@ -8,10 +8,10 @@ describe('Feilmelding vises ved feil i lasting av data', () => {
         cy.get('[class="typo-normal alertstripe__tekst"]')
             .should('contain', 'Du er ikke registrert som arbeidssøker. Vi må hjelpe deg videre i andre kanaler.')
     });
-    it('Jeg har blitt arbeidsledig og skal søke dagpenger - Viser info', () => {
+    it('Jeg har blitt arbeidsledig eller permittert og skal søke dagpenger - Viser info', () => {
         cy.get('[class="skjemaelement__label"]')
             .eq(0)
-            .should('contain', 'Jeg har blitt arbeidsledig og skal søke dagpenger')
+            .should('contain', 'Jeg har blitt arbeidsledig eller permittert og skal søke dagpenger')
             .click();
         cy.get('[id="dagpenger-result"]')
             .should('have.attr', 'class', 'show-result-text');
