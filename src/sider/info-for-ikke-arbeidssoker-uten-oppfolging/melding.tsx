@@ -104,7 +104,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
           </Normaltekst>
           <Fieldset legend="" id="veiledervalg">
             <Radio
-              label={"Jeg har blitt arbeidsledig og skal søke dagpenger"}
+              label={"Jeg har blitt arbeidsledig eller permittert og skal søke dagpenger"}
               name="oppfolging"
               id="dagpenger"
               onChange={handleClick}
