@@ -10,6 +10,7 @@ import { feilTyper } from "./metrics-middleware-util";
 import { loggResponstidForTjenestekall } from "./responstid-middleware-utils";
 import * as _ from "lodash";
 import { frontendLogger } from "../metrikker/metrics-utils";
+import { amplitudeLogger } from "../metrikker/amplitude-utils";
 
 interface InfoPayload {
   message: string;
@@ -119,6 +120,11 @@ function loggRegistreringInngang(store: any, action: Action) {
     );
 
     frontendLogger("registrering.inngang.type.ny", { registreringType }, {});
+
+    amplitudeLogger("registrering.aktivitet", {
+      aktivitet: "Starter registrering",
+      registreringType,
+    });
 
     if (erSykmeldt) {
       frontendLogger(
