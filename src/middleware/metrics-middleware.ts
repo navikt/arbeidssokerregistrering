@@ -83,7 +83,6 @@ function loggBesvarelse(store: any, action: Action) {
 function loggRegistreringInngang(store: any, action: Action) {
   if (action.type === RegistreringStatusActionTypes.HENT_REG_STATUS_OK) {
     const inngangSykefravaer = store.getState().logger.data.inngangSykefravaer;
-    const inngangFraAap = store.getState().logger.data.inngangFraAap;
     const {
       registreringType,
       maksDato,
@@ -106,7 +105,6 @@ function loggRegistreringInngang(store: any, action: Action) {
     const erSperret = registreringType === RegistreringType.SPERRET;
     const geografiskTilknytningOrIngenVerdi = geografiskTilknytning || "INGEN_VERDI";
     const rettighetsgruppeOrIngenVerdi = rettighetsgruppe || "INGEN_VERDI";
-    const kommerFra = inngangFraAap ? "AAP" : inngangSykefravaer ? "SYKEFRAVÆR" : "ORDINÆR";
     frontendLogger(
       "registrering.inngang.type",
       {
@@ -123,13 +121,12 @@ function loggRegistreringInngang(store: any, action: Action) {
 
     frontendLogger("registrering.inngang.type.ny", { registreringType }, {});
 
-    amplitudeLogger("registrering.aktivitet", {
-      aktivitet: "Starter registrering",
-      registreringType,
-      kommerFra,
-    });
-
     if (erSykmeldt) {
+      amplitudeLogger("registrering.aktivitet", {
+        aktivitet: "Starter registrering",
+        registreringType,
+        kommerFra: "SYKEFRAVÆR",
+      });
       frontendLogger(
         "registrering.inngang.sykmeldt",
         {
@@ -178,6 +175,11 @@ function loggRegistreringInngangFraAAP(store: any, action: Action) {
         rettighetsgruppe,
       } = registreringStatusData;
       const kommerFra = "AAP";
+      amplitudeLogger("registrering.aktivitet", {
+        aktivitet: "Starter registrering",
+        registreringType,
+        kommerFra: "AAP",
+      });
       frontendLogger(
         "registrering.kommerfra",
         {
