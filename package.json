@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@alheimsins/virkedager": "1.2.5",
-    "@craco/craco": "5.9.0",
+    "@craco/craco": "6.1.1",
     "@navikt/fnrvalidator": "1.1.3",
     "@navikt/fo-session-timeout-modal": "1.1.1",
     "amplitude-js": "7.4.1",
@@ -86,10 +86,9 @@
     "react-motion": "0.5.2",
     "react-redux": "5.1.2",
     "react-router-dom": "5.2.0",
-    "react-scripts": "3.4.4",
+    "react-scripts": "4.0.2",
     "react-test-renderer": "16.14.0",
-    "redux-thunk": "2.2.0",
-    "typescript": "4.1.5"
+    "redux-thunk": "2.2.0"
   },
   "devDependencies": {
     "@babel/preset-react": "7.12.1",
@@ -113,6 +112,8 @@
     "@types/react-select": "1.2.0",
     "@types/react-test-renderer": "16.9.3",
     "@types/sinon": "5.0.3",
+    "@typescript-eslint/eslint-plugin": "4.15.0",
+    "@typescript-eslint/parser": "4.15.0",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-spies": "1.0.0",
@@ -121,6 +122,7 @@
     "cypress": "4.12.1",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
+    "eslint": "7.19.0",
     "express": "4.17.1",
     "fetch-mock": "5.13.1",
     "husky": "4.3.5",
@@ -132,6 +134,7 @@
     "svg-inline-loader": "0.8.2",
     "tree-kill": "1.2.2",
     "ts-loader": "7.0.4",
+    "typescript": "4.1.5",
     "watch": "1.0.2",
     "yet-another-fetch-mock": "3.4.0"
   },
