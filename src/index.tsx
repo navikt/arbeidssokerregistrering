@@ -40,10 +40,12 @@ if (process.env.REACT_APP_MOCK) {
 }
 
 if (erProduksjon()) {
-  Sentry.init({
-    dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
-    environment: erProduksjon() ? "production" : "test",
-  });
+  if (false) {
+    Sentry.init({
+      dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
+      environment: erProduksjon() ? "production" : "test",
+    });
+  }
 }
 
 ReactDOM.render(erIFSS() ? <AppFss /> : <App />, document.getElementById("root") as HTMLElement);
