@@ -22,38 +22,37 @@ interface StateProps {
 
 type AllProps = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-class DuErNaRegistrert extends React.Component<AllProps> {
-  hentTekstId(erSykmeldt: boolean): (id: string) => string {
+function DuErNaRegistrert(props: AllProps) {
+  function hentTekstId(erSykmeldt: boolean): (id: string) => string {
     return (id: string) => {
       return `duernaregistrert-${erSykmeldt ? "sykmeldt" : "ordinaer"}-${id}`;
     };
   }
 
-  render() {
-    const registreringType = this.props.state.registreringStatus.data.registreringType;
-    const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
-    const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
-    const hentTekstId = this.hentTekstId(erSykmeldt);
-    const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : hentTekstId("innholdstittel");
-    uniLogger("arbeidssokerregistrering.success", { registreringType: registreringType });
-    return (
-      <section className={cls("registrert", { erIE: erIE(), "registrert-fss": erIFSS() })}>
-        <div className={cls("registrert__avsjekk", { "registrert__avsjekk-sykmeldt": erSykmeldt })}>
-          <AvsjekkBilde />
-          <Systemtittel tag="h1" className="registrert__tittel">
-            <FormattedMessage id={tittelId} />
-          </Systemtittel>
-        </div>
-        {erIFSS() ? (
-          <RegistrertSendVidere />
-        ) : erReaktivert ? (
-          <ReaktivertAksjonspanel />
-        ) : (
-          <RegistrertAksjonspanel hentTekstId={this.hentTekstId(erSykmeldt)} erSykmeldt={erSykmeldt} />
-        )}
-      </section>
-    );
-  }
+  const registreringType = props.state.registreringStatus.data.registreringType;
+  const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
+  const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
+  const alder = props.state.registreringStatus.data.alder;
+  const getTekstId = hentTekstId(erSykmeldt);
+  const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : getTekstId("innholdstittel");
+  uniLogger("arbeidssokerregistrering.success", { registreringType: registreringType });
+  return (
+    <section className={cls("registrert", { erIE: erIE(), "registrert-fss": erIFSS() })}>
+      <div className={cls("registrert__avsjekk", { "registrert__avsjekk-sykmeldt": erSykmeldt })}>
+        <AvsjekkBilde />
+        <Systemtittel tag="h1" className="registrert__tittel">
+          <FormattedMessage id={tittelId} />
+        </Systemtittel>
+      </div>
+      {erIFSS() ? (
+        <RegistrertSendVidere />
+      ) : erReaktivert ? (
+        <ReaktivertAksjonspanel />
+      ) : (
+        <RegistrertAksjonspanel hentTekstId={hentTekstId(erSykmeldt)} erSykmeldt={erSykmeldt} />
+      )}
+    </section>
+  );
 }
 
 const mapStateToProps = (state: AppState) => ({
