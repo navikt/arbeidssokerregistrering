@@ -119,6 +119,16 @@ export function hentKontaktinfo() {
   });
 }
 
+export function hentRegistreringsResultat() {
+  return fetchToJson({
+    url: leggTilFnrForFSS(`${VEILARBREGISTRERING_URL}/registrering`),
+    config: {
+      ...MED_CREDENTIALS,
+      headers: getHeaders(),
+    },
+  });
+}
+
 export function hentAutentiseringsInfo() {
   return fetchToJson({
     url: `${AUTENTISERINGSINFO_URL}`,
@@ -126,6 +136,7 @@ export function hentAutentiseringsInfo() {
       ...MED_CREDENTIALS,
       headers: getHeaders(),
     },
+    recoverWith: () => ({}),
   });
 }
 

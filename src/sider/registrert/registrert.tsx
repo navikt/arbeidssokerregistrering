@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as Sentry from "@sentry/react";
 import cls from "classnames";
 import { FormattedMessage, injectIntl, InjectedIntlProps } from "react-intl";
 import { Systemtittel } from "nav-frontend-typografi";
@@ -7,6 +8,7 @@ import { erIE } from "../../utils/ie-test";
 import { AppState } from "../../reducer";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
+import { hentRegistreringsResultat } from "../../ducks/api";
 import { MatchProps } from "../../utils/utils";
 import { RegistreringType } from "../../ducks/registreringstatus";
 import RegistrertAksjonspanel from "./aksjonspanel/registrert-aksjonspanel";
@@ -22,20 +24,44 @@ interface StateProps {
 
 type AllProps = StateProps & InjectedIntlProps & RouteComponentProps<MatchProps>;
 
-function DuErNaRegistrert(props: AllProps) {
-  function hentTekstId(erSykmeldt: boolean): (id: string) => string {
-    return (id: string) => {
-      return `duernaregistrert-${erSykmeldt ? "sykmeldt" : "ordinaer"}-${id}`;
-    };
-  }
+function hentTekstId(erSykmeldt: boolean): (id: string) => string {
+  return (id: string) => {
+    return `duernaregistrert-${erSykmeldt ? "sykmeldt" : "ordinaer"}-${id}`;
+  };
+}
 
+function DuErNaRegistrert(props: AllProps) {
+  const [registreringsData, setRegistreringsData] = React.useState();
   const registreringType = props.state.registreringStatus.data.registreringType;
   const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
   const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
   const alder = props.state.registreringStatus.data.alder;
   const getTekstId = hentTekstId(erSykmeldt);
   const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : getTekstId("innholdstittel");
-  uniLogger("arbeidssokerregistrering.success", { registreringType: registreringType });
+
+  React.useEffect(() => {
+    uniLogger("arbeidssokerregistrering.success", { registreringType: registreringType, alder });
+  }, []);
+
+  React.useEffect(() => {
+    function getRegistreringsData() {
+      hentRegistreringsResultat()
+        .then((data: any) => {
+          setRegistreringsData(data);
+        })
+        .catch((error) => {
+          Sentry.captureException(error);
+        });
+    }
+    getRegistreringsData();
+  }, []);
+
+  React.useEffect(() => {
+    if (registreringsData) {
+      console.log(registreringsData);
+    }
+  }, [registreringsData]);
+
   return (
     <section className={cls("registrert", { erIE: erIE(), "registrert-fss": erIFSS() })}>
       <div className={cls("registrert__avsjekk", { "registrert__avsjekk-sykmeldt": erSykmeldt })}>
