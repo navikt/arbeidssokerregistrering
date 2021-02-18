@@ -32,7 +32,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: Action)
   loggFeil(action);
   loggHarStartetRegistrering(action);
   loggRegistreringInngang(store, action);
-  next(action);
+  return next(action);
 };
 
 const loggHarStartetRegistreringKunEngang = _.once(() => {

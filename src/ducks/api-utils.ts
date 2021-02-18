@@ -1,7 +1,7 @@
 import { Dispatch } from "react-redux";
 import { AppState } from "../reducer";
 import ActionType from "./actions";
-import { ThunkAction } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { erIFSS, hentBrukerFnr, hentVeilederEnhetId } from "../utils/fss-utils";
 
 export const STATUS = {
@@ -117,8 +117,8 @@ interface RestActions {
 export function doThenDispatch<DATA>(
   fn: () => Promise<DATA>,
   { OK, FEILET, PENDING }: RestActions
-): ThunkAction<Promise<DATA | void>, AppState, void> {
-  return (dispatch: Dispatch<AppState>) => {
+): ThunkAction<Promise<DATA | void>, AppState, void, any> {
+  return (dispatch: ThunkDispatch<AppState, void, any>) => {
     if (PENDING) {
       dispatch({ type: PENDING });
     }

@@ -9,6 +9,7 @@ import { selectKontaktinfo, State as KontaktinfoState } from "../../ducks/kontak
 import { OppgaveSuccess, OppgaveErrorTooSoon, OppgaveError, KontaktMegForm } from "./";
 
 import "./kontakt-meg-melding.less";
+import { ThunkDispatch } from "redux-thunk";
 
 interface DispatchProps {
   opprettKontaktmegOppgave: () => void;
@@ -57,7 +58,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
   kontaktinfo: selectKontaktinfo(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, any>): DispatchProps => ({
   opprettKontaktmegOppgave: () => dispatch(opprettKontaktmegOppgave()),
 });
 
