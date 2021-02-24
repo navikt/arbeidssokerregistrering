@@ -18,7 +18,8 @@
     "alwaysStrict": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["cypress"]
   },
   "exclude": [
     "node_modules",
