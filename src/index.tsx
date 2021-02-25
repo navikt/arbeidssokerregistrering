@@ -42,6 +42,7 @@ const environment = window.location.hostname;
 Sentry.init({
   dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
   environment,
+  autoSessionTracking: false,
   ignoreErrors: [
     "TypeError: Failed to fetch",
     "TypeError: NetworkError when attempting to fetch resource.",
