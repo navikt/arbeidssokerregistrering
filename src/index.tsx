@@ -7,7 +7,6 @@ import * as Sentry from "@sentry/react";
 import moment from "moment";
 import "moment/locale/nb";
 import { erIFSS } from "./utils/fss-utils";
-import { erProduksjon } from "./utils/url-utils";
 import App from "./app";
 import AppFss from "./app-fss";
 import "./index.less";
@@ -39,21 +38,20 @@ if (process.env.REACT_APP_MOCK) {
   require("./mocks/mocks");
 }
 
-if (erProduksjon()) {
-  Sentry.init({
-    dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
-    environment: erProduksjon() ? "production" : "test",
-    ignoreErrors: [
-      "TypeError: Failed to fetch",
-      "TypeError: NetworkError when attempting to fetch resource.",
-      "TypeError: cancelled",
-      "TypeError: avbrutt",
-      "TypeError: cancelado",
-      "TypeError: anulowane",
-      "TypeError: avbruten",
-      "TypeError: anulat",
-    ],
-  });
-}
+const environment = window.location.hostname;
+Sentry.init({
+  dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
+  environment,
+  ignoreErrors: [
+    "TypeError: Failed to fetch",
+    "TypeError: NetworkError when attempting to fetch resource.",
+    "TypeError: cancelled",
+    "TypeError: avbrutt",
+    "TypeError: cancelado",
+    "TypeError: anulowane",
+    "TypeError: avbruten",
+    "TypeError: anulat",
+  ],
+});
 
 ReactDOM.render(erIFSS() ? <AppFss /> : <App />, document.getElementById("root") as HTMLElement);
