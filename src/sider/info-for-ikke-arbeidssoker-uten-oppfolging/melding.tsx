@@ -95,7 +95,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
 
     return (
       <div className="info-for-ikke-arbeidssoker">
-        <Panel border className="nav-veilederpanel">
+        <Panel border>
           <Alertstripe type="info" className="blokk-s">
             Du er ikke registrert som arbeidssøker. Vi må hjelpe deg videre i andre kanaler.
           </Alertstripe>
