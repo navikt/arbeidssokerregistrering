@@ -55,7 +55,7 @@ const webpackOptions = {
       }
     ]
   },
-},
+};
 
 
 const options = {
