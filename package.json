@@ -32,7 +32,7 @@
     "@navikt/fo-session-timeout-modal": "1.1.1",
     "@sentry/browser": "6.1.0",
     "@sentry/react": "6.1.0",
-    "amplitude-js": "7.4.1",
+    "amplitude-js": "7.4.4",
     "babel-polyfill": "6.26.0",
     "classnames": "2.2.6",
     "core-js": "3.8.3",
