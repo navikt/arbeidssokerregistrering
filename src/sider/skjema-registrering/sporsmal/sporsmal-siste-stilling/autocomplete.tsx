@@ -56,7 +56,10 @@ class ResultatListe extends React.Component<ResultatListeProps> {
   }
 
   onOptionClick(e: any) {
-    this.props.oppdaterState(e.target.getAttribute("data-stilling-index"));
+    const valgtIndex = e.target.getAttribute("data-stilling-index");
+    if (valgtIndex) {
+      this.props.oppdaterState(valgtIndex);
+    }
   }
 
   render() {
