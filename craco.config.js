@@ -28,7 +28,7 @@ module.exports = {
       plugin: CracoLessPlugin,
       options: {
         lessLoaderOptions: {
-          loader: new NpmImportPlugin({ prefix: "~" }),
+          lessOptions: { loader: new NpmImportPlugin({ prefix: "~" }) },
         },
       },
     },
