@@ -1,13 +1,12 @@
 import * as React from "react";
 import { getTekstIdForArbeidSisteManeder } from "./oppsummering-utils";
 import OppsummeringElement from "./oppsummering-element";
+import oppsummeringSvg from "./oppsummering.svg";
 import "./ordinaer-oppsummering-besvarelser.less";
 import { hentElementOppsummering } from "../skjema-registrering/skjema-sporsmalene";
 import { State as SvarState } from "../../ducks/svar";
 import { Data as RegStatusData } from "../../ducks/registreringstatus";
 import { State as SisteStillingState } from "../../ducks/siste-stilling";
-
-const oppsummeringSvg = require("./oppsummering.svg");
 
 interface OwnProps {
   svar: SvarState;
