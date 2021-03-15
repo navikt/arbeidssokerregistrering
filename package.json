@@ -38,7 +38,7 @@
     "amplitude-js": "7.4.4",
     "babel-polyfill": "6.26.0",
     "classnames": "2.2.6",
-    "core-js": "3.8.3",
+    "core-js": "3.9.0",
     "craco-less": "1.17.1",
     "idempotent-babel-polyfill": "7.4.4",
     "less-plugin-npm-import": "2.1.0",
