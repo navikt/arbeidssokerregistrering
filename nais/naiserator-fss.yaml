@@ -11,6 +11,8 @@ spec:
     value: {{configuration_location}}
   - name: DISABLE_DECORATOR
     value: "true"
+  - name: DISABLE_FRONTEND_LOGGER
+    value: "true"
   - name: VEILARBPERSONFLATEFS_URL
     value: {{veilarbpersonflatefs_url}}
   - name: VEILARBOPPFOLGINGAPI_URL

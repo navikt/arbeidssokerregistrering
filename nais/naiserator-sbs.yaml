@@ -12,6 +12,8 @@ spec:
     value: {{ app_environment_name }}
   - name: APPRES_CMS_URL
     value: {{ appres_cms_url }}
+  - name: DISABLE_FRONTEND_LOGGER
+    value: "true"
   - name: LOGINSERVICE_URL
     value: {{ loginservice_url }}
   - name: ARBEIDSSOKERREGISTRERING_URL
