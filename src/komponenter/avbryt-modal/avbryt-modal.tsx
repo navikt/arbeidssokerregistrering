@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { AppState } from "../../reducer";
 import { RegistreringType, selectRegistreringstatus } from "../../ducks/registreringstatus";
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from "../../utils/konstanter";
-import { frontendLogger } from "../../metrikker/metrics-utils";
 
 import "./avbryt-modal.less";
 import { erIFSS } from "../../utils/fss-utils";
@@ -29,7 +28,6 @@ type AllProps = OwnProps & StateProps;
 
 class AvbrytModal extends React.Component<AllProps> {
   handleAvbrytKnappClicked = (url: string) => {
-    frontendLogger("registrering.avbryt.modal.avbrutt", { fromUrl: window.location.href }, {});
     window.location.href = url;
   };
 

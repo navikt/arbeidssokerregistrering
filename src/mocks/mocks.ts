@@ -42,7 +42,6 @@ export const MOCK_REGISTRER_BRUKER = true;
 export const MOCK_REAKTIVER_BRUKER = true;
 export const MOCK_BRUKER_KONTEKST = true;
 export const MOCK_OPPRETT_KONTAKTMEG_OPPGAVE = true;
-export const PRINT_FRONTENDLOGGER = true;
 export const MOCK_KONTAKTINFO = true;
 
 export const MOCK_OPPDATER_BRUKER_KONTEKST = true;
@@ -84,14 +83,6 @@ const mock = FetchMock.configure({
 // Dette dispatcher svarene _før_ noe annet skjer,
 // som kan føre til en sær tilstand. Siste test før merge bør skje uten dette flagget.
 const DELAY = 0;
-
-if (PRINT_FRONTENDLOGGER) {
-  (window as any).frontendlogger = {
-    event: (name: string, fields: any, tags: any) => {
-      console.log("frontendlogger", { name, fields, tags });
-    },
-  };
-}
 
 if (MOCK_START_REGISRERING_STATUS) {
   mock.get(`${VEILARBREGISTRERING_URL}/startregistrering`, ResponseUtils.delayed(DELAY, startRegistreringStatus));

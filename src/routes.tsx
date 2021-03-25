@@ -53,7 +53,6 @@ import RegistreringArbeidssokerSykmeldtFss from "./sider/startside/registrering-
 import RegistreringArbeidssokerSykmeldt from "./sider/startside/registrering-sykmeldt";
 import RegistreringArbeidssokerFss from "./sider/startside/registrering-arbeidssoker-fss";
 import RegistreringArbeidssoker from "./sider/startside/registrering-arbeidssoker";
-import { loggStartenPaaRegistreringFraAAP } from "./middleware/metrics-middleware";
 import { uniLogger } from "./metrikker/uni-logger";
 import OppsummeringOrdinaer from "./sider/oppsummering/oppsummering-ordinaer";
 
@@ -90,7 +89,6 @@ class Routes extends React.Component<AllProps> {
   componentDidMount() {
     if (this.kommerAap()) {
       this.props.setInngangAapAction();
-      loggStartenPaaRegistreringFraAAP(this.props.registreringstatusData);
     }
 
     if (this.kommerFraSykefravaer()) {

@@ -15,7 +15,6 @@ import { SKJEMA_PATH } from "../../utils/konstanter";
 import InformasjonModal from "./informasjon/informasjon-modal";
 import { AppState } from "../../reducer";
 import { Data as FeatureToggleData, selectFeatureToggles } from "../../ducks/feature-toggles";
-import { frontendLogger } from "../../metrikker/metrics-utils";
 
 interface Props {
   featureToggles: FeatureToggleData;
@@ -33,7 +32,6 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
   };
 
   handleSeVideoBtnClicked = () => {
-    frontendLogger("registrering.start.video.open", {}, {});
     this.setState({ isModalOpen: true });
   };
 

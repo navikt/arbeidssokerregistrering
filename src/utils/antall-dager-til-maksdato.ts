@@ -1,4 +1,3 @@
-import { Frontendlogger } from "../middleware/metrics-middleware";
 import { uniLogger } from "../metrikker/uni-logger";
 
 export const antallDagerTilMaksdato = (naa: Date, maksdato: Date): number => {
@@ -9,14 +8,5 @@ export const antallDagerTilMaksdato = (naa: Date, maksdato: Date): number => {
     maksdato,
     antallDagerTilMaksdato: antallDager,
   });
-
-  const frontendlogger: Frontendlogger = (window as any).frontendlogger;
-  if (frontendlogger && frontendlogger.info) {
-    const message = `Dager til maksdato: ${antallDager} (Maksdato kan være satt til 350 dager frem i tid)\nMaksdato: ${maksdato}\nNå-dato: ${naa}`;
-    frontendlogger.info({
-      message: message,
-    });
-  }
-
   return antallDager;
 };

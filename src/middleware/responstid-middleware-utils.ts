@@ -1,5 +1,5 @@
 import ActionTypes from "../ducks/actions";
-import { frontendLogger, FrontendLoggerHelper } from "../metrikker/metrics-utils";
+import { AmplitudeLogger } from "../metrikker/amplitude-utils";
 
 interface StartTiderType {
   [propName: string]: number;
@@ -7,11 +7,7 @@ interface StartTiderType {
 
 const starttider: StartTiderType = {};
 
-export function loggResponstidForTjenestekall(actionType: ActionTypes) {
-  loggResponstid(actionType, frontendLogger);
-}
-
-export function loggResponstid(actionType: ActionTypes, logger: FrontendLoggerHelper) {
+export function loggResponstid(actionType: ActionTypes, logger: AmplitudeLogger) {
   const type = actionType.toString();
   if (type.includes("_PENDING")) {
     const prefix = getPrefix(type);
@@ -21,13 +17,9 @@ export function loggResponstid(actionType: ActionTypes, logger: FrontendLoggerHe
   if (type.includes("_OK") || type.includes("_FEILET")) {
     const prefix = getPrefix(type);
     if (starttider[prefix] !== undefined) {
-      logger(
-        getEventString(prefix),
-        {
-          responstid: Date.now() - starttider[prefix],
-        },
-        {}
-      );
+      logger(getEventString(prefix), {
+        responstid: Date.now() - starttider[prefix],
+      });
     }
   }
 }

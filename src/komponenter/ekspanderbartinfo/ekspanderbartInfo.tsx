@@ -3,7 +3,6 @@ import { injectIntl, InjectedIntlProps } from "react-intl";
 import { Normaltekst } from "nav-frontend-typografi";
 import Ikon from "nav-frontend-ikoner-assets";
 import { getIntlMessage } from "../../utils/utils";
-import { frontendLogger } from "../../metrikker/metrics-utils";
 
 import "./ekspanderbartinfo.less";
 
@@ -34,16 +33,9 @@ class EkspanderbartInfo extends React.PureComponent<EgenProps, EgenStateProps> {
     if (onClick) {
       onClick(e);
     }
-    this.setState(
-      {
-        apen: !this.state.apen,
-      },
-      () => {
-        if (this.state.apen) {
-          frontendLogger(this.props.tittelId + ".ekspandert");
-        }
-      }
-    );
+    this.setState({
+      apen: !this.state.apen,
+    });
   }
 
   render() {
