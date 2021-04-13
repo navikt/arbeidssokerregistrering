@@ -9,11 +9,10 @@ import { AppState } from "../../reducer";
 import { RegistreringType, selectRegistreringstatus } from "../../ducks/registreringstatus";
 import { DITT_NAV_URL, DITT_SYKEFRAVAER_URL } from "../../utils/konstanter";
 
+import avbrytSvg from "./avbryt.svg";
 import "./avbryt-modal.less";
 import { erIFSS } from "../../utils/fss-utils";
 import { lagAktivitetsplanUrl } from "../../utils/url-utils";
-
-const avbrytSvg = require("./avbryt.svg");
 
 interface OwnProps {
   isOpen: boolean;
