@@ -8,6 +8,7 @@ veientilarbeid_url: https://veientilarbeid-q.nav.no
 sykefravaer_url: https://tjenester-q0.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan-q.nav.no
 pam_janzz_url: https://pam-janzz-q0.nais.oera-q.local
+ny_pam_janzz_url: https://pam-janzz.dev.intern.nav.no
 ingresses:
   - https://arbeidssokerregistrering.nais.oera-q.local # Kun for tilgang til /internal/selftest
   - https://arbeidssokerregistrering-q.nav.no

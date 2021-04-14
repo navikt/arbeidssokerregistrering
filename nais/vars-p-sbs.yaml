@@ -8,6 +8,7 @@ veientilarbeid_url: https://veientilarbeid.nav.no
 sykefravaer_url: https://tjenester.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan.nav.no
 pam_janzz_url: https://pam-janzz.nais.oera.no
+ny_pam_janzz_url: https://pam-janzz.intern.nav.no
 ingresses:
   - https://arbeidssokerregistrering.nais.oera.no # Kun for tilgang til /internal/selftest
   - https://arbeidssokerregistrering.nav.no
