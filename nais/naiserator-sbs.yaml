@@ -28,8 +28,6 @@ spec:
     value: {{ aktivitetsplan_url }}
   - name: PAM_JANZZ_URL
     value: {{ pam_janzz_url }}
-  - name: NY_PAM_JANZZ_URL
-    value: {{ ny_pam_janzz_url }}
   envFrom:
     - configmap: loginservice-idporten
   image: {{ image }}
