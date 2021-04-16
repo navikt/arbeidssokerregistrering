@@ -10,9 +10,6 @@ proxy:
   - contextPath: "/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
     pingRequestPath: "/pam-janzz/isAlive"
-  - contextPath: "/ny-pam-janzz"
-    baseUrl: {{ NY_PAM_JANZZ_URL }}
-    pingRequestPath: "/internal/isAlive"
 
 redirect:
   - from: /arbeidssokerregistrering
