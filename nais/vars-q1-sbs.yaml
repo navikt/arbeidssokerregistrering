@@ -7,8 +7,7 @@ dittnav_link_url: https://www.dev.nav.no/person/dittnav
 veientilarbeid_url: https://veientilarbeid-q1.nav.no
 sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan-q1.dev-sbs.nais.io
-pam_janzz_url: https://pam-janzz-q0.nais.oera-q.local
-ny_pam_janzz_url: https://arbeidsplassen.dev.nav.no/pam-janzz
+pam_janzz_url: https://arbeidsplassen.dev.nav.no
 ingresses:
   - https://arbeidssokerregistrering.dev.nav.no
   - https://arbeidssokerregistrering-q1.nais.oera-q.local # Kun for tilgang til /internal/selftest

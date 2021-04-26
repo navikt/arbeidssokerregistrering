@@ -9,7 +9,7 @@ proxy:
     baseUrl: "http://veilarbproxy"
   - contextPath: "/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
-    pingRequestPath: "/pam-janzz/isAlive"
+    pingRequestPath: "/pam-janzz/swagger-ui/"
 
 redirect:
   - from: /arbeidssokerregistrering
