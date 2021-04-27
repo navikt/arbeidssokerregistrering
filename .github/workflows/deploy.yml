@@ -125,7 +125,7 @@ jobs:
           CLUSTER: prod-fss
           RESOURCE: nais/naiserator-fss.yaml
           VARS: nais/vars-p-fss.yaml
-          DRY_RUN: false
+          DRY_RUN: true
   deploy-prod-sbs:
     name: Deploy to Prod SBS
     needs: deploy-q0-sbs
