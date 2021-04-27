@@ -36,8 +36,8 @@ proxy:
     requestRewrite: REMOVE_CONTEXT_PATH
     validateOidcToken: false
   - contextPath: "/pam-janzz"
-    baseUrl: "https://tjenester.nav.no"
-    pingRequestPath: "/pam-janzz/isAlive"
+    baseUrl: {{ PAM_JANZZ_URL }}
+    pingRequestPath: "/pam-janzz/swagger-ui/"
     validateOidcToken: false
 
 redirect:

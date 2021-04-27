@@ -21,6 +21,8 @@ spec:
     value: {{veilarbpersonapi_url}}
   - name: AKTOERREGISTER_API_V1_URL
     value: {{aktoerregister_api_v1_url}}
+  - name: PAM_JANZZ_URL
+    value: {{ pam_janzz_url }}
   image: {{ image }}
   ingresses:
   {{#each ingresses as |url|}}
