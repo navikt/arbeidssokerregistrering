@@ -23,7 +23,8 @@ const Melding = ({ state }: Props) => {
   };
 
   const handleClickDialog = () => {
-    uniLogger("registrering.allerede-registrert.click.dialog", {
+    uniLogger("registrering.aktivitet", {
+      aktivitet: "Går til dialogen fra iarbs-melding",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,
@@ -48,7 +49,8 @@ const Melding = ({ state }: Props) => {
         rettighetsgruppe,
       });
     } else if (hensikt === "arbeidsplassen") {
-      uniLogger("registrering.allerede-registrert.click.arbeidsplassen", {
+      uniLogger("registrering.aktivitet", {
+        aktivitet: "Går til arbeidsplassen fra iarbs-melding",
         formidlingsgruppe,
         servicegruppe,
         geografiskTilknytning,
