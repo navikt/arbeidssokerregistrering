@@ -21,7 +21,7 @@ class FetchError extends Error {
   }
 }
 
-type RecoverWith = (status: number) => {} | null;
+type RecoverWith = (status: number) => unknown | null;
 
 export function leggTilFnrForFSS(url: string) {
   if (erIFSS()) {
