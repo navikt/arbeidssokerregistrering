@@ -21,5 +21,6 @@ process.env.CI
         "@typescript-eslint/no-inferrable-types": "warn",
         "no-extra-boolean-cast": "warn",
         "react-hooks/exhaustive-deps": "warn",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
       },
     });
