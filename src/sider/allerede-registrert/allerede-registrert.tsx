@@ -21,7 +21,8 @@ class AlleredeRegistrert extends React.Component<Props> {
     const servicegruppe = event.currentTarget.dataset.servicegruppe;
     const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
     const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
-    uniLogger("registrering.allerede-registrert.click.aktivitetsplan", {
+    uniLogger("registrering.aktivitet", {
+      aktivitet: "Går til aktivitetsplanen fra allerede registrert siden",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,
