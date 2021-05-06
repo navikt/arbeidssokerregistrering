@@ -13,7 +13,7 @@ export interface State {
   status: string;
 }
 
-export interface ReaktiveringData {}
+export type ReaktiveringData = unknown;
 
 export type Data = ReaktiveringData;
 
