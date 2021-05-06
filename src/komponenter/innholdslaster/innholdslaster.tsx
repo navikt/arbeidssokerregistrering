@@ -6,12 +6,13 @@ import { uniLogger } from "../../metrikker/uni-logger";
 
 import "./innholdslaster.less";
 
-const array = (value: {}) => (Array.isArray(value) ? value : [value]);
+const array = (value: unknown) => (Array.isArray(value) ? value : [value]);
 const harStatus = (...status: string[]) => (element: { status: string }) =>
   array(status).toString().includes(element.status);
-const noenHarFeil = (avhengigheter: {}[]) => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
-const alleLastet = (avhengigheter: {}[]) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
-const alleLastetEllerReloading = (avhengigheter: {}[]) =>
+const noenHarFeil = (avhengigheter: { status: string }[]) =>
+  avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
+const alleLastet = (avhengigheter: { status: string }[]) => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
+const alleLastetEllerReloading = (avhengigheter: { status: string }[]) =>
   avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
 
 interface InnholdslasterProps {

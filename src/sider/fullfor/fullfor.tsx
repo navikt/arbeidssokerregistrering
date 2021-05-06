@@ -42,7 +42,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | {}>;
+  onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | unknown>;
 }
 
 interface EgenState {

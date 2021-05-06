@@ -1,6 +1,6 @@
 import { annenStilling } from "../../../../ducks/siste-stilling";
 
-export function hentStillingsAlternativer(typeaheadYrkeList: {}[], sokestreng: string) {
+export function hentStillingsAlternativer(typeaheadYrkeList: unknown[], sokestreng: string) {
   const alternativer = typeaheadYrkeList
     .sort((a: { label: string }, b: { label: string }) => a.label.localeCompare(b.label))
     .map((stilling: { label: string; styrk08: string[]; konseptId: number }, index: number) => {

@@ -32,7 +32,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | {}>;
+  onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | unknown>;
 }
 
 type Props = StateProps & DispatchProps & RouteComponentProps<MatchProps> & InjectedIntlProps;

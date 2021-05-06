@@ -31,8 +31,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
-  hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
+  hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | unknown>;
+  hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | unknown>;
   velgStilling: (stilling: Stilling) => void;
   settDefaultStilling: (stilling: Stilling) => void;
 }

@@ -30,7 +30,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onReaktiverBruker: () => Promise<void | {}>;
+  onReaktiverBruker: () => Promise<void | unknown>;
 }
 
 type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps;

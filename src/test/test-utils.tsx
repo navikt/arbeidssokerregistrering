@@ -150,7 +150,7 @@ export class FetchStub {
   }
 }
 
-export function withResponse(response: {}) {
+export function withResponse(response: unknown) {
   return new FetchStub().addResponse("_", response);
 }
 

@@ -37,11 +37,11 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  hentBrukersNavn: () => Promise<void | {}>;
-  hentAutentiseringsInfo: () => Promise<void | {}>;
+  hentBrukersNavn: () => Promise<void | unknown>;
+  hentAutentiseringsInfo: () => Promise<void | unknown>;
   hentRegistreringStatus: () => void;
-  hentFeatureToggle: () => Promise<void | {}>;
-  hentKontaktinfo: () => Promise<void | {}>;
+  hentFeatureToggle: () => Promise<void | unknown>;
+  hentKontaktinfo: () => Promise<void | unknown>;
 }
 
 type Props = StateProps & DispatchProps;

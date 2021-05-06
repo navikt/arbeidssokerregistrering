@@ -58,7 +58,7 @@ class SokeInputComponent extends React.Component<SokeInputComponentProps, SokeIn
         });
       });
     } else {
-      hentStillingMedStyrk08(encodeURI(sokeStreng)).then((response: { typeaheadYrkeList: {}[] }) => {
+      hentStillingMedStyrk08(encodeURI(sokeStreng)).then((response: { typeaheadYrkeList: unknown[] }) => {
         const { typeaheadYrkeList } = response;
 
         const stillingsAlternativer = hentStillingsAlternativer(typeaheadYrkeList, sokeStreng);
