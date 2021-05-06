@@ -15,8 +15,7 @@ import { connect } from "react-redux";
 import { erIFSS } from "../../utils/fss-utils";
 import { lagAktivitetsplanUrl } from "../../utils/url-utils";
 import { erKlarForFullforing } from "../fullfor/fullfor-utils";
-
-const veilederSvg = require("./veileder-syfo.svg");
+import veilederSvg from "./veileder-syfo.svg";
 
 interface StateProps {
   brukersNavn: BrukersNavnState;
