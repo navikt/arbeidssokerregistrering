@@ -6,7 +6,7 @@ const prefix = {
   appversion,
 };
 
-export function uniLogger(name: string, values?: object) {
+export function uniLogger(name: string, values?: Record<string, unknown>) {
   const data = values || {};
   amplitudeLogger(name, { ...prefix, ...data });
   return true;
