@@ -65,7 +65,7 @@ function getSporsmalSomIkkeSkalBesvares(svar: Svar | undefined, config: SkjemaCo
   if (!svar || !config.has(svar)) {
     return [];
   } else {
-    return config.get(svar)!;
+    return config.get(svar) ?? [];
   }
 }
 

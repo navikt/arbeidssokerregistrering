@@ -11,7 +11,7 @@ export function hentOversattStillingFraAAReg(data: OversettelseAvStillingData): 
     stilling = {
       label: koderFraPam[0].label,
       styrk08: koderFraPam[0].styrk08[0],
-      konseptId: koderFraPam[0].konseptId === undefined ? -1 : koderFraPam[0].konseptId!,
+      konseptId: koderFraPam[0].konseptId ?? -1,
     };
   }
   return stilling;
