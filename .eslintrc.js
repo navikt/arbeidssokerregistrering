@@ -22,5 +22,6 @@ process.env.CI
         "no-extra-boolean-cast": "warn",
         "react-hooks/exhaustive-deps": "warn",
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "import/no-anonymous-default-export": "off",
       },
     });
