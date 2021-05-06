@@ -109,7 +109,7 @@ const Melding = ({ state }: Props) => {
                   eller ring oss på <strong>55 55 33 33</strong>.
                 </Normaltekst>
                 <Radio
-                  label={"Jeg vil opprette CV eller jobbprofil"}
+                  label={"Jeg vil opprette CV eller jobbønsker"}
                   name="kontaktmeg"
                   id="cv"
                   onChange={handleClickContact}
@@ -124,7 +124,7 @@ const Melding = ({ state }: Props) => {
                   >
                     Gå til Arbeidsplassen.no
                   </a>{" "}
-                  for å opprette CV og jobbprofil.
+                  for å opprette CV og jobbønsker.
                 </Normaltekst>
                 <Radio
                   label={"Jeg finner ikke det jeg leter etter"}
