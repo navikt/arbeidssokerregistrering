@@ -111,7 +111,7 @@ type Props = AutoCompleteProps & InjectedIntlProps;
 class AutoComplete extends React.Component<Props, AutoCompleteState> {
   formRef: any;
   static clickLabel() {
-    document.getElementById("stilling")!.focus();
+    document.getElementById("stilling")?.focus();
   }
 
   constructor(props: Props) {
