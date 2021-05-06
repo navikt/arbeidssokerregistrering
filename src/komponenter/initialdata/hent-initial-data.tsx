@@ -102,15 +102,10 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-  // @ts-ignore
   hentBrukersNavn: () => dispatch(hentBrukersNavn()),
-  // @ts-ignore
   hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
-  // @ts-ignore
   hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
-  // @ts-ignore
   hentFeatureToggle: () => dispatch(hentFeatureToggles()),
-  // @ts-ignore
   hentKontaktinfo: () => dispatch(hentKontaktinfo()),
 });
 
