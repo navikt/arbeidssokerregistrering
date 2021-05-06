@@ -79,7 +79,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     this.setState((prevState) => ({ ...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING }));
 
     this.props.onRegistrerBruker(this.getSvarMappetForBackend(), RegistreringType.ORDINAER_REGISTRERING).then((res) => {
-      if (!!res) {
+      if (res) {
         this.props.history.push(DU_ER_NA_REGISTRERT_PATH);
       }
     });

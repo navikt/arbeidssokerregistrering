@@ -59,7 +59,7 @@ class KreverReaktivering extends React.Component<Props, State> {
     uniLogger("arbeidssokerregistrering.reaktivering", { klikk: "reaktiver" });
 
     onReaktiverBruker().then((res) => {
-      if (!!res) {
+      if (res) {
         history.push(DU_ER_NA_REGISTRERT_PATH);
       }
     });

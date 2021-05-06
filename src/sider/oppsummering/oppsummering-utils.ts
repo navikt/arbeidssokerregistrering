@@ -20,9 +20,7 @@ export function getTekstIdForArbeidSisteManeder(svarState: SvarState, regStatus:
   if (brukersSvarSamsvarerMedInfoFraAAReg(svarState, infoFraAARegIndikererArbeidSisteManeder)) {
     return "";
   }
-  return !!infoFraAARegIndikererArbeidSisteManeder
-    ? "oppsummering-arbeidserfaring-1"
-    : "oppsummering-arbeidserfaring-2";
+  return infoFraAARegIndikererArbeidSisteManeder ? "oppsummering-arbeidserfaring-1" : "oppsummering-arbeidserfaring-2";
 }
 
 export function brukersSvarSamsvarerMedInfoFraAAReg(

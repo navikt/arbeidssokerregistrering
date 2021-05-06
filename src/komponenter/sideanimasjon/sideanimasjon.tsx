@@ -15,7 +15,7 @@ class Sideanimasjon extends React.Component<Props> {
   }
 
   render() {
-    const forover: Boolean = this.props.history.action === "PUSH";
+    const forover: boolean = this.props.history.action === "PUSH";
     return (
       <div
         className={(this.props.location.pathname !== START_PATH ? "limit " : "") + (forover ? "forover" : "bakover")}
