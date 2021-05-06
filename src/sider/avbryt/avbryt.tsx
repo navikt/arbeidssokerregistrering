@@ -30,7 +30,7 @@ function Avbryt({ history }: Props) {
             <FormattedMessage id="beskrivelse-avbryt" />
           </Innholdstittel>
           <div className="avbryt-panel__knapperad">
-            <KnappBase type="standard" onClick={() => (document.location!.href = DITT_NAV_URL)}>
+            <KnappBase type="standard" onClick={() => (document.location.href = DITT_NAV_URL)}>
               <FormattedMessage id="knapp-ja-avbryt" />
             </KnappBase>
             <KnappBase type="standard" onClick={() => history.goBack()}>

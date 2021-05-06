@@ -15,12 +15,12 @@ const config = {
 
 amplitude.getInstance().init(apiKey, undefined, config);
 
-export type AmplitudeLogger = (name: string, values?: object) => void;
+export type AmplitudeLogger = (name: string, values?: Record<string, unknown>) => void;
 
 export function getDeviceId() {
   return amplitude.getInstance().options.deviceId;
 }
 
-export function amplitudeLogger(name: string, values?: object) {
+export function amplitudeLogger(name: string, values?: Record<string, unknown>) {
   amplitude.getInstance().logEvent(name, values);
 }

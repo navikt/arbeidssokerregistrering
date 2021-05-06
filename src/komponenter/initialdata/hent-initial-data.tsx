@@ -37,11 +37,11 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  hentBrukersNavn: () => Promise<void | {}>;
-  hentAutentiseringsInfo: () => Promise<void | {}>;
+  hentBrukersNavn: () => Promise<void | unknown>;
+  hentAutentiseringsInfo: () => Promise<void | unknown>;
   hentRegistreringStatus: () => void;
-  hentFeatureToggle: () => Promise<void | {}>;
-  hentKontaktinfo: () => Promise<void | {}>;
+  hentFeatureToggle: () => Promise<void | unknown>;
+  hentKontaktinfo: () => Promise<void | unknown>;
 }
 
 type Props = StateProps & DispatchProps;
@@ -102,15 +102,10 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-  // @ts-ignore
   hentBrukersNavn: () => dispatch(hentBrukersNavn()),
-  // @ts-ignore
   hentAutentiseringsInfo: () => dispatch(hentAutentiseringsInfo()),
-  // @ts-ignore
   hentRegistreringStatus: () => dispatch(hentRegistreringStatus()),
-  // @ts-ignore
   hentFeatureToggle: () => dispatch(hentFeatureToggles()),
-  // @ts-ignore
   hentKontaktinfo: () => dispatch(hentKontaktinfo()),
 });
 

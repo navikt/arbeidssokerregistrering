@@ -31,8 +31,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | {}>;
-  hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
+  hentStyrkkodeForSisteStillingFraAAReg: () => Promise<void | unknown>;
+  hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | unknown>;
   velgStilling: (stilling: Stilling) => void;
   settDefaultStilling: (stilling: Stilling) => void;
 }
@@ -94,9 +94,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-  // @ts-ignore
   hentStyrkkodeForSisteStillingFraAAReg: () => dispatch(hentStyrkkodeForSisteStillingFraAAReg()),
-  // @ts-ignore
   hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
   velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
   settDefaultStilling: (stilling: Stilling) => dispatch(settDefaultStilling(stilling)),

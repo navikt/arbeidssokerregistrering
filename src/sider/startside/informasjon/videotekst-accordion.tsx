@@ -2,12 +2,13 @@ import * as React from "react";
 import { FormattedHTMLMessage, FormattedMessage } from "react-intl";
 import { NedChevron, OppChevron } from "nav-frontend-chevron";
 import "./videotekst-accordion.less";
+
 interface EgenState {
   apen: boolean;
 }
 
-class VideotekstAccordion extends React.Component<{}, EgenState> {
-  constructor(props: {}) {
+class VideotekstAccordion extends React.Component<Record<string, unknown>, EgenState> {
+  constructor(props: Record<string, unknown>) {
     super(props);
     this.state = { apen: false };
   }

@@ -116,7 +116,7 @@ class Skjema extends React.Component<Props, OwnState> {
 
   shouldComponentUpdate(nextProps: Props): boolean {
     if (this.state.visAdvarsel) {
-      const visAdvarsel: boolean = !kanGaaTilNeste(nextProps.svarState, hentGjeldendeSporsmalId(nextProps));
+      const visAdvarsel = !kanGaaTilNeste(nextProps.svarState, hentGjeldendeSporsmalId(nextProps));
       if (!visAdvarsel) {
         this.setState({ visAdvarsel: false });
         return false;

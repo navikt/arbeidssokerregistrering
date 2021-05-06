@@ -30,7 +30,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onReaktiverBruker: () => Promise<void | {}>;
+  onReaktiverBruker: () => Promise<void | unknown>;
 }
 
 type Props = RouteComponentProps<MatchProps> & StateProps & DispatchProps;
@@ -59,7 +59,7 @@ class KreverReaktivering extends React.Component<Props, State> {
     uniLogger("arbeidssokerregistrering.reaktivering", { klikk: "reaktiver" });
 
     onReaktiverBruker().then((res) => {
-      if (!!res) {
+      if (res) {
         history.push(DU_ER_NA_REGISTRERT_PATH);
       }
     });
@@ -126,7 +126,6 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-  // @ts-ignore
   onReaktiverBruker: () => dispatch(reaktiverBruker()),
 });
 

@@ -39,7 +39,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | {}>;
+  hentStillingFraPamGittStyrkkode: (styrk98: string | undefined) => Promise<void | unknown>;
   velgStilling: (stilling: Stilling) => void;
 }
 
@@ -183,7 +183,6 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-  // @ts-ignore
   hentStillingFraPamGittStyrkkode: (styrk: string) => dispatch(hentStillingFraPamGittStyrkkode(styrk)),
   velgStilling: (stilling: Stilling) => dispatch(velgSisteStilling(stilling)),
 });

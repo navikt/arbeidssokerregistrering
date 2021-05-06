@@ -11,11 +11,9 @@ import {
 } from "../../../../../src/ducks/svar-utils";
 import { mapAvgitteSvarForBackend, mapTilBesvarelse, mapTilSvarState } from "../../../../../src/ducks/registrerbruker-utils";
 import { InjectedIntl } from 'react-intl';
-import { OrdinaerBesvarelse, SykmeldtBesvarelse, TeksterForBesvarelse } from "../../../../../src/ducks/registrerbruker";
+import { BesvarelseType, TeksterForBesvarelse } from "../../../../../src/ducks/registrerbruker";
 import { SporsmalId } from "../../../../../src/ducks/svar";
 import { RegistreringType } from "../../../../../src/ducks/registreringstatus";
-// @ts-ignore
-import { BesvarelseType } from "../../../../src/ducks/registrerbruker-utils";
 
 const svarState: SvarState = [
     { sporsmalId: SporsmalId.dinSituasjon, svar: DinSituasjonSvar.ER_PERMITTERT },

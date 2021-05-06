@@ -67,7 +67,7 @@ const svarAlternativeConfig = (alternativProps: any) => [
   },
 ];
 
-export const hentAlternativeneForInngangsporsmal = (alternativProps: {}) =>
+export const hentAlternativeneForInngangsporsmal = (alternativProps: Record<string, unknown>) =>
   svarAlternativeConfig(alternativProps).map((alternativ) => alternativ.element);
 
 export const hentInngangsLoep = (inngangsLoepSvar: Svar | undefined) => {
@@ -75,7 +75,7 @@ export const hentInngangsLoep = (inngangsLoepSvar: Svar | undefined) => {
   return lop && lop.lop;
 };
 
-export const hentLoepConfig = (alternativProps: {}, inngangsLoepSvar: Svar | undefined) => {
+export const hentLoepConfig = (alternativProps: Record<string, unknown>, inngangsLoepSvar: Svar | undefined) => {
   const lop = svarAlternativeConfig(alternativProps).find((alternativ) => alternativ.id === inngangsLoepSvar);
   return lop && lop.lopConfig;
 };

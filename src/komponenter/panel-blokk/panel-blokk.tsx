@@ -7,7 +7,7 @@ import { getIntlMessage } from "../../utils/utils";
 
 interface PanelBlokkProps {
   tittelId?: string;
-  tittelVerdier?: {};
+  tittelVerdier?: Record<string, any>;
   tittelCssNavnVariant?: string;
   cssVariant?: string;
   beskrivelseId?: string;

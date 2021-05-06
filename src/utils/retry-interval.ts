@@ -4,7 +4,7 @@ class RetryInterval {
   private retriesLeft: number;
   private interval?: NodeJS.Timer;
 
-  constructor(handler: (retryInterval: RetryInterval) => void, intervalMs: number = 250, retries: number = 40) {
+  constructor(handler: (retryInterval: RetryInterval) => void, intervalMs = 250, retries = 40) {
     this.handler = handler;
     this.retriesLeft = retries;
     this.intervalMs = intervalMs;

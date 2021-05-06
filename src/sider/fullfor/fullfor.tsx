@@ -42,7 +42,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | {}>;
+  onRegistrerBruker: (data: RegistrerBrukerData, registreringType: RegistreringType) => Promise<void | unknown>;
 }
 
 interface EgenState {
@@ -79,7 +79,7 @@ class Fullfor extends React.PureComponent<Props, EgenState> {
     this.setState((prevState) => ({ ...prevState, sblArbeidRegistrerBrukerStatus: STATUS.PENDING }));
 
     this.props.onRegistrerBruker(this.getSvarMappetForBackend(), RegistreringType.ORDINAER_REGISTRERING).then((res) => {
-      if (!!res) {
+      if (res) {
         this.props.history.push(DU_ER_NA_REGISTRERT_PATH);
       }
     });
@@ -219,7 +219,6 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): DispatchProps => ({
-  // @ts-ignore
   onRegistrerBruker: (data, registreringType: RegistreringType) => dispatch(utforRegistrering(data, registreringType)),
 });
 
