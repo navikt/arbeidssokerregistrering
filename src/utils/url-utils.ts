@@ -14,3 +14,11 @@ export const lagDetaljeVisningUrl = () => {
 export const erProduksjon = () => {
   return url.indexOf("arbeidssokerregistrering.nav.no") > -1;
 };
+
+export const erNAVMiljo = (miljo: string) =>
+  miljo.endsWith(".nav.no") ||
+  miljo.endsWith(".adeo.no") ||
+  miljo.endsWith(".preprod.local") ||
+  miljo.endsWith(".oera.no") ||
+  miljo.endsWith(".oera-q.local") ||
+  miljo.endsWith(".nav.party");

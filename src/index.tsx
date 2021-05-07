@@ -10,6 +10,7 @@ import { erIFSS } from "./utils/fss-utils";
 import App from "./app";
 import AppFss from "./app-fss";
 import "./index.less";
+import { erNAVMiljo } from "./utils/url-utils";
 
 moment.locale("nb");
 
@@ -38,23 +39,23 @@ if (process.env.REACT_APP_MOCK) {
   require("./mocks/mocks");
 }
 
-if (!erIFSS()) {
-  const environment = window.location.hostname;
-  Sentry.init({
-    dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
-    environment,
-    autoSessionTracking: false,
-    ignoreErrors: [
-      "TypeError: Failed to fetch",
-      "TypeError: NetworkError when attempting to fetch resource.",
-      "TypeError: cancelled",
-      "TypeError: avbrutt",
-      "TypeError: cancelado",
-      "TypeError: anulowane",
-      "TypeError: avbruten",
-      "TypeError: anulat",
-    ],
-  });
-}
+const miljo = window.location.hostname;
+const sendFeilTilSentry = erNAVMiljo(miljo) && !erIFSS();
+Sentry.init({
+  dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
+  environment: miljo,
+  enabled: sendFeilTilSentry,
+  autoSessionTracking: false,
+  ignoreErrors: [
+    "TypeError: Failed to fetch",
+    "TypeError: NetworkError when attempting to fetch resource.",
+    "TypeError: cancelled",
+    "TypeError: avbrutt",
+    "TypeError: cancelado",
+    "TypeError: anulowane",
+    "TypeError: avbruten",
+    "TypeError: anulat",
+  ],
+});
 
 ReactDOM.render(erIFSS() ? <AppFss /> : <App />, document.getElementById("root") as HTMLElement);

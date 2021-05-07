@@ -24,6 +24,8 @@
     "cypress:clear": "cypress cache clear",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "test": "craco test",
+    "test:ci": "CI=true craco test",
     "postinstall": "husky install"
   },
   "dependencies": {
