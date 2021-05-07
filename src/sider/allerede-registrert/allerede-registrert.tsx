@@ -67,7 +67,7 @@ class AlleredeRegistrert extends React.Component<Props> {
     const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || "INGEN_VERDI";
     const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
     const isIARBS = formidlingsgruppeOrIngenVerdi === "IARBS";
-    uniLogger("registrering.visning", {
+    uniLogger("arbeidssokerregistrering.visning", {
       viser: "Viser allerede registrert siden",
       formidlingsgruppe,
       servicegruppe,

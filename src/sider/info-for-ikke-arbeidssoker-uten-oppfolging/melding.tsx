@@ -64,7 +64,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
       const id = event.target.id;
       const numberOfChoices = this.increaseOptions();
       const choices = this.addChoice(id).join(", ");
-      uniLogger("registrering.aktivitet", {
+      uniLogger("arbeidssokerregistrering.aktivitet", {
         aktivitet: "Velger alternativ fra info for ikke arbeidssøker siden",
         formidlingsgruppe,
         servicegruppe,

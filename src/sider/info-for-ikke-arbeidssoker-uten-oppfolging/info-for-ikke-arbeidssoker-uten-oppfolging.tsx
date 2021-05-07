@@ -23,7 +23,7 @@ class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> 
     const maksdato = this.props.state.registreringStatus.data.maksDato;
     const dagerTilMaksdato = maksdato ? antallDagerTilMaksdato(new Date(), new Date(maksdato)).toString() : "null";
 
-    uniLogger("registrering.visning", {
+    uniLogger("arbeidssokerregistrering.visning", {
       viser: "Viser info for ikke arbeidssoker uten oppfolging",
       formidlingsgruppe,
       servicegruppe,

@@ -41,7 +41,8 @@ const Melding = ({ state }: Props) => {
       result.className = "show-result-text";
     }
     if (hensikt !== "arbeidsplassen") {
-      uniLogger("registrering.allerede-registrert.hensikt.click", {
+      uniLogger("arbeidssokerregistrering.aktivitet", {
+        aktivitet: "Velger hensikt fra iarbs-melding",
         hensikt,
         formidlingsgruppe,
         servicegruppe,
@@ -49,7 +50,7 @@ const Melding = ({ state }: Props) => {
         rettighetsgruppe,
       });
     } else if (hensikt === "arbeidsplassen") {
-      uniLogger("registrering.aktivitet", {
+      uniLogger("arbeidssokerregistrering.aktivitet", {
         aktivitet: "Går til arbeidsplassen fra iarbs-melding",
         formidlingsgruppe,
         servicegruppe,
