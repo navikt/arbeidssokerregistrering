@@ -62,11 +62,10 @@ class Melding extends React.Component<BaseProps, OptionState> {
 
     const handleClickLog = (event) => {
       const id = event.target.id;
-      const metricName = `registrering.ikke-arbeidssoker-utenfor-oppfolging.click.${id}`;
       const numberOfChoices = this.increaseOptions();
       const choices = this.addChoice(id).join(", ");
-      uniLogger("registrering.ikke-arbeidssoker-utenfor-oppfolging.click", { numberOfChoices, choices });
-      uniLogger(metricName, {
+      uniLogger("registrering.aktivitet", {
+        aktivitet: "Velger alternativ fra info for ikke arbeidssøker siden",
         formidlingsgruppe,
         servicegruppe,
         geografiskTilknytning,
