@@ -27,7 +27,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
     const brukHerokuUrl = !!process.env.REACT_APP_HEROKU_OVERGANG;
 
     if (brukHerokuUrl) {
-      const brukerStatusQueryParam = "brukerStatus=" + (erSykmeldt ? "sykmeldt" : "ordinaer");
+      const brukerStatusQueryParam = "?brukerStatus=" + (erSykmeldt ? "sykmeldt" : "ordinaer");
 
       veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + "?" + brukerStatusQueryParam;
       veienTilArbeidMedVisInfoUrl =
