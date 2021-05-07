@@ -23,7 +23,8 @@ const Melding = ({ state }: Props) => {
   };
 
   const handleClickDialog = () => {
-    uniLogger("registrering.allerede-registrert.click.dialog", {
+    uniLogger("registrering.aktivitet", {
+      aktivitet: "Går til dialogen fra iarbs-melding",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,
@@ -40,7 +41,8 @@ const Melding = ({ state }: Props) => {
       result.className = "show-result-text";
     }
     if (hensikt !== "arbeidsplassen") {
-      uniLogger("registrering.allerede-registrert.hensikt.click", {
+      uniLogger("arbeidssokerregistrering.aktivitet", {
+        aktivitet: "Velger hensikt fra iarbs-melding",
         hensikt,
         formidlingsgruppe,
         servicegruppe,
@@ -48,7 +50,8 @@ const Melding = ({ state }: Props) => {
         rettighetsgruppe,
       });
     } else if (hensikt === "arbeidsplassen") {
-      uniLogger("registrering.allerede-registrert.click.arbeidsplassen", {
+      uniLogger("arbeidssokerregistrering.aktivitet", {
+        aktivitet: "Går til arbeidsplassen fra iarbs-melding",
         formidlingsgruppe,
         servicegruppe,
         geografiskTilknytning,
@@ -107,7 +110,7 @@ const Melding = ({ state }: Props) => {
                   eller ring oss på <strong>55 55 33 33</strong>.
                 </Normaltekst>
                 <Radio
-                  label={"Jeg vil opprette CV eller jobbprofil"}
+                  label={"Jeg vil opprette CV eller jobbønsker"}
                   name="kontaktmeg"
                   id="cv"
                   onChange={handleClickContact}
@@ -122,7 +125,7 @@ const Melding = ({ state }: Props) => {
                   >
                     Gå til Arbeidsplassen.no
                   </a>{" "}
-                  for å opprette CV og jobbprofil.
+                  for å opprette CV og jobbønsker.
                 </Normaltekst>
                 <Radio
                   label={"Jeg finner ikke det jeg leter etter"}

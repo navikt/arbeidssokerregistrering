@@ -21,7 +21,8 @@ class AlleredeRegistrert extends React.Component<Props> {
     const servicegruppe = event.currentTarget.dataset.servicegruppe;
     const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
     const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
-    uniLogger("registrering.allerede-registrert.click.aktivitetsplan", {
+    uniLogger("registrering.aktivitet", {
+      aktivitet: "Går til aktivitetsplanen fra allerede registrert siden",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,
@@ -34,7 +35,8 @@ class AlleredeRegistrert extends React.Component<Props> {
     const servicegruppe = event.currentTarget.dataset.servicegruppe;
     const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
     const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
-    uniLogger("registrering.allerede-registrert.click.veienTilArbeid", {
+    uniLogger("registrering.aktivitet", {
+      aktivitet: "Går til veien til arbeid fra allerede registrert siden",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,
@@ -47,7 +49,8 @@ class AlleredeRegistrert extends React.Component<Props> {
     const servicegruppe = event.currentTarget.dataset.servicegruppe;
     const geografiskTilknytning = event.currentTarget.dataset.geografisktilknytning;
     const rettighetsgruppe = event.currentTarget.dataset.rettighetsgruppe;
-    uniLogger("registrering.allerede-registrert.click.dialog", {
+    uniLogger("registrering.aktivitet", {
+      aktivitet: "Går til dialogen fra allerede registrert siden",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,
@@ -64,7 +67,8 @@ class AlleredeRegistrert extends React.Component<Props> {
     const geografiskTilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || "INGEN_VERDI";
     const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
     const isIARBS = formidlingsgruppeOrIngenVerdi === "IARBS";
-    uniLogger("registrering.allerede-registrert.sidevisning", {
+    uniLogger("arbeidssokerregistrering.visning", {
+      viser: "Viser allerede registrert siden",
       formidlingsgruppe,
       servicegruppe,
       geografiskTilknytning,

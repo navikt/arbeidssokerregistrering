@@ -46,17 +46,23 @@ class KreverReaktivering extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    uniLogger("arbeidssokerregistrering.reaktivering.sidevisning");
+    uniLogger("arbeidssokerregistrering.visning", {
+      viser: "Viser siden for reaktivering",
+    });
   }
 
   avbrytReaktiveringOnClick() {
-    uniLogger("arbeidssokerregistrering.reaktivering", { klikk: "avbryt" });
+    uniLogger("arbeidssokerregistrering.aktivitet", {
+      aktivitet: "Velger avbryt fra reaktiveringssiden",
+    });
   }
 
   reaktiverBrukerOnClick() {
     const { onReaktiverBruker, history } = this.props;
     this.setState({ reaktivererBruker: true });
-    uniLogger("arbeidssokerregistrering.reaktivering", { klikk: "reaktiver" });
+    uniLogger("arbeidssokerregistrering.aktivitet", {
+      aktivitet: "Velger reaktiver fra reaktiveringssiden",
+    });
 
     onReaktiverBruker().then((res) => {
       if (res) {
