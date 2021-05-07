@@ -38,11 +38,11 @@ if (process.env.REACT_APP_MOCK) {
   require("./mocks/mocks");
 }
 
-const environment = window.location.hostname;
+const miljo = window.location.hostname;
 const sendFeilTilSentry = !erIFSS();
 Sentry.init({
   dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
-  environment,
+  environment: miljo,
   enabled: sendFeilTilSentry,
   autoSessionTracking: false,
   ignoreErrors: [
