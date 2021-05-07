@@ -16,10 +16,8 @@ const herokuUrl = "https://veientilarbeid.herokuapp.com/veientilarbeid";
 const vanligUrl = "/veientilarbeid/";
 
 export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
-export const HEROKU_VEIENTILARBEID_MED_DAGPENGER_URL = `${herokuUrl}`;
 
 export const VEIENTILARBEID_URL = vanligUrl;
-export const VEIENTILARBEID_MED_DAGPENGER_URL = `${vanligUrl}`;
 
 export const DITT_NAV_URL = "/dittnav";
 export const DITT_SYKEFRAVAER_URL = "/sykefravaer";
