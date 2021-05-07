@@ -39,12 +39,12 @@ if (process.env.REACT_APP_MOCK) {
 }
 
 const miljo = window.location.hostname;
-const erNAVMiljo =
+const erNAVMiljo = (miljo: string) =>
   miljo.endsWith(".nav.no") ||
   miljo.endsWith(".adeo.no") ||
   miljo.endsWith(".preprod.local") ||
   miljo.endsWith(".nav.party");
-const sendFeilTilSentry = erNAVMiljo && !erIFSS();
+const sendFeilTilSentry = erNAVMiljo(miljo) && !erIFSS();
 Sentry.init({
   dsn: "https://52908dd3ce2a4fde8bd57bc1cd03651c@sentry.gc.nav.no/66",
   environment: miljo,
