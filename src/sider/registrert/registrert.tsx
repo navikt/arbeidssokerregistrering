@@ -35,7 +35,10 @@ class DuErNaRegistrert extends React.Component<AllProps> {
     const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
     const hentTekstId = this.hentTekstId(erSykmeldt);
     const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : hentTekstId("innholdstittel");
-    uniLogger("arbeidssokerregistrering.success", { registreringType: registreringType });
+    uniLogger("arbeidssokerregistrering.visning", {
+      viser: "Viser kvitteringssiden",
+      registreringType: registreringType,
+    });
     return (
       <section className={cls("registrert", { erIE: erIE(), "registrert-fss": erIFSS() })}>
         <div className={cls("registrert__avsjekk", { "registrert__avsjekk-sykmeldt": erSykmeldt })}>
