@@ -2,13 +2,7 @@ import * as React from "react";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
 import { uniLogger } from "../../../metrikker/uni-logger";
-import {
-  HEROKU_VEIENTILARBEID_MED_AAP_URL,
-  HEROKU_VEIENTILARBEID_URL,
-  VEIENTILARBEID_MED_AAP_URL,
-  VEIENTILARBEID_URL,
-  DP_SOK_URL,
-} from "../../../utils/konstanter";
+import { HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_URL, DP_SOK_URL } from "../../../utils/konstanter";
 
 import handinfoSvg from "./clipboard.svg";
 import "./registrert-aksjonspanel.less";
@@ -29,13 +23,12 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
     if (brukHerokuUrl) {
       const brukerStatusQueryParam = "?brukerStatus=" + (erSykmeldt ? "sykmeldt" : "ordinaer");
 
-      veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + "?" + brukerStatusQueryParam;
-      veienTilArbeidMedVisInfoUrl =
-        (erSykmeldt ? HEROKU_VEIENTILARBEID_MED_AAP_URL : DP_SOK_URL) + "&" + brukerStatusQueryParam;
+      veienTilArbeidUrl = HEROKU_VEIENTILARBEID_URL + brukerStatusQueryParam;
+      veienTilArbeidMedVisInfoUrl = (erSykmeldt ? HEROKU_VEIENTILARBEID_URL : DP_SOK_URL) + brukerStatusQueryParam;
       knappetekstJa = erSykmeldt ? "duernaregistrert-knapp-les-mer" : "duernaregistrert-knapp-sok-dagpenger";
     } else {
       veienTilArbeidUrl = VEIENTILARBEID_URL;
-      veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_MED_AAP_URL : DP_SOK_URL;
+      veienTilArbeidMedVisInfoUrl = erSykmeldt ? VEIENTILARBEID_URL : DP_SOK_URL;
       knappetekstJa = erSykmeldt ? "duernaregistrert-knapp-les-mer" : "duernaregistrert-knapp-sok-dagpenger";
     }
 
