@@ -54,7 +54,7 @@ import RegistreringArbeidssokerFss from "./sider/startside/registrering-arbeidss
 import RegistreringArbeidssoker from "./sider/startside/registrering-arbeidssoker";
 import { uniLogger } from "./metrikker/uni-logger";
 import OppsummeringOrdinaer from "./sider/oppsummering/oppsummering-ordinaer";
-import { parseParametre } from "./utils/url-utils";
+import { hentQueryParameter } from "./utils/url-utils";
 
 interface StateProps {
   registreringstatusData: RegistreringstatusData;
@@ -73,7 +73,7 @@ type AllProps = StateProps & RouteComponentProps<any> & DispatchProps;
 class Routes extends React.Component<AllProps> {
   kommerFraSykefravaer() {
     const { registreringstatusData, location } = this.props;
-    const erFraSykefravaer = parseParametre(location.search).fraSykefravaer === "true";
+    const erFraSykefravaer = hentQueryParameter(location.search, "fraSykefravaer") === "true";
 
     return (
       registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
@@ -83,7 +83,7 @@ class Routes extends React.Component<AllProps> {
   }
 
   kommerAap() {
-    return parseParametre(this.props.location.search).fraAap === "true";
+    return hentQueryParameter(this.props.location.search, "fraAap") === "true";
   }
 
   componentDidMount() {

@@ -2,7 +2,7 @@ import * as React from "react";
 import { addLocaleData, IntlProvider as Provider } from "react-intl";
 import * as nb from "react-intl/locale-data/nb";
 import tekster from "./tekster/bundle";
-import { parseParametre } from "./utils/url-utils";
+import { hentQueryParameter } from "./utils/url-utils";
 
 addLocaleData(nb);
 
@@ -19,8 +19,8 @@ function mapTeksterTilNokler(teksterTilMapping: TeksterTilMappingType) {
 }
 
 function skalViseTekstnokler(): boolean {
-  const search = parseParametre(window.location.search);
-  return !!search.vistekster;
+  const vistekster = hentQueryParameter(window.location.search, "vistekster");
+  return !!vistekster;
 }
 
 class IntlProvider extends React.Component {

@@ -16,9 +16,12 @@ export const erProduksjon = () => {
   return url.indexOf("arbeidssokerregistrering.nav.no") > -1;
 };
 
-export const parseParametre = (search: string): Record<string, string> => {
+const parseParametre = (search: string): Record<string, string> => {
   return parse(search);
 };
+
+export const hentQueryParameter = (search: string, parameter: string): string | null =>
+  parseParametre(search)[parameter];
 
 export const erNAVMiljo = (miljo: string) =>
   miljo.endsWith(".nav.no") ||
