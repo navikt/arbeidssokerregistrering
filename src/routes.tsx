@@ -73,7 +73,7 @@ type AllProps = StateProps & RouteComponentProps<any> & DispatchProps;
 class Routes extends React.Component<AllProps> {
   kommerFraSykefravaer() {
     const { registreringstatusData, location } = this.props;
-    const erFraSykefravaer = hentQueryParameter(location.search, "fraSykefravaer") === "true";
+    const erFraSykefravaer = hentQueryParameter(location, "fraSykefravaer") === "true";
 
     return (
       registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
@@ -83,7 +83,7 @@ class Routes extends React.Component<AllProps> {
   }
 
   kommerAap() {
-    return hentQueryParameter(this.props.location.search, "fraAap") === "true";
+    return hentQueryParameter(this.props.location, "fraAap") === "true";
   }
 
   componentDidMount() {

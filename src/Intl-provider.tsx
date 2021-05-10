@@ -19,7 +19,7 @@ function mapTeksterTilNokler(teksterTilMapping: TeksterTilMappingType) {
 }
 
 function skalViseTekstnokler(): boolean {
-  const vistekster = hentQueryParameter(window.location.search, "vistekster");
+  const vistekster = hentQueryParameter(window.location, "vistekster");
   return !!vistekster;
 }
 

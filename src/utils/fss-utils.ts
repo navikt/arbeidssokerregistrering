@@ -108,11 +108,11 @@ export function erIFSS(): boolean {
 }
 
 export function hentUrlBrukerFnr(): string | null {
-  return hentQueryParameter(window.location.search, "fnr");
+  return hentQueryParameter(window.location, "fnr");
 }
 
 export function hentUrlEnhetId(): string | null {
-  return hentQueryParameter(window.location.search, "enhetId");
+  return hentQueryParameter(window.location, "enhetId");
 }
 
 export function hentBrukerFnr(): string | null {
