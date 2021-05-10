@@ -23,7 +23,7 @@ const parseParametre = (location: LocationType): Record<string, string> => {
 };
 
 export const hentQueryParameter = (location: LocationType, parameter: string): string | null =>
-  parseParametre(location)[parameter];
+  new URLSearchParams(location.search).get(parameter);
 
 export const erNAVMiljo = (miljo: string) =>
   miljo.endsWith(".nav.no") ||
