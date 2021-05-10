@@ -1,6 +1,5 @@
 import { AKTIVITETSPLAN_URL } from "./konstanter";
 import { hentBrukerFnr, hentVeilederEnhetId } from "./fss-utils";
-import { parse } from "query-string";
 
 const url = window && window.location && window.location.href ? window.location.href : "";
 
@@ -17,10 +16,6 @@ export const erProduksjon = () => {
 };
 
 type LocationType = { search: string };
-
-const parseParametre = (location: LocationType): Record<string, string> => {
-  return parse(location.search);
-};
 
 export const hentQueryParameter = (location: LocationType, parameter: string): string | null =>
   new URLSearchParams(location.search).get(parameter);
