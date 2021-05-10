@@ -32,7 +32,6 @@ import Fullfor from "./sider/fullfor/fullfor";
 import DuErNaRegistrert from "./sider/registrert/registrert";
 import { AppState } from "./reducer";
 import { connect, Dispatch } from "react-redux";
-import { parse } from "query-string";
 import {
   Data as RegistreringstatusData,
   Formidlingsgruppe,
@@ -55,6 +54,7 @@ import RegistreringArbeidssokerFss from "./sider/startside/registrering-arbeidss
 import RegistreringArbeidssoker from "./sider/startside/registrering-arbeidssoker";
 import { uniLogger } from "./metrikker/uni-logger";
 import OppsummeringOrdinaer from "./sider/oppsummering/oppsummering-ordinaer";
+import { parseParametre } from "./utils/url-utils";
 
 interface StateProps {
   registreringstatusData: RegistreringstatusData;
@@ -73,7 +73,7 @@ type AllProps = StateProps & RouteComponentProps<any> & DispatchProps;
 class Routes extends React.Component<AllProps> {
   kommerFraSykefravaer() {
     const { registreringstatusData, location } = this.props;
-    const erFraSykefravaer = parse(location.search).fraSykefravaer === "true";
+    const erFraSykefravaer = parseParametre(location.search).fraSykefravaer === "true";
 
     return (
       registreringstatusData.registreringType === RegistreringType.SYKMELDT_REGISTRERING &&
@@ -83,7 +83,7 @@ class Routes extends React.Component<AllProps> {
   }
 
   kommerAap() {
-    return parse(this.props.location.search).fraAap === "true";
+    return parseParametre(this.props.location.search).fraAap === "true";
   }
 
   componentDidMount() {

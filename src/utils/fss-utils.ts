@@ -1,6 +1,5 @@
-import { parse } from "query-string";
 import { hentBrukerIKontekst, oppdaterAktivBruker } from "../ducks/api";
-import { lagAktivitetsplanUrl } from "./url-utils";
+import { lagAktivitetsplanUrl, parseParametre } from "./url-utils";
 import mockedBrukerFnr from "../mocks/bruker-fnr";
 import mockedVeilederEnhetId from "../mocks/veileder-enhet-id";
 
@@ -109,11 +108,11 @@ export function erIFSS(): boolean {
 }
 
 export function hentUrlBrukerFnr(): string | null {
-  return parse(window.location.search).fnr;
+  return parseParametre(window.location.search).fnr;
 }
 
 export function hentUrlEnhetId(): string | null {
-  return parse(window.location.search).enhetId;
+  return parseParametre(window.location.search).enhetId;
 }
 
 export function hentBrukerFnr(): string | null {

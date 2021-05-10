@@ -1,5 +1,6 @@
 import { AKTIVITETSPLAN_URL } from "./konstanter";
 import { hentBrukerFnr, hentVeilederEnhetId } from "./fss-utils";
+import { parse } from "query-string";
 
 const url = window && window.location && window.location.href ? window.location.href : "";
 
@@ -13,6 +14,10 @@ export const lagDetaljeVisningUrl = () => {
 
 export const erProduksjon = () => {
   return url.indexOf("arbeidssokerregistrering.nav.no") > -1;
+};
+
+export const parseParametre = (search: string): Record<string, string> => {
+  return parse(search);
 };
 
 export const erNAVMiljo = (miljo: string) =>
