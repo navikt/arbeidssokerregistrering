@@ -4,7 +4,6 @@ import { AppState } from "../../reducer";
 import { uniLogger } from "../../metrikker/uni-logger";
 import Melding from "./melding";
 import "./info-for-ikke-arbeidssoker-uten-oppfolging.less";
-import { antallDagerTilMaksdato } from "../../utils/antall-dager-til-maksdato";
 
 interface StateProps {
   state: AppState;
@@ -20,9 +19,6 @@ class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> 
     const underOppfolging = this.props.state.registreringStatus.data.underOppfolging ? "ja" : "nei";
     const rettighetsgruppe = this.props.state.registreringStatus.data.rettighetsgruppe;
 
-    const maksdato = this.props.state.registreringStatus.data.maksDato;
-    const dagerTilMaksdato = maksdato ? antallDagerTilMaksdato(new Date(), new Date(maksdato)).toString() : "null";
-
     uniLogger("arbeidssokerregistrering.visning", {
       viser: "Viser info for ikke arbeidssoker uten oppfolging",
       formidlingsgruppe,
@@ -30,7 +26,6 @@ class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> 
       geografiskTilknytning,
       underOppfolging,
       rettighetsgruppe,
-      antallDagerTilMaksdato: dagerTilMaksdato,
     });
     return (
       <Melding
@@ -38,7 +33,6 @@ class InfoForIkkeArbeidssokerUtenOppfolging extends React.Component<StateProps> 
         servicegruppe={servicegruppe || "null"}
         geografiskTilknytning={geografiskTilknytning || "null"}
         underOppfolging={underOppfolging}
-        dagerTilMaksdato={dagerTilMaksdato}
       />
     );
   }

@@ -10,7 +10,6 @@ interface BaseProps {
   servicegruppe: string;
   geografiskTilknytning: string;
   underOppfolging: string;
-  dagerTilMaksdato: string;
 }
 
 interface OptionState {
@@ -58,7 +57,7 @@ class Melding extends React.Component<BaseProps, OptionState> {
   }
 
   render() {
-    const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging, dagerTilMaksdato } = this.props;
+    const { formidlingsgruppe, servicegruppe, geografiskTilknytning, underOppfolging } = this.props;
 
     const handleClickLog = (event) => {
       const id = event.target.id;
@@ -70,7 +69,6 @@ class Melding extends React.Component<BaseProps, OptionState> {
         servicegruppe,
         geografiskTilknytning,
         underOppfolging,
-        antallDagerTilMaksdato: dagerTilMaksdato,
         numberOfChoices,
         choices,
       });

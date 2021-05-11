@@ -48,7 +48,6 @@ export interface State {
 export interface Data {
   underOppfolging?: boolean;
   jobbetSeksAvTolvSisteManeder?: boolean;
-  maksDato?: string;
   registreringType?: RegistreringType;
   erSykmeldtMedArbeidsgiver?: boolean;
   servicegruppe?: ServicegruppeOrNull;
