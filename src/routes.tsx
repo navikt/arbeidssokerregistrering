@@ -10,7 +10,6 @@ import {
   DITT_NAV_URL,
   DU_ER_NA_REGISTRERT_PATH,
   FULLFOR_PATH,
-  IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH,
   INFOSIDE_PATH,
   INNGANGSSPORSMAL_PATH,
   OPPSUMMERING_PATH,
@@ -38,7 +37,6 @@ import {
   RegistreringType,
   selectRegistreringstatus,
 } from "./ducks/registreringstatus";
-import InfoForIkkeArbeidssokerUtenOppfolging from "./sider/info-for-ikke-arbeidssoker-uten-oppfolging/info-for-ikke-arbeidssoker-uten-oppfolging";
 import RedirectAll from "./komponenter/redirect-all";
 import { selectReaktiveringStatus } from "./ducks/reaktiverbruker";
 import { STATUS } from "./ducks/api-utils";
@@ -128,13 +126,6 @@ class Routes extends React.Component<AllProps> {
       } else {
         return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert} />;
       }
-    } else if (registreringType === RegistreringType.SPERRET) {
-      return (
-        <RedirectAll
-          to={IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH}
-          component={InfoForIkkeArbeidssokerUtenOppfolging}
-        />
-      );
     } else if (registreringType === RegistreringType.REAKTIVERING && reaktivertStatus !== STATUS.OK) {
       if (erNede) {
         return <RedirectAll to={"/"} component={TjenesteOppdateres} />;

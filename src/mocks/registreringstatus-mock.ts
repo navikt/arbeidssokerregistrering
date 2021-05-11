@@ -6,7 +6,7 @@ export default {
   underOppfolging: false,
   jobbetSeksAvTolvSisteManeder: false,
   //registreringType: RegistreringType.ORDINAER_REGISTRERING,
-  registreringType: RegistreringType.SYKMELDT_REGISTRERING,
+  registreringType: RegistreringType.SPERRET,
   servicegruppe: Servicegruppe.IVURD,
   formidlingsgruppe: Formidlingsgruppe.IARBS,
   geografiskTilknytning: "0807",
