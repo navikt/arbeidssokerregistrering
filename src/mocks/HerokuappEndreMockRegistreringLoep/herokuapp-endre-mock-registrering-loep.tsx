@@ -213,8 +213,8 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
                 oppdaterRegistreringsType(RegistreringType.SYKMELDT_REGISTRERING);
               }}
               name="devToggleStatus"
-              label="Sykmeldt med arbeidsgiver 39 uker til 52 uker"
-              value="Sykmeldt med arbeidsgiver 39 uker til 52 uker"
+              label="Sykmeldt med arbeidsgiver"
+              value="Sykmeldt med arbeidsgiver"
               checked={registreringType === RegistreringType.SYKMELDT_REGISTRERING}
             />
             <RadioPanel
@@ -226,15 +226,7 @@ class HerokuappEndreMockRegistreringLoep extends React.Component<Props, OwnState
               value="Sykmeldt"
               checked={registreringType === RegistreringType.REAKTIVERING}
             />
-            <RadioPanel
-              onChange={() => {
-                oppdaterRegistreringsType(RegistreringType.SPERRET);
-              }}
-              name="devToggleStatus"
-              label="Sykmeldt med arbeidsgiver mindre enn 39 uker"
-              value="Sykmeldt med arbeidsgiver mindre enn 39 uker"
-              checked={registreringType === RegistreringType.SPERRET}
-            />
+
             <RadioPanel
               onChange={() => {
                 oppdaterRegistreringsType(RegistreringType.ALLEREDE_REGISTRERT);
