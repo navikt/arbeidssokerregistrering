@@ -40,40 +40,6 @@ jobs:
           echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
           docker build --tag ${IMAGE} .
           docker push ${IMAGE}
-  deploy-q0-fss:
-    name: Deploy to Q0 FSS
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy to Q0
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-fss
-          RESOURCE: nais/naiserator-fss.yaml
-          VARS: nais/vars-q0-fss.yaml
-  deploy-q0-sbs:
-    name: Deploy to Q0 SBS
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy to Q0
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: nais/naiserator-sbs.yaml
-          VARS: nais/vars-q0-sbs.yaml
   deploy-q1-fss:
     name: Deploy to Q1 FSS
     needs: test-build-and-push
@@ -110,7 +76,7 @@ jobs:
           VARS: nais/vars-q1-sbs.yaml
   deploy-prod-fss:
     name: Deploy to Prod FSS
-    needs: deploy-q0-fss
+    needs: deploy-q1-fss
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -128,7 +94,7 @@ jobs:
           DRY_RUN: false
   deploy-prod-sbs:
     name: Deploy to Prod SBS
-    needs: deploy-q0-sbs
+    needs: deploy-q1-sbs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
