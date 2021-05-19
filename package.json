@@ -31,7 +31,7 @@
   "dependencies": {
     "@alheimsins/virkedager": "1.2.5",
     "@craco/craco": "6.1.1",
-    "@navikt/fnrvalidator": "1.1.3",
+    "@navikt/fnrvalidator": "1.1.4",
     "@navikt/fo-session-timeout-modal": "1.1.1",
     "@sentry/browser": "6.3.4",
     "@sentry/react": "6.3.4",
