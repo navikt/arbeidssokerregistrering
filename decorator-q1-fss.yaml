@@ -5,7 +5,7 @@ contextPath: /
 
 proxy:
   - contextPath: "/internarbeidsflatedecorator"
-    baseUrl: "http://internarbeidsflatedecorator"
+    baseUrl: "https://internarbeidsflatedecorator-q1.dev.adeo.no"
     pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbvisittkortfs"
@@ -13,11 +13,11 @@ proxy:
     pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/modiacontextholder"
-    baseUrl: "http://modiacontextholder"
+    baseUrl: "https://modiacontextholder-q1.dev.adeo.no"
     pingRequestPath: "/modiacontextholder/internal/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbregistrering"
-    baseUrl: "http://veilarbregistrering"
+    baseUrl: "https://veilarbregistrering-q1.dev.adeo.no"
     validateOidcToken: false
   - contextPath: "/veilarboppfolging"
     baseUrl: "https://veilarboppfolging-q1.nais.preprod.local"
