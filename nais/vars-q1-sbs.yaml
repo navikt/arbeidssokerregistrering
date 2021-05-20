@@ -1,4 +1,4 @@
-namespace: q1
+namespace: paw
 app_environment_name: q1
 appres_cms_url: https://appres-q1.nav.no
 loginservice_url: https://loginservice-q.nav.no
