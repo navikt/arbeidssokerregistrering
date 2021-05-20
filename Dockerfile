@@ -13,5 +13,4 @@ ENV APPLICATION_NAME=arbeidssokerregistrering
 COPY --from=node-builder /source/build /app
 ADD decorator.yaml /decorator.yaml
 ADD decorator-q1-fss.yaml /decorator-q1-fss.yaml
-ADD decorator-q0-fss.yaml /decorator-q0-fss.yaml
 ADD decorator-prod-fss.yaml /decorator-prod-fss.yaml
