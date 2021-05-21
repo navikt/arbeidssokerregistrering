@@ -12,5 +12,5 @@ FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator
 ENV APPLICATION_NAME=arbeidssokerregistrering
 COPY --from=node-builder /source/build /app
 ADD decorator.yaml /decorator.yaml
-ADD decorator-q1-fss.yaml /decorator-q1-fss.yaml
+ADD decorator-dev-fss.yaml /decorator-dev-fss.yaml
 ADD decorator-prod-fss.yaml /decorator-prod-fss.yaml
