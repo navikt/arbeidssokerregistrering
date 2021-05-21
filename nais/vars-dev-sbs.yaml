@@ -8,7 +8,7 @@ veientilarbeid_url: https://veientilarbeid-q1.nav.no
 sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan-q1.dev-sbs.nais.io
 pam_janzz_url: https://arbeidsplassen.dev.nav.no
-veilarbproxy_url: http://veilarbproxy
+veilarbproxy_url: https://veilarbproxy-q1.dev.nav.no
 ingresses:
   - https://arbeidssokerregistrering.dev.nav.no
   - https://arbeidssokerregistrering-q1.nais.oera-q.local # Kun for tilgang til /internal/selftest
