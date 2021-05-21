@@ -28,6 +28,8 @@ spec:
     value: {{ aktivitetsplan_url }}
   - name: PAM_JANZZ_URL
     value: {{ pam_janzz_url }}
+  - name: VEILARBPROXY_URL
+    value: {{ veilarbproxy_url }}
   envFrom:
     - configmap: loginservice-idporten
   image: {{ image }}

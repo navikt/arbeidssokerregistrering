@@ -4,9 +4,9 @@ auth:
 
 proxy:
   - contextPath: "/veilarbregistrering"
-    baseUrl: "http://veilarbproxy"
+    baseUrl: {{ VEILARBPROXY_URL }}
   - contextPath: "/veilarbperson"
-    baseUrl: "http://veilarbproxy"
+    baseUrl: {{ VEILARBPROXY_URL }}
   - contextPath: "/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
     pingRequestPath: "/pam-janzz/swagger-ui/"
