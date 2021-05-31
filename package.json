@@ -36,7 +36,7 @@
     "@sentry/browser": "6.4.1",
     "@sentry/react": "6.4.1",
     "@typescript-eslint/eslint-plugin": "4.22.1",
-    "@typescript-eslint/parser": "4.22.1",
+    "@typescript-eslint/parser": "4.23.0",
     "amplitude-js": "7.4.4",
     "babel-polyfill": "6.26.0",
     "classnames": "2.3.1",
