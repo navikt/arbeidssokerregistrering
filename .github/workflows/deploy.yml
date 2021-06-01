@@ -110,6 +110,42 @@ jobs:
           RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-p-sbs.yaml
           DRY_RUN: false
+  deploy-prod-fss-paw:
+    name: Deploy to Prod FSS
+    needs: deploy-dev-fss
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Lag tag for image
+        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+      - name: Lag full image referanse
+        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+      - name: Deploy to P
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-fss
+          RESOURCE: nais/naiserator-fss.yaml
+          VARS: nais/vars-p-fss-paw.yaml
+          DRY_RUN: false
+  deploy-prod-sbs-paw:
+      name: Deploy to Prod SBS
+      needs: deploy-dev-sbs
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: Lag tag for image
+          run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+        - name: Lag full image referanse
+          run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+        - name: Deploy to P
+          uses: nais/deploy/actions/deploy@master
+          env:
+            APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+            CLUSTER: prod-sbs
+            RESOURCE: nais/naiserator-sbs.yaml
+            VARS: nais/vars-p-sbs-paw.yaml
+            DRY_RUN: false
   release:
     name: Tag and release
     needs: [deploy-prod-fss, deploy-prod-sbs]
