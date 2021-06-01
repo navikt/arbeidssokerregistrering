@@ -24,10 +24,12 @@ spec:
   - name: PAM_JANZZ_URL
     value: {{ pam_janzz_url }}
   image: {{ image }}
+  {{#if ingresses}}
   ingresses:
   {{#each ingresses as |url|}}
      - {{url}}
   {{/each}}
+  {{/if}}
   liveness:
     path: /internal/isAlive
     port: 8080
