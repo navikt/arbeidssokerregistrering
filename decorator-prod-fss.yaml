@@ -5,7 +5,7 @@ contextPath: /
 
 proxy:
   - contextPath: "/internarbeidsflatedecorator"
-    baseUrl: "http://internarbeidsflatedecorator"
+    baseUrl: "https://internarbeidsflatedecorator.nais.adeo.no"
     pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbvisittkortfs"
@@ -13,11 +13,11 @@ proxy:
     pingRequestPath: "/isAlive"
     validateOidcToken: false
   - contextPath: "/modiacontextholder"
-    baseUrl: "http://modiacontextholder"
+    baseUrl: "https://modiacontextholder.nais.adeo.no"
     pingRequestPath: "/modiacontextholder/internal/isAlive"
     validateOidcToken: false
   - contextPath: "/veilarbregistrering"
-    baseUrl: "http://veilarbregistrering"
+    baseUrl: "https://veilarbregistrering.nais.adeo.no"
     validateOidcToken: false
   - contextPath: "/veilarboppfolging"
     baseUrl: "https://veilarboppfolging.nais.adeo.no"
