@@ -15,6 +15,7 @@ import { AppState } from "../../../reducer";
 import { situasjonerDerViVetAtBrukerenHarHattJobb } from "./sporsmal-siste-stilling/siste-stilling-utils";
 import { DinSituasjonSvar, Svar } from "../../../ducks/svar-utils";
 import { SporsmalProps } from "../../../komponenter/skjema/sporsmal-utils";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 interface DispatchProps {
   velgStilling: (stilling: Stilling) => void;
@@ -58,12 +59,13 @@ class SporsmalDinSituasjon extends React.Component<Props> {
 
     return (
       <form className="spm-skjema">
-        <fieldset className="skjema__fieldset">
-          <legend className="skjema__legend spm-hode">
+        <SkjemaGruppe
+          legend={
             <Innholdstittel tag="h1" className="spm-tittel">
               {getIntlTekstForSporsmal(sporsmalId, "tittel", intl, this.props.registeringType)}
             </Innholdstittel>
-          </legend>
+          }
+        >
           <div className="spm-body">
             <Alternativ svar={DinSituasjonSvar.MISTET_JOBBEN} {...fellesProps} />
             <Alternativ svar={DinSituasjonSvar.HAR_SAGT_OPP} {...fellesProps} />
@@ -76,7 +78,7 @@ class SporsmalDinSituasjon extends React.Component<Props> {
             <Alternativ svar={DinSituasjonSvar.AKKURAT_FULLFORT_UTDANNING} {...fellesProps} />
             <Alternativ svar={DinSituasjonSvar.VIL_FORTSETTE_I_JOBB} {...fellesProps} />
           </div>
-        </fieldset>
+        </SkjemaGruppe>
       </form>
     );
   }

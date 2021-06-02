@@ -21,6 +21,7 @@ import NavAlertStripe from "nav-frontend-alertstriper";
 import { RegistreringType } from "../../ducks/registreringstatus";
 import "./inngangssporsmal.less";
 import { hentAlternativeneForInngangsporsmal, hentInngangsLoep } from "./inngangssporsmal-svar-alternativene";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 interface OwnState {
   visAdvarsel: boolean;
@@ -105,15 +106,16 @@ class Inngangssporsmal extends React.Component<AllProps, OwnState> {
     return (
       <ResponsivSide>
         <form className="spm-skjema">
-          <fieldset className="skjema__fieldset">
-            <legend className="skjema__legend spm-hode">
+          <SkjemaGruppe
+            legend={
               <Innholdstittel tag="h1" className="spm-tittel">
                 {getTekst("tittel")}
               </Innholdstittel>
-            </legend>
+            }
+          >
             <div className="spm-body">{alternativSvarene}</div>
             {advarselElement}
-          </fieldset>
+          </SkjemaGruppe>
         </form>
         <LenkeNeste onClick={this.handleNesteBtnClick} href={this.hentNesteUrl()} erAktiv={kanGaaTilNesteTmp} />
         <LenkeTilbake onClick={this.handleTilbakeBtnClick} />

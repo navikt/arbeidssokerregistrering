@@ -24,6 +24,7 @@ import { SporsmalId, State as SvarState } from "../../../../ducks/svar";
 import { SporsmalProps } from "../../../../komponenter/skjema/sporsmal-utils";
 import { RegistreringType, selectRegistreringstatus } from "../../../../ducks/registreringstatus";
 import InaktivSokeInput from "./inaktiv-soke-input";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 interface SisteStillingState {
   erInputAktiv: boolean;
@@ -146,17 +147,20 @@ class SisteStilling extends React.Component<Props, SisteStillingState> {
     return (
       <>
         <form className="spm-skjema">
-          <fieldset className="skjema__fieldset">
-            <legend className="skjema__legend spm-hode">
-              <Innholdstittel tag="h1" className="spm-tittel">
-                {getTekst("tittel")}
-              </Innholdstittel>
-              <Normaltekst className="spm-beskrivelse">
-                <span dangerouslySetInnerHTML={{ __html: intl.messages["siste-arbeidsforhold.ingress"] }} />
-              </Normaltekst>
-            </legend>
+          <SkjemaGruppe
+            legend={
+              <>
+                <Innholdstittel tag="h1" className="spm-tittel">
+                  {getTekst("tittel")}
+                </Innholdstittel>
+                <Normaltekst className="spm-beskrivelse">
+                  <span dangerouslySetInnerHTML={{ __html: intl.messages["siste-arbeidsforhold.ingress"] }} />
+                </Normaltekst>
+              </>
+            }
+          >
             <div className="spm-body">{alternativer}</div>
-          </fieldset>
+          </SkjemaGruppe>
         </form>
         <div className="spm-valg">
           {sokeInput}

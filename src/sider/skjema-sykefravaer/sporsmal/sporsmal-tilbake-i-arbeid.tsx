@@ -5,6 +5,7 @@ import { Innholdstittel } from "nav-frontend-typografi";
 import { Svar, TilbakeIArbeidSvar } from "../../../ducks/svar-utils";
 import { SporsmalProps } from "../../../komponenter/skjema/sporsmal-utils";
 import { injectIntl, InjectedIntlProps } from "react-intl";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 type Props = SporsmalProps & InjectedIntlProps;
 
@@ -21,19 +22,20 @@ function SporsmalTilbakeIArbeid(props: Props) {
 
   return (
     <form className="spm-skjema">
-      <fieldset className="skjema__fieldset">
-        <legend className="skjema__legend spm-hode">
+      <SkjemaGruppe
+        legend={
           <Innholdstittel tag="h1" className="spm-tittel blokk-xxxl">
             {getTekst("tittel")}
           </Innholdstittel>
-        </legend>
+        }
+      >
         <div className="spm-body">
           <Alternativ svar={TilbakeIArbeidSvar.JA_FULL_STILLING} {...fellesProps} />
           <Alternativ svar={TilbakeIArbeidSvar.JA_REDUSERT_STILLING} {...fellesProps} />
           <Alternativ svar={TilbakeIArbeidSvar.USIKKER} {...fellesProps} />
           <Alternativ svar={TilbakeIArbeidSvar.NEI} {...fellesProps} />
         </div>
-      </fieldset>
+      </SkjemaGruppe>
     </form>
   );
 }

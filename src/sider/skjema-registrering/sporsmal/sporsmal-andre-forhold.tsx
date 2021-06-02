@@ -6,6 +6,7 @@ import Ikon from "nav-frontend-ikoner-assets";
 import { AndreForholdSvar, Svar } from "../../../ducks/svar-utils";
 import { SporsmalProps } from "../../../komponenter/skjema/sporsmal-utils";
 import { injectIntl, InjectedIntlProps } from "react-intl";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 type Props = SporsmalProps & InjectedIntlProps;
 
@@ -24,16 +25,19 @@ function AndreForhold(props: Props) {
   return (
     <>
       <form className="spm-skjema">
-        <fieldset className="skjema__fieldset">
-          <legend className="skjema__legend spm-hode">
-            <h1 className="typo-innholdstittel spm-tittel" dangerouslySetInnerHTML={{ __html: getTekst("tittel") }} />
-            <Normaltekst className="spm-beskrivelse">{getTekst("ingress")}</Normaltekst>
-          </legend>
+        <SkjemaGruppe
+          legend={
+            <>
+              <h1 className="typo-innholdstittel spm-tittel" dangerouslySetInnerHTML={{ __html: getTekst("tittel") }} />
+              <Normaltekst className="spm-beskrivelse">{getTekst("ingress")}</Normaltekst>
+            </>
+          }
+        >
           <div className="spm-body">
             <Alternativ svar={AndreForholdSvar.JA} {...fellesProps} />
             <Alternativ svar={AndreForholdSvar.NEI} {...fellesProps} />
           </div>
-        </fieldset>
+        </SkjemaGruppe>
       </form>
       <div className="spm-info">
         <span className="spm-info__ikon" aria-label="info">
