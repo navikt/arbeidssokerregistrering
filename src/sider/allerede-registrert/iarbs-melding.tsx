@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Alertstripe from "nav-frontend-alertstriper";
 import { Column, Row } from "nav-frontend-grid";
 import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
-import { Fieldset, Radio } from "nav-frontend-skjema";
+import { SkjemaGruppe, Radio } from "nav-frontend-skjema";
 import { uniLogger } from "../../metrikker/uni-logger";
 import { AppState } from "../../reducer";
 
@@ -70,7 +70,7 @@ const Melding = ({ state }: Props) => {
             </Alertstripe>
             <Systemtittel>Hvorfor vil du registrere deg?</Systemtittel>
             <div className="blokk-s" id="kontaktMegMeldingWrapper">
-              <Fieldset legend="">
+              <SkjemaGruppe legend=" ">
                 <Radio
                   label={"Jeg vil søke dagpenger"}
                   name="kontaktmeg"
@@ -156,7 +156,7 @@ const Melding = ({ state }: Props) => {
                   </a>{" "}
                   eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre.
                 </Normaltekst>
-              </Fieldset>
+              </SkjemaGruppe>
             </div>
           </div>
         </div>
