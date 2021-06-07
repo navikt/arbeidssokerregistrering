@@ -6,6 +6,7 @@ import Ikon from "nav-frontend-ikoner-assets";
 import { HelseHinderSvar, Svar } from "../../../ducks/svar-utils";
 import { SporsmalProps } from "../../../komponenter/skjema/sporsmal-utils";
 import { injectIntl, InjectedIntlProps } from "react-intl";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 type Props = SporsmalProps & InjectedIntlProps;
 
@@ -22,17 +23,18 @@ function HelseHinder(props: Props) {
   return (
     <>
       <form className="spm-skjema">
-        <fieldset className="skjema__fieldset">
-          <legend className="skjema__legend spm-hode">
+        <SkjemaGruppe
+          legend={
             <Innholdstittel tag="h1" className="spm-tittel">
               {getTekst("tittel")}
             </Innholdstittel>
-          </legend>
+          }
+        >
           <div className="spm-body">
             <Alternativ svar={HelseHinderSvar.JA} {...fellesProps} />
             <Alternativ svar={HelseHinderSvar.NEI} {...fellesProps} />
           </div>
-        </fieldset>
+        </SkjemaGruppe>
       </form>
       <div className="spm-info">
         <span className="spm-info__ikon" aria-label="info">

@@ -44,6 +44,15 @@
   .nav-veileder + div {
     width: 100%;
   }
+
+
+  &.modal {
+    background: transparent;
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+  }
 }
 
 @media (max-width: @screen-sm-max) {

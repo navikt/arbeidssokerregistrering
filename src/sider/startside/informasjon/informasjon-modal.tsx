@@ -17,7 +17,6 @@ class InformasjonModal extends React.Component<Props> {
     return (
       <ModalWrapper
         isOpen={this.props.isOpen}
-        className="informasjon-modal"
         overlayClassName="aktivitet-modal__overlay"
         portalClassName="aktivitetsplanfs aktivitet-modal-portal"
         shouldCloseOnOverlayClick={false}

@@ -5,6 +5,7 @@ import { Innholdstittel } from "nav-frontend-typografi";
 import { Svar, UtdanningSvar } from "../../../ducks/svar-utils";
 import { SporsmalProps } from "../../../komponenter/skjema/sporsmal-utils";
 import ReactIntl, { injectIntl } from "react-intl";
+import { SkjemaGruppe } from "nav-frontend-skjema";
 
 type Props = SporsmalProps & ReactIntl.InjectedIntlProps;
 
@@ -19,12 +20,13 @@ function Utdanningsporsmal(props: Props) {
 
   return (
     <form className="spm-skjema">
-      <fieldset className="skjema__fieldset">
-        <legend className="skjema__legend spm-hode">
+      <SkjemaGruppe
+        legend={
           <Innholdstittel tag="h1" className="spm-tittel">
             {getTekst("tittel")}
           </Innholdstittel>
-        </legend>
+        }
+      >
         <div className="spm-body">
           <Alternativ svar={UtdanningSvar.INGEN_UTDANNING} {...fellesProps} />
           <Alternativ svar={UtdanningSvar.GRUNNSKOLE} {...fellesProps} />
@@ -33,7 +35,7 @@ function Utdanningsporsmal(props: Props) {
           <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_1_TIL_4} {...fellesProps} />
           <Alternativ svar={UtdanningSvar.HOYERE_UTDANNING_5_ELLER_MER} {...fellesProps} />
         </div>
-      </fieldset>
+      </SkjemaGruppe>
     </form>
   );
 }

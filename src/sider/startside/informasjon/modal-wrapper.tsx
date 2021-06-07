@@ -5,8 +5,6 @@ import Lukkeknapp from "./lukkeknapp";
 import "./react-modal.less";
 import "./modal-wrapper-style.less";
 
-const cls = (className: any) => classNames("modal", className);
-
 interface Props {
   closeButton?: boolean;
   isOpen: boolean;
@@ -58,7 +56,7 @@ class ModalWrapper extends React.Component<Props> {
     return (
       <Modal
         {...props}
-        className={cls(className)}
+        className={classNames("informasjon-modal", className)}
         onRequestClose={this.onRequestClose}
         overlayClassName="informasjon-modal__overlay"
         shouldCloseOnOverlayClick={true}
