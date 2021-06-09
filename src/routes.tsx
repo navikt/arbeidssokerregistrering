@@ -122,7 +122,8 @@ class Routes extends React.Component<AllProps> {
           rettighetsgruppe,
           underOppfolging,
         });
-        window.location.href = DITT_NAV_URL;
+        const redirectUrl = `${DITT_NAV_URL}?goTo=registrering`;
+        window.location.href = redirectUrl;
       } else {
         return <RedirectAll to={ALLEREDE_REGISTRERT_PATH} component={AlleredeRegistrert} />;
       }
