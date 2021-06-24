@@ -2,7 +2,12 @@ import * as React from "react";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
 import { uniLogger } from "../../../metrikker/uni-logger";
-import { HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_URL, DP_SOK_URL } from "../../../utils/konstanter";
+import {
+  HEROKU_VEIENTILARBEID_URL,
+  VEIENTILARBEID_URL,
+  DP_SOK_URL,
+  VTA_REGISTRERING_FULLORT,
+} from "../../../utils/konstanter";
 
 import handinfoSvg from "./clipboard.svg";
 import "./registrert-aksjonspanel.less";
@@ -10,11 +15,21 @@ import "./registrert-aksjonspanel.less";
 interface RegistrertAksjonspanelProps {
   hentTekstId: (id: string) => string;
   erSykmeldt: boolean;
+  ingen_kvittering: boolean;
 }
 
 class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps> {
   render() {
-    const { hentTekstId, erSykmeldt } = this.props;
+    const { hentTekstId, erSykmeldt, ingen_kvittering } = this.props;
+
+    if (!erSykmeldt && ingen_kvittering) {
+      uniLogger("registrering.aktivitet", {
+        aktivitet: "Redirecter til veientilarbeid",
+      });
+      window.location.href = VTA_REGISTRERING_FULLORT;
+      return null;
+    }
+
     let veienTilArbeidUrl;
     let veienTilArbeidMedVisInfoUrl;
     let knappetekstJa;
