@@ -2,7 +2,7 @@ import moment from "moment";
 
 
 Cypress.Commands.add('configure', option => {
-    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid`
+    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid,arbeidssokerregistrering.ingen_kvittering`
     switch (option) {
         case 'registrering':
             cy.on('window:before:load', win => {
