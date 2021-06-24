@@ -33,6 +33,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
     const registreringType = this.props.state.registreringStatus.data.registreringType;
     const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
     const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
+    const ingen_kvittering = this.props.state.featureToggles.data["arbeidssokerregistrering.ingen_kvittering"];
     const hentTekstId = this.hentTekstId(erSykmeldt);
     const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : hentTekstId("innholdstittel");
     uniLogger("arbeidssokerregistrering.visning", {
@@ -52,7 +53,11 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         ) : erReaktivert ? (
           <ReaktivertAksjonspanel />
         ) : (
-          <RegistrertAksjonspanel hentTekstId={this.hentTekstId(erSykmeldt)} erSykmeldt={erSykmeldt} />
+          <RegistrertAksjonspanel
+            hentTekstId={this.hentTekstId(erSykmeldt)}
+            erSykmeldt={erSykmeldt}
+            ingen_kvittering={ingen_kvittering}
+          />
         )}
       </section>
     );
