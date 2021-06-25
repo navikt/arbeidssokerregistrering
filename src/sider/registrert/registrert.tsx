@@ -31,7 +31,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
 
   render() {
     const registreringType = this.props.state.registreringStatus.data.registreringType;
-    const geografisk_tilknytning = this.props.state.registreringStatus.data.geografiskTilknytning;
+    const geografisk_tilknytning = this.props.state.registreringStatus.data.geografiskTilknytning || "INGEN VERDI";
     const erSykmeldt = registreringType === RegistreringType.SYKMELDT_REGISTRERING;
     const erReaktivert = registreringType === RegistreringType.REAKTIVERING;
     const ingen_kvittering = this.props.state.featureToggles.data["arbeidssokerregistrering.ingen_kvittering"];
