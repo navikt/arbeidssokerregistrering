@@ -18,6 +18,29 @@ interface RegistrertAksjonspanelProps {
   ingen_kvittering: boolean;
 }
 
+const eksperimentkontorer = [
+  "030112",
+  "030104",
+  "030105",
+  "030101",
+  "030108",
+  "030115",
+  "4202",
+  "3803",
+  "110302",
+  "110303",
+  "030114",
+  "3411",
+  "3422",
+  "3414",
+  "3415",
+  "3437",
+  "3446",
+  "3054",
+  "3419",
+  "3403",
+];
+
 class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps> {
   render() {
     const { hentTekstId, erSykmeldt, ingen_kvittering } = this.props;
