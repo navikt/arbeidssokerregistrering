@@ -1,8 +1,11 @@
 import moment from "moment";
+import {alleFeatureToggles} from "../../src/ducks/feature-toggles";
+import {FEATURE_URL} from "../../src/ducks/api";
 
 
 Cypress.Commands.add('configure', option => {
-    const featureToggles = `/api/feature/?feature=arbeidssokerregistrering.nedetid,arbeidssokerregistrering.ingen_kvittering`
+    const parameters = alleFeatureToggles.map((element) => "feature=" + element).join("&");
+    const featureToggles = `${FEATURE_URL}/?${parameters}`
     switch (option) {
         case 'registrering':
             cy.on('window:before:load', win => {
