@@ -16,6 +16,7 @@ interface RegistrertAksjonspanelProps {
   hentTekstId: (id: string) => string;
   erSykmeldt: boolean;
   ingen_kvittering: boolean;
+  geografisk_tilknytning: string;
 }
 
 const eksperimentkontorer = [
@@ -43,9 +44,10 @@ const eksperimentkontorer = [
 
 class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps> {
   render() {
-    const { hentTekstId, erSykmeldt, ingen_kvittering } = this.props;
+    const { hentTekstId, erSykmeldt, ingen_kvittering, geografisk_tilknytning } = this.props;
+    const erEksperimentkontor = eksperimentkontorer.includes(geografisk_tilknytning);
 
-    if (!erSykmeldt && ingen_kvittering) {
+    if (!erSykmeldt && ingen_kvittering && erEksperimentkontor) {
       uniLogger("registrering.aktivitet", {
         aktivitet: "Redirecter til veientilarbeid",
       });
