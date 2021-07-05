@@ -35,7 +35,7 @@
     "@navikt/fo-session-timeout-modal": "1.1.1",
     "@sentry/browser": "6.5.1",
     "@sentry/react": "6.5.1",
-    "@typescript-eslint/eslint-plugin": "4.26.0",
+    "@typescript-eslint/eslint-plugin": "4.27.0",
     "@typescript-eslint/parser": "4.26.0",
     "amplitude-js": "7.4.4",
     "babel-polyfill": "6.26.0",
