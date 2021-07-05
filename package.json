@@ -33,7 +33,7 @@
     "@craco/craco": "6.1.2",
     "@navikt/fnrvalidator": "1.1.4",
     "@navikt/fo-session-timeout-modal": "1.1.1",
-    "@sentry/browser": "6.5.1",
+    "@sentry/browser": "6.7.0",
     "@sentry/react": "6.5.1",
     "@typescript-eslint/eslint-plugin": "4.26.0",
     "@typescript-eslint/parser": "4.26.0",
