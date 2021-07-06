@@ -9,5 +9,7 @@ sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
 aktivitetsplan_url: https://aktivitetsplan-q1.dev-sbs.nais.io
 pam_janzz_url: https://arbeidsplassen.dev.nav.no
 veilarbproxy_url: http://pto-proxy.pto.svc.cluster.local/proxy
+ingresses:
+  - https://arbeidssokerregistrering.dev.nav.no
 externalHosts:
   - appres-q1.nav.no
