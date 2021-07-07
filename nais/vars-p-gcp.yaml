@@ -1,0 +1,13 @@
+namespace: paw
+app_environment_name: paw
+appres_cms_url: https://appres.nav.no
+loginservice_url: https://loginservice.nav.no
+arbeidssokerregistrering_url: https://arbeidssokerregistrering.nav.no
+dittnav_link_url: https://tjenester.nav.no/dittnav/
+veientilarbeid_url: https://veientilarbeid.nav.no
+sykefravaer_url: https://tjenester.nav.no/sykefravaer
+aktivitetsplan_url: https://aktivitetsplan.nav.no
+pam_janzz_url: https://arbeidsplassen.nav.no
+veilarbproxy_url: http://pto-proxy.pto.svc.cluster.local/proxy
+externalHosts:
+  - appres.nav.no

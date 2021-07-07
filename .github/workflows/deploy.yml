@@ -92,6 +92,24 @@ jobs:
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-dev-gcp.yaml
 
+  deploy-prod-gcp:
+      name: Deploy to prod-gcp
+      needs: deploy-dev-gcp
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: Lag tag for image
+          run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+        - name: Lag full image referanse
+          run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+        - name: Deploy with nais
+          uses: nais/deploy/actions/deploy@master
+          env:
+            APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+            CLUSTER: prod-gcp
+            RESOURCE: nais/naiserator-gcp.yaml
+            VARS: nais/vars-p-gcp.yaml
+
   deploy-prod-fss-paw:
     name: Deploy to Prod FSS
     needs: deploy-dev-fss
