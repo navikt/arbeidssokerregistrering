@@ -30,6 +30,8 @@ spec:
     value: {{ pam_janzz_url }}
   - name: VEILARBPROXY_URL
     value: {{ veilarbproxy_url }}
+  - name: DISABLE_SENSU_METRICS
+    value: 'true'
   envFrom:
     - configmap: loginservice-idporten
   image: {{ image }}
