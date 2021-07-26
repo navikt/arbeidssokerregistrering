@@ -1,5 +1,4 @@
 import * as React from "react";
-import "moment/locale/nb";
 import { Provider } from "react-redux";
 import IntlProvider from "./Intl-provider";
 import { getStore } from "./store";
