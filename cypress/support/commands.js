@@ -1,4 +1,3 @@
-import moment from "moment";
 import {alleFeatureToggles} from "../../src/ducks/feature-toggles";
 import {FEATURE_URL} from "../../src/ducks/api";
 
@@ -52,12 +51,7 @@ Cypress.Commands.add('configure', option => {
             cy.route('GET', '/pam-janzz/rest/typeahead/yrke-med-styrk08?q=Klovn', 'fixture:tidligere-yrke');
             cy.route('POST', '/veilarbregistrering/api/startregistrersykmeldt', {})
                 .as('startregistrersykemeldt');
-            cy.fixture('startregistrering/registrering-sykefravaer')
-                .then(fixture => {
-                    // Setter dato tretten uker frem i tid
-                    fixture.maksDato = moment(new Date(), 'DD.MM.YYYY').add(13, 'week');
-                    cy.route('GET', '/veilarbregistrering/api/startregistrering', fixture);
-                });
+            cy.route('GET', '/veilarbregistrering/api/startregistrering',  'fixture:/startregistrering/registrering-sykefravaer')
             break;
         case 'reaktivering':
             cy.on('window:before:load', win => {
