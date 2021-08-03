@@ -1,46 +1,39 @@
 import { hentBrukerFnr, hentVeilederEnhetId } from "./fss-utils";
 import RetryInterval from "./retry-interval";
+import { ApplicationProps, EnhetDisplay, FnrDisplay } from "./decorator-domain";
+import { lagAktivitetsplanUrl } from "./url-utils";
 
-interface Config {
-  config: {
-    dataSources: {
-      veileder: string;
-      enheter: string;
-    };
+function createConfig(): ApplicationProps {
+  return {
+    appname: "Arbeidsrettet oppfølging",
     toggles: {
-      visEnhet: boolean;
-      visEnhetVelger: boolean;
-      visSokefelt: boolean;
-      visVeileder: boolean;
-    };
-    applicationName: string;
-    initiellEnhet: string | null;
-    fnr: string | null;
+      visVeileder: true,
+    },
+    fnr: {
+      display: FnrDisplay.SOKEFELT,
+      initialValue: hentBrukerFnr(),
+      ignoreWsEvents: true,
+      onChange(value: string | null) {
+        if (value !== null) {
+          window.location.href = lagAktivitetsplanUrl(value);
+        }
+      },
+    },
+    enhet: {
+      display: EnhetDisplay.ENHET,
+      initialValue: hentVeilederEnhetId(),
+      ignoreWsEvents: true,
+    },
+    useProxy: true,
   };
 }
 
-const config = (): Config => ({
-  config: {
-    applicationName: "Arbeidsrettet oppfølging",
-    dataSources: {
-      enheter: "/veilarbveileder/api/veileder/enheter",
-      veileder: "/veilarbveileder/api/veileder/me",
-    },
-    fnr: hentBrukerFnr(),
-    initiellEnhet: hentVeilederEnhetId(),
-    toggles: {
-      visEnhet: true,
-      visEnhetVelger: false,
-      visSokefelt: true,
-      visVeileder: true,
-    },
-  },
-});
-
 export const initToppmeny = (): void => {
   new RetryInterval((retryInterval: RetryInterval) => {
-    if ((window as any).renderDecoratorHead) {
-      (window as any).renderDecoratorHead(config());
+    const NAVSPA = (window as any).NAVSPA ?? {};
+    if (NAVSPA.internarbeidsflatefs) {
+      const element = document.getElementById("header");
+      NAVSPA.internarbeidsflatefs(element, createConfig());
       retryInterval.stop();
     } else {
       retryInterval.decreaseRetry();

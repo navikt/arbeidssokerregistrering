@@ -20,7 +20,8 @@
         }
 
         const devBaseUrl = 'https://internarbeidsflatedecorator-q1.dev.adeo.no';
-        const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
+        const dekoratorScriptUrl = '/internarbeidsflatedecorator/v2.1/static/js/head.v2.min.js';
+        const dekoratorCssUrl = '/internarbeidsflatedecorator/v2.1/static/css/main.css';
         const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
         const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
         const hostname = window.location.hostname;
@@ -28,9 +29,11 @@
         if (hostname.indexOf('adeo.no') !== -1 || hostname.indexOf('preprod.local') !== -1) {
             lastInnScript(dekoratorScriptUrl);
             lastInnScript(visittkortScriptUrl);
+            lastInnCss(dekoratorCssUrl);
             lastInnCss(visittkortCssUrl);
         } else if(hostname.indexOf('localhost') !== -1) {
             lastInnScript(devBaseUrl + dekoratorScriptUrl);
+            lastInnCss(devBaseUrl + dekoratorCssUrl);
         }
 
 	</script>

@@ -13,7 +13,6 @@ import {
   hasSessionExpired,
   initSessionKontekst,
   startSetExpirationOnUnloadListener,
-  startBrukerFnrEndretListener,
   clearSessionExpiration,
 } from "./utils/fss-utils";
 
@@ -25,7 +24,6 @@ class AppFss extends React.Component {
       clearSessionExpiration();
     }
 
-    startBrukerFnrEndretListener();
     startSetExpirationOnUnloadListener();
 
     initSessionKontekst();
