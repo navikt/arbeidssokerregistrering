@@ -92,12 +92,6 @@ export function initSessionKontekst(): void {
   oppdaterModiaKontekst();
 }
 
-export function startBrukerFnrEndretListener(): void {
-  document.addEventListener("dekorator-hode-personsok", (event: PersonsokEvent) => {
-    window.location.href = lagAktivitetsplanUrl(event.fodselsnummer);
-  });
-}
-
 export function erIFSS(): boolean {
   if (process.env.REACT_APP_MOCK_MANUELL_REGISTRERING) {
     return true;
