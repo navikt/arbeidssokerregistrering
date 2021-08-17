@@ -20,6 +20,10 @@ For å starte app i demo-mode
 
 - `npm run demo`
 
+For å starte app i veileder-demo-mode (arbeidssokerregistrering-fss)
+
+- `npm run start-manuell`
+
 ## Utvikling med backend
 
 - Clone og start (StartJetty normal) `dev-proxy` https://github.com/navikt/dev-proxy
