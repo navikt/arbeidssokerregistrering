@@ -136,6 +136,7 @@ if (MOCK_OPPRETT_KONTAKTMEG_OPPGAVE) {
 
 if (MOCK_BRUKER_KONTEKST) {
   mock.get(`${BRUKER_KONTEKST_URL}`, ResponseUtils.delayed(DELAY, brukerKontekst));
+  mock.delete(`${BRUKER_KONTEKST_URL}`, ResponseUtils.delayed(DELAY, {}));
 }
 
 if (MOCK_AUTENTISERINGS_INFO) {
