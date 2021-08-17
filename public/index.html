@@ -19,7 +19,7 @@
             document.head.appendChild(css);
         }
 
-        const q6BaseUrl = 'https://app-q6.adeo.no';
+        const devBaseUrl = 'https://app-q6.adeo.no';
         const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
         const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
         const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
@@ -30,7 +30,7 @@
             lastInnScript(visittkortScriptUrl);
             lastInnCss(visittkortCssUrl);
         } else if(hostname.indexOf('localhost') !== -1) {
-            lastInnScript(q6BaseUrl + dekoratorScriptUrl);
+            lastInnScript(devBaseUrl + dekoratorScriptUrl);
         }
 
 	</script>
