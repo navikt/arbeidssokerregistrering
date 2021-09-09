@@ -2,7 +2,7 @@ namespace: paw
 app_environment_name: paw
 appres_cms_url: https://appres-q1.nav.no
 loginservice_url: https://loginservice-q.nav.no
-arbeidssokerregistrering_url: https://arbeidssokerregistrering-q1.nav.no
+arbeidssokerregistrering_url: https://arbeidssokerregistrering.dev.nav.no
 dittnav_link_url: https://www.dev.nav.no/person/dittnav
 veientilarbeid_url: https://veientilarbeid-q1.nav.no
 sykefravaer_url: https://tjenester-q1.nav.no/sykefravaer
