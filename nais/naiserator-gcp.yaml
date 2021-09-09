@@ -6,6 +6,9 @@ metadata:
   namespace: {{ namespace }}
   labels:
     team: paw
+  annotations:
+    nginx.ingress.kubernetes.io/server-snippet: |
+      underscores_in_headers on;
 spec:
   env:
   - name: APP_ENVIRONMENT_NAME
