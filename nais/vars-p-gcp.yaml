@@ -11,3 +11,5 @@ pam_janzz_url: https://arbeidsplassen.nav.no
 veilarbproxy_url: http://pto-proxy.pto.svc.cluster.local/proxy
 externalHosts:
   - appres.nav.no
+ingresses:
+  - https://www.nav.no/arbeid/registrering
