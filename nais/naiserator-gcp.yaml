@@ -36,7 +36,7 @@ spec:
   - name: DISABLE_SENSU_METRICS
     value: 'true'
   - name: CONTEXT_PATH
-    value: {{ context_path }}
+    value: /arbeid/registrering
   envFrom:
     - configmap: loginservice-idporten
   image: {{ image }}
@@ -47,14 +47,14 @@ spec:
   {{/each}}
   {{/if}}
   liveness:
-    path: /internal/isAlive
+    path: /arbeid/registrering/internal/isAlive
     port: 8080
   port: 8080
   prometheus:
     enabled: true
-    path: /internal/metrics
+    path: /arbeid/registrering/internal/metrics
   readiness:
-    path: /internal/isReady
+    path: /arbeid/registrering/internal/isReady
     port: 8080
     initialDelay: 15
   replicas:
