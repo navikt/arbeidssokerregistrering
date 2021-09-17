@@ -14,7 +14,7 @@ function createConfig(): ApplicationProps {
       initialValue: hentBrukerFnr(),
       ignoreWsEvents: true,
       onChange(value: string | null) {
-        if (value !== null) {
+        if (value !== null && hentBrukerFnr() !== value) {
           window.location.href = lagAktivitetsplanUrl(value);
         }
       },
