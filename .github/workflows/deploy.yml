@@ -3,7 +3,7 @@ name: Build, push, and deploy
 on:
   push:
     branches:
-      - main
+      - gcp-tilpasninger
 
 env:
   IMAGE_BASE: ghcr.io/${{ github.repository }}/arbeidssokerregistrering
@@ -24,7 +24,6 @@ jobs:
           wait-on: http://localhost:3001
   test-build-and-push:
     name: Test, build and push
-    needs: cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -40,23 +39,7 @@ jobs:
           echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
           docker build --tag ${IMAGE} .
           docker push ${IMAGE}
-  deploy-dev-sbs:
-    name: Deploy to dev-sbs
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy with nais
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: nais/naiserator-sbs.yaml
-          VARS: nais/vars-dev-sbs.yaml
+
   deploy-dev-gcp:
       name: Deploy to dev-gcp
       needs: test-build-and-push
@@ -94,50 +77,3 @@ jobs:
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-p-gcp.yaml
             DRY_RUN: true
-
-  deploy-prod-sbs-paw:
-      name: Deploy to Prod SBS
-      needs: deploy-dev-sbs
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
-        - name: Lag tag for image
-          run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-        - name: Lag full image referanse
-          run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-        - name: Deploy to P
-          uses: nais/deploy/actions/deploy@master
-          env:
-            APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-            CLUSTER: prod-sbs
-            RESOURCE: nais/naiserator-sbs.yaml
-            VARS: nais/vars-p-sbs-paw.yaml
-            DRY_RUN: false
-  release:
-    name: Tag and release
-    needs: deploy-prod-sbs-paw
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-        name: Checkout
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Create release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: release/prod@${{ env.TAG }}
-          release_name: Release to prod
-          prerelease: false
-          
-  deploy-demo:
-    name: Deploy demo
-    needs: deploy-prod-sbs-paw
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-        name: Checkout
-      - run: now --prod --token ${VERCEL_TOKEN} --confirm
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
