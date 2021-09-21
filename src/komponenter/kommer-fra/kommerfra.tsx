@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { uniLogger } from "../../metrikker/uni-logger";
+import { amplitudeLogger } from "../../metrikker/amplitude-utils";
 
 const SESSION_STORAGE_KEY = "arbeidssokerregistrering-kommerfra";
 
@@ -12,7 +12,7 @@ function KommerFra() {
     const avsender = new URLSearchParams(window.location.search).get("kommerFra");
     if (avsender) {
       setItem(avsender);
-      uniLogger("registrering.aktivitet", {
+      amplitudeLogger("registrering.aktivitet", {
         aktivitet: "Lagrer kommerFra",
         kommerFra: avsender,
       });
