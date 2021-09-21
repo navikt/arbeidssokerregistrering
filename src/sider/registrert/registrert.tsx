@@ -11,6 +11,7 @@ import { MatchProps } from "../../utils/utils";
 import { RegistreringType } from "../../ducks/registreringstatus";
 import RegistrertAksjonspanel from "./aksjonspanel/registrert-aksjonspanel";
 import ReaktivertAksjonspanel from "./aksjonspanel/reaktivert-aksjonspanel";
+import DpSoknadAksjonspanel from "./aksjonspanel/dpsoknad-aksjonspanel";
 import RegistrertSendVidere from "./send-videre-fss/registrert-send-videre";
 import { uniLogger } from "../../metrikker/uni-logger";
 import { hentKommerFra } from "../../komponenter/kommer-fra/kommerfra";
@@ -54,7 +55,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         {erIFSS() ? (
           <RegistrertSendVidere />
         ) : kommerFra ? (
-          <div>{kommerFra}</div>
+          <DpSoknadAksjonspanel />
         ) : erReaktivert ? (
           <ReaktivertAksjonspanel />
         ) : (
