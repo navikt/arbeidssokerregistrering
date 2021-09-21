@@ -7,12 +7,17 @@ function setItem(value: string) {
   window.sessionStorage.setItem(SESSION_STORAGE_KEY, value);
 }
 
+export function hentKommerFra(): string | null {
+  const kommerFra = window.localStorage.getItem(SESSION_STORAGE_KEY);
+  return kommerFra;
+}
+
 function KommerFra() {
   useEffect(() => {
     const avsender = new URLSearchParams(window.location.search).get("kommerFra");
     if (avsender) {
       setItem(avsender);
-      amplitudeLogger("registrering.aktivitet", {
+      amplitudeLogger("arbeidssokerregistrering.aktivitet", {
         aktivitet: "Lagrer kommerFra",
         kommerFra: avsender,
       });
