@@ -8,7 +8,7 @@ function setItem(value: string) {
 }
 
 export function hentKommerFra(): string | null {
-  const kommerFra = window.localStorage.getItem(SESSION_STORAGE_KEY);
+  const kommerFra = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
   return kommerFra;
 }
 
