@@ -10,6 +10,7 @@ import KnappBase from "nav-frontend-knapper";
 import aktplanbilde from "./aktivitetsplan-ill.svg";
 import paragrafbilde from "./paragraf.svg";
 import infobilde from "./info.svg";
+import KommerFra from "../../komponenter/kommer-fra/kommerfra";
 import { MatchProps } from "../../utils/utils";
 import { SKJEMA_PATH } from "../../utils/konstanter";
 import InformasjonModal from "./informasjon/informasjon-modal";
@@ -149,6 +150,7 @@ class RegistreringArbeidssoker extends React.Component<RegistreringArbeidssokerP
 
     return (
       <div className="registrering-arbeidssoker">
+        <KommerFra />
         <div className="banner">
           <Sidetittel>
             <FormattedMessage id="registrering-arbeidssoker.tittel" />

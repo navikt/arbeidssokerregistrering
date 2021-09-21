@@ -11,8 +11,10 @@ import { MatchProps } from "../../utils/utils";
 import { RegistreringType } from "../../ducks/registreringstatus";
 import RegistrertAksjonspanel from "./aksjonspanel/registrert-aksjonspanel";
 import ReaktivertAksjonspanel from "./aksjonspanel/reaktivert-aksjonspanel";
+import DpSoknadAksjonspanel from "./aksjonspanel/dpsoknad-aksjonspanel";
 import RegistrertSendVidere from "./send-videre-fss/registrert-send-videre";
 import { uniLogger } from "../../metrikker/uni-logger";
+import { hentKommerFra } from "../../komponenter/kommer-fra/kommerfra";
 import "./registrert.less";
 import { erIFSS } from "../../utils/fss-utils";
 
@@ -37,6 +39,7 @@ class DuErNaRegistrert extends React.Component<AllProps> {
     const ingen_kvittering = this.props.state.featureToggles.data["arbeidssokerregistrering.ingen_kvittering"];
     const hentTekstId = this.hentTekstId(erSykmeldt);
     const tittelId = erIFSS() ? "duernaregistrert-manuell-innholdstittel" : hentTekstId("innholdstittel");
+    const kommerFra = hentKommerFra();
     uniLogger("arbeidssokerregistrering.visning", {
       viser: "Viser kvitteringssiden",
       registreringType: registreringType,
@@ -51,6 +54,8 @@ class DuErNaRegistrert extends React.Component<AllProps> {
         </div>
         {erIFSS() ? (
           <RegistrertSendVidere />
+        ) : kommerFra ? (
+          <DpSoknadAksjonspanel />
         ) : erReaktivert ? (
           <ReaktivertAksjonspanel />
         ) : (
