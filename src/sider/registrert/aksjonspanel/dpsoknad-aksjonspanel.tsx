@@ -59,7 +59,7 @@ function DpSoknadAksjonspanel() {
             href={veienTilArbeidMedVisInfoUrl}
             className="registrert__lenke knapp knapp--hoved blokk-m"
             onClick={() => {
-              amplitudeLogger("arbeidssokerregistrering.aktivitet", {
+              amplitudeLogger("registrering.aktivitet", {
                 aktivitet: "Går til dagpenger fra kommerFra",
                 sprak: "norsk",
               });
