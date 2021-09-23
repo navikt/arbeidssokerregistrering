@@ -41,8 +41,8 @@ function DpSoknadAksjonspanel() {
   };
 
   React.useEffect(() => {
-    amplitudeLogger("registrering.aktivitet", {
-      aktivitet: "Viser kvittering etter kommerFra",
+    amplitudeLogger("registrering.visning", {
+      viser: "Kvittering etter kommerFra",
     });
   }, []);
 
