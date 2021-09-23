@@ -14,3 +14,4 @@ ingresses:
   - https://arbeidssokerregistrering-q1.dev-sbs.nais.io
   - https://arbeidssokerregistrering-q1.nav.no
   - https://tjenester-q1.nav.no/arbeidssokerregistrering
+  - https://arbeidssokerregistrering.dev.nav.no
