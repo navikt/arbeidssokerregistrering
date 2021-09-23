@@ -3,7 +3,9 @@ ARG BASE_IMAGE_PREFIX=""
 FROM ${BASE_IMAGE_PREFIX}node as node-builder
 
 ADD / /source
-ENV CI=true
+ARG PUBLIC_URL
+ENV CI=true \
+    PUBLIC_URL=$PUBLIC_URL
 WORKDIR /source
 RUN npm ci && npm run build
 
