@@ -12,6 +12,10 @@ export function hentKommerFra(): string | null {
   return kommerFra;
 }
 
+export function slettKommerFra() {
+  window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
+}
+
 function KommerFra() {
   useEffect(() => {
     const avsender = new URLSearchParams(window.location.search).get("kommerFra");
