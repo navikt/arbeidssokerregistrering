@@ -49,7 +49,7 @@ function DpSoknadAksjonspanel() {
       <img src={handinfoSvg} alt="Hånd med info skilt" className="registrert__handinfo-ikon" />
       <div className="registrert__tekster">
         <Systemtittel tag="h2" className="blokk-xs">
-          Du kan fortsette på søknaden om dagpenger
+          Fortsett på søknaden om dagpenger
         </Systemtittel>
         <Normaltekst className="blokk">Du kan tidligst få dagpenger fra den dagen du sender søknaden.</Normaltekst>
         <Normaltekst className="blokk">Søknadsdialogen hjelper deg videre.</Normaltekst>
