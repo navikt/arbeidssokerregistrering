@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
 import { amplitudeLogger } from "../../../metrikker/amplitude-utils";
+import { slettKommerFra } from "../../../komponenter/kommer-fra/kommerfra";
 import { HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_URL, DP_SOK_URL } from "../../../utils/konstanter";
 
 import handinfoSvg from "./clipboard.svg";
@@ -31,6 +32,7 @@ function DpSoknadAksjonspanel() {
             aktivitet: "Går til dagpenger fra kommerFra",
             sprak: "engelsk",
           });
+          slettKommerFra();
         }}
       >
         <span>Continue to application</span>
@@ -63,6 +65,7 @@ function DpSoknadAksjonspanel() {
                 aktivitet: "Går til dagpenger fra kommerFra",
                 sprak: "norsk",
               });
+              slettKommerFra();
             }}
           >
             Fortsett på søknaden
