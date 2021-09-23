@@ -54,4 +54,6 @@ Sentry.init({
   ],
 });
 
-ReactDOM.render(erIFSS() ? <AppFss /> : <App />, document.getElementById("root") as HTMLElement);
+const basename = process.env.PUBLIC_URL;
+
+ReactDOM.render(erIFSS() ? <AppFss /> : <App basename={basename} />, document.getElementById("root") as HTMLElement);

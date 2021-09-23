@@ -7,12 +7,12 @@ import HentInitialData from "./komponenter/initialdata/hent-initial-data";
 import Routes from "./routes";
 import { TimeoutModal } from "@navikt/fo-session-timeout-modal";
 
-const App = () => (
+const App = ({ basename }: { basename: string }) => (
   <Provider store={getStore()}>
     <IntlProvider>
       <HentInitialData>
         <TimeoutModal />
-        <Router>
+        <Router basename={basename}>
           <Routes />
         </Router>
       </HentInitialData>
