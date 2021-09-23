@@ -37,6 +37,8 @@ spec:
     value: 'true'
   - name: CONTEXT_PATH
     value: /arbeid/registrering
+  - name: PUBLIC_URL
+    value: /arbeid/registrering
   envFrom:
     - configmap: loginservice-idporten
   image: {{ image }}
