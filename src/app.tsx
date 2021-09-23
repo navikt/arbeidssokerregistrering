@@ -7,21 +7,17 @@ import HentInitialData from "./komponenter/initialdata/hent-initial-data";
 import Routes from "./routes";
 import { TimeoutModal } from "@navikt/fo-session-timeout-modal";
 
-class App extends React.Component {
-  render() {
-    return (
-      <Provider store={getStore()}>
-        <IntlProvider>
-          <HentInitialData>
-            <TimeoutModal />
-            <Router>
-              <Routes />
-            </Router>
-          </HentInitialData>
-        </IntlProvider>
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={getStore()}>
+    <IntlProvider>
+      <HentInitialData>
+        <TimeoutModal />
+        <Router>
+          <Routes />
+        </Router>
+      </HentInitialData>
+    </IntlProvider>
+  </Provider>
+);
 
 export default App;
