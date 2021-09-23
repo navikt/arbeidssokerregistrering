@@ -1,7 +1,10 @@
 import {
+  AUTENTISERINGSINFO_URL,
   BRUKER_KONTEKST_URL,
   FEATURE_URL,
   OPPDATER_KONTEKST_URL,
+  PAM_JANZZ_URL,
+  STYRK_URL,
   VEILARBPERSON_NAVN_URL,
   VEILARBREGISTRERING_URL,
 } from "../ducks/api";
@@ -101,12 +104,12 @@ if (MOCK_GET_SISTE_ARBIEDSFORHOLD) {
 }
 
 if (MOCK_GET_KODEOVERSETTING_FRA_PAMJANZZ) {
-  mock.get("/pam-janzz/rest/kryssklassifiserMedKonsept", ResponseUtils.delayed(DELAY, oversettelseAvStillingFraAAReg));
+  mock.get(`${PAM_JANZZ_URL}/kryssklassifiserMedKonsept`, ResponseUtils.delayed(DELAY, oversettelseAvStillingFraAAReg));
 }
 
 if (MOCK_STYRK08_PAMJANZZ) {
   mock.get(
-    "/pam-janzz/rest/typeahead/yrke-med-styrk08",
+    STYRK_URL,
     ResponseUtils.delayed(DELAY, (args) => ResponseUtils.jsonPromise(lagPamjanzzRespons(args.queryParams)))
   );
 }
@@ -139,7 +142,7 @@ if (MOCK_BRUKER_KONTEKST) {
 }
 
 if (MOCK_AUTENTISERINGS_INFO) {
-  mock.get("/api/auth", ResponseUtils.delayed(DELAY, autentisert));
+  mock.get(AUTENTISERINGSINFO_URL, ResponseUtils.delayed(DELAY, autentisert));
 }
 
 if (MOCK_OPPDATER_BRUKER_KONTEKST) {
