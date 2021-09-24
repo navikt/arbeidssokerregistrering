@@ -1,4 +1,4 @@
-contextPath: /
+contextPath: /arbeid/registrering
 auth:
   enforce: false
 
