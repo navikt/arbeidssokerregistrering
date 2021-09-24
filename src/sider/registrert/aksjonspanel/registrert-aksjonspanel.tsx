@@ -2,12 +2,7 @@ import * as React from "react";
 import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
 import { uniLogger } from "../../../metrikker/uni-logger";
-import {
-  HEROKU_VEIENTILARBEID_URL,
-  VEIENTILARBEID_URL,
-  DP_SOK_URL,
-  VTA_REGISTRERING_FULLORT,
-} from "../../../utils/konstanter";
+import { HEROKU_VEIENTILARBEID_URL, VEIENTILARBEID_URL, DP_SOK_URL } from "../../../utils/konstanter";
 
 import handinfoSvg from "./clipboard.svg";
 import "./registrert-aksjonspanel.less";
@@ -19,41 +14,9 @@ interface RegistrertAksjonspanelProps {
   geografisk_tilknytning: string;
 }
 
-const eksperimentkontorer = [
-  "030112",
-  "030104",
-  "030105",
-  "030101",
-  "030108",
-  "030115",
-  "4202",
-  "3803",
-  "110302",
-  "110303",
-  "030114",
-  "3411",
-  "3422",
-  "3414",
-  "3415",
-  "3437",
-  "3446",
-  "3054",
-  "3419",
-  "3403",
-];
-
 class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps> {
   render() {
     const { hentTekstId, erSykmeldt, ingen_kvittering, geografisk_tilknytning } = this.props;
-    const erEksperimentkontor = eksperimentkontorer.includes(geografisk_tilknytning);
-
-    if (!erSykmeldt && ingen_kvittering && erEksperimentkontor) {
-      uniLogger("registrering.aktivitet", {
-        aktivitet: "Redirecter til veientilarbeid",
-      });
-      window.location.href = VTA_REGISTRERING_FULLORT;
-      return null;
-    }
 
     let veienTilArbeidUrl;
     let veienTilArbeidMedVisInfoUrl;
