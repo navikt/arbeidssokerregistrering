@@ -3,24 +3,27 @@ auth:
   enforce: false
 
 proxy:
-  - contextPath: "/veilarbregistrering"
-    baseUrl: {{ VEILARBPROXY_URL }}
-  - contextPath: "/veilarbperson"
-    baseUrl: {{ VEILARBPROXY_URL }}
-  - contextPath: "/pam-janzz"
+  - contextPath: "/arbeid/registrering/veilarbregistrering"
+    baseUrl: {{ VEILARBPROXY_URL }}/veilarbregistrering
+    requestRewrite: REMOVE_CONTEXT_PATH
+  - contextPath: "/arbeid/registrering/veilarbperson"
+    baseUrl: {{ VEILARBPROXY_URL }}/veilarbperson
+    requestRewrite: REMOVE_CONTEXT_PATH
+  - contextPath: "/arbeid/registrering/pam-janzz"
     baseUrl: {{ PAM_JANZZ_URL }}
     pingRequestPath: "/pam-janzz/swagger-ui/"
+    requestRewrite: REMOVE_CONTEXT_PATH
 
 redirect:
-  - from: /arbeidssokerregistrering
+  - from: /arbeid/registrering/arbeidssokerregistrering
     to: {{ ARBEIDSSOKERREGISTRERING_URL }}
-  - from: /dittnav
+  - from: /arbeid/registrering/dittnav
     to: {{ DITTNAV_LINK_URL }}
-  - from: /veientilarbeid
+  - from: /arbeid/registrering/veientilarbeid
     to: {{ VEIENTILARBEID_URL }}
-  - from: /sykefravaer
+  - from: /arbeid/registrering/sykefravaer
     to: {{ SYKEFRAVAER_URL }}
-  - from: /aktivitetsplan
+  - from: /arbeid/registrering/aktivitetsplan
     to: {{ AKTIVITETSPLAN_URL }}
-  - from: /loginservice
+  - from: /arbeid/registrering/loginservice
     to: {{ LOGINSERVICE_URL }}
