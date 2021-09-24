@@ -91,6 +91,7 @@ jobs:
             CLUSTER: dev-gcp
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-dev-gcp.yaml
+            DRY_RUN: true
 
   deploy-prod-gcp:
       name: Deploy to prod-gcp
@@ -109,6 +110,7 @@ jobs:
             CLUSTER: prod-gcp
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-p-gcp.yaml
+            DRY_RUN: true
 
   deploy-prod-fss-paw:
     name: Deploy to Prod FSS
