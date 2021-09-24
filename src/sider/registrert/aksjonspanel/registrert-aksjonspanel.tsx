@@ -16,7 +16,7 @@ interface RegistrertAksjonspanelProps {
 
 class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps> {
   render() {
-    const { hentTekstId, erSykmeldt, ingen_kvittering, geografisk_tilknytning } = this.props;
+    const { hentTekstId, erSykmeldt } = this.props;
 
     let veienTilArbeidUrl;
     let veienTilArbeidMedVisInfoUrl;
