@@ -6,7 +6,7 @@ import { RegistreringType } from "./registreringstatus";
 const publicUrl = process.env.PUBLIC_URL || "";
 export const VEILARBPERSON_NAVN_URL = `${publicUrl}/veilarbperson/api/person/navn`;
 export const AUTENTISERINGSINFO_URL = `${publicUrl}/api/auth`;
-export const LOGINSERVICEURL = `${publicUrl}/loginservice/login?redirect=${window.location.origin}`;
+export const LOGINSERVICEURL = `${publicUrl}/loginservice/login?redirect=${window.location.origin}/${publicUrl}`;
 export const VEILARBREGISTRERING_URL = `${publicUrl}/veilarbregistrering/api`;
 export const FEATURE_URL = `${publicUrl}/api/feature`;
 export const OPPDATER_KONTEKST_URL = `${publicUrl}/modiacontextholder/api/context`;
