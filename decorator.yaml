@@ -10,8 +10,8 @@ proxy:
     baseUrl: {{ VEILARBPROXY_URL }}/veilarbperson
     requestRewrite: REMOVE_CONTEXT_PATH
   - contextPath: "/arbeid/registrering/pam-janzz"
-    baseUrl: {{ PAM_JANZZ_URL }}
-    pingRequestPath: "/pam-janzz/swagger-ui/"
+    baseUrl: {{ PAM_JANZZ_URL }}/pam-janzz
+    pingRequestPath: "/swagger-ui/"
     requestRewrite: REMOVE_CONTEXT_PATH
 
 redirect:
