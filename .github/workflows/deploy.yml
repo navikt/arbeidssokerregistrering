@@ -78,4 +78,4 @@ jobs:
             CLUSTER: prod-gcp
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-p-gcp.yaml
-            DRY_RUN: true
+            DRY_RUN: false
