@@ -21,6 +21,7 @@ export const VEIENTILARBEID_URL = vanligUrl;
 
 export const DITT_NAV_URL = "/dittnav";
 export const VTA_REGISTRERING_FULLORT = `${DITT_NAV_URL}?goTo=registrering`;
+export const VTA_REAKTIVERING_FULLORT = `${DITT_NAV_URL}?goTo=registrering&kommerFra=reaktivering`;
 export const DITT_SYKEFRAVAER_URL = "/sykefravaer";
 
 export const AKTIVITETSPLAN_URL = "/veilarbpersonflatefs";
