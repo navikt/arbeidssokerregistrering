@@ -21,6 +21,8 @@ describe('Avbryt-modal', () => {
             .eq(0)
             .should('contain', 'Ja, avbryt')
             .click();
+        cy.get('[class="typo-sidetittel"]', { timeout: 5000 })
+            .should('contain', 'Registrer deg som arbeidssøker');
         cy.get('[class="registrering-arbeidssoker"]')
             .should('contain', 'Registrer deg som arbeidssøker');
     });
