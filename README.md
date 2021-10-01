@@ -1,6 +1,8 @@
 # Arbeidssøkerregistrering
 
-Frontend for registrering av arbeidssøker
+Frontend for registrering av arbeidssøker for **personbrukere**.
+
+Frontenden for **veiledere** finnes på [navikt/arbeidssokerregistrering-fss](https://github.com/navikt/arbeidssokerregistrering-fss).
 
 # Komme i gang med utvikling
 
@@ -10,10 +12,6 @@ Frontend for registrering av arbeidssøker
 For å starte app i demo-mode
 
 - `npm run demo`
-
-For å starte app i veileder-demo-mode (arbeidssokerregistrering-fss)
-
-- `npm run start-manuell`
 
 ## Utvikling med backend
 
@@ -43,4 +41,4 @@ Spørsmål knyttet til koden eller prosjektet kan stilles via issues her på git
 
 # For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen [#område-arbeid-tech](https://nav-it.slack.com/archives/CLTFAEW75)
+Interne henvendelser kan sendes via Slack i kanalen [#team-paw-dev](https://nav-it.slack.com/archives/CLTFAEW75)

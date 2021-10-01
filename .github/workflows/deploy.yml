@@ -40,23 +40,6 @@ jobs:
           echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
           docker build --tag ${IMAGE} .
           docker push ${IMAGE}
-  deploy-dev-fss:
-    name: Deploy to dev-fss
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy with nais
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-fss
-          RESOURCE: nais/naiserator-fss.yaml
-          VARS: nais/vars-dev-fss.yaml
   deploy-dev-sbs:
     name: Deploy to dev-sbs
     needs: test-build-and-push
@@ -112,24 +95,6 @@ jobs:
             VARS: nais/vars-p-gcp.yaml
             DRY_RUN: true
 
-  deploy-prod-fss-paw:
-    name: Deploy to Prod FSS
-    needs: deploy-dev-fss
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy to P
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-fss
-          RESOURCE: nais/naiserator-fss.yaml
-          VARS: nais/vars-p-fss-paw.yaml
-          DRY_RUN: false
   deploy-prod-sbs-paw:
       name: Deploy to Prod SBS
       needs: deploy-dev-sbs
@@ -150,7 +115,7 @@ jobs:
             DRY_RUN: false
   release:
     name: Tag and release
-    needs: [deploy-prod-fss-paw, deploy-prod-sbs-paw]
+    needs: deploy-prod-sbs-paw
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
