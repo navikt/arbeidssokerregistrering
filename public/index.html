@@ -3,38 +3,6 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Arbeidssøkerregistrering</title>
-	<script>
-        function lastInnScript(scriptSrc) {
-            const script = document.createElement('script');
-            script.src = scriptSrc;
-            script.type = "text/javascript";
-            document.head.appendChild(script);
-        }
-
-        function lastInnCss(cssSrc) {
-            const css = document.createElement('link');
-            css.href = cssSrc;
-            css.type = "text/css";
-            css.rel = "stylesheet";
-            document.head.appendChild(css);
-        }
-
-        const devBaseUrl = 'https://internarbeidsflatedecorator-q1.dev.adeo.no';
-        const dekoratorScriptUrl = '/internarbeidsflatedecorator/js/head.min.js';
-        const visittkortScriptUrl = '/veilarbvisittkortfs/static/js/main.js';
-        const visittkortCssUrl = '/veilarbvisittkortfs/static/css/main.css';
-        const hostname = window.location.hostname;
-
-        if (hostname.indexOf('adeo.no') !== -1 || hostname.indexOf('preprod.local') !== -1) {
-            lastInnScript(dekoratorScriptUrl);
-            lastInnScript(visittkortScriptUrl);
-            lastInnCss(visittkortCssUrl);
-        } else if(hostname.indexOf('localhost') !== -1) {
-            lastInnScript(devBaseUrl + dekoratorScriptUrl);
-        }
-
-	</script>
-
 </head>
 <body>
 <div id="header"></div>
