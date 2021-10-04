@@ -59,7 +59,7 @@ jobs:
             CLUSTER: dev-gcp
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-dev-gcp.yaml
-            DRY_RUN: true
+            DRY_RUN: false
 
   deploy-prod-gcp:
       name: Deploy to prod-gcp
