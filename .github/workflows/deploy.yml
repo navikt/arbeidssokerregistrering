@@ -23,6 +23,13 @@ jobs:
           headless: true
           start: npm run start:cypress
           wait-on: http://localhost:3001
+
+      - name: Last opp bilder av feilmeldinger
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
   test-build-and-push:
     name: Test, build and push
     needs: cypress-run
