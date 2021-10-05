@@ -1,4 +1,5 @@
 describe('Er opplysningene riktige?', () => {
+    const basePath = new URL(Cypress.config().baseUrl).pathname
     describe('Jobbet seks av tolv siste måneder', () => {
         beforeEach(() => {
             cy.configure('registrering-seksavtolv');
@@ -52,7 +53,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain', 'Har ikke vært i jobb de siste 2 årene');
             cy.get('[class="lenke"]')
                 .eq(0)
-                .should('have.attr', 'href', '/skjema/0');
+                .should('have.attr', 'href', `${basePath}/skjema/0`);
         });
         it('"Siste stilling" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
             cy.get('[class="typo-normal"]')
@@ -61,7 +62,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain', 'Klovn kommunal sektor');
             cy.get('[class="lenke"]')
                 .eq(1)
-                .should('have.attr', 'href', '/skjema/1');
+                .should('have.attr', 'href', `${basePath}/skjema/1`);
         });
         it('"Høyeste fullførte utdanning" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
             cy.get('[class="typo-normal"]')
@@ -70,7 +71,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain.any', 'Høyere utdanning (1 til 4 år)');
             cy.get('[class="lenke"]')
                 .eq(2)
-                .should('have.attr', 'href', '/skjema/2');
+                .should('have.attr', 'href', `${basePath}/skjema/2`);
         });
         it('"Utdanning godkjent i Norge" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
             cy.get('[class="typo-normal"]')
@@ -79,7 +80,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain.any', 'Ja');
             cy.get('[class="lenke"]')
                 .eq(3)
-                .should('have.attr', 'href', '/skjema/3');
+                .should('have.attr', 'href', `${basePath}/skjema/3`);
         });
         it('"Utdanning bestått" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
             cy.get('[class="typo-normal"]')
@@ -88,7 +89,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain.any', 'Ja');
             cy.get('[class="lenke"]')
                 .eq(4)
-                .should('have.attr', 'href', '/skjema/4');
+                .should('have.attr', 'href', `${basePath}/skjema/4`);
         });
         it('"Helseproblemer" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
             cy.get('[class="typo-normal"]')
@@ -97,7 +98,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain.any', 'Ja');
             cy.get('[class="lenke"]')
                 .eq(5)
-                .should('have.attr', 'href', '/skjema/5');
+                .should('have.attr', 'href', `${basePath}/skjema/5`);
         });
         it('"Andre problemer" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
             cy.get('[class="typo-normal"]')
@@ -106,7 +107,7 @@ describe('Er opplysningene riktige?', () => {
                 .should('contain.any', 'Ja');
             cy.get('[class="lenke"]')
                 .eq(6)
-                .should('have.attr', 'href', '/skjema/6');
+                .should('have.attr', 'href', `${basePath}/skjema/6`);
         });
         it('Naviger til fullfør ved klikk på "JA, NESTE', () => {
             cy.get('[data-testid="neste"')

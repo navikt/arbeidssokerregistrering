@@ -1,4 +1,5 @@
 describe('skjema/1 - Hva er din siste jobb?', () => {
+    const basePath = new URL(Cypress.config().baseUrl).pathname
     beforeEach(() => {
         cy.configure('registrering');
     });
@@ -49,7 +50,7 @@ describe('skjema/1 - Hva er din siste jobb?', () => {
     });
     it('Går videre til neste /skjema/2 ved klikk på NESTE', () => {
         cy.get('[data-testid="neste"]')
-            .should('have.attr', 'href', '/skjema/2')
+            .should('have.attr', 'href', `${basePath}/skjema/2`)
             .click()
         cy.get('[class="typo-innholdstittel spm-tittel"]')
             .should('contain', 'Hva er din høyeste fullførte utdanning?');

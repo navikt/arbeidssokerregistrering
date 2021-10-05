@@ -1,4 +1,5 @@
 describe('/oppsummering - Dine opplysninger', () => {
+    const basePath = new URL(Cypress.config().baseUrl).pathname
     beforeEach(() => {
         cy.configure('registrering-sykefravaer');
     });
@@ -20,7 +21,7 @@ describe('/oppsummering - Dine opplysninger', () => {
             .should('contain', 'Jeg er usikker');
         cy.get('[class="lenke"]')
             .eq(0)
-            .should('have.attr', 'href', '/inngangssporsmal');
+            .should('have.attr', 'href', `${basePath}/inngangssporsmal`);
     });
     it('"Høyeste fullførte utdanning" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
         cy.get('[class="typo-normal"]')
@@ -29,7 +30,7 @@ describe('/oppsummering - Dine opplysninger', () => {
             .should('contain', 'Grunnskole');
         cy.get('[class="lenke"]')
             .eq(1)
-            .should('have.attr', 'href', '/skjema-sykefravaer/4/0');
+            .should('have.attr', 'href', `${basePath}/skjema-sykefravaer/4/0`);
     });
     it('"Utdanning godkjent i Norge" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
         cy.get('[class="typo-normal"]')
@@ -38,7 +39,7 @@ describe('/oppsummering - Dine opplysninger', () => {
             .should('contain', 'Ja');
         cy.get('[class="lenke"]')
             .eq(2)
-            .should('have.attr', 'href', '/skjema-sykefravaer/4/1');
+            .should('have.attr', 'href', `${basePath}/skjema-sykefravaer/4/1`);
     });
     it('"Utdanning bestått" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
         cy.get('[class="typo-normal"]')
@@ -47,7 +48,7 @@ describe('/oppsummering - Dine opplysninger', () => {
             .should('contain', 'Ja');
         cy.get('[class="lenke"]')
             .eq(3)
-            .should('have.attr', 'href', '/skjema-sykefravaer/4/2');
+            .should('have.attr', 'href', `${basePath}/skjema-sykefravaer/4/2`);
     });
     it('"Andre hensyn NAV bør ta" viser korrekt informasjon og "endre" navigerer tilbake til korrekt skjema', () => {
         cy.get('[class="typo-normal"]')
@@ -56,7 +57,7 @@ describe('/oppsummering - Dine opplysninger', () => {
             .should('contain', 'Ja');
         cy.get('[class="lenke"]')
             .eq(4)
-            .should('have.attr', 'href', '/skjema-sykefravaer/4/3');
+            .should('have.attr', 'href', `${basePath}/skjema-sykefravaer/4/3`);
     });
     it('Innhold i POST matcher skjemaverdier', () => {
         cy.get('[data-testid="neste"')
