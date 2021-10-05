@@ -1,9 +1,11 @@
 describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
+    const baseUrl = Cypress.config().baseUrl
+
     beforeEach(() => {
         cy.configure("arbeidstillatelse-opprett-sak");
     });
     it("Navigerer gjennom skjema", () => {
-        cy.route("GET", "/veilarbregistrering/api/person/kontaktinfo", {});
+        cy.route("GET", `${baseUrl}/veilarbregistrering/api/person/kontaktinfo`, {});
         cy.visit("/");
         cy.wait(2000);
         cy.get('[data-testid="start-registrering"]').click();
@@ -32,7 +34,7 @@ describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
             .should('exist');
     });
     it("TA KONTAKT - Oppretter sak - Henvendelse mottatt - Ingen kontaktinformasjon funnet", () => {
-        cy.route("POST", "/veilarbregistrering/api/oppgave", {}).as("opprettSak");
+        cy.route("POST", `${baseUrl}/veilarbregistrering/api/oppgave`, {}).as("opprettSak");
         cy.get('[class="knapp avbryt-modal__knapp blokk-s knapp--hoved"]').click();
         cy.wait('@opprettSak')
             .its('request.body')
@@ -44,8 +46,8 @@ describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
 
     });
     it("TA KONTAKT - Oppretter sak - Henvendelse mottatt - Telefonnummer kun fra KRR", () => {
-        cy.route("POST", "/veilarbregistrering/api/oppgave", {});
-        cy.route("GET", "/veilarbregistrering/api/person/kontaktinfo", { telefonnummerHosKrr: "+47 22222222" });
+        cy.route("POST", `${baseUrl}/veilarbregistrering/api/oppgave`, {});
+        cy.route("GET", `${baseUrl}/veilarbregistrering/api/person/kontaktinfo`, { telefonnummerHosKrr: "+47 22222222" });
         cy.visit("/");
         cy.get('[data-testid="start-registrering"]').click();
         cy.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
@@ -73,8 +75,8 @@ describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
             .should('have.attr', 'href', 'https://www.nav.no/person/personopplysninger/#kontaktinformasjon');
     });
     it("TA KONTAKT - Oppretter sak - Henvendelse mottatt - Telefonnummer hos både KRR og NAV", () => {
-        cy.route("POST", "/veilarbregistrering/api/oppgave", {});
-        cy.route("GET", "/veilarbregistrering/api/person/kontaktinfo", { telefonnummerHosKrr: "+47 22222222", telefonnummerHosNav: "+47 22222223" });
+        cy.route("POST", `${baseUrl}/veilarbregistrering/api/oppgave`, {});
+        cy.route("GET", `${baseUrl}/veilarbregistrering/api/person/kontaktinfo`, { telefonnummerHosKrr: "+47 22222222", telefonnummerHosNav: "+47 22222223" });
         cy.visit("/");
         cy.get('[data-testid="start-registrering"]').click();
         cy.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
@@ -107,7 +109,7 @@ describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
     it("TA KONTAKT - Oppretter sak - Feilmelding", () => {
         cy.route({
             method: "POST",
-            url: "/veilarbregistrering/api/oppgave",
+            url: `${baseUrl}/veilarbregistrering/api/oppgave`,
             status: 500,
             response: {},
         });
@@ -136,11 +138,11 @@ describe("/fullfor - Mangler arbeidstillatelse opprett sak", () => {
     it("TA KONTAKT - Oppretter sak - Vennligst vent", () => {
         cy.route({
             method: "POST",
-            url: "/veilarbregistrering/api/oppgave",
+            url: `${baseUrl}/veilarbregistrering/api/oppgave`,
             status: 403,
             response: {},
         });
-        cy.route("GET", "/veilarbregistrering/api/person/kontaktinfo", { telefonnummerHosKrr: "+47 22222222", telefonnummerHosNav: "+47 22222223" });
+        cy.route("GET", `${baseUrl}/veilarbregistrering/api/person/kontaktinfo`, { telefonnummerHosKrr: "+47 22222222", telefonnummerHosNav: "+47 22222223" });
         cy.visit("/");
         cy.get('[data-testid="start-registrering"]').click();
         cy.clickOptionThenNext(5); // Velg "Har ikke vært i jobb de siste 2 årene" og gå til steg 1
