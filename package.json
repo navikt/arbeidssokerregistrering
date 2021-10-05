@@ -23,7 +23,7 @@
     "start:cypress": "npm-run-all -p start:tekster start:utenmock",
     "cypress:clear": "cypress cache clear",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --headless --browser chrome",
     "test": "craco test",
     "test:ci": "CI=true craco test",
     "postinstall": "husky install"
