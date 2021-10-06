@@ -60,7 +60,7 @@ describe("/allerederegistrert", () => {
         cy.get('[class="allerede-registrert__knapp knapp"]')
             .eq(0)
             .should("have.attr", "data-servicegruppe", "TEST_MEG")
-            .should("have.attr", "href", "/aktivitetsplan/");
+            .should("have.attr", "href", `${basePath}/aktivitetsplan/`);
     });
     it("VEIEN TIL ARBEID - knapp har riktig data og link", () => {
         cy.get('[class="allerede-registrert__knapp knapp"]')

@@ -30,7 +30,7 @@ export const AKTIVITETSPLAN_VEILEDER_URL = "/veilarbpersonflatefs";
 
 export const DP_SOK_URL = "https://www.nav.no/soknader/nb/person/arbeid/dagpenger";
 
-export const AKTIVITETSPLAN_URL = `/aktivitetsplan/`;
+export const AKTIVITETSPLAN_URL = `${BASE_PATH}/aktivitetsplan/`;
 export const DIALOG_URL = `${BASE_PATH}/aktivitetsplan/dialog/ny/`;
 
 export const AMPLITUDE_API_KEY_TEST = "2f190e67f31d7e4719c5ff048ad3d3e6";
