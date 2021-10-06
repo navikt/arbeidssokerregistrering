@@ -1,10 +1,10 @@
-import { AKTIVITETSPLAN_URL } from "./konstanter";
+import { AKTIVITETSPLAN_VEILEDER_URL } from "./konstanter";
 import { hentBrukerFnr, hentVeilederEnhetId } from "./fss-utils";
 
 const url = window && window.location && window.location.href ? window.location.href : "";
 
 export const lagAktivitetsplanUrl = (fnr?: string) => {
-  return `${AKTIVITETSPLAN_URL}/${fnr ? fnr : hentBrukerFnr()}?enhet=${hentVeilederEnhetId()}`;
+  return `${AKTIVITETSPLAN_VEILEDER_URL}/${fnr ? fnr : hentBrukerFnr()}?enhet=${hentVeilederEnhetId()}`;
 };
 
 export const lagDetaljeVisningUrl = () => {
