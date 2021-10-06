@@ -72,6 +72,6 @@ describe("/allerederegistrert", () => {
         cy.get('[class="allerede-registrert__knapp knapp"]')
             .eq(2)
             .should("have.attr", "data-servicegruppe", "TEST_MEG")
-            .should("have.attr", "href", "/aktivitetsplan/dialog/ny/");
+            .should("have.attr", "href", `${basePath}/aktivitetsplan/dialog/ny/`);
     });
 });
