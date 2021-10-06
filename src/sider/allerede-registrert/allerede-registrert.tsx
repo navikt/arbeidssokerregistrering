@@ -10,7 +10,7 @@ import { AppState } from "../../reducer";
 import IARBSMelding from "./iarbs-melding";
 
 import "./allerede-registrert.less";
-import { DIALOG_URL, VEIENTILARBEID_URL } from "../../utils/konstanter";
+import { AKTIVITETSPLAN_URL, DIALOG_URL, VEIENTILARBEID_URL } from "../../utils/konstanter";
 interface StateProps {
   state: AppState;
 }
@@ -88,7 +88,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                   {messages["allerede-registrert-boks-1-tekst"]}
                 </Normaltekst>
                 <a
-                  href={messages["allerede-registrert-boks-1-lenke"]}
+                  href={AKTIVITETSPLAN_URL}
                   className="allerede-registrert__knapp knapp"
                   onClick={this.handleClickAktivitetsplan}
                   data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}
