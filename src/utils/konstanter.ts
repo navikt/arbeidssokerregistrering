@@ -21,7 +21,7 @@ export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
 
 export const VEIENTILARBEID_URL = vanligUrl;
 
-export const DITT_NAV_URL = "/dittnav";
+export const DITT_NAV_URL = `${BASE_PATH}/dittnav`;
 export const VTA_REGISTRERING_FULLORT = `${DITT_NAV_URL}?goTo=registrering`;
 export const VTA_REAKTIVERING_FULLORT = `${DITT_NAV_URL}?goTo=registrering&visKvittering=reaktivering`;
 export const DITT_SYKEFRAVAER_URL = "/sykefravaer";

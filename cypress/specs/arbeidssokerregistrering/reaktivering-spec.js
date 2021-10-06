@@ -16,7 +16,7 @@ describe('Feilmelding vises ved feil i lasting av data', () => {
 
         cy.get('[class="lenke lenke-avbryt typo-element"]')
             .should('contain', 'Avbryt')
-            .should('have.attr', 'href', '/dittnav');
+            .should('have.attr', 'href', `${basePath}/dittnav`);
     });
     describe('/duernaregistrert - Du er nå registert som arbeidssøker', () => {
         it('Viser riktig side', () => {
