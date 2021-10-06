@@ -6,6 +6,7 @@ import { Normaltekst, Systemtittel } from "nav-frontend-typografi";
 import { SkjemaGruppe, Radio } from "nav-frontend-skjema";
 import { uniLogger } from "../../metrikker/uni-logger";
 import { AppState } from "../../reducer";
+import { DIALOG_URL } from "../../utils/konstanter";
 
 interface StateProps {
   state: AppState;
@@ -80,12 +81,7 @@ const Melding = ({ state }: Props) => {
                 <Normaltekst className="hidden" id="dagpenger-result">
                   For å få registrert deg som arbeidssøker må du kontakte NAV.
                   <br />
-                  <a
-                    href="/aktivitetsplan/dialog/ny/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    onClick={handleClickDialog}
-                  >
+                  <a href={DIALOG_URL} target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>
                     Send melding til veilederen din{" "}
                   </a>{" "}
                   eller ring oss på <strong>55 55 33 33</strong>.
@@ -99,12 +95,7 @@ const Melding = ({ state }: Props) => {
                 <Normaltekst className="hidden" id="aap-result">
                   For å søke AAP må du ta kontakt med NAV.
                   <br />
-                  <a
-                    href="/aktivitetsplan/dialog/ny/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    onClick={handleClickDialog}
-                  >
+                  <a href={DIALOG_URL} target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>
                     Send melding til veilederen din
                   </a>{" "}
                   eller ring oss på <strong>55 55 33 33</strong>.
@@ -134,24 +125,14 @@ const Melding = ({ state }: Props) => {
                   name="kontaktmeg"
                 />
                 <Normaltekst className="hidden" id="finnerikke-result">
-                  <a
-                    href="/aktivitetsplan/dialog/ny/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    onClick={handleClickDialog}
-                  >
+                  <a href={DIALOG_URL} target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>
                     Send melding til veilederen din
                   </a>{" "}
                   eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre.
                 </Normaltekst>
                 <Radio label={"Andre grunner"} id="annet" onChange={handleClickContact} name="kontaktmeg" />
                 <Normaltekst className="hidden" id="annet-result">
-                  <a
-                    href="/aktivitetsplan/dialog/ny/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    onClick={handleClickDialog}
-                  >
+                  <a href={DIALOG_URL} target="_blank" rel="noreferrer noopener" onClick={handleClickDialog}>
                     Send melding til veilederen din
                   </a>{" "}
                   eller ring oss på <strong>55 55 33 33</strong> så skal vi hjelpe deg videre.
