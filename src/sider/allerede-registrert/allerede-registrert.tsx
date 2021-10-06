@@ -10,6 +10,7 @@ import { AppState } from "../../reducer";
 import IARBSMelding from "./iarbs-melding";
 
 import "./allerede-registrert.less";
+import { VEIENTILARBEID_URL } from "../../utils/konstanter";
 interface StateProps {
   state: AppState;
 }
@@ -107,7 +108,7 @@ class AlleredeRegistrert extends React.Component<Props> {
                   {messages["allerede-registrert-boks-2-tekst"]}
                 </Normaltekst>
                 <a
-                  href={messages["allerede-registrert-boks-2-lenke"]}
+                  href={VEIENTILARBEID_URL}
                   className="allerede-registrert__knapp knapp"
                   onClick={this.handleClickVeienTilArbeid}
                   data-formidlingsgruppe={formidlingsgruppeOrIngenVerdi}

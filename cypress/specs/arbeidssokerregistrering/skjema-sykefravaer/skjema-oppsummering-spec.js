@@ -78,9 +78,9 @@ describe('/oppsummering - Dine opplysninger', () => {
         });
         it('Knapperad finnes og linker til riktig adresser', () => {
             cy.get('[class="registrert__lenke knapp knapp--hoved blokk-m"]')
-                .should('have.attr', 'href', '/veientilarbeid/');
+                .should('have.attr', 'href', `${basePath}/veientilarbeid/`);
             cy.get('[class="lenke typo-element"]')
-                .should('have.attr', 'href', '/veientilarbeid/');
+                .should('have.attr', 'href', `${basePath}/veientilarbeid/`);
         });
     });
 

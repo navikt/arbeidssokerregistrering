@@ -1,4 +1,5 @@
 describe('/fullfor - Er opplysningene riktige?', () => {
+    const basePath = new URL(Cypress.config().baseUrl).pathname
     beforeEach(() => {
         cy.configure('registrering');
     });
@@ -70,7 +71,7 @@ describe('/fullfor - Er opplysningene riktige?', () => {
             cy.get('[class="registrert__lenke knapp knapp--hoved blokk-m"]')
                 .should('have.attr', 'href', 'https://www.nav.no/soknader/nb/person/arbeid/dagpenger');
             cy.get('[class="lenke typo-element"]')
-                .should('have.attr', 'href', '/veientilarbeid/');
+                .should('have.attr', 'href', `${basePath}/veientilarbeid/`);
         });
     });
 });

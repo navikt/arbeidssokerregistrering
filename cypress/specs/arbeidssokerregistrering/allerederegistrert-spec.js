@@ -1,4 +1,6 @@
 describe("/allerederegistrert", () => {
+    const basePath = new URL(Cypress.config().baseUrl).pathname
+
     beforeEach(() => {
         cy.configure("allerederegistrert");
     });
@@ -64,7 +66,7 @@ describe("/allerederegistrert", () => {
         cy.get('[class="allerede-registrert__knapp knapp"]')
             .eq(1)
             .should("have.attr", "data-servicegruppe", "TEST_MEG")
-            .should("have.attr", "href", "/veientilarbeid/");
+            .should("have.attr", "href", `${basePath}/veientilarbeid/`);
     });
     it("DIALOG - knapp har riktig data og link", () => {
         cy.get('[class="allerede-registrert__knapp knapp"]')

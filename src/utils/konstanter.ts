@@ -11,9 +11,11 @@ export const IKKE_ARBEIDSSSOKER_UTENFOR_OPPFOLGING_PATH = "/ikke-arbeidssoker-ut
 export const INFOSIDE_PATH = "/infoside";
 export const ARBEIDSSOKERREGISTRERING_START_PATH = "/start";
 
+export const BASE_PATH = process.env.PUBLIC_URL || "";
+
 // URLer til andre applikasjoner
 const herokuUrl = "https://veientilarbeid.herokuapp.com/veientilarbeid";
-const vanligUrl = "/veientilarbeid/";
+const vanligUrl = `${BASE_PATH}/veientilarbeid/`;
 
 export const HEROKU_VEIENTILARBEID_URL = herokuUrl;
 
