@@ -2,8 +2,8 @@ import { fetchToJson, leggTilFnrForFSS, leggTilFnrOgEnhetForFSS } from "./api-ut
 import { Data as RegistrerBrukerData } from "./registrerbruker";
 import { alleFeatureToggles } from "./feature-toggles";
 import { RegistreringType } from "./registreringstatus";
+import { BASE_PATH } from "../utils/konstanter";
 
-const BASE_PATH = process.env.PUBLIC_URL || "";
 export const VEILARBPERSON_NAVN_URL = `${BASE_PATH}/veilarbperson/api/person/navn`;
 export const AUTENTISERINGSINFO_URL = `${BASE_PATH}/api/auth`;
 export const LOGINSERVICEURL = `${BASE_PATH}/loginservice/login?redirect=${window.location.origin}${BASE_PATH}`;
