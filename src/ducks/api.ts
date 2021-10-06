@@ -3,16 +3,16 @@ import { Data as RegistrerBrukerData } from "./registrerbruker";
 import { alleFeatureToggles } from "./feature-toggles";
 import { RegistreringType } from "./registreringstatus";
 
-const publicUrl = process.env.PUBLIC_URL || "";
-export const VEILARBPERSON_NAVN_URL = `${publicUrl}/veilarbperson/api/person/navn`;
-export const AUTENTISERINGSINFO_URL = `${publicUrl}/api/auth`;
-export const LOGINSERVICEURL = `${publicUrl}/loginservice/login?redirect=${window.location.origin}${publicUrl}`;
-export const VEILARBREGISTRERING_URL = `${publicUrl}/veilarbregistrering/api`;
-export const FEATURE_URL = `${publicUrl}/api/feature`;
-export const OPPDATER_KONTEKST_URL = `${publicUrl}/modiacontextholder/api/context`;
-export const BRUKER_KONTEKST_URL = `${publicUrl}/modiacontextholder/api/context/aktivbruker`;
+const BASE_PATH = process.env.PUBLIC_URL || "";
+export const VEILARBPERSON_NAVN_URL = `${BASE_PATH}/veilarbperson/api/person/navn`;
+export const AUTENTISERINGSINFO_URL = `${BASE_PATH}/api/auth`;
+export const LOGINSERVICEURL = `${BASE_PATH}/loginservice/login?redirect=${window.location.origin}${BASE_PATH}`;
+export const VEILARBREGISTRERING_URL = `${BASE_PATH}/veilarbregistrering/api`;
+export const FEATURE_URL = `${BASE_PATH}/api/feature`;
+export const OPPDATER_KONTEKST_URL = `${BASE_PATH}/modiacontextholder/api/context`;
+export const BRUKER_KONTEKST_URL = `${BASE_PATH}/modiacontextholder/api/context/aktivbruker`;
 
-export const PAM_JANZZ_URL = `${publicUrl}/pam-janzz/rest`;
+export const PAM_JANZZ_URL = `${BASE_PATH}/pam-janzz/rest`;
 export const STYRK_URL = `${PAM_JANZZ_URL}/typeahead/yrke-med-styrk08`;
 
 interface BrukerIKontekstData {
