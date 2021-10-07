@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./kontakt-meg.less";
-import { getHeaders, MED_CREDENTIALS } from "../../ducks/api";
+import { getHeaders, MED_CREDENTIALS, VEILARBREGISTRERING_URL } from "../../ducks/api";
 import { uniLogger } from "../../metrikker/uni-logger";
 import OppgaveOpprettet from "./oppgave-opprettet";
 import KontaktMegMelding from "./kontakt-meg-melding";
@@ -74,8 +74,8 @@ const KontaktMeg = () => {
 
   const handleKontakMegClicked = () => {
     uniLogger("registrering.utvandret.kontaktmeg.klikk");
-    opprettOppgave("/veilarbregistrering/api/oppgave");
-    hentKontaktinfo("/veilarbregistrering/api/person/kontaktinfo");
+    opprettOppgave(`${VEILARBREGISTRERING_URL}/oppgave`);
+    hentKontaktinfo(`${VEILARBREGISTRERING_URL}/person/kontaktinfo`);
   };
 
   if (oppgave.status === OpprettOppgaveStatus.SUKSESS) {
