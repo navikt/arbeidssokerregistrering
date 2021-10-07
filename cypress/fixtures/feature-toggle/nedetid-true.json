@@ -1,4 +1,5 @@
 {
     "arbeidssokerregistrering.nedetid": true,
-    "arbeidssokerregistrering.ingen_kvittering": true
+    "arbeidssokerregistrering.ingen_kvittering": true,
+    "arbeidssokerregistrering.ny-ingress": false
 }

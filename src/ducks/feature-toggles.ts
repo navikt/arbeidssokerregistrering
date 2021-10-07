@@ -11,6 +11,7 @@ export enum ActionTypes {
 export interface Data {
   "arbeidssokerregistrering.nedetid": boolean;
   "arbeidssokerregistrering.ingen_kvittering": boolean;
+  "arbeidssokerregistrering.ny-ingress": boolean;
 }
 
 export interface State {
@@ -23,12 +24,17 @@ interface Action {
   data: Data;
 }
 
-export const alleFeatureToggles = ["arbeidssokerregistrering.nedetid", "arbeidssokerregistrering.ingen_kvittering"];
+export const alleFeatureToggles = [
+  "arbeidssokerregistrering.nedetid",
+  "arbeidssokerregistrering.ingen_kvittering",
+  "arbeidssokerregistrering.ny-ingress",
+];
 
 const initialState = {
   data: {
     "arbeidssokerregistrering.nedetid": false,
     "arbeidssokerregistrering.ingen_kvittering": false,
+    "arbeidssokerregistrering.ny-ingress": false,
   },
   status: STATUS.NOT_STARTED,
 };
