@@ -12,7 +12,8 @@ export const lagDetaljeVisningUrl = () => {
 };
 
 export const erProduksjon = () => {
-  return url.indexOf("arbeidssokerregistrering.nav.no") > -1;
+  const hostname = window.location.hostname;
+  return hostname === "arbeidssokerregistrering.nav.no";
 };
 
 type LocationType = { search: string };
