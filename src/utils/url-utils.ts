@@ -13,7 +13,7 @@ export const lagDetaljeVisningUrl = () => {
 
 export const erProduksjon = () => {
   const hostname = window.location.hostname;
-  return hostname === "arbeidssokerregistrering.nav.no";
+  return hostname === "arbeidssokerregistrering.nav.no" || hostname === "www.nav.no";
 };
 
 type LocationType = { search: string };
