@@ -62,7 +62,7 @@ function videresendTilNyIngress() {
 export class HentInitialData extends React.Component<Props> {
   componentDidMount() {
     this.props.hentFeatureToggle().then((featureToggles) => {
-      if ((featureToggles as FeatureToggleData)["arbeidssokerregistrering.ny-ingress"]) {
+      if (featureToggles && (featureToggles as FeatureToggleData)["arbeidssokerregistrering.ny-ingress"]) {
         videresendTilNyIngress();
       }
 
