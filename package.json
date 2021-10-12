@@ -33,7 +33,7 @@
     "@craco/craco": "6.2.0",
     "@navikt/fnrvalidator": "1.1.4",
     "@navikt/fo-session-timeout-modal": "1.1.1",
-    "@sentry/browser": "6.12.0",
+    "@sentry/browser": "6.13.1",
     "@sentry/react": "6.12.0",
     "amplitude-js": "7.4.4",
     "babel-polyfill": "6.26.0",
