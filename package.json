@@ -29,7 +29,7 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "@alheimsins/virkedager": "1.2.5",
+    "@alheimsins/virkedager": "2.1.1",
     "@craco/craco": "6.4.0",
     "@navikt/fnrvalidator": "1.1.4",
     "@navikt/fo-session-timeout-modal": "1.1.1",
