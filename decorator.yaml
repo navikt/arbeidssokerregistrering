@@ -1,4 +1,4 @@
-contextPath: /
+contextPath: {{ CONTEXT_PATH }}
 auth:
   enforce: false
 
