@@ -30,6 +30,7 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          
   test-build-and-push:
     name: Test, build and push
     needs: cypress-run
