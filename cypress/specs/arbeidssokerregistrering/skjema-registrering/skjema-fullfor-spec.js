@@ -69,7 +69,7 @@ describe('/fullfor - Er opplysningene riktige?', () => {
             cy.get('[class="registrert__lenke knapp knapp--standard"]')
                 .should('have.attr', 'href', 'https://www.nav.no/soknader/en/person/arbeid/dagpenger');
             cy.get('[class="registrert__lenke knapp knapp--hoved blokk-m"]')
-                .should('have.attr', 'href', 'https://www.nav.no/soknader/nb/person/arbeid/dagpenger');
+                .should('have.attr', 'href', 'https://www.nav.no/arbeid/dagpenger/soknad-veileder');
             cy.get('[class="lenke typo-element"]')
                 .should('have.attr', 'href', `${basePath}/veientilarbeid/`);
         });
