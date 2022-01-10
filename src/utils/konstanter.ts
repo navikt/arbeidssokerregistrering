@@ -28,7 +28,7 @@ export const DITT_SYKEFRAVAER_URL = `${BASE_PATH}/sykefravaer`;
 
 export const AKTIVITETSPLAN_VEILEDER_URL = "/veilarbpersonflatefs";
 
-export const DP_SOK_URL = "https://www.nav.no/soknader/nb/person/arbeid/dagpenger";
+export const DP_SOK_URL = "https://www.nav.no/arbeid/dagpenger/soknad-veileder";
 
 export const AKTIVITETSPLAN_URL = `${BASE_PATH}/aktivitetsplan/`;
 export const DIALOG_URL = `${BASE_PATH}/aktivitetsplan/dialog/ny/`;
