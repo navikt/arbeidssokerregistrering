@@ -54,7 +54,9 @@ function videresendTilNyIngress() {
 
   if (location.hostname === "arbeidssokerregistrering.dev.nav.no") {
     location.href = "https://arbeid.dev.nav.no/arbeid/registrering" + komplettSti;
+    uniLogger("registrering.redirect", { target: "gcp dev" });
   } else if (location.hostname === "arbeidssokerregistrering.nav.no") {
+    uniLogger("registrering.redirect", { target: "gcp prod" });
     location.href = "https://www.nav.no/arbeid/registrering" + komplettSti;
   }
 }
