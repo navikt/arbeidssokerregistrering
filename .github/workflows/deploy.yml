@@ -22,6 +22,7 @@ jobs:
           headless: true
           start: npm run start:cypress
           wait-on: http://localhost:3001
+          
   test-build-and-push:
     name: Test, build and push
     needs: cypress-run
@@ -40,6 +41,7 @@ jobs:
           echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
           docker build --tag ${IMAGE} .
           docker push ${IMAGE}
+
   deploy-dev-sbs:
     name: Deploy to dev-sbs
     needs: test-build-and-push
@@ -57,44 +59,6 @@ jobs:
           CLUSTER: dev-sbs
           RESOURCE: nais/naiserator-sbs.yaml
           VARS: nais/vars-dev-sbs.yaml
-
-  deploy-dev-gcp:
-    name: Deploy to dev-gcp
-    needs: test-build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy with nais
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: nais/naiserator-gcp.yaml
-          VARS: nais/vars-dev-gcp.yaml
-          DRY_RUN: true
-
-  deploy-prod-gcp:
-    name: Deploy to prod-gcp
-    needs: deploy-dev-gcp
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Lag tag for image
-        run: echo "TAG=$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      - name: Lag full image referanse
-        run: echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
-      - name: Deploy with nais
-        uses: nais/deploy/actions/deploy@master
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
-          RESOURCE: nais/naiserator-gcp.yaml
-          VARS: nais/vars-p-gcp.yaml
-          DRY_RUN: true
 
   deploy-prod-sbs-paw:
       name: Deploy to Prod SBS
@@ -114,6 +78,7 @@ jobs:
             RESOURCE: nais/naiserator-sbs.yaml
             VARS: nais/vars-p-sbs-paw.yaml
             DRY_RUN: false
+
   release:
     name: Tag and release
     needs: deploy-prod-sbs-paw
