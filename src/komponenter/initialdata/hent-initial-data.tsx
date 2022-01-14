@@ -18,7 +18,6 @@ import {
 import {
   hentFeatureToggles,
   selectFeatureTogglesState,
-  Data as FeatureToggleData,
   State as FeatureToggleState,
 } from "../../ducks/feature-toggles";
 import Innholdslaster from "../innholdslaster/innholdslaster";
@@ -54,6 +53,7 @@ export class HentInitialData extends React.Component<Props> {
         this.props.hentRegistreringStatus();
         this.props.hentBrukersNavn();
         this.props.hentKontaktinfo();
+        this.props.hentFeatureToggle();
       }
     });
   }
