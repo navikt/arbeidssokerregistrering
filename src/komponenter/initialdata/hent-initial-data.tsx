@@ -47,34 +47,14 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-function videresendTilNyIngress() {
-  const { location } = window;
-  // pathname vil alltid starte med '/'
-  const komplettSti = location.pathname + location.search + location.hash;
-
-  if (location.hostname === "arbeidssokerregistrering.dev.nav.no") {
-    location.href = "https://arbeid.dev.nav.no/arbeid/registrering" + komplettSti;
-    uniLogger("registrering.redirect", { target: "gcp dev" });
-  } else if (location.hostname === "arbeidssokerregistrering.nav.no") {
-    uniLogger("registrering.redirect", { target: "gcp prod" });
-    location.href = "https://www.nav.no/arbeid/registrering" + komplettSti;
-  }
-}
-
 export class HentInitialData extends React.Component<Props> {
   componentDidMount() {
-    this.props.hentFeatureToggle().then((featureToggles) => {
-      if (featureToggles && (featureToggles as FeatureToggleData)["arbeidssokerregistrering.ny-ingress"]) {
-        videresendTilNyIngress();
+    this.props.hentAutentiseringsInfo().then((res) => {
+      if ((res as AuthData).securityLevel === SecurityLevel.Level4) {
+        this.props.hentRegistreringStatus();
+        this.props.hentBrukersNavn();
+        this.props.hentKontaktinfo();
       }
-
-      this.props.hentAutentiseringsInfo().then((res) => {
-        if ((res as AuthData).securityLevel === SecurityLevel.Level4) {
-          this.props.hentRegistreringStatus();
-          this.props.hentBrukersNavn();
-          this.props.hentKontaktinfo();
-        }
-      });
     });
   }
 
