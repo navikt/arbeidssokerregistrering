@@ -3,7 +3,7 @@ name: Build, push, and deploy
 on:
   push:
     branches:
-      - gcp-tilpasninger
+      - main
 
 env:
   IMAGE_BASE: ghcr.io/${{ github.repository }}/arbeidssokerregistrering
@@ -87,4 +87,4 @@ jobs:
             CLUSTER: prod-gcp
             RESOURCE: nais/naiserator-gcp.yaml
             VARS: nais/vars-p-gcp.yaml
-            DRY_RUN: True
+            DRY_RUN: true
