@@ -60,7 +60,6 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
             <FormattedHTMLMessage id={hentTekstId("normaltekst")} />
           </Normaltekst>
           <div className="registrert__knapperad">
-            {knappetekstJa === "duernaregistrert-knapp-sok-dagpenger" && <DagpengerEngelsk />}
             <a
               href={veienTilArbeidMedVisInfoUrl}
               className="registrert__lenke knapp knapp--hoved blokk-m"
@@ -70,6 +69,7 @@ class RegistrertAksjonspanel extends React.Component<RegistrertAksjonspanelProps
             >
               <FormattedMessage id={knappetekstJa} />
             </a>
+            {knappetekstJa === "duernaregistrert-knapp-sok-dagpenger" && <DagpengerEngelsk />}
             <a
               href={veienTilArbeidUrl}
               className="lenke typo-element"
