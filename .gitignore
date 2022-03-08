@@ -47,3 +47,5 @@ yarn-error.log*
 /APP_LOG_HOME_IS_UNDEFINED
 
 .now
+
+.vercel
