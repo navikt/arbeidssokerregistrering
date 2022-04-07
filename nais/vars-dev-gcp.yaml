@@ -1,7 +1,7 @@
 namespace: paw
 app_environment_name: paw
 context_path: /arbeid/registrering
-appres_cms_url: https://appres-q1.nav.no
+appres_cms_url: https://dekoratoren.dev.nav.no/
 loginservice_url: https://loginservice.dev.nav.no
 arbeidssokerregistrering_url: https://arbeid.dev.nav.no/arbeid/registrering
 dittnav_link_url: https://www.dev.nav.no/person/dittnav
@@ -13,4 +13,4 @@ veilarbproxy_url: http://pto-proxy.pto.svc.cluster.local/proxy
 ingresses:
   - https://arbeid.dev.nav.no/arbeid/registrering
 externalHosts:
-  - appres-q1.nav.no
+  - dekoratoren.dev.nav.no
