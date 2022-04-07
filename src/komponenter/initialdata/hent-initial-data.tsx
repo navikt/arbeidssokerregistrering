@@ -18,6 +18,7 @@ import {
 import {
   hentFeatureToggles,
   selectFeatureTogglesState,
+  Data as FeatureToggleData,
   State as FeatureToggleState,
 } from "../../ducks/feature-toggles";
 import Innholdslaster from "../innholdslaster/innholdslaster";
@@ -46,15 +47,34 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
+function videresendTilNyIngress() {
+  const { location } = window;
+  const devHostnames = ["arbeid.dev.nav.no"];
+  const prodHostnames = ["www.nav.no"];
+
+  if (devHostnames.includes(location.hostname)) {
+    location.href = "https://arbeid.dev.nav.no/arbeid/registrering-ny";
+    uniLogger("registrering.gcp.redirect", { target: "gcp dev" });
+  } else if (prodHostnames.includes(location.hostname)) {
+    uniLogger("registrering.gcp.redirect", { target: "gcp prod" });
+    location.href = "https://www.nav.no/arbeid/registrering-ny";
+  }
+}
+
 export class HentInitialData extends React.Component<Props> {
   componentDidMount() {
-    this.props.hentAutentiseringsInfo().then((res) => {
-      if ((res as AuthData).securityLevel === SecurityLevel.Level4) {
-        this.props.hentRegistreringStatus();
-        this.props.hentBrukersNavn();
-        this.props.hentKontaktinfo();
-        this.props.hentFeatureToggle();
+    this.props.hentFeatureToggle().then((featureToggles) => {
+      if (featureToggles && (featureToggles as FeatureToggleData)["arbeidssokerregistrering.ny-ingress"]) {
+        videresendTilNyIngress();
       }
+      this.props.hentAutentiseringsInfo().then((res) => {
+        if ((res as AuthData).securityLevel === SecurityLevel.Level4) {
+          this.props.hentRegistreringStatus();
+          this.props.hentBrukersNavn();
+          this.props.hentKontaktinfo();
+          this.props.hentFeatureToggle();
+        }
+      });
     });
   }
 
