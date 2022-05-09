@@ -1,5 +1,7 @@
 # Arbeidssøkerregistrering
 
+[09.05-2022] - Repoet er arkivert, og ny løsning finnes på [navikt/poa-arbeidssokerregistrering](https://github.com/navikt/poa-arbeidssokerregistrering)
+
 Frontend for registrering av arbeidssøker for **personbrukere**.
 
 Frontenden for **veiledere** finnes på [navikt/arbeidssokerregistrering-fss](https://github.com/navikt/arbeidssokerregistrering-fss).
